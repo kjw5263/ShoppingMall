@@ -134,7 +134,7 @@
 					
 					
 					<div class="row">
-						<a href="" class="txt1 mt-3">회원가입</a>
+						<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
 					</div>
 				</form>
 				<!-- 로그인 폼 끝 -->
