@@ -1,62 +1,100 @@
 package com.goods.db;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.sql.DataSource;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 public class GoodsDAO {
-	private Connection conn = null;
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
-	private String sql = "";
-	
-	
-	//-----------DB 드라이버 정보--------------------
-	/*final String DRIVER = "com.mysql.jdbc.Driver";
-	final String DBURL = "jdbc:mysql://localhost:3306/cosshopping";
-	final String DBID = "root";
-	final String DBPW = "1234";*/
-	
-	
-	private Connection getConnection() {
-		// 커넥션 풀 (Connection pool) : 미리 연결정보(connection)을 생성해서 저장 후 사용(pool) -> 사용 후 반납
-		// Context 객체를 생성 (현재 프로젝트 정보를 가지고 있는 객체)
-		try {
-			Context initCTX = new InitialContext();	 //얘는 인터페이스(부모)!인데 객체 생성(자식)-> 업캐스팅(상속)
-			
-			// DB 연동 정보를 불러오기 (context.xml)
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosshopping");	// 다운캐스팅
-			
-			conn = ds.getConnection();
-			
-			System.out.println("드라이버 로드, 디비 연결 성공!");
-			System.out.println(conn);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		
-		return conn;
-	}
-	
-	
-	// 자원 해제 코드
-	public void closeDB() {
-		// 자원 해제
-		try {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    private Connection conn = null;
+    private PreparedStatement pstmt = null;
+    private ResultSet rs = null;
+    private String sql = "";
+
+    private Connection getConnection() {
+        try {
+            // Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
+            Context initCTX = new InitialContext();
+            // DB연동 정보를 불러오기(context.xml)
+            DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosShop");
+
+            conn = ds.getConnection();
+
+            System.out.println(" 드라이버 로드, 디비연결 성공! ");
+            System.out.println(conn);
+
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return conn;
+    }// getConnection() - 디비연결 끝
+
+    // 자원해제코드 - finally 구문에서 사용
+    public void closeDB() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // 상세페이지 시작
+    public GoodsDTO getGoods(int cosNum){
+        GoodsDTO goods = null;
+        try {
+            conn = getConnection();
+            sql= "select * from cosList where cosNum=? ";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,cosNum);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()){
+                goods = new GoodsDTO();
+
+                goods.setCosNum(rs.getInt("cosNum"));
+                goods.setCosName(rs.getString("cosName"));
+                goods.setCosPrice(rs.getInt("cosPrice"));
+                goods.setCosBrand(rs.getString("cosBrand"));
+                goods.setCosCategory(rs.getString("cosCategory"));
+                goods.setCosSkinType(rs.getString("cosSkinType"));
+                goods.setCosTrouble(rs.getString("cosTrouble"));
+                goods.setCosAmount(rs.getInt("cosAmount"));
+                goods.setCosVolumn(rs.getInt("cosVolumn"));
+                goods.setMadeCompany(rs.getString("madeCompany"));
+                goods.setIngredient(rs.getString("ingredient"));
+                goods.setCosMethod(rs.getString("cosMethod"));
+                goods.setCosWarning(rs.getString("cosWarning"));
+                goods.setCosImage(rs.getString("cosImage"));
+                goods.setOrderCount(rs.getInt("orderCount"));
+                goods.setUseDate(rs.getInt("useDate"));
+
+
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            closeDB();
+        }
+            return goods;
+    }
+
+
 }

@@ -17,15 +17,14 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
 
-
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
 </head>
 
 <body>
@@ -52,7 +51,7 @@
     <!-- Hero Slider Begin -->
     <section class="hero-slider">
         <div class="hero-items owl-carousel">
-            <div class="single-slider-item set-bg" data-setbg="../img/slider-1.jpg">
+            <div class="single-slider-item set-bg" data-setbg="./img/slider-1.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -63,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single-slider-item set-bg" data-setbg="../img/slider-2.jpg">
+            <div class="single-slider-item set-bg" data-setbg="./img/slider-2.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -74,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single-slider-item set-bg" data-setbg="../img/slider-3.jpg">
+            <div class="single-slider-item set-bg" data-setbg="./img/slider-3.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -96,7 +95,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="single-features-ads first">
-                            <img src="../img/icons/f-delivery.png" alt="">
+                            <img src="./img/icons/f-delivery.png" alt="">
                             <h4>Free shipping</h4>
                             <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal
                                 esuada aliquet libero viverra cursus. </p>
@@ -104,7 +103,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads second">
-                            <img src="../img/icons/coin.png" alt="">
+                            <img src="./img/icons/coin.png" alt="">
                             <h4>100% Money back </h4>
                             <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
                                 aliquet libero viverra cursus. </p>
@@ -112,7 +111,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads">
-                            <img src="../img/icons/chat.png" alt="">
+                            <img src="./img/icons/chat.png" alt="">
                             <h4>Online support 24/7</h4>
                             <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
                                 aliquet libero viverra cursus. </p>
@@ -129,7 +128,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="single-box-item first-box">
-                                    <img src="../img/f-box-1.jpg" alt="">
+                                    <img src="./img/f-box-1.jpg" alt="">
                                     <div class="box-text">
                                         <span class="trend-year">2019 Party</span>
                                         <h2>Jewelry</h2>
@@ -140,7 +139,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="single-box-item second-box">
-                                    <img src="../img/f-box-2.jpg" alt="">
+                                    <img src="./img/f-box-2.jpg" alt="">
                                     <div class="box-text">
                                         <span class="trend-year">2019 Trend</span>
                                         <h2>Footwear</h2>
@@ -152,7 +151,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="single-box-item large-box">
-                            <img src="../img/f-box-3.jpg" alt="">
+                            <img src="./img/f-box-3.jpg" alt="">
                             <div class="box-text">
                                 <span class="trend-year">2019 Party</span>
                                 <h2>Collection</h2>
@@ -189,7 +188,7 @@
                 <div class="col-lg-3 col-sm-6 mix all dresses bags">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-1.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-1.jpg" alt=""></a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
@@ -201,7 +200,7 @@
                 <div class="col-lg-3 col-sm-6 mix all dresses bags">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-2.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-2.jpg" alt=""></a>
                             <div class="p-status sale">sale</div>
                         </figure>
                         <div class="product-text">
@@ -213,7 +212,7 @@
                 <div class="col-lg-3 col-sm-6 mix all shoes accesories">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-3.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-3.jpg" alt=""></a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
@@ -225,7 +224,7 @@
                 <div class="col-lg-3 col-sm-6 mix all shoes accesories">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-4.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-4.jpg" alt=""></a>
                             <div class="p-status popular">popular</div>
                         </figure>
                         <div class="product-text">
@@ -237,7 +236,7 @@
                 <div class="col-lg-3 col-sm-6 mix all dresses shoes">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-5.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-5.jpg" alt=""></a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
@@ -249,7 +248,7 @@
                 <div class="col-lg-3 col-sm-6 mix all accesories bags">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-6.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-6.jpg" alt=""></a>
                             <div class="p-status sale">sale</div>
                         </figure>
                         <div class="product-text">
@@ -261,7 +260,7 @@
                 <div class="col-lg-3 col-sm-6 mix all dresses bags">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-7.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-7.jpg" alt=""></a>
                         </figure>
                         <div class="product-text">
                             <h6>One piece bodysuit</h6>
@@ -272,7 +271,7 @@
                 <div class="col-lg-3 col-sm-6 mix all accesories bags">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="../img/products/img-8.jpg" alt=""></a>
+                            <a href="#"><img src="./img/products/img-8.jpg" alt=""></a>
                             <div class="p-status popular">popular</div>
                         </figure>
                         <div class="product-text">
@@ -307,7 +306,7 @@
                 </div>
                 <div class="col-lg-5 offset-lg-1">
                     <div class="lookbok-pic">
-                        <img src="../img/lookbok.jpg" alt="">
+                        <img src="./img/lookbok.jpg" alt="">
                         <div class="pic-text">fashion</div>
                     </div>
                 </div>
@@ -320,19 +319,19 @@
     <div class="logo-section spad">
         <div class="logo-items owl-carousel">
             <div class="logo-item">
-                <img src="../img/logos/logo-1.png" alt="">
+                <img src="./img/logos/logo-1.png" alt="">
             </div>
             <div class="logo-item">
-                <img src="../img/logos/logo-2.png" alt="">
+                <img src="./img/logos/logo-2.png" alt="">
             </div>
             <div class="logo-item">
-                <img src="../img/logos/logo-3.png" alt="">
+                <img src="./img/logos/logo-3.png" alt="">
             </div>
             <div class="logo-item">
-                <img src="../img/logos/logo-4.png" alt="">
+                <img src="./img/logos/logo-4.png" alt="">
             </div>
             <div class="logo-item">
-                <img src="../img/logos/logo-5.png" alt="">
+                <img src="./img/logos/logo-5.png" alt="">
             </div>
         </div>
     </div>
@@ -344,14 +343,14 @@
     
 
     <!-- Js Plugins -->
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.magnific-popup.min.js"></script>
-    <script src="../js/jquery.slicknav.js"></script>
-    <script src="../js/owl.carousel.min.js"></script>
-    <script src="../js/jquery.nice-select.min.js"></script>
-    <script src="../js/mixitup.min.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.magnific-popup.min.js"></script>
+    <script src="./js/jquery.slicknav.js"></script>
+    <script src="./js/owl.carousel.min.js"></script>
+    <script src="./js/jquery.nice-select.min.js"></script>
+    <script src="./js/mixitup.min.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
