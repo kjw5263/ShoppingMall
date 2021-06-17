@@ -30,7 +30,7 @@ public class MemberDAO {
 			Context initCTX = new InitialContext();	 //얘는 인터페이스(부모)!인데 객체 생성(자식)-> 업캐스팅(상속)
 			
 			// DB 연동 정보를 불러오기 (context.xml)
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosshopping");	// 다운캐스팅
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosShopping");	// 다운캐스팅
 			
 			conn = ds.getConnection();
 			
@@ -59,4 +59,46 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	// idCheck(userId,userPass)
+		public int idCheck(String userId,String userPass){
+			int check = -1;
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from userinfo where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userId);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				if(rs.next()){
+					if(userPass.equals(rs.getString("userPass"))){
+						// 본인 
+						check = 1;
+					}else{
+						// 비밀번호 오류
+						check = 0;
+					}
+				}else{
+					// 회원정보 x
+					check = -1;
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// idCheck(id,pass)
+	
 }
