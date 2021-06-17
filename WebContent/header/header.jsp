@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<%
+ String userId = (String)session.getAttribute("userId");
+%>
+
 	<!-- Header Section Begin -->
     <header class="header-section">
         <div class="container-fluid">
@@ -14,18 +19,31 @@
                 <div class="logo">
                     <a href="./Main.me"><img src="./img/logo.png" alt=""></a>
                 </div>
+                
                 <div class="header-right">
                     <img src="./img/icons/search.png" alt="" class="search-trigger">
-                    <img src="./img/icons/man.png" alt="">
+                    <img src="./img/icons/man.png" alt="" onclick="location.href='./MemberInfo.me'">
                     <a href="#">
                         <img src="./img/icons/bag.png" alt="">
                         <span>2</span>
                     </a>
+                    <a href="./MemberLogout.me" class="m-2">로그아웃</a>
+                    
                 </div>
+                
+                
+                <%
+        		 if(session.getAttribute("userId") == null){
+        		%>
                 <div class="user-access">
                     <a href="#">Register</a>
                     <a href="./MemberLogin.me" class="in">Sign in</a>
                 </div>
+                <%}else{%>
+                <div class="user-access">
+                    <a href="./MemberLogin.me" class="in"><%=userId %>님 반갑습니다.</a>
+                </div>
+                <%}%>
                 <nav class="main-menu mobile-menu">
                     <ul>
                         <li><a class="active" href="./index.jsp">Home</a></li>

@@ -54,6 +54,10 @@
 
 
 
+	<!-- jquery 준비 시작 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<!-- jquery 준비 끝 -->
+
 </head>
 <body>
     <!-- header 시작 -->
@@ -102,15 +106,35 @@
 						</div>
 					</div>
 					
-					<div class="row">
-						<a href="#" class="txt1">회원가입</a>
-					</div>
+					
 
 					<div class="container-login100-form-btn m-t-17">
+						<!-- 일반 로그인 버튼 시작 -->
 						<input class="login100-form-btn" type="submit" value="Login"> 
+						<!-- 일반 로그인 버튼 끝 -->
+						
+						<ul>
+							<!-- 카카오 로그인 버튼 시작 -->
+							<li onclick="kakaoLogin();">
+						      <a href="javascript:void(0)">
+						          <img alt="" src="./img/member/kakao_login.png">
+						      </a>
+							</li>
+							<!-- 카카오 로그인 버튼 시작 -->
+							
+							<!-- 카카오 로그아웃 시작 -->
+							<li onclick="kakaoLogout();">
+						      <a href="javascript:void(0)">
+						          <span>카카오 로그아웃</span>
+						      </a>
+							</li>
+							<!-- 카카오 로그아웃 시작 -->
+						</ul>
 					</div>
-					<div class="container-login100-form-btn m-t-17">
-						<input class="login100-form-btn" type="submit" value="Login"> 
+					
+					
+					<div class="row">
+						<a href="" class="txt1 mt-3">회원가입</a>
 					</div>
 				</form>
 				<!-- 로그인 폼 끝 -->
@@ -121,6 +145,53 @@
 	
 
 	<div id="dropDownSelect1"></div>
+	
+	<!-- 카카오 스크립트 시작 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+	Kakao.init('b1ca6ddb15d32d81700309a8f4611657'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	
+	//카카오로그인
+	function kakaoLogin() {
+	    Kakao.Auth.login({
+	      success: function (response) {
+	        Kakao.API.request({
+	          url: '/v2/user/me',
+	          success: function (response) {
+	        	  console.log(response)
+	        	  alert('카카오 로그인 성공')
+	          },
+	          fail: function (error) {
+	            console.log(error)
+	          },
+	        })
+	      },
+	      fail: function (error) {
+	        console.log(error)
+	      },
+	    })
+	  }
+	
+	//카카오로그아웃  
+	function kakaoLogout() {
+	    if (Kakao.Auth.getAccessToken()) {
+	      Kakao.API.request({
+	        url: '/v1/user/unlink',
+	        success: function (response) {
+	        	console.log(response)
+	        	alert('카카오 로그아웃 성공')
+	        },
+	        fail: function (error) {
+	          console.log(error)
+	        },
+	      })
+	      Kakao.Auth.setAccessToken(undefined)
+	    }
+	  }  
+	</script>
+	<!-- 카카오 스크립트 끝 -->
+	
 	
 <!--===============================================================================================-->
 	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>

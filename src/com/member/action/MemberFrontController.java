@@ -52,7 +52,7 @@ public class MemberFrontController extends HttpServlet{
 					// = request.getRequestDispatcher("주소");
 					// dis.forward(request, response);
 
-					System.out.println("2 :  /MemberJoin.me 주소 호출");
+					System.out.println("2 : /MemberJoin.me 주소 호출");
 
 					forward = new ActionForward();
 					forward.setPath("./member/insertForm.jsp");
@@ -73,8 +73,7 @@ public class MemberFrontController extends HttpServlet{
 					forward.setPath("./member/login.jsp");
 					forward.setRedirect(false);
 					
-				}
-					else if(command.equals("/MemberLoginAction.me")){
+				}else if(command.equals("/MemberLoginAction.me")){
 					System.out.println("C : /MemberLoginAction.me 호출");
 					// DB 사용 => MemberLoginAction() 객체를 생성해야함.
 					action = new MemberLoginAction();
@@ -86,7 +85,27 @@ public class MemberFrontController extends HttpServlet{
 					}
 					
 				}
-		
+//				else if(command.equals("/MemberInfo.me")){
+//					System.out.println("C : /MemberInfo.me 호출");
+//					// DB정보를 가져와서 view페이지에 출력
+//					// MemberInfoAction() 객체 생성
+//					action = new MemberInfoAction();
+//					try {
+//						forward = action.execute(request, response);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//					
+//				}else if(command.equals("/MemberLogout.me")){
+//					System.out.println("C : /MemberLogout.me 호출");
+//					// MemberLogoutAction() 객체 생성
+//					action = new MemberLogoutAction();
+//					
+//					try {
+//						forward = action.execute(request, response);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}	
 		
 		
 		
