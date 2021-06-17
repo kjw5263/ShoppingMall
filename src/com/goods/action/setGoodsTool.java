@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.goods.db.GoodsDTO;
 
+
 public class setGoodsTool {
 
 	public GoodsDTO setdata(GoodsDTO goods , ResultSet rs){

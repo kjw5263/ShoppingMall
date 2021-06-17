@@ -13,6 +13,8 @@
 
   <h1>WebContent/goods/goods_list.jsp</h1>
   
+  
+
   <%
     // request.setAttribute("goodsList", gdao.getGoodsList());
   	listDAO gdao = new listDAO();

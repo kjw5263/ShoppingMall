@@ -40,6 +40,7 @@ public class listDAO extends DBconnection{
 				
 				goods = setTool.setdata(goods, rs);
 				
+				
 				// 리스트 한칸에 상품 1개를 저장
 				goodsList.add(goods);
 
