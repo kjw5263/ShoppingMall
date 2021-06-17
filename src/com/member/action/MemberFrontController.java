@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-// @WebServlet('')
+@WebServlet("*.me")
 public class MemberFrontController extends HttpServlet{
 
 	
@@ -34,16 +35,63 @@ public class MemberFrontController extends HttpServlet{
 		
 		
 		
-		/********************************* 2. 페이지 주소 매핑(연결) *******************/
+		/********************************* 2. 페이지 주소 매핑(연결) 시작 *******************/
 		// -> 특정 주소일때 실행할 기능들 정의해주기
 		// 같은 패키지 안에 있는 Action을 호출 해주어야함!
 		Action action = null;
 		ActionForward forward = null;
 		
+		// http://localhost:8088/Model2JSP2/MemberJoin.me
+				if (command.equals("/MemberJoin.me")) {
+					// 회원가입 페이지 -> view 페이지
+					// 1. response 이동 (주소o,페이지o 변경)
+					// response.sendRedirect("주소");
+
+					// 2. forward 이동 (주소x, 페이지o 변경)
+					// RequestDispatcher dis
+					// = request.getRequestDispatcher("주소");
+					// dis.forward(request, response);
+
+					System.out.println("2 :  /MemberJoin.me 주소 호출");
+
+					forward = new ActionForward();
+					forward.setPath("./member/insertForm.jsp");
+					forward.setRedirect(false);
+					
+				}else if(command.equals("/Main.me")){
+					System.out.println("C : /Main.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./main/main.jsp");
+					forward.setRedirect(false);
+					
+				}else if(command.equals("/MemberLogin.me")){
+					System.out.println("C : /MemberLogin.me 호출");
+					// 화면을 보여주기=> view페이지로 이동
+					
+					forward = new ActionForward();
+					forward.setPath("./member/login.jsp");
+					forward.setRedirect(false);
+					
+				}
+					else if(command.equals("/MemberLoginAction.me")){
+					System.out.println("C : /MemberLoginAction.me 호출");
+					// DB 사용 => MemberLoginAction() 객체를 생성해야함.
+					action = new MemberLoginAction();
+					System.out.println("C : 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+		
+		
 		
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
-		/********************************* 2. 페이지 주소 매핑(연결) *******************/
+		/********************************* 2. 페이지 주소 매핑(연결) 끝 *******************/
 	
 		
 		/******************* 3. 페이지 주소 이동 종류를 정하기 (제어) *******************/
