@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<form method="post" action="#" enctype="multipart/form-data">
+	<form method="post" action="./GoodsAddAction.ag" enctype="multipart/form-data">
 		<table border="1">
 			<thead>
 				<tr>
@@ -32,12 +32,12 @@
 					<td>카테고리</td>
 					<td>
 						<select name="cosCategory">
-							<option value="skin">스킨</option>
-							<option value="skin">에센스</option>
-							<option value="lotion">로션</option>
-							<option value="cream">크림</option>
-							<option value="cleansing">클렌징</option>
-							<option value="maskpack">마스크팩</option>
+							<option value="스킨">스킨</option>
+							<option value="에센스">에센스</option>
+							<option value="로션">로션</option>
+							<option value="크림">크림</option>
+							<option value="클렌징">클렌징</option>
+							<option value="마스크팩">마스크팩</option>
 						</select>
 					</td>
 				</tr>
@@ -45,9 +45,9 @@
 					<td>피부타입</td>
 					<td>
 						<select name="cosSkinType">
-							<option value="drySkin">건성</option>
-							<option value="combiSkin">중성</option>
-							<option value="oilySkin">지성</option>
+							<option value="건성">건성</option>
+							<option value="중성">중성</option>
+							<option value="지성">지성</option>
 						</select>
 					</td>
 				</tr>								
@@ -55,9 +55,9 @@
 					<td>피부고민</td>
 					<td>
 						<select name="cosTrouble">
-							<option value="drySkin">민감성</option>
-							<option value="acneSkin">여드름</option>
-							<option value="normalSkin">해당없음</option>
+							<option value="민감성">민감성</option>
+							<option value="여드름">여드름</option>
+							<option value="해당없음">해당없음</option>
 						</select>
 					</td>
 				</tr>	
