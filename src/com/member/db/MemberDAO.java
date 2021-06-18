@@ -100,5 +100,45 @@ public class MemberDAO {
 			return check;
 		}
 		// idCheck(id,pass)
+		
+		
+		// kakaoIdCheck(userEmail)
+		public String kakaoIdCheck(String userEmail){
+			String check = "";
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userId, userEmail from userinfo where userEmail=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userEmail);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				
+				if(rs.next()){
+					
+					check = rs.getString("userId");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// kakaoIdCheck(userEmail)
+		
 	
 }

@@ -84,7 +84,30 @@ public class MemberFrontController extends HttpServlet{
 						e.printStackTrace();
 					}
 					
+				}else if(command.equals("/MemberKaKaoLoginAction.me")){
+					System.out.println("C : /MemberKaKaoLoginAction.me 호출");
+					// DB 사용 => MemberLoginAction() 객체를 생성해야함.
+					action = new MemberKaKaoLoginAction();
+					System.out.println("C : 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}else if(command.equals("/MemberLogout.me")){
+					System.out.println("C : /MemberLogout.me 호출");
+					// MemberLogoutAction() 객체 생성
+					action = new MemberLogoutAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}	
+				
 				}
+				
 //				else if(command.equals("/MemberInfo.me")){
 //					System.out.println("C : /MemberInfo.me 호출");
 //					// DB정보를 가져와서 view페이지에 출력
