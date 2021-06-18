@@ -22,7 +22,8 @@ public class DBconnection {
 			// Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
 			Context initCTX = new InitialContext();
 			// DB연동 정보를 불러오기(context.xml)
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/model2DB");
+			String contextname = "cosShopping";
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/"+ contextname);
 
 			conn = ds.getConnection();
 

@@ -85,7 +85,7 @@ public class listDAO extends DBconnection{
 			System.out.println("pstmt + "+ pstmt );
 
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 				GoodsDTO goods = new GoodsDTO();
 				
