@@ -70,7 +70,7 @@ public class AdminGoodsDAO {
 		try {
 			conn = getConnection();
 			// 1. 상품 번호 계산
-			sql = "select max(cosNum) from coslist";
+			sql = "select max(cosNum) from cos_list";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -80,7 +80,7 @@ public class AdminGoodsDAO {
 			System.out.println("DAO : 상품번호 - "+cosNum);
 			
 			// 2. 상품등록
-			sql = "insert into coslist(cosNum,cosName,cosPrice,cosBrand,cosCategory,"
+			sql = "insert into cos_list(cosNum,cosName,cosPrice,cosBrand,cosCategory,"
 					+ "cosSkinType,cosTrouble,cosAmount,cosVolumn,madeCompany,"
 					+ "ingredient,cosMethod,cosWarning,cosImage,cosWriteDate) "
 					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
@@ -121,7 +121,7 @@ public class AdminGoodsDAO {
 		
 		try {
 			conn = getConnection();
-			sql = "select count(*) from coslist";
+			sql = "select count(*) from cos_list";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -154,7 +154,7 @@ public class AdminGoodsDAO {
 		
 		try {
 			conn = getConnection();
-			sql = "select * from coslist";
+			sql = "select * from cos_list";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -204,7 +204,7 @@ public class AdminGoodsDAO {
 		
 		try {
 			conn = getConnection();
-			sql = "select * from coslist order by cosNum desc limit ?,?";
+			sql = "select * from cos_list order by cosNum desc limit ?,?";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -254,7 +254,7 @@ public class AdminGoodsDAO {
 		
 		try {
 			conn = getConnection();
-			sql = "select * from coslist where cosNum=?";
+			sql = "select * from cos_list where cosNum=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cosNum);
 			
@@ -293,7 +293,7 @@ public class AdminGoodsDAO {
 	public void modifyGoods(GoodsDTO gdto){
 		try {
 			conn = getConnection();
-			sql = "update coslist set "
+			sql = "update cos_list set "
 					+ "cosName=?,cosPrice=?,cosBrand=?,cosCategory=?,"
 					+ "cosSkinType=?,cosTrouble=?,cosAmount=?,cosVolumn=?,"
 					+ "madeCompany=?,ingredient=?,cosMethod=?,cosWarning=? "
@@ -332,7 +332,7 @@ public class AdminGoodsDAO {
 		
 		try {
 			conn = getConnection();
-			sql = "delete from coslist where cosNum=?";
+			sql = "delete from cos_list where cosNum=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, cosNum);
