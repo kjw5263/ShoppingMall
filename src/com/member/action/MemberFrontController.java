@@ -106,7 +106,70 @@ public class MemberFrontController extends HttpServlet{
 						e.printStackTrace();
 					}	
 				
+				}else if(command.equals("/FindId.me")){
+					System.out.println("C : /FindId.me 호출");
+					// 화면을 보여주기=> view페이지로 이동
+					
+					forward = new ActionForward();
+					forward.setPath("./member/findId.jsp");
+					forward.setRedirect(false);
+					
+				}else if(command.equals("/FindIdAction.me")){
+					System.out.println("C : /FindIdAction.me 호출");
+					// DB 사용 => FindIdAction() 객체를 생성해야함.
+					action = new FindIdAction();
+					System.out.println("C : 아이디 찾기처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}else if(command.equals("/FindIdConfirm.me")){
+					System.out.println("C : /FindIdConfirm.me 호출");
+					// 화면을 보여주기=> view페이지로 이동
+					
+					
+					System.out.println("받아온 request 값은 @@@@@@@@@@@@@@"+ request.getAttribute("userId"));
+					
+					forward = new ActionForward();
+					forward.setPath("./member/findIdConfirm.jsp");
+					forward.setRedirect(false);
+					
+				}else if(command.equals("/FindPw.me")){
+					System.out.println("C : /FindPw.me 호출");
+					// 화면을 보여주기=> view페이지로 이동
+					
+					forward = new ActionForward();
+					forward.setPath("./member/findPw.jsp");
+					forward.setRedirect(false);
+					
+				}else if(command.equals("/FindPwAction.me")){
+					System.out.println("C : /FindPwAction.me 호출");
+					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
+					action = new FindPwAction();
+					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
+					
+//				}else if(command.equals("/FindPwAjax.me")){
+//					System.out.println("C : /FindPwAjax.me 호출");
+//					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
+//					action = new FindPwAjax();
+//					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
+//					try {
+//						forward = action.execute(request, response);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//					
+//				}
+				
+				
 				
 //				else if(command.equals("/MemberInfo.me")){
 //					System.out.println("C : /MemberInfo.me 호출");
