@@ -31,6 +31,7 @@
     <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+    
 <title>관리자 상품수정</title>
 </head>
 <body>
@@ -60,7 +61,7 @@
 		GoodsDTO dto = (GoodsDTO) request.getAttribute("dto"); 
 	%>
 	
-    <section class="admin-goods-modify">
+    <section class="admin_goods_modify">
         <div class="container">
 		<form method="post" action="./AdminGoodsModifyAction.ag">
 			<!-- 상품번호 저장 -->

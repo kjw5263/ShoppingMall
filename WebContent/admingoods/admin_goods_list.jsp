@@ -33,6 +33,7 @@
     <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+    
 <title>등록 상품 목록</title>
 </head>
 <body>
@@ -54,16 +55,10 @@
 		<div class="col-0 text-center">
 		<!-- left -->
 		</div>
+		
 		<div class="col-12 text-center">
 			
     <!-- admin goods list Begin -->
-    <table style="margin-left: auto; margin-right: auto;">
-    <tr>
-    <td>
-    <a href="./GoodsAdd.ag" class="btn btn-secondary" style="background-color: #b0bcc2;">상품 등록하기</a>
-    </td>
-    </tr>
-    </table><br>
     
    	<%
 	// AdminGoodsDAO 객체 생성
@@ -98,9 +93,15 @@
 	ArrayList<GoodsDTO> goodsList = adao.getGoodsList(startRow,pageSize);
 	%>
     
-    <section class="admin-goods-write">
+    <section class="admin_goods_list">
         <div class="container">
-		<form method="post" action="./GoodsAddAction.ag" enctype="multipart/form-data">
+	        <table>
+		    <tr>
+		    <td>
+		    <a href="./GoodsAdd.ag" class="btn btn-secondary" style="background-color: #b0bcc2;">상품 등록하기</a>
+		    </td>
+		    </tr>
+		    </table><br>
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -156,7 +157,6 @@
 					<%} %>      	          
 				</tbody>
 			</table>	
-		</form>
         </div>
     </section>
     

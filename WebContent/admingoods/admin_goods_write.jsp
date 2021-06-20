@@ -30,7 +30,9 @@
     <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+    
 <title>관리자 상품등록</title>
+
 </head>
 <body>
 <!-- Header Section Begin -->
@@ -54,7 +56,7 @@
 		<div class="col-6 text-center">
 			
     <!-- admin goods write Begin -->
-    <section class="admin-goods-write">
+    <section class="admin_goods_write">
         <div class="container">
 		<form method="post" action="./GoodsAddAction.ag" enctype="multipart/form-data">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
