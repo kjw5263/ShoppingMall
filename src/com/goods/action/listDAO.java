@@ -82,7 +82,7 @@ public class listDAO extends DBconnection{
 				pstmt.setString(1, item);
 			} 
 			
-			System.out.println("pstmt + "+ pstmt );
+			
 
 			rs = pstmt.executeQuery();
 			
@@ -92,7 +92,7 @@ public class listDAO extends DBconnection{
 				goods = setTool.setdata(goods, rs);
 				
 				// 리스트 한칸에 상품 1개를 저장
-				System.out.println(goods.toString());
+				
 				goodsList.add(goods);
 
 			} // while
