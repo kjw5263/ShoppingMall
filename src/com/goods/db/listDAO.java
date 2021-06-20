@@ -1,4 +1,4 @@
-package com.goods.action;
+package com.goods.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,27 +11,25 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import com.goods.action.DBconnection;
-import com.goods.db.GoodsDTO;
 
 
 public class listDAO extends DBconnection{
 	
-	private Connection conn = null;
-	private PreparedStatement pstmt = null;
+	
 	private ResultSet rs = null;
 	private String sql = "";
 	private String databasename = "coslist";
-	//DB connrction 분리
+	
+	
 	DBconnection con = new DBconnection();
 	setGoodsTool setTool = new setGoodsTool();
 	public List getGoodsList() {
 		List goodsList = new ArrayList();
 		try {
-			conn = con.getConnection();
+			
+			
 			sql = "select * from "+databasename;
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			rs = con.consql(sql, databasename);
 
 			while (rs.next()) {
 				
@@ -51,6 +49,7 @@ public class listDAO extends DBconnection{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			con.closeDB();
 			closeDB();
 		}
 
@@ -68,23 +67,9 @@ public class listDAO extends DBconnection{
 		StringBuffer SQL = new StringBuffer();
 
 		try {
-			conn = con.getConnection();
-
-			// sql = "select * from itwill_goods";
-
-			SQL.append("select * from "+databasename);
-			System.out.println("sql + "+ SQL );
-			if (item.equals("all")) {
-				pstmt = conn.prepareStatement(SQL + "");
-			} else  {
-				SQL.append(" where "+ item +"=?");
-				
-				pstmt.setString(1, item);
-			} 
 			
-			
-
-			rs = pstmt.executeQuery();
+			sql = "select * from "+databasename;
+			rs = con.consql(sql, databasename);
 			
 			while (rs.next()) {
 				GoodsDTO goods = new GoodsDTO();

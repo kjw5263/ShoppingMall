@@ -1,4 +1,4 @@
-<%@page import="com.goods.action.listDAO"%>
+<%@page import="com.goods.db.listDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

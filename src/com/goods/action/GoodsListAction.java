@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.goods.db.GoodsDAO;
+import com.goods.db.listDAO;
 
 public class GoodsListAction implements Action{
 

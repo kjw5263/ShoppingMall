@@ -1,4 +1,4 @@
-package com.goods.db;
+package com.notice.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
