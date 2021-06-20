@@ -1,7 +1,5 @@
 package com.member.action;
 
-import java.sql.Timestamp;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,10 +16,14 @@ public class MemberJoinAction implements Action {
 		// 한글처리 
 		request.setCharacterEncoding("UTF-8");
 		
-		// 전달된 정보 파라미터 저장
-		MemberDTO mdto = new MemberDTO();
-		mdto.setUserId(request.getParameter("userId"));
-		mdto.setUserPass(request.getParameter("userPass"));
+		// 전달된 정보 파라미터 저장 
+
+		
+		
+		
+		
+		
+		
 		
 		
 		
