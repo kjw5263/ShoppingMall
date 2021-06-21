@@ -96,7 +96,7 @@
                     <div class="col-lg-4">
                         <div class="single-features-ads first">
                             <img src="./img/icons/f-delivery.png" alt="">
-                            <h4>Free shipping</h4>
+                            <h4>${param.userEmail }</h4>
                             <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal
                                 esuada aliquet libero viverra cursus. </p>
                         </div>

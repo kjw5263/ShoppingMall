@@ -1,11 +1,9 @@
-package com.goods.action;
+package com.goods.db;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.goods.db.GoodsDTO;
 
 
 public class setGoodsTool {

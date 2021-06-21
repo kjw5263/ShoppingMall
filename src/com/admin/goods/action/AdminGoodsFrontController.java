@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("*.ag")
 public class AdminGoodsFrontController extends HttpServlet{
 
-	
 	// Get, Post 방식 상관없이 한번에 주소를 처리할 수 있는 메소드
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("C : AdminGoods_doProcess() 호출");
@@ -28,21 +27,82 @@ public class AdminGoodsFrontController extends HttpServlet{
 		
 		// (3) 필요한 가상주소 생성
 		String command = requestURI.substring(ContextPath.length());
+		
 		System.out.println("command : " + command);
 		System.out.println("C : 1.페이지 주소 파싱");
 		
 		/********************************* 1. 페이지 주소 파싱 *************************/
+
+		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 		Action action = null;
 		ActionForward forward = null;
 		
-
-		
-		
-		/********************************* 2. 페이지 주소 매핑(연결) *******************/
-		// -> 특정 주소일때 실행할 기능들 정의해주기
-		// 같은 패키지 안에 있는 Action을 호출 해주어야함!
-
-		
+		if(command.equals("/GoodsAdd.ag")){
+			System.out.println("C : /GoodsAdd.ag 호출");
+			// 정보를 입력받는 페이지 -> view페이지 이동
+			
+			forward = new ActionForward();
+			forward.setPath("./admingoods/admin_goods_write.jsp");
+			forward.setRedirect(false);
+			
+		} else if(command.equals("/GoodsAddAction.ag")){
+			System.out.println("C : /GoodsAddAction.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new GoodsAddAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminGoodsList.ag")){
+			System.out.println("C : /AdminGoodsList.ag 호출");
+			// DB정보를 사용해서 화면에 출력
+			// AdminGoodsListAction() 객체 			
+			action = new AdminGoodsListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminGoodsModify.ag")) {
+			System.out.println("C : /AdminGoodsModify.ag 호출");
+			// DB 정보를 꺼내서 화면에 출력
+			// AdminGoodsModifyFormAction();
+			
+			action = new AdminGoodsModifyFormAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if(command.equals("/AdminGoodsModifyAction.ag")){
+			System.out.println("C : /AdminGoodsModifyAction.ag 호출");
+			// DB정보를 처리 페이지(list 이동)이동
+			// AdminGoodsModifyAction() 객체 생성
+			
+			action = new AdminGoodsModifyAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminGoodsDelete.ag")){
+			System.out.println("C : /AdminGoodsDelete.ag 호출");
+			// 상품정보를 바로 DB에서 삭제 -> 상품리스트 이동
+			// AdminGoodsDeleteAction() 객체 생성
+			action = new AdminGoodsDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
