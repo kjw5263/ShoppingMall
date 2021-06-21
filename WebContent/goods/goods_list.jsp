@@ -1,6 +1,7 @@
 <%@page import="com.goods.db.listDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="com.var.list.varlist"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,15 +21,11 @@
   	listDAO gdao = new listDAO();
   	
     List goodsList = gdao.getGoodsList("all");//(List) request.getAttribute("goodsList");
-    String goHead = "./GoodsList.go";
-    String http[][] = new String[][]
-    		{{"" ," 전체"},
-    	{"?item=best","베스트상품"},
-    	{"?item=outwear","스킨"},
-    	{"?item=essence","에센스"},
-    	{"?item=cream","크림"},
-    	{"?item=maskpack","마스크팩"}
-    		};//이부분만 수정
+    String goHead = "./GoodsList.cos";
+    varlist var = new varlist();
+    String http[][] = var.getHttp();
+	String cat[][] = var.getCat();	
+    
     
   %>
   <table  border="1">
@@ -36,6 +33,19 @@
     <%for(int i = 0; i<http.length;i++){ %>
 	  <td>
        	<a href=<%=goHead%> + <%=http[i][0] %>> <%=http[i][1] %> </a>
+      </td>
+      <%} %>
+    </tr>
+  
+  </table>
+  <br>
+  <br>
+  <table border="1">
+  <table  border="1">
+  <tr>
+    <%for(int i = 0; i<cat.length;i++){ %>
+	  <td>
+       	<a href=<%=goHead%> + <%=cat[i][0] %>> <%=cat[i][1] %> </a>
       </td>
       <%} %>
     </tr>
@@ -72,7 +82,7 @@
 	             	 width="120" height="120"
 	          		 ><br>
 	          		 
-	         	  	<a href="./GoodsDetail.go?num=<%=dto.getCosNum()%>"><%=dto.getCosName() %></a><br>
+	         	  	<a href="./GoodsDetail.cos?num=<%=dto.getCosNum()%>"><%=dto.getCosName() %></a><br>
 	           		<%=dto.getCosPrice() %>원  <br>
     		     </td>
     		  <%   		  
