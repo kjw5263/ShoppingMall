@@ -20,7 +20,7 @@ public class GoodsAddAction implements Action {
 		// upload 폴더 생성
 		// request.getRealPath("/upload")
 		ServletContext ctx = request.getServletContext();
-		String realpath = ctx.getRealPath("/upload");
+		String realpath = ctx.getRealPath("/admingoods/upload");
 		
 		int maxSize = 10 * 1024 * 1024;
 		

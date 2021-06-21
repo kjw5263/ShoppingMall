@@ -47,7 +47,6 @@ public class BasketDAO {
 		return conn;
 	}
 	
-	
 	// 자원 해제 코드
 	public void closeDB() {
 		// 자원 해제
@@ -59,4 +58,92 @@ public class BasketDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	// checkGoods(bkDTO)
+	public int checkGoods(BasketDTO bkDTO){
+		int result = 0;
+		try {
+			conn = getConnection();
+			// 전달받은 옵션값들 (basketCosNum, basketCosAmount, basketUserID) 사용하여
+			// 기존의 추가된 상품이 있는지 체크 => 상품이 있을 때 1리턴 + 상품의 수량만 update
+			//						 => 상품이 없을 때 0리턴
+			sql = "select * from basket_list where basketCosNum=? and "
+					+ "basketCosAmount=? and "
+					+ "basketUserID=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bkDTO.getBasketCosNum());
+			pstmt.setInt(2, bkDTO.getBasketCosAmount());
+			pstmt.setString(3, bkDTO.getBasketUserId());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				//result = 1;
+				
+				// 장바구니 상품의 정보(수량)를 수정
+				sql = "update basket_list set basketCosAmount = basketCosAmount + ? "
+						+ "where basketUserID=? and basketCosNum=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, bkDTO.getBasketCosAmount());
+				pstmt.setString(2, bkDTO.getBasketUserId());
+				pstmt.setInt(3, bkDTO.getBasketCosNum());
+				
+				result = pstmt.executeUpdate();
+			}
+			
+			System.out.println("DAO : 장바구니 상품 체크 완료! -> "+result);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+		
+	}
+	// checkGoods(bkDTO)
+	
+	// basketAdd(bkDTO)
+	public void basketAdd(BasketDTO bkDTO){
+		// 장바구니 번호
+		int basketNum = 0;
+		
+		try {
+			conn = getConnection();
+			
+			// 상품번호 계산 : 기존의 장바구니가 있으면 해당번호 + 1
+			sql = "select max(basketNum) from basket_list";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				basketNum = rs.getInt(1)+1;
+			}
+			System.out.println("DAO : 장바구니 번호"+basketNum);
+			
+			// 화장품 장바구니에 추가
+			sql = "insert into basket_list values()";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, basketNum);
+			pstmt.setString(2, bkDTO.getBasketUserId());
+			pstmt.setInt(3, bkDTO.getBasketCosNum());
+			pstmt.setInt(4, bkDTO.getBasketCosAmount());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DAO : 장바구니 추가 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+	}
+	// basketAdd(bkDTO)
 }
