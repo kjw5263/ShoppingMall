@@ -20,9 +20,8 @@ public class NoticeDAO extends DBconnection{
 	
 	private ResultSet rs = null;
 	private String sql = "";
-	varlist vars = new varlist();
-	private String databasename = vars.getDatabasename();
 	
+	private String tablename = "notice_Board";
 	DBconnection con = new DBconnection();
 	setnoticetool setTool = new setnoticetool();
 	public List getNoticeList() {
@@ -30,8 +29,8 @@ public class NoticeDAO extends DBconnection{
 		try {
 			
 			
-			sql = "select * from "+databasename;
-			rs = con.consql(sql, databasename);
+			sql = "select * from "+tablename;
+			rs = con.consql(sql);
 			
 
 			while (rs.next()) {

@@ -10,18 +10,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+
+import com.var.list.varlist;
+
 public class DBconnection {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private String sql = "";
+	varlist vars = new varlist();
+	private String databasename = vars.getDatabasename();
 	
 	
-	
-	protected ResultSet consql(String sql , String databasename){
+	protected ResultSet consql(String sql ){
 		try {
 		conn = getConnection();
-		sql = "select * from "+databasename;
+		
 		
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
@@ -40,8 +44,9 @@ public class DBconnection {
 			// Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
 			Context initCTX = new InitialContext();
 			// DB연동 정보를 불러오기(context.xml)
-			String contextname = "cosShopping";
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/"+ contextname);
+		
+			
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/"+ databasename);
 
 			conn = ds.getConnection();
 
