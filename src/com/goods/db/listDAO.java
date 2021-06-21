@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.var.list.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -18,7 +19,8 @@ public class listDAO extends DBconnection{
 	
 	private ResultSet rs = null;
 	private String sql = "";
-	private String databasename = "coslist";
+	varlist vars = new varlist();
+	private String databasename = vars.getDatabasename();
 	
 	
 	DBconnection con = new DBconnection();
