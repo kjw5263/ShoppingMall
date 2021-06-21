@@ -34,6 +34,7 @@ public class DBconnection {
 	
 	
 	
+	
 	protected Connection getConnection() {
 		try {
 			// Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
