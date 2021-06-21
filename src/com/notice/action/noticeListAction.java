@@ -34,7 +34,7 @@ public class noticeListAction implements Action{
 		
 		// 정보 저장 -> 영역 저장
 //		 request.setAttribute("goodsList", gdao.getGoodsList());
-		request.setAttribute("goodsList", noti.getNoticeList());
+		request.setAttribute("noticeList", noti.getNoticeList());
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
