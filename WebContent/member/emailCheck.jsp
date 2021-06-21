@@ -1,3 +1,4 @@
+<%@page import="email.random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,6 +51,48 @@
     <!-- Ajax -->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
+	
+
+<!-- 이메일 유효성확인 --> <!-- 이메일 중복체크 넣기 -->
+<script type="text/javascript">
+
+		var chkup = false;
+
+		$(document).ready(function(){
+			$("#fr").submit(function(){
+				 if($.trim($("#userEmail").val()) == null){
+					 $('.ckMsg_mail').text("이메일을 입력하세요");     
+		             $('.ckMsg_mail').css("color","red"); 
+		             $('.ckMsg_mail').css("padding-left","1rem"); 
+		             $("#userEmail").focus();
+		             return false;
+				 }
+				 if(chkup == false){
+					 return false;
+				 }
+			 });
+			 
+		 
+			 $("#userEmail").keyup(function(){
+				  
+					var Usermail = $("#userEmail").val();
+					var chk = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+					
+					if(Usermail.match(chk) != null){
+						$('.ckMsg_mail').text("");     
+						chkup = true;  
+					}else{
+						$('.ckMsg_mail').text("이메일을 정확히 입력하세요");     
+						$('.ckMsg_mail').css("color","red"); 
+						$('.ckMsg_mail').css("padding-left","1rem");
+						chkup = false; 
+					}
+				 	});
+		
+		});
+</script>
+<!-- 이메일 유효성 확인 -->
+
 </head>
 
 <body>
@@ -60,35 +103,42 @@
 <!-- header 시작 -->
 	<jsp:include page="../header/header.jsp" />
 <!-- header 끝 -->
-	
+
+<%
+	random r = new random();
+	String emailKey = r.randomNum();
+	session.setAttribute("emailKey", emailKey);
+%>
+
 
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-				<form class="login100-form validate-form flex-sb flex-w" action="emailCheckAction" method="post" >
+				<form class="login100-form validate-form flex-sb flex-w" action="emailCheckAction" method="post" id="fr">
 					<span class="login100-form-title p-b-51">
 						회원 가입 전 이메일 인증을 완료 해 주세요!
 					</span>
 
-						* 이메일주소
+						* 이메일주소 <span class="ckMsg_mail"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "이메일 인증을 완료해주세요!">
-							<span class="ckMsg_email"></span>
-								<input class="input100" type="text" id="email" name="userEmail" placeholder="email을 입력해주세요">
+								<input class="input100" type="text" id="userEmail" name="userEmail" placeholder="email을 입력해주세요" required="required">
 							<span class="focus-input100"></span>
 						</div>
-						
-						* 인증번호 확인  function 값 넣기
-								<input type="button" onclick="" value="확인">
-						<div class="wrap-input100 validate-input m-b-16">
-							<span class="ckMsg_pw"></span>
-								<input class="input100" type="text" id="emailkey" name="userEmailKey">
+					
+							<input type="hidden" name="emailKey" value=<%=emailKey%>>
+							
+						* 인증번호 확인 (인증번호 비교 추가 해야함)
+								<input type="button" onclick="" value="인증번호발송">
+						<div class="wrap-input100 validate-input m-b-16" data-validate = "발송받은 인증번호를 넣어주세요!">				
+								<input class="input100" type="text" id="userEmailKey" name="userEmailKey" 
+									   placeholder="인증번호를 넣어주세요">
 							<span class="focus-input100"></span>
 						</div>
 						
 						
 					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn">
-							Login
+							확인
 						</button>
 					</div>
 

@@ -47,9 +47,10 @@
     <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../css/style.css" type="text/css">
     
-    <!-- Ajax -->
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
+    <!-- JQuery -->
+	<script src="../js/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+	
 </head>
 
 
@@ -193,7 +194,7 @@
 				 return false;
 			 }
 	
-		 });
+		
 
 	 });	 // signUp (공백체크)
 	 
@@ -202,7 +203,7 @@
 			var check = /^[A-Za-z\d_-]{4,15}$/;
 			
 			$.ajax({
-				 url:'.MemberCheckAction',
+				 url:'./MemberCheckAction',
 			     type:'post',
 			     data:{"user_id":user_id}, 
 			     success:function(data){
@@ -257,8 +258,9 @@
 		
 		 
 		 $("#pw1").keyup(function(){
-			 if($("#pw").val() !== $("#pw1").val()){
-					$('.ckMsg_pw1').text("비밀번호가 다릅니다");     
+			 
+			 if($("#pw").val() != $("#pw1").val()){
+					$('.ckMsg_pw1').text("비밀번호가 일치하지 않습니다");     
 					$('.ckMsg_pw1').css("color","red"); 
 					$('.ckMsg_pw1').css("padding-left","1rem"); 
 					ck3 = false;
@@ -268,9 +270,11 @@
 					$('.ckMsg_pw1').css("padding-left","1rem"); 
 					ck3 = true;
 			 }
+			 
 		 });//pw1 (pw확인)
 		 
 		 $("#name").keyup(function(){
+			 
 			 var name = $("#name").val();
 			 var check = /^[A-Z|a-z|가-힣]{1,14}$/;
 			 if(name.match(check) != null){
@@ -286,14 +290,15 @@
 		 });//name
 		 
 		 $("#phone").keyup(function(){
+			 
 			 var phone = $("#phone").val();
-			 var check1 =  /^010([0-9]{8})$/;
+			 var check1 = /^010([0-9]{8})$/;
 			 var check2 = /^01([1|6|7|8|9])([0-9]{3})([0-9]{4})$/;
-			 	if(phone.match(ckeck1) || phone.match(check2) != null){
+			 	if(phone.match(ckeck1) != null || phone.match(check2) != null){
 					$('.ckMsg_phone').text("");     
 					ck5 = true;
 				}else{
-		            $('.ckMsg_phone').text("연락처를 정확히 입력하세요");     
+		            $('.ckMsg_phone').text("연락처를 확인해주세요");     
 					$('.ckMsg_phone').css("color","red"); 
 					$('.ckMsg_phone').css("padding-left","1rem");
 					chkup5 = false; 
@@ -303,7 +308,7 @@
 		 	});//phone
 		 	
 		  	 
-	
+	});//signUp
 	
 	</script>
 	<!-- 유효성 체크  끝 -->
@@ -311,7 +316,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-				<form class="login100-form validate-form flex-sb flex-w" action="MemberJoin.me" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" action="./MemberJoinAction.me" method="post" id="signUp" name="signUp">
 					<span class="login100-form-title p-b-51">
 						회원가입
 					</span>
@@ -346,15 +351,18 @@
 							<span class="focus-input100"></span>
 						</div>
 						
-						*휴대폰 번호 <span class="ckMsg_ph"></span>
+						*휴대폰 번호 <span class="ckMsg_phone"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "휴대폰 번호를 입력해주세요">
-								<input class="input100" type="text" id="phone" name="userTel" placeholder="예) 01054321224">
+								<input class="input100" type="text" id="phone" name="userTel" placeholder="'-'를 제외한 연락처를 입력하세요">
 							<span class="focus-input100"></span>
 						</div>
 						
-						*이메일 (이메일인증하면 세션값 이메일로 받아서 넣기)
+						*이메일
 						<div class="wrap-input100 validate-input m-b-16">
-								<input class="input100" type="email" name="userEmail" value="<%=session.getAttribute("userEmail") %>" placeholder="예) 세션값->email@email.com" readonly>
+								<input class="input100" type="email" name="userEmail" 
+								<%if(request.getParameter("userEmail") != null){ %>
+								value=<%=request.getParameter("userEmail")%>
+								<%} %> placeholder="예) 세션값->email@email.com" readonly>
 							<span class="focus-input100"></span>
 						</div>
 						
@@ -373,11 +381,13 @@
 								<input class="input100" type="text" name="address1" id="address1" placeholder="우편번호" readonly>
 							<span class="focus-input100"></span>
 						</div>
+						
 						<div class="wrap-input100 validate-input m-b-16">
 							<span class="ckMsg_addr2"></span>
 								<input class="input100" type="text" name="address2" id="address2" placeholder="주소를 입력하세요" readonly>
 							<span class="focus-input100"></span>
 						</div>
+						
 						<div class="wrap-input100 validate-input m-b-16">
 							<span class="ckMsg_addr3"></span>
 								<input class="input100" type="text" name="address3" id="address3" placeholder="상세주소">
@@ -402,12 +412,11 @@
 						</div>
 						
 						*추천인 아이디 (DB에서 검색 후 값 입력)
-							<input type="button" value="추천인 검색" onclick="">
 						<div class="wrap-input100 validate-input m-b-16">
-								<input class="input100" type="text" name="referral" placeholder="추천인 아이디">
+								<input class="input100" type="text" id="referral_id" name="referral" placeholder="추천인 아이디">
 							<span class="focus-input100"></span>
 						</div>
-								
+						
 			
 					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn">

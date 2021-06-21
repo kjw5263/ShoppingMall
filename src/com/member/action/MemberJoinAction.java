@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.member.db.MemberDAO;
 import com.member.db.MemberDTO;
 
+import secure.AES256Util;
+
 public class MemberJoinAction implements Action {
 	
 	@Override
@@ -29,11 +31,16 @@ public class MemberJoinAction implements Action {
 		String userGender = request.getParameter("userGender");
 		String userSkinType = request.getParameter("userSkinType");
 		String userTrouble = request.getParameter("userTrouble");
+	
+	//	암호 복호화 보류
+		
+	//	AES256Util secure = new AES256Util();
+	//	String userPass = secure.encrypt(password);
 		
 		
 		// DB에 저장 
 		//MemberDAO mdao = new MemberDAO();
-		// 회원가입 메서드  - insertMember(mdto);
+		// 회원가입 메서드  - insertMember(mdto); (작성완료)
 		//mdao.insertMember(mdto);
 		
 		
