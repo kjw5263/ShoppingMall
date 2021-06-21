@@ -54,40 +54,6 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
 
-	<script type="text/javascript">
-		$(function() {
-			
-	        $('#certify').click(function(){
-	        	
-				var con = document.getElementById("i1");
-				var userId = $('#userId').val();
-				var userEmail = $('#userEmail').val();
-				var userTel = $('#userTel').val();
-
-	           $.ajax({
-	            url: "./FindPwAjax.me",
-	            type:"post",
-	            data:{userId:userId,userEmail:userEmail,userTel:userTel},
-	            success:function(data){
-
-	               if(data == 0){
-
- 		            	alert('인증번호를 발송합니다.') 
- 		       			con.style.display = (con.style.display != 'none') ? "none" : "block";
- 		            	
-	               }else{
-	            	alert('잘못된 정보입니다.')
-	            	   
-	               } // if else
-	            	   
-	            }
-	         });
-	           
-	           
-	        })   
-		});
-	</script>
-
 </head>
 
 <body>
@@ -232,7 +198,10 @@
 <!--===============================================================================================-->
 	<script src="./vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="./js/login.js"></script>    
+	<script src="./js/login.js"></script>  
+<!--===============================================================================================-->
+	<!-- 비밀번호 찾기 에이잭스 -->
+ 	<script src="./js/findPw.js"></script>
     
     
 </body>

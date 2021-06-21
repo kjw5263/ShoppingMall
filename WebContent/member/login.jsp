@@ -116,7 +116,7 @@
 							<!-- 카카오 로그인 버튼 시작 -->
 							<li onclick="kakaoLogin();">
 						      <a href="javascript:void(0)">
-						          <img alt="" src="./img/member/kakao_login.png">
+						          <img alt="" src="./img/member/kakao_login_large_wide.png">
 						      </a>
 							</li>
 							<!-- 카카오 로그인 버튼 시작 -->
@@ -129,12 +129,11 @@
 <!-- 							</li> -->
 							<!-- 카카오 로그아웃 시작 -->
 						</ul>
+						<div>
+							<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
+						</div>
 					</div>
 					
-					
-					<div class="row">
-						<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
-					</div>
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
 				
