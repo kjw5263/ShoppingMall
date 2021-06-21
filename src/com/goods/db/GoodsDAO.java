@@ -20,7 +20,7 @@ public class GoodsDAO {
             // Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
             Context initCTX = new InitialContext();
             // DB연동 정보를 불러오기(context.xml)
-            DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosShop");
+            DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosShopping");
 
             conn = ds.getConnection();
 
@@ -59,7 +59,7 @@ public class GoodsDAO {
         GoodsDTO goods = null;
         try {
             conn = getConnection();
-            sql= "select * from cosList where cosNum=? ";
+            sql= "select * from cos_list where cosNum=? ";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,cosNum);
             rs = pstmt.executeQuery();

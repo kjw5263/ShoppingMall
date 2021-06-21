@@ -38,6 +38,36 @@
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
     <title>상세페이지</title>
+    
+   	<script type="text/javascript">
+	   function isBasket(){
+		   //alert("장바구니 동작");
+		   if(document.gfr.amount.value == ""){
+			   alert(" 구매 수량을 입력하세요. ");
+			   document.gfr.amount.focus();
+			   return;
+		   }
+		   if(document.gfr.size.value == ""){
+			   alert("크기를 입력하시오.");
+			   document.gfr.size.focus();
+			   return;
+		   }
+		   if(document.gfr.color.value ==""){
+			   alert("색상을 입력하시오.");
+			   document.gfr.color.focus();
+			   return;
+		   }
+		   
+		   var result = confirm("장바구니에 저장 하시겠습니까?");
+		   
+		   if(result){
+			   document.gfr.action = "./BasketAdd.ba";
+			   document.gfr.submit();
+		   }
+		   
+	   }
+		
+	</script>
 
 
 </head>
@@ -141,7 +171,7 @@
                             <input type="text" value="1">
                         </div>
                     </div>
-                    <a href="#" class="primary-btn pc-btn">장바구니</a>
+                    <a href="javascript:isBasket();" class="primary-btn pc-btn">장바구니</a>
                     <a href="#" class="primary-btn pc-btn"> 구매 </a>
 
                 </div>

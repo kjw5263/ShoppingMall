@@ -4,7 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import javax.sql.DataSource;
+
+import com.goods.db.GoodsDTO;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -146,4 +153,69 @@ public class BasketDAO {
 		
 	}
 	// basketAdd(bkDTO)
+	
+	// getBasketList(userId)
+	public Vector getBasketList(String userID){
+		
+		// 장바구니 정보(List) + 상품정보(상품이름, 가격, 이미지)(List)
+		Vector totalList = new Vector();
+		List basketList = new ArrayList();
+		List goodsList = new ArrayList();
+		
+		try {
+			// userID에 해당하는 장바구니 정보 저장
+			conn = getConnection();
+			
+			sql = "select * from basket_list where basketUserId=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userID);
+			
+			rs = pstmt.executeQuery();
+			
+			// 장바구니가 있을 때 마다 장바구니의 상품정보를 추가적으로 저장
+			while(rs.next()){
+				BasketDTO bkDTO = new BasketDTO();
+				bkDTO.setBasketCosAmount(rs.getInt("basketCosAmount"));
+				bkDTO.setBasketCosNum(rs.getInt("basketCosNum"));
+				bkDTO.setBasketNum(rs.getInt("basketNum"));
+				bkDTO.setBasketUserId(rs.getString("basketUserId"));
+				
+				// 장바구니 List 한칸에 저장
+				basketList.add(bkDTO);
+				
+				// 장바구니 상품에 해당하는 정보 저장(이름, 가격, 이미지..)
+				// 기존의 데이터를 사용하는데 문제없이 쓰기 위해서
+				// pstmt2, rs2 객체 생성
+				sql = "select * from basket_list where cosNum=?";
+				PreparedStatement pstmt2 = conn.prepareStatement(sql);
+				pstmt2.setInt(1, bkDTO.getBasketCosNum());
+				
+				ResultSet rs2 = pstmt2.executeQuery();
+				if(rs2.next()){
+					// 상품정보가 있을 때
+					GoodsDTO gdto = new GoodsDTO();
+					
+					gdto.setCosName(rs2.getString("cosName"));
+					gdto.setCosPrice(rs2.getInt("cosPrice"));
+					gdto.setCosImage(rs2.getString("cosImage"));
+					
+					// 상품 리스트 한칸에 저장
+					goodsList.add(gdto);
+				}
+				
+				System.out.println("DAO : 상품정보 저장완료!");
+			}
+			
+			totalList.add(basketList);
+			totalList.add(goodsList);
+			System.out.println("DAO : 장바구니정보 + 상품정보 저장완료!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return totalList;
+	}
 }

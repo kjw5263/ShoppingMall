@@ -20,7 +20,7 @@ public class BasketAddAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		if(userID == null){
-			forward.setPath("MemberLogin.me");
+			forward.setPath("./MemberLogin.me");
 			forward.setRedirect(true);
 			return forward;
 		}
