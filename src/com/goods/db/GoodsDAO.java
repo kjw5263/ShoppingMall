@@ -59,7 +59,7 @@ public class GoodsDAO {
         GoodsDTO goods = null;
         try {
             conn = getConnection();
-            sql= "select * from cosList where cosNum=? ";
+            sql= "select * from cos_List where cosNum=? ";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,cosNum);
             rs = pstmt.executeQuery();

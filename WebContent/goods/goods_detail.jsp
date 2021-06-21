@@ -1,4 +1,12 @@
-<%@ page import="com.goods.db.GoodsDTO" %>
+<%@ page import="goods.db.GoodsDTO" %>
+<%@ page import="goods_board.db.GoodsReviewDTO" %>
+<%@ page import="goods_board.db.GoodsReviewDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="goods.db.GoodsDAO" %>
+<%@ page import="goods_board.db.PageInfo" %>
+<%@ page import="java.util.List" %>
+
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%--
 
@@ -24,18 +32,21 @@
           rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
-    <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
-    <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
-    <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
-    <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+    <link rel="stylesheet" href="./violet-master/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./violet-master/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./violet-master/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="./violet-master/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="./violet-master/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="./violet-master/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="./violet-master/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="./violet-master/css/style.css" type="text/css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <title>상세페이지</title>
     <script type="text/javascript">
         function isBasket() {
             //alert("장바구니 동작");
@@ -52,8 +63,6 @@
             }
         }
     </script>
-    <title>상세페이지</title>
-
 
 </head>
 <body>
@@ -61,10 +70,12 @@
     // DB에서 가져온정보를 저장 (request 영역)
 //    request.setAttribute("goods", gdao.getGoods(num));
 
-    // 장바구니 테스트시 ArryaList 주석 처리후 작업 진행 !!!!
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     GoodsDTO dto = (GoodsDTO) request.getAttribute("goods");
-    GoodsReviewDAO grdao = new GoodsReviewDAO();
+    ArrayList<GoodsReviewDTO> grdto = (GoodsReviewDTO) request.getAttribute("grdto");
+//    GoodsReviewDTO grdto = request.getAttribute("grdto");
+//    GoodsReviewDAO grdao = new GoodsReviewDAO();
+//    int cnt = grdao.getReviewCount();
 
 %>
 <!-- Page Preloder -->
@@ -84,7 +95,7 @@
 <!-- Search model end -->
 
 <!-- Header Section Begin -->
-<jsp:include page="/header/header.jsp"/>
+<jsp:include page="/violet-master/header/header.jsp"/>
 <!-- Header Info Begin -->
 
 <!-- Header Info End -->
@@ -115,144 +126,144 @@
 
 <!-- Product Page Section Beign -->
 <form action="" method="post" name="gfr">
-    <section class="product-page">
-        <div class="container">
-            <div class="product-control">
-                <a href="#">Previous</a>
-                <a href="#">Next</a>
-            </div>
-            <input type="hidden" name="cosNum" value="<%= dto.getCosNum()%>">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="product-slider owl-carousel">
-                        <div class="product-img">
-                            <figure>
-                                <img src="" alt="">
-                                <div class="p-status">new</div>
-                            </figure>
-                        </div>
-                        <div class="product-img">
-                            <figure>
-                                <img src="<%= dto.getCosImage()%>" alt="">
-                                <div class="p-status">new</div>
-                            </figure>
-                        </div>
+<section class="product-page">
+    <div class="container">
+        <div class="product-control">
+            <a href="#">Previous</a>
+            <a href="#">Next</a>
+        </div>
+        <input type="hidden" name="cosNum" value="<%= dto.getCosNum()%>">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-slider owl-carousel">
+                    <div class="product-img">
+                        <figure>
+                            <img src="" alt="">
+                            <div class="p-status">new</div>
+                        </figure>
                     </div>
-
+                    <div class="product-img">
+                        <figure>
+                            <img src="<%= dto.getCosImage()%>" alt="">
+                            <div class="p-status">new</div>
+                        </figure>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="product-content">
-                        <h2><%=dto.getCosName() %></h2>
-                        <div class="pc-meta">
-                            <h5><%= dto.getCosPrice()%>원</h5>
-                            <div class="rating">
-                                <%--                            <i class="fa fa-star"></i>--%>
-                                <%--                            <i class="fa fa-star"></i>--%>
-                                <%--                            <i class="fa fa-star"></i>--%>
-                                <%--                            <i class="fa fa-star"></i>--%>
-                                <%--                            <i class="fa fa-star"></i>--%>
-                                별 평점
-                            </div>
-                            <%--                        <jsp:include page="goods_toggle.jsp"/>--%>
-                            수정 전!!
-                        </div>
-                        <ul class="tags">
-                            <li><span>Category :</span> <%=dto.getCosCategory() %></li>
-                            <li><span>Brand :</span> <%=dto.getCosBrand() %></li>
-                        </ul>
-                        <div class="product-quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1" name="amount">
-                            </div>
-                        </div>
-                        <a href="javascript:isBasket();" class="primary-btn pc-btn">장바구니</a>
-                        <a href="" class="primary-btn pc-btn"> 구매 </a>
 
+            </div>
+            <div class="col-lg-6">
+                <div class="product-content">
+                    <h2><%=dto.getCosName() %></h2>
+                    <div class="pc-meta">
+                        <h5><%= dto.getCosPrice()%>원</h5>
+                        <div class="rating">
+<%--                            <i class="fa fa-star"></i>--%>
+<%--                            <i class="fa fa-star"></i>--%>
+<%--                            <i class="fa fa-star"></i>--%>
+<%--                            <i class="fa fa-star"></i>--%>
+<%--                            <i class="fa fa-star"></i>--%>
+                            별 평점
+                        </div>
+                        <jsp:include page="goods_toggle.jsp"/>
                     </div>
+                    <ul class="tags">
+                        <li><span>Category :</span> <%=dto.getCosCategory() %></li>
+                        <li><span>Brand :</span> <%=dto.getCosBrand() %></li>
+                    </ul>
+                    <div class="product-quantity">
+                        <div class="pro-qty">
+                            <input type="text" value="1" name="amount">
+                        </div>
+                    </div>
+                    <a href="javascript:isBasket();" class="primary-btn pc-btn">장바구니</a>
+                    <a href="" class="primary-btn pc-btn"> 구매 </a>
+
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 </form>
 <!-- Product Page Section End -->
-<h1>상세페이지</h1>
-<!-- Related Product Section Begin -->
 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#id1">상세 이미지</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#id2">구매정보</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#id3">리뷰</a>
-    </li>
 
-</ul>
-<div class="tab-content">
-    <div class="tab-pane fade show active" id="id1"> <h3>상세설명</h3>
-        <img src="<%=dto.getCosImage() %>" alt="이미지..."></div>
-    <div class="tab-pane fade" id="id2">
-        <table border="1">
-            <tr>
-                <td>용량</td>
-                <td>
-                    <%= dto.getCosVolumn()%>
-                </td>
-            </tr>
-            <tr>
-                <td>주요사양</td>
-                <td><%=dto.getIngredient() %></td>
-            </tr>
-            <tr>
-                <td>사용기간</td>
-                <td><%=dto.getUseDate() %></td>
-            </tr>
-            <tr>
-                <td>사용방법</td>
-                <td><%= dto.getCosMethod()%></td>
-            </tr>
-            <tr>
-                <td>사용시주의사항</td>
-                <td><%=dto.getCosWarning() %></td>
-            </tr>
-        </table>
+<div style='width:1400px;margin:0;margin-top:100px;'>
+    <ul class="nav nav-tabs">
+        <li class='active'><a href="#tabmenu_01" data-toggle="tab">탭메뉴1</a></li>
+        <li><a href="#tabmenu_02" data-toggle="tab">탭메뉴2</a></li>
+        <li><a href="#tabmenu_03" data-toggle="tab">탭메뉴3</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="tabmenu_01">
+            <p>
+                <img src="<%=dto.getCosImage() %>" alt="이미지...">
+            </p>
+        </div>
+        <div class="tab-pane fade" id="tabmenu_02">
+            <p>
+            <table border="1">
+                <tr>
+                    <td>용량</td>
+                    <td>
+                        <%= dto.getCosVolumn()%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>주요사양</td>
+                    <td><%=dto.getIngredient() %></td>
+                </tr>
+                <tr>
+                    <td>사용기간</td>
+                    <td><%=dto.getUseDate() %></td>
+                </tr>
+                <tr>
+                    <td>사용방법</td>
+                    <td><%= dto.getCosMethod()%></td>
+                </tr>
+                <tr>
+                    <td>사용시주의사항</td>
+                    <td><%=dto.getCosWarning() %></td>
+                </tr>
+            </table>
+            </p>
+        </div>
+        <div class="tab-pane fade" id="tabmenu_03">
+
+            <h3>리뷰</h3>
+            <button onclick="location.href='/reviewForm.rev?cosNum=<%=dto.getCosNum() %>'" class="btn-primary">글등록</button>
+            <br>
+            평점 별 글 갯수 <br>
+
+            <%
+
+                if (request.getAttribute("grdto")!=null){
+
+            %>
+
+            <%}%>
+            <jsp:include page="/goods_board/review_list.jsp"/>
+
+
+        </div>
     </div>
-
-    <div class="tab-pane fade" id="id3">
-        <h3>리뷰</h3>
-        <button onclick="location.href='/reviewForm.rev?cosNum=<%=dto.getCosNum() %>'" class="btn-primary">글등록</button>
-        <br>
-        평점 별 글 갯수 <br>
-
-        <%
-
-            if (request.getAttribute("grdto")!=null){
-
-        %>
-        <%}%>
-<%--        <jsp:include page="/goods_board/review_list.jsp"/>--%>
-    </div>
-
 </div>
 
 
 <!-- Related Product Section End -->
 
 <!-- Footer Section Begin -->
-<jsp:include page="/footer/footer.jsp"/>
+<jsp:include page="/violet-master/footer/footer.jsp"/>
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-<script src="./js/jquery-3.3.1.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/jquery.magnific-popup.min.js"></script>
-<script src="./js/jquery.slicknav.js"></script>
-<script src="./js/owl.carousel.min.js"></script>
-<script src="./js/jquery.nice-select.min.js"></script>
-<script src="./js/mixitup.min.js"></script>
-<script src="./js/main.js"></script>
+<script src="./violet-master/js/jquery-3.3.1.min.js"></script>
+<script src="./violet-master/js/bootstrap.min.js"></script>
+<script src="./violet-master/js/jquery.magnific-popup.min.js"></script>
+<script src="./violet-master/js/jquery.slicknav.js"></script>
+<script src="./violet-master/js/owl.carousel.min.js"></script>
+<script src="./violet-master/js/jquery.nice-select.min.js"></script>
+<script src="./violet-master/js/mixitup.min.js"></script>
+<script src="./violet-master/js/main.js"></script>
 
 
 

@@ -1,0 +1,7 @@
+@import 'Desktop/team/WebContent/goods_board/style/starability-scssability-scss/variables';
+@import 'Desktop/team/WebContent/goods_board/style/starability-scssability-scss/starability-base';
+@import 'Desktop/team/WebContent/goods_board/style/starability-scssability-scss/starability-result';
+
+.starability-basic {
+  @include starability-base;
+}
