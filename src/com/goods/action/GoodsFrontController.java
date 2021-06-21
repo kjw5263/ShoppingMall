@@ -41,6 +41,15 @@ public class GoodsFrontController extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        if (command.equals("/GoodsDetail.cos")){
+            System.out.println("C : /GoodsList.cos 호출");
+            action = new GoodsListAction();
+            try {
+                forward = action.execute(req, resp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println("C : 2.페이지 주소 매핑  완료");
 
 

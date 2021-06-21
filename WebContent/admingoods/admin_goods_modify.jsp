@@ -1,3 +1,4 @@
+<%@page import="com.goods.db.GoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,8 +32,7 @@
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
     
-<title>관리자 상품등록</title>
-
+<title>관리자 상품수정</title>
 </head>
 <body>
 <!-- Header Section Begin -->
@@ -56,38 +56,69 @@
 		<div class="col-6 text-center">
 			
     <!-- admin goods write Begin -->
-    <section class="admin_goods_write">
+    
+	<%
+		GoodsDTO dto = (GoodsDTO) request.getAttribute("dto"); 
+	%>
+	
+    <section class="admin_goods_modify">
         <div class="container">
-		<form method="post" action="./GoodsAddAction.ag" enctype="multipart/form-data">
+		<form method="post" action="./AdminGoodsModifyAction.ag">
+			<!-- 상품번호 저장 -->
+			<input type="hidden" name="cosNum" value="<%=dto.getCosNum() %>">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="2" style="background-color: #b0bcc2; text-align: center; color: white;"><b>관리자 상품등록</b></th>
+						<th colspan="2" style="background-color: #b0bcc2; text-align: center; color: white;"><b>관리자 상품수정</b></th>
 					</tr>
 				</thead>
 				<tbody>
 				 <tr>
 		           <td>상품이름</td>
-		           <td><input type="text" name="cosName"></td>           
+		           <td><input type="text" name="cosName" value="<%=dto.getCosName() %>"></td>           
 		         </tr>
 				 <tr>
 		           <td>상품가격</td>
-		           <td><input type="text" name="cosPrice"></td>           
+		           <td><input type="text" name="cosPrice" value="<%=dto.getCosPrice() %>"></td>           
 		         </tr>
 		         <tr>
 					<td>브랜드</td>
-					<td><input type="text" name="cosBrand"></td> 
+					<td><input type="text" name="cosBrand" value="<%=dto.getCosBrand() %>"></td> 
 				</tr>
 				<tr>
 					<td>카테고리</td>
 					<td>
 						<select name="cosCategory">
-							<option value="스킨">스킨</option>
-							<option value="에센스">에센스</option>
-							<option value="로션">로션</option>
-							<option value="크림">크림</option>
-							<option value="클렌징">클렌징</option>
-							<option value="마스크팩">마스크팩</option>
+							<option value="스킨"
+								<%if(dto.getCosCategory().equals("스킨")){ %>
+								selected
+								<%} %>
+							>스킨</option>
+							<option value="에센스"
+								<%if(dto.getCosCategory().equals("에센스")){ %>
+								selected
+								<%} %>
+							>에센스</option>
+							<option value="로션"
+								<%if(dto.getCosCategory().equals("로션")){ %>
+								selected
+								<%} %>							
+							>로션</option>
+							<option value="크림"
+								<%if(dto.getCosCategory().equals("크림")){ %>
+								selected	
+								<%} %>						
+							>크림</option>
+							<option value="클렌징"
+								<%if(dto.getCosCategory().equals("클렌징")){ %>
+								selected
+								<%} %>							
+							>클렌징</option>
+							<option value="마스크팩"
+								<%if(dto.getCosCategory().equals("마스크팩")){ %>
+								selected
+								<%} %>							
+							>마스크팩</option>
 						</select>
 					</td>
 				</tr>
@@ -95,9 +126,21 @@
 					<td>피부타입</td>
 					<td>
 						<select name="cosSkinType">
-							<option value="건성">건성</option>
-							<option value="중성">중성</option>
-							<option value="지성">지성</option>
+							<option value="건성"
+								<%if(dto.getCosSkinType().equals("건성")){ %>
+								selected
+								<%} %>
+							>건성</option>
+							<option value="중성"
+								<%if(dto.getCosSkinType().equals("중성")){ %>
+								selected
+								<%} %>
+							>중성</option>
+							<option value="지성"
+								<%if(dto.getCosSkinType().equals("지성")){ %>
+								selected
+								<%} %>							
+							>지성</option>
 						</select>
 					</td>
 				</tr>								
@@ -105,66 +148,58 @@
 					<td>피부고민</td>
 					<td>
 						<select name="cosTrouble">
-							<option value="민감성">민감성</option>
-							<option value="여드름">여드름</option>
-							<option value="아토피">아토피</option>
-							<option value="해당없음">해당없음</option>
+							<option value="민감성"
+								<%if(dto.getCosTrouble().equals("민감성")){ %>
+								selected
+								<%} %>							
+							>민감성</option>
+							<option value="여드름"
+								<%if(dto.getCosTrouble().equals("여드름")){ %>
+								selected
+								<%} %>							
+							>여드름</option>
+							<option value="아토피"
+								<%if(dto.getCosTrouble().equals("아토피")){ %>
+								selected
+								<%} %>							
+							>아토피</option>							
+							<option value="해당없음"
+								<%if(dto.getCosTrouble().equals("해당없음")){ %>
+								selected
+								<%} %>							
+							>해당없음</option>
 						</select>
 					</td>
 				</tr>	
 				<tr>
 		           <td>수량</td>
-		           <td><input type="text" name="cosAmount"></td>           
+		           <td><input type="text" name="cosAmount" value="<%=dto.getCosAmount()%>"></td>           
 		        </tr>
  				<tr>
 		           <td>용량</td>
-		           <td><input type="text" name="cosVolumn"></td>           
+		           <td><input type="text" name="cosVolumn" value="<%=dto.getCosVolumn() %>"></td>           
 		        </tr> 
 				<tr>
 		           <td>회사</td>
-		           <td><input type="text" name="madeCompany"></td>           
+		           <td><input type="text" name="madeCompany" value="<%=dto.getMadeCompany() %>"></td>           
 		        </tr>      
-				<tr>
-		           <td>성분</td>
-		           <td><textarea name="ingredient" rows="4" cols="25"></textarea></td>           
-		        </tr> 
-				<tr>
-		           <td>사용방법</td>
-		           <td><textarea name="cosMethod" rows="4" cols="25"></textarea></td>           
-		        </tr>
-				<tr>
-		           <td>주의사항</td>
-		           <td><textarea name="cosWarning" rows="4" cols="25"></textarea></td>           
-		        </tr>
-		         <tr>
-		           <td>제품이미지1(메인)</td>
-		           <td>
-		              <input type="file" name="file1" accept="cosImage/*,.pdf">           
-		           </td>
-		         </tr>
-		           <tr>
-		           <td>제품이미지2</td>
-		           <td>
-		             <input type="file" name="file2">
-		           </td>
-		         </tr>
-		           <tr>
-		           <td>제품이미지3</td>
-		           <td>
-		             <input type="file" name="file3">
-		           </td>
-		         </tr>
-		           <tr>
-		           <td>제품이미지4</td>
-		           <td>
-		             <input type="file" name="file4">
-		           </td>
-		         </tr>		      	          
+ 				<tr> 
+ 		           <td>성분</td> 
+ 		           <td><textarea name="ingredient" rows="4" cols="25"><%=dto.getIngredient() %></textarea></td>            
+ 		        </tr>  
+ 				<tr> 
+ 		           <td>사용방법</td> 
+ 		           <td><textarea name="cosMethod" rows="4" cols="25"><%=dto.getCosMethod() %></textarea></td>            
+ 		        </tr> 
+ 				<tr> 
+ 		           <td>주의사항</td> 
+ 		           <td><textarea name="cosWarning" rows="4" cols="25"><%=dto.getCosWarning() %></textarea></td>            
+ 		        </tr> 	      	          
 				</tbody>
 			</table>
 			<table style="margin-left: auto; margin-right: auto;">
 			<tr>
-			    <td><input type="submit" value="상품등록" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
+			    <td><input type="submit" value="상품수정" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
 			    <td><input type="reset" value="상품초기화" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>	
 		    </tr>
 		    </table>		
