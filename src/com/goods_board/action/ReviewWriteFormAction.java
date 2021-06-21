@@ -1,7 +1,7 @@
 package com.goods_board.action;
 
-import goods_board.db.GoodsReviewDAO;
-import goods_board.db.GoodsReviewDTO;
+import com.goods_board.db.GoodsReviewDAO;
+import com.goods_board.db.GoodsReviewDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +16,7 @@ public class ReviewWriteFormAction implements Action{
         grdto.setCosNum(Integer.parseInt(request.getParameter("cosNum")));
         grdto.setUserid(request.getParameter("userId"));
         grdto.setReviewImage(request.getParameter("reviewImage"));
-        grdto.setRating(Integer.parseInt(request.getParameter("rating")));
+ /*       grdto.setRating(Integer.parseInt(request.getParameter("rating")));*/
         grdto.setReviewContent(request.getParameter("reviewContent"));
         GoodsReviewDAO grdao = new GoodsReviewDAO();
         grdao.createReview(grdto);

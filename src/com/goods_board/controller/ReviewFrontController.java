@@ -1,10 +1,10 @@
 package com.goods_board.controller;
 
 
-import goods_board.action.Action;
-import goods_board.action.ActionForward;
-import goods_board.action.ReviewListAction;
-import goods_board.action.ReviewWriteFormAction;
+import com.goods_board.action.Action;
+import com.goods_board.action.ActionForward;
+import com.goods_board.action.ReviewListAction;
+import com.goods_board.action.ReviewWriteFormAction;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
