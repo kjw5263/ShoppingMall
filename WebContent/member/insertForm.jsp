@@ -31,7 +31,7 @@
 <!--===============================================================================================-->
 
 
-    <title>회원가입 페이지입니다.</title>
+    <title>이메일 인증페이지</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -116,12 +116,12 @@
 	
 	<!-- 유효성 체크  시작  (name, id, pw, pw1, phone, address) -->
 
-	<script type="text/javascript">
+	<script type="text/javascript"> //id값
 	
-	var ck1=false;			//name
-	var ck2=false;			//id
-	var ck3=false;			//pw
-	var ck4=false;			//pw1
+	var ck1=false;			//id
+	var ck2=false;			//pw
+	var ck3=false;			//pw1
+	var ck4=false;			//name
 	var ck5=false;			//phone
 	var ck6=false;			//address2
 	var ck7=false;			//address3
@@ -185,7 +185,7 @@
 	            $('.ckMsg_addr3').css("padding-left","1rem"); 
 	            $("#address3").focus();
 	            return false;											
-			}
+			 }
 			 
 			 
 			 if(ck1 == false || ck2 == false || ck3 == false || ck4 == false || 
@@ -193,15 +193,16 @@
 				 return false;
 			 }
 	
-		 });// signUp (공백체크)
+		 });
 
-		 
+	 });	 // signUp (공백체크)
+	 
 		$("#id").keyup(function(){
 			var userId = $("#id").val();
 			var check = /^[A-Za-z\d_-]{4,15}$/;
 			
 			$.ajax({
-				 url:'.MemberJoinAction',
+				 url:'.MemberCheckAction',
 			     type:'post',
 			     data:{"user_id":user_id}, 
 			     success:function(data){
@@ -209,99 +210,99 @@
 			                $('.ckMsg_id').text("이미 존재하는 아이디입니다");     
 			                $('.ckMsg_id').css("color","red"); 
 			                $('.ckMsg_id').css("padding-left","1rem"); 
-			                ck2 = false; 			                
+			                ck1 = false; 			                
 			    		}else{
 			    			
-			    			if(user_id.match(check) != null){
+			    			if(userId.match(check) != null){
 								$('.ckMsg_id').text("사용가능한 아이디입니다");
 								$('.ckMsg_id').css("color","green");
-								ck2 = true;
+								ck1 = true;
 							}else{
 								$('.ckMsg_id').text("아이디는 4~15자리만 가능합니다");     
 								$('.ckMsg_id').css("color","red"); 
 								$('.ckMsg_id').css("padding-left","1rem");
-								ck2 = false; 
+								ck1 = false; 
 							}
 		                }
 		               },
 		        		error:function(){
 		                alert("에러입니다");
-		               }
+		               	}
 		          });
-			});//id
+			});//id 중복확인
 		 
 		 $("#pw").keyup(function(){
-			 var user_pw = $("#pw").val();
-			 var check=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/.test(user_pw);
+			 var userPass = $("#pw").val();
+			 var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/.test(userPass);
 			 
-			 if(user_pw == null){
+			 if(userPass == null){
 					$('.ckMsg_pw').text("비밀번호를 입력하세요");     
 					$('.ckMsg_pw').css("color","red"); 
  					$('.ckMsg_pw').css("padding-left","1rem"); 
- 					ck3 = false;
+ 					ck2 = false;
 				
 			 }else if(check){
 				 	$('.ckMsg_pw').text("사용 가능한 비밀번호입니다");     
 					$('.ckMsg_pw').css("color","green");
 					$('.ckMsg_pw').css("padding-left","1rem"); 
-					ck3 = true; 
+					ck2 = true; 
 			 }else{
-				 	$('.ckMsg_pw').text("대소문자,숫자,특수문자 중 세가지를 조합한 8~16자리를 입력하세요");     
+				 	$('.ckMsg_pw').text("대소문자,숫자,특수문자(@$!%*#?&) 중 세가지를 조합한 8~16자리를 입력하세요");     
 					$('.ckMsg_pw').css("color","red"); 
 				 	$('.ckMsg_pw').css("padding-left","1rem");
-		 		 	ck3 = false;									
+		 		 	ck2 = false;									
 			 }
 			 
 		 });//pw
 		
 		 
 		 $("#pw1").keyup(function(){
-			 if($("#pw1").val() !== $("#pw1").val()){
-					$('.chkMsg_upwc').text("비밀번호가 다릅니다");     
-					$('.chkMsg_upwc').css("color","red"); 
-					$('.chkMsg_upwc').css("padding-left","1rem"); 
-					chkup3 = false;
+			 if($("#pw").val() !== $("#pw1").val()){
+					$('.ckMsg_pw1').text("비밀번호가 다릅니다");     
+					$('.ckMsg_pw1').css("color","red"); 
+					$('.ckMsg_pw1').css("padding-left","1rem"); 
+					ck3 = false;
 			 }else{
-					$('.chkMsg_upwc').text("비밀번호가 일치합니다");     
-					$('.chkMsg_upwc').css("color","green");
-					$('.chkMsg_upwc').css("padding-left","1rem"); 
-					chkup3 = true;
+					$('.ckMsg_pw1').text("비밀번호가 일치합니다");     
+					$('.ckMsg_pw1').css("color","green");
+					$('.ckMsg_pw1').css("padding-left","1rem"); 
+					ck3 = true;
 			 }
-		 });//upwc
+		 });//pw1 (pw확인)
 		 
 		 $("#name").keyup(function(){
 			 var name = $("#name").val();
 			 var check = /^[A-Z|a-z|가-힣]{1,14}$/;
 			 if(name.match(check) != null){
 					$('.ckMsg_name').text("");     
-					ck1 = true;
+					ck4 = true;
 				}else{
 		            $('.ckMsg_name').text("이름을 정확히 입력하세요");     
 					$('.ckMsg_name').css("color","red"); 
 					$('.ckMsg_name').css("padding-left","1rem");
-					ck1 = false;
+					ck4 = false;
 				}
 			 
 		 });//name
 		 
-		 $("#uphone").keyup(function(){
-			 var uphone = $("#phone").val();
-			 var chk1 = /^010([0-9]{8})$/;
-			 var chk2 = /^01([1|6|7|8|9])([0-9]{3})([0-9]{4})$/;
-				if(uphone.match(chk1) != null || uphone.match(chk2) != null ){
-					$('.chkMsg_uphone').text("");     
-					chkup5 = true;
+		 $("#phone").keyup(function(){
+			 var phone = $("#phone").val();
+			 var check1 =  /^010([0-9]{8})$/;
+			 var check2 = /^01([1|6|7|8|9])([0-9]{3})([0-9]{4})$/;
+			 	if(phone.match(ckeck1) || phone.match(check2) != null){
+					$('.ckMsg_phone').text("");     
+					ck5 = true;
 				}else{
-		            $('.chkMsg_uphone').text("연락처를 정확히 입력하세요");     
-					$('.chkMsg_uphone').css("color","red"); 
-					$('.chkMsg_uphone').css("padding-left","1rem");
+		            $('.ckMsg_phone').text("연락처를 정확히 입력하세요");     
+					$('.ckMsg_phone').css("color","red"); 
+					$('.ckMsg_phone').css("padding-left","1rem");
 					chkup5 = false; 
 				}
+			 	
+			 	
 		 	});//phone
 		 	
 		  	 
-				 
-		});
 	
 	
 	</script>
@@ -310,35 +311,31 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-				<form class="login100-form validate-form flex-sb flex-w" action="MemberJoin.me" method="post" >
+				<form class="login100-form validate-form flex-sb flex-w" action="MemberJoin.me" method="post">
 					<span class="login100-form-title p-b-51">
 						회원가입
 					</span>
 
-						*아이디
+						*아이디 <span class="ckMsg_id"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "아이디를 입력해주세요">
-							<span class="ckMsg_id"></span>
 								<input class="input100" type="text" id="id" name="userId" placeholder="아이디를 입력해주세요">
 							<span class="focus-input100"></span>
 						</div>
 						
-						*비밀번호
+						*비밀번호 <span class="ckMsg_pw"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "비밀번호를 입력해주세요">
-							<span class="ckMsg_pw"></span>
 								<input class="input100" type="password" id="pw" name="userPass" placeholder="비밀번호를 입력해주세요">
 							<span class="focus-input100"></span>
 						</div>
 						
-						*비밀번호 확인
+						*비밀번호 확인 <span class="ckMsg_pw1"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-							<span class="ckMsg_pw1"></span>
 								<input class="input100" type="password" id="pw1" name="passConfirm" placeholder="입력한 비밀번호를 다시 입력해주세요">
 							<span class="focus-input100"></span>
 						</div>
 						
-						*이름
+						*이름<span class="ckMsg_name"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "이름을 적어주세요">
-							<span class="ckMsg_name"></span>
 								<input class="input100" type="text" id="name" name="userName" placeholder="이름을 입력하세요">
 							<span class="focus-input100"></span>
 						</div>
@@ -349,16 +346,15 @@
 							<span class="focus-input100"></span>
 						</div>
 						
-						*휴대폰 번호
+						*휴대폰 번호 <span class="ckMsg_ph"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "휴대폰 번호를 입력해주세요">
-							<span class="ckMsg_ph"></span>
-								<input class="input100" type="text" id="phone" name="userTel" placeholder="에) 01054321224">
+								<input class="input100" type="text" id="phone" name="userTel" placeholder="예) 01054321224">
 							<span class="focus-input100"></span>
 						</div>
 						
 						*이메일 (이메일인증하면 세션값 이메일로 받아서 넣기)
 						<div class="wrap-input100 validate-input m-b-16">
-								<input class="input100" type="email" name="userEmail" placeholder="예) 세션값->email@email.com" readonly>
+								<input class="input100" type="email" name="userEmail" value="<%=session.getAttribute("userEmail") %>" placeholder="예) 세션값->email@email.com" readonly>
 							<span class="focus-input100"></span>
 						</div>
 						
@@ -371,7 +367,7 @@
 						</div>
 						
 						*주소
-							<input type="button"  value="주소찾기" onclick="DaumPostcode()"> <br>
+							<input type="button"  value="주소찾기" onclick="DaumPostcode()">
 						<div class="wrap-input100 validate-input m-b-16">
 							<span class="ckMsg_addr1"></span>
 								<input class="input100" type="text" name="address1" id="address1" placeholder="우편번호" readonly>
@@ -379,7 +375,7 @@
 						</div>
 						<div class="wrap-input100 validate-input m-b-16">
 							<span class="ckMsg_addr2"></span>
-								<input class="input100" type="text" name="address2" id="address2" placeholder="주소찾기로 주소를 입력하세요" readonly>
+								<input class="input100" type="text" name="address2" id="address2" placeholder="주소를 입력하세요" readonly>
 							<span class="focus-input100"></span>
 						</div>
 						<div class="wrap-input100 validate-input m-b-16">
@@ -404,6 +400,14 @@
 							<input type="radio" name="userTrouble" value="아토피"> 아토피
 							<input type="radio" name="userTrouble" value="해당없음"> 해당없음
 						</div>
+						
+						*추천인 아이디 (DB에서 검색 후 값 입력)
+							<input type="button" value="추천인 검색" onclick="">
+						<div class="wrap-input100 validate-input m-b-16">
+								<input class="input100" type="text" name="referral" placeholder="추천인 아이디">
+							<span class="focus-input100"></span>
+						</div>
+								
 			
 					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn">
