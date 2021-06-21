@@ -27,7 +27,12 @@
                         <img src="./img/icons/bag.png" alt="">
                         <span>2</span>
                     </a>
+                    
+                    <%
+	        		 if(session.getAttribute("userId") != null){
+	        		%>
                     <a href="./MemberLogout.me" class="m-2">로그아웃</a>
+                    <%} %>
                     
                 </div>
                 
@@ -41,7 +46,7 @@
                 </div>
                 <%}else{%>
                 <div class="user-access">
-                    <a href="./MemberLogin.me" class="in"><%=userId %>님 반갑습니다.</a>
+                    <span class="mt-5"><%=userId %>님 반갑습니다.</span>
                 </div>
                 <%}%>
                 <nav class="main-menu mobile-menu">

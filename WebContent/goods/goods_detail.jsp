@@ -32,11 +32,26 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-
     <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
     <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+    <script type="text/javascript">
+        function isBasket() {
+            //alert("장바구니 동작");
+            if (document.gfr.amount.value == "") {
+                alert(" 구매 수량을 입력하세요. ");
+                document.gfr.amount.focus();
+                return;
+            }
+            var result = confirm("장바구니에 저장 하시겠습니까?");
+
+            if(result){
+                document.gfr.action = "./BasketAdd.ba";
+                document.gfr.submit();
+            }
+        }
+    </script>
     <title>상세페이지</title>
 
 
@@ -44,8 +59,13 @@
 <body>
 <%
     // DB에서 가져온정보를 저장 (request 영역)
-    //request.setAttribute("goods", gdao.getGoods(num));
+//    request.setAttribute("goods", gdao.getGoods(num));
+
+    // 장바구니 테스트시 ArryaList 주석 처리후 작업 진행 !!!!
+    ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     GoodsDTO dto = (GoodsDTO) request.getAttribute("goods");
+    GoodsReviewDAO grdao = new GoodsReviewDAO();
+
 %>
 <!-- Page Preloder -->
 <div id="preloder">
@@ -71,6 +91,9 @@
 <!-- Header End -->
 
 <!-- Page Add Section Begin -->
+
+
+
 <section class="page-add">
     <div class="container">
         <div class="row">
@@ -83,7 +106,7 @@
                 </div>
             </div>
             <div class="col-lg-8">
-                <img src="./img/add.jpg" alt="">
+                <img src="img/add.jpg" alt="">
             </div>
         </div>
     </div>
@@ -91,66 +114,68 @@
 <!-- Page Add Section End -->
 
 <!-- Product Page Section Beign -->
-<section class="product-page">
-    <div class="container">
-        <div class="product-control">
-            <a href="#">Previous</a>
-            <a href="#">Next</a>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="product-slider owl-carousel">
-                    <div class="product-img">
-                        <figure>
-                            <img src="" alt="">
-                            <div class="p-status">new</div>
-                        </figure>
-                    </div>
-                    <div class="product-img">
-                        <figure>
-                            <img src="<%= dto.getCosImage()%>" alt="">
-                            <div class="p-status">new</div>
-                        </figure>
-                    </div>
-                </div>
-
+<form action="" method="post" name="gfr">
+    <section class="product-page">
+        <div class="container">
+            <div class="product-control">
+                <a href="#">Previous</a>
+                <a href="#">Next</a>
             </div>
-            <div class="col-lg-6">
-                <div class="product-content">
-                    <h2><%=dto.getCosName() %></h2>
-                    <div class="pc-meta">
-                        <h5><%= dto.getCosPrice()%>원</h5>
-                        <div class="rating">
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-                            별 평점
+            <input type="hidden" name="cosNum" value="<%= dto.getCosNum()%>">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-slider owl-carousel">
+                        <div class="product-img">
+                            <figure>
+                                <img src="" alt="">
+                                <div class="p-status">new</div>
+                            </figure>
+                        </div>
+                        <div class="product-img">
+                            <figure>
+                                <img src="<%= dto.getCosImage()%>" alt="">
+                                <div class="p-status">new</div>
+                            </figure>
                         </div>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                        viverra maecenas accumsan lacus vel facilisis.</p>
-                    <ul class="tags">
-                        <li><span>Category :</span> <%=dto.getCosCategory() %></li>
-                        <li><span>Brand :</span> <%=dto.getCosBrand() %></li>
-                    </ul>
-                    <div class="product-quantity">
-                        <div class="pro-qty">
-                            <input type="text" value="1">
-                        </div>
-                    </div>
-                    <a href="#" class="primary-btn pc-btn">장바구니</a>
-                    <a href="#" class="primary-btn pc-btn"> 구매 </a>
 
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-content">
+                        <h2><%=dto.getCosName() %></h2>
+                        <div class="pc-meta">
+                            <h5><%= dto.getCosPrice()%>원</h5>
+                            <div class="rating">
+                                <%--                            <i class="fa fa-star"></i>--%>
+                                <%--                            <i class="fa fa-star"></i>--%>
+                                <%--                            <i class="fa fa-star"></i>--%>
+                                <%--                            <i class="fa fa-star"></i>--%>
+                                <%--                            <i class="fa fa-star"></i>--%>
+                                별 평점
+                            </div>
+                            <%--                        <jsp:include page="goods_toggle.jsp"/>--%>
+                            수정 전!!
+                        </div>
+                        <ul class="tags">
+                            <li><span>Category :</span> <%=dto.getCosCategory() %></li>
+                            <li><span>Brand :</span> <%=dto.getCosBrand() %></li>
+                        </ul>
+                        <div class="product-quantity">
+                            <div class="pro-qty">
+                                <input type="text" value="1" name="amount">
+                            </div>
+                        </div>
+                        <a href="javascript:isBasket();" class="primary-btn pc-btn">장바구니</a>
+                        <a href="" class="primary-btn pc-btn"> 구매 </a>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</form>
 <!-- Product Page Section End -->
-        <h1>상세페이지</h1>
+<h1>상세페이지</h1>
 <!-- Related Product Section Begin -->
 
 <ul class="nav nav-tabs">
@@ -194,25 +219,22 @@
             </tr>
         </table>
     </div>
+
     <div class="tab-pane fade" id="id3">
         <h3>리뷰</h3>
-        <button onclick="location.href='/reviewForm.rev'" class="btn-primary">글등록</button>
+        <button onclick="location.href='/reviewForm.rev?cosNum=<%=dto.getCosNum() %>'" class="btn-primary">글등록</button>
         <br>
         평점 별 글 갯수 <br>
-        <table border="1">
-            <tr>
 
-                <td rowspan="2">작성자</td>
-                <td>글</td>
-            </tr>
-            <tr>
+        <%
 
-                <td><textarea name="" id="" cols="30" rows="10" readonly>
-                   글~~~~~
-                </textarea></td>
-            </tr>
-        </table>
+            if (request.getAttribute("grdto")!=null){
+
+        %>
+        <%}%>
+<%--        <jsp:include page="/goods_board/review_list.jsp"/>--%>
     </div>
+
 </div>
 
 
