@@ -41,8 +41,8 @@ public class GoodsFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/GoodsDetail.go")){
-			System.out.println("C : /GoodsDetail.go 호출");
+		}else if(command.equals("/GoodsDetail.cos")){
+			System.out.println("C : /GoodsDetail.cos 호출");
 			// DB정보를 받아서 페이지 이동없이(주소변화X) 출력
 			// GoodsDetailAction() 객체 생성
 			

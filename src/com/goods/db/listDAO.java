@@ -21,7 +21,7 @@ public class listDAO extends DBconnection{
 	private String sql = "";
 	
 	
-	private String tablename = "cos_List";
+	private String tablename = "cos_list";
 	DBconnection con = new DBconnection();
 	setGoodsTool setTool = new setGoodsTool();
 	public List getGoodsList() {
