@@ -221,11 +221,14 @@ public class MemberDAO {
 		// findPw(userName, userEmail) 끝
 		
 	
-		// findPwAjax(userName, userEmail, userTel) 시작
-		
+		// findPwAjax(userId, userEmail, userTel) 시작
 		public int findPwAjax(String userId, String userEmail, String userTel){
 			int check = -1;
 
+			System.out.println("넘어온 userId 는 : @@@@@@@@@@@@@@ " + userId);
+			System.out.println("넘어온 userEmail 는 : @@@@@@@@@@@@@@ " + userEmail);
+			System.out.println("넘어온 userTel 는 : @@@@@@@@@@@@@@ " + userTel);
+			
 			try {
 				// 1,2 디비연결
 				conn = getConnection();
@@ -258,7 +261,7 @@ public class MemberDAO {
 			return check;
 		}
 		
-		// findPwAjax(userName, userEmail, userTel) 끝
+		// findPwAjax(userId, userEmail, userTel) 끝
 		
 		
 }

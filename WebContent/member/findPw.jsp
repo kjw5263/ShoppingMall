@@ -54,6 +54,42 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
 
+	<script type="text/javascript">
+		$(function() {
+			
+	        $('#certify').click(function(){
+	        	
+				var con = document.getElementById("i1");
+				var userId = $('#userId').val();
+				var userEmail = $('#userEmail').val();
+				var userTel = $('#userTel').val();
+	        	
+	           $.ajax({
+	            url: "./FindPwAjax.me",
+	            type:"post",
+	            data:{userId:userId,userEmail:userEmail,userTel:userTel},
+	            success:function(data){
+	               alert(data);
+	               
+	               if(data == 0){
+	            	alert('인증번호를 발송합니다. 근데 아직 구현은 안됨..') 
+	       			con.style.display = (con.style.display != 'none') ? "none" : "block";
+	            		
+	            	// 이 단계에서 입력한 전화번호로 인증번호 전송하기
+	            	
+	            	
+
+	               }else{
+	            	alert('잘못된 정보입니다.')
+	            	   
+	               } // if else
+	            	   
+	            }
+	         });
+	        })   
+		});
+	</script>
+
 </head>
 
 <body>
@@ -89,17 +125,24 @@
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "전화번호를 입력해주세요">
 							<input class="input100" type="text" id="userTel" name="userTel" placeholder="Phone">
 							
-							
+							<!-- Button to Open the Modal -->
+							<button type="button" class="btn btn-primary" id="certify">
+							  인증요청
+							</button>
+							<span class="focus-input100"></span>
+						</div>
+											
+						<div class="wrap-input100 validate-input m-b-16" data-validate = "인증번호를 입력해주세요" style="display: none;" id="i1">
+							<input class="input100" type="text" id="" name="" placeholder="인증번호" >
 							
 							<!-- Button to Open the Modal -->
-							<button type="submit" class="btn btn-primary" id="certify">
-							  인증받기
+							<button type="button" class="btn btn-primary" id="">
+							  확인
 							</button>
-
-
 							<span class="focus-input100"></span>
-							
 						</div>
+			
+						
 					</div>
 					
 					<div class="flex-sb-m w-full p-t-3 p-b-24">
@@ -126,7 +169,7 @@
 					
 					
 					<div class="row">
-						<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
+						<a href="./MemberJoin.me" class="txt1 mt-3" >회원가입</a>
 					</div>
 				</form>
 				<!-- 일반 로그인 폼 끝 -->

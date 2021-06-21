@@ -154,20 +154,21 @@ public class MemberFrontController extends HttpServlet{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					
+				}else if(command.equals("/FindPwAjax.me")){
+					System.out.println("C : /FindPwAjax.me 호출");
+					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
+					action = new FindPwAjax();
+					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
 				}
 					
-//				}else if(command.equals("/FindPwAjax.me")){
-//					System.out.println("C : /FindPwAjax.me 호출");
-//					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
-//					action = new FindPwAjax();
-//					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
-//					try {
-//						forward = action.execute(request, response);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//					
-//				}
+				
 				
 				
 				
