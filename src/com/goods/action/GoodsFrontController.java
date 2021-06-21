@@ -30,26 +30,32 @@ public class GoodsFrontController extends HttpServlet {
         Action action = null;
         ActionForward forward = null;
 
+        if(command.equals("/GoodsList.cos")){
+			System.out.println("C : /GoodsList.cos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			action = new GoodsListAction();
+			
+			try {
+				forward = action.execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/GoodsDetail.go")){
+			System.out.println("C : /GoodsDetail.go 호출");
+			// DB정보를 받아서 페이지 이동없이(주소변화X) 출력
+			// GoodsDetailAction() 객체 생성
+			
+			action = new GoodsDetailAction();
+			try {
+				forward = action.execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 
-
-        if (command.equals("/GoodsDetail.cos")){
-            System.out.println("C : /GoodsDetail.cos 호출");
-            action = new GoodsDetailAction();
-            try {
-                forward = action.execute(req, resp);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (command.equals("/GoodsDetail.cos")){
-            System.out.println("C : /GoodsList.cos 호출");
-            action = new GoodsListAction();
-            try {
-                forward = action.execute(req, resp);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+       
         System.out.println("C : 2.페이지 주소 매핑  완료");
 
 

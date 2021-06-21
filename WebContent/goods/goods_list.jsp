@@ -1,4 +1,4 @@
-<%@page import="com.goods.action.listDAO"%>
+<%@page import="com.goods.db.listDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -24,8 +24,11 @@
     String http[][] = new String[][]
     		{{"" ," 전체"},
     	{"?item=best","베스트상품"},
-    	{"?item=outwear"," 외투"},
-    	{"?item=fulldress","정장/신사복"}};
+    	{"?item=outwear","스킨"},
+    	{"?item=essence","에센스"},
+    	{"?item=cream","크림"},
+    	{"?item=maskpack","마스크팩"}
+    		};//이부분만 수정
     
   %>
   <table  border="1">

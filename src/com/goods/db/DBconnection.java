@@ -1,4 +1,4 @@
-package com.goods.action;
+package com.goods.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,19 +10,40 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.var.list.varlist;
+
 public class DBconnection {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private String sql = "";
-
+	varlist vars = new varlist();
+	private String databasename = vars.getDatabasename();
+	
+	
+	
+	protected ResultSet consql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	
 	
 	protected Connection getConnection() {
 		try {
 			// Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
 			Context initCTX = new InitialContext();
 			// DB연동 정보를 불러오기(context.xml)
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/model2DB");
+			
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/"+ databasename);
 
 			conn = ds.getConnection();
 
@@ -34,7 +55,7 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		setConn(conn);
 		return conn;
 	}
 	// getConnection() - 디비연결 끝
@@ -54,5 +75,53 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+
+	public Connection getConn() {
+		return conn;
+	}
+
+
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
+
+
+
+	public PreparedStatement getPstmt() {
+		return pstmt;
+	}
+
+
+
+	public void setPstmt(PreparedStatement pstmt) {
+		this.pstmt = pstmt;
+	}
+
+
+
+	public ResultSet getRs() {
+		return rs;
+	}
+
+
+
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+
+
+
+	public String getSql() {
+		return sql;
+	}
+
+
+
+	public void setSql(String sql) {
+		this.sql = sql;
 	}
 }

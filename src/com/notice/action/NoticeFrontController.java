@@ -4,12 +4,15 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
 
+import com.notice.db.NoticeDAO;
 
-// @WebServlet('')
+@WebServlet("*.nos")
 public class NoticeFrontController extends HttpServlet{
 
 	
@@ -39,10 +42,23 @@ public class NoticeFrontController extends HttpServlet{
 		// 같은 패키지 안에 있는 Action을 호출 해주어야함!
 		Action action = null;
 		ActionForward forward = null;
-		
-		
-		
-		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
+
+        if(command.equals("/notice.nos")){
+			System.out.println("C : /notice.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			action = new noticeListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+       
+        System.out.println("C : 2.페이지 주소 매핑  완료");
+
+
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
 		
