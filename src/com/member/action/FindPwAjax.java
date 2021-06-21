@@ -26,9 +26,21 @@ public class FindPwAjax implements Action {
 		MemberDAO mdao = new MemberDAO();
 		int check = mdao.findPwAjax(userId, userEmail, userTel);		
 		
+		MessageSendAjax ms = new MessageSendAjax();
 		PrintWriter out = response.getWriter();
+
 		
-		out.print(check);
+		if(check == 0){
+			ms.call(userTel);
+			
+			out.print(check);
+			
+		}else{
+			
+			out.print(check);
+			
+		}
+		
 		
 		return null;
 	}
