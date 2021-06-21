@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title>Login V10</title>
@@ -54,45 +54,10 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
 
-	<script type="text/javascript">
-		$(function() {
-			
-	        $('#certify').click(function(){
-	        	
-				var con = document.getElementById("i1");
-				var userId = $('#userId').val();
-				var userEmail = $('#userEmail').val();
-				var userTel = $('#userTel').val();
-
-	           $.ajax({
-	            url: "./FindPwAjax.me",
-	            type:"post",
-	            data:{userId:userId,userEmail:userEmail,userTel:userTel},
-	            success:function(data){
-
-	               if(data == 0){
-
- 		            	alert('인증번호를 발송합니다.') 
- 		       			con.style.display = (con.style.display != 'none') ? "none" : "block";
- 		            	
-	               }else{
-	            	alert('잘못된 정보입니다.')
-	            	   
-	               } // if else
-	            	   
-	            }
-	         });
-	           
-	           
-	        })   
-		});
-	</script>
-
 </head>
 
 <body>
-
-
+				
 	<!-- header 시작 -->
  	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
@@ -104,77 +69,35 @@
 			<div class="wrap-login100 p-t-50 p-b-90">
 			
 				<!-- 일반 로그인 폼 시작 -->
-				<form class="login100-form validate-form flex-sb flex-w" action="./FindPwAjax.me" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" action="./FindIdAction.me" method="post">
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
 							비밀번호 찾기 <br>
 						</span>
 						
-						<div class="wrap-input100 validate-input m-b-16" data-validate = "아이디를 입력해주세요">
-							<input class="input100" type="text" id="userId" name="userId" placeholder="ID">
-							<span class="focus-input100"></span>
-						</div>
+							찾으시는 비밀번호는 ${userPass } 입니다.
 						
-						<div class="wrap-input100 validate-input m-b-16" data-validate = "이메일을 입력해 주세요">
-							<input class="input100" type="email" id="userEmail" name="userEmail" placeholder="Email">
-							<span class="focus-input100"></span>
-						</div>
-						
-						<div class="wrap-input100 validate-input m-b-16" data-validate = "전화번호를 입력해주세요">
-							<input class="input100" type="text" id="userTel" name="userTel" placeholder="Phone">
-							
-							<!-- Button to Open the Modal -->
-							<button type="button" class="btn btn-primary" id="certify">
-							  인증요청
-							</button>
-							<span class="focus-input100"></span>
-						</div>
 					</div>
-				</form>
-								
-								
-				<form action="./PwCheckAction.me" method="post">					
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "인증번호를 입력해주세요" style="display: none;" id="i1">
-						<input class="input100" type="text" id="checkNum" name="checkNum" placeholder="인증번호" >
-						
-						<!-- Button to Open the Modal -->
-						<button type="submit" class="btn btn-primary" id="confirm">
-						  확인
-						</button>
-						<span class="focus-input100"></span>
-					</div>
-				</form>
-						
 					
-			<div class="flex-sb-m w-full p-t-3 p-b-24">
-				<div class="contact100-form-checkbox">
-					<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-				</div>
+					<div class="flex-sb-m w-full p-t-3 p-b-24">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+						</div>
 
-				<div>
-					<a href="./MemberLogin.me" class="txt1">로그인</a>
-					/
-					<a href="./FindId.me" class="txt1">아이디 찾기</a>
-				</div>
-			</div>
-			
-			
-
-			<div class="container-login100-form-btn m-t-17">
-			
-				<!-- 일반 로그인 버튼 시작 -->
-				<input class="login100-form-btn" type="submit" value="비밀번호 찾기" id="submit"> 
-				<!-- 일반 로그인 버튼 끝 -->
-				
-			</div>
-			
-			
-			<div class="row">
-				<a href="./MemberJoin.me" class="txt1 mt-3" >회원가입</a>
-			</div>
+						<div class="mt-3">
+							<a href="./MemberLogin.me" class="txt1">로그인</a>
+							/
+							<a href="./FindId.me" class="txt1">아이디 찾기</a>
+						</div>
+					</div>
+					
+					
+					<div class="row">
+						<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
+					</div>
+				</form>
 				<!-- 일반 로그인 폼 끝 -->
-				
 				
 				
 			</div>
@@ -187,35 +110,6 @@
  	<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
     
-	
-
-
-	<!-- 인증번호 Modal 시작 -->
-	<div class="modal" id="myModal">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	
-	
-	      <!-- Modal body 시작 -->
-	      <div class="modal-body">
-	      
-			<div class="input-group mb-3">
-			  <input type="text" class="form-control" placeholder="인증번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
-			  <button class="btn btn-outline-secondary" type="button" id="button-addon2">확인</button>
-			</div>	    
-			  
-	      </div>
-	      <!-- Modal body 끝 -->
-	
-	
-	    </div>
-	  </div>
-	</div>
-	<!-- 인증번호 Modal 끝 -->
-	
-	
-	
-	
 	
 <!--===============================================================================================-->
 	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>

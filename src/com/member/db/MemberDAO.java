@@ -260,8 +260,76 @@ public class MemberDAO {
 			
 			return check;
 		}
-		
 		// findPwAjax(userId, userEmail, userTel) 끝
 		
 		
+		// CheckPw(userId, rm) 시작
+		public void CheckPw(String userId, String rm){
+			String check = "";
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "update user_info set userPwCheck=? where userId=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, rm);
+				pstmt.setString(2, userId);
+				
+				// 4 sql 실행
+				pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+		}
+		
+		// CheckPw(userId, rm)  끝
+		
+		
+		// PwCheck(checkNum) 시작 .. 가져온 인증번호를 디비에 대비해보는 메소드
+		public String PwCheck(String checkNum, String PwCheckId){
+			String check = "";
+			
+			System.out.println("PwCheckId 는 @@@@@@@@ " + PwCheckId);
+			
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userPwCheck=? and userId=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, checkNum);
+				pstmt.setString(2, PwCheckId);
+
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				if(rs.next()){
+					check = rs.getString("userPass");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// PwCheck(checkNum) 끝 .. 가져온 인증번호를 디비에 대비해보는 메소드
+
 }
