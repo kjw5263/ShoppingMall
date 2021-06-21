@@ -31,7 +31,7 @@ public class FindPwAjax implements Action {
 
 		
 		if(check == 0){
-			ms.call();
+			ms.call(userTel);
 			
 			out.print(check);
 			
