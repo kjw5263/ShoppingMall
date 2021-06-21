@@ -24,8 +24,11 @@
     String http[][] = new String[][]
     		{{"" ," 전체"},
     	{"?item=best","베스트상품"},
-    	{"?item=outwear"," 외투"},
-    	{"?item=fulldress","스킨"}};//이부분만 수정
+    	{"?item=outwear","스킨"},
+    	{"?item=essence","에센스"},
+    	{"?item=cream","크림"},
+    	{"?item=maskpack","마스크팩"}
+    		};//이부분만 수정
     
   %>
   <table  border="1">
