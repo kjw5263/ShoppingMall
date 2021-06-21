@@ -61,11 +61,10 @@
     // DB에서 가져온정보를 저장 (request 영역)
 //    request.setAttribute("goods", gdao.getGoods(num));
 
+    // 장바구니 테스트시 ArryaList 주석 처리후 작업 진행 !!!!
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     GoodsDTO dto = (GoodsDTO) request.getAttribute("goods");
-    ArrayList<GoodsReviewDTO> grdto = (GoodsReviewDTO) request.getAttribute("grdto");
     GoodsReviewDAO grdao = new GoodsReviewDAO();
-    int cnt = grdao.getReviewCount();
 
 %>
 <!-- Page Preloder -->
