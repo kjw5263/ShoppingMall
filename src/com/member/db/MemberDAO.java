@@ -69,7 +69,7 @@ public class MemberDAO {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userPass from userinfo where userId=?";
+				sql = "select userPass from user_info where userId=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, userId);
@@ -100,5 +100,167 @@ public class MemberDAO {
 			return check;
 		}
 		// idCheck(id,pass)
-	
-}
+<<<<<<< HEAD
+=======
+		
+		
+		// kakaoIdCheck(userEmail)
+		public String kakaoIdCheck(String userEmail){
+			String check = "";
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userId, userEmail from user_info where userEmail=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userEmail);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				
+				if(rs.next()){
+					
+					check = rs.getString("userId");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// kakaoIdCheck(userEmail)
+		
+		
+		// findId(userName, userEmail) 시작
+		public String findId(String userName,String userEmail){
+			String check = "";
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userId from user_info where userName=? and userEmail=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userName);
+				pstmt.setString(2, userEmail);
+				
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				if(rs.next()){
+					check = rs.getString("userId");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// findId(userName, userEmail) 끝
+		
+		
+		// findPw(userName, userEmail) 시작
+		public String findPw(String userId,String userEmail, String userTel){
+			String check = "";
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userId=? and userEmail=? and userTel=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userId);
+				pstmt.setString(2, userEmail);
+				pstmt.setString(3, userTel);
+				
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				if(rs.next()){
+					check = rs.getString("userPass");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// findPw(userName, userEmail) 끝
+		
+		// findPwAjax(userId, userEmail, userTel) 시작
+		public int findPwAjax(String userId, String userEmail, String userTel){
+			int check = -1;
+
+			System.out.println("넘어온 userId 는 : @@@@@@@@@@@@@@ " + userId);
+			System.out.println("넘어온 userEmail 는 : @@@@@@@@@@@@@@ " + userEmail);
+			System.out.println("넘어온 userTel 는 : @@@@@@@@@@@@@@ " + userTel);
+			
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userId=? and userEmail=? and userTel =?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userId);
+				pstmt.setString(2, userEmail);
+				pstmt.setString(3, userTel);
+				
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				if(rs.next()){
+					check = 0;
+					
+				}else{
+					// 회원정보 x
+					check = -1;
+				}
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		
+
+		
+		// findPwAjax(userId, userEmail, userTel) 끝
+		
+		

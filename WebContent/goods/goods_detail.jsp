@@ -32,7 +32,6 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-
     <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
     <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
