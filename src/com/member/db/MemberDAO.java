@@ -72,7 +72,7 @@ public class MemberDAO {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userPass from userinfo where userId=?";
+				sql = "select userPass from user_info where userId=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, userId);
@@ -113,7 +113,7 @@ public class MemberDAO {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userId, userEmail from userinfo where userEmail=?";
+				sql = "select userId, userEmail from user_info where userEmail=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, userEmail);
@@ -152,7 +152,7 @@ public class MemberDAO {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userId from userinfo where userName=? and userEmail=?";
+				sql = "select userId from user_info where userName=? and userEmail=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, userName);
@@ -190,7 +190,7 @@ public class MemberDAO {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userPass from userinfo where userId=? and userEmail=? and userTel=?";
+				sql = "select userPass from user_info where userId=? and userEmail=? and userTel=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, userId);
@@ -233,7 +233,7 @@ public class MemberDAO {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userPass from userinfo where userId=? and userEmail=? and userTel =?";
+				sql = "select userPass from user_info where userId=? and userEmail=? and userTel =?";
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, userId);

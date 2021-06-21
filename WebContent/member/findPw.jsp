@@ -72,10 +72,19 @@
 	               alert(data);
 	               
 	               if(data == 0){
-	            	alert('인증번호를 발송합니다. 근데 아직 구현은 안됨..') 
-	       			con.style.display = (con.style.display != 'none') ? "none" : "block";
-	            		
-	            	// 이 단계에서 입력한 전화번호로 인증번호 전송하기
+	            	   
+	            	   
+ 		            	alert('인증번호를 발송합니다. 근데 아직 구현은 안됨..') 
+ 		       			con.style.display = (con.style.display != 'none') ? "none" : "block";
+		            		
+// 		            	// 이 단계에서 입력한 전화번호로 인증번호 전송하기 시작
+// 		            	$.ajax({
+// 		    	            url: "./MessageSendAjax.java",
+// 		    	            success:function(data){
+	
+// 		    	            }
+// 		    	         });
+// 		            	// 이 단계에서 입력한 전화번호로 인증번호 전송하기 끝
 	            	
 	            	
 
@@ -86,6 +95,13 @@
 	            	   
 	            }
 	         });
+	           
+	           
+	           
+	           
+	           
+	           
+	           
 	        })   
 		});
 	</script>
