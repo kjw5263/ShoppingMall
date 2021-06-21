@@ -194,13 +194,6 @@ iframe {
   border-radius: 3px;
 }
 
-.wrap-input101 {
-  width: 90%;
-  position: relative;
-  background-color: #e6e6e6;
-  border: 1px solid transparent;
-  border-radius: 3px;
-}
 
 /*---------------------------------------------*/
 .input100 {
@@ -215,20 +208,6 @@ iframe {
   height: 62px;
   padding: 0 20px 0 38px;
 }
-
-.input101 {
-  font-family: Ubuntu-Bold;
-  color: #403866;
-  line-height: 1.2;
-  font-size: 18px;
-
-  display: block;
-  width: 90%;
-  background: transparent;
-  height: 62px;
-  padding: 0 20px 0 38px;
-}
-
 /*------------------------------------------------------------------
 [ Focus Input ]*/
 
