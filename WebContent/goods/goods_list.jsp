@@ -1,5 +1,4 @@
-<%@page import="com.goods.action.listDAO"%>
-<%@page import="com.goods.db.GoodsDTO"%>
+<%@page import="goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,42 +12,53 @@
 
   <h1>WebContent/goods/goods_list.jsp</h1>
   
-  
-
   <%
     // request.setAttribute("goodsList", gdao.getGoodsList());
-  	listDAO gdao = new listDAO();
-  	
-    List goodsList = gdao.getGoodsList("all");//(List) request.getAttribute("goodsList");
-    String goHead = "./GoodsList.go";
-    String http[][] = new String[][]
-    		{{"" ," 전체"},
-    	{"?item=best","베스트상품"},
-    	{"?item=outwear"," 외투"},
-    	{"?item=fulldress","정장/신사복"}};
-    
+    List goodsList = (List) request.getAttribute("goodsList");
+    String[] aa = new String[]{ "", "?item=best" ,"?item=outwear" ,"?item=fulldress"
+    		,"?item=Tshirts" ,"?item=shirts" ,"?item=pants" ,"?item=shoes"};
+    String[] bb = new String[]{"전체","베스트상품","외투"," 정장/신사복","티셔츠","와이셔츠","바지"," 신발"};
+  
   %>
-  <table  border="1">
-  <tr>
-    <%for(int i = 0; i<http.length;i++){ %>
+  
+  
+  <table border="1">
+    <tr>
+    <% for(int i = 0 ; i<8 ;i++){ %>
 	  <td>
-       	<a href=<%=goHead%> + <%=http[i][0] %>> <%=http[i][1] %> </a>
+       	<a href="./GoodsList.go"+<%=aa[i] %>> <%=bb[i] %> </a>
       </td>
+      <!-- <td>
+      	<a href="./GoodsList.go?item=best"> 베스트상품</a>
+      </td>
+      <td>
+        <a href="./GoodsList.go?item=outwear"> 외투 </a>
+      </td>
+      <td>
+        <a href="./GoodsList.go?item=fulldress"> 정장/신사복</a>
+      </td>
+      <td>
+        <a href="./GoodsList.go?item=Tshirts"> 티셔츠 </a>
+      </td>
+      <td>
+        <a href="./GoodsList.go?ite
+        m=shirts"> 와이셔츠 </a>
+      </td>
+      <td>
+        <a href="./GoodsList.go?item=pants"> 바지</a>
+      </td>
+      <td>
+        <a href="./GoodsList.go?item=shoes"> 신발 </a>
+      </td> -->
       <%} %>
     </tr>
-  
-  </table>
-  <br>
-  <br>
-  <table border="1">
     
     
     <%
       // 전체 상품 개수
-      System.out.println(goodsList);
       int size = goodsList.size();
       // 열의 개수
-      int col =http.length;
+      int col =8;
       // 행의 개수 
       int row = (size/col)+((size%col>0)? 1:0);
       // 상품 출력개수 
@@ -65,12 +75,12 @@
     		  GoodsDTO dto = (GoodsDTO) goodsList.get(num);
     		  %>
     		     <td>
-    		         <img src="./upload/<%=dto.getCosImage().split(",")[0]%>"
+    		         <img src="./upload/<%=dto.getImage().split(",")[0]%>"
 	             	 width="120" height="120"
 	          		 ><br>
 	          		 
-	         	  	<a href="./GoodsDetail.go?num=<%=dto.getCosNum()%>"><%=dto.getCosName() %></a><br>
-	           		<%=dto.getCosPrice() %>원  <br>
+	         	  	<a href="./GoodsDetail.go?num=<%=dto.getNum()%>"><%=dto.getName() %></a><br>
+	           		<%=dto.getPrice() %>원  <br>
     		     </td>
     		  <%   		  
     		  num++;

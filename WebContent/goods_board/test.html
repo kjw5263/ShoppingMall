@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-1.8.2.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="js/jquery.tmpl.js"></script>
+    <script src="js/jquery.history.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery-ui/jquery-ui.js"></script>
+    <script src="js/placeholders.js"></script>
+
+    <script src="js/util.js?ver=20151117_3"></script>  <!-- 업무에 필요한 유틸리티 함수들을 지정 -->
+    <title>Document</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>No</th>
+        <th>지출일</th>
+        <th>지출번호</th>
+        <th>지출코드</th>
+        <th>지출코드명</th>
+        <th>금액</th>
+        <th>수령인</th>
+        <th>적요</th>
+    </tr>
+    <tbody id="listCont">
+    </tbody>
+    <!-- jquery templat 를 이용해서 리스트 출력-->
+    <script id="listTmpl" type="text/x-jquery-tmpl">
+            {{each list}}
+            <tr>
+              <td>${totalCnt - (((pageNum - 1) * listCnt) + $index)}</td>
+              <td>${this.EXPEND_DT}</td>
+              <td>${this.EXPEND_DETAIL_CODE}</td>
+              <td>${this.ACCOUNT_CODE}</td>
+              <td>${this.ACCOUNT_NM}</td>
+              <td>${this.AMOUNT}</td>
+              <td>${this.NAME}</td>
+              <td>${this.ETC}</td>
+            </tr>
+            {{/each}}
+          </script>
+</table>
+<div class="paginate" id="paging">
+</div>
+<script type="text/javascript">
+    var pageNum = 1 ;  //현재 페이지 번호
+    var totalPageCnt = 0 ; //전체 페이지 수
+    var totalCnt = 0;  //전체 글 수
+    var listCnt = 10;  //한 화면에 보여질 리스트 수
+    var pageSet = 10;  // 페이징 부부의 카운트 수
+    var searchString = ""; //검색
+    $(function(){
+        searchList();  //목록 조회 함수 호출
+    });
+
+    //정보 조회
+    searchList = function(){
+        var startNum = (pageNum -1) * listCnt;  //현재 페이지 번호를 가지고 시작 위치를 구한다.
+        var parameter = {
+            "SearchType" : $("#searchType").val() + ""
+            ,"SearchString" : $("#searchString").val() + ""
+            ,"startNum" : startNum + ""
+            ,"endNum" : listCnt + ""
+        }
+        util.data.getDatafromUrl("/goods_board/review_list.jsp", parameter, searchListCallback); //호출 주소는 적당히 알아서...
+    }
+
+    searchListCallback = function(resultData){
+        $("#listCont").empty(); //리스트 내용을 지움
+        if (resultData.list != null){
+            totalCnt = resultData.Cnt;
+            util.list.setListContent(resultData,"#listCont", "#listTmpl");  //util.list.setListContent(데이터, 대상 오브젝트, 템플릿스크립트 오브젝트);
+        }
+        util.list.paging("#paging", pageNum, listCnt, resultData.Cnt , "searchList()", "pageNum"); //페이징 처리
+    }
+
+</script>
+
+
+
+
+</body>
+</html>
