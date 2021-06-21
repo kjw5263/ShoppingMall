@@ -4,7 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import javax.sql.DataSource;
+
+import com.goods.db.GoodsDTO;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -30,7 +37,7 @@ public class BasketDAO {
 			Context initCTX = new InitialContext();	 //얘는 인터페이스(부모)!인데 객체 생성(자식)-> 업캐스팅(상속)
 			
 			// DB 연동 정보를 불러오기 (context.xml)
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosshopping");	// 다운캐스팅
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosShopping");	// 다운캐스팅
 			
 			conn = ds.getConnection();
 			
@@ -47,7 +54,6 @@ public class BasketDAO {
 		return conn;
 	}
 	
-	
 	// 자원 해제 코드
 	public void closeDB() {
 		// 자원 해제
@@ -58,5 +64,158 @@ public class BasketDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// checkGoods(bkDTO)
+	public int checkGoods(BasketDTO bkDTO){
+		int result = 0;
+		try {
+			conn = getConnection();
+			// 전달받은 옵션값들 (basketCosNum, basketCosAmount, basketUserID) 사용하여
+			// 기존의 추가된 상품이 있는지 체크 => 상품이 있을 때 1리턴 + 상품의 수량만 update
+			//						 => 상품이 없을 때 0리턴
+			sql = "select * from basket_list where basketCosNum=? and "
+					+ "basketCosAmount=? and "
+					+ "basketUserId=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bkDTO.getBasketCosNum());
+			pstmt.setInt(2, bkDTO.getBasketCosAmount());
+			pstmt.setString(3, bkDTO.getBasketUserId());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				//result = 1;
+				
+				// 장바구니 상품의 정보(수량)를 수정
+				sql = "update basket_list set basketCosAmount = basketCosAmount + ? "
+						+ "where basketUserId=? and basketCosNum=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, bkDTO.getBasketCosAmount());
+				pstmt.setString(2, bkDTO.getBasketUserId());
+				pstmt.setInt(3, bkDTO.getBasketCosNum());
+				
+				result = pstmt.executeUpdate();
+			}
+			
+			System.out.println("DAO : 장바구니 상품 체크 완료! -> "+result);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+		
+	}
+	// checkGoods(bkDTO)
+	
+	// basketAdd(bkDTO)
+	public void basketAdd(BasketDTO bkDTO){
+		// 장바구니 번호
+		int basketNum = 0;
+		
+		try {
+			conn = getConnection();
+			
+			// 상품번호 계산 : 기존의 장바구니가 있으면 해당번호 + 1
+			sql = "select max(basketNum) from basket_list";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				basketNum = rs.getInt(1)+1;
+			}
+			System.out.println("DAO : 장바구니 번호"+basketNum);
+			
+			// 화장품 장바구니에 추가
+			sql = "insert into basket_list values(?,?,?,?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, basketNum);
+			pstmt.setString(2, bkDTO.getBasketUserId());
+			pstmt.setInt(3, bkDTO.getBasketCosNum());
+			pstmt.setInt(4, bkDTO.getBasketCosAmount());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DAO : 장바구니 추가 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+	}
+	// basketAdd(bkDTO)
+	
+	// getBasketList(userId)
+	public Vector getBasketList(String userID){
+		
+		// 장바구니 정보(List) + 상품정보(상품이름, 가격, 이미지)(List)
+		Vector totalList = new Vector();
+		List basketList = new ArrayList();
+		List goodsList = new ArrayList();
+		
+		try {
+			// userID에 해당하는 장바구니 정보 저장
+			conn = getConnection();
+			
+			sql = "select * from basket_list where basketUserId=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userID);
+			
+			rs = pstmt.executeQuery();
+			
+			// 장바구니가 있을 때 마다 장바구니의 상품정보를 추가적으로 저장
+			while(rs.next()){
+				BasketDTO bkDTO = new BasketDTO();
+				bkDTO.setBasketCosAmount(rs.getInt("basketCosAmount"));
+				bkDTO.setBasketCosNum(rs.getInt("basketCosNum"));
+				bkDTO.setBasketNum(rs.getInt("basketNum"));
+				bkDTO.setBasketUserId(rs.getString("basketUserId"));
+				
+				// 장바구니 List 한칸에 저장
+				basketList.add(bkDTO);
+				
+				// 장바구니 상품에 해당하는 정보 저장(이름, 가격, 이미지..)
+				// 기존의 데이터를 사용하는데 문제없이 쓰기 위해서
+				// pstmt2, rs2 객체 생성
+				sql = "select * from basket_list where cosNum=?";
+				PreparedStatement pstmt2 = conn.prepareStatement(sql);
+				pstmt2.setInt(1, bkDTO.getBasketCosNum());
+				
+				ResultSet rs2 = pstmt2.executeQuery();
+				if(rs2.next()){
+					// 상품정보가 있을 때
+					GoodsDTO gdto = new GoodsDTO();
+					
+					gdto.setCosName(rs2.getString("cosName"));
+					gdto.setCosPrice(rs2.getInt("cosPrice"));
+					gdto.setCosImage(rs2.getString("cosImage"));
+					
+					// 상품 리스트 한칸에 저장
+					goodsList.add(gdto);
+				}
+				
+				System.out.println("DAO : 상품정보 저장완료!");
+			}
+			
+			totalList.add(basketList);
+			totalList.add(goodsList);
+			System.out.println("DAO : 장바구니정보 + 상품정보 저장완료!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return totalList;
 	}
 }

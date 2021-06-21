@@ -1,8 +1,10 @@
-<%@ page import="goods_board.db.GoodsReviewDTO" %>
-<%@ page import="goods.db.GoodsDTO" %>
+<%@page import="com.goods_board.db.PageInfo"%>
+<%@page import="com.goods_board.db.GoodsReviewDTO"%>
+<%@ page import="com.goods_board.db.GoodsReviewDTO" %>
+<%@ page import="com.goods.db.GoodsDTO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="goods_board.db.GoodsReviewDAO" %>
-<%@ page import="goods_board.db.PageInfo" %><%--
+<%@ page import="com.goods_board.db.GoodsReviewDAO" %>
+<%@ page import="com.goods_board.db.PageInfo" %><%--
   Created by IntelliJ IDEA.
   User: jun
   Date: 2021/06/18

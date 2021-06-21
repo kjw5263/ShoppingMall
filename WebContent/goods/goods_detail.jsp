@@ -1,9 +1,9 @@
-<%@ page import="goods.db.GoodsDTO" %>
-<%@ page import="goods_board.db.GoodsReviewDTO" %>
-<%@ page import="goods_board.db.GoodsReviewDAO" %>
+<%@ page import="com.goods.db.GoodsDTO" %>
+<%@ page import="com.goods_board.db.GoodsReviewDTO" %>
+<%@ page import="com.goods_board.db.GoodsReviewDAO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="goods.db.GoodsDAO" %>
-<%@ page import="goods_board.db.PageInfo" %>
+<%@ page import="com.goods.db.GoodsDAO" %>
+<%@ page import="com.goods_board.db.PageInfo" %>
 <%@ page import="java.util.List" %>
 
 
@@ -32,14 +32,14 @@
           rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="./violet-master/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./violet-master/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./violet-master/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="./violet-master/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="./violet-master/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="./violet-master/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="./violet-master/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="./violet-master/css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -50,9 +50,9 @@
     <script type="text/javascript">
         function isBasket() {
             //alert("장바구니 동작");
-            if (document.gfr.amount.value == "") {
+            if (document.gfr.cosAmount.value == "") {
                 alert(" 구매 수량을 입력하세요. ");
-                document.gfr.amount.focus();
+                document.gfr.cosAmount.focus();
                 return;
             }
             var result = confirm("장바구니에 저장 하시겠습니까?");
@@ -72,8 +72,10 @@
 
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     GoodsDTO dto = (GoodsDTO) request.getAttribute("goods");
-    ArrayList<GoodsReviewDTO> grdto = (GoodsReviewDTO) request.getAttribute("grdto");
-//    GoodsReviewDTO grdto = request.getAttribute("grdto");
+    System.out.println("아아아아 >>>>> "+dto);
+//    ArrayList<GoodsReviewDTO> grdto = (GoodsReviewDTO) request.getAttribute("grdto");
+//    GoodsReviewDTO grdto = (GoodsReviewDTO) request.getAttribute("grdto");
+//    System.out.println("아아아아222 >>>>> " + grdto);
 //    GoodsReviewDAO grdao = new GoodsReviewDAO();
 //    int cnt = grdao.getReviewCount();
 
@@ -95,7 +97,7 @@
 <!-- Search model end -->
 
 <!-- Header Section Begin -->
-<jsp:include page="/violet-master/header/header.jsp"/>
+<jsp:include page="/header/header.jsp"/>
 <!-- Header Info Begin -->
 
 <!-- Header Info End -->
@@ -110,7 +112,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="page-breadcrumb">
-                    <h2><%=dto.getCosCategory() %><span>.</span></h2>
+                    <%-- <h2><%=dto.getCosCategory() %><span>.</span></h2> --%>
                     <a href="#">홈</a>
                     <a href="#">??</a>
                     <a class="active" href="#">??</a>
@@ -172,7 +174,7 @@
                     </ul>
                     <div class="product-quantity">
                         <div class="pro-qty">
-                            <input type="text" value="1" name="amount">
+                            <input type="number" name="cosAmount" value="1"><br>
                         </div>
                     </div>
                     <a href="javascript:isBasket();" class="primary-btn pc-btn">장바구니</a>
@@ -252,18 +254,18 @@
 <!-- Related Product Section End -->
 
 <!-- Footer Section Begin -->
-<jsp:include page="/violet-master/footer/footer.jsp"/>
+<jsp:include page="/footer/footer.jsp"/>
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-<script src="./violet-master/js/jquery-3.3.1.min.js"></script>
-<script src="./violet-master/js/bootstrap.min.js"></script>
-<script src="./violet-master/js/jquery.magnific-popup.min.js"></script>
-<script src="./violet-master/js/jquery.slicknav.js"></script>
-<script src="./violet-master/js/owl.carousel.min.js"></script>
-<script src="./violet-master/js/jquery.nice-select.min.js"></script>
-<script src="./violet-master/js/mixitup.min.js"></script>
-<script src="./violet-master/js/main.js"></script>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.magnific-popup.min.js"></script>
+<script src="./js/jquery.slicknav.js"></script>
+<script src="./js/owl.carousel.min.js"></script>
+<script src="./js/jquery.nice-select.min.js"></script>
+<script src="./js/mixitup.min.js"></script>
+<script src="./js/main.js"></script>
 
 
 

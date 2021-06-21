@@ -131,7 +131,7 @@
 					<tr>
 						<td><%=dto.getCosNum() %></td>
 						<td>
-							<img src="./upload/<%=dto.getCosImage().split(",")[0] %>"
+							<img src="./admingoods/upload/<%=dto.getCosImage().split(",")[0] %>"
 								 width="100" height="100">
 						</td>
 						<td><%=dto.getCosName() %></td>
