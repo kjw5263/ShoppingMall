@@ -1,9 +1,9 @@
 package com.goods_board.action;
 
-import goods.db.GoodsDAO;
-import goods_board.db.GoodsReviewDAO;
-import goods_board.db.GoodsReviewDTO;
-import goods_board.db.PageInfo;
+import com.goods.db.GoodsDAO;
+import com.goods_board.db.GoodsReviewDAO;
+import com.goods_board.db.GoodsReviewDTO;
+import com.goods_board.db.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

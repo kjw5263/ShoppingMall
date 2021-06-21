@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-// @WebServlet('')
+@WebServlet("*.ba")
 public class BasketFrontController extends HttpServlet{
 
 	
@@ -40,6 +41,17 @@ public class BasketFrontController extends HttpServlet{
 		Action action = null;
 		ActionForward forward = null;
 		
+		if(command.equals("/BasketAdd.ba")){
+			System.out.println("C : /BasketAdd.ba 호출");
+			// 전달받은 구매정보를 DB에 저장
+			action = new BasketAddAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");

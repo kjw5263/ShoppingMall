@@ -62,7 +62,7 @@ public class GoodsReviewDAO {
 
         try {
             conn = getConnection();
-            sql = "select max(reviewNum) from review_Board";
+            sql = "select max(reviewNum) from review_board";
             pstmt = conn.prepareStatement(sql);
 
             rs = pstmt.executeQuery();
@@ -70,7 +70,7 @@ public class GoodsReviewDAO {
                 reviewNum = rs.getInt(1) + 1;
 
             }
-            sql = "insert into review_Board (reviewNum,cosNum,userId,reviewImage,rating,reviewContent,reviewUp)" +
+            sql = "insert into review_board (reviewNum,cosNum,userId,reviewImage,rating,reviewContent,reviewUp)" +
                     "values(?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
 
@@ -99,7 +99,7 @@ public class GoodsReviewDAO {
             GoodsReviewDTO grdto = new GoodsReviewDTO();
             try {
                 conn = getConnection();
-                sql= "select * from review_Board where cosNum=?";
+                sql= "select * from review_board where cosNum=?";
 
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1,cosNum);
@@ -129,7 +129,7 @@ public class GoodsReviewDAO {
         int cnt = 0;
         try {
             conn = getConnection();
-            sql="select count(*) from review_Board";
+            sql="select count(*) from review_board";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
             if (rs.next()){
@@ -151,7 +151,7 @@ public class GoodsReviewDAO {
             int startrow = (startRow - 1) *10;
         try {
             conn = getConnection();
-            sql = "select * from review_Board where cosNum=?";
+            sql = "select * from review_board where cosNum=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,cosNum);
 
@@ -185,7 +185,7 @@ public class GoodsReviewDAO {
 
         try {
             conn = getConnection();
-            sql = "select userId from review_Board where cosNum=?";
+            sql = "select userId from review_board where cosNum=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,grdto.getCosNum());
 
@@ -193,7 +193,7 @@ public class GoodsReviewDAO {
 
             if (rs.next()){
                 if (grdto.getUserid().equals(rs.getString("userId"))){
-                    sql = "delete from review_Board where cosNum=?";
+                    sql = "delete from review_board where cosNum=?";
                     pstmt = conn.prepareStatement(sql);
                     pstmt.setInt(1,grdto.getCosNum());
 

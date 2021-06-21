@@ -1,6 +1,8 @@
-<%@ page import="goods.db.GoodsDTO" %>
-<%@ page import="goods_board.db.GoodsReviewDTO" %>
-<%@ page import="goods.db.GoodsDAO" %><%--
+<%@page import="com.goods.db.GoodsDTO"%>
+<%@page import="com.goods.db.GoodsDAO"%>
+<%@ page import="com.goods.db.GoodsDTO" %>
+<%@ page import="com.goods_board.db.GoodsReviewDTO" %>
+<%@ page import="com.goods.db.GoodsDAO" %><%--
   Created by IntelliJ IDEA.
   User: jun
   Date: 2021/06/16
@@ -51,7 +53,7 @@
 <body>
 
 
-  <h1>별점과 리뷰를 남겨주세요.</h1>
+<%--   <h1>별점과 리뷰를 남겨주세요.</h1>
   <form  method="post" action="./reviewFormPro.rev">
 
         <fieldset class="starability-basic" id="rating" aria-required="false">
@@ -88,7 +90,7 @@
 
       <input type="submit" id="save" value="등록">
 
-  </form>
+  </form> --%>
 
 </body>
 
