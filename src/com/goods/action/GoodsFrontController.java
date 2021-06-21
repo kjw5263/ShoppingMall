@@ -46,7 +46,7 @@ public class GoodsFrontController extends HttpServlet {
 			// DB정보를 받아서 페이지 이동없이(주소변화X) 출력
 			// GoodsDetailAction() 객체 생성
 			
-			action = new GoodsListAction();//new GoodsDetailAction();
+			action = new GoodsDetailAction();
 			try {
 				forward = action.execute(req, resp);
 			} catch (Exception e) {
