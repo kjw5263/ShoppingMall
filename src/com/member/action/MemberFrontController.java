@@ -269,18 +269,19 @@ public class MemberFrontController extends HttpServlet{
 				
 				
 				
-//				else if(command.equals("/MemberInfo.me")){
-//					System.out.println("C : /MemberInfo.me 호출");
-//					// DB정보를 가져와서 view페이지에 출력
-//					// MemberInfoAction() 객체 생성
-//					action = new MemberInfoAction();
-//					try {
-//						forward = action.execute(request, response);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//					
-//				}else if(command.equals("/MemberLogout.me")){
+				else if(command.equals("/MemberInfo.me")){
+					System.out.println("C : /MemberInfo.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					// MemberInfoAction() 객체 생성
+					action = new MemberInfoAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+//				else if(command.equals("/MemberLogout.me")){
 //					System.out.println("C : /MemberLogout.me 호출");
 //					// MemberLogoutAction() 객체 생성
 //					action = new MemberLogoutAction();
