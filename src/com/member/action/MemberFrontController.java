@@ -187,6 +187,84 @@ public class MemberFrontController extends HttpServlet{
 					forward.setPath("./member/findPwConfirm.jsp");
 					forward.setRedirect(false);
 					
+				}else if(command.equals("/MemberUpdateInfo.me")){
+					System.out.println("C : /MemberUpdateInfo.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/update_info_pass.jsp");
+					forward.setRedirect(false);
+					
+				}
+				
+				else if(command.equals("/MemberUpdateInfopro.me")){
+					System.out.println("C : /MemberUpdateInfopro.me 호출");
+					
+					action = new MemberUpdateInfoproAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				else if(command.equals("/MemberUpdateInfopro2.me")){
+					System.out.println("C : /MemberUpdateInfopro2.me 호출");
+					
+					action = new MemberUpdateInfoproAction2();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				else if(command.equals("/MemberUpdateInfopro3.me")){
+					System.out.println("C : /MemberUpdateInfopro3.me 호출");
+					
+					action = new MemberUpdateInfoproAction3();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				
+				
+				else if(command.equals("/MemberDelete.me")){
+					System.out.println("C : /MemberDelete.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/deleteForm.jsp");
+					forward.setRedirect(false);	
+				}
+				else if(command.equals("/MemberDeleteAction.me")){
+					System.out.println("C : /MemberDeleteAction.me 호출");
+					action = new MemberDeleteAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}		
+				}
+				else if(command.equals("/MyCoupon.me")){
+					System.out.println("C : /MyCoupon.me 호출");
+					
+					action = new MycouponAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				}
 				
 				
