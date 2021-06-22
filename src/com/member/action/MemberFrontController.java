@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("*.me")
@@ -17,7 +18,6 @@ public class MemberFrontController extends HttpServlet{
 	// Get, Post 방식 상관없이 한번에 주소를 처리할 수 있는 메소드
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("C : Member_doProcess() 호출");
-		
 		
 		/********************************* 1. 페이지 주소 파싱 *************************/
 		// (1) 가상주소 전체 가져오기
@@ -158,6 +158,8 @@ public class MemberFrontController extends HttpServlet{
 				}else if(command.equals("/FindPwAjax.me")){
 					System.out.println("C : /FindPwAjax.me 호출");
 					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
+					
+					
 					action = new FindPwAjax();
 					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
 					try {
@@ -166,24 +168,120 @@ public class MemberFrontController extends HttpServlet{
 						e.printStackTrace();
 					}
 					
+				}else if(command.equals("/PwCheckAction.me")){
+					System.out.println("C : /PwCheckAction.me 호출");
+					// DB 사용 => PwCheckAction() 객체를 생성해야함.
+					action = new PwCheckAction();
+					System.out.println("C : 비밀번호 확인 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}else if(command.equals("/findPwConfirm.me")){
+					System.out.println("C : /findPwConfirm.me 호출");
+					// 화면을 보여주기=> view페이지로 이동
+					
+					forward = new ActionForward();
+					forward.setPath("./member/findPwConfirm.jsp");
+					forward.setRedirect(false);
+					
+				}else if(command.equals("/MemberUpdateInfo.me")){
+					System.out.println("C : /MemberUpdateInfo.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/update_info_pass.jsp");
+					forward.setRedirect(false);
+					
 				}
+				
+				else if(command.equals("/MemberUpdateInfopro.me")){
+					System.out.println("C : /MemberUpdateInfopro.me 호출");
 					
+					action = new MemberUpdateInfoproAction();
 					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				else if(command.equals("/MemberUpdateInfopro2.me")){
+					System.out.println("C : /MemberUpdateInfopro2.me 호출");
+					
+					action = new MemberUpdateInfoproAction2();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				else if(command.equals("/MemberUpdateInfopro3.me")){
+					System.out.println("C : /MemberUpdateInfopro3.me 호출");
+					
+					action = new MemberUpdateInfoproAction3();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				
 				
 				
-//				else if(command.equals("/MemberInfo.me")){
-//					System.out.println("C : /MemberInfo.me 호출");
-//					// DB정보를 가져와서 view페이지에 출력
-//					// MemberInfoAction() 객체 생성
-//					action = new MemberInfoAction();
-//					try {
-//						forward = action.execute(request, response);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//					
-//				}else if(command.equals("/MemberLogout.me")){
+				else if(command.equals("/MemberDelete.me")){
+					System.out.println("C : /MemberDelete.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/deleteForm.jsp");
+					forward.setRedirect(false);	
+				}
+				else if(command.equals("/MemberDeleteAction.me")){
+					System.out.println("C : /MemberDeleteAction.me 호출");
+					action = new MemberDeleteAction();
+					
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}		
+				}
+				else if(command.equals("/MyCoupon.me")){
+					System.out.println("C : /MyCoupon.me 호출");
+					
+					action = new MycouponAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+				
+				
+				else if(command.equals("/MemberInfo.me")){
+					System.out.println("C : /MemberInfo.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					// MemberInfoAction() 객체 생성
+					action = new MemberInfoAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+//				else if(command.equals("/MemberLogout.me")){
 //					System.out.println("C : /MemberLogout.me 호출");
 //					// MemberLogoutAction() 객체 생성
 //					action = new MemberLogoutAction();

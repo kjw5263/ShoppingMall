@@ -13,7 +13,7 @@ public class FindPwAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("M :FindIdAction_execute() 실행 ");
-
+		
 		// 한글처리
 		request.setCharacterEncoding("utf-8");
 		// 전달정보 저장(id,pass)

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Login V10</title>
@@ -82,7 +82,7 @@
 						</div>
 						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "이메일을 입력해 주세요">
-							<input class="input100" type="text" id="userEmail" name="userEmail" placeholder="Email">
+							<input class="input100" type="email" id="userEmail" name="userEmail" placeholder="Email">
 							
 							
 							<span class="focus-input100"></span>
@@ -106,19 +106,14 @@
 					<div class="container-login100-form-btn m-t-17">
 					
 						<!-- 일반 로그인 버튼 시작 -->
-						<input class="login100-form-btn" type="submit" value="아이디찾기" id="submit"> 
+						<input class="login100-form-btn input100" type="submit" value="아이디찾기" id="submit"> 
 						<!-- 일반 로그인 버튼 끝 -->
 						
 					</div>
 					
 					
-					<div class="row">
-						<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
-					</div>
-				</form>
-				<!-- 일반 로그인 폼 끝 -->
-				
-				
+					
+				</form>				
 			</div>
 		</div>
 	</div>

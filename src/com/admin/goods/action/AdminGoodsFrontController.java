@@ -102,6 +102,14 @@ public class AdminGoodsFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} if(command.equals("/AdminList.ag")){
+			System.out.println("C : /AdminList.ag 호출");
+			// 정보를 입력받는 페이지 -> view페이지 이동
+			
+			forward = new ActionForward();
+			forward.setPath("./admingoods/admin_list.jsp");
+			forward.setRedirect(false);
+			
 		}
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");

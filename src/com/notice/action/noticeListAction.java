@@ -14,17 +14,14 @@ public class noticeListAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("M : GoodsListAction_execute() 호출 ");
+		System.out.println("M : noticeListAction_execute() 호출 ");
 
 		// 한글처리 
 		request.setCharacterEncoding("utf-8");
 		// 파라미터를 처리
 		// item=best
-		String item = request.getParameter("item");
 		
-		if(item == null){
-			item = "all";
-		}
+		
 		System.out.print("dao 호출");
 		// 디비 처리 객체 GoodsDAO 생성
 		NoticeDAO noti = new NoticeDAO();

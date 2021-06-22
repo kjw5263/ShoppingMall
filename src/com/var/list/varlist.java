@@ -3,6 +3,10 @@ package com.var.list;
 public class varlist {
 	private String databasename = "cosShopping";
 
+	
+	private String GoodslistTablename =  "cos_list";
+	private String noticelistTablename =  "notice_Board";
+	private String noticecontentListSt = "noticeContent?noticeNum=";
 	private String http[][] = new String[][]
     		{{"" ," 전체"},
     	{"?item=best","베스트상품"},
@@ -45,8 +49,15 @@ public class varlist {
 	public String[][] getCat() {
 		return cat;
 	}
-
-	
+	public String getGoodslistTablename(){
+		return GoodslistTablename;
+	}
+	public String getnoticelistTablename(){
+		return noticelistTablename;
+	}
+	public String getnoticecontentListSt(){
+		return noticecontentListSt;
+	}
 	
 	
 }

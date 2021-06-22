@@ -20,10 +20,10 @@ public class MemberLogoutAction implements Action{
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");
-		out.print(" alert('로그아웃 성공!');");
+		out.print(" alert('로그아웃 하였습니다.');");
 		out.print(" location.href='./Main.me';");
 		out.print("</script>");
-		out.close();
+		out.close();		
 		
 		return null;
 	}

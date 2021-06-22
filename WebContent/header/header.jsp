@@ -22,7 +22,15 @@
                 
                 <div class="header-right">
                     <img src="./img/icons/search.png" alt="" class="search-trigger">
+                    <%
+						if(userId !=null && userId.equals("admin") ){
+					%>
+					   <img src="./img/icons/man.png" alt="" onclick="location.href='./AdminList.ag'">
+					<%
+					   } else {
+					%>
                     <img src="./img/icons/man.png" alt="" onclick="location.href='./MemberInfo.me'">
+                    <% } %>
                     <a href="#">
                         <img src="./img/icons/bag.png" alt="">
                         <span>2</span>

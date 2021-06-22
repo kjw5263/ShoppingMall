@@ -4,9 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
+
+import com.coupon.db.CouponDTO;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -260,8 +265,395 @@ public class MemberDAO {
 			
 			return check;
 		}
-		
 		// findPwAjax(userId, userEmail, userTel) 끝
 		
 		
+		// CheckPw(userId, rm) 시작
+		public void CheckPw(String userId, String rm){
+			String check = "";
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "update user_info set userPwCheck=? where userId=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, rm);
+				pstmt.setString(2, userId);
+				
+				// 4 sql 실행
+				pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+		}
+		
+		// CheckPw(userId, rm)  끝
+		
+		
+		// PwCheck(checkNum) 시작 .. 가져온 인증번호를 디비에 대비해보는 메소드
+		public String PwCheck(String checkNum, String PwCheckId){
+			String check = "";
+			
+			System.out.println("PwCheckId 는 @@@@@@@@ " + PwCheckId);
+			
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userPwCheck=? and userId=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, checkNum);
+				pstmt.setString(2, PwCheckId);
+
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				if(rs.next()){
+					check = rs.getString("userPass");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// PwCheck(checkNum) 끝 .. 가져온 인증번호를 디비에 대비해보는 메소드
+		
+		// getMemberInfo
+		/**
+		 * @param userId
+		 * @return dto 회원정보 조회, mypage 쿠폰,포인트,피부타입 조회에 사용
+		 */
+		public MemberDTO getMemberInfo(String userId) {
+			MemberDTO dto = null;
+			try {
+				conn = getConnection();
+				sql = "select * from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					dto = new MemberDTO();
+
+					dto.setUserId(rs.getString("userId"));
+					dto.setUserPass(rs.getString("userPass"));
+					dto.setUserName(rs.getString("userName"));
+					dto.setUserEmail(rs.getString("userEmail"));
+					dto.setUserAddr(rs.getString("userAddr"));
+					dto.setUserTel(rs.getString("userTel"));
+					dto.setUserBirth(rs.getDate("userBirth"));
+					dto.setUserGender(rs.getString("userGender"));
+					dto.setUserSkinType(rs.getString("userSkinType"));
+					dto.setUserTrouble(rs.getString("userTrouble"));
+					dto.setUserPoint(rs.getInt("userPoint"));
+					dto.setUserTotal(rs.getInt("userTotal"));
+					dto.setUserPoint(rs.getInt("userPoint"));
+					dto.setUserTotal(rs.getInt("userPoint"));
+					dto.setUserLevel(rs.getInt("userLevel"));
+				}
+				System.out.println("DAO : 회원정보 저장완료");
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+
+			return dto;
+		}
+
+		// getMemberInfo
+
+		// PassCheck(userId,userPass);
+		/**
+		 * @param userId
+		 * @param userPass
+		 * @return int check 1:일치 0:비밀번호 일치x 회원정보 수정페이지 클릭시 pass일치여부 확인하는 메소드
+		 */
+		public int PassCheck(String userId, String userPass) {
+			int check = -1;
+			try {
+
+				conn = getConnection();
+				sql = "select userPass from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					if (userPass.equals(rs.getString("userPass"))) {
+						// 본인
+						check = 1;
+					} else {
+						// 비밀번호 일치x
+						check = 0;
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			return check;
+		}// PassCheck(userId,userPass);
+
+		// updatemembertel(mdto);
+		
+		/**
+		 * @param mdto
+		 * @return int result
+		 * 회원정보 수정  전화번호 업데이트 메소드
+		 */
+		public int updatemembertel(MemberDTO mdto) {
+			int result = -1;
+			try {
+
+
+				conn = getConnection();
+				sql = "select * from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mdto.getUserId());
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					sql = "update user_info set userTel=? where userId=?";
+					pstmt = conn.prepareStatement(sql);
+
+					pstmt.setString(1, mdto.getUserTel());
+					pstmt.setString(2, mdto.getUserId());
+					pstmt.executeUpdate();
+					System.out.println("휴대폰번호 수정완료");
+					result = 1;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			return result;
+		}
+
+		//updatemembertel(mdto);
+		
+		//updatemembermail(mdto)
+		
+		/**
+		 * @param mdto
+		 * @return
+		 * 회원정보 수정  메일 업데이트 메소드
+		 */
+		public int updatemembermail(MemberDTO mdto) {
+			int result = -1;
+			try {
+				conn = getConnection();
+				sql = "select * from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mdto.getUserId());
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					sql = "update user_info set userEmail=? where userId=?";
+					pstmt = conn.prepareStatement(sql);
+
+					pstmt.setString(1, mdto.getUserEmail());
+					pstmt.setString(2, mdto.getUserId());
+					pstmt.executeUpdate();
+					System.out.println("이메일 수정완료");
+					result = 1;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			return result;
+		}
+		// updatemembermail(mdto)
+
+		// updatememberpw(userId,number)
+		
+		/**
+		 * @param userId
+		 * @param userPass
+		 * @param newpw1
+		 * @return
+		 * 회원정보 수정  비밀번호 업데이트 메소드
+		 */
+		public int updatememberpw(String userId, String userPass, String newpw1) {
+			int result = -1;
+			try {
+				conn = getConnection();
+				sql = "select userPass from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					if (rs.getString("userPass").equals("userPass")) {
+
+						sql = "update user_info set userPass=? where userId=?";
+						pstmt = conn.prepareStatement(sql);
+
+						pstmt.setString(1, newpw1);
+						pstmt.setString(2, userId);
+						pstmt.executeUpdate();
+						System.out.println("이메일 수정완료");
+						result = 1;
+					} else {// 비밀번호 불일치
+						result = 0;
+
+					}
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			return result;
+
+		}
+		// updatememberpw(userId,number)
+
+		// updatememberskin(mdto)
+		
+		/**
+		 * @param mdto
+		 * @return
+		 * 회원정보 수정  선택정보 업데이트 메소드
+		 */
+		public int updatememberskin(MemberDTO mdto) {
+			int result = -1;
+			try {
+				conn = getConnection();
+				sql = "select * from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mdto.getUserId());
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					sql = "update user_info set userTrouble=?,userSkinType=? where userId=?";
+					pstmt = conn.prepareStatement(sql);
+
+					pstmt.setString(1, mdto.getUserTrouble());
+					pstmt.setString(2, mdto.getUserSkinType());
+					pstmt.setString(3, mdto.getUserId());
+					pstmt.executeUpdate();
+					System.out.println("피부타입 수정완료");
+					result = 1;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+
+			return result;
+		}
+		// updatememberskin(mdto)
+
+		// deleteMember(userId,userPass)
+		/**
+		 * @param userId
+		 * @param userPass
+		 * @return int check 회원정보 탈퇴 메소드
+		 */
+		public int deleteMember(String userId, String userPass) {
+			int check = -1;
+
+			try {
+				conn = getConnection();
+				sql = "select userPass from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					if (userPass.equals(rs.getString("userPass"))) {
+						sql = "delete from user_info where userId=?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, userId);
+
+						check = pstmt.executeUpdate();
+					} else {
+						check = 0;
+					}
+
+				} else {
+					check = -1;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			return check;
+		}
+		// deleteMember(userId,userPass)
+
+		// getCoupon(userId);
+		
+		/**
+		 * @param userId
+		 * @return
+		 * 쿠폰 목록 가져오는 메소드
+		 */
+		public List getCoupon(String userId) {
+			List couponList = new ArrayList();
+
+			try {
+				conn = getConnection();
+				sql = "select * from coupon_type t join my_coupon m on m.mcCouponNum = t.couponNum where m.mcUserId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					CouponDTO dto = new CouponDTO();
+
+					dto.setMcAmount(rs.getInt("mcAmount"));
+					dto.setCouponDc(rs.getInt("couponDc"));
+					dto.setCouponName(rs.getString("couponName"));
+					dto.setCouponNote(rs.getString("couponNote"));
+
+					couponList.add(dto);
+				}
+				System.out.println("DAO : 쿠폰 정보 저장완료");
+				System.out.println(couponList);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return couponList;
+		}
+		// mycouponlist(userId);
+		
+		
+
 }
