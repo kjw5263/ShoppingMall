@@ -17,10 +17,10 @@
   
 
   <%
-    // request.setAttribute("goodsList", gdao.getGoodsList());
+   
   	listDAO gdao = new listDAO();
   	
-    List goodsList = gdao.getGoodsList("all");//(List) request.getAttribute("goodsList");
+    List goodsList = gdao.getGoodsList("all");
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
     String http[][] = var.getHttp();
@@ -51,20 +51,22 @@
     </tr>
   
   </table>
-  <br>
+  
+  <h1> ↑ 에이젝스로 처리해야함! </h1>
+  
   <br>
   <table border="1">
     
     
     <%
       // 전체 상품 개수
-      System.out.println(goodsList);
+      
       int size = goodsList.size();
       // 열의 개수
       int col =http.length;
       // 행의 개수 
       int row = (size/col)+((size%col>0)? 1:0);
-      // 상품 출력개수 
+      // 상품 출력넘버 
       int num = 0;
       
       // 행
@@ -78,7 +80,7 @@
     		  GoodsDTO dto = (GoodsDTO) goodsList.get(num);
     		  %>
     		     <td>
-    		         <img src="./upload/<%=dto.getCosImage().split(",")[0]%>"
+    		         <img src="<%=dto.getCosImage()%>"
 	             	 width="120" height="120"
 	          		 ><br>
 	          		 
@@ -122,4 +124,3 @@
   
 
 </body>
-</html>

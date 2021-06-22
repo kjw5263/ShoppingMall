@@ -1,4 +1,4 @@
-package com.var.list;
+package com.test.sim;
 
 public class varlist {
 	private String databasename = "cosShopping";
