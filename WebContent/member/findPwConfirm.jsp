@@ -62,43 +62,33 @@
  	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-	
 	<!-- 컨테이너 시작 -->
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
 			
 				<!-- 일반 로그인 폼 시작 -->
-				<form class="login100-form validate-form flex-sb flex-w" action="./FindIdAction.me" method="post">
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
 							비밀번호 찾기 <br>
 						</span>
+					</div>
 						
-							찾으시는 비밀번호는 ${userPass } 입니다.
-						
+					<div class="m-5" style="text-align: center;">
+						찾으시는 비밀번호는 ${userPass } 입니다.
+					</div>	
+					
+					<div>
+						<!-- 일반 로그인 버튼 시작 -->
+						<input class="login100-form-btn" type="button" value="login" onclick="location.href='./MemberLogin.me'"> 
+						<!-- 일반 로그인 버튼 끝 -->
 					</div>
 					
-					<div class="flex-sb-m w-full p-t-3 p-b-24">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						</div>
-
-						<div class="mt-3">
-							<a href="./MemberLogin.me" class="txt1">로그인</a>
-							/
-							<a href="./FindId.me" class="txt1">아이디 찾기</a>
-						</div>
+					<div class="row m-3" style="text-align: center;">
+						<a href="./MemberJoin.me">회원가입 </a>/ <a href="./FindPw.me">아이디 찾기</a>
 					</div>
-					
-					
-					<div class="row">
-						<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
-					</div>
-				</form>
 				<!-- 일반 로그인 폼 끝 -->
-				
 				
 			</div>
 		</div>

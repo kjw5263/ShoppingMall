@@ -89,19 +89,23 @@
 						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "전화번호를 입력해주세요">
 							<input class="input100" type="text" id="userTel" name="userTel" placeholder="Phone">
-							
-							<!-- Button to Open the Modal -->
-							<button type="button" class="btn btn-primary" id="certify">
-							  인증요청
-							</button>
 							<span class="focus-input100"></span>
+							
 						</div>
+						
+						<button type="button" class="login100-form-btn" id="certify">
+						  인증요청
+						</button>
+							
+							
+							
 					</div>
 				</form>
+				<!-- 일반 로그인 폼 끝 -->
 								
-								
+				<!-- 휴대폰 인증 폼 시작 -->				
 				<form action="./PwCheckAction.me" method="post">					
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "인증번호를 입력해주세요" style="display: none;" id="i1">
+					<div class="wrap-input100 validate-input m-b-16 mt-3" data-validate = "인증번호를 입력해주세요" style="display: none;" id="i1">
 						<input class="input100" type="text" id="checkNum" name="checkNum" placeholder="인증번호" >
 						
 						<!-- Button to Open the Modal -->
@@ -111,6 +115,7 @@
 						<span class="focus-input100"></span>
 					</div>
 				</form>
+				<!-- 휴대폰 인증 폼 끝 -->				
 						
 					
 			<div class="flex-sb-m w-full p-t-3 p-b-24">
@@ -134,14 +139,7 @@
 				<!-- 일반 로그인 버튼 끝 -->
 				
 			</div>
-			
-			
-			<div class="row">
-				<a href="./MemberJoin.me" class="txt1 mt-3" >회원가입</a>
-			</div>
-				<!-- 일반 로그인 폼 끝 -->
-				
-				
+	
 				
 			</div>
 		</div>
@@ -152,35 +150,6 @@
 	<!-- footer 시작 -->
  	<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
-    
-	
-
-
-	<!-- 인증번호 Modal 시작 -->
-	<div class="modal" id="myModal">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	
-	
-	      <!-- Modal body 시작 -->
-	      <div class="modal-body">
-	      
-			<div class="input-group mb-3">
-			  <input type="text" class="form-control" placeholder="인증번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
-			  <button class="btn btn-outline-secondary" type="button" id="button-addon2">확인</button>
-			</div>	    
-			  
-	      </div>
-	      <!-- Modal body 끝 -->
-	
-	
-	    </div>
-	  </div>
-	</div>
-	<!-- 인증번호 Modal 끝 -->
-	
-	
-	
 	
 	
 <!--===============================================================================================-->
