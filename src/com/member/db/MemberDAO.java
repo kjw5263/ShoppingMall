@@ -11,6 +11,8 @@ import javax.sql.DataSource;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
 
+import com.coupon.db.CouponDTO;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
