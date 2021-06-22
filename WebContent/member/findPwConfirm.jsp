@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title>Login V10</title>
@@ -57,11 +57,10 @@
 </head>
 
 <body>
-
+				
 	<!-- header 시작 -->
  	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
-	
 	
 	<!-- 컨테이너 시작 -->
 	<div class="limiter">
@@ -69,51 +68,28 @@
 			<div class="wrap-login100 p-t-50 p-b-90">
 			
 				<!-- 일반 로그인 폼 시작 -->
-				<form class="login100-form validate-form flex-sb flex-w" action="./FindIdAction.me" method="post">
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
-							아이디 찾기 <br>
+							비밀번호 찾기 <br>
 						</span>
-						
-						<div class="wrap-input100 validate-input m-b-16" data-validate = "이름을 입력해주세요">
-							<input class="input100" type="text" id="userName" name="userName" placeholder="Name">
-							<span class="focus-input100"></span>
-						</div>
-						
-						<div class="wrap-input100 validate-input m-b-16" data-validate = "이메일을 입력해 주세요">
-							<input class="input100" type="email" id="userEmail" name="userEmail" placeholder="Email">
-							
-							
-							<span class="focus-input100"></span>
-						</div>
 					</div>
+						
+					<div class="m-5" style="text-align: center;">
+						찾으시는 비밀번호는 ${userPass } 입니다.
+					</div>	
 					
-					<div class="flex-sb-m w-full p-t-3 p-b-24">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						</div>
-
-						<div>
-							<a href="./MemberLogin.me" class="txt1">로그인</a>
-							/
-							<a href="./FindPw.me" class="txt1">비밀번호 찾기</a>
-						</div>
-					</div>
-					
-					
-
-					<div class="container-login100-form-btn m-t-17">
-					
+					<div>
 						<!-- 일반 로그인 버튼 시작 -->
-						<input class="login100-form-btn input100" type="submit" value="아이디찾기" id="submit"> 
+						<input class="login100-form-btn" type="button" value="login" onclick="location.href='./MemberLogin.me'"> 
 						<!-- 일반 로그인 버튼 끝 -->
-						
 					</div>
 					
-					
-					
-				</form>				
+					<div class="row m-3" style="text-align: center;">
+						<a href="./MemberJoin.me">회원가입 </a>/ <a href="./FindPw.me">아이디 찾기</a>
+					</div>
+				<!-- 일반 로그인 폼 끝 -->
+				
 			</div>
 		</div>
 	</div>

@@ -32,7 +32,7 @@ public class FindIdAction implements Action{
 			PrintWriter out = response.getWriter();
 
 			out.print("<script>");
-			out.print(" alert('없는 정보입니다.'); ");
+			out.print(" alert('회원 정보가 없습니다.'); ");
 			out.print(" history.back(); ");
 			out.print("</script>");
 
@@ -54,7 +54,6 @@ public class FindIdAction implements Action{
 		forward.setRedirect(false);
 		return forward;
 	}
-
 	
 	
 }
