@@ -67,29 +67,27 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-				<!-- 로그인 폼 시작 -->
+			
+				<!-- 일반 로그인 폼 시작 -->
 				<form class="login100-form validate-form flex-sb flex-w" action="./MemberLoginAction.me" method="post">
-				
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
 							Login
 						</span>
-	
 						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "ID를 입력해 주세요">
-							<input class="input100" type="text" name="userId" placeholder="ID">
+							<input class="input100" type="text" id="userID" name="userId" placeholder="ID">
 							<span class="focus-input100"></span>
 						</div>
 						
-						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "비밀번호를 입력해 주세요.">
-							<input class="input100" type="password" name="userPass" placeholder="Password">
+							<input class="input100" type="password" id="userPass" name="userPass" placeholder="Password">
+							
+							
 							<span class="focus-input100"></span>
 						</div>
 					</div>
-					
-					
 					
 					<div class="flex-sb-m w-full p-t-3 p-b-24">
 						<div class="contact100-form-checkbox">
@@ -100,44 +98,58 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">ID 찾기</a>
+							<a href="./FindId.me" class="txt1">ID 찾기</a>
 							/
-							<a href="#" class="txt1">비밀번호 찾기</a>
+							<a href="./FindPw.me" class="txt1">비밀번호 찾기</a>
 						</div>
 					</div>
 					
 					
 
 					<div class="container-login100-form-btn m-t-17">
+					
 						<!-- 일반 로그인 버튼 시작 -->
-						<input class="login100-form-btn" type="submit" value="Login"> 
+						<input class="login100-form-btn" type="submit" value="Login" id="submit"> 
 						<!-- 일반 로그인 버튼 끝 -->
-						
-						<ul>
+					</div>
+					<div>	
+						<ul class="mt-3">
 							<!-- 카카오 로그인 버튼 시작 -->
 							<li onclick="kakaoLogin();">
 						      <a href="javascript:void(0)">
-						          <img alt="" src="./img/member/kakao_login.png">
+						          <img alt="" src="./img/member/kakao_login_large_wide.png">
 						      </a>
 							</li>
 							<!-- 카카오 로그인 버튼 시작 -->
 							
 							<!-- 카카오 로그아웃 시작 -->
-							<li onclick="kakaoLogout();">
-						      <a href="javascript:void(0)">
-						          <span>카카오 로그아웃</span>
-						      </a>
-							</li>
+<!-- 							<li onclick="kakaoLogout();"> -->
+<!-- 						      <a href="javascript:void(0)"> -->
+<!-- 						          <span>카카오 로그아웃</span> -->
+<!-- 						      </a> -->
+<!-- 							</li> -->
 							<!-- 카카오 로그아웃 시작 -->
 						</ul>
+						
 					</div>
 					
 					
-					<div class="row">
-						<a href="./MemberJoin.me" class="txt1 mt-3">회원가입</a>
-					</div>
 				</form>
-				<!-- 로그인 폼 끝 -->
+				<!-- 일반 로그인 폼 끝 -->
+				<div class="text-center mt-3">
+					<a href="./MemberJoin.me" >회원가입</a>
+				</div>
+				
+				
+				<!-- 카카오 로그인 폼 시작 -->
+				
+				<form action="./MemberKaKaoLoginAction.me" method="post" id="kl">
+					<input type="hidden" id="userEmail" name="userEmail" value="">
+					<input type="hidden" id="userGender" name="userGender" value="">
+				</form>
+				
+				<!-- 카카오 로그인 폼 끝 -->
+				
 				
 			</div>
 		</div>
@@ -146,7 +158,7 @@
 
 	<div id="dropDownSelect1"></div>
 	
-	<!-- 카카오 스크립트 시작 -->
+	<!-- 카카오 로그인 스크립트 시작 -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 	Kakao.init('b1ca6ddb15d32d81700309a8f4611657'); //발급받은 키 중 javascript키를 사용해준다.
@@ -154,13 +166,35 @@
 	
 	//카카오로그인
 	function kakaoLogin() {
-	    Kakao.Auth.login({
+	    Kakao.Auth.loginForm({
 	      success: function (response) {
 	        Kakao.API.request({
 	          url: '/v2/user/me',
 	          success: function (response) {
 	        	  console.log(response)
 	        	  alert('카카오 로그인 성공')
+	        	  
+	        	  var k_id = response.id;
+	        	  var k_email = response.kakao_account.email;
+	        	  var k_nickname = response.properties.nickname;
+	        	  var k_gender = response.kakao_account.gender;
+	        	  // 연령대, 생일 가져오기
+	        	  
+	        	  $('#userEmail').val(k_email)
+	        	  $('#userGender').val(k_gender)
+	        	  
+	        	  
+	        	  $('#kl').submit();
+	        	  
+	        	  
+// 	        	  alert(k_id)
+// 	        	  alert(k_email)
+// 	        	  alert(k_gender)
+	        	  
+	        	  
+	        	  
+  	  
+
 	          },
 	          fail: function (error) {
 	            console.log(error)
@@ -190,7 +224,7 @@
 	    }
 	  }  
 	</script>
-	<!-- 카카오 스크립트 끝 -->
+	<!-- 카카오 로그인 스크립트 끝 -->
 	
 	
 <!--===============================================================================================-->
@@ -211,10 +245,7 @@
 	<script src="./js/login.js"></script>
 
     <!-- footer 시작 -->
-    
    		<jsp:include page="../footer/footer.jsp" />
-   		 
-    
     <!-- footer 시작 -->
 
 </body>

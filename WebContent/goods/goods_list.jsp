@@ -84,7 +84,7 @@
 	             	 width="120" height="120"
 	          		 ><br>
 	          		 
-	         	  	<a href="./GoodsDetail.cos?num=<%=dto.getCosNum()%>"><%=dto.getCosName() %></a><br>
+	         	  	<a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><%=dto.getCosName() %></a><br>
 	           		<%=dto.getCosPrice() %>원  <br>
     		     </td>
     		  <%   		  
@@ -124,4 +124,3 @@
   
 
 </body>
-</html>
