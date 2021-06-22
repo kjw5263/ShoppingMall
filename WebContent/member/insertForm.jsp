@@ -49,7 +49,7 @@
     
     <!-- JQuery -->
 	<script src="../js/jquery-3.6.0.js"></script>
-	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+	<script src="../js/jquery-3.3.1.min.js"></script>
 	
 </head>
 
@@ -119,15 +119,17 @@
 
 	<script type="text/javascript"> //id값
 	
-	var ck1=false;			//id
-	var ck2=false;			//pw
-	var ck3=false;			//pw1
-	var ck4=false;			//name
-	var ck5=false;			//phone
-	var ck6=false;			//address2
-	var ck7=false;			//address3
+
 	
 	$(document).ready(function(){
+		
+		var ck1=false;			//id
+		var ck2=false;			//pw
+		var ck3=false;			//pw1
+		var ck4=false;			//name
+		var ck5=false;			//phone
+		var ck6=false;			//address2
+		var ck7=false;			//address3
 		$("#signUp").submit(function(){
 			
 			 if($.trim($("#id").val()) == ""){
@@ -294,7 +296,7 @@
 			 var phone = $("#phone").val();
 			 var check1 = /^010([0-9]{8})$/;
 			 var check2 = /^01([1|6|7|8|9])([0-9]{3})([0-9]{4})$/;
-			 	if(phone.match(ckeck1) != null || phone.match(check2) != null){
+			 	if(phone.match(check1) != null || phone.match(check2) != null ){
 					$('.ckMsg_phone').text("");     
 					ck5 = true;
 				}else{
