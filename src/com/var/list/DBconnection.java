@@ -24,9 +24,22 @@ public class DBconnection {
 	varlist vars = new varlist();
 	private String databasename = vars.getDatabasename();
 	
+	protected void insql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeDB();
+		
+	}
 	
 	
-	protected ResultSet consql(String sql ){
+	protected ResultSet selsql(String sql ){
 		try {
 		conn = getConnection();
 		
@@ -36,6 +49,18 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		try {
+			
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return rs;
 	}
 	protected ResultSet conpstmt(PreparedStatement pstmt ,ArrayList a ){
@@ -60,6 +85,17 @@ public class DBconnection {
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

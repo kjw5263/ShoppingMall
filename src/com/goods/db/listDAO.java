@@ -20,8 +20,9 @@ public class listDAO extends DBconnection{
 	private ResultSet rs = null;
 	private String sql = "";
 	
+	varlist var = new varlist();
+	private String tablename = var.getGoodslistTablename(); 
 	
-	private String tablename = "cos_list";
 	DBconnection con = new DBconnection();
 	setGoodsTool setTool = new setGoodsTool();
 	public List getGoodsList() {
@@ -30,7 +31,7 @@ public class listDAO extends DBconnection{
 			
 			
 			sql = "select * from "+tablename;
-			rs = con.consql(sql);
+			rs = con.selsql(sql);
 
 			while (rs.next()) {
 				
@@ -61,6 +62,7 @@ public class listDAO extends DBconnection{
 
 	// getGoodsList(item)
 	public List getGoodsList(String item) {
+
 		// item에 따라서 다른 결과를 처리
 		// item - all/best/그외 카테고리
 		List goodsList = new ArrayList();
@@ -70,7 +72,7 @@ public class listDAO extends DBconnection{
 		try {
 			
 			sql = "select * from "+tablename;
-			rs = con.consql(sql);
+			rs = con.selsql(sql);
 			
 			while (rs.next()) {
 				GoodsDTO goods = new GoodsDTO();
@@ -94,4 +96,8 @@ public class listDAO extends DBconnection{
 
 		return goodsList;
 	}
+
+
+	
+
 }
