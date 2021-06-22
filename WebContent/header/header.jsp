@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +8,10 @@
 </head>
 <body>
 
+<%
+ String userId = (String)session.getAttribute("userId");
+%>
+
 	<!-- Header Section Begin -->
     <header class="header-section">
         <div class="container-fluid">
@@ -17,31 +19,44 @@
                 <div class="logo">
                     <a href="./Main.me"><img src="./img/logo.png" alt=""></a>
                 </div>
+                
                 <div class="header-right">
                     <img src="./img/icons/search.png" alt="" class="search-trigger">
+                    <%
+						if(userId !=null && userId.equals("admin") ){
+					%>
+					   <img src="./img/icons/man.png" alt="" onclick="location.href='./AdminList.ag'">
+					<%
+					   } else {
+					%>
                     <img src="./img/icons/man.png" alt="" onclick="location.href='./MemberInfo.me'">
+                    <% } %>
                     <a href="#">
                         <img src="./img/icons/bag.png" alt="">
                         <span>2</span>
                     </a>
-                    <c:if test="${userId ne null }">
+                    
+                    <%
+	        		 if(session.getAttribute("userId") != null){
+	        		%>
                     <a href="./MemberLogout.me" class="m-2">로그아웃</a>
-                    </c:if>
+                    <%} %>
+                    
                 </div>
-              <c:choose>
-			    <c:when test="${userId eq null}">
-	                <div class="user-access">
-	                    <a href="#">Register</a>
-	                    <a href="./MemberLogin.me" class="in">Sign in</a>
-	                </div>
-                </c:when>
-                <c:when test="${userId ne null}">
-	                <div class="user-access">
-	                    <span class="mt-5">${userId }님 반갑습니다.</span>
-	                </div>
-                </c:when>
-			</c:choose>
                 
+                
+                <%
+        		 if(session.getAttribute("userId") == null){
+        		%>
+                <div class="user-access">
+                    <a href="#">Register</a>
+                    <a href="./MemberLogin.me" class="in">Sign in</a>
+                </div>
+                <%}else{%>
+                <div class="user-access">
+                    <span class="mt-5"><%=userId %>님 반갑습니다.</span>
+                </div>
+                <%}%>
                 <nav class="main-menu mobile-menu">
                     <ul>
                         <li><a class="active" href="./index.jsp">Home</a></li>

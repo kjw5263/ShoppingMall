@@ -32,7 +32,6 @@
 			</thead>		
 			<tbody>
 				<tr>
-					<td>번호</td>
 					<td>이미지</td>
 					<td>이름</td>
 					<td>수량</td>
@@ -45,7 +44,6 @@
 					GoodsDTO gDTO = (GoodsDTO) goodsList.get(i);
 				%>
 				<tr>
-					<td><%=bkDTO.getBasketNum() %></td>
 					<td>
 						<img src="./admingoods/upload/<%=gDTO.getCosImage().split(",")[0] %>"
 						width="50" height="50">
