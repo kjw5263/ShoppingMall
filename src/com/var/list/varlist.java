@@ -5,7 +5,7 @@ public class varlist {
 
 	
 	private String GoodslistTablename =  "cos_list";
-	private String noticelistTablename =  "notice_Board";
+	private String noticelistTablename =  "notice_board";
 	private String noticecontentListSt = "noticeContent?noticeNum=";
 	private String http[][] = new String[][]
     		{{"" ," 전체"},
