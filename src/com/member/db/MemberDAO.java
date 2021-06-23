@@ -111,7 +111,7 @@ public class MemberDAO {
 		
 		
 		// kakaoIdCheck(userEmail)
-		public String kakaoIdCheck(String userEmail){
+		public String kakaoIdCheck(String k_Email){
 			String check = "";
 
 			try {
@@ -121,7 +121,7 @@ public class MemberDAO {
 				sql = "select userId, userEmail from user_info where userEmail=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
-				pstmt.setString(1, userEmail);
+				pstmt.setString(1, k_Email);
 				// 4 sql 실행
 				rs = pstmt.executeQuery();
 				// 5 데이터 처리 (본인확인)
@@ -716,6 +716,58 @@ public class MemberDAO {
 			return check;
 		}
 		// NaverIdCheck(n_Email)
+		
+		
+		// ConNaver(userId, userPass, n_email) 시작
+		public int ConNaver(String userId,String userPass, String n_email){
+			int check = -1;
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userId);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				//아이디 있음
+				if(rs.next()){
+					if(userPass.equals(rs.getString("userPass"))){
+						// 비밀번호 일치 본인 
+						sql = "update user_info set naverLogin=? where userId=?";
+						pstmt = conn.prepareStatement(sql);
+						//?
+						pstmt.setString(1, n_email);
+						pstmt.setString(2, userId);
+						
+						// 4 sql 실행
+						pstmt.executeUpdate();
+						check = 1;
+					}else{
+						// 비밀번호 오류
+						check = 0;
+					}
+				}else{
+					// 회원정보 x
+					check = -1;
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		
+		// ConNaver(userId, userPass, n_email) 끝
 		
 		
 }

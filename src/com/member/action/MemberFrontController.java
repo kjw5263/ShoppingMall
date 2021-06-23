@@ -306,16 +306,38 @@ public class MemberFrontController extends HttpServlet{
 					}
 					
 				}
-				else if(command.equals("/ConnectId.me")){
+				else if(command.equals("/NConnectId.me")){
 					
-					System.out.println("C : /ConnectId.me 호출");
+					System.out.println("C : /NConnectId.me 호출");
 					// DB정보를 가져와서 view페이지에 출력
 					
 					forward = new ActionForward();
-					forward.setPath("./member/ConnectId.jsp");
+					forward.setPath("./member/NConnectId.jsp");
 					forward.setRedirect(false);	
 					
 				}
+				else if(command.equals("/NloginConnected.me")){
+					
+					System.out.println("C : /NloginConnected.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/NloginConnected.jsp");
+					forward.setRedirect(false);	
+				}
+				else if(command.equals("/NConLoginAction.me")){
+					
+					System.out.println("C : /NConLoginAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					action = new NConLoginAction();
+					System.out.println("C : 네이버 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				
 				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");

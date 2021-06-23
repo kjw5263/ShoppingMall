@@ -13,12 +13,12 @@ public class MemberKaKaoLoginAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String userEmail = request.getParameter("userEmail");
+		String k_Email = request.getParameter("userEmail");
 
 		// DAO객체 생성 -> idCheck(id,pass)
 			MemberDAO mdao = new MemberDAO();
 			
-			String check = mdao.kakaoIdCheck(userEmail);
+			String check = mdao.kakaoIdCheck(k_Email);
 	
 			// 결과에 따른 페이지 이동
 			// 컨트롤러 X - 비밀번호,아이디없음 오류(javascript)

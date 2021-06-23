@@ -15,22 +15,19 @@ public class MemberNaverLoginAction implements Action{
 		
 		String n_Email = request.getParameter("n_Email");
 		
-//		HttpSession session = request.getSession();
-//		
-//		String n_Email = (String)session.getAttribute("n_Email");
-		
-		System.out.println("넘어온 네이버 이메일 값은 @@@@@@@@@@@@@@@@@@@ : " + n_Email);
-		
 		MemberDAO mdao = new MemberDAO();
 		
 		String check = mdao.NaverIdCheck(n_Email);
 		
 		if (check.equals("")) { // 이메일 없음, 회원가입 권유
 			
-			// 페이지 이동 (./Main.me)
+			// 페이지 이동 (./ConnectId.me)
+			
+			request.setAttribute("n_Email", n_Email);
+			
 			ActionForward forward = new ActionForward();
-			forward.setPath("./ConnectId.me");
-			forward.setRedirect(true);
+			forward.setPath("./member/NConnectId.jsp");
+			forward.setRedirect(false);
 			return forward;
 		}
 		
