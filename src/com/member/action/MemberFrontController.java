@@ -22,12 +22,16 @@ public class MemberFrontController extends HttpServlet{
 		/********************************* 1. 페이지 주소 파싱 *************************/
 		// (1) 가상주소 전체 가져오기
 		String requestURI = request.getRequestURI();
+
 		
 		// (2) 프로젝트명 가져오기
 		String ContextPath = request.getContextPath();
 		
 		// (3) 필요한 가상주소 생성
 		String command = requestURI.substring(ContextPath.length());
+		
+//		String command2 = request.getPathInfo();
+		
 		System.out.println("command : " + command);
 		System.out.println("C : 1.페이지 주소 파싱");
 		
@@ -88,7 +92,7 @@ public class MemberFrontController extends HttpServlet{
 					System.out.println("C : /MemberKaKaoLoginAction.me 호출");
 					// DB 사용 => MemberLoginAction() 객체를 생성해야함.
 					action = new MemberKaKaoLoginAction();
-					System.out.println("C : 로그인처리 메소드 호출");
+					System.out.println("C : 카카오 로그인처리 메소드 호출");
 					try {
 						forward = action.execute(request, response);
 					} catch (Exception e) {
@@ -158,7 +162,6 @@ public class MemberFrontController extends HttpServlet{
 				}else if(command.equals("/FindPwAjax.me")){
 					System.out.println("C : /FindPwAjax.me 호출");
 					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
-					
 					
 					action = new FindPwAjax();
 					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
@@ -235,8 +238,6 @@ public class MemberFrontController extends HttpServlet{
 					}
 				}
 				
-				
-				
 				else if(command.equals("/MemberDelete.me")){
 					System.out.println("C : /MemberDelete.me 호출");
 					
@@ -267,8 +268,6 @@ public class MemberFrontController extends HttpServlet{
 					
 				}
 				
-				
-				
 				else if(command.equals("/MemberInfo.me")){
 					System.out.println("C : /MemberInfo.me 호출");
 					// DB정보를 가져와서 view페이지에 출력
@@ -281,18 +280,43 @@ public class MemberFrontController extends HttpServlet{
 					}
 					
 				}
-//				else if(command.equals("/MemberLogout.me")){
-//					System.out.println("C : /MemberLogout.me 호출");
-//					// MemberLogoutAction() 객체 생성
-//					action = new MemberLogoutAction();
-//					
-//					try {
-//						forward = action.execute(request, response);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}	
-		
-		
+				
+				else if(command.equals("/NewPassAction.me")){
+					System.out.println("C : /NewPassAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					// MemberInfoAction() 객체 생성
+					action = new NewPassAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				else if(command.equals("/MemberNaverLoginAction.me")){
+					
+					System.out.println("C : /MemberNaverLoginAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					action = new MemberNaverLoginAction();
+					System.out.println("C : 네이버 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				else if(command.equals("/ConnectId.me")){
+					
+					System.out.println("C : /ConnectId.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					
+					forward = new ActionForward();
+					forward.setPath("./member/ConnectId.jsp");
+					forward.setRedirect(false);	
+					
+				}
+				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) 끝 *******************/

@@ -29,10 +29,18 @@ public class MemberKaKaoLoginAction implements Action{
 				PrintWriter out = response.getWriter();
 	
 				out.print("<script>");
-				out.print(" alert('회원가입 하시겠습니까.'); ");
+				out.print("var con_test = confirm('회원가입 하시겠습니까.'); ");
 				out.print(" history.back(); ");
+				out.print("if(con_test == true){");
+				out.print("alert('확인을 누르셨군요');");
+				out.print("}");
+				out.print("else if(con_test == false){");
+				out.print(" history.back(); ");
+				out.print("}");
+
 				out.print("</script>");
 	
+				
 				out.close();
 				return null;
 			}

@@ -71,33 +71,28 @@
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
-							새 비밀번호 설정 <br>
+							CosShopping 가입 안내 <br>
 						</span>
 					</div>
 						
-					<form action="./NewPassAction.me">	
-						<div class="" style="text-align: center;">
-							<div class="input-group">
-							 <input type="password" class="form-control" placeholder="새 비밀번호" aria-label="새 비밀번호" aria-describedby="basic-addon1" name="newPass">
-							</div>
-							<br>
-							 
-							<div class="input-group mb-3">
-							  <input type="password" class="form-control" placeholder="새 비밀번호 확인" aria-label="새 비밀번호 확인" aria-describedby="basic-addon1" name="newPass2">
-							</div>
-						</div>	
+					<div class="m-5" style="text-align: center;">
+						Naver 인증이 완료 되었습니다. <br>
 						
-						<div>
-							<!-- 일반 로그인 버튼 시작 -->
-							<input class="login100-form-btn" type="submit" value="새 비밀번호 설정" > 
-							<!-- 일반 로그인 버튼 끝 -->
-						</div>
-					</form>
+						추가 정보를 입력하시면 Naver 아이디로 <br>
+						로그인 하실 수 있습니다. <br>
+					</div>	
 					
-					<div class="row m-3" style="text-align: center;">
-						<a href="./MemberJoin.me">회원가입 </a>/ <a href="./FindId.me">아이디 찾기</a>
+					<div>
+						<!-- 새로운 회원가입 및 연동 버튼 시작 -->
+						<input class="login100-form-btn" type="button" value="회원가입 및 연동하기" onclick="location.href='./MemberLogin.me'"> 
+						<!-- 새로운 회원가입 및 연동 버튼 끝 -->
 					</div>
-				<!-- 일반 로그인 폼 끝 -->
+					
+					<div>
+						<!-- 기존회원 연동 버튼 시작 -->
+						<input class="login100-form-btn mt-3" type="button" value="기존 계정에 연동하기" onclick="location.href='./MemberLogin.me'"> 
+						<!-- 기존회원 연동 버튼 끝 -->
+					</div>
 				
 			</div>
 		</div>

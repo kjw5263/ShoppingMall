@@ -43,7 +43,7 @@ public class FindPwAjax implements Action {
 			
 			rm = RandNum.rand();
 
-			// 세션에 해당 아이디
+			// 세션에 해당 아이디 저장
 			session.setAttribute("PwCheckId", userId);
 			
 			// 디비에 인증번호 저장

@@ -654,6 +654,68 @@ public class MemberDAO {
 		}
 		// mycouponlist(userId);
 		
+		// NewPassCheck(String newPass) 시작
+		public void NewPassCheck(String newPass, String userId){
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "update user_info set userPass=? where userId=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, newPass);
+				pstmt.setString(2, userId);
+				
+				// 4 sql 실행
+				pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+		}
+		// NewPassCheck(String newPass) 끝
 		
+		// NaverIdCheck(n_Email)
+		public String NaverIdCheck(String n_Email){
+			String check = "";
 
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userId, naverLogin from user_info where naverLogin=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, n_Email);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				if(rs.next()){
+					
+					check = rs.getString("userId");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// NaverIdCheck(n_Email)
+		
+		
 }
