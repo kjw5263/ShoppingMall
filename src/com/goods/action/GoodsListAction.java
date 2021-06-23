@@ -26,7 +26,7 @@ public class GoodsListAction implements Action{
 		if(item == null){
 			item = "all";
 		}else if(item.equals("best")){
-			item = "베스트상품";
+			item = "베스트";
 		}else if(item.equals("skin")){
 			item = "스킨";
 		}else if(item.equals("essence")){

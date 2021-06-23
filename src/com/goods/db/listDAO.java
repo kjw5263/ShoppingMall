@@ -106,16 +106,21 @@ public class listDAO extends DBconnection{
 		StringBuffer SQL = new StringBuffer();
 		
 		try {
-			if(!cat.equals("all")){
-			sql = "select * from "+tablename + 
-					" where cosBrand = '" + cat+"'";
-			}else if(!item.equals("all")){
-				sql = "select * from "+tablename + 
-						" where cosCategory = '" + item+"'";
+			if(item.equals("베스트")){
+				sql ="select * from "+ tablename + " order by "
+						+ "orderCount desc limit 0 , 10";
 			}else{
-				sql = "select * from "+tablename;
+				if(!cat.equals("all")){
+					sql = "select * from "+tablename + 
+							" where cosBrand = '" + cat+"'";
+					}else if(!item.equals("all")){
+						sql = "select * from "+tablename + 
+								" where cosCategory = '" + item+"'";
+					}else{
+						sql = "select * from "+tablename;
+					}
 			}
-			
+			System.out.println(sql);
 			rs = con.selsql(sql);
 			
 			while (rs.next()) {
