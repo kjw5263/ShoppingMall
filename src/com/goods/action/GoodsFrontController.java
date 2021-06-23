@@ -34,6 +34,7 @@ public class GoodsFrontController extends HttpServlet {
 			System.out.println("C : /GoodsList.cos 호출");
 			// DB정보를 화면이동 없이 출력
 			// GoodsListAction() 객체 생성
+			
 			action = new GoodsListAction();
 			
 			try {

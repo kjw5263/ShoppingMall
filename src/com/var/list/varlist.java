@@ -10,7 +10,7 @@ public class varlist {
 	private String http[][] = new String[][]
     		{{"" ," 전체"},
     	{"?item=best","베스트상품"},
-    	{"?item=outwear","스킨"},
+    	{"?item=skin","스킨"},
     	{"?item=essence","에센스"},
     	{"?item=cream","크림"},
     	{"?item=maskpack","마스크팩"}

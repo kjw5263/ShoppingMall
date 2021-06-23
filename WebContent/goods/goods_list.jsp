@@ -42,7 +42,8 @@
    
   	listDAO gdao = new listDAO();
   	
-    List goodsList = gdao.getGoodsList("all");
+    List goodsList = (List)request.getAttribute("goodsList");
+    
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
     String http[][] = var.getHttp();
@@ -54,7 +55,7 @@
   <tr>
     <%for(int i = 0; i<http.length;i++){ %>
 	  <td>
-       	<a href=<%=goHead%> + <%=http[i][0] %>> <%=http[i][1] %> &nbsp;&nbsp; </a>
+       	<a href="<%=goHead%><%=http[i][0] %>"> <%=http[i][1] %> &nbsp;&nbsp; </a>
       </td>
       <%} %>
     </tr>
@@ -67,7 +68,7 @@
   <tr>
     <%for(int i = 0; i<cat.length;i++){ %>
 	  <td>
-       	<a href=<%=goHead%> + <%=cat[i][0] %>> <%=cat[i][1] %> &nbsp;&nbsp; </a>
+       	<a href="<%=goHead%><%=cat[i][0] %>"> <%=cat[i][1] %> &nbsp;&nbsp; </a>
       </td>
       <%} %>
     </tr>
