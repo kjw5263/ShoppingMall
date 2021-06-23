@@ -34,7 +34,6 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeDB();
 		
 	}
 	
@@ -49,17 +48,7 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		
 		return rs;
 	}
@@ -88,17 +77,7 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return rs;
 	}
 	
