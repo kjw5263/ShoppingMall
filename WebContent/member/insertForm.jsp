@@ -48,8 +48,7 @@
     <link rel="stylesheet" href="../css/style.css" type="text/css">
     
     <!-- JQuery -->
-	<script src="../js/jquery-3.6.0.js"></script>
-	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
 </head>
 
