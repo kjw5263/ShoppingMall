@@ -34,7 +34,33 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		closeDB();
+		
+		
+	}
+	protected void delsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	protected void upsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
@@ -49,17 +75,7 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		
 		return rs;
 	}
@@ -88,17 +104,7 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return rs;
 	}
 	
