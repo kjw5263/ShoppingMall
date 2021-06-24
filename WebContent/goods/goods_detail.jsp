@@ -245,9 +245,13 @@
 </section>
 </form>
 <!-- Product Page Section End -->
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
 
 <div>
-    <ul class="nav nav-tabs" style="margin-top: 200px;" >
+    <ul class="nav nav-tabs">
         <li class='active'><a href="#tabmenu_01" data-toggle="tab">상세이미지</a></li>
         <li><a href="#tabmenu_02" data-toggle="tab">사용설명</a></li>
         <li><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=reviewList.size() %>)</a></li>
@@ -288,7 +292,7 @@
         <div class="tab-pane fade" id="tabmenu_03">
 
             <h3>리뷰</h3>
-            <div class="wrap_area_view" style="width: 60%; margin: 50px 50px 100px 350px;">
+            <div class="wrap_area_view" style="width: 80%; margin: 50px 50px 100px 150px;">
              <div class="review_rating_area">
                 <div class="inner">
                     <div class="grade_img">
