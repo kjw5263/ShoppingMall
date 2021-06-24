@@ -28,7 +28,7 @@ public class ReviewListAction implements Action{
 
         // DAO 객체 생성 - getGoods(cosNum);
         GoodsReviewDAO grdao = new GoodsReviewDAO();
-        int listCount =grdao.getReviewCount();
+        int listCount =grdao.getReviewCount(cosNum);
         reviewList = grdao.selectReviewList(startRow,pageSize,cosNum);
         int maxPage = (int)((double) listCount/pageSize + 0.95);
         int startPage = (((int) ((double)startRow/10+0.9)) -1) *10+1;

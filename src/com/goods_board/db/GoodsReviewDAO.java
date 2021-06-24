@@ -94,15 +94,15 @@ public class GoodsReviewDAO {
         }
     }
 
-        public ArrayList<GoodsReviewDTO> getReview(int cosNum){
-            ArrayList<GoodsReviewDTO> getReview = new ArrayList<GoodsReviewDTO>();
+     // 아이디 글 조회
+        public GoodsReviewDTO getReview(String userId){
             GoodsReviewDTO grdto = new GoodsReviewDTO();
             try {
                 conn = getConnection();
-                sql= "select * from review_board where cosNum=?";
+                sql= "select * from review_board where userId=?";
 
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1,cosNum);
+                pstmt.setString(1,userId);
 
                 rs = pstmt.executeQuery();
                 if (rs.next()){
@@ -125,15 +125,18 @@ public class GoodsReviewDAO {
             return grdto;
         }
 // 글 개수 구하기
-    public int getReviewCount(){
+    public int getReviewCount(int cosNum){
         int cnt = 0;
         try {
             conn = getConnection();
-            sql="select count(*) from review_board";
+            sql="select count(*) from review_board where cosNum=?";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,cosNum);
             rs = pstmt.executeQuery();
+
             if (rs.next()){
                 cnt = rs.getInt(1);
+
             }
 
         } catch (SQLException throwables) {
@@ -180,42 +183,74 @@ public class GoodsReviewDAO {
     }
 
 
-    public int deleteReview(GoodsReviewDTO grdto){
-        int check = -1;
+    public int deleteReview(String userId){
+            int deleteCount = 0;
 
         try {
             conn = getConnection();
-            sql = "select userId from review_board where cosNum=?";
+            sql = "delete  from review_board where userId=?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,grdto.getCosNum());
+            pstmt.setString(1,userId);
+            deleteCount = pstmt.executeUpdate();
 
-            rs = pstmt.executeQuery();
-
-            if (rs.next()){
-                if (grdto.getUserid().equals(rs.getString("userId"))){
-                    sql = "delete from review_board where cosNum=?";
-                    pstmt = conn.prepareStatement(sql);
-                    pstmt.setInt(1,grdto.getCosNum());
-
-                    check = pstmt.executeUpdate();
-                }else {
-                    check = 0;
-                }
-            }else {
-                check = -1;
-            }
-            System.out.println("글 삭제 완료!" + check);
+            System.out.println("글 삭제 완료!" + deleteCount);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
             closeDB();
         }
-        return check;
+        return deleteCount;
     }
 
 
+    public int checkUser(String userId , int cosNum){
+        int checkId =0;
 
+        try {
+            conn = getConnection();
+            sql="select * from review_board where userId=? and cosNum=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,userId);
+            pstmt.setInt(2,cosNum);
+            rs = pstmt.executeQuery();
+            if (rs.next()){
+                checkId =1;
+            }else {
+                checkId=2;
+            }
+
+        } catch (SQLException throwables) {
+            System.out.println("아이디 체크 오류" +throwables);
+        }finally {
+            closeDB();
+        }
+        return checkId;
+
+    }
+
+    // 글 수정
+    public int updateReview(String userId,GoodsReviewDTO grdto){
+        int updateCount = 0;
+        try {
+            conn=getConnection();
+            System.out.println("아이디 출력" + userId);
+            System.out.println("grdto 출력" + grdto);
+            sql="update review_board set rating=? reviewContent=? where userId=? and cosNum=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,grdto.getRating());
+            pstmt.setString(2,grdto.getReviewContent());
+            pstmt.setString(3,userId);
+            pstmt.setInt(4,grdto.getCosNum());
+            updateCount =pstmt.executeUpdate();
+            System.out.println("글 수정 완료" + updateCount);
+        } catch (SQLException throwables) {
+            System.out.println("글 수정 에러" + throwables);
+        }finally {
+            closeDB();
+        }
+        return updateCount;
+    }
 
 
 }

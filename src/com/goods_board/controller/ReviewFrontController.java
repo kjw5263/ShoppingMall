@@ -1,10 +1,8 @@
 package com.goods_board.controller;
 
 
-import com.goods_board.action.Action;
-import com.goods_board.action.ActionForward;
-import com.goods_board.action.ReviewListAction;
-import com.goods_board.action.ReviewWriteFormAction;
+import com.goods_board.action.ReviewUpdateAction;
+import com.goods_board.action.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,6 +57,36 @@ public class ReviewFrontController extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        else if (command.equals("/reviewUserList.rev")){
+            action = new ReviewUserListAction();
+            try {
+                forward = action.execute(req, resp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (command.equals("/reviewUpdateForm.rev")){
+            forward = new ActionForward();
+            forward.setPath("./goods_board/review_update.jsp");
+
+        }
+
+        else if (command.equals("/reviewUpdate.rev")){
+            action = new ReviewUpdateAction();
+            try {
+                forward = action.execute(req, resp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (command.equals("/reviewDelete.rev")){
+            action = new ReviewUserListAction();
+            try {
+                forward = action.execute(req, resp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
 
 
