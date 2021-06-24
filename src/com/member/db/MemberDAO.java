@@ -228,7 +228,52 @@ public class MemberDAO {
 		
 	
 		// findPwAjax(userId, userEmail, userTel) 시작
-		public int findPwAjax(String userId, String userEmail, String userTel){
+//		public int findPwAjax(String userId, String userEmail, String userTel){
+//			int check = -1;
+//
+//			System.out.println("넘어온 userId 는 : @@@@@@@@@@@@@@ " + userId);
+//			System.out.println("넘어온 userEmail 는 : @@@@@@@@@@@@@@ " + userEmail);
+//			System.out.println("넘어온 userTel 는 : @@@@@@@@@@@@@@ " + userTel);
+//			
+//			try {
+//				// 1,2 디비연결
+//				conn = getConnection();
+//				// 3 sql 구문 & pstmt 객체생성
+//				sql = "select userPass from user_info where userId=? and userEmail=? and userTel =?";
+//				pstmt = conn.prepareStatement(sql);
+//				//?
+//				pstmt.setString(1, userId);
+//				pstmt.setString(2, userEmail);
+//				pstmt.setString(3, userTel);
+//				
+//				// 4 sql 실행
+//				rs = pstmt.executeQuery();
+//				// 5 데이터 처리 (본인확인)
+//				if(rs.next()){
+//					check = 0;
+//					
+//				}else{
+//					// 회원정보 x
+//					check = -1;
+//				}
+//				System.out.println("DAO : 로그인 처리 결과 "+check);
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				closeDB();
+//			}
+//			
+//			return check;
+//		}
+		// findPwAjax(userId, userEmail, userTel) 끝
+		
+		
+		
+		
+		// findPwCerAction 시작
+		
+		public int findPwCerAction(String userId, String userEmail, String userTel){
 			int check = -1;
 
 			System.out.println("넘어온 userId 는 : @@@@@@@@@@@@@@ " + userId);
@@ -266,7 +311,9 @@ public class MemberDAO {
 			
 			return check;
 		}
-		// findPwAjax(userId, userEmail, userTel) 끝
+		
+		
+		// findPwCerAction 끝
 		
 		
 		// CheckPw(userId, rm) 시작
@@ -300,10 +347,10 @@ public class MemberDAO {
 		
 		
 		// PwCheck(checkNum) 시작 .. 가져온 인증번호를 디비에 대비해보는 메소드
-		public String PwCheck(String checkNum, String PwCheckId){
+		public String PwCheck(String checkNum, String rm){
 			String check = "";
 			
-			System.out.println("PwCheckId 는 @@@@@@@@ " + PwCheckId);
+			System.out.println("PwCheckId 는 @@@@@@@@ " + rm);
 			
 			try {
 				// 1,2 디비연결
@@ -313,7 +360,7 @@ public class MemberDAO {
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, checkNum);
-				pstmt.setString(2, PwCheckId);
+				// pstmt.setString(2, PwCheckId);
 
 				// 4 sql 실행
 				rs = pstmt.executeQuery();

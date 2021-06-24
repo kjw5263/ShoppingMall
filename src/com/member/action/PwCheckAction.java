@@ -25,23 +25,17 @@ public class PwCheckAction implements Action {
 //		String checkRm = request.getParameter("checkRm");
 //		System.out.println("전달된 checkRm 값 : " + checkRm);
 		
-		String PwCheckId = (String)session.getAttribute("PwCheckId");
+		String rm = (String)session.getAttribute("rm");
+		System.out.println("전달된 rm 값 : " + rm);
+		PrintWriter out = response.getWriter();
+
 		
-		MemberDAO mdao = new MemberDAO();
-		String check = mdao.PwCheck(checkNum, PwCheckId);
 		
-		
-		if(check.equals("")){
+		if(!checkNum.equals(rm)){
 			// 넘겨온 값이 다를 때
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
 
-			out.print("<script>");
-			out.print(" alert('인증번호가 다릅니다.'); ");
-			out.print(" history.back(); ");
-			out.print("</script>");
+			out.print("0");
 
-			out.close();
 			
 			return null;
 		}
@@ -49,13 +43,10 @@ public class PwCheckAction implements Action {
 		// 넘겨온 값이 같을 때
 	    // 페이지 이동 (./Main.me)
 		
-		request.setAttribute("userPass", check);
-
+		// request.setAttribute("userPass", check);
+		out.print("1");
 		
-		ActionForward forward = new ActionForward();
-		forward.setPath("./member/findPwConfirm.jsp");
-		forward.setRedirect(false);
-		return forward;
+		return null;
 	}
 
 }

@@ -133,9 +133,6 @@ public class MemberFrontController extends HttpServlet{
 					System.out.println("C : /FindIdConfirm.me 호출");
 					// 화면을 보여주기=> view페이지로 이동
 					
-					
-					System.out.println("받아온 request 값은 @@@@@@@@@@@@@@"+ request.getAttribute("userId"));
-					
 					forward = new ActionForward();
 					forward.setPath("./member/findIdConfirm.jsp");
 					forward.setRedirect(false);
@@ -148,10 +145,23 @@ public class MemberFrontController extends HttpServlet{
 					forward.setPath("./member/findPw.jsp");
 					forward.setRedirect(false);
 					
-				}else if(command.equals("/FindPwAction.me")){
-					System.out.println("C : /FindPwAction.me 호출");
+					
+				// 새로 추가된 비밀번호 찾기 페이지 시작
+				}else if(command.equals("/findPwCer.me")){
+					System.out.println("C : /findPwCer.me 호출");
+					// 화면을 보여주기=> view페이지로 이동
+					
+					forward = new ActionForward();
+					forward.setPath("./member/findPwCer.jsp");
+					forward.setRedirect(false);
+					
+				}
+				// 새로 추가된 비밀번호 찾기 페이지 끝
+				else if(command.equals("/findPwCerAction.me")){
+					System.out.println("C : /findPwCerAction.me 호출");
 					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
-					action = new FindPwAction();
+					
+					action = new findPwCerAction();
 					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
 					try {
 						forward = action.execute(request, response);
@@ -159,11 +169,25 @@ public class MemberFrontController extends HttpServlet{
 						e.printStackTrace();
 					}
 					
-				}else if(command.equals("/FindPwAjax.me")){
-					System.out.println("C : /FindPwAjax.me 호출");
+				}
+				else if(command.equals("/PwCheckMove.me")){
+					System.out.println("C : /PwCheckMove.me 호출");
 					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
 					
-					action = new FindPwAjax();
+					action = new PwCheckMoveAction();
+					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if(command.equals("/FindPwAction.me")){
+					System.out.println("C : /FindPwAction.me 호출");
+					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
+					action = new FindPwAction();
 					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
 					try {
 						forward = action.execute(request, response);
@@ -358,6 +382,8 @@ public class MemberFrontController extends HttpServlet{
 					}
 					
 				}
+				
+				
 				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
