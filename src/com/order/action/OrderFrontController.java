@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("*.or")  
+@WebServlet("*.or")
+// http://localhost:8088/ShoppingMall/OrderStart.or
 public class OrderFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("C : OrdertFrontController_doProcess() 호출!");

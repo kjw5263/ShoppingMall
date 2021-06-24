@@ -1,6 +1,5 @@
 package com.order.db;
 
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.basket.db.BasketDTO;
+import com.goods.db.GoodsDTO;
 
 public class OrderDAO {
 	private Connection conn = null;
@@ -49,7 +49,7 @@ public class OrderDAO {
 			Context initCTX = new InitialContext();	 //얘는 인터페이스(부모)!인데 객체 생성(자식)-> 업캐스팅(상속)
 			
 			// DB 연동 정보를 불러오기 (context.xml)
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/model2DB");	// 다운캐스팅
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosShopping");	// 다운캐스팅
 			
 			conn = ds.getConnection();
 			
@@ -84,11 +84,11 @@ public class OrderDAO {
 	/* getBasketList()
 	 * 설명 : 장바구니 목록 가져오기 메소드
 	 * return : vector  */
-	public Vector<List> getBasketList(String userId) {
-		Vector<List> totalVector = new Vector();
+	public Vector getBasketList(String userId) {
+		Vector totalVector = new Vector();
 		
-		ArrayList basketList = new ArrayList();
-		ArrayList goodsList = new ArrayList();
+		ArrayList<BasketDTO> basketList = new ArrayList<BasketDTO>();
+		ArrayList<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
 		
 		
 		try {
@@ -111,14 +111,40 @@ public class OrderDAO {
 				// 장바구니 목록 한칸에 저장하기
 				basketList.add(bkDTO);
 				
-				// 
+				// 2. 상품 목록 가져오기 : 장바구니에 해당하는 상품 상세 정보저장
+				sql = "select * from cos_list where cosNum=?";
+				PreparedStatement pstmt2 = conn.prepareStatement(sql);
+				pstmt2.setInt(1, rs.getInt("basketCosNum"));
+				
+				ResultSet rs2 = pstmt2.executeQuery();
+				
+				// 상품정보가 있을 때
+				if(rs2.next()) {
+					GoodsDTO gDTO = new GoodsDTO();
+					gDTO.setCosNum(rs2.getInt("cosNum"));
+					gDTO.setCosName(rs2.getString("cosName"));
+					gDTO.setCosBrand(rs2.getString("cosBrand"));
+					gDTO.setCosPrice(rs2.getInt("cosPrice"));
+					gDTO.setCosImage(rs2.getString("cosImage"));
+					
+					goodsList.add(gDTO);
+				}
+				
+				System.out.println("[OrderDAO] getBasketList : 상품 정보 저장 완료 ");
 			}
+			
+			totalVector.add(basketList);
+			totalVector.add(goodsList);
+			System.out.println("[OrderDAO] getBasketList :장바구니 상품 정보 저장 완료 ");
 		} catch (SQLException e) {
+			System.out.println("[OrderDAO] getBasketList Exception 발생 >>>>>>" + e.getMessage());
 			e.printStackTrace();
+		} finally {
+			closeDB();
 		}
 		
 		
-		return null;
+		return totalVector;
 	}
 	 /* getBasketList() 종료 */
 	
