@@ -1,8 +1,8 @@
+<%@page import="java.util.List"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="com.basket.db.BasketDTO"%>
 <%@page import="com.member.db.MemberDTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,9 +25,8 @@
     
  <!--  다음 우편번호 API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="../js/jquery-3.6.0.js"></script>
+<script src="./js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-
 function openAddrPop() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -69,11 +68,42 @@ function openAddrPop() {
         }
     }).open();
 }
-
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	/* 주소지 지정- 기존배송지, 신규배송지 radio 선택 */
+	$('input[name="addrType"]').change(function(){
+		if($('input[name="addrType"]:checked').val() == 'savedAddr'){
+			$('#receiverName').val('${memberDTO.userName}');
+			$('#receiverTel1').val('${memberDTO.userTel}');
+			$('#receiverTel2').val('');
+			$('#zonecode').val('${(memberDTO.userAddr).split(",")[0]}');
+			$('#addr').val('${(memberDTO.userAddr).split(",")[1]}');
+			$('#addr_detail').val('${(memberDTO.userAddr).split(",")[2]}');
+		} else {
+			$('#receiverName').val('');
+			$('#receiverTel1').val('');
+			$('#receiverTel2').val('');
+			$('#zonecode').val('');
+			$('#addr').val('');
+			$('#addr_detail').val('');
+		}
+	});
+	/* 주소지 지정- 기존배송지, 신규배송지 radio 선택 */
+	
+	
+	/* 포인트 입력 keyup 이벤트 */
+	$('#userPoint').keyup(function() {
+		if(Number($('#userPoint').val()) > ${memberDTO.userPoint}){
+			alert("소유한 포인트보다 초과하여 적용할 수 없습니다.");
+			$('#userPoint').val(0);
+		}
+	});
+});
 
 
 </script>
-
 <!-- Css Styles -->
 <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
@@ -91,9 +121,10 @@ function openAddrPop() {
 	
 	<%
 		// OrderStartAction.java 에서 넘긴 영역 정보 저장하기
-		ArrayList basketList = (ArrayList)request.getAttribute("basketList");
-		ArrayList goodsList = (ArrayList)request.getAttribute("goodsList");
+		List basketList = (List)request.getAttribute("basketList");
+		List goodsList = (List)request.getAttribute("goodsList");
 		MemberDTO mDTO = (MemberDTO)request.getAttribute("memberDTO");
+		List couponList = (List)request.getAttribute("couponList");
 		
 		DecimalFormat fmMoney = new DecimalFormat("###,###");
 		int sumAmount=0;
@@ -106,15 +137,13 @@ function openAddrPop() {
 	<div class="container-fluid">	
 	
 	<div class="row">
-	 <div class="col-2 text-center"></div>
-	  <div class="col-8" >	
-	  <h2>주문/결제</h2>
-	  <br><br><br>
+	<div class="col-2 text-center"></div>
+	<div class="col-8 " >
 	
-	<h4>배송상품</h4>
-	<h5>총 <%=basketList.size() %>개의 상품</h5> 
-	
-	<div  style="text-align: center; width : 100%;">
+	<h2>주문/결제</h2>
+	<div><h4>배송상품</h4></div>
+	<div><h5>총 <%=basketList.size() %>개의 상품</h5></div> 
+	<div style="width : 100%;">
 		<table class="table">
 			<thead class="thead-light">
 				<tr>
@@ -131,7 +160,6 @@ function openAddrPop() {
 						GoodsDTO gDTO = (GoodsDTO)goodsList.get(i);
 						sumAmount += bkDTO.getBasketCosAmount();
 						sumMoney += (bkDTO.getBasketCosAmount()*gDTO.getCosPrice());
-						
 				%>
 				<tr>
 					<td><img src="<%=gDTO.getCosImage().split(",")[0] %>" width="100" height="100"></td>
@@ -151,47 +179,53 @@ function openAddrPop() {
 		</table>
 		</div> <!-- 장바구니 정보 테이블 닫는 div -->
 		
-		
-		<br><br>
+		<form action="#" method="post">
+		<!-- 새로운 inner Layout : 사용자/쿠폰 영역, 금액영역 -->
+		<div class="row">
+		<div class="col-8">
 		<h4>배송지 정보</h4>
-		<div  style="text-align: center; width : 100%;">
+		
+		
+		<!-- 회원정보 테이블 묶는 div -->
+		<div style="width : 100%;">
 		<table class="table">
 			<tr>
-				<th scope="row" class="table-active">배송지 선택</th>
+				<th scope="row" class="table-active" style="width:150px;">배송지 선택</th>
 				<td>
-					<span><input type="radio" name="basicAddr" id="savedAddr">기존 배송지</span>
-					<span><input type="radio" name="basicAddr" id="newAddr">신규 배송지</span> </td>
+					<span><input type="radio" name="addrType" id="savedAddr" checked value="savedAddr">기존 배송지</span>
+					<span><input type="radio" name="addrType" id="newAddr" value="newAddr">신규 배송지</span>
+				</td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">배송지명-디비에 추가해야할듯</th>
-				<td></td>
+				<th scope="row" class="table-active" id="addrName">배송지명</th>
+				<td><input type="text" style="width:200px;" id="addrName"></td>
 			</tr>
 			<tr>
 				<th scope="row" class="table-active">받는 분</th>
-				<td><input type="text" class="form-control" name="receiverName" value="<%=mDTO.getUserName()%>"></td>
+				<td><input type="text" class="form-control" name="receiverName" id="receiverName" value="<%=mDTO.getUserName()%>"></td>
 			</tr>
 			<tr>
 				<th scope="row" class="table-active">연락처1</th>
-				<td><input type="text" class="form-control" name="receiverTel1" value="<%=mDTO.getUserTel()%>"></td>
+				<td><input type="text" class="form-control" name="receiverTel1" id="receiverTel1" value="<%=mDTO.getUserTel()%>"></td>
 			</tr>
 			<tr>
 				<th scope="row" class="table-active">연락처2</th>
-				<td><input type="text" class="form-control" name="receiverTel2" value=""></td>
+				<td><input type="text" class="form-control" name="receiverTel2" id="receiverTel2"></td>
 			</tr>
 			<tr>
 				<th scope="row" class="table-active">주소</th>
 				<td>
-				<div class="form-inline">
+					<div class="form-inline">
 					<div class="form-group mx-sm mb-2">
-				    	<input type="text" class="form-control" name="zonecode" id="zonecode" readonly>
+				    	<input type="text" class="form-control" name="zonecode" id="zonecode" value="${(memberDTO.userAddr).split(',')[0] }" readonly>
 				 	</div>
 					<input type="button"  id="addr_btn" class="btn btn-secondary mx-sm-1 mb-2" value="우편번호 찾기" onclick="openAddrPop()">
 				</div>
 				
 				<div class="form-inline">
 					<div class="form-group mx-sm mb-2">
-				    	<input type="text" class="form-control" name="addr" id="addr" readonly>
-				    	<input type="text" class="form-control mx-sm-1" name="addr_detail" id="addr_detail">
+				    	<input type="text" class="form-control" name="addr" id="addr" value="${(memberDTO.userAddr).split(',')[1] }" readonly>
+				    	<input type="text" class="form-control mx-sm-1" name="addr_detail" id="addr_detail" value="${(memberDTO.userAddr).split(',')[2]}">
 				 	</div>
 				</div>
 				</td>
@@ -214,10 +248,66 @@ function openAddrPop() {
 		</div> <!-- 회원정보 테이블 묶는 div -->
 		
 		
-		<br><br><br>
+		<!-- 포인트/쿠폰 테이블 묶는 div -->
+		<h4>포인트/쿠폰 사용</h4>
+		<div  style="width : 100%;">
+		<table class="table">
+			<tr>
+				<th scope="row" class="table-active" style="width:150px;">쿠폰</th>
+				<td>
+					<select class="form-control" name="o_msg">
+						<option value="">쿠폰선택 안함</option>
+						<c:forEach var="i" items="${couponList }">
+						<option value="">${i.couponName }</option>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row" class="table-active" id="addrName">포인트</th>
+				<td><input type="text" value="" name="userPoint" id="userPoint" style="width:80px;"> / <%= fmMoney.format(mDTO.getUserPoint()) %>원</td>
+			</tr>
+		</table>
+		</div> <!-- 포인트/쿠폰 테이블 묶는 div -->
 		
 		
+		</div>  <!-- 배송정보,쿠폰 영역 묶는 div -->
 		
+		
+		<!-- 금액 영역 묶는 div -->
+		<div class="col-4">
+		<div><h4>최종 결제정보 </h4></div>
+		<div style="width : 100%;">
+		<table class="table table-bordered">
+			<tr>
+				<th scope="row" style="width:200px;">총 상품금액</th>
+				<td style="width:200px;"><%=fmMoney.format(sumMoney) %>원</td>
+			</tr>
+			<tr>
+				<th scope="row" style="width:200px;" >쿠폰 할인금액</th>
+				<td style="width:200px;"><span>0</span></td>
+			</tr>
+			<tr>
+				<th scope="row" style="width:200px;" >포인트</th>
+				<td style="width:200px;"><span>0</span></td>
+			</tr>
+			<tr>
+				<th scope="row" style="width:200px;" >적립예정 포인트</th>
+				<td style="width:200px;"><span>0</span></td>
+			</tr>
+			<tr>
+				<th scope="row" style="width:200px;" ><strong>최종금액</strong></th>
+				<td style="width:200px;"><strong><%=fmMoney.format(sumMoney) %>원</strong></td>
+			</tr>
+			<tr>
+				<td scope="row" colspan="2"><input type="submit" value="결제하기" onclick="" class="btn btn-secondary btn-lg"></td>
+			</tr>
+		</table>
+		</div> <!-- 금액 테이블 묶는 div -->
+			
+		</div> <!-- 금액 영역 묶는 div -->
+		</div> <!-- innerLayout 묶는 div -->
+		</form>
 		
 		</div> <!--  col-8 클래스 닫는 div  -->
 		

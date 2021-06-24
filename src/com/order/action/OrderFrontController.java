@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 // http://localhost:8088/ShoppingMall/OrderStart.or
 public class OrderFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("C : OrdertFrontController_doProcess() 호출!");
-		
 		/********************************* 1. 페이지 주소 파싱 *************************/
 		// (1) 가상주소 전체 가져오기
 		String requestURI = request.getRequestURI();
@@ -43,16 +41,11 @@ public class OrderFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
 		
-		
-		
-		
-		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
 		
@@ -60,17 +53,12 @@ public class OrderFrontController extends HttpServlet {
 		// forward 가 null 이 아닐 때 : 페이지 이동 정보가 있을 때 
 		if(forward != null){
 			if(forward.isRedirect()){ // TRUE일 때, 
-				response.sendRedirect(forward.getPath());	// 해당 경로로 이동하기
-				System.out.println("C : 페이지 주소 이동 >> sendRedirect() << 방식, " + forward.getPath());
+				response.sendRedirect(forward.getPath());
 			} else { // FALSE일 때
 				RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
 				dis.forward(request, response);
-				System.out.println("C : 페이지 주소 이동 >> forward << 방식, " + forward.getPath());
 			}
-			System.out.println("C : 3. 페이지 주소 이동 완료 ");
 		}
-		
-		System.out.println("C : 3. 페이지 주소 이동 X (주소 이동X ) >> forward NULL ");
 		
 		
 		/******************* 3. 페이지 주소 이동 종류를 정하기 (제어) *******************/
@@ -79,13 +67,11 @@ public class OrderFrontController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("C : OrdertFrontController_doGet() 호출!");
 		doProcess(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("C : OrderFrontController_doPost() 호출!");
 		doProcess(request, response);
 	}
 }

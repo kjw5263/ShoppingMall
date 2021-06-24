@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.naming.Context;
@@ -53,8 +54,6 @@ public class OrderDAO {
 			
 			conn = ds.getConnection();
 			
-			System.out.println("드라이버 로드, 디비 연결 성공!");
-			System.out.println(conn);
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,8 +86,8 @@ public class OrderDAO {
 	public Vector getBasketList(String userId) {
 		Vector totalVector = new Vector();
 		
-		ArrayList<BasketDTO> basketList = new ArrayList<BasketDTO>();
-		ArrayList<GoodsDTO> goodsList = new ArrayList<GoodsDTO>();
+		List basketList = new ArrayList();
+		List goodsList = new ArrayList();
 		
 		
 		try {
@@ -129,15 +128,11 @@ public class OrderDAO {
 					
 					goodsList.add(gDTO);
 				}
-				
-				System.out.println("[OrderDAO] getBasketList : 상품 정보 저장 완료 ");
 			}
 			
 			totalVector.add(basketList);
 			totalVector.add(goodsList);
-			System.out.println("[OrderDAO] getBasketList :장바구니 상품 정보 저장 완료 ");
 		} catch (SQLException e) {
-			System.out.println("[OrderDAO] getBasketList Exception 발생 >>>>>>" + e.getMessage());
 			e.printStackTrace();
 		} finally {
 			closeDB();
