@@ -118,7 +118,7 @@ public class MemberDAO {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userId, userEmail from user_info where userEmail=?";
+				sql = "select userId, kakaoLogin from user_info where kakaoLogin=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, k_Email);
@@ -769,5 +769,56 @@ public class MemberDAO {
 		
 		// ConNaver(userId, userPass, n_email) 끝
 		
+		
+		// ConKakao(userId, userPass, k_email) 시작
+		public int ConKakao(String userId,String userPass, String k_email){
+			int check = -1;
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userId);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				//아이디 있음
+				if(rs.next()){
+					if(userPass.equals(rs.getString("userPass"))){
+						// 비밀번호 일치 본인 
+						sql = "update user_info set kakaoLogin=? where userId=?";
+						pstmt = conn.prepareStatement(sql);
+						//?
+						pstmt.setString(1, k_email);
+						pstmt.setString(2, userId);
+						
+						// 4 sql 실행
+						pstmt.executeUpdate();
+						check = 1;
+					}else{
+						// 비밀번호 오류
+						check = 0;
+					}
+				}else{
+					// 회원정보 x
+					check = -1;
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		
+		// ConKakao(userId, userPass, k_email) 끝
 		
 }

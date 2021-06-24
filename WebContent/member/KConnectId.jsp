@@ -76,11 +76,11 @@
 					</div>
 						
 					<div class="m-5" style="text-align: center;">
-						<span style="color: green;">Naver</span> 인증이 완료 되었습니다. <br>
+						Kakao 인증이 완료 되었습니다. <br>
 						
-						추가 정보를 입력하시면 <span style="color: green;">Naver</span> 아이디로 <br>
+						추가 정보를 입력하시면 Kakao 아이디로 <br>
 						로그인 하실 수 있습니다. <br>
-						${n_Email }@@@@@@@@@@@@@@@@@@@@@@
+						${k_Email }@@@@@@@@@@@@@@@@@@@@@@
 					</div>	
 					
 					<div>
@@ -91,8 +91,8 @@
 					
 					<div>
 						<!-- 기존회원 연동 버튼 시작 -->
-						<form action="./NloginConnected.me" method="post">
-							<input type="hidden" value="${n_Email }" name="n_Email">
+						<form action="./KloginConnected.me" method="post">
+							<input type="hidden" value="${k_Email }" name="k_Email">
 							<input class="login100-form-btn mt-3" type="submit" value="기존 계정에 연동하기">
 						</form> 
 						<!-- 기존회원 연동 버튼 끝 -->

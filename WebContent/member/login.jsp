@@ -139,7 +139,13 @@
 						
 					</div>
 					<!-- 네이버 로그인 버튼 시작 -->
-						<div id="naverIdLogin" class="mt-3"></div>
+						<div id="naverIdLogin" class="mt-3" >
+						
+							<a id="naverIdLogin_loginButton" href="#">
+								<img src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.0" height="60" width="100%">
+							</a>
+						
+						</div>
 					<!-- 네이버 로그인 버튼 끝 -->
 					
 				</form>
@@ -235,7 +241,7 @@
 					callbackUrl: "http://localhost:8088/ShoppingMall/member/logincallback.jsp",
 					isPopup: false,
 					/* 팝업을 통한 연동처리 여부 */
-					loginButton: {color: "green", type: 3, height: 60}
+					//loginButton: {color: "green", type: 3, height: 60}
 					/* 로그인 버튼의 타입을 지정 */ 
 				}
 		);

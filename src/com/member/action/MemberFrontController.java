@@ -337,7 +337,27 @@ public class MemberFrontController extends HttpServlet{
 					}
 					
 				}
-				
+				else if(command.equals("/KloginConnected.me")){
+					
+					System.out.println("C : /KloginConnected.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/KloginConnected.jsp");
+					forward.setRedirect(false);	
+				}
+					else if(command.equals("/KConLoginAction.me")){
+					
+					System.out.println("C : /KConLoginAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					action = new KConLoginAction();
+					System.out.println("C : 네이버 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
 				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");

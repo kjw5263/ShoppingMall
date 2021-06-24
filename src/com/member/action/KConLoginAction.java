@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.member.db.MemberDAO;
 
-public class NConLoginAction implements Action {
+public class KConLoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -17,15 +17,15 @@ public class NConLoginAction implements Action {
 		// 전달정보 저장(id,pass)
 		String userId = request.getParameter("userId");
 		String userPass = request.getParameter("userPass");
-		String n_email = request.getParameter("n_email");
+		String k_email = request.getParameter("k_email");
 		
 		System.out.println(userId);
 		System.out.println(userPass);
-		System.out.println(n_email);
+		System.out.println(k_email);
 		
 		// DAO객체 생성 -> idCheck(id,pass)
 		MemberDAO mdao = new MemberDAO();
-		int check = mdao.ConNaver(userId, userPass, n_email);
+		int check = mdao.ConKakao(userId, userPass, k_email);
 
 		// 결과에 따른 페이지 이동
 		// 컨트롤러 X - 비밀번호,아이디없음 오류(javascript)
@@ -73,7 +73,7 @@ public class NConLoginAction implements Action {
 
 		out.close();
 	    //////
-	    
+		
 	    
 	    // 페이지 이동 (./Main.me)
 		ActionForward forward = new ActionForward();

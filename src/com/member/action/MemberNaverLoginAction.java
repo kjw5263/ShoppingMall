@@ -21,8 +21,7 @@ public class MemberNaverLoginAction implements Action{
 		
 		if (check.equals("")) { // 이메일 없음, 회원가입 권유
 			
-			// 페이지 이동 (./ConnectId.me)
-			
+			// 페이지 이동 (./NConnectId.me)
 			request.setAttribute("n_Email", n_Email);
 			
 			ActionForward forward = new ActionForward();

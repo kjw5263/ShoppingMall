@@ -25,24 +25,14 @@ public class MemberKaKaoLoginAction implements Action{
 			// => 컨트롤러에는 가지만 페이지이동 X
 			
 			if (check.equals("")) { // 이메일 없음, 회원가입 권유
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter out = response.getWriter();
-	
-				out.print("<script>");
-				out.print("var con_test = confirm('회원가입 하시겠습니까.'); ");
-				out.print(" history.back(); ");
-				out.print("if(con_test == true){");
-				out.print("alert('확인을 누르셨군요');");
-				out.print("}");
-				out.print("else if(con_test == false){");
-				out.print(" history.back(); ");
-				out.print("}");
-
-				out.print("</script>");
-	
 				
-				out.close();
-				return null;
+				// 페이지 이동 (./NConnectId.me)
+				request.setAttribute("k_Email", k_Email);
+				
+				ActionForward forward = new ActionForward();
+				forward.setPath("./member/KConnectId.jsp");
+				forward.setRedirect(false);
+				return forward;
 			}
 			
 			// 컨트롤러 O - 로그인성공
