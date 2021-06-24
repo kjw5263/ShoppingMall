@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Yoga Studio Template">
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 </head>
-</head>
+
 <body>
 
   <!-- header 시작 -->
@@ -42,7 +42,8 @@
    
   	listDAO gdao = new listDAO();
   	
-    List goodsList = gdao.getGoodsList("all");
+    List goodsList = (List)request.getAttribute("goodsList");
+    
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
     String http[][] = var.getHttp();
@@ -54,7 +55,7 @@
   <tr>
     <%for(int i = 0; i<http.length;i++){ %>
 	  <td>
-       	<a href=<%=goHead%> + <%=http[i][0] %>> <%=http[i][1] %> &nbsp;&nbsp; </a>
+       	<a href="<%=goHead%><%=http[i][0] %>"> <%=http[i][1] %> &nbsp;&nbsp; </a>
       </td>
       <%} %>
     </tr>
@@ -67,7 +68,7 @@
   <tr>
     <%for(int i = 0; i<cat.length;i++){ %>
 	  <td>
-       	<a href=<%=goHead%> + <%=cat[i][0] %>> <%=cat[i][1] %> &nbsp;&nbsp; </a>
+       	<a href="<%=goHead%><%=cat[i][0] %>"> <%=cat[i][1] %> &nbsp;&nbsp; </a>
       </td>
       <%} %>
     </tr>

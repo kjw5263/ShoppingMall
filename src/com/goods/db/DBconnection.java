@@ -37,6 +37,32 @@ public class DBconnection {
 		
 		
 	}
+	protected void delsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	protected void upsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
 	
 	protected ResultSet selsql(String sql ){
@@ -78,17 +104,7 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return rs;
 	}
 	

@@ -13,13 +13,13 @@ import java.util.List;
 import com.goods.db.GoodsDAO;
 import com.goods.db.listDAO;
 
-public class noticeWriteAction implements Action{
+public class noticeDeleteAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		System.out.println("M : noticeWriteAction_execute() 호출 ");
+		System.out.println("M : noticeDeleteAction_execute() 호출 ");
 
 		// 한글처리 
 		request.setCharacterEncoding("utf-8");
@@ -30,7 +30,7 @@ public class noticeWriteAction implements Action{
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
-		forward.setPath("./notice/noticewrite.jsp");
+		forward.setPath("./notice/noticedel.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

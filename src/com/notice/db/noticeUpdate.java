@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import com.var.list.varlist;
 
 
-public class noticeinsert extends DBconnection{
+public class noticeUpdate extends DBconnection{
 	varlist var = new varlist();
 	private String tablename = var.getnoticelistTablename();
 	
@@ -21,11 +21,11 @@ public class noticeinsert extends DBconnection{
 				rs = con.selsql(sql);
 				rs.next() ;
 				int num = rs.getInt(1)+1;
-				sql = "insert into "+ tablename + " values "
-						+ "(" + num +","+ noti.getNoticeTitle() +","
+				sql = "update "+ tablename + " set "
+						+ "(" + noti.getNoticeNum() +","+ noti.getNoticeTitle() +","
 						+ noti.getNoticeContent()
 						+","+noti.getNoticeFile() +","+
-						noti.getNoticeType() +")";
+						noti.getNoticeType() +" )";
 				con.insql(sql);
 
 

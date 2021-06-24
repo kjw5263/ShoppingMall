@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
+    <link rel="stylesheet" href="./goods/rating.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -72,12 +73,20 @@
 
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     GoodsDTO dto = (GoodsDTO) request.getAttribute("goods");
-    System.out.println("아아아아 >>>>> "+dto);
-//    ArrayList<GoodsReviewDTO> grdto = (GoodsReviewDTO) request.getAttribute("grdto");
-//    GoodsReviewDTO grdto = (GoodsReviewDTO) request.getAttribute("grdto");
-//    System.out.println("아아아아222 >>>>> " + grdto);
-//    GoodsReviewDAO grdao = new GoodsReviewDAO();
-//    int cnt = grdao.getReviewCount();
+
+    int rating=0;
+    int avg = 0;
+    if (reviewList.size() != 0){
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            rating += reviewList.get(i).getRating();
+        }
+        avg = rating/reviewList.size();
+    }
+
+    System.out.println(avg);
+
+
 
 %>
 <!-- Page Preloder -->
@@ -131,13 +140,13 @@
 <section class="product-page">
     <div class="container">
         <div class="product-control">
-            <a href="#">Previous</a>
-            <a href="#">Next</a>
+            <a href="GoodsDetail.cos?cosNum=<%=dto.getCosNum()-1%>">Previous</a>
+            <a href="GoodsDetail.cos?cosNum=<%=dto.getCosNum()+1 %>">Next</a>
         </div>
         <input type="hidden" name="cosNum" value="<%= dto.getCosNum()%>">
         <div class="row">
             <div class="col-lg-6">
-                <div class="product-slider owl-carousel">
+                <div>
                     <div class="product-img">
                         <figure>
                             <img src="" alt="">
@@ -154,27 +163,76 @@
 
             </div>
             <div class="col-lg-6">
-                <div class="product-content">
-                    <h2><%=dto.getCosName() %></h2>
+                <div class="product-content" style="padding: 0">
+                    <h2 style="margin-bottom: 20px"><%=dto.getCosName() %></h2>
+
                     <div class="pc-meta">
                         <h5><%= dto.getCosPrice()%>원</h5>
+
                         <div class="rating">
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-<%--                            <i class="fa fa-star"></i>--%>
-                            별 평점
+                            <%
+                                switch (avg){
+                                    case 5:
+                            %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+                            <%
+                                    break;
+                                case 4:
+                            %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+
+                            <%       break;
+                                case 3:
+                            %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+
+                            <%        break;
+                                case 2:
+                            %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+                            <%         break;
+                                case 1:
+                            %>
+                            <i class="fa fa-star"></i>
+
+
+                            <%
+                                        break;
+
+
+
+                            }%>
+                            리뷰(<%=reviewList.size()%>)
                         </div>
-                        <jsp:include page="goods_toggle.jsp"/>
+
+                       <br> <br>
+                        <div style="margin-left: 0px">
+                            <jsp:include page="goods_toggle.jsp"/>
+                        </div>
+
                     </div>
+
                     <ul class="tags">
                         <li><span>Category :</span> <%=dto.getCosCategory() %></li>
                         <li><span>Brand :</span> <%=dto.getCosBrand() %></li>
                     </ul>
                     <div class="product-quantity">
                         <div class="pro-qty">
-                            <input type="number" name="cosAmount" value="1"><br>
+                            <input type="number" name="cosAmount" value="1">
                         </div>
                     </div>
                     <a href="javascript:isBasket();" class="primary-btn pc-btn">장바구니</a>
@@ -187,23 +245,26 @@
 </section>
 </form>
 <!-- Product Page Section End -->
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
 
-
-<div style='width:1400px;margin:0;margin-top:100px;'>
+<div>
     <ul class="nav nav-tabs">
-        <li class='active'><a href="#tabmenu_01" data-toggle="tab">탭메뉴1</a></li>
-        <li><a href="#tabmenu_02" data-toggle="tab">탭메뉴2</a></li>
-        <li><a href="#tabmenu_03" data-toggle="tab">탭메뉴3</a></li>
+        <li class='active'><a href="#tabmenu_01" data-toggle="tab">상세이미지</a></li>
+        <li><a href="#tabmenu_02" data-toggle="tab">사용설명</a></li>
+        <li><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=reviewList.size() %>)</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade in active" id="tabmenu_01">
-            <p>
+            <p style="margin: 100px 0 200px 400px">
                 <img src="<%=dto.getCosImage() %>" alt="이미지...">
             </p>
         </div>
         <div class="tab-pane fade" id="tabmenu_02">
-            <p>
-            <table border="1">
+
+            <table border="1" style="margin: 100px 50px 200px 50px; height: 500px; text-align: center">
                 <tr>
                     <td>용량</td>
                     <td>
@@ -227,29 +288,99 @@
                     <td><%=dto.getCosWarning() %></td>
                 </tr>
             </table>
-            </p>
         </div>
         <div class="tab-pane fade" id="tabmenu_03">
 
             <h3>리뷰</h3>
-            <button onclick="location.href='/reviewForm.rev?cosNum=<%=dto.getCosNum() %>'" class="btn-primary">글등록</button>
-            <br>
-            평점 별 글 갯수 <br>
+            <div class="wrap_area_view" style="width: 80%; margin: 50px 50px 100px 150px;">
+             <div class="review_rating_area">
+                <div class="inner">
+                    <div class="grade_img">
 
-            <%
+                    </div>
+                    <div class="start_area">
+                        <p class="total">
+                            총
+                        <em><%=reviewList.size()%></em>
+                            건
+                        </p>
+                        <p class="num">
+                            <strong><%=avg%></strong>
+                            <span>점</span>
+                        </p>
+                        <div class="star_list">
+                            <div class="rating">
+                                <%
+                                    switch (avg){
+                                        case 5:
+                                %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
 
-                if (request.getAttribute("grdto")!=null){
+                                <%
+                                        break;
+                                    case 4:
+                                %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
 
-            %>
 
-            <%}%>
+                                <%       break;
+                                    case 3:
+                                %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+
+
+                                <%        break;
+                                    case 2:
+                                %>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+
+                                <%         break;
+                                    case 1:
+                                %>
+                                <i class="fa fa-star"></i>
+
+
+                                <%
+                                            break;
+
+                                    }
+                                %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="goods_name">
+                        <div class="name_list">
+                            <%= dto.getCosName()%>
+                        </div>
+
+                    </div>
+                    <div class="write_info">
+                        <dl>
+                            <dt>리뷰를 써보세요</dt>
+                        </dl>
+                        <p class="alignCenter">
+                            <button class="btn-primary" onclick="location.href='/reviewForm.rev?cosNum=<%=dto.getCosNum() %>'" >글등록</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
             <jsp:include page="/goods_board/review_list.jsp"/>
-
-
         </div>
     </div>
-</div>
-
 
 <!-- Related Product Section End -->
 

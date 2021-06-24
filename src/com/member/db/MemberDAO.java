@@ -9,7 +9,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
+//import org.apache.jasper.tagplugins.jstl.core.Out;
+
 
 import com.coupon.db.CouponDTO;
 
@@ -623,35 +624,35 @@ public class MemberDAO {
 		 * @return
 		 * 쿠폰 목록 가져오는 메소드
 		 */
-		public List getCoupon(String userId) {
-			List couponList = new ArrayList();
-
-			try {
-				conn = getConnection();
-				sql = "select * from coupon_type t join my_coupon m on m.mcCouponNum = t.couponNum where m.mcUserId=?";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, userId);
-				rs = pstmt.executeQuery();
-
-				while (rs.next()) {
-					CouponDTO dto = new CouponDTO();
-
-					dto.setMcAmount(rs.getInt("mcAmount"));
-					dto.setCouponDc(rs.getInt("couponDc"));
-					dto.setCouponName(rs.getString("couponName"));
-					dto.setCouponNote(rs.getString("couponNote"));
-
-					couponList.add(dto);
-				}
-				System.out.println("DAO : 쿠폰 정보 저장완료");
-				System.out.println(couponList);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			return couponList;
-		}
+//		public List getCoupon(String userId) {
+//			List couponList = new ArrayList();
+//
+//			try {
+//				conn = getConnection();
+//				sql = "select * from coupon_type t join my_coupon m on m.mcCouponNum = t.couponNum where m.mcUserId=?";
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, userId);
+//				rs = pstmt.executeQuery();
+//
+//				while (rs.next()) {
+//					CouponDTO dto = new CouponDTO();
+//
+//					dto.setMcAmount(rs.getInt("mcAmount"));
+//					dto.setCouponDc(rs.getInt("couponDc"));
+//					dto.setCouponName(rs.getString("couponName"));
+//					dto.setCouponNote(rs.getString("couponNote"));
+//
+//					couponList.add(dto);
+//				}
+//				System.out.println("DAO : 쿠폰 정보 저장완료");
+//				System.out.println(couponList);
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//			return couponList;
+//		}
 		// mycouponlist(userId);
 		
 		// NewPassCheck(String newPass) 시작

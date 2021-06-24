@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import com.var.list.varlist;
 
 
-public class noticeinsert extends DBconnection{
+public class noticeDelete extends DBconnection{
 	varlist var = new varlist();
 	private String tablename = var.getnoticelistTablename();
 	
@@ -17,19 +17,12 @@ public class noticeinsert extends DBconnection{
 		String sql = "";
 		
 			try {
-				sql = "select max(noticeNum) as num from "+ tablename;
-				rs = con.selsql(sql);
-				rs.next() ;
-				int num = rs.getInt(1)+1;
-				sql = "insert into "+ tablename + " values "
-						+ "(" + num +","+ noti.getNoticeTitle() +","
-						+ noti.getNoticeContent()
-						+","+noti.getNoticeFile() +","+
-						noti.getNoticeType() +")";
-				con.insql(sql);
+				sql = "delete from "+ tablename + " where noticeNum = "+noti.getNoticeNum();
+				con.delsql(sql);
+				
 
 
-				System.out.println("DAO : 공지 등록 완료");
+				System.out.println("DAO : 공지 삭제 완료");
 
 			} catch (Exception e) {
 				e.printStackTrace();
