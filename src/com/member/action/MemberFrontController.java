@@ -199,7 +199,7 @@ public class MemberFrontController extends HttpServlet{
 				else if(command.equals("/MemberUpdateInfopro.me")){
 					System.out.println("C : /MemberUpdateInfopro.me 호출");
 					
-					action = new MemberUpdateInfoproAction();
+//					action = new MemberUpdateInfoproAction();
 					
 					try {
 						forward = action.execute(request, response);
@@ -212,7 +212,7 @@ public class MemberFrontController extends HttpServlet{
 				else if(command.equals("/MemberUpdateInfopro2.me")){
 					System.out.println("C : /MemberUpdateInfopro2.me 호출");
 					
-					action = new MemberUpdateInfoproAction2();
+//					action = new MemberUpdateInfoproAction2();
 					
 					try {
 						forward = action.execute(request, response);
@@ -225,7 +225,7 @@ public class MemberFrontController extends HttpServlet{
 				else if(command.equals("/MemberUpdateInfopro3.me")){
 					System.out.println("C : /MemberUpdateInfopro3.me 호출");
 					
-					action = new MemberUpdateInfoproAction3();
+//					action = new MemberUpdateInfoproAction3();
 					
 					try {
 						forward = action.execute(request, response);
@@ -246,7 +246,7 @@ public class MemberFrontController extends HttpServlet{
 				}
 				else if(command.equals("/MemberDeleteAction.me")){
 					System.out.println("C : /MemberDeleteAction.me 호출");
-					action = new MemberDeleteAction();
+//					action = new MemberDeleteAction();
 					
 					try {
 						forward = action.execute(request, response);
@@ -257,7 +257,7 @@ public class MemberFrontController extends HttpServlet{
 				else if(command.equals("/MyCoupon.me")){
 					System.out.println("C : /MyCoupon.me 호출");
 					
-					action = new MycouponAction();
+//					action = new MycouponAction();
 					try {
 						forward = action.execute(request, response);
 					} catch (Exception e) {
