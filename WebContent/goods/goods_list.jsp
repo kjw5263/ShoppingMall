@@ -119,6 +119,8 @@
 	          		 
 	         	  	<a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><%=dto.getCosName() %></a><br>
 	           		<%=dto.getCosPrice() %>원  <br>
+	           		<button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos'">글수정</button>	
+
     		     </td>
     		  <%   		  
     		  num++;
