@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<context>
+<Context>
 	<Resource
 		name="jdbc/cosShopping"
 		auth="Container "
 		type="javax.sql.DataSource"
 		driverClassName="com.mysql.jdbc.Driver"
 		username="root"
-		password="root"
-		url="jdbc:mysql://localhost:3306/namesnew"
+		password="1234"
+		url="jdbc:mysql://localhost:3306/cosshopping"
 		maxWait="5000"
 	/>
-</context>
+</Context>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+	<Resource
+		name="jdbc/cosShopping"
+		auth="Container "
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.jdbc.Driver"
+		username="root"
+		password="1234"
+		url="jdbc:mysql://localhost:3306/cosshopping"
+		maxWait="5000"
+	/>
