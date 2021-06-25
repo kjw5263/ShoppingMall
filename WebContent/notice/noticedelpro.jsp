@@ -30,15 +30,18 @@
 </head>
 <body>
 
-  <!-- header 시작 -->
- 		<jsp:include page="../header/header.jsp" />
+	<%
+		int num = Integer.parseInt(request.getParameter("num"));
+		String pageNum = request.getParameter("pageNum");
+	%>
+	<!-- header 시작 -->
+	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
+	
+	<!-- footer 시작 -->
+	<jsp:include page="../footer/footer.jsp" />
+	<!-- footer 끝 -->
 
-
- <!-- footer 시작 -->
-   		<jsp:include page="../footer/footer.jsp" />
-    <!-- footer 끝 -->
-    
 
 </body>
 </html>

@@ -40,6 +40,17 @@ public class NoticeDAO extends DBconnection{
 		Dobbynoti.doit(noti);
 		
 	}
+	public int deleteCheckNotice(String id ){
+		noticeDeleteCheck Dobbynoti = new noticeDeleteCheck();
+		return Dobbynoti.doit(id);
+		
+	}
+	public noticeDTO getNoticeData(int num){
+		NoticeData  Dobbynoti = new NoticeData();
+		return Dobbynoti.doit(num);
+		
+		
+	}
 	
 	
 	
@@ -184,5 +195,6 @@ public class NoticeDAO extends DBconnection{
 		
 		
 	}
+	
 	
 }

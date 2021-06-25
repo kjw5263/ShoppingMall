@@ -7,6 +7,7 @@ public class varlist {
 	private String GoodslistTablename =  "cos_list";
 	private String noticelistTablename =  "notice_board";
 	private String noticecontentListSt = "noticeContent?noticeNum=";
+	private String MemberInfoTablename = "user_info";
 	private String http[][] = new String[][]
     		{{"" ," 전체"},
     	{"?item=best","베스트상품"},
@@ -57,6 +58,14 @@ public class varlist {
 	}
 	public String getnoticecontentListSt(){
 		return noticecontentListSt;
+	}
+
+	public String getMemberInfoTablename() {
+		return MemberInfoTablename;
+	}
+
+	public void setMemberInfoTablename(String memberInfoTablename) {
+		MemberInfoTablename = memberInfoTablename;
 	}
 	
 	
