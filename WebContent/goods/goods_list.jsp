@@ -64,9 +64,9 @@
   <br>
    <table  >
   <tr>
-    <%for(int i = 0; i<http.length;i++){ %>
+    <%for(int i = 0; i<skin.length;i++){ %>
 	  <td>
-       	<a href="<%=goHead%><%=skin[i][0] %>"> <%=http[i][1] %> &nbsp;&nbsp; </a>
+       	<a href="<%=goHead%><%=skin[i][0] %>"> <%=skin[i][1] %> &nbsp;&nbsp; </a>
       </td>
       <%} %>
     </tr>

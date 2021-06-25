@@ -37,9 +37,9 @@ public class varlist {
 	   		
 	private String skin[][] = new String[][]
     		{{"" ," 전체"},
-    	{"?item=wet","지성"},
-    	{"?item=mid","중성"},
-    	{"?item=trd","건성"}
+    	{"?skin=wet","지성"},
+    	{"?skin=mid","중성"},
+    	{"?skin=trd","건성"}
     	};
     	
 	
