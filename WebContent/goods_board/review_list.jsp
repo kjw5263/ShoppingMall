@@ -15,15 +15,21 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="./goods_board/style/reviewList.css">
 </head>
     <%
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+//    GoodsReviewDTO grdto = new GoodsReviewDTO();
     int listCount = pageInfo.getListCount();
     int nowPage = pageInfo.getPage();
     int maxPage = pageInfo.getMaxPage();
     int startPage = pageInfo.getStartPage();
     int endPage = pageInfo.getEndPage();
+
+        System.out.println("현제 페이지:"+nowPage);
+        System.out.println("갯수" +listCount);
+
     %>
 <body>
 
@@ -36,17 +42,96 @@
     for(int i=0;i<reviewList.size();i++){
 
 %>
-<table border="1">
-    <tr>
-        <td rowspan="2"><%=reviewList.get(i).getUserid() %></td>
-        <td>아이디</td>
-    </tr>
-    <tr>
-        <td><%=reviewList.get(i).getReviewContent() %></td>
-        <td></td>
-    </tr>
-</table>
-<br>
+
+    <div class="review_list_wrap">
+        <div class="info_test">
+            <div class="user_fix">
+                <div class="thum">
+                    <span class="bg">
+                    <img src="./goods_board/style/img/user.png" alt="...">
+                    </span>
+                </div>
+                <p class="info_user">
+                    <%=reviewList.get(i).getUserid() %>
+                </p>
+            </div>
+        </div>
+        <div class="review_cont">
+            <div class="score_area">
+                <span class="review_point">
+                    <span class="point">
+                         <%
+                             switch (reviewList.get(i).getRating()){
+                                 case 5:
+                         %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+                            <%
+                                    break;
+                                case 4:
+                            %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+
+                            <%       break;
+                                case 3:
+                            %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+
+                            <%        break;
+                                case 2:
+                            %>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+
+                            <%         break;
+                                case 1:
+                            %>
+                            <i class="fa fa-star"></i>
+
+
+                            <%
+                                        break;
+
+
+
+                                }%>
+
+                    </span>
+                </span>
+                <span class="date">
+                        202020
+                    </span>
+
+            </div>
+            <div class="poll_sample"></div>
+            <div class="tet_inner">
+                <span><%=reviewList.get(i).getReviewContent() %></span>
+            </div>
+            <div class="review_thum_type1"></div>
+            <div class="recom_area">
+
+                <button type="button" class="btn_recom">
+                    이 리뷰가 도움이 돼요!
+                <span class="num1">
+
+                </span>
+            </button>
+            </div>
+        </div>
+    </div>
+
+
 
 <%--    <td><%=reviewList.get(i).getBOAR %></td>--%>
 <%--    <td><%=reviewList.get(i).getBOARD_READCOUNT() %></td>--%>
@@ -54,7 +139,7 @@
 <%} %>
 
 
-    </section>
+
 
     <section id="pageList">
         <%if(nowPage<=1){ %>
@@ -67,7 +152,7 @@
             if(a==nowPage){%>
         [<%=a %>]
         <%}else{ %>
-        <a href="reviewList.rev?cosNum=2&page=<%=a %>">[<%=a %>]
+        <a href="reviewList.rev?cosNum=1&page=<%=a %>">[<%=a %>]
         </a>&nbsp;
         <%} %>
         <%} %>
@@ -75,7 +160,7 @@
         <%if(nowPage>=maxPage){ %>
         [다음]
         <%}else{ %>
-        <a href="reviewList.rev?page=<%=nowPage+1 %>">[다음]</a>
+        <a href="GoodsDetail.cos?cosNum=1&page=<%=nowPage+1 %>">[다음]</a>
         <%} %>
     </section>
         <%
