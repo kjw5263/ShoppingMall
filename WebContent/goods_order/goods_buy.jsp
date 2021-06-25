@@ -100,6 +100,14 @@ $(document).ready(function () {
 			$('#userPoint').val(0);
 		}
 	});
+	
+
+	$('#userPoint').blur(function() {
+		$('#usepoint').text(($('#userPoint').val())*-1);
+		$('#ttmoney').text(Number($('#ttmoney').text())-Number($('#userPoint').val()));
+	});
+	
+	
 });
 
 
@@ -255,12 +263,17 @@ $(document).ready(function () {
 			<tr>
 				<th scope="row" class="table-active" style="width:150px;">쿠폰</th>
 				<td>
-					<select class="form-control" name="o_msg">
+					<select class="form-control" name="selectCoupon">
 						<option value="">쿠폰선택 안함</option>
 						<c:forEach var="i" items="${couponList }">
-						<option value="">${i.couponName }</option>
+						<option value="${i.couponName }">${i.couponName }</option>
 						</c:forEach>
 					</select>
+					<script type="text/javascript">
+						for(var i=0; i<couponList.size(); i++){
+							
+						}
+					</script>
 				</td>
 			</tr>
 			<tr>
@@ -281,23 +294,23 @@ $(document).ready(function () {
 		<table class="table table-bordered">
 			<tr>
 				<th scope="row" style="width:200px;">총 상품금액</th>
-				<td style="width:200px;"><%=fmMoney.format(sumMoney) %>원</td>
+				<td style="width:200px;"><span><%=fmMoney.format(sumMoney) %></span>원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;" >쿠폰 할인금액</th>
-				<td style="width:200px;"><span>0</span></td>
+				<td style="width:200px;"><span>0</span>원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;" >포인트</th>
-				<td style="width:200px;"><span>0</span></td>
+				<td style="width:200px;"><span id="usepoint">0</span>원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;" >적립예정 포인트</th>
-				<td style="width:200px;"><span>0</span></td>
+				<td style="width:200px;"><span><%=fmMoney.format(sumMoney*1/100) %></span>원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;" ><strong>최종금액</strong></th>
-				<td style="width:200px;"><strong><%=fmMoney.format(sumMoney) %>원</strong></td>
+				<td style="width:200px;"><span id="ttmoney"><strong><%=sumMoney%></strong></span>원</td>
 			</tr>
 			<tr>
 				<td scope="row" colspan="2"><input type="submit" value="결제하기" onclick="" class="btn btn-secondary btn-lg"></td>
