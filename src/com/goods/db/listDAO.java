@@ -97,7 +97,7 @@ public class listDAO extends DBconnection{
 	}
 
 	// getGoodsList(item)
-	public List getGoodsList(String item , String cat) {
+	public List getGoodsList(String item , String cat ,String skin) {
 
 		// item에 따라서 다른 결과를 처리
 		// item - all/best/그외 카테고리
@@ -116,7 +116,12 @@ public class listDAO extends DBconnection{
 					}else if(!item.equals("all")){
 						sql = "select * from "+tablename + 
 								" where cosCategory = '" + item+"'";
-					}else{
+						
+					}else if(!skin.equals("all")){
+						sql = "select * from "+tablename + 
+								" where cosSkinType = '" + skin+"'";
+					}
+					else{
 						sql = "select * from "+tablename;
 					}
 			}

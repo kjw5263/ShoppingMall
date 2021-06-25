@@ -33,7 +33,12 @@
 
 
 
-
+ <script type="text/javascript">
+   
+   location.href = "http://localhost:8088/ShoppingMall/notice.nos";
+   </script>
+   
+   
 
 
 

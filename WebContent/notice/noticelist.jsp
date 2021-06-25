@@ -10,8 +10,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,6 +68,7 @@
 		int a = (Integer.parseInt(pageNum)-1)*pageSize;
 	
 		int b = pageSize; 
+		System.out.println("직전위치");
 		List topnoticeList = noti.getTopNoticeList();
 		List noticeList = noti.getNoticeList(a, b);
 		
@@ -78,10 +78,11 @@
 		게시판 글목록 [총 :
 		<%=cnt%>개]
 	</h2>
+	<button onclick="location.href='http://localhost:8088/ShoppingMall/noticewrite.nos'">글쓰기</button>
 	
 	<table border="1">
 		<tr>
-			<td>번호</td>
+			<td> </td>
 			<td>제목</td>
 			
 
@@ -96,7 +97,7 @@
 				
 		%>
 		<tr>
-			<td><%=notid.getNoticeNum()%></td>
+			<td>공지</td>
 			<td>
 			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
 					<%=notid.getNoticeTitle()%></a>
@@ -118,7 +119,7 @@
 				
 		%>
 		<tr>
-			<td><%=notid.getNoticeNum()%></td>
+			<td>이벤트</td>
 			<td>
 			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
 					<%=notid.getNoticeTitle()%></a>
@@ -161,14 +162,14 @@
     	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
     	if(startPage >= pageBlock){
     		%>
-	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a>
+	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage-pageBlock%>">[이전]</a>
 	<%
     	}   	
     	
     	// 숫자  1....5
     	for(int i=startPage;i<=endPage;i++){
     		%>
-	<a href="list.jsp?pageNum=<%=i%>">[<%=i %>]
+	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=i%>">[<%=i %>]
 	</a>
 	<%    		
     	}
@@ -176,7 +177,7 @@
     	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
     	if(endPage < pageCount){
     		%>
-	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a>
+	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage+pageBlock%>">[다음]</a>
 	<%
     	}
     }

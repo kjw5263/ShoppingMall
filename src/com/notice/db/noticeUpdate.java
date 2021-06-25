@@ -25,7 +25,7 @@ public class noticeUpdate extends DBconnection{
 						+ "(" + noti.getNoticeNum() +","+ noti.getNoticeTitle() +","
 						+ noti.getNoticeContent()
 						+","+noti.getNoticeFile() +","+
-						noti.getNoticeType() +" )";
+						noti.getNoticeType() +","+noti.getNoticeRealFileName() +" )";
 				con.insql(sql);
 
 

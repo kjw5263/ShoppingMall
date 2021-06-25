@@ -22,6 +22,7 @@ public class GoodsListAction implements Action{
 		// item=best
 		String item = request.getParameter("item");
 		String cat = request.getParameter("cat");
+		String skin = request.getParameter("skin");
 		varlist var = new varlist();
 		if(item == null){
 			item = "all";
@@ -46,10 +47,18 @@ public class GoodsListAction implements Action{
 			
 			if(cat.equals(var.getCat()[i][0].split("=",2)[1])){
 				cat = var.getCat()[i][1];
-			}
-		
-			
+			}	
 		}
+		if(skin == null){
+			skin = "all";
+		}
+		for (int i = 1; i<var.getSkin().length;i++){
+			
+			if(skin.equals(var.getSkin()[i][0].split("=",2)[1])){
+				skin = var.getSkin()[i][1];
+			}	
+		}
+		
 		
 		System.out.print("dao 호출");
 		// 디비 처리 객체 GoodsDAO 생성
@@ -61,7 +70,7 @@ public class GoodsListAction implements Action{
 		// 정보 저장 -> 영역 저장
 //		 request.setAttribute("goodsList", gdao.getGoodsList());
 		
-		request.setAttribute("goodsList", gdao.getGoodsList(item, cat));
+		request.setAttribute("goodsList", gdao.getGoodsList(item, cat ,skin));
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();

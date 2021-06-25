@@ -76,7 +76,7 @@ public class NoticeDAO extends DBconnection{
 
 			} // while
 
-			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+			System.out.println("DAO : 돌아가면 안되는 거 돌아감");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,9 +92,10 @@ public class NoticeDAO extends DBconnection{
 		List notiList = new ArrayList();
 		try {
 			
-			 sql= "select * from"+tablename
-						+ "order by noticeNum desc limit " + startRow +" , "+ pageSize;		
+			 sql= "select * from "+tablename
+						+ " where noticeType = 0 order by noticeNum desc limit " + startRow +" , "+ pageSize;		
 			
+			 System.out.println("minsql = "+ sql);
 			rs = con.selsql(sql);
 			
 
@@ -111,7 +112,7 @@ public class NoticeDAO extends DBconnection{
 
 			} // while
 
-			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+			System.out.println("DAO : 일반 공지 등록");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,9 +130,10 @@ public class NoticeDAO extends DBconnection{
 			
 			
 			sql = "select * from "+tablename +" where noticeType = 1 ";
+			System.out.println("bigsql = "+ sql);
 			rs = con.selsql(sql);
 			
-
+			
 			while (rs.next()) {
 				
 				noticeDTO noti = new noticeDTO();
@@ -145,7 +147,7 @@ public class NoticeDAO extends DBconnection{
 
 			} // while
 
-			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+			System.out.println("DAO : 중요 공지 등록");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

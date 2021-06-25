@@ -48,7 +48,7 @@
     varlist var = new varlist();
     String http[][] = var.getHttp();
 	String cat[][] = var.getCat();	
-    
+    String skin[][] = var.getSkin(); // 스킨타입
     
   %>
   <table  >
@@ -62,6 +62,16 @@
   
   </table>
   <br>
+   <table  >
+  <tr>
+    <%for(int i = 0; i<http.length;i++){ %>
+	  <td>
+       	<a href="<%=goHead%><%=skin[i][0] %>"> <%=http[i][1] %> &nbsp;&nbsp; </a>
+      </td>
+      <%} %>
+    </tr>
+  
+  </table>
   <br>
   
   <table  >

@@ -1,5 +1,5 @@
-<%@page import="com.notice.db.NoticeDAO"%>
 <%@page import="com.notice.db.noticeDTO"%>
+<%@page import="com.notice.db.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,42 +35,72 @@
   <!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
-	<%
-		int num = Integer.parseInt(request.getParameter("num"));
-		String pageNum = request.getParameter("pageNum");
 
-		// DB에서 글번호에 해당하는 정보를 가져와서 출력
 
-		// DAO 객체 생성
+<%
+		// 페이지 이동시 전달정보가 있으면(파라미터) 항상 가장먼저 저장
+		// num,pageNum
+		
+	    String pageNum = request.getParameter("pageNum");
+		
+	    // BoardDAO 객체 생성
+	    
+	    noticeDTO notit = (noticeDTO)request.getAttribute("noti");
+		// DB에서 글번호(num)에 해당하 글정보를 모두 가져와서 출력
+		
+		String type;
+		if(notit.getNoticeType()==1){
+			type = "공지";
+		}else{
+			type = "이벤트";
+		}
+		
+	%> 
 
-		// 글번호에 해당하는 정보를 가져오는 메서드 
-		noticeDTO notit = new noticeDTO();
-		NoticeDAO noti = new NoticeDAO();
-		notit = noti.getNoticeData(num);
-		//bdao.getBoard(num).getNum(); (x)
-	%>
+<table>
+<tr>
+<td><%=type %>
+</td>
+<td><%=notit.getNoticeTitle() %></td>
+</tr>
+</table>
 
-	<!-- Db에 처리해야하는 데이터 폼태그 안에 저장(hidden)
-            "  안하는 경우  주소줄에 저장(url)
-   -->
-  <fieldset>
-    <form action="noticeuppro.jsp?pageNum=<%=pageNum %>" method="post">
-     <input type="hidden" name="index" value="<%=notit.getNoticeNum()%>">
-          
-          
-          제목 : <input type="text" name="title" value="<%=notit.getNoticeTitle() %>"><br>
-          내용 : <textarea rows="10" cols="30" name="context"><%=notit.getNoticeContent() %></textarea>
-     
-          
-      <input type="submit" value="글 수정 하기">
-    </form>
-  </fieldset>
-  
+<br>
+ <tr>
+        <td><b>첨부파일</b> :</td>
+        
+        
+        <%
+        if (notit.getNoticeFile() == null){
+        	%>
+        	첨부파일 없음
+        	<%
+        	
+        }else{
+        %><a href="./notice/filedown.jsp?filename=<%=notit.getNoticeFile()%>"><%=notit.getNoticeRealFileName() %></a> <%
+        }
+        
+        %>
+         
+         </td>
+      </tr>
+<br>
+<br>
 
- <!-- footer 시작 -->
+
+<table>
+<tr>
+<td><%=notit.getNoticeContent() %></td>
+
+</tr>
+</table>
+<button onclick="location.href='http://localhost:8088/ShoppingMall/noticedel.nos'">글삭제</button>
+<button onclick="location.href='http://localhost:8088/ShoppingMall/noticeup.nos'">글수정</button>	
+<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
     
+
 
 </body>
 </html>
