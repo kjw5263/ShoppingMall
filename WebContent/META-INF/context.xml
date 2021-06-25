@@ -7,8 +7,8 @@
 		type="javax.sql.DataSource"
 		driverClassName="com.mysql.jdbc.Driver"
 		username="root"
-		password="1234"
-		url="jdbc:mysql://localhost:3306/cosshopping"
+		password="root"
+		url="jdbc:mysql://localhost:3306/namesnew"
 		maxWait="5000"
 	/>
 </context>
