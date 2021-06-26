@@ -1,3 +1,5 @@
+<%@page import="com.faq.db.FaqDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -61,6 +63,11 @@
 
 </head>
 <body>
+  <%
+    // request.setAttribute("goodsList", gdao.getGoodsList());
+    List faqList = (List)request.getAttribute("faqList");
+  %>
+
 
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
@@ -69,34 +76,125 @@
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
+	
+	
+	<!-- 제목 시작 -->
+	  <div class="col-md-12 text-center p-5 row">
+	  
+		  <div class="col-2"></div>
+			<div class="col-2">
+		   		<a href="./FaqList.faq" style="text-decoration-line: none; color: black;"> <h3>고객 센터</h3> </a>
+			</div>
+		  <div class="col-8"></div>
+		
+	  </div>
+	<!-- 제목 끝 --> 	
+				
+	<!-- 글쓰기 버튼 시작 -->			
 		<div class="row">
-			<div class="col-6 text-center" style="background-color: #2EFEC8;">
-				ㅇㅇ
+			<div class="col-9"></div>
+			<div class="col-3">
+			<button type="button" class="btn btn-secondary" onclick="location.href='./FaqWrite.faq'">글쓰기</button>
 			</div>
-			<div class="col-6" style="background-color: #610B5E;">	
-				ㅇㅇ
+		</div>
+	<!-- 글쓰기 버튼 시작 -->
+		
+	
+		<div class="row">
+			<div class="col-2 text-center"></div>
+			<div class="col-8">	
+				
+				
+				
+				
+				
+				
+				<!-- 테이블 카테고리 시작 -->
+				<table class="table mb-0 mt-5">
+				  <thead class="table table-bordered text-center">
+				  	<tr>
+				      <th scope="col"><a href="./FaqList.faq">전체</a></th>
+				      <th scope="col"><a href="./FaqList.faq?category=회원관련">회원관련</a></th>
+				      <th scope="col"><a href="./FaqList.faq?category=주문결제">주문결제</a></th>
+				      <th scope="col"><a href="./FaqList.faq?category=포인트">포인트</a></th>
+				      <th scope="col"><a href="./FaqList.faq?category=환불">환불</a></th>
+				      <th scope="col"><a href="./FaqList.faq?category=배송안내">배송안내</a></th>
+				      <th scope="col"><a href="./FaqList.faq?category=상품관련">상품관련</a></th>
+				      <th scope="col"><a href="./FaqList.faq?category=기타">기타</a></th>
+				    </tr>
+				  </thead>
+				</table>
+				<!-- 테이블 카테고리 끝 -->
+				
+				<!-- faq 테이블 시작 -->
+				<table class="table">
+				  <tbody>
+				  	<tr>
+				      <th class="text-center">번호</th>
+				      <th class="text-center">내용</th>
+				    </tr>
+				    
+				    <%for(int i = 0; i < faqList.size(); i++){ 
+						FaqDTO fdto = (FaqDTO)faqList.get(i);
+					%>
+				    <tr id="<%=fdto.getFaqNum()%>">
+				      <th class="text-center"><%=fdto.getFaqNum() %></th>
+				      <td class="text-center" style='cursor:pointer;'>
+				      	<%=fdto.getFaqQuestion() %><br><br>
+				       	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqWrite.faq'">수정</button> /
+				       	<button type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqWrite.faq'">삭제</button>
+				       </td>
+				    </tr>
+				    
+				    <tr style="display: none;" id="<%=fdto.getFaqNum()%>_answer">
+					  <th class="text-center">답변</th>
+					  <td class="text-center"><b><%=fdto.getFaqAnswer() %></b></td>
+				    </tr>
+				    <%} %>
+				    
+				  </tbody>
+				</table>
+				<!-- faq 테이블 끝 -->
 			</div>
+			
+			
+			
+			<div class="col-2">	</div>
+			
+			
 		</div>
 		
-		<div class="row">
-			<div class="col-6" style="background-color: #0B3B17;">
-				ㅎㅎ
-			</div>
-			<div class="col-6" style="background-color: #D8F781;">	
-				ㅎㅎ
-			</div>
-		</div>
-	
 	</div>
 	<!-- container 끝 -->	
-	
-	
-	
 	
 	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
+    
+    <!-- 스크립스 시작 -->
+    <script type="text/javascript">
+	// 제이쿼리 시작    
+    $(function() {
+    	// 질문 클릭시 답변 보이기 시작
+    	$('tr').click(function() {
+    		// alert('클릭됐습니다.');
+    		
+			var fnum = $(this).attr('id');
+			
+			// alert(fnum);
+			
+			
+			var con = document.getElementById(fnum + "_answer");
+			con.style.display = (con.style.display != 'none') ? "none" : "";
+			
+			//alert(fnum);
+
+    	});
+    	// 질문 클릭시 답변 보이기 끝
+    });
+ 	// 제이쿼리 끝
+    </script>
 	
 </body>
 </html>

@@ -108,9 +108,7 @@
 					<div class="wrap-input100 validate-input m-b-16 mt-3" data-validate = "인증번호를 입력해주세요">
 						<input class="input100" type="text" id="checkNum" name="checkNum" placeholder="인증번호" >
 						
-						<button type="button" class="btn btn-primary" id="confirm">
-						  확인
-						</button>
+						<button type="button" class="btn btn-primary" id="confirm">확인</button>
 						<span class="focus-input100"></span>
 						
 					</div>

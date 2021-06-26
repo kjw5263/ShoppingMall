@@ -70,28 +70,63 @@
 	<div class="container-fluid">	
 	
 		<div class="row">
-			<div class="col-6 text-center" style="background-color: #2EFEC8;">
-				ㅇㅇ
+			<div class="col-2 text-center"></div>
+			
+			
+			<div class="col-8">
+			
+			<!-- 제목 시작 -->
+			  <div class="col-md-12 text-center p-5 row">
+				<div class="col-2"></div>
+				<div class="col-4">
+			   		<h3>고객 센터 - 글쓰기</h3>
+				</div>
+				<div class="col-6"></div>
+			  </div>
+			<!-- 제목 끝 --> 
+			
+			<!-- 카테고리 시작 -->
+			<div class="row">
+				<select class="form-select" aria-label="Default select example">
+				  <option selected>카테고리</option>
+				  <option value="1">One</option>
+				  <option value="2">Two</option>
+				  <option value="3">Three</option>
+				</select>
 			</div>
-			<div class="col-6" style="background-color: #610B5E;">	
-				ㅇㅇ
+			<!-- 카테고리 끝 -->
+			
+			<!-- 제목 인풋 시작 -->
+			<div class="input-group input-group-lg mt-3 mb-3">
+			  <input type="text" class="form-control" placeholder="제목을 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 			</div>
+			<!-- 제목 인풋 시작 -->
+			
+			<hr>
+				
+			<!-- 내용 인풋 시작 -->	
+			<div class="form-floating mb-5">
+			  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 500px"></textarea>
+			</div>	
+			<!-- 내용 인풋 끝 -->	
+			
+			
+				<button type="button" class="btn btn-primary mb-3">Primary</button>
+			
+			
+			</div>
+			
+			
+			
+			
+			
+			<div class="col-2">	
+			</div>			
 		</div>
 		
-		<div class="row">
-			<div class="col-6" style="background-color: #0B3B17;">
-				ㅎㅎ
-			</div>
-			<div class="col-6" style="background-color: #D8F781;">	
-				ㅎㅎ
-			</div>
-		</div>
-	
+		
 	</div>
 	<!-- container 끝 -->	
-	
-	
-	
 	
 	
 	<!-- footer 시작 -->

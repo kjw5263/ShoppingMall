@@ -18,13 +18,13 @@ public class findPwCerAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		
 		String userId = request.getParameter("userId");
-		System.out.println("전달된 userId 값 : " + userId);
+		// System.out.println("전달된 userId 값 : " + userId);
 
 		String userEmail = request.getParameter("userEmail");
-		System.out.println("전달된 userEmail 값 : " + userEmail);
+		// System.out.println("전달된 userEmail 값 : " + userEmail);
 		
 		String userTel = request.getParameter("userTel");
-		System.out.println("전달된 userTel 값 : " + userTel);
+		// System.out.println("전달된 userTel 값 : " + userTel);
 		
 		MemberDAO mdao = new MemberDAO();
 		int check = mdao.findPwCerAction(userId, userEmail, userTel);		
@@ -58,14 +58,12 @@ public class findPwCerAction implements Action {
 		rm = RandNum.rand();
 
 		// 세션에 해당 아이디 저장
-		// session.setAttribute("PwCheckId", userId);
+		session.setAttribute("PwCheckId", userId);
 		
-		// 디비에 인증번호 저장 -> 세션으로 변경하기
-		// mdao.CheckPw(userId, rm);
+		// 인증번호 세션에 저장
 		session.setAttribute("rm", rm);
 	
-		
-		//
+		// 입력된 전화번호로 인증번호 전송
 		ms.call(userTel, rm);
 		
 		

@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -30,7 +34,7 @@ public class FaqDAO {
 			Context initCTX = new InitialContext();	 //얘는 인터페이스(부모)!인데 객체 생성(자식)-> 업캐스팅(상속)
 			
 			// DB 연동 정보를 불러오기 (context.xml)
-			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosshopping");	// 다운캐스팅
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/cosShopping");	// 다운캐스팅
 			
 			conn = ds.getConnection();
 			
@@ -59,4 +63,87 @@ public class FaqDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	// getFaqList()
+	public List getFaqList() {
+		List faqList = new ArrayList();
+		try {
+			conn = getConnection();
+			sql = "select * from faq_board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				FaqDTO dto = new FaqDTO();
+				dto.setFaqNum(rs.getInt("faqNum"));
+				dto.setFaqCategory(rs.getString("faqCategory"));
+				dto.setFaqQuestion(rs.getString("faqQuestion"));
+				dto.setFaqAnswer(rs.getString("faqAnswer"));
+
+				// 리스트 한칸에 faq 1개를 저장
+				faqList.add(dto);
+
+			} // while
+
+			System.out.println("DAO : faqList 리스트 저장 완료");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+
+		return faqList;
+	}
+	// getFaqList()
+	
+	// getFaqList(category)
+		public List getFaqList(String category) {
+			// item에 따라서 다른 결과를 처리
+			// item - all/best/그외 카테고리
+			List faqList = new ArrayList();
+
+			try {
+				conn = getConnection();
+				
+
+				if (category.equals("all")) {
+					
+					sql = "select * from faq_board";
+					pstmt = conn.prepareStatement(sql);
+
+					
+				} else {
+					
+					sql = "select * from faq_board where faqCategory=?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, category);
+
+				}
+				
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					FaqDTO dto = new FaqDTO();
+					dto.setFaqNum(rs.getInt("faqNum"));
+					dto.setFaqCategory(rs.getString("faqCategory"));
+					dto.setFaqQuestion(rs.getString("faqQuestion"));
+					dto.setFaqAnswer(rs.getString("faqAnswer"));
+
+					// 리스트 한칸에 faq 1개를 저장
+					faqList.add(dto);
+				} // while
+
+				System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+
+			return faqList;
+		}
+		// getGoodsList(item)
+	
 }

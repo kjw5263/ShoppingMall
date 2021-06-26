@@ -4,12 +4,16 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.faq.action.FaqListAction;
+import com.faq.action.ActionForward;
 
-// @WebServlet('')
+
+@WebServlet("*.faq")
 public class FaqFrontController extends HttpServlet{
 
 	
@@ -27,6 +31,7 @@ public class FaqFrontController extends HttpServlet{
 		
 		// (3) 필요한 가상주소 생성
 		String command = requestURI.substring(ContextPath.length());
+		
 		System.out.println("command : " + command);
 		System.out.println("C : 1.페이지 주소 파싱");
 		
@@ -39,6 +44,29 @@ public class FaqFrontController extends HttpServlet{
 		// 같은 패키지 안에 있는 Action을 호출 해주어야함!
 		Action action = null;
 		ActionForward forward = null;
+		
+		if (command.equals("/FaqList.faq")) {
+
+			System.out.println("2 : /FaqList.faq 주소 호출");
+
+			action = new FaqListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else if(command.equals("/FaqWrite.faq")) {
+
+			System.out.println("2 : /FaqWrite.faq 주소 호출");
+
+			forward = new ActionForward();
+			forward.setPath("./faq_board/faqWrite.jsp");
+			forward.setRedirect(false);
+			
+		}
 		
 		
 		
