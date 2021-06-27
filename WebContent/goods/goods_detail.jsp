@@ -73,20 +73,10 @@
 
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     GoodsDTO dto = (GoodsDTO) request.getAttribute("goods");
-
-    int rating=0;
-    int avg = 0;
-    if (reviewList.size() != 0){
-
-        for (int i = 0; i < reviewList.size(); i++) {
-            rating += reviewList.get(i).getRating();
-        }
-        avg = rating/reviewList.size();
-    }
-
-    System.out.println(avg);
-
-
+    PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
+    GoodsReviewDAO grdao = new GoodsReviewDAO();
+    int cnt = pageInfo.getListCount();
+    int avg = grdao.getRating(dto.getCosNum());
 
 %>
 <!-- Page Preloder -->
@@ -123,8 +113,8 @@
                 <div class="page-breadcrumb">
                     <%-- <h2><%=dto.getCosCategory() %><span>.</span></h2> --%>
                     <a href="#">홈</a>
-                    <a href="#">??</a>
-                    <a class="active" href="#">??</a>
+                    <a href="#"><%= dto.getCosBrand()%></a>
+                    <a class="active" href="#"><%=dto.getCosCategory() %></a>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -216,11 +206,12 @@
 
 
                             }%>
-                            리뷰(<%=reviewList.size()%>)
+                            리뷰(<%=cnt%>)
                         </div>
 
                        <br> <br>
                         <div style="margin-left: 0px">
+                            <div></div>
                             <jsp:include page="goods_toggle.jsp"/>
                         </div>
 
@@ -254,7 +245,7 @@
     <ul class="nav nav-tabs">
         <li class='active'><a href="#tabmenu_01" data-toggle="tab">상세이미지</a></li>
         <li><a href="#tabmenu_02" data-toggle="tab">사용설명</a></li>
-        <li><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=reviewList.size() %>)</a></li>
+        <li><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=cnt %>)</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade in active" id="tabmenu_01">
@@ -296,12 +287,37 @@
              <div class="review_rating_area">
                 <div class="inner">
                     <div class="grade_img">
+                        <div class="img_face" style="margin-top: 50px; margin-left: 20px;">
+                        <%
+                            switch (avg){
+                                case 5:
+                                case 4:
+                        %>
+                        <img src="./goods_board/style/img/good.png" alt="..">
 
+                        <%       break;
+                            case 3:
+                        %>
+                        <img src="./goods_board/style/img/notbad.png" alt="..">
+
+                        <%        break;
+                            case 2:
+                            case 1:
+                        %>
+
+                        <img src="./goods_board/style/img/sad.png" alt="..">
+
+                        <%
+                                    break;
+
+                            }
+                        %>
+                        </div>
                     </div>
                     <div class="start_area">
                         <p class="total">
                             총
-                        <em><%=reviewList.size()%></em>
+                        <em><%=cnt%></em>
                             건
                         </p>
                         <p class="num">

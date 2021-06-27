@@ -29,6 +29,7 @@
     width: 60px;
     height: 60px;
 }
+
 .thum img {
     border-radius: 30px;
     width: 60px;
@@ -104,8 +105,27 @@ p {
 }
 .review_thum_type1 {
     margin-bottom: 15px;
-
 }
+.inner_clrfix {
+    margin-left: -5px;
+    width: calc(100% + 5px);
+    display: flex;
+    height: 165px;
+}
+review_thum_type1 ul.inner_clrfix li {
+    width: 165px;
+    height: 165px;
+    overflow: hidden;
+    margin: 0 5px;
+}
+.img_size11 {
+    display: block;
+    position: relative;
+    width: 165px;
+    height: 165px;
+    max-width: 50%;
+}
+
 .recom_area {
     margin-top: 20px;
 }
