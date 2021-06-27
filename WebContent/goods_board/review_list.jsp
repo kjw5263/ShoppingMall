@@ -17,18 +17,22 @@
     <title>Title</title>
     <link rel="stylesheet" href="./goods_board/style/reviewList.css">
 </head>
+<script>
+    function fnMove(seq){
+        var offset = $("#p" + seq).offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+    }
+</script>
+
+
     <%
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
-//    GoodsReviewDTO grdto = new GoodsReviewDTO();
     int listCount = pageInfo.getListCount();
     int nowPage = pageInfo.getPage();
     int maxPage = pageInfo.getMaxPage();
     int startPage = pageInfo.getStartPage();
     int endPage = pageInfo.getEndPage();
-
-        System.out.println("현제 페이지:"+nowPage);
-        System.out.println("갯수" +listCount);
 
     %>
 <body>
@@ -110,7 +114,7 @@
                     </span>
                 </span>
                 <span class="date">
-                        202020
+                        <%=reviewList.get(i).getReviewdate() %>
                     </span>
 
             </div>
@@ -118,15 +122,29 @@
             <div class="tet_inner">
                 <span><%=reviewList.get(i).getReviewContent() %></span>
             </div>
-            <div class="review_thum_type1"></div>
-            <div class="recom_area">
+            <div class="review_thum_type1">
+                <ul class="inner_clrfix">
+                    <li>
+                        <span class="img_size11">
 
-                <button type="button" class="btn_recom">
+                            <img src="./goods_board/upload/<%=reviewList.get(i).getReviewImage() %>" alt=".." style="max-width: 15%">
+
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="recom_area">
+                <form action="reviewLike.rev" method="post">
+                <input type="hidden" name="reviewNum" value="<%=reviewList.get(i).getReviewNum() %>">
+                <input type="hidden" name="cosNum" value="<%=reviewList.get(i).getCosNum() %>">
+                <input type="hidden" name="userId" value="<%=reviewList.get(i).getUserid() %>">
+                <button type="submit" class="btn_recom">
                     이 리뷰가 도움이 돼요!
                 <span class="num1">
-
+                    <%=reviewList.get(i).getReviewUp() %>
                 </span>
             </button>
+                </form>
             </div>
         </div>
     </div>
@@ -141,18 +159,18 @@
 
 
 
-    <section id="pageList">
+    <section id="pageList" style="margin-left: 50%">
         <%if(nowPage<=1){ %>
-        [이전]&nbsp;
+        [이전]
         <%}else{ %>
-        <a href="reviewList.rev?page=<%=nowPage-1 %>">[이전]</a>&nbsp;
+        <a href="GoodsDetail.cos?cosNum=1&page=<%=nowPage-1 %>" id="p1" onclick="fnMove('1')">[이전]</a>&nbsp;
         <%} %>
 
         <%for(int a=startPage;a<=endPage;a++){
             if(a==nowPage){%>
         [<%=a %>]
         <%}else{ %>
-        <a href="reviewList.rev?cosNum=1&page=<%=a %>">[<%=a %>]
+        <a href="GoodsDetail.cos?cosNum=1&page=<%=a %>" id="p2" onclick="fnMove('2')">[<%=a %>]
         </a>&nbsp;
         <%} %>
         <%} %>
@@ -160,7 +178,7 @@
         <%if(nowPage>=maxPage){ %>
         [다음]
         <%}else{ %>
-        <a href="GoodsDetail.cos?cosNum=1&page=<%=nowPage+1 %>">[다음]</a>
+        <a href="GoodsDetail.cos?cosNum=1&page=<%=nowPage+1 %>" id="p3" onclick="fnMove('3')">[다음]</a>
         <%} %>
     </section>
         <%
