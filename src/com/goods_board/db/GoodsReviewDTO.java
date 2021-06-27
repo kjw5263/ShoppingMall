@@ -1,6 +1,7 @@
 package com.goods_board.db;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GoodsReviewDTO extends ArrayList<GoodsReviewDTO> {
     // 리뷰 게시판 화장품 각각에 대한 리뷰. 화장품 상세 페이지 하단에 리뷰가 존재함
@@ -20,10 +21,12 @@ public class GoodsReviewDTO extends ArrayList<GoodsReviewDTO> {
         // 별점 나중에 AVG() 매겨야함
         private int rating;
 
-        // 댓글 내용 댓글 내용
+        // 리뷰 내용
         private String reviewContent;
         // 추천수
         private int reviewUp;
+
+        private Date reviewdate;
 
     public int getReviewNum() {
         return reviewNum;
@@ -81,6 +84,14 @@ public class GoodsReviewDTO extends ArrayList<GoodsReviewDTO> {
         this.reviewUp = reviewUp;
     }
 
+    public Date getReviewdate() {
+        return reviewdate;
+    }
+
+    public void setReviewdate(Date reviewdate) {
+        this.reviewdate = reviewdate;
+    }
+
     @Override
     public String toString() {
         return "GoodsReviewDTO{" +
@@ -91,7 +102,7 @@ public class GoodsReviewDTO extends ArrayList<GoodsReviewDTO> {
                 ", rating=" + rating +
                 ", reviewContent='" + reviewContent + '\'' +
                 ", reviewUp=" + reviewUp +
+                ", reviewdate=" + reviewdate +
                 '}';
     }
-
 }

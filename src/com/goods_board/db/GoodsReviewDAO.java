@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GoodsReviewDAO {
 
@@ -70,8 +71,8 @@ public class GoodsReviewDAO {
                 reviewNum = rs.getInt(1) + 1;
 
             }
-            sql = "insert into review_board (reviewNum,cosNum,userId,reviewImage,rating,reviewContent,reviewUp)" +
-                    "values(?,?,?,?,?,?,?)";
+            sql = "insert into review_board values(?,?,?,?,?,?,?,now())";
+
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, reviewNum);
@@ -95,8 +96,8 @@ public class GoodsReviewDAO {
     }
 
      // 아이디 글 조회
-        public GoodsReviewDTO getReview(String userId){
-            GoodsReviewDTO grdto = new GoodsReviewDTO();
+        public ArrayList<GoodsReviewDTO> getReview(String userId){
+            ArrayList<GoodsReviewDTO> reviewUserList = new ArrayList<GoodsReviewDTO>();
             try {
                 conn = getConnection();
                 sql= "select * from review_board where userId=?";
@@ -105,24 +106,28 @@ public class GoodsReviewDAO {
                 pstmt.setString(1,userId);
 
                 rs = pstmt.executeQuery();
-                if (rs.next()){
-                    grdto = new GoodsReviewDTO();
+                while (rs.next()){
+                   GoodsReviewDTO grdto = new GoodsReviewDTO();
                     grdto.setCosNum(rs.getInt("cosNum"));
                     grdto.setRating(rs.getInt("rating"));
+                    grdto.setReviewdate(rs.getDate("reviewdate"));
                     grdto.setReviewContent(rs.getString("reviewContent"));
                     grdto.setReviewNum(rs.getInt("reviewNum"));
                     grdto.setUserid(rs.getString("userId"));
                     grdto.setReviewUp(rs.getInt("reviewUp"));
                     grdto.setReviewImage(rs.getString("reviewImage"));
+
+                    reviewUserList.add(grdto);
+
                 }
-                System.out.println("DAO : 회원 정보 저장");
+                System.out.println("DAO : 회원 리뷰 글 저장");
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }finally {
                 closeDB();
             }
-            return grdto;
+            return reviewUserList;
         }
 // 글 개수 구하기
     public int getReviewCount(int cosNum){
@@ -146,18 +151,40 @@ public class GoodsReviewDAO {
         }
                 return cnt;
     }
-    // 글 목록 보기
 
-    public ArrayList<GoodsReviewDTO> selectReviewList(int startRow, int pageSize,int cosNum){
-            ArrayList<GoodsReviewDTO> reviewList = new ArrayList<GoodsReviewDTO>();
-            GoodsReviewDTO grdto = null;
-            int startrow = (startRow - 1) *10;
+    public int getUserReviewCnt(String userId){
+        int count = 0;
         try {
             conn = getConnection();
-            sql = "select * from review_board where cosNum=?";
+            sql="select count(*) from review_board where userId=?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,cosNum);
+            pstmt.setString(1,userId);
+            rs = pstmt.executeQuery();
 
+            if (rs.next()){
+                count = rs.getInt(1);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            closeDB();
+        }
+        return count;
+    }
+    public ArrayList<GoodsReviewDTO> userReviewList(int page, int limit,String userId){
+        ArrayList<GoodsReviewDTO> userReviewList = new ArrayList<GoodsReviewDTO>();
+        GoodsReviewDTO grdto = null;
+        int startRow = (page - 1) *3;
+
+
+        try {
+            conn = getConnection();
+            sql = "select * from review_board where userId=? limit ?, 3";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,userId);
+            pstmt.setInt(2,startRow);
 
             rs = pstmt.executeQuery();
 
@@ -170,6 +197,69 @@ public class GoodsReviewDAO {
                 grdto.setUserid(rs.getString("userId"));
                 grdto.setReviewUp(rs.getInt("reviewUp"));
                 grdto.setReviewImage(rs.getString("reviewImage"));
+                grdto.setReviewdate(rs.getDate("reviewdate"));
+
+                userReviewList.add(grdto);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            closeDB();
+        }
+        return userReviewList;
+    }
+
+    // 글 평점 값
+    public int getRating(int cosNum){
+        int rating =0;
+        try {
+            conn = getConnection();
+            sql="select avg(rating) from review_board where cosNum=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,cosNum);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()){
+                rating = rs.getInt(1);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            closeDB();
+        }
+        return rating;
+    }
+
+    // 글 목록 보기
+
+    public ArrayList<GoodsReviewDTO> selectReviewList(int page, int limit,int cosNum){
+            ArrayList<GoodsReviewDTO> reviewList = new ArrayList<GoodsReviewDTO>();
+            GoodsReviewDTO grdto = null;
+            int startrow = (page - 1) *10;
+
+
+        try {
+            conn = getConnection();
+            sql = "select * from review_board where cosNum=? limit ?,10";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,cosNum);
+            pstmt.setInt(2,startrow);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                grdto = new GoodsReviewDTO();
+                grdto.setCosNum(rs.getInt("cosNum"));
+                grdto.setRating(rs.getInt("rating"));
+                grdto.setReviewContent(rs.getString("reviewContent"));
+                grdto.setReviewNum(rs.getInt("reviewNum"));
+                grdto.setUserid(rs.getString("userId"));
+                grdto.setReviewUp(rs.getInt("reviewUp"));
+                grdto.setReviewImage(rs.getString("reviewImage"));
+                grdto.setReviewdate(rs.getDate("reviewdate"));
 
                 reviewList.add(grdto);
             }
@@ -183,19 +273,20 @@ public class GoodsReviewDAO {
     }
 
 
-    public int deleteReview(String userId){
+    public int deleteReview(int reviewNum){
             int deleteCount = 0;
 
         try {
             conn = getConnection();
-            sql = "delete  from review_board where userId=?";
+            sql = "delete from review_board where reviewNum=?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,userId);
+            pstmt.setInt(1,reviewNum);
             deleteCount = pstmt.executeUpdate();
 
             System.out.println("글 삭제 완료!" + deleteCount);
 
         } catch (SQLException throwables) {
+            System.out.println("삭제 실패" +throwables);
             throwables.printStackTrace();
         }finally {
             closeDB();
@@ -228,20 +319,38 @@ public class GoodsReviewDAO {
         return checkId;
 
     }
+    // 좋아요
+    public int reviewUp(int reviewNum) {
+        int numCount = 0;
+
+        try {
+            conn = getConnection();
+            sql = "update review_board set reviewUp=" +
+                    "reviewUp+1 where reviewNum=" + reviewNum;
+            pstmt = conn.prepareStatement(sql);
+            numCount = pstmt.executeUpdate();
+
+            System.out.println("numCount값 출력..." + numCount);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            closeDB();
+        }
+
+        return numCount;
+    }
+
 
     // 글 수정
-    public int updateReview(String userId,GoodsReviewDTO grdto){
+    public int updateReview(int reviewNum,GoodsReviewDTO grdto){
         int updateCount = 0;
         try {
             conn=getConnection();
-            System.out.println("아이디 출력" + userId);
-            System.out.println("grdto 출력" + grdto);
-            sql="update review_board set rating=? reviewContent=? where userId=? and cosNum=?";
+            sql="update review_board set rating=? ,reviewContent=? where reviewNum=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,grdto.getRating());
             pstmt.setString(2,grdto.getReviewContent());
-            pstmt.setString(3,userId);
-            pstmt.setInt(4,grdto.getCosNum());
+            pstmt.setInt(3,reviewNum);
             updateCount =pstmt.executeUpdate();
             System.out.println("글 수정 완료" + updateCount);
         } catch (SQLException throwables) {

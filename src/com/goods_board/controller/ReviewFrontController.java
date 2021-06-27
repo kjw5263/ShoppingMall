@@ -56,18 +56,14 @@ public class ReviewFrontController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else if (command.equals("/reviewUserList.rev")){
-            action = new ReviewUserListAction();
+
+        }else if (command.equals("/reviewUpdateForm.rev")){
+            action = new ReviewUpdateForm();
             try {
                 forward = action.execute(req, resp);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if (command.equals("/reviewUpdateForm.rev")){
-            forward = new ActionForward();
-            forward.setPath("./goods_board/review_update.jsp");
-
         }
 
         else if (command.equals("/reviewUpdate.rev")){
@@ -79,7 +75,15 @@ public class ReviewFrontController extends HttpServlet {
             }
         }
         else if (command.equals("/reviewDelete.rev")){
-            action = new ReviewUserListAction();
+            action = new ReviewDeleteAction();
+            try {
+                forward = action.execute(req, resp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (command.equals("/reviewLike.rev")){
+            action = new ReviewLikeAction();
             try {
                 forward = action.execute(req, resp);
             } catch (Exception e) {

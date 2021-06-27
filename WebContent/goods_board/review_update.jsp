@@ -35,11 +35,7 @@
 
   </style>
   <%
-    GoodsReviewDTO grdto = (GoodsReviewDTO) request.getAttribute("grdto");
-    GoodsDTO gdto = (GoodsDTO) request.getAttribute("goods");
-
-    System.out.println("grdto 출력 정보" + grdto);
-    System.out.println("gdto 출력 정보" + gdto);
+      int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
   %>
 
 
@@ -54,11 +50,12 @@
 
 
 <h1>별점과 리뷰를 수정해주세요</h1>
-<form  method="post" action="./reviewUpdate.rev">
+<form  method="post" action="reviewUpdate.rev">
 <%--  <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 350px">--%>
   <fieldset class="starability-basic" id="rating" aria-required="false">
     <legend>별점을 선택해 주세요.</legend>
-<%--    <%= gdto.getCosName()%>--%>
+        <input type="hidden" name="reviewNum" value="<%= reviewNum%>"/>
+
 
 
 
