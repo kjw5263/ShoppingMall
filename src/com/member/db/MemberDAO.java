@@ -406,7 +406,7 @@ public class MemberDAO {
 					dto.setUserEmail(rs.getString("userEmail"));
 					dto.setUserAddr(rs.getString("userAddr"));
 					dto.setUserTel(rs.getString("userTel"));
-					dto.setUserBirth(rs.getDate("userBirth"));
+					dto.setUserBirth(rs.getString("userBirth"));
 					dto.setUserGender(rs.getString("userGender"));
 					dto.setUserSkinType(rs.getString("userSkinType"));
 					dto.setUserTrouble(rs.getString("userTrouble"));
@@ -866,5 +866,201 @@ public class MemberDAO {
 		}
 		
 		// ConKakao(userId, userPass, k_email) 끝
+		
+		/////////////// Member Join DAO /////////////////
+		        
+		//mailAddrCheck() -> 이메일이 DB에 있는지 확인
+		
+		public int mailAddrCheck(String mail){
+		   
+		   int result = 0;
+		   
+		   try {
+		      conn = getConnection();
+		
+		      sql="select * from user_info where userEmail=?";
+		   
+		      pstmt = conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, mail);
+		      
+		      rs = pstmt.executeQuery();
+		      
+		      if(rs.next()){
+		         result=1; //메일주소 있음 사용x
+		      }else{
+		         result=0; //메일주소 없음 사용ㅇ
+		      }
+		
+		   } catch (SQLException e) {
+		      
+		      e.printStackTrace();
+		   }finally{
+		      closeDB();
+		   }
+		   
+		   return result;
+		}
+		
+		//mailAddrCheck() -> 이메일이 DB에 있는지 확인
+		
+		
+		//signUpIdCheck() ->ajax 중복 id 확인
+		
+		public int signUpIdCheck(String userId) {
+		    
+		   int result = 0;
+		
+		   try {
+		      conn = getConnection();
+		      
+		      sql="select * from user_info where userId=?";
+		      
+		      PreparedStatement pstmt = conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, userId);
+		      
+		      rs = pstmt.executeQuery();
+		      
+		      if(rs.next()){
+		            return 1;      //아이디 있음 사용X
+		      }else{
+		            return 0;      //아이디 없음 사용O
+		      }
+		      
+		      } catch (SQLException e) {
+		      
+		      e.printStackTrace();
+		      } finally{
+		         closeDB();
+		      }
+		   
+		   
+		   return result;
+		}
+		
+		//signUpIdCheck() ->ajax 중복 id 확인
+		
+		//insertMember() 시작    -> 회원가입 폼에 있는 정보 DB로 전달
+		public void insertMember(MemberDTO mdto, String referral_id){
+		      
+		      int num = 0;
+		
+		      int point = 500;
+		   
+		      
+		   try {   
+		      conn = getConnection();
+		      
+		      sql = "select max(userNum) from user_info";
+		      
+		      pstmt = conn.prepareStatement(sql);
+		      
+		      rs = pstmt.executeQuery();
+		      
+		         System.out.println("회원번호: "+num);
+		      
+		      if(rs.next()){
+		         num = rs.getInt(1)+1;
+		      }
+		      
+		         
+		      if(referral_id != ""){
+		         System.out.println("추천인 아이디: "+referral_id);
+		            conn = getConnection();
+		            //추천인 아이디가 있을 경우, 회원정보 입력
+		         
+		            sql="insert into user_info (userNum, userId, userPass, userName, userEmail, userAddr, userTel, "
+		                  + "userBirth, userGender, userSkinType, userTrouble) values(?,?,?,?,?,?,?,?,?,?,?)";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            pstmt.setInt(1, num);
+		            pstmt.setString(2, mdto.getUserId());
+		            pstmt.setString(3, mdto.getUserPass());
+		            pstmt.setString(4, mdto.getUserName());
+		            pstmt.setString(5, mdto.getUserEmail());
+		            pstmt.setString(6, mdto.getUserAddr());
+		            pstmt.setString(7, mdto.getUserTel());
+		            pstmt.setString(8, mdto.getUserBirth());
+		            pstmt.setString(9, mdto.getUserGender());
+		            pstmt.setString(10, mdto.getUserSkinType());
+		            pstmt.setString(11, mdto.getUserTrouble());
+		   
+		            
+		            pstmt.executeUpdate();
+		            
+		            System.out.println("회원가입: 저장완료");      
+		            
+		            conn = getConnection();
+		
+		            sql="update user_info set userPoint=userPoint+? where userId=? "
+		                  + "or userId=?";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            pstmt.setInt(1,point);
+		            pstmt.setString(2, mdto.getUserId());
+		            pstmt.setString(3, referral_id);
+		            
+		            pstmt.executeUpdate();
+		            
+		      //      System.out.println("회원가입 추천인,신규회원: 포인트 지급 완료");                           
+		         
+		      
+		         }else {
+		            //추천인 아이디가 없을 경우, 회원 가입만 시키기.
+		            
+		            conn = getConnection();
+		            
+		            sql="insert into user_info (userNum, userId, userPass, userName, userEmail, userAddr, userTel, "
+		                  + "userBirth, userGender, userSkinType, userTrouble) values(?,?,?,?,?,?,?,?,?,?,?)";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            
+		            pstmt.setInt(1, num);
+		            pstmt.setString(2, mdto.getUserId());
+		            pstmt.setString(3, mdto.getUserPass());
+		            pstmt.setString(4, mdto.getUserName());
+		            pstmt.setString(5, mdto.getUserEmail());
+		            pstmt.setString(6, mdto.getUserAddr());
+		            pstmt.setString(7, mdto.getUserTel());
+		            pstmt.setString(8, mdto.getUserBirth());
+		            pstmt.setString(9, mdto.getUserGender());
+		            pstmt.setString(10, mdto.getUserSkinType());
+		            pstmt.setString(11, mdto.getUserTrouble());
+		   
+		            pstmt.executeUpdate();
+		            
+		         //   System.out.println("회원가입: 저장완료");      
+		            
+		            conn = getConnection();
+		            sql="update user_info set userPoint=userPoint+? where userId=?";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            pstmt.setInt(1, mdto.getUserPoint()+point);
+		            pstmt.setString(2, mdto.getUserId());
+		            
+		            
+		            pstmt.executeUpdate();
+		
+		            System.out.println("회원가입 신규회원: 포인트 지급 완료 (추천인x)");   
+		         
+		      }
+		         
+		   } catch (SQLException e) {
+		      
+		      e.printStackTrace();
+		   } finally{
+		      closeDB();
+		   }
+		
+		}
+		
+		//insertMember() 끝
+		
+		/////////////// Member SignUp DAO /////////////////
 		
 }

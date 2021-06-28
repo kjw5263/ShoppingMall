@@ -1,6 +1,8 @@
 <%@page import="com.faq.db.FaqDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,8 +63,6 @@
 
 </head>
 <body>
-<% FaqDTO faqdto = (FaqDTO)request.getAttribute("faqdto"); %>
-
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
@@ -73,9 +73,7 @@
 		<div class="row">
 			<div class="col-2 text-center"></div>
 			
-			
 			<div class="col-8">
-			
 			<!-- 제목 시작 -->
 				<div class="col-md-12 text-center p-5 row">
 					<div class="col-2"></div>
@@ -86,85 +84,100 @@
 				</div>
 			<!-- 제목 끝 --> 
 			
-				<form action="./FaqReviseProAction.faq" method="post">
+				<form action="./FaqReviseProAction.faq" method="post" onsubmit="return check()">
 				
 				<!-- 글 번호 넘기기 시작 -->
-				<input type="hidden" name="faqNum" value="<%=faqdto.getFaqNum() %>">
+				<input type="hidden" name="faqNum" value="${faqdto.faqNum}">
 				
 				
 				<!-- 카테고리 시작 -->
 				<div class="row">
-					<select class="form-select" name="faqCategory" aria-label="Default select example">
+					<select class="form-select" name="faqCategory" id="faqCategory" aria-label="Default select example">
 					
-					  <option selected>카테고리</option>
+					  <option value="" selected>카테고리</option>
 					  
-					  <%if(faqdto.getFaqCategory().equals("회원관련")){ %>
-					  <option selected="selected" value="회원관련">회원관련</option>
-					  <%}else{ %>
-					  <option value="회원관련">회원관련</option>
-					  <%} %>
-					  
-					  <%if(faqdto.getFaqCategory().equals("주문결제")){ %>
-					  <option selected="selected" value="주문결제">주문결제</option>
-					  <%}else{ %>
-					  <option value="주문결제">주문결제</option>
-					  <%} %>
-					  
-					  <%if(faqdto.getFaqCategory().equals("포인트")){ %>
-					  <option selected="selected" value="포인트">포인트</option>
-					  <%}else{ %>
-					  <option value="포인트">포인트</option>
-					  <%} %>
+					  <c:choose>
+						  <c:when test="${faqdto.faqCategory eq '회원관련' }">
+						  	<option selected="selected" value="회원관련">회원관련</option>
+						  </c:when>
+						  <c:otherwise>
+						  	<option value="회원관련">회원관련</option>
+						  </c:otherwise>
+					  </c:choose>
 					  
 					  
-					  <%if(faqdto.getFaqCategory().equals("환불")){ %>
-					  <option selected="selected" value="환불">환불</option>
-					  <%}else{ %>
-					  <option value="환불">환불</option>
-					  <%} %>
+					  <c:choose>
+						  <c:when test="${faqdto.faqCategory eq '주문결제' }">
+						  	<option selected="selected" value="주문결제">주문결제</option>
+						  </c:when>
+						  <c:otherwise>
+						  	<option value="주문결제">주문결제</option>
+						  </c:otherwise>
+					  </c:choose>
+					  
+					  <c:choose>
+						  <c:when test="${faqdto.faqCategory eq '포인트' }">
+						  	<option selected="selected" value="포인트">포인트</option>
+						  </c:when>
+						  <c:otherwise>
+						  	<option value="포인트">포인트</option>
+						  </c:otherwise>
+					  </c:choose>
+					  
+					  <c:choose>
+						  <c:when test="${faqdto.faqCategory eq '환불' }">
+						  	<option selected="selected" value="주문결제">환불</option>
+						  </c:when>
+						  <c:otherwise>
+						  	<option value="환불">환불</option>
+						  </c:otherwise>
+					  </c:choose>
 					  
 					  
-					  <%if(faqdto.getFaqCategory().equals("배송안내")){ %>
-					  <option selected="selected" value="배송안내">배송안내</option>
-					  <%}else{ %>
-					  <option value="배송안내">배송안내</option>
-					  <%} %>
+					  <c:choose>
+						  <c:when test="${faqdto.faqCategory eq '배송안내' }">
+						  	<option selected="selected" value="배송안내">배송안내</option>
+						  </c:when>
+						  <c:otherwise>
+						  	<option value="배송안내">배송안내</option>
+						  </c:otherwise>
+					  </c:choose>
 					  
 					  
+					  <c:choose>
+						  <c:when test="${faqdto.faqCategory eq '상품관련' }">
+						  	<option selected="selected" value="주문결제">상품관련</option>
+						  </c:when>
+						  <c:otherwise>
+						  	<option value="상품관련">상품관련</option>
+						  </c:otherwise>
+					  </c:choose>
 					  
+					  <c:choose>
+						  <c:when test="${faqdto.faqCategory eq '기타' }">
+						  	<option selected="selected" value="기타">기타</option>
+						  </c:when>
+						  <c:otherwise>
+						  	<option value="기타">기타</option>
+						  </c:otherwise>
+					  </c:choose>
 					  
-					  <%if(faqdto.getFaqCategory().equals("상품관련")){ %>
-					  <option selected="selected" value="상품관련">상품관련</option>
-					  <%}else{ %>
-					  <option value="상품관련">상품관련</option>
-					  <%} %>
-					  
-					  
-					  
-					  
-					  <%if(faqdto.getFaqCategory().equals("기타")){ %>
-					  <option selected="selected" value="기타">기타</option>
-					  <%}else{ %>
-					  <option value="기타">기타</option>
-					  <%} %>
 					</select>
 				</div>
 				<!-- 카테고리 끝 -->
 				
 				<!-- 제목 인풋 시작 -->
 				<div class="input-group input-group-lg mt-3 mb-3">
-				  <input type="text" class="form-control" placeholder="질문을 입력하세요" name="faqQuestion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-				  value="<%=faqdto.getFaqQuestion() %>"
+				  <input type="text" class="form-control" placeholder="질문을 입력하세요" name="faqQuestion" id="faqQuestion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+				  value="${faqdto.faqQuestion}"
 				  >
 				</div>
 				<!-- 제목 인풋 시작 -->
-				
 				<hr>
-					
 				<!-- 내용 인풋 시작 -->	
 				<div class="form-floating mb-5">
-				  <textarea class="form-control" placeholder="답변을 입력하세요" name="faqAnswer" id="floatingTextarea2" style="height: 500px">
-				  	<%=faqdto.getFaqAnswer() %>
+				  <textarea class="form-control" placeholder="답변을 입력하세요" name="faqAnswer" id="faqAnswer" style="height: 500px">
+				  	${faqdto.faqAnswer}
 				  </textarea>
 				</div>	
 				<!-- 내용 인풋 끝 -->	
@@ -186,6 +199,29 @@
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
+	
+	
+	<!-- 유효성 검사 스크립트 시작 -->
+	<script type="text/javascript">
+	function check(){
+		if($.trim($("#faqCategory").val())==""){
+			alert('카테고리를 정하세요')
+			return false;
+		}
+		
+		if($.trim($("#faqQuestion").val())==""){
+			alert('자주묻는 질문을 쓰세요')
+			return false;
+		}
+		
+		if($.trim($("#faqAnswer").val())==""){
+			alert('답변을 쓰세요')
+			return false;
+		}
+	}
+	</script>
+	<!-- 유효성 검사 스크립트 끝 -->
+	
 	
 </body>
 </html>

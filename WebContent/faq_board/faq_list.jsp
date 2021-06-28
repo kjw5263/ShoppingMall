@@ -65,11 +65,6 @@
 
 </head>
 <body>
-  <%
-    // request.setAttribute("goodsList", gdao.getGoodsList());
-    List faqList = (List)request.getAttribute("faqList");
-  %>
-
 
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
@@ -77,8 +72,6 @@
 	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
-	
-	
 	
 	<!-- 제목 시작 -->
 	  <div class="col-md-12 text-center p-5 row">
@@ -103,16 +96,10 @@
 			</div>
 		</div>
 	<!-- 글쓰기 버튼 시작 -->
-		
 	
 		<div class="row">
 			<div class="col-2 text-center"></div>
 			<div class="col-8">	
-				
-				
-				
-				
-				
 				
 				<!-- 테이블 카테고리 시작 -->
 				<table class="table mb-0 mt-5">
@@ -138,41 +125,30 @@
 				      <th class="text-center">유형</th>
 				      <th class="text-center">내용</th>
 				    </tr>
-				    
-				    <%for(int i = 0; i < faqList.size(); i++){ 
-						FaqDTO fdto = (FaqDTO)faqList.get(i);
-					%>
+				    <c:forEach var="i" items="${ faqList }">
 				    <tr>
-				      <th class="text-center"><%=fdto.getFaqCategory() %></th>
-				      <td class="text-center" style='cursor:pointer;' id="<%=fdto.getFaqNum()%>">
-				      	<%=fdto.getFaqQuestion() %><br><br>
+				      <th class="text-center">${i.faqCategory }</th>
+				      <td class="text-center" style='cursor:pointer;' id="${i.faqNum }">
+				      	${i.faqQuestion }<br><br>
 				       </td>
 				      <c:if test="${userId eq 'admin' }">
-					  <th id="<%=fdto.getFaqNum()%>">
-				      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=<%=fdto.getFaqNum() %>'">수정</button> /
-				       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=<%=fdto.getFaqNum() %>'">삭제</span>					  
+					  <th id="${i.faqNum }">
+				      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> /
+				       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=${i.faqNum }'">삭제</span>					  
 					  </th>
 					  </c:if>			       
 				    </tr>
-				    
-				    <tr style="display: none;" id="<%=fdto.getFaqNum()%>_answer">
+				    <tr style="display: none;" id="${i.faqNum }_answer">
 					  <th class="text-center">답변</th>
-					  <td class="text-center"><b style="width: 737;"><%=fdto.getFaqAnswer() %></b></td>
+					  <td class="text-center"><b style="width: 737;">${i.faqAnswer }</b></td>
 				    </tr>
-				    
-				    <%} %>
-				    
+				    </c:forEach>
 				  </tbody>
 				</table>
 				<!-- faq 테이블 끝 -->
 			</div>
-			
-			
 			<div class="col-2">	</div>
-			
-			
 		</div>
-		
 	</div>
 	<!-- container 끝 -->	
 	

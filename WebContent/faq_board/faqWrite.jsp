@@ -83,11 +83,11 @@
 					<div class="col-6"></div>
 				</div>
 			<!-- 제목 끝 --> 
-				<form action="./FaqWriteAction.faq" method="post">
+				<form action="./FaqWriteAction.faq" method="post" id="fr" onsubmit="return check()">
 				<!-- 카테고리 시작 -->
 				<div class="row">
-					<select class="form-select" name="faqCategory" aria-label="Default select example">
-					  <option selected>카테고리</option>
+					<select class="form-select" name="faqCategory" id="faqCategory" aria-label="Default select example">
+					  <option value="" selected>카테고리</option>
 					  <option value="회원관련">회원관련</option>
 					  <option value="주문결제">주문결제</option>
 					  <option value="포인트">포인트</option>
@@ -101,7 +101,7 @@
 				
 				<!-- 제목 인풋 시작 -->
 				<div class="input-group input-group-lg mt-3 mb-3">
-				  <input type="text" class="form-control" placeholder="질문을 입력하세요" name="faqQuestion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+				  <input type="text" class="form-control" placeholder="질문을 입력하세요" name="faqQuestion" id="faqQuestion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
 				</div>
 				<!-- 제목 인풋 시작 -->
 				
@@ -109,10 +109,9 @@
 					
 				<!-- 내용 인풋 시작 -->	
 				<div class="form-floating mb-5">
-				  <textarea class="form-control" placeholder="답변을 입력하세요" name="faqAnswer" id="floatingTextarea2" style="height: 500px"></textarea>
+				  <textarea class="form-control" placeholder="답변을 입력하세요" name="faqAnswer" id="faqAnswer" style="height: 500px"></textarea>
 				</div>	
 				<!-- 내용 인풋 끝 -->	
-				
 				
 					<button type="submit" class="btn btn-primary mb-3">글쓰기</button>
 				</form>
@@ -130,6 +129,29 @@
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
+	
+	
+	<!-- 유효성 검사 스크립트 시작 -->
+	
+	<script type="text/javascript">
+	function check(){
+		if($.trim($("#faqCategory").val())==""){
+			alert('카테고리를 정하세요')
+			return false;
+		}
+		
+		if($.trim($("#faqQuestion").val())==""){
+			alert('자주묻는 질문을 쓰세요')
+			return false;
+		}
+		
+		if($.trim($("#faqAnswer").val())==""){
+			alert('답변을 쓰세요')
+			return false;
+		}
+	}
+	</script>
+	<!-- 유효성 검사 스크립트 끝 -->
 	
 </body>
 </html>

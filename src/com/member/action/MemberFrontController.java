@@ -382,7 +382,46 @@ public class MemberFrontController extends HttpServlet{
 					
 				}
 				
-				
+				else if (command.equals("/MemberJoin.me")) {
+
+			         System.out.println("C 회원가입 호출: /MemberJoin.me 호출");
+
+			         forward = new ActionForward();
+			         forward.setPath("./member/insertForm.jsp");
+			         forward.setRedirect(false);
+
+			      } else if (command.equals("/MemberJoinAction.me")) {
+
+			         System.out.println("C 회원가입 호출: /MemberJoinAction.me 호출");
+
+			         System.out.println("2 : / 주소 호출");
+
+			         action = new MemberJoinAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+
+			      } else if (command.equals("/MemberCheckAction.me")) {
+
+			         System.out.println("2 id 중복체크:  호출");
+
+			         action = new MemberCheckAction();
+
+			         System.out.println("2 id 중복체크:  호출 종료");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+			      }
+
+				      
 				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
