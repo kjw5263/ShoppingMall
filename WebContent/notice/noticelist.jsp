@@ -34,6 +34,66 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    
+    <style type="text/css">
+button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:34px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+table {
+    width: 80%;
+    margin-left : 5%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+   th {
+    background-color: #0d47a1;
+    color: #ffffff;
+  }
+  tbody tr:nth-child(2n) {
+    background-color: #bbdefb;
+  }
+  tbody tr:nth-child(2n+1) {
+    background-color: #e3f2fd;
+  }
+</style>
 </head>
 
 <body>
@@ -74,16 +134,14 @@
 		
 	
 	%>
-	<h2>
-		게시판 글목록 [총 :
-		<%=cnt%>개]
-	</h2>
+	<br>
 	<button onclick="location.href='http://localhost:8088/ShoppingMall/noticewrite.nos'">글쓰기</button>
-	
-	<table border="1">
+	<br>
+	<br>
+	<table >
 		<tr>
-			<td> </td>
-			<td>제목</td>
+			<th> </th>
+			<th>제목</th>
 			
 
 		</tr>

@@ -36,7 +36,7 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	<%
-		int num = Integer.parseInt(request.getParameter("num"));
+		int num = Integer.parseInt(request.getParameter("noticeNum"));
 		String pageNum = request.getParameter("pageNum");
 
 		// DB에서 글번호에 해당하는 정보를 가져와서 출력
@@ -54,12 +54,16 @@
             "  안하는 경우  주소줄에 저장(url)
    -->
   <fieldset>
-    <form action="noticeuppro.jsp?pageNum=<%=pageNum %>" method="post">
+    <form action="noticeuppro.nos?pageNum=<%=pageNum %>" method="post"  enctype="multipart/form-data">
      <input type="hidden" name="index" value="<%=notit.getNoticeNum()%>">
           
           
           제목 : <input type="text" name="title" value="<%=notit.getNoticeTitle() %>"><br>
-          내용 : <textarea rows="10" cols="30" name="context"><%=notit.getNoticeContent() %></textarea>
+          중요도 : <input type="checkbox" value="1" id ="imp1" 
+			 name = "imp2" onclick="pop()">
+			 <input type="checkbox" value="0" id ="imp2" name = "imp2" checked="checked" class = "hidden" ><br>
+			 파일 : <input type="file" name="filename" value="<%=notit.getNoticeFile() %>"><br> 
+          내용 : <textarea rows="10" cols="30" name="content"><%=notit.getNoticeContent().replace("<br>", "\n").replace("s0i0m0p0u0", ",") %></textarea>
      
           
       <input type="submit" value="글 수정 하기">
@@ -73,4 +77,16 @@
     
 
 </body>
+<script type="text/javascript">
+	
+	function pop() {
+		if(document.getElementById("imp2").checked==true){
+			document.getElementById("imp2").checked=false;
+		}else{
+			document.getElementById("imp2").checked=true;
+		}
+	}
+
+</script>
+
 </html>

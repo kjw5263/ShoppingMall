@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+
+import com.basket.db.BasketDTO;
 import com.goods.db.GoodsDAO;
 import com.goods.db.goodsbasket;
 import com.goods.db.listDAO;
@@ -15,20 +18,33 @@ public class GoodsBasketAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("M : GoodsListAction_execute() 호출 ");
+		System.out.println("M : GoodsBasketAction_execute() 호출 ");
 
 		// 한글처리 
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		// 파라미터를 처리
 		// item=best
 		String id = request.getParameter("userId");
-		String goodnum = request.getParameter("userId");
 		
+		String userID = (String)session.getAttribute("userId");
+		String goodnum = request.getParameter("userId");
+		ActionForward forward = new ActionForward();
+		if(userID == null){
+			forward.setPath("./MemberLogin.me");
+			forward.setRedirect(true);
+			return forward;
+		}
 		
 		System.out.print("dao 호출");
 		// 디비 처리 객체 GoodsDAO 생성
+		BasketDTO bkDTO = new BasketDTO();
+		bkDTO.setBasketCosAmount(Integer.parseInt(request.getParameter("cosAmount")));
+		bkDTO.setBasketCosNum(Integer.parseInt(request.getParameter("cosNum")));
+		bkDTO.setBasketUserId(userID);
+		
 		goodsbasket gbgb = new goodsbasket();
-		gbgb.doit();
+		gbgb.doit(bkDTO);
 		// List goodsList =  gdao.getGoodsList();
 		// => Action 페이지에서 사용하는 경우
 		
@@ -38,8 +54,8 @@ public class GoodsBasketAction implements Action{
 		
 		
 		// 페이지 이동
-		ActionForward forward = new ActionForward();
-		forward.setPath("./goods/goods_list.jsp");
+		
+		forward.setPath("./goods/goodsBasketPro.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

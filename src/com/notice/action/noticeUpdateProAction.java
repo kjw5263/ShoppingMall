@@ -61,15 +61,16 @@ public class noticeUpdateProAction implements Action{
 		  
 		
 		   
-		
+		notit.setNoticeNum(Integer.parseInt(multi.getParameter("index")));
 		notit.setNoticeTitle(multi.getParameter("title"));
 		notit.setNoticeContent(multi.getParameter("content"));
 		notit.setNoticeType(Integer.parseInt(multi.getParameter("imp2")));
-		notit.setNoticeFile(multi.getParameter("filename"));
+		notit.setNoticeRealFileName(multi.getOriginalFileName("filename"));
+		notit.setNoticeFile(multi.getFilesystemName("filename"));
 		// List goodsList =  gdao.getGoodsList();
 		// => Action 페이지에서 사용하는 경우
 		System.out.println(notit.toString());
-		noti.insertNotice(notit);
+		noti.updateNotice(notit);
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();

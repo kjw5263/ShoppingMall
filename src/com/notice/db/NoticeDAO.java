@@ -31,12 +31,12 @@ public class NoticeDAO extends DBconnection{
 		
 	}
 	public void deleteNotice(noticeDTO noti){
-		noticeinsert Dobbynoti = new noticeinsert();
+		noticeDelete Dobbynoti = new noticeDelete();
 		Dobbynoti.doit(noti);
 		//도비는 자유에요!
 	}
 	public void updateNotice(noticeDTO noti){
-		noticeinsert Dobbynoti = new noticeinsert();
+		noticeUpdate Dobbynoti = new noticeUpdate();
 		Dobbynoti.doit(noti);
 		
 	}

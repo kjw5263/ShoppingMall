@@ -28,7 +28,7 @@ public class noticeinsert extends DBconnection{
 				//sss = sss.replace(",", "s0i0m0p0u0").replace("\n", "<br>").replace("\r", "<br>");
 				sql = "insert into "+ tablename + " values "
 						+ "(" + num +","+ "'"+noti.getNoticeTitle()+ "'" +","
-						+ "'"+noti.getNoticeContent()+ "'"
+						+ "'"+noti.getNoticeContent().replace("\n", "<br>").replace("\r", "<br>")+ "'"
 						+",'"+noti.getNoticeFile()
 						+"',"+
 						noti.getNoticeType()+",'"+noti.getNoticeRealFileName() +"')";

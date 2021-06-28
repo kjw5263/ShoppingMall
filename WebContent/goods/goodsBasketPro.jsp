@@ -3,10 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style type="text/css">
-.hidden { display:none;}
-.shown {display:;} 
-</style>
     <meta charset="UTF-8">
     <meta name="description" content="Yoga Studio Template">
     <meta name="keywords" content="Yoga, unica, creative, html">
@@ -29,22 +25,29 @@
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 </head>
 <body>
-
-  <!-- header 시작 -->
+ <!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 
 
 
  <script type="text/javascript">
-   
-   location.href = "http://localhost:8088/ShoppingMall/notice.nos";
+   alert("완료!");
+   location.href = "http://localhost:8088/ShoppingMall/GoodsList.cos";
    </script>
    
- <!-- footer 시작 -->
+   
+
+
+
+
+
+
+
+
+
+<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
-    
-
 </body>
 </html>
