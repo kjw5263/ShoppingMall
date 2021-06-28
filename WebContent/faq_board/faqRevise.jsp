@@ -1,9 +1,6 @@
 <%@page import="com.faq.db.FaqDTO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,14 +59,9 @@
 	<!-- jquery 준비 끝 -->
 
 
-
 </head>
 <body>
-  <%
-    // request.setAttribute("goodsList", gdao.getGoodsList());
-    List faqList = (List)request.getAttribute("faqList");
-  %>
-
+<% FaqDTO faqdto = (FaqDTO)request.getAttribute("faqdto"); %>
 
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
@@ -78,99 +70,113 @@
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
-	
-	
-	<!-- 제목 시작 -->
-	  <div class="col-md-12 text-center p-5 row">
-	  
-		  <div class="col-2"></div>
-		  <div class="col-4">
-		   	<a href="./FaqList.faq" style="text-decoration-line: none; color: black;"> <h3>고객 센터 - 자주묻는 질문</h3> </a>
-		  </div>
-		  <div class="col-6"></div>
-		
-	  </div>
-	<!-- 제목 끝 --> 	
-				
-	<!-- 글쓰기 버튼 시작 -->			
-		<div class="row">
-			<div class="col-9"></div>
-			<div class="col-3">
-				<c:if test="${userId eq 'admin' }">
-				<button type="button" class="btn btn-secondary" id="write">글쓰기</button>
-				</c:if>
-				
-			</div>
-		</div>
-	<!-- 글쓰기 버튼 시작 -->
-		
-	
 		<div class="row">
 			<div class="col-2 text-center"></div>
-			<div class="col-8">	
+			
+			
+			<div class="col-8">
+			
+			<!-- 제목 시작 -->
+				<div class="col-md-12 text-center p-5 row">
+					<div class="col-2"></div>
+					<div class="col-4">
+						<h3>고객 센터 - 글 수정하기</h3>
+					</div>
+					<div class="col-6"></div>
+				</div>
+			<!-- 제목 끝 --> 
+			
+				<form action="./FaqReviseProAction.faq" method="post">
+				
+				<!-- 글 번호 넘기기 시작 -->
+				<input type="hidden" name="faqNum" value="<%=faqdto.getFaqNum() %>">
 				
 				
+				<!-- 카테고리 시작 -->
+				<div class="row">
+					<select class="form-select" name="faqCategory" aria-label="Default select example">
+					
+					  <option selected>카테고리</option>
+					  
+					  <%if(faqdto.getFaqCategory().equals("회원관련")){ %>
+					  <option selected="selected" value="회원관련">회원관련</option>
+					  <%}else{ %>
+					  <option value="회원관련">회원관련</option>
+					  <%} %>
+					  
+					  <%if(faqdto.getFaqCategory().equals("주문결제")){ %>
+					  <option selected="selected" value="주문결제">주문결제</option>
+					  <%}else{ %>
+					  <option value="주문결제">주문결제</option>
+					  <%} %>
+					  
+					  <%if(faqdto.getFaqCategory().equals("포인트")){ %>
+					  <option selected="selected" value="포인트">포인트</option>
+					  <%}else{ %>
+					  <option value="포인트">포인트</option>
+					  <%} %>
+					  
+					  
+					  <%if(faqdto.getFaqCategory().equals("환불")){ %>
+					  <option selected="selected" value="환불">환불</option>
+					  <%}else{ %>
+					  <option value="환불">환불</option>
+					  <%} %>
+					  
+					  
+					  <%if(faqdto.getFaqCategory().equals("배송안내")){ %>
+					  <option selected="selected" value="배송안내">배송안내</option>
+					  <%}else{ %>
+					  <option value="배송안내">배송안내</option>
+					  <%} %>
+					  
+					  
+					  
+					  
+					  <%if(faqdto.getFaqCategory().equals("상품관련")){ %>
+					  <option selected="selected" value="상품관련">상품관련</option>
+					  <%}else{ %>
+					  <option value="상품관련">상품관련</option>
+					  <%} %>
+					  
+					  
+					  
+					  
+					  <%if(faqdto.getFaqCategory().equals("기타")){ %>
+					  <option selected="selected" value="기타">기타</option>
+					  <%}else{ %>
+					  <option value="기타">기타</option>
+					  <%} %>
+					</select>
+				</div>
+				<!-- 카테고리 끝 -->
+				
+				<!-- 제목 인풋 시작 -->
+				<div class="input-group input-group-lg mt-3 mb-3">
+				  <input type="text" class="form-control" placeholder="질문을 입력하세요" name="faqQuestion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+				  value="<%=faqdto.getFaqQuestion() %>"
+				  >
+				</div>
+				<!-- 제목 인풋 시작 -->
+				
+				<hr>
+					
+				<!-- 내용 인풋 시작 -->	
+				<div class="form-floating mb-5">
+				  <textarea class="form-control" placeholder="답변을 입력하세요" name="faqAnswer" id="floatingTextarea2" style="height: 500px">
+				  	<%=faqdto.getFaqAnswer() %>
+				  </textarea>
+				</div>	
+				<!-- 내용 인풋 끝 -->	
 				
 				
-				
-				
-				<!-- 테이블 카테고리 시작 -->
-				<table class="table mb-0 mt-5">
-				  <thead class="table table-bordered text-center">
-				  	<tr>
-				      <th scope="col"><a href="./FaqList.faq">전체</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=회원관련">회원관련</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=주문결제">주문결제</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=포인트">포인트</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=환불">환불</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=배송안내">배송안내</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=상품관련">상품관련</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=기타">기타</a></th>
-				    </tr>
-				  </thead>
-				</table>
-				<!-- 테이블 카테고리 끝 -->
-				
-				<!-- faq 테이블 시작 -->
-				<table class="table">
-				  <tbody>
-				  	<tr>
-				      <th class="text-center">유형</th>
-				      <th class="text-center">내용</th>
-				    </tr>
-				    
-				    <%for(int i = 0; i < faqList.size(); i++){ 
-						FaqDTO fdto = (FaqDTO)faqList.get(i);
-					%>
-				    <tr>
-				      <th class="text-center"><%=fdto.getFaqCategory() %></th>
-				      <td class="text-center" style='cursor:pointer;' id="<%=fdto.getFaqNum()%>">
-				      	<%=fdto.getFaqQuestion() %><br><br>
-				       </td>
-				      <c:if test="${userId eq 'admin' }">
-					  <th id="<%=fdto.getFaqNum()%>">
-				      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=<%=fdto.getFaqNum() %>'">수정</button> /
-				       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=<%=fdto.getFaqNum() %>'">삭제</span>					  
-					  </th>
-					  </c:if>			       
-				    </tr>
-				    
-				    <tr style="display: none;" id="<%=fdto.getFaqNum()%>_answer">
-					  <th class="text-center">답변</th>
-					  <td class="text-center"><b style="width: 737;"><%=fdto.getFaqAnswer() %></b></td>
-				    </tr>
-				    
-				    <%} %>
-				    
-				  </tbody>
-				</table>
-				<!-- faq 테이블 끝 -->
+					<button type="submit" class="btn btn-primary mb-3">글 수정하기</button>
+				</form>
+			
 			</div>
 			
-			
-			<div class="col-2">	</div>
-			
-			
+			<div class="col-2">	
+			</div>			
 		</div>
 		
 	</div>
@@ -180,35 +186,6 @@
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
-    
-    <!-- 스크립스 시작 -->
-    <script type="text/javascript">
-	// 제이쿼리 시작    
-    $(function() {
-    	// 질문 클릭시 답변 보이기 시작
-    	$('td').click(function() {
-    		// alert('클릭됐습니다.');
-    		
-			var fnum = $(this).attr('id');
-			
-			var con = document.getElementById(fnum + "_answer");
-			con.style.display = (con.style.display != 'none') ? "none" : "";
-			
-			//alert(fnum);
-
-    	});
-    	// 질문 클릭시 답변 보이기 끝
-    	
-    	// 글쓰기 버튼 시작
-    	$('#write').click(function() {
-    		location.href='./FaqWrite.faq';
-		});    	
-    	// 글쓰기 버튼 끝
-
-    	
-    });
- 	// 제이쿼리 끝
-    </script>
 	
 </body>
 </html>

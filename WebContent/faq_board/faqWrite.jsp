@@ -58,7 +58,6 @@
 	<!-- jquery 준비 끝 -->
 
 
-
 </head>
 <body>
 
@@ -76,54 +75,53 @@
 			<div class="col-8">
 			
 			<!-- 제목 시작 -->
-			  <div class="col-md-12 text-center p-5 row">
-				<div class="col-2"></div>
-				<div class="col-4">
-			   		<h3>고객 센터 - 글쓰기</h3>
+				<div class="col-md-12 text-center p-5 row">
+					<div class="col-2"></div>
+					<div class="col-4">
+						<h3>고객 센터 - 글쓰기</h3>
+					</div>
+					<div class="col-6"></div>
 				</div>
-				<div class="col-6"></div>
-			  </div>
 			<!-- 제목 끝 --> 
-			
-			<!-- 카테고리 시작 -->
-			<div class="row">
-				<select class="form-select" aria-label="Default select example">
-				  <option selected>카테고리</option>
-				  <option value="1">One</option>
-				  <option value="2">Two</option>
-				  <option value="3">Three</option>
-				</select>
-			</div>
-			<!-- 카테고리 끝 -->
-			
-			<!-- 제목 인풋 시작 -->
-			<div class="input-group input-group-lg mt-3 mb-3">
-			  <input type="text" class="form-control" placeholder="제목을 입력하세요" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-			</div>
-			<!-- 제목 인풋 시작 -->
-			
-			<hr>
+				<form action="./FaqWriteAction.faq" method="post">
+				<!-- 카테고리 시작 -->
+				<div class="row">
+					<select class="form-select" name="faqCategory" aria-label="Default select example">
+					  <option selected>카테고리</option>
+					  <option value="회원관련">회원관련</option>
+					  <option value="주문결제">주문결제</option>
+					  <option value="포인트">포인트</option>
+					  <option value="환불">환불</option>
+					  <option value="배송안내">배송안내</option>
+					  <option value="상품관련">상품관련</option>
+					  <option value="기타">기타</option>
+					</select>
+				</div>
+				<!-- 카테고리 끝 -->
 				
-			<!-- 내용 인풋 시작 -->	
-			<div class="form-floating mb-5">
-			  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 500px"></textarea>
-			</div>	
-			<!-- 내용 인풋 끝 -->	
-			
-			
-				<button type="button" class="btn btn-primary mb-3">Primary</button>
-			
+				<!-- 제목 인풋 시작 -->
+				<div class="input-group input-group-lg mt-3 mb-3">
+				  <input type="text" class="form-control" placeholder="질문을 입력하세요" name="faqQuestion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+				</div>
+				<!-- 제목 인풋 시작 -->
+				
+				<hr>
+					
+				<!-- 내용 인풋 시작 -->	
+				<div class="form-floating mb-5">
+				  <textarea class="form-control" placeholder="답변을 입력하세요" name="faqAnswer" id="floatingTextarea2" style="height: 500px"></textarea>
+				</div>	
+				<!-- 내용 인풋 끝 -->	
+				
+				
+					<button type="submit" class="btn btn-primary mb-3">글쓰기</button>
+				</form>
 			
 			</div>
-			
-			
-			
-			
 			
 			<div class="col-2">	
 			</div>			
 		</div>
-		
 		
 	</div>
 	<!-- container 끝 -->	

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.faq.action.FaqListAction;
+import com.member.action.MemberLoginAction;
 import com.faq.action.ActionForward;
 
 
@@ -67,7 +68,50 @@ public class FaqFrontController extends HttpServlet{
 			forward.setRedirect(false);
 			
 		}
-		
+		else if(command.equals("/FaqWriteAction.faq")) {
+
+			System.out.println("2 : /FaqWriteAction.faq 주소 호출");
+
+			action = new FaqWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/FaqDelete.faq")) {
+
+			System.out.println("2 : /FaqDelete.faq 주소 호출");
+
+			action = new FaqDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}		
+		else if(command.equals("/FaqRevise.faq")) {
+
+			System.out.println("2 : /FaqRevise.faq 주소 호출");
+
+			action = new FaqReviseAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/FaqReviseProAction.faq")) {
+
+			System.out.println("2 : /FaqReviseProAction.faq 주소 호출");
+
+			action = new FaqReviseProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");

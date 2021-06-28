@@ -64,7 +64,7 @@ public class FaqDAO {
 		}
 	}
 	
-	// getFaqList()
+	// getFaqList() 시작
 	public List getFaqList() {
 		List faqList = new ArrayList();
 		try {
@@ -95,55 +95,199 @@ public class FaqDAO {
 
 		return faqList;
 	}
-	// getFaqList()
+	// getFaqList() 끝
 	
-	// getFaqList(category)
-		public List getFaqList(String category) {
-			// item에 따라서 다른 결과를 처리
-			// item - all/best/그외 카테고리
-			List faqList = new ArrayList();
+	// getFaqList(category) 시작
+	public List getFaqList(String category) {
+		// item에 따라서 다른 결과를 처리
+		// item - all/best/그외 카테고리
+		List faqList = new ArrayList();
 
-			try {
-				conn = getConnection();
+		try {
+			conn = getConnection();
+			
+
+			if (category.equals("all")) {
 				
+				sql = "select * from faq_board";
+				pstmt = conn.prepareStatement(sql);
 
-				if (category.equals("all")) {
-					
-					sql = "select * from faq_board";
-					pstmt = conn.prepareStatement(sql);
-
-					
-				} else {
-					
-					sql = "select * from faq_board where faqCategory=?";
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, category);
-
-				}
 				
-				rs = pstmt.executeQuery();
+			} else {
+				
+				sql = "select * from faq_board where faqCategory=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, category);
 
-				while (rs.next()) {
-					FaqDTO dto = new FaqDTO();
-					dto.setFaqNum(rs.getInt("faqNum"));
-					dto.setFaqCategory(rs.getString("faqCategory"));
-					dto.setFaqQuestion(rs.getString("faqQuestion"));
-					dto.setFaqAnswer(rs.getString("faqAnswer"));
-
-					// 리스트 한칸에 faq 1개를 저장
-					faqList.add(dto);
-				} // while
-
-				System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				closeDB();
 			}
+			
+			rs = pstmt.executeQuery();
 
-			return faqList;
+			while (rs.next()) {
+				FaqDTO dto = new FaqDTO();
+				dto.setFaqNum(rs.getInt("faqNum"));
+				dto.setFaqCategory(rs.getString("faqCategory"));
+				dto.setFaqQuestion(rs.getString("faqQuestion"));
+				dto.setFaqAnswer(rs.getString("faqAnswer"));
+
+				// 리스트 한칸에 faq 1개를 저장
+				faqList.add(dto);
+			} // while
+
+			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
 		}
-		// getGoodsList(item)
+
+		return faqList;
+	}
+	// getGoodsList(item) 끝
+	
+	// faqWrite(faqdto) 시작
+	public void faqWrite(FaqDTO faqdto){
+		int num = 0;
+		try {
+			conn = getConnection();
+			// 1. 상품 번호 계산
+			sql="select max(faqNum) from faq_board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			//select max(num) from itwill_goods;
+			// => 값이 없을 경우 null표시,
+			//    내장함수 호출하는경우 항상 커서가 존재함 (rs.next()==true)
+			//select num from itwill_goods;
+			// => 값이 없을 경우 null표시, 커서는 X(rs.next()==false)
+			if(rs.next()){
+				num = rs.getInt(1)+1;
+				//num = rs.getInt("max(num)")+1;
+			}	
+			System.out.println("DAO : 상품번호 - "+num);
+			
+			// 2. 상품등록
+			sql = "insert into faq_board values(?,?,?,?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			pstmt.setString(2, faqdto.getFaqCategory());
+			pstmt.setString(3, faqdto.getFaqQuestion());
+			pstmt.setString(4, faqdto.getFaqAnswer());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DAO : 관리자 상품 등록 완료!");			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+	}	
+	// faqWrite(faqdto) 끝
+	
+	
+	// deleteFaq(faqNum) 시작
+	public int deleteFaq(int faqNum) {
+		int check = -1;
+		
+		try {
+			conn = getConnection();
+			sql = "select * from faq_board where faqNum=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faqNum);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				sql = "delete from faq_board where faqNum=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, faqNum);
+				
+				pstmt.executeUpdate();
+
+				check = 0;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return check;
+	}	
+	// deleteFaq(faqNum) 끝	
+		
+	// reviseFaq(faqNum) 시작
+	public FaqDTO reviseFaq(int faqNum) {
+		FaqDTO faqdto = new FaqDTO();
+		
+		try {
+			conn = getConnection();
+			sql = "select * from faq_board where faqNum=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faqNum);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				faqdto.setFaqNum(faqNum);
+				faqdto.setFaqCategory(rs.getString("faqCategory"));
+				faqdto.setFaqQuestion(rs.getString("faqQuestion"));
+				faqdto.setFaqAnswer(rs.getString("faqAnswer"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return faqdto;
+	}	
+	// reviseFaq(faqNum) 끝
+	
+	// faqRevisePro 시작
+	public void faqRevisePro(FaqDTO faqdto){
+		int num = 0;
+		try {
+			conn = getConnection();
+			// 1. 상품 번호 계산
+			sql="select * from faq_board where faqNum=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faqdto.getFaqNum());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				
+				sql = "update faq_board set faqCategory=?, faqQuestion=?, faqAnswer=? where faqNum=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, faqdto.getFaqCategory());
+				pstmt.setString(2, faqdto.getFaqQuestion());
+				pstmt.setString(3, faqdto.getFaqAnswer());
+				pstmt.setInt(4, faqdto.getFaqNum());
+				
+				pstmt.executeUpdate();
+				
+				System.out.println("DAO : 관리자 상품 등록 완료!");	
+			}
+			
+					
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+	}	
+	// faqRevisePro 끝
+	
 	
 }
