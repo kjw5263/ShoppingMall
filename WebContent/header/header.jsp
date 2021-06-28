@@ -69,7 +69,7 @@
                         </li>
                         <li><a href="./product-page.jsp">About</a></li>
                         <li><a href="./check-out.jsp">Blog</a></li>
-                        <li><a href="./contact.jsp">Contact</a></li>
+                        <li><a href="./FaqList.faq">Contact</a></li>
                     </ul>
                 </nav>
             </div>

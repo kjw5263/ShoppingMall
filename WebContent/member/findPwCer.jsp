@@ -63,13 +63,14 @@
  	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
+	
 	<!-- 컨테이너 시작 -->
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
 			
 				<!-- 일반 로그인 폼 시작 -->
-				<form class="login100-form validate-form flex-sb flex-w" action="./findPwCerAction.me" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" action="./FindPwAjax.me" method="post">
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
@@ -77,28 +78,42 @@
 						</span>
 						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "아이디를 입력해주세요">
-							<input class="input100" type="text" id="userId" name="userId" placeholder="ID">
+							<input class="input100" type="text" id="userId" name="userId" placeholder="ID" value="${param.userId }">
 							<span class="focus-input100"></span>
 						</div>
 						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "이메일을 입력해 주세요">
-							<input class="input100" type="email" id="userEmail" name="userEmail" placeholder="Email">
+							<input class="input100" type="email" id="userEmail" name="userEmail" placeholder="Email" value="${param.userEmail }">
 							<span class="focus-input100"></span>
 						</div>
 						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "전화번호를 입력해주세요">
-							<input class="input100" type="text" id="userTel" name="userTel" placeholder="Phone">
+							<input class="input100" type="text" id="userTel" name="userTel" placeholder="Phone" value="${param.userTel }">
 							<span class="focus-input100"></span>
 							
 						</div>
 						
-						<button type="submit" class="login100-form-btn">
+						<button type="button" class="login100-form-btn">
 						  인증요청
 						</button>
+							
+							
 							
 					</div>
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
+								
+				<!-- 휴대폰 인증 폼 시작 -->				
+				<form action="./PwCheckAction.me" method="post">					
+					<div class="wrap-input100 validate-input m-b-16 mt-3" data-validate = "인증번호를 입력해주세요">
+						<input class="input100" type="text" id="checkNum" name="checkNum" placeholder="인증번호" >
+						
+						<button type="button" class="btn btn-primary" id="confirm">확인</button>
+						<span class="focus-input100"></span>
+						
+					</div>
+				</form>
+				<!-- 휴대폰 인증 폼 끝 -->				
 						
 					
 			<div class="flex-sb-m w-full p-t-3 p-b-24">
@@ -113,12 +128,12 @@
 				</div>
 			</div>
 			
-
+			
 			<form action="./PwCheckMove.me" method="post">
 				<div class="container-login100-form-btn m-t-17">
 					<!-- 일반 로그인 버튼 시작 -->
 					<input class="login100-form-btn" type="submit" value="새 비밀번호 설정" id="submit">
-					<input type="hidden" name="PwCerCheck" value="N"> 
+					<input type="hidden" name="PwCerCheck" value="N" id="PwCerCheck"> 
 					<!-- 일반 로그인 버튼 끝 -->
 				</div>
 			</form>	
@@ -129,11 +144,49 @@
 	</div>
 	<!-- 컨테이너 끝 -->
 	
-	
 	<!-- footer 시작 -->
  	<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
 	
+	
+	<!-- 확인 에이잭스 시작 -->
+	<script type="text/javascript">
+	$(function() {
+		
+	        $('#confirm').click(function(){
+        	
+				var checkNum = $('#checkNum').val();
+
+	           $.ajax({
+	            url: "./PwCheckAction.me",
+	            type:"post",
+	            data:{checkNum:checkNum},
+	            success:function(data){
+
+	            	if(data == 1){
+
+  		            	alert('확인됐습니다.')
+		            	
+  						$('#PwCerCheck').val('Y');
+  		            	
+  		            	
+ 	               }else{
+ 	            	   
+ 	            	   	alert('인증번호가 다릅니다.')
+
+  						$('#PwCerCheck').val('N');
+
+ 	               } // if else
+            	   
+	            }
+	         });
+           
+           
+	        })   
+		});
+	
+	</script>
+	<!-- 확인 에이잭스 끝 -->
 	
 <!--===============================================================================================-->
 	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="zxx">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 	<title>Login V10</title>
 	<meta charset="UTF-8">
@@ -59,44 +60,86 @@
 
 
 
+	<!-- 네이버 로그인 시작 -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	<!-- 네이버 로그인 끝 -->
+
 </head>
 <body>
-
-	<!-- header 시작 -->
+    <!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-	<!-- container 시작 -->	
-	<div class="container-fluid">	
-	
-		<div class="row">
-			<div class="col-6 text-center" style="background-color: #2EFEC8;">
-				ㅇㅇ
-			</div>
-			<div class="col-6" style="background-color: #610B5E;">	
-				ㅇㅇ
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+			
+				<!-- 일반 로그인 폼 시작 -->
+				<form class="login100-form validate-form flex-sb flex-w" action="./KConLoginAction.me" method="post">
+				
+					<div class="row">
+						<span class="login100-form-title p-b-51">
+							SNS 로그인 연동
+						</span>
+						<div class="m-5" style="text-align: center;">
+							기존 계정과 연동을 위해 로그인 해주세요
+							${param.k_Email }@@@@@@@@@@@@@@@@@@@@@@
+						</div>
+						
+						<div class="wrap-input100 validate-input m-b-16" data-validate = "ID를 입력해 주세요">
+							<input class="input100" type="text" id="userID" name="userId" placeholder="ID">
+							<span class="focus-input100"></span>
+						</div>
+						
+						<div class="wrap-input100 validate-input m-b-16" data-validate = "비밀번호를 입력해 주세요.">
+							<input class="input100" type="password" id="userPass" name="userPass" placeholder="Password">
+							<span class="focus-input100"></span>
+						</div>
+						
+						<!-- 네이버 이메일 값 히든으로 같이 넘기기 -->
+						<div>
+							<input type="hidden" name="k_email" value="${param.k_Email }">
+						</div>
+					</div>
+					
+					
+					
+
+					<div class="container-login100-form-btn m-t-17">
+					
+						<!-- 일반 로그인 버튼 시작 -->
+						<input class="login100-form-btn" type="submit" value="기존 계정에 연결" id="submit"> 
+						<!-- 일반 로그인 버튼 끝 -->
+					</div>
+				</form>
 			</div>
 		</div>
-		
-		<div class="row">
-			<div class="col-6" style="background-color: #0B3B17;">
-				ㅎㅎ
-			</div>
-			<div class="col-6" style="background-color: #D8F781;">	
-				ㅎㅎ
-			</div>
-		</div>
-	
 	</div>
-	<!-- container 끝 -->	
+	
+
+	<div id="dropDownSelect1"></div>
 	
 	
-	
-	
-	
-	<!-- footer 시작 -->
+<!--===============================================================================================-->
+	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/bootstrap/js/popper.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/daterangepicker/moment.min.js"></script>
+	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="./js/login.js"></script>
+
+    <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
-	
+
 </body>
 </html>
