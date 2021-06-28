@@ -26,10 +26,22 @@ public class NoticeDAO extends DBconnection{
 	setnoticetool setTool = new setnoticetool();
 	
 	public void insertNotice(noticeDTO noti){
-		noticeinsert insertnoti = new noticeinsert();
-		insertnoti.doit(noti);
+		noticeinsert Dobbynoti = new noticeinsert();
+		Dobbynoti.doit(noti);
 		
 	}
+	public void deleteNotice(noticeDTO noti){
+		noticeinsert Dobbynoti = new noticeinsert();
+		Dobbynoti.doit(noti);
+		//도비는 자유에요!
+	}
+	public void updateNotice(noticeDTO noti){
+		noticeinsert Dobbynoti = new noticeinsert();
+		Dobbynoti.doit(noti);
+		
+	}
+	
+	
 	
 	public List getNoticeList() {
 		List notiList = new ArrayList();

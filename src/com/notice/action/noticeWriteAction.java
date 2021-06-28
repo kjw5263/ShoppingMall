@@ -28,15 +28,6 @@ public class noticeWriteAction implements Action{
 		
 		
 		
-		System.out.print("dao 호출");
-		// 디비 처리 객체 GoodsDAO 생성
-		NoticeDAO noti = new NoticeDAO();
-		noticeDTO notit = (noticeDTO)request.getAttribute("noti");
-		// List goodsList =  gdao.getGoodsList();
-		// => Action 페이지에서 사용하는 경우
-		
-		noti.insertNotice(notit);
-		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
 		forward.setPath("./notice/noticewrite.jsp");

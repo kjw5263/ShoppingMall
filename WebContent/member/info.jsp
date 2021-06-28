@@ -78,6 +78,7 @@
 					<hr>
 					<a href=""><h5>내 화장품 사용기한 
 					&nbsp;확인하기</h5></a>
+					<a href="reviewList.rev"><h5>리뷰</h5></a>
 					<hr>
 					<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a>
 					<a href="./MemberDelete.me"><h5>탈퇴하기</h5></a>

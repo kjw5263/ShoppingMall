@@ -32,7 +32,7 @@
                     <img src="./img/icons/man.png" alt="" onclick="location.href='./MemberInfo.me'">
                     <% } %>
                     <a href="#">
-                        <img src="./img/icons/bag.png" alt="">
+                        <img src="./img/icons/bag.png" alt="" onclick="location.href='./BasketList.ba'">
                         <span>2</span>
                     </a>
                     

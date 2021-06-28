@@ -1,0 +1,98 @@
+
+
+.review_rating_area {
+    margin-top: 20px;
+    border-top: 3px solid #333;
+
+}
+.inner{
+    height: 231px;
+    border-bottom: 1px solid #ddd;
+}
+.grade_img{
+    float:left;
+    width: 170px;
+    height: 231px;
+    border-right: 1px solid #ddd;
+}
+.start_area {
+    float: left;
+    width: 254px;
+    /*padding: 20px 0 0 0;*/
+
+}
+.total {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+}
+.total em {
+    font-style: normal;
+}
+.num {
+    margin-bottom: 24px;
+    line-height: 40px;
+    color:#000;
+    font-weight: bold;
+    text-align: center;
+}
+.num >strong {
+    font-size: 40px;
+}
+.num >strong + span {
+    font-size: 24px;
+    padding-left: 6px;
+}
+.star_list{
+    text-align: center;
+    font-size: 35px;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+.goods_name{
+    float: left;
+    width: 255px;
+    height: 231px;
+    padding-top: 38px;
+    border-right: 1px solid #ddd;
+
+}
+.name_list{
+    text-align: center;
+    font-size: 18px;
+}
+.write_info {
+    float: left;
+    width: 339px;
+}
+.write_info dl {
+    padding-top: 85px;
+    padding: 58px 0 0 0;
+}
+.write_info dt {
+    margin-bottom: 13px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+.alignCenter {
+    text-align: center;
+}
+.btn-primary {
+    text-align: center;
+    height: 40px;
+    /*padding: 0px 10px 10px 5px;*/
+    font-size: 20px;
+    line-height: 34px;
+    border-radius: 5px;
+
+}
+

@@ -17,11 +17,11 @@ public class noticeinsert extends DBconnection{
 		String sql = "";
 		
 			try {
-				sql = "select max(noticeNum) as num from board";
+				sql = "select max(noticeNum) as num from "+ tablename;
 				rs = con.selsql(sql);
 				rs.next() ;
 				int num = rs.getInt(1)+1;
-				sql = "insert into "+tablename + " values "
+				sql = "insert into "+ tablename + " values "
 						+ "(" + num +","+ noti.getNoticeTitle() +","
 						+ noti.getNoticeContent()
 						+","+noti.getNoticeFile() +","+
