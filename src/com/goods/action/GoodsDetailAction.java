@@ -16,12 +16,12 @@ public class GoodsDetailAction implements Action{
 
 
         ArrayList<GoodsReviewDTO> reviewList = new ArrayList<GoodsReviewDTO>();
-        int startRow = 1;
-        int pageSize = 10;
+       int page = 1;
+       int limit = 10;
         int cosNum = 0;
 
-        if (request.getParameter("pageNum") !=null){
-            startRow = Integer.parseInt(request.getParameter("pageNum"));
+        if (request.getParameter("page") !=null){
+            page = Integer.parseInt(request.getParameter("page"));
         }
         if (request.getParameter("cosNum")!=null){
             cosNum = Integer.parseInt(request.getParameter("cosNum"));
@@ -30,22 +30,21 @@ public class GoodsDetailAction implements Action{
         // DAO 객체 생성 - getGoods(cosNum);
         GoodsReviewDAO grdao = new GoodsReviewDAO();
         int listCount =grdao.getReviewCount(cosNum);
-        reviewList = grdao.selectReviewList(startRow,pageSize,cosNum);
-        int maxPage = (int)((double) listCount/pageSize + 0.95);
-        int startPage = (((int) ((double)startRow/10+0.9)) -1) *10+1;
+        reviewList = grdao.selectReviewList(page,limit,cosNum);
+        int maxPage = (int)((double) listCount/limit + 0.95);
+        int startPage = (((int) ((double)page/10+0.9)) -1) *10+1;
         int endPage = startPage+10-1;
-
         if (endPage>maxPage) endPage = maxPage;
         PageInfo pageInfo = new PageInfo();
         pageInfo.setEndPage(endPage);
         pageInfo.setListCount(listCount);
         pageInfo.setMaxPage(maxPage);
-        pageInfo.setPage(startPage);
+        pageInfo.setPage(page);
+        pageInfo.setStartPage(startPage);
         request.setAttribute("pageInfo" , pageInfo);
         request.setAttribute("reviewList", reviewList);
         GoodsDAO gdao = new GoodsDAO();
         request.setAttribute("goods",gdao.getGoods(cosNum));
-
         ActionForward forward =  new ActionForward();
         forward.setPath("./goods/goods_detail.jsp");
         forward.setRedirect(false);

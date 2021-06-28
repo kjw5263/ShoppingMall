@@ -39,16 +39,13 @@
     int cosNum = Integer.parseInt(request.getParameter("cosNum"));
     request.setAttribute("goods",gdao.getGoods(cosNum));
     GoodsDTO gdto = (GoodsDTO) request.getAttribute("goods");
-
-
-
   %>
 
 
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Accessible rating example</title>
+<title>리뷰 등록</title>
 <link rel="stylesheet" type="text/css" href="goods_board/style/starability-minified/starability-all.min.css"/>
 
 
@@ -56,14 +53,10 @@
 
 
  <h1>별점과 리뷰를 남겨주세요.</h1>
-  <form  method="post" action="./reviewFormPro.rev">
-    <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 350px">
+  <form  method="post" action="./reviewFormPro.rev" enctype="multipart/form-data">
+    <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 250px">
         <fieldset class="starability-basic" id="rating" aria-required="false">
           <legend>별점을 선택해 주세요.</legend>
-          
-
-
-
           <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
           <input type="radio" id="rate1" name="rating" value="1" />
           <label for="rate1">1 star.</label>
@@ -86,14 +79,18 @@
         <input type="hidden" name="cosNum" value="<%=gdto.getCosNum() %>">
 
     <br>
+
+
     <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
     <label>
       <textarea rows="10" minlength="5" name="reviewContent" required></textarea>
     </label>
 
       <input type="submit" id="save" value="등록">
-      <input type="reset" value="취소">
-    <input type="file" name="reviewImage">
+      <input type="reset" value="취소"><input type="file" name="file1">
+
+
+
   </form>
 
 </body>
