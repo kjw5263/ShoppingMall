@@ -9,7 +9,7 @@ public class GoogleAuthentication extends Authenticator{
 	PasswordAuthentication passAuth;
 	
 	public GoogleAuthentication() {
-		passAuth = new PasswordAuthentication("cosshopping29@gmail.com", "itwillbs!");
+		passAuth = new PasswordAuthentication("cosshopping29", "jlrqrcwamchcagcr");
 	
 	}
 	
@@ -18,4 +18,3 @@ public class GoogleAuthentication extends Authenticator{
 	}
 
 }
-

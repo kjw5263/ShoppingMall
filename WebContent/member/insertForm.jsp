@@ -8,26 +8,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../img/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="./img/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="./fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/animate/animate.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/select2/select2.min.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../css/util.css">
-	<link rel="stylesheet" type="text/css" href="../css/login.css">
+	<link rel="stylesheet" type="text/css" href="./css/util.css">
+	<link rel="stylesheet" type="text/css" href="./css/login.css">
 <!--===============================================================================================-->
 
 
@@ -39,13 +39,13 @@
         rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
     
     <!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -62,20 +62,16 @@
 				{
 					oncomplete : function(data) {
 						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 						var fullAddr = ''; // 최종 주소 변수
 						var extraAddr = ''; // 조합형 주소 변수
-
 						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 							fullAddr = data.roadAddress;
-
 						} else { // 사용자가 지번 주소를 선택했을 경우(J)
 							fullAddr = data.jibunAddress;
 						}
-
 						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
 						if (data.userSelectedType === 'R') {
 							//법정동명이 있을 경우 추가한다.
@@ -91,11 +87,9 @@
 							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
 									+ ')' : '');
 						}
-
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
 						document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
 						document.getElementById('address2').value = fullAddr; // 선택한 주소 들어가는곳
-
 						// 커서를 상세주소 필드로 이동한다.
 						document.getElementById('address3').focus(); //상세주소 동 호수 기입하는곳
 					}
@@ -116,9 +110,8 @@
 	
 	<!-- 유효성 체크  시작  (name, id, pw, pw1, phone, address) -->
 
-	<script type="text/javascript"> //id값
+	<script type="text/javascript"> 
 	
-
 	
 	$(document).ready(function(){
 		
@@ -129,13 +122,14 @@
 		var ck5=false;			//phone
 		var ck6=false;			//address2
 		var ck7=false;			//address3
+		
 		$("#signUp").submit(function(){
 			
-			 if($.trim($("#id").val()) == ""){
+			 if($.trim($("#userId").val()) == ""){
 				 $('.ckMsg_id').text("아이디를 입력하세요");     
 	             $('.ckMsg_id').css("color","red"); 
 	             $('.ckMsg_id').css("padding-left","1rem"); 
-	             $("#id").focus();
+	             $("#userId").focus();
 	             return false;
 			 }
 			 if($.trim($("#pw").val()) == ""){
@@ -196,19 +190,19 @@
 			 }
 	
 		
-
 	 });	 // signUp (공백체크)
 	 
-		$("#id").keyup(function(){
-			var userId = $("#id").val();
+		$("#userId").keyup(function(){
+			var userId = $("#userId").val();
 			var check = /^[A-Za-z\d_-]{4,15}$/;
 			
 			$.ajax({
-				 url:'./MemberCheckAction',
+				 url:'./MemberCheckAction.me',
 			     type:'post',
-			     data:{"user_id":user_id}, 
+			     data:{"userId":userId}, 
 			     success:function(data){
-			    	if(data.trim() > 0){
+		    			    	 
+			    	 if(data > 0){
 			                $('.ckMsg_id').text("이미 존재하는 아이디입니다");     
 			                $('.ckMsg_id').css("color","red"); 
 			                $('.ckMsg_id').css("padding-left","1rem"); 
@@ -231,7 +225,7 @@
 		                alert("에러입니다");
 		               	}
 		          });
-			});//id 중복확인
+			});//id 중복확인 
 		 
 		 $("#pw").keyup(function(){
 			 var userPass = $("#pw").val();
@@ -249,7 +243,7 @@
 					$('.ckMsg_pw').css("padding-left","1rem"); 
 					ck2 = true; 
 			 }else{
-				 	$('.ckMsg_pw').text("대소문자,숫자,특수문자(@$!%*#?&) 중 세가지를 조합한 8~16자리를 입력하세요");     
+				 	$('.ckMsg_pw').text("대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");     
 					$('.ckMsg_pw').css("color","red"); 
 				 	$('.ckMsg_pw').css("padding-left","1rem");
 		 		 	ck2 = false;									
@@ -277,7 +271,7 @@
 		 $("#name").keyup(function(){
 			 
 			 var name = $("#name").val();
-			 var check = /^[A-Z|a-z|가-힣]{1,14}$/;
+			 var check = /^[A-Z|a-z|가-힣]{2,5}$/;
 			 if(name.match(check) != null){
 					$('.ckMsg_name').text("");     
 					ck4 = true;
@@ -317,14 +311,15 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-				<form class="login100-form validate-form flex-sb flex-w" action="./MemberJoinAction.me" method="post" id="signUp" name="signUp">
+			<form class="login100-form validate-form flex-sb flex-w" action="./MemberJoinAction.me" method="post">
+				<!-- <form class="login100-form validate-form flex-sb flex-w" action="./MemberJoinAction.me" method="post" id="signUp" name="signUp"> -->
 					<span class="login100-form-title p-b-51">
 						회원가입
 					</span>
 
 						*아이디 <span class="ckMsg_id"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "아이디를 입력해주세요">
-								<input class="input100" type="text" id="id" name="userId" placeholder="아이디를 입력해주세요">
+								<input class="input100" type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요">
 							<span class="focus-input100"></span>
 						</div>
 						
@@ -359,14 +354,20 @@
 						</div>
 						
 						*이메일
-						<div class="wrap-input100 validate-input m-b-16">
+						<%-- <div class="wrap-input100 validate-input m-b-16">
 								<input class="input100" type="email" name="userEmail" 
 								<%if(request.getParameter("userEmail") != null){ %>
 								value=<%=request.getParameter("userEmail")%>
 								<%} %> placeholder="예) 세션값->email@email.com" readonly>
 							<span class="focus-input100"></span>
-						</div>
+						</div>     이메일 인증 연동할때 주석풀고 밑에 input form 삭제        --%>
 						
+						<div class="wrap-input100 validate-input m-b-16">
+								<input class="input100" type="email" name="userEmail" 
+								placeholder="예) 세션값->email@email.com" >
+							<span class="focus-input100"></span>
+						</div>
+			
 						*성별
 						<div class="wrap-input100 validate-input m-b-16">
 								<input type="radio" name="userGender" value="남"> 남
@@ -376,7 +377,7 @@
 						</div>
 						
 						*주소
-							<input type="button"  value="주소찾기" onclick="DaumPostcode()">
+							<input type="button"  value="우편번호찾기" onclick="DaumPostcode()">
 						<div class="wrap-input100 validate-input m-b-16">
 							<span class="ckMsg_addr1"></span>
 								<input class="input100" type="text" name="address1" id="address1" placeholder="우편번호" readonly>
@@ -398,10 +399,10 @@
 						
 						*피부타입
 						<div class="wrap-input100 validate-input m-b-16">
-							<input type="radio" name="userskinType" value="건성"> 건성
-							<input type="radio" name="userskinType" value="중성"> 중성
-							<input type="radio" name="userskinType" value="지성"> 지성
-							<input type="radio" name="userskinType" value="복합성"> 복합성
+							<input type="radio" name="userSkinType" value="건성"> 건성
+							<input type="radio" name="userSkinType" value="중성"> 중성
+							<input type="radio" name="userSkinType" value="지성"> 지성
+							<input type="radio" name="userSkinType" value="복합성"> 복합성
 						</div>
 					
 						*피부고민
@@ -412,17 +413,16 @@
 							<input type="radio" name="userTrouble" value="해당없음"> 해당없음
 						</div>
 						
-						*추천인 아이디 (DB에서 검색 후 값 입력)
+						*추천인 아이디 //(id,name="referral")
 						<div class="wrap-input100 validate-input m-b-16">
-								<input class="input100" type="text" id="referral_id" name="referral" placeholder="추천인 아이디">
-							<span class="focus-input100"></span>
+								<input type="text" id="referral_id" name="referral_id" placeholder="추천인 아이디">
 						</div>
 						
 			
 					<div class="container-login100-form-btn m-t-17">
-						<button class="login100-form-btn">
-							Login
-						</button>
+						<input type="submit" class="login100-form-btn" value="Login">
+							
+						
 					</div>
 
 				</form>
@@ -434,21 +434,21 @@
 	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->
-	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="../vendor/animsition/js/animsition.min.js"></script>
+	<script src="./vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-	<script src="../vendor/bootstrap/js/popper.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./vendor/bootstrap/js/popper.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="../vendor/select2/select2.min.js"></script>
+	<script src="./vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
-	<script src="../vendor/daterangepicker/moment.min.js"></script>
-	<script src="../vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="./vendor/daterangepicker/moment.min.js"></script>
+	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-	<script src="../vendor/countdowntime/countdowntime.js"></script>
+	<script src="./vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="../js/login.js"></script>
+	<script src="./js/login.js"></script>
 
     <!-- footer 시작 -->
     
