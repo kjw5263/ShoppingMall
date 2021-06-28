@@ -70,7 +70,71 @@ function openAddrPop() {
 }
 </script>
 <script type="text/javascript">
+function redirectFunc() {
+	
+}
+
+function payClick() {
+	
+	
+	var radioVal = $('input[name="payType"]:checked').val();
+	if(radioVal == "카드결제"){
+		
+	}else if(radioVal == "계좌이체"){
+		
+	}else if(radioVal == "카카오페이"){
+		var url = "./goods_order/kakaoSuccess.jsp";
+		var title = "kakao payment";
+		var status = "width=426, height=542";
+		window.open(url, title, status);
+		
+		var frmData = document.frmData;
+		frmData.target=title;
+		frmData.action = url;
+		frmData.method="post";
+		frmData.submit();
+		
+	}
+	else if(radioVal == "무통장입금"){
+		
+	}
+// 	function openPopup() {
+// 		window.open("./kakaoSuccess.jsp", "","width=426, height=542");
+// 	}
+	
+	//배송지 정보 입력 여부 체크
+	
+	// 받는사람 입력여부 
+	if(document.getElementById("receiverName").value==""){
+		alert("받는사람을 입력하세요 ");
+		return false;
+	}
+	
+	if(document.getElementById("receiverTel1").value==""){
+		alert("연락처를 입력해주세요.");
+		return false;
+	}
+	
+	if(document.getElementById("zonecode").value == "" || document.getElementById("addr").value== ""|| document.getElementById("addr_detail").value == "" ){
+		alert("주소는 필수입력 항목입니다.");
+		return false;
+	}
+	
+
+}
+
+
+</script>
+<script type="text/javascript">
 $(document).ready(function () {
+
+	
+	
+	// 천단위 콤마 찍기
+	function addComma(str){
+		str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
 	
 	/* 주소지 지정- 기존배송지, 신규배송지 radio 선택 */
 	$('input[name="addrType"]').change(function(){
@@ -92,20 +156,70 @@ $(document).ready(function () {
 	});
 	/* 주소지 지정- 기존배송지, 신규배송지 radio 선택 */
 	
+	// 총금액 콤마빼고 숫자값만 저장
+	var sumMoney = Number($('#summoney').text().replace(/,/g, ""));	//합계금액
+	var ttMoney = Number($('#ttmoney').text().replace(/,/g, ""));	//최종금액
+	var cpDc = 0;
+	var pointDc= 0;
+	
+	// 배송 메시지 '직접 입력' 선택 시 input 박스 생성
+	$('#o_msg').change(function(){
+		var a = $('#o_msg option:selected').val();
+		if(a == 80){
+			$('#shipmsg').prop('type', 'text');
+			$('#shipmsg').focus();
+		} else {
+			$('#shipmsg').prop('type', 'hidden');
+		}
+	});
+	
+	
+	/* 쿠폰 선택하면 됨 */
+	$('#selectCoupon').change(function(){
+		var e = Number($('#selectCoupon option:selected').val());
+		var cname = $('#selectCoupon option:selected').text();
+		$('#delCp').prop('value', cname);
+		var dcNum = sumMoney * e/100;		//할인율(10%)
+		$('#usecoupon').text(addComma(dcNum*(-1)));	//차감될금액(-1000원) 화면에 표시
+		cpDc = dcNum;
+		$('#ttmoney').text(addComma(ttMoney-(pointDc+cpDc)));
+		$('#ttmoneyData').prop('value',ttMoney-(pointDc+cpDc));
+	});
+	
 	
 	/* 포인트 입력 keyup 이벤트 */
+	// 1. 소유한 포인트보다 많이 입력할경우 경고
 	$('#userPoint').keyup(function() {
 		if(Number($('#userPoint').val()) > ${memberDTO.userPoint}){
 			alert("소유한 포인트보다 초과하여 적용할 수 없습니다.");
 			$('#userPoint').val(0);
+			//$('#ttmoney').text($('#summoney').text());
+			$('#ttmoney').text(addComma(ttMoney-(pointDc+cpDc)));
+		} else if(Number($('#userPoint').val())<0){
+			alert("포인트는 0포인트 이상 입력해야 합니다.");
+			$('#userPoint').val(0);
 		}
 	});
 	
-
+	// 2. 포인트 입력칸 포커스 해제 시 적용
 	$('#userPoint').blur(function() {
-		$('#usepoint').text(($('#userPoint').val())*-1);
-		$('#ttmoney').text(Number($('#ttmoney').text())-Number($('#userPoint').val()));
+		$('#usepoint').text(addComma(($('#userPoint').val())*-1));
+		pointDc = Number($('#userPoint').val());
+		$('#ttmoney').text(addComma(ttMoney-(pointDc+cpDc)));
+		$('#ttmoneyData').prop('value',ttMoney-(pointDc+cpDc));
 	});
+	
+
+	
+// 	$('input[name="payType"]').change(function(){
+// 		if($('input[name="payType"]:checked').val() == "cardPay"){
+			
+// 		} else {
+			
+// 		}
+// 	});
+	
+	
 	
 	
 });
@@ -187,8 +301,23 @@ $(document).ready(function () {
 		</table>
 		</div> <!-- 장바구니 정보 테이블 닫는 div -->
 		
-		<form action="#" method="post">
+		
+		
+		<!-- onsubmit="return payClick()" -->
+		<form action="./OrderConfirm.or" name="frmData" method="post" accept-charset="utf-8" onsubmit="return payClick()">
+		<%
+			GoodsDTO gdto = (GoodsDTO)goodsList.get(0);
+		%>
+		<input type="hidden" name="goodsTitle" value="<%=gdto.getCosName()%> 외 <%=basketList.size()-1 %>개">
 		<!-- 새로운 inner Layout : 사용자/쿠폰 영역, 금액영역 -->
+		<input type="hidden" name="userId" value="<%=mDTO.getUserId() %>">			<!-- 사용자 아이디  -->
+		<input type="hidden" name="delCp" value="" id="delCp"> 						<!--사용한 쿠폰이름 -->
+		<input type="hidden" name="sumMoneyData" id="sumMoneyData" value="<%=sumMoney %>"> <!-- 합계금액 -->
+		<input type="hidden" name="ttmoneyData" id="ttmoneyData" value=""> 			 	<!-- 최종금액 -->
+		<input type="hidden" name="addPoint" id="addPoint" value="<%=sumMoney*1/100 %>"><!-- 적립예정 포인트 -->
+		<input type="hidden" name="userEmail" value="<%=mDTO.getUserEmail() %>">		<!-- 사용자 이메일 -->
+		<input type="hidden" name="userName" value="<%=mDTO.getUserName() %>">			<!-- 사용자 이름 -->
+		<input type="hidden" name="userTel" value="<%=mDTO.getUserTel() %>">			<!-- 사용자 전화번호 -->
 		<div class="row">
 		<div class="col-8">
 		<h4>배송지 정보</h4>
@@ -205,23 +334,19 @@ $(document).ready(function () {
 				</td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active" id="addrName">배송지명</th>
-				<td><input type="text" style="width:200px;" id="addrName"></td>
-			</tr>
-			<tr>
-				<th scope="row" class="table-active">받는 분</th>
+				<th scope="row" class="table-active">*받는 분</th>
 				<td><input type="text" class="form-control" name="receiverName" id="receiverName" value="<%=mDTO.getUserName()%>"></td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">연락처1</th>
-				<td><input type="text" class="form-control" name="receiverTel1" id="receiverTel1" value="<%=mDTO.getUserTel()%>"></td>
+				<th scope="row" class="table-active">*연락처</th>
+				<td><input type="text" class="form-control" name="receiverTel1" id="receiverTel1" value="<%=mDTO.getUserTel()%>" placeholder="-제외 입력"></td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">연락처2</th>
-				<td><input type="text" class="form-control" name="receiverTel2" id="receiverTel2"></td>
+				<th scope="row" class="table-active">연락처</th>
+				<td><input type="text" class="form-control" name="receiverTel2" id="receiverTel2" placeholder="-제외 입력"></td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">주소</th>
+				<th scope="row" class="table-active">*주소</th>
 				<td>
 					<div class="form-inline">
 					<div class="form-group mx-sm mb-2">
@@ -241,15 +366,18 @@ $(document).ready(function () {
 			<tr>
 				<th scope="row" class="table-active">배송 메시지</th>
 				<td>
-					<select class="form-control" name="o_msg">
-						<option value="">배송메시지를 선택하세요.</option>
-						<option value="10">부재시 경비실에 맡겨주세요.</option>
-						<option value="20">부재시 문 앞에 놓아주세요.</option>
-						<option value="30">파손의 위험이 있는 상품이오니, 배송 시 주의해주세요.</option>
-						<option value="40">배송 전 연락주세요.</option>
-						<option value="50">택배함에 넣어주세요.</option>
-						<option value="80">직접 입력</option>
-					</select>
+					<div class="input-group">
+						<select class="form-control" name="o_msg" id="o_msg">
+							<option value="">배송메시지를 선택하세요.</option>
+							<option value="10">부재시 경비실에 맡겨주세요.</option>
+							<option value="20">부재시 문 앞에 놓아주세요.</option>
+							<option value="30">파손의 위험이 있는 상품이오니, 배송 시 주의해주세요.</option>
+							<option value="40">배송 전 연락주세요.</option>
+							<option value="50">택배함에 넣어주세요.</option>
+							<option value="80">직접 입력</option>
+						</select>
+					</div>
+					<div class="input-group"><input type="hidden" class="form-control" name="o_msg" id="shipmsg" value="" maxlength="30"></div>
 				</td>
 			</tr>
 		</table>
@@ -263,17 +391,13 @@ $(document).ready(function () {
 			<tr>
 				<th scope="row" class="table-active" style="width:150px;">쿠폰</th>
 				<td>
-					<select class="form-control" name="selectCoupon">
-						<option value="">쿠폰선택 안함</option>
+					<select class="form-control" name="selectCoupon" id="selectCoupon">
+						<option value="0">쿠폰선택 안함</option>
 						<c:forEach var="i" items="${couponList }">
-						<option value="${i.couponName }">${i.couponName }</option>
+						<option value="${i.couponDc }">${i.couponName }</option>
 						</c:forEach>
 					</select>
-					<script type="text/javascript">
-						for(var i=0; i<couponList.size(); i++){
-							
-						}
-					</script>
+					
 				</td>
 			</tr>
 			<tr>
@@ -282,6 +406,25 @@ $(document).ready(function () {
 			</tr>
 		</table>
 		</div> <!-- 포인트/쿠폰 테이블 묶는 div -->
+		
+		
+		<!-- 결제수단 테이블 묶는 div -->
+		<h4>결제수단 선택</h4>
+		<div  style="width : 100%;">
+		<table class="table" id="payTable">
+			<tr>
+				<td colspan="2">
+					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="cardPay" value="카드">카드결제</span>
+					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="accountPay" value="계좌이체">계좌이체</span>
+					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="kakaoPay" value="카카오페이">카카오페이</span>
+					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="cashPay" value="무통장입금">무통장입금</span>
+				</td>
+			</tr>
+			<tr id="payArea" >
+				<!-- 추후에 해결하기  -->
+			</tr>
+		</table>
+		</div> <!-- 결제수단 테이블 묶는 div -->
 		
 		
 		</div>  <!-- 배송정보,쿠폰 영역 묶는 div -->
@@ -294,26 +437,27 @@ $(document).ready(function () {
 		<table class="table table-bordered">
 			<tr>
 				<th scope="row" style="width:200px;">총 상품금액</th>
-				<td style="width:200px;"><span><%=fmMoney.format(sumMoney) %></span>원</td>
+				<td style="width:200px; font-weight:bold;"><span id="summoney"><%=fmMoney.format(sumMoney) %></span>원</td>
 			</tr>
 			<tr>
-				<th scope="row" style="width:200px;" >쿠폰 할인금액</th>
-				<td style="width:200px;"><span>0</span>원</td>
+				<th scope="row" style="width:200px;">적립예정 포인트</th>
+				<td style="width:200px;"><span><%=fmMoney.format(sumMoney*1/100) %></span>원</td>
+			</tr>
+			<tr>
+				<th scope="row" style="width:200px;">쿠폰 할인금액</th>
+				<td style="width:200px;"><span id="usecoupon">0</span>원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;" >포인트</th>
 				<td style="width:200px;"><span id="usepoint">0</span>원</td>
 			</tr>
-			<tr>
-				<th scope="row" style="width:200px;" >적립예정 포인트</th>
-				<td style="width:200px;"><span><%=fmMoney.format(sumMoney*1/100) %></span>원</td>
-			</tr>
+			
 			<tr>
 				<th scope="row" style="width:200px;" ><strong>최종금액</strong></th>
-				<td style="width:200px;"><span id="ttmoney"><strong><%=sumMoney%></strong></span>원</td>
+				<td style="width:200px; font-weight:bold;"><span id="ttmoney"><%=fmMoney.format(sumMoney) %></span>원</td>
 			</tr>
 			<tr>
-				<td scope="row" colspan="2"><input type="submit" value="결제하기" onclick="" class="btn btn-secondary btn-lg"></td>
+				<td scope="row" colspan="2"><input type="button" onclick="payClick()" id="payButton" class="btn btn-secondary btn-lg" value="결제하기"></td>
 			</tr>
 		</table>
 		</div> <!-- 금액 테이블 묶는 div -->
@@ -329,11 +473,6 @@ $(document).ready(function () {
 	
 	</div> <!-- 전체 묶는 -->
 	<!-- container 끝 -->	
-	
-	
-	
-	
-	
 	
 	
 	<!-- footer 시작 -->
