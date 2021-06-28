@@ -69,6 +69,8 @@ public class noticeWriteProAction implements Action{
 		notit.setNoticeFile(multi.getFilesystemName("filename"));
 		// List goodsList =  gdao.getGoodsList();
 		// => Action 페이지에서 사용하는 경우
+		
+		System.out.println("여기 지나감159");
 		System.out.println(notit.toString());
 		noti.insertNotice(notit);
 		

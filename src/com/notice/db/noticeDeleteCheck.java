@@ -17,18 +17,15 @@ public class noticeDeleteCheck {
 		
 			try {
 				
-				sql = "select userNum from " + tablename 
-						+ " where userId = 'admin' ";
-				rs = con.selsql(sql);
-				rs.next();
-				if(rs.getInt(1) == 1){
+				
+				if(id.equals("admin")){
 					x = 1;
 				}else{
 					x=0;
 				}
-
-
-				System.out.println("DAO : 삭제 유제 체크 완료");
+				
+				
+				System.out.println("DAO : 삭제 유제 체크 완료 + x = "+ x);
 
 			} catch (Exception e) {
 				e.printStackTrace();

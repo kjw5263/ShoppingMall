@@ -30,9 +30,9 @@ public class NoticeDAO extends DBconnection{
 		Dobbynoti.doit(noti);
 		
 	}
-	public void deleteNotice(noticeDTO noti){
+	public void deleteNotice(String noticeNum){
 		noticeDelete Dobbynoti = new noticeDelete();
-		Dobbynoti.doit(noti);
+		Dobbynoti.doit(noticeNum);
 		//도비는 자유에요!
 	}
 	public void updateNotice(noticeDTO noti){

@@ -115,6 +115,11 @@ table {
 			type = "이벤트";
 		}
 		
+		if(notit.getNoticeFile().equals("null")){
+			notit.setNoticeFile("파일없음");
+			notit.setNoticeRealFileName("파일없음");
+		}
+		
 	%> 
 	<br>
 <button onclick="location.href='http://localhost:8088/ShoppingMall/notice.nos'">목록으로</button>	
@@ -134,7 +139,7 @@ table {
         
         
         <%
-        if (notit.getNoticeFile() == null){
+        if (notit.getNoticeFile().equals("파일없음")){
         	%>
         	첨부파일 없음
         	<%

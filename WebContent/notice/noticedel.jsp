@@ -37,7 +37,7 @@
 
 	<%
 		// 전달정보 저장 - pageNum
-		String num = (String) request.getParameter("num");
+		String noticeNum = (String) request.getParameter("noticeNum");
 		String pageNum =  (String)request.getParameter("pageNum");
 		String id =  (String)request.getParameter("userId");
 		// 전달정보 저장 - 액션태그 (자바빈)- num,pass
@@ -57,7 +57,7 @@
 			}
 		
 	%>
-	<form action="deletePro.jsp?pageNum=<%=pageNum%>&num=<%=num%>"
+	<form action="noticedelpro.nos?pageNum=<%=pageNum%>&noticeNum=<%=noticeNum%>"
 		method="post">
 		<input type="submit" value="삭제하기">
 	</form>

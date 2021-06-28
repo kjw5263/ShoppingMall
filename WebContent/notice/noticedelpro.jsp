@@ -31,7 +31,7 @@
 <body>
 
 	<%
-		int num = Integer.parseInt(request.getParameter("num"));
+		int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
 		String pageNum = request.getParameter("pageNum");
 	%>
 	<!-- header 시작 -->
