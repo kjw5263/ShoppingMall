@@ -1,11 +1,14 @@
 package com.member.action;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.goods.db.GoodsDTO;
+import com.like.db.LikeDAO;
 import com.member.db.MemberDAO;
 import com.member.db.MemberDTO;
 
@@ -30,6 +33,12 @@ public class MemberInfoAction implements Action{
 		MemberDAO mdao = new MemberDAO();
 		MemberDTO mdto = mdao.getMemberInfo(userId);
 		
+		LikeDAO ldao = new LikeDAO();
+		List LikeList = ldao.getLikeList(userId);
+		List couponList = mdao.getCoupon(userId);
+	    
+		request.setAttribute("couponList", couponList);
+		request.setAttribute("LikeList", LikeList);
 		request.setAttribute("mdto", mdto);
 		
 		forward.setPath("./member/info.jsp");

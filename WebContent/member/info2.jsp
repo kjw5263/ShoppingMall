@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 
 <style type="text/css">
-* {
+*{
 	margin: 0;
 }
 
@@ -106,8 +106,7 @@
 
 					<div class="col-9">
 
-						<fieldset
-							style="border: 3px solid #B0BCC2; padding: 40px; width: 100%;">
+						<fieldset style="border: 4px solid #B0BCC2; padding: 40px; width: 100%;" >
 							<div class="row">
 								<h3><%=mdto.getUserName()%>님의 정보
 								</h3>
@@ -115,42 +114,46 @@
 							</div>
 							<div class="row" style="text-align: center; font-size: 20px;"
 								id="grade">
+								<div class="col-3">
+									<%if(mdto.getUserTotal() > 0 && mdto.getUserTotal()<= 99999 ){ %>
+									등급 &nbsp;&nbsp;<b>1</b> level
+									<%} %>
+									<%if(mdto.getUserTotal() >= 100000 && mdto.getUserTotal()<= 149999 ){ %>
+									등급 &nbsp;&nbsp;<b>2</b> level
+									<%} %>
+									<%if(mdto.getUserTotal() >= 150000 && mdto.getUserTotal()<= 199999 ){ %>
+									등급 &nbsp;&nbsp;<b>3</b> level
+									<%} %>
+									<%if(mdto.getUserTotal() >= 200000 ){ %>
+									등급 &nbsp;&nbsp;<b>4</b> level
+									<%} %>
+								</div>
+								<%
+				int cnt = 0;
+								
+				if(couponList.size() != 0){				
+				for(int i=0;i<couponList.size();i++){ 
+					CouponDTO cdto = (CouponDTO)couponList.get(i);
+					cnt += cdto.getMcAmount();
+					System.out.println(cnt);
+								}
+				}
+								%>
 
-
-								<table class="table table-borderless">
-									<tr>
-										<th>등급</th>
-										<th>쿠폰</th>
-										<th>포인트</th>
-										<th>적립금</th>
-									</tr>
-									<tr>
-										<td>
-											<%if(mdto.getUserTotal() > 0 && mdto.getUserTotal()<= 99999 ){ %>
-											<b>1</b> level <%} %> <%if(mdto.getUserTotal() >= 100000 && mdto.getUserTotal()<= 149999 ){ %>
-											<b>2</b> level <%} %> <%if(mdto.getUserTotal() >= 150000 && mdto.getUserTotal()<= 199999 ){ %>
-											<b>3</b> level <%} %> <%if(mdto.getUserTotal() >= 200000 ){ %>
-											<b>4</b> level <%} %>
-										</td>
-										<%
-											int cnt = 0;
-
-											if (couponList.size() != 0) {
-												for (int i = 0; i < couponList.size(); i++) {
-													CouponDTO cdto = (CouponDTO) couponList.get(i);
-													cnt += cdto.getMcAmount();
-													System.out.println(cnt);
-												}
-											}
-										%>
-										<td><a href="./MyCoupon.me"><b><%=cnt %></b></a> 장</td>
-										<td><a href="" style="color: orange;"><b><%=mdto.getUserPoint() %></b></a>P</td>
-										<td><a href="" style="color: orange;"><b><%=mdto.getUserPoint() %></b></a>원</td>
-									</tr>
-								</table>
+								<div class="col-3">
+									쿠폰 &nbsp;&nbsp; <a href="./MyCoupon.me"><b><%=cnt %></b></a> 장
+								</div>
+								<div class="col-3">
+									포인트 &nbsp;&nbsp; <a href="" style="color: orange;"><b><%=mdto.getUserPoint() %></b></a>P
+								</div>
+								<div class="col-3">
+									적립금 &nbsp;&nbsp;<a href="" style="color: orange;"><b><%=mdto.getUserPoint() %></b></a>원
+								</div>
 							</div>
+							
+							
 						</fieldset>
-
+						
 						<h3 style="margin-bottom: 10px; margin-top: 100px;">주문조회</h3>
 						<hr>
 						<div class="row" style="text-align: center; font-size: 16px;">
@@ -250,7 +253,10 @@
 								</div>
 							</div>
 						</fieldset>
-						<br> <br> <br> <br> <br> <br>
+						<br> <br> <br>
+						
+
+						<br> <br> <br>
 
 					</div>
 

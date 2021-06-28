@@ -74,7 +74,7 @@
 						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
 							href="./getLike.li"><h5>찜목록</h5></a>
 						<hr>
-						<a href="./MyCoupon.me"><h5>내 쿠폰</h5></a> <a href=""><h5>포인트</h5></a>
+						<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
 						<hr>
 						<a href=""><h5>내 화장품 사용기한 &nbsp;확인하기</h5></a>
 						<hr>
