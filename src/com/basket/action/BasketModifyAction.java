@@ -5,41 +5,38 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.basket.db.BasketDAO;
+import com.basket.db.BasketDTO;
+import com.goods.db.GoodsDTO;
 
-public class BasketDeleteAction implements Action {
+public class BasketModifyAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("M : BasketModifyAction_execute() 호출");
 		
-		System.out.println("M : BasketDeleteAction_execute() 호출");
-		
-		// 세션 제어
+		//세션 제어
 		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("userId");
+		String userID = (String) session.getAttribute("userId");
 		
 		ActionForward forward = new ActionForward();
-		if(userId == null){
+		if(userID == null){
 			forward.setPath("./MemberLogin.me");
 			forward.setRedirect(true);
 			return forward;
 		}
+
+		BasketDTO bkdto = new BasketDTO();
+		bkdto.setBasketNum(Integer.parseInt(request.getParameter("bkNum")));
+		bkdto.setBasketCosAmount(Integer.parseInt(request.getParameter("amount")));
 		
-		// 전달된 파라미터값 저장 (del-id)
-		String[] bNum = request.getParameterValues("del-id");
-		// DAO 객체 생성 - basketDelete(basketNum)
 		BasketDAO bkdao = new BasketDAO();
-		int[] basketNum = new int[bNum.length];
-		for(int i=0; i<bNum.length; i++){
-			basketNum[i] = Integer.parseInt(bNum[i]);
-		}
+		bkdao.modifyBasket(bkdto);
 		
-		int result = bkdao.basketDelete(basketNum);
-		
-		// 페이지 이동 (./BasketList.ba)
+		// 페이지 이동
 		forward.setPath("./BasketList.ba");
 		forward.setRedirect(true);
-		
 		return forward;
+
 	}
 
 }
