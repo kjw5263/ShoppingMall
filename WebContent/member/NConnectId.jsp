@@ -30,7 +30,6 @@
 <!--===============================================================================================-->
 
 
-
     <meta name="description" content="Yoga Studio Template">
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,52 +50,82 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
-
-
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
 
-
-
 </head>
-<body>
 
+<body>
+				
 	<!-- header 시작 -->
- 		<jsp:include page="../header/header.jsp" />
+ 	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-	<!-- container 시작 -->	
-	<div class="container-fluid">	
-	
-		<div class="row">
-			<div class="col-6 text-center" style="background-color: #2EFEC8;">
-				ㅇㅇ
-			</div>
-			<div class="col-6" style="background-color: #610B5E;">	
-				ㅇㅇ
+	<!-- 컨테이너 시작 -->
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+			
+				<!-- 일반 로그인 폼 시작 -->
+				
+					<div class="row">
+						<span class="login100-form-title p-b-51">
+							CosShopping 가입 안내 <br>
+						</span>
+					</div>
+						
+					<div class="m-5" style="text-align: center;">
+						<span style="color: green;">Naver</span> 인증이 완료 되었습니다. <br>
+						
+						추가 정보를 입력하시면 <span style="color: green;">Naver</span> 아이디로 <br>
+						로그인 하실 수 있습니다. <br>
+						${n_Email }@@@@@@@@@@@@@@@@@@@@@@
+					</div>	
+					
+					<div>
+						<!-- 새로운 회원가입 및 연동 버튼 시작 -->
+						<input class="login100-form-btn" type="button" value="회원가입 및 연동하기" onclick="location.href='./MemberLogin.me'"> 
+						<!-- 새로운 회원가입 및 연동 버튼 끝 -->
+					</div>
+					
+					<div>
+						<!-- 기존회원 연동 버튼 시작 -->
+						<form action="./NloginConnected.me" method="post">
+							<input type="hidden" value="${n_Email }" name="n_Email">
+							<input class="login100-form-btn mt-3" type="submit" value="기존 계정에 연동하기">
+						</form> 
+						<!-- 기존회원 연동 버튼 끝 -->
+					</div>
+				
 			</div>
 		</div>
-		
-		<div class="row">
-			<div class="col-6" style="background-color: #0B3B17;">
-				ㅎㅎ
-			</div>
-			<div class="col-6" style="background-color: #D8F781;">	
-				ㅎㅎ
-			</div>
-		</div>
-	
 	</div>
-	<!-- container 끝 -->	
-	
-	
-	
+	<!-- 컨테이너 끝 -->
 	
 	
 	<!-- footer 시작 -->
-   		<jsp:include page="../footer/footer.jsp" />
+ 	<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
+    
 	
+<!--===============================================================================================-->
+	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/bootstrap/js/popper.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/daterangepicker/moment.min.js"></script>
+	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="./vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="./js/login.js"></script>    
+    
+    
 </body>
 </html>

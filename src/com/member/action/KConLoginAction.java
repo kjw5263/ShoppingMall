@@ -8,19 +8,24 @@ import javax.servlet.http.HttpSession;
 
 import com.member.db.MemberDAO;
 
-public class MemberLoginAction implements Action {
+public class KConLoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("M :MemberLoginAction_execute() 실행 ");
+		System.out.println("M :NConLoginAction_execute() 실행 ");
 
 		// 전달정보 저장(id,pass)
 		String userId = request.getParameter("userId");
 		String userPass = request.getParameter("userPass");
-
+		String k_email = request.getParameter("k_email");
+		
+		System.out.println(userId);
+		System.out.println(userPass);
+		System.out.println(k_email);
+		
 		// DAO객체 생성 -> idCheck(id,pass)
 		MemberDAO mdao = new MemberDAO();
-		int check = mdao.idCheck(userId, userPass);
+		int check = mdao.ConKakao(userId, userPass, k_email);
 
 		// 결과에 따른 페이지 이동
 		// 컨트롤러 X - 비밀번호,아이디없음 오류(javascript)
@@ -57,6 +62,19 @@ public class MemberLoginAction implements Action {
 		HttpSession session = request.getSession();
 	    session.setAttribute("userId", userId);	
 		
+	    //////
+	    response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		out.print("<script>");
+		out.print(" alert('연동 완료됐습니다.'); ");
+		out.print(" location.href='./Main.me' "); 
+		out.print("</script>");
+
+		out.close();
+	    //////
+		
+	    
 	    // 페이지 이동 (./Main.me)
 		ActionForward forward = new ActionForward();
 		forward.setPath("./Main.me");
