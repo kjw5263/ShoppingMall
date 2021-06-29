@@ -11,7 +11,7 @@ import com.member.db.MemberDAO;
 import com.member.db.MemberDTO;
 import com.order.db.OrderDAO;
 
-public class OrderStartAction implements Action{
+public class OrderStart implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

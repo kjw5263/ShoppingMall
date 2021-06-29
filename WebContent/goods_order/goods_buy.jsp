@@ -22,6 +22,15 @@
 <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
     rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="./css/style.css" type="text/css">
     
  <!--  다음 우편번호 API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -128,7 +137,7 @@ function payClick() {
 		return false;
 	}
 	
-	if(document.getElementById("receiverTel1").value==""){
+	if(document.getElementById("receiverTel").value==""){
 		alert("연락처를 입력해주세요.");
 		return false;
 	}
@@ -158,18 +167,20 @@ $(document).ready(function () {
 	$('input[name="addrType"]').change(function(){
 		if($('input[name="addrType"]:checked').val() == 'savedAddr'){
 			$('#receiverName').val('${memberDTO.userName}');
-			$('#receiverTel1').val('${memberDTO.userTel}');
+			$('#receiverTel').val('${memberDTO.userTel}');
 			$('#receiverTel2').val('');
+			$('#receiverMail').val('${memberDTO.userEmail}');
 			$('#zonecode').val('${(memberDTO.userAddr).split(",")[0]}');
 			$('#addr').val('${(memberDTO.userAddr).split(",")[1]}');
 			$('#addr_detail').val('${(memberDTO.userAddr).split(",")[2]}');
 		} else {
 			$('#receiverName').val('');
-			$('#receiverTel1').val('');
+			$('#receiverTel').val('');
 			$('#receiverTel2').val('');
 			$('#zonecode').val('');
 			$('#addr').val('');
 			$('#addr_detail').val('');
+			$('#receiverEmail').val('');
 		}
 	});
 	/* 주소지 지정- 기존배송지, 신규배송지 radio 선택 */
@@ -202,6 +213,7 @@ $(document).ready(function () {
 		cpDc = dcNum;
 		$('#ttmoney').text(addComma(ttMoney-(pointDc+cpDc)));
 		$('#ttmoneyData').prop('value',ttMoney-(pointDc+cpDc));
+		$('#cpUseAmount').prop('value',cpDc*-1);
 	});
 	
 	
@@ -225,6 +237,7 @@ $(document).ready(function () {
 		pointDc = Number($('#userPoint').val());
 		$('#ttmoney').text(addComma(ttMoney-(pointDc+cpDc)));
 		$('#ttmoneyData').prop('value',ttMoney-(pointDc+cpDc));
+		$('#ptUseAmount').prop('value',pointDc*-1);
 	});
 	
 
@@ -244,14 +257,6 @@ $(document).ready(function () {
 
 
 </script>
-<!-- Css Styles -->
-<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="./css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="./css/style.css" type="text/css">
 </head>
 <body>
 
@@ -278,13 +283,13 @@ $(document).ready(function () {
 	
 	<div class="row">
 	<div class="col-2 text-center"></div>
-	<div class="col-8 " >
+	<div class="col-8 " style="padding-bottom:100px;">
 	
-	<h2>주문/결제</h2>
-	<div><h4>배송상품</h4></div>
-	<div><h5>총 <%=basketList.size() %>개의 상품</h5></div> 
+	<h2 style="margin:30px 30px 30px 0;">주문/결제</h2>
+	<div style="margin:50px 30px 10px 0;"><h4>배송상품</h4></div>
+	<div style="margin:10px 30px 10px 0;"><h5>총 <%=basketList.size() %>개의 상품</h5></div> 
 	<div style="width : 100%;">
-		<table class="table">
+		<table class="table" style="text-align: center; margin-bottom:50px;">
 			<thead class="thead-light">
 				<tr>
 					<th scope="col" colspan="2">상품정보</th>
@@ -314,7 +319,7 @@ $(document).ready(function () {
 				<tr class="table-active">
 					<th scope="col" colspan="3" style="color:black;">합계</th>
 					<td style="color:black;"><strong><%=sumAmount %></strong></td>
-					<td style="color:#ff0000;"><strong><%=fmMoney.format(sumMoney) %>원</strong></td>
+					<td style="color:black;"><strong><%=fmMoney.format(sumMoney) %>원</strong></td>
 				</tr>
 		</table>
 		</div> <!-- 장바구니 정보 테이블 닫는 div -->
@@ -322,7 +327,7 @@ $(document).ready(function () {
 		
 		
 		<!-- onsubmit="return payClick()" -->
-		<form action="./OrderConfirm.or" id="submitForm" name="frmData" method="post" accept-charset="utf-8" >
+		<form action="./OrderAdd.or" id="submitForm" name="frmData" method="post" accept-charset="utf-8" >
 		<%
 			GoodsDTO gdto = (GoodsDTO)goodsList.get(0);
 		%>
@@ -331,18 +336,20 @@ $(document).ready(function () {
 		<input type="hidden" name="userId" value="<%=mDTO.getUserId() %>">			<!-- 사용자 아이디  -->
 		<input type="hidden" name="delCp" value="" id="delCp"> 						<!--사용한 쿠폰이름 -->
 		<input type="hidden" name="sumMoneyData" id="sumMoneyData" value="<%=sumMoney %>"> <!-- 합계금액 -->
-		<input type="hidden" name="ttmoneyData" id="ttmoneyData" value="<%=sumMoney%>"> 			 	<!-- 최종금액 -->
-		<input type="hidden" name="addPoint" id="addPoint" value="<%=sumMoney*1/100 %>"><!-- 적립예정 포인트 -->
+		<input type="hidden" name="ttmoneyData" id="ttmoneyData" value="<%=sumMoney%>"> 	<!-- 최종금액 -->
+		<input type="hidden" name="addPoint" id="addPoint" value=<%=sumMoney*1/100 %>><!-- 적립예정 포인트 -->
 		<input type="hidden" name="userEmail" value="<%=mDTO.getUserEmail() %>">		<!-- 사용자 이메일 -->
-		<input type="hidden" name="userName" id="userName" value="<%=mDTO.getUserName() %>">			<!-- 사용자 이름 -->
-		<input type="hidden" name="userTel" value="<%=mDTO.getUserTel() %>">			<!-- 사용자 전화번호 -->
+		<input type="hidden" name="userName" value="<%=mDTO.getUserName() %>">		<!--  사용자 이메일 -->
+		<input type="hidden" name="cpUseAmount" id="cpUseAmount" value=0>			<!-- 사용한 쿠폰 할인율 -->
+		<input type="hidden" name="ptUseAmount" id="ptUseAmount" value=0>			<!-- 사용한 포인트 할인율 -->
 		<div class="row">
 		<div class="col-8">
-		<h4>배송지 정보</h4>
 		
 		
 		<!-- 회원정보 테이블 묶는 div -->
 		<div style="width : 100%;">
+		
+		<h4 style="margin:10px 30px 10px 0;">배송지 정보</h4>
 		<table class="table">
 			<tr>
 				<th scope="row" class="table-active" style="width:150px;">배송지 선택</th>
@@ -352,19 +359,23 @@ $(document).ready(function () {
 				</td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">*받는 분</th>
+				<th scope="row" class="table-active"><span style="color:red">*</span>받는 분</th>
 				<td><input type="text" class="form-control" name="receiverName" id="receiverName" value="<%=mDTO.getUserName()%>"></td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">*연락처</th>
-				<td><input type="text" class="form-control" name="receiverTel1" id="receiverTel1" value="<%=mDTO.getUserTel()%>" placeholder="-제외 입력"></td>
+				<th scope="row" class="table-active"><span style="color:red">*</span>연락처</th>
+				<td><input type="text" class="form-control" name="receiverTel" id="receiverTel" value="<%=mDTO.getUserTel()%>" placeholder="-제외 입력"></td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">연락처</th>
+				<th scope="row" class="table-active">연락처2</th>
 				<td><input type="text" class="form-control" name="receiverTel2" id="receiverTel2" placeholder="-제외 입력"></td>
 			</tr>
 			<tr>
-				<th scope="row" class="table-active">*주소</th>
+				<th scope="row" class="table-active">이메일</th>
+				<td><input type="text" class="form-control" name="receiverEmail" id="receiverEmail" value="<%=mDTO.getUserEmail()%>"></td>
+			</tr>
+			<tr>
+				<th scope="row" class="table-active"><span style="color:red">*</span>주소</th>
 				<td>
 					<div class="form-inline">
 					<div class="form-group mx-sm mb-2">
@@ -387,11 +398,11 @@ $(document).ready(function () {
 					<div class="input-group">
 						<select class="form-control" name="o_msg" id="o_msg">
 							<option value="">배송메시지를 선택하세요.</option>
-							<option value="10">부재시 경비실에 맡겨주세요.</option>
-							<option value="20">부재시 문 앞에 놓아주세요.</option>
-							<option value="30">파손의 위험이 있는 상품이오니, 배송 시 주의해주세요.</option>
-							<option value="40">배송 전 연락주세요.</option>
-							<option value="50">택배함에 넣어주세요.</option>
+							<option value="부재시 경비실에 맡겨주세요.">부재시 경비실에 맡겨주세요.</option>
+							<option value="부재시 문 앞에 놓아주세요.">부재시 문 앞에 놓아주세요.</option>
+							<option value="파손의 위험이 있는 상품이오니, 배송 시 주의해주세요.">파손의 위험이 있는 상품이오니, 배송 시 주의해주세요.</option>
+							<option value="배송 전 연락주세요.">배송 전 연락주세요.</option>
+							<option value="택배함에 넣어주세요.">택배함에 넣어주세요.</option>
 							<option value="80">직접 입력</option>
 						</select>
 					</div>
@@ -403,8 +414,9 @@ $(document).ready(function () {
 		
 		
 		<!-- 포인트/쿠폰 테이블 묶는 div -->
-		<h4>포인트/쿠폰 사용</h4>
+		
 		<div  style="width : 100%;">
+		<h4 style="margin:50px 30px 10px 0;">포인트/쿠폰 사용</h4>
 		<table class="table">
 			<tr>
 				<th scope="row" class="table-active" style="width:150px;">쿠폰</th>
@@ -427,12 +439,12 @@ $(document).ready(function () {
 		
 		
 		<!-- 결제수단 테이블 묶는 div -->
-		<h4>결제수단 선택</h4>
+		<h4  style="margin:50px 30px 10px 0;">결제수단 선택</h4>
 		<div  style="width : 100%;">
 		<table class="table" id="payTable">
 			<tr>
 				<td colspan="2">
-					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="cardPay" value="카드">카드결제</span>
+					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="cardPay" value="카드" checked>카드결제</span>
 					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="accountPay" value="계좌이체">계좌이체</span>
 					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="kakaoPay" value="카카오페이">카카오페이</span>
 					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="cashPay" value="무통장입금">무통장입금</span>
@@ -449,33 +461,33 @@ $(document).ready(function () {
 		
 		
 		<!-- 금액 영역 묶는 div -->
-		<div class="col-4">
-		<div><h4>최종 결제정보 </h4></div>
+		<div class="col-4" >
+		<div  style="margin:10px 30px 10px 0;"><h4>최종 결제정보 </h4></div>
 		<div style="width : 100%;">
 		<table class="table table-bordered">
 			<tr>
 				<th scope="row" style="width:200px;">총 상품금액</th>
-				<td style="width:200px; font-weight:bold;"><span id="summoney"><%=fmMoney.format(sumMoney) %></span>원</td>
+				<td style="width:200px; font-weight:bold; text-align:right;"><span id="summoney"><%=fmMoney.format(sumMoney) %></span> 원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;">적립예정 포인트</th>
-				<td style="width:200px;"><span><%=fmMoney.format(sumMoney*1/100) %></span>원</td>
+				<td style="width:200px; text-align:right;"><span><%=fmMoney.format(sumMoney*1/100) %></span> 원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;">쿠폰 할인금액</th>
-				<td style="width:200px;"><span id="usecoupon">0</span>원</td>
+				<td style="width:200px; text-align:right; color:red;"><span id="usecoupon">0</span> 원</td>
 			</tr>
 			<tr>
 				<th scope="row" style="width:200px;" >포인트</th>
-				<td style="width:200px;"><span id="usepoint">0</span>원</td>
+				<td style="width:200px; text-align:right; color:red;"><span id="usepoint">0</span> 원</td>
 			</tr>
 			
 			<tr>
 				<th scope="row" style="width:200px;" ><strong>최종금액</strong></th>
-				<td style="width:200px; font-weight:bold;"><span id="ttmoney"><%=fmMoney.format(sumMoney) %></span>원</td>
+				<td style="width:200px; font-weight:bold; text-align:right; color:#0054FF"><span id="ttmoney"><%=fmMoney.format(sumMoney) %></span> 원</td>
 			</tr>
 			<tr>
-				<td scope="row" colspan="2"><input type="button" onclick="payClick()" id="payButton" class="btn btn-secondary btn-lg" value="결제하기"></td>
+				<td scope="row" colspan="2" style="text-align:center;"><input type="button" onclick="payClick()" id="payButton" class="btn btn-secondary btn-lg" value="결제하기"></td>
 			</tr>
 		</table>
 		</div> <!-- 금액 테이블 묶는 div -->

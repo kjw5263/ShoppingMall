@@ -47,8 +47,8 @@ $(function(){
 		    	window.opener.redirectFunc();
 		    	window.close();
 		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
+		        var msg = '결제에 실패하였습니다.\n';
+		        msg += rsp.error_msg;
 
 		        alert(msg);
 		        window.close();
