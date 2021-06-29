@@ -45,7 +45,7 @@
 	<!-- Search model end -->
 
     <!-- header 시작 -->
- 		<jsp:include page="../header/header.jsp" />
+<%-- 		<jsp:include page="../header/header.jsp" />--%>
 	<!-- header 끝 -->
 
     <!-- Page Add Section Begin -->
@@ -179,7 +179,7 @@
     <!-- Cart Page Section End -->
 
     <!-- footer 시작 -->
-   		<jsp:include page="../footer/footer.jsp" />
+<%--   		<jsp:include page="../footer/footer.jsp" />--%>
     <!-- footer 끝 -->
 
     <!-- Js Plugins -->

@@ -1,0 +1,213 @@
+#Container1 {
+    overflow: hidden;
+
+}
+#Contents1 {
+    width: 1020px;
+    height: 100%;
+    margin: 0 auto;
+}
+.mypage-head1 {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    margin: 30px 0 0;
+}
+h1.tit1 {
+    float: left;
+    width: 169px;
+    padding: 10px 0 0 10px;
+}
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    font-weight: bold;
+}
+h1.tit1 a {
+    font-size: 32px;
+    line-height: 34px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -1.3px;
+}
+.grd-box1 {
+    float: left;
+    width: 850px;
+    padding: 0 29px 0;
+
+}
+.mypage-ix1 {
+    position: relative;
+    width: 100%;
+}
+.mypage-lnb1 {
+    position: relative;
+    top: -20px;
+    float: left;
+    width: 169px;
+    padding-left: 10px;
+}
+.mypage-lnb1 ul {
+    width: 140px;
+
+}
+.mypage-lnb1 li {
+    margin-top: 10px;
+}
+.mypage-lnb1 li h2 {
+    padding-top: 10px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -1px;
+    color: #333;
+}
+.mypage-lnb1 li a {
+    font-size: 13px;
+    letter-spacing: -0.8px;
+    color: #333;
+}
+.line {
+    margin-top: 10px;
+    border-top: 1px solid #e5e5e5;
+}
+.mypage-contents1 {
+    float: left;
+    width: 850px;
+    min-height: 640px;
+    padding: 0 29px 40px;
+    background: #fff;
+}
+.title-area1 {
+    padding-top: 25px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 36px 0 7px;
+
+}
+.tit2 {
+    float: left;
+    color: #333;
+    font-size: 20px;
+    line-height: 30px;
+}
+.comm1sTabs {
+    float: left;
+    overflow: hidden;
+    width: 100%;
+
+}
+div {
+    display: block;
+}
+.info1 {
+    position: relative;
+    height: 51px;
+    padding: 8px 0 0 30px;
+}
+.point-box1 {
+    padding: 19px 0;
+    border:1px solid #ccc;
+    border: 0;
+}
+.mypage_review {
+    padding: 0 16px 0 14px;
+    border-top: 1px solid #d4d4d4;
+}
+.table_list {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding: 20px 0 15px;
+    border-bottom: 1px solid #f1f1f1;
+    box-sizing: border-box;
+}
+.list_image {
+    display: table-cell;
+    width: 40px;
+    vertical-align: top;
+
+}
+.list_cos_title {
+    display: table-cell;
+    padding: 0 210px 0 8px;
+    vertical-align: middle;
+}
+.table_bottom {
+    position: relative;
+    padding: 15px 0 40px;
+}
+.bottom_list {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.bottom_content {
+    display: table-cell;
+    vertical-align: top;
+}
+.rating_view_wrap{
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333333;
+    vertical-align: top;
+
+}
+.review_content_list{
+    overflow: hidden;
+    padding-top: 6px;
+    font-size: 13px;
+    line-height: 22px;
+    word-break: break-all;
+    /*white-space: pre-wrap;*/
+}
+.button_view {
+    display: table-cell;
+    width: 210px;
+    padding-top: 20px;
+    vertical-align: top;
+}
+.update_btn {
+    float: right;
+    position: relative;
+    width: 110px;
+    margin-right: 60px;
+    border: 1px solid #dedede;
+    background-color: #ffffff;
+    font-size: 12px;
+    line-height: 26px;
+    color: #555555;
+    text-align: center;
+    vertical-align: top;
+}
+.delete_btn {
+    position: absolute;
+    top: 13px;
+    right: 0;
+}
+.btn_img {
+
+    background-position: -406px -379px;
+    width: 40px;
+    height: 15px;
+    display: block;
+}
+.blind {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+#delete {
+    border: none;
+    background-color: transparent;
+    cursor:pointer;
+    -webkit-appearance: none;
+}

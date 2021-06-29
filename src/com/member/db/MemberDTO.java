@@ -27,7 +27,7 @@ public class MemberDTO {
 	 private String userTel;
 	
 	 // 회원 생년월일 생년월일
-	 private Date userBirth;
+	 private String userBirth;
 	
 	 // 회원 성별 성별(남/여)
 	 private String userGender;
@@ -103,11 +103,11 @@ public class MemberDTO {
 		this.userTel = userTel;
 	}
 
-	public Date getUserBirth() {
+	public String getUserBirth() {
 		return userBirth;
 	}
 
-	public void setUserBirth(Date userBirth) {
+	public void setUserBirth(String userBirth) {
 		this.userBirth = userBirth;
 	}
 

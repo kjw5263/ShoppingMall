@@ -1,14 +1,18 @@
 package com.goods.db;
-
+//DBcon원본
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import org.omg.IOP.CodecPackage.TypeMismatch;
 
 import com.var.list.varlist;
 
@@ -20,9 +24,48 @@ public class DBconnection {
 	varlist vars = new varlist();
 	private String databasename = vars.getDatabasename();
 	
+	protected void insql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	protected void delsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	protected void upsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
 	
-	protected ResultSet consql(String sql ){
+	protected ResultSet selsql(String sql ){
 		try {
 		conn = getConnection();
 		
@@ -32,6 +75,36 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
+		return rs;
+	}
+	protected ResultSet conpstmt(PreparedStatement pstmt ,ArrayList a ){
+		try {
+		conn = getConnection();
+		
+		for(int i=0; i<a.size();i++){
+			
+			if(a.get(i) instanceof Integer ){
+				pstmt.setInt(i,(int)a.get(i));
+			}else if(a.get(i) instanceof String ){
+				pstmt.setString(i,(String)a.get(i));
+			}
+			else if(a.get(i) instanceof Float ){
+				pstmt.setFloat(i,(Float)a.get(i));
+			}else{
+				pstmt.setString(i,(String)a.get(i));
+			}
+			
+		}
+		
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return rs;
 	}
 	

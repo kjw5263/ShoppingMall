@@ -51,10 +51,39 @@ public class BasketFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/BasketList.ba")){
+			System.out.println("C : /BasketList.ba 호출 ");
+			
+			// BasketListAction 객체 -> 정보 view 페이지 출력
+			action = new BasketListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/BasketDelete.ba")){
+			// 장바구니 정보 DB에서 삭제
+			action = new BasketDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/BasketModify.ba")){
+			// 장바구니 정보 DB에서 삭제
+			action = new BasketModifyAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
+		
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
 		

@@ -24,9 +24,48 @@ public class DBconnection {
 	varlist vars = new varlist();
 	private String databasename = vars.getDatabasename();
 	
+	protected void insql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	protected void delsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	protected void upsql(String sql ){
+		try {
+		conn = getConnection();
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
 	
-	protected ResultSet consql(String sql ){
+	protected ResultSet selsql(String sql ){
 		try {
 		conn = getConnection();
 		
@@ -36,6 +75,8 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
 		return rs;
 	}
 	protected ResultSet conpstmt(PreparedStatement pstmt ,ArrayList a ){
@@ -63,6 +104,7 @@ public class DBconnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return rs;
 	}
 	

@@ -83,31 +83,32 @@
 
 		
 	%>
+	
+	<div class="row">
+		<div class="col-3"></div><!--여백 -->
+		<div class="col-6">
+			
+			<div class="row">
+				<div class="col-3">
+					<a href=""><h5>장바구니</h5></a>
+					<a href=""><h5>주문조회</h5></a>
+					<a href="./getLike.li"><h5>찜목록</h5></a>
+					<hr>
+					<a href="./MyCoupon.me"><h5>내 쿠폰</h5></a>
+					<a href=""><h5>포인트</h5></a>
+					<hr>
+					<a href=""><h5>내 화장품 사용기한 
+					&nbsp;확인하기</h5></a>
+					<a href="reviewList.rev"><h5>리뷰</h5></a>
+					<hr>
+					<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a>
+					<a href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
+				</div>
+				
+				<div class="col-9">
+					
+						<fieldset style="border: 4px solid #B0BCC2; padding: 40px;" >
 
-		<div class="row">
-			<div class="col-3"></div>
-			<!--여백 -->
-			<div class="col-6">
-
-				<div class="row">
-					<div class="col-3">
-						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
-							href="./getLike.li"><h5>찜목록</h5></a>
-						<hr>
-						<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
-						<hr>
-						<a href="./registerUse.ud"><h5>
-								내 화장품 사용기한 <br>등록 / 확인하기
-							</h5></a>
-						<hr>
-						<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a> <a
-							href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
-					</div>
-
-					<div class="col-9">
-
-						<fieldset
-							style="border: 3px solid #B0BCC2; padding: 40px; width: 100%;">
 							<div class="row">
 								<h3><%=mdto.getUserName()%>님의 정보
 								</h3>

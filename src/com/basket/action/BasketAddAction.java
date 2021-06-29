@@ -17,7 +17,6 @@ public class BasketAddAction implements Action {
 		//세션 제어
 		HttpSession session = request.getSession();
 		String userID = (String) session.getAttribute("userId");
-		System.out.println("아이디 세션은???? >>>>>>>>>>>>" + userID);
 		
 		ActionForward forward = new ActionForward();
 		if(userID == null){

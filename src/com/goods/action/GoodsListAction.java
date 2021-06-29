@@ -61,6 +61,7 @@ public class GoodsListAction implements Action{
 		// 정보 저장 -> 영역 저장
 //		 request.setAttribute("goodsList", gdao.getGoodsList());
 		
+		request.setAttribute("goodsList", gdao.getGoodsList(item, cat));
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();

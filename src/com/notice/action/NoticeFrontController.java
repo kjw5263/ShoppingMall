@@ -55,7 +55,85 @@ public class NoticeFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-       
+        if(command.equals("/noticewrite.nos")){
+			System.out.println("C : /noticewrite.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new noticeWriteAction();
+			
+			try {
+				forward = action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+        if(command.equals("/noticewritepro.nos")){
+			System.out.println("C : /noticewritepro.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new noticeWriteProAction();
+			
+			try {
+				forward = action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+        if(command.equals("/noticeup.nos")){
+			System.out.println("C : /noticeup.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new noticeUpdateAction();
+			
+			try {
+				forward = action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+        if(command.equals("/noticeuppro.nos")){
+			System.out.println("C : /noticeuppro.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new noticeUpdateProAction();
+			
+			try {
+				forward = action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+        if(command.equals("/noticedel.nos")){
+			System.out.println("C : /noticedel.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new noticeDeleteAction();
+			
+			try {
+				forward = action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+        if(command.equals("/noticedelpro.nos")){
+			System.out.println("C : /noticedelpro.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new noticeDeleteProAction();
+			
+			try {
+				forward = action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+        
         System.out.println("C : 2.페이지 주소 매핑  완료");
 
 

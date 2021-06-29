@@ -1,3 +1,4 @@
+
 package com.basket.db;
 
 import java.sql.Connection;
@@ -186,7 +187,7 @@ public class BasketDAO {
 				// 장바구니 상품에 해당하는 정보 저장(이름, 가격, 이미지..)
 				// 기존의 데이터를 사용하는데 문제없이 쓰기 위해서
 				// pstmt2, rs2 객체 생성
-				sql = "select * from basket_list where cosNum=?";
+				sql = "select * from cos_list where cosNum=?";
 				PreparedStatement pstmt2 = conn.prepareStatement(sql);
 				pstmt2.setInt(1, bkDTO.getBasketCosNum());
 				
@@ -204,7 +205,8 @@ public class BasketDAO {
 				}
 				
 				System.out.println("DAO : 상품정보 저장완료!");
-			}
+				
+			}// while
 			
 			totalList.add(basketList);
 			totalList.add(goodsList);
@@ -217,5 +219,83 @@ public class BasketDAO {
 		}
 		
 		return totalList;
+	}
+	
+	// basketDelete(int[] basketNum)
+	public int basketDelete(int[] basketNum) {
+		
+		int result = 0;
+		
+		String params = "";
+		
+		for(int i=0; i<basketNum.length; i++){
+			params += basketNum[i];
+			
+			if(i < basketNum.length-1){
+				params += ",";
+			}
+		}
+		
+		try {
+			conn = getConnection();
+			sql = "delete from basket_list where basketNum in ("+params+")";
+			pstmt = conn.prepareStatement(sql);
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("DAO : 회원 장바구니 정보 삭제 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return result;
+	}
+	// basketDelete(int[] basketNum)
+	
+	// basketDelete(userId) - 구매 후 장바구니 전체 제거
+	public void basketDelete(String userId){
+		
+		try {
+			conn = getConnection();
+			// 구매후 아이디에 해당하는 모든 장보구니 초기화
+			sql = "delete from basket_list where basketUserId=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DAO : 구매 후 장바구니 제거");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
+	// basketDelete(userId) - 구매 후 장바구니 전체 제거
+	
+	// modifyBasket(bkdto)
+	public void modifyBasket(BasketDTO bkdto){
+		try {
+			conn = getConnection();
+			sql = "update basket_list set basketCosAmount=? where basketNum=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bkdto.getBasketCosAmount());
+			pstmt.setInt(2, bkdto.getBasketNum());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DAO : 상품정보 수정 완료!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
 	}
 }
