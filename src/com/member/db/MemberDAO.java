@@ -820,6 +820,7 @@ public class MemberDAO {
 		public int ConKakao(String userId,String userPass, String k_email){
 			int check = -1;
 
+
 			try {
 				// 1,2 디비연결
 				conn = getConnection();
