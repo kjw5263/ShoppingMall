@@ -70,12 +70,28 @@ function openAddrPop() {
 }
 </script>
 <script type="text/javascript">
-function redirectFunc() {
-	
-}
+
+	 function redirectFunc() {
+		 document.getElementById("submitForm").submit();
+		 // 인풋태그에서 입력한 값 가져와서
+		 // 폼 태그 만들어서값 넣어주고 
+		 // 폼을 submit 하기
+		 
+		 
+		 //var un = document.getElementById("userName").value;
+<%-- 		 <% --%>
+// 		   RequestDispatcher dispatcher =request.getRequestDispatcher("/OrderConfirm.or");
+// 		   dispatcher.forward(request, response);
+		 
+<%-- 		 %>	 --%>
+		//document.frmData.action="./OrderConfirm.or";
+		//document.frmData.submit();
+	}
+
+
+
 
 function payClick() {
-	
 	
 	var radioVal = $('input[name="payType"]:checked').val();
 	if(radioVal == "카드결제"){
@@ -83,16 +99,18 @@ function payClick() {
 	}else if(radioVal == "계좌이체"){
 		
 	}else if(radioVal == "카카오페이"){
-		var url = "./goods_order/kakaoSuccess.jsp";
-		var title = "kakao payment";
-		var status = "width=426, height=542";
-		window.open(url, title, status);
+// 		var url = "./kakaoSuccess.or";
+// 		var title = "kakao payment";
+// 		var status = "width=426, height=542";
+		var amount = $('#ttmoneyData').val();
+		var goods =  $('#goodsTitle').val();
+		window.open("./kakaoSuccess.or?amount="+amount+"&goods="+goods, "", "width=426, height=542");
 		
-		var frmData = document.frmData;
-		frmData.target=title;
-		frmData.action = url;
-		frmData.method="post";
-		frmData.submit();
+// 		var frmData = document.frmData;
+// 		frmData.target=title;
+// 		frmData.action = url;
+// 		frmData.method="post";
+// 		frmData.submit();
 		
 	}
 	else if(radioVal == "무통장입금"){
@@ -304,19 +322,19 @@ $(document).ready(function () {
 		
 		
 		<!-- onsubmit="return payClick()" -->
-		<form action="./OrderConfirm.or" name="frmData" method="post" accept-charset="utf-8" onsubmit="return payClick()">
+		<form action="./OrderConfirm.or" id="submitForm" name="frmData" method="post" accept-charset="utf-8" >
 		<%
 			GoodsDTO gdto = (GoodsDTO)goodsList.get(0);
 		%>
-		<input type="hidden" name="goodsTitle" value="<%=gdto.getCosName()%> 외 <%=basketList.size()-1 %>개">
+		<input type="hidden" name="goodsTitle" id="goodsTitle" value="<%=gdto.getCosName()%> 외 <%=basketList.size()-1 %>개">
 		<!-- 새로운 inner Layout : 사용자/쿠폰 영역, 금액영역 -->
 		<input type="hidden" name="userId" value="<%=mDTO.getUserId() %>">			<!-- 사용자 아이디  -->
 		<input type="hidden" name="delCp" value="" id="delCp"> 						<!--사용한 쿠폰이름 -->
 		<input type="hidden" name="sumMoneyData" id="sumMoneyData" value="<%=sumMoney %>"> <!-- 합계금액 -->
-		<input type="hidden" name="ttmoneyData" id="ttmoneyData" value=""> 			 	<!-- 최종금액 -->
+		<input type="hidden" name="ttmoneyData" id="ttmoneyData" value="<%=sumMoney%>"> 			 	<!-- 최종금액 -->
 		<input type="hidden" name="addPoint" id="addPoint" value="<%=sumMoney*1/100 %>"><!-- 적립예정 포인트 -->
 		<input type="hidden" name="userEmail" value="<%=mDTO.getUserEmail() %>">		<!-- 사용자 이메일 -->
-		<input type="hidden" name="userName" value="<%=mDTO.getUserName() %>">			<!-- 사용자 이름 -->
+		<input type="hidden" name="userName" id="userName" value="<%=mDTO.getUserName() %>">			<!-- 사용자 이름 -->
 		<input type="hidden" name="userTel" value="<%=mDTO.getUserTel() %>">			<!-- 사용자 전화번호 -->
 		<div class="row">
 		<div class="col-8">

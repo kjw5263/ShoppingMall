@@ -43,6 +43,19 @@ public class OrderFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/OrderConfirm.or")) {
+			request.setCharacterEncoding("UTF-8");
+			action = new OrderConfirmAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/kakaoSuccess.or")) {
+			forward = new ActionForward();
+			forward.setPath("./goods_order/kakaoSuccess.jsp");
+			forward.setRedirect(false);
 		}
 		
 		

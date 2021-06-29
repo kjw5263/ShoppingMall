@@ -19,10 +19,7 @@ $(function(){
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : $('#hidden_goodsTitle').val(),
-		    amount : $('#hidden_ttMoneyData').val(),
-		    buyer_email : $('#hidden_userEmail').val(),
-		    buyer_name : $('#hidden_userName').val(),
-		    buyer_tel : '010-1234-5678'
+		    amount : $('#hidden_ttMoneyData').val()
 		}, function(rsp) {
 		    if ( rsp.success ) {
 		    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -45,6 +42,8 @@ $(function(){
 		    		} else {
 		    		}
 		    	});
+		    	//window.opener.parent.document.redirectFunc();
+		    	//window.opener.parent.location.href="./OrderConfirm.or";
 		    	window.opener.redirectFunc();
 		    	window.close();
 		    } else {
@@ -62,13 +61,13 @@ $(function(){
 </head>
 <body>
 <%	
-	request.setCharacterEncoding("UTF-8");
+	//request.setCharacterEncoding("UTF-8");
 %>
 
-<input type="hidden" id="hidden_goodsTitle" value="<%=request.getParameter("goodsTitle") %>">
-<input type="hidden" id="hidden_ttMoneyData" value="<%=request.getParameter("ttmoneyData") %>">
-<input type="hidden" id="hidden_email" value="<%=request.getParameter("userEmail")%> ">
-<input type="hidden" id="hidden_userName" value="<%=request.getParameter("userName") %>">
-<input type="hidden" id="hidden_userTel" value="<%=request.getParameter("userTel") %>">
+<input type="hidden" id="hidden_goodsTitle" value="<%=request.getParameter("goods") %>">
+<input type="hidden" id="hidden_ttMoneyData" value="<%=request.getParameter("amount") %>">
+<%-- <input type="hidden" id="hidden_email" value="<%=request.getParameter("userEmail")%> "> --%>
+<%-- <input type="hidden" id="hidden_userName" value="<%=request.getParameter("userName") %>"> --%>
+<%-- <input type="hidden" id="hidden_userTel" value="<%=request.getParameter("userTel") %>"> --%>
 </body>
 </html>
