@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.goods.db.GoodsDAO;
 import com.goods.db.listDAO;
 import com.notice.db.NoticeDAO;
+import com.notice.db.noticeDTO;
 
-public class noticeListAction implements Action{
+public class noticeContentAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("M : noticeListAction_execute() 호출 ");
+		System.out.println("M : noticeContentAction_execute() 호출 ");
 
 		// 한글처리 
 		request.setCharacterEncoding("utf-8");
@@ -25,19 +26,20 @@ public class noticeListAction implements Action{
 		System.out.print("dao 호출");
 		// 디비 처리 객체 GoodsDAO 생성
 		NoticeDAO noti = new NoticeDAO();
-		
-		// List goodsList =  gdao.getGoodsList();
-		// => Action 페이지에서 사용하는 경우
+		String num = request.getParameter("noticeNum");
+		System.out.println(num);
+		int realnum = Integer.parseInt(num);
+	    noticeDTO notit = noti.getNoticeData(realnum);
 		
 		// 정보 저장 -> 영역 저장
-//		 request.setAttribute("goodsList", gdao.getGoodsList());
+		request.setAttribute("noti", notit);
 		
-		
+		System.out.println("작업함");
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
-		forward.setPath("./notice/noticelist.jsp");
+		forward.setPath("./notice/noticeContent.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}
-
+	
 }

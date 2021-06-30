@@ -35,6 +35,12 @@
 	<!-- header 끝 -->
 
 
+
+ <script type="text/javascript">
+   
+   location.href = "http://localhost:8088/ShoppingMall/notice.nos";
+   </script>
+   
  <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->

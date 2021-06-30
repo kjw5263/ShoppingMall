@@ -55,6 +55,32 @@ public class NoticeFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+        if(command.equals("/filedown.nos")){
+			System.out.println("C : /filedown.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			action = new noticeDownAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+        
+        if(command.equals("/noticeContent.nos")){
+			System.out.println("C : /noticeContent.nos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new noticeContentAction();
+			
+			try {
+				forward = action.execute(request, response );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
         if(command.equals("/noticewrite.nos")){
 			System.out.println("C : /noticewrite.nos 호출");
 			// DB정보를 화면이동 없이 출력
