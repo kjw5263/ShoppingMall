@@ -30,14 +30,25 @@ public class NoticeDAO extends DBconnection{
 		Dobbynoti.doit(noti);
 		
 	}
-	public void deleteNotice(noticeDTO noti){
-		noticeinsert Dobbynoti = new noticeinsert();
-		Dobbynoti.doit(noti);
+	public void deleteNotice(String noticeNum){
+		noticeDelete Dobbynoti = new noticeDelete();
+		Dobbynoti.doit(noticeNum);
 		//도비는 자유에요!
 	}
 	public void updateNotice(noticeDTO noti){
-		noticeinsert Dobbynoti = new noticeinsert();
+		noticeUpdate Dobbynoti = new noticeUpdate();
 		Dobbynoti.doit(noti);
+		
+	}
+	public int deleteCheckNotice(String id ){
+		noticeDeleteCheck Dobbynoti = new noticeDeleteCheck();
+		return Dobbynoti.doit(id);
+		
+	}
+	public noticeDTO getNoticeData(int num){
+		NoticeData  Dobbynoti = new NoticeData();
+		return Dobbynoti.doit(num);
+		
 		
 	}
 	
@@ -65,7 +76,7 @@ public class NoticeDAO extends DBconnection{
 
 			} // while
 
-			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+			System.out.println("DAO : 돌아가면 안되는 거 돌아감");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,9 +92,10 @@ public class NoticeDAO extends DBconnection{
 		List notiList = new ArrayList();
 		try {
 			
-			 sql= "select * from"+tablename
-						+ "order by noticeNum desc limit " + startRow +" , "+ pageSize;		
+			 sql= "select * from "+tablename
+						+ " where noticeType = 0 order by noticeNum desc limit " + startRow +" , "+ pageSize;		
 			
+			 System.out.println("minsql = "+ sql);
 			rs = con.selsql(sql);
 			
 
@@ -100,7 +112,7 @@ public class NoticeDAO extends DBconnection{
 
 			} // while
 
-			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+			System.out.println("DAO : 일반 공지 등록");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,9 +130,10 @@ public class NoticeDAO extends DBconnection{
 			
 			
 			sql = "select * from "+tablename +" where noticeType = 1 ";
+			System.out.println("bigsql = "+ sql);
 			rs = con.selsql(sql);
 			
-
+			
 			while (rs.next()) {
 				
 				noticeDTO noti = new noticeDTO();
@@ -134,7 +147,7 @@ public class NoticeDAO extends DBconnection{
 
 			} // while
 
-			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+			System.out.println("DAO : 중요 공지 등록");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -184,5 +197,6 @@ public class NoticeDAO extends DBconnection{
 		
 		
 	}
+	
 	
 }

@@ -62,7 +62,7 @@
                         <li><a class="active" href="./index.jsp">Home</a></li>
                         <li><a href="./GoodsList.cos">Shop</a>
                             <ul class="sub-menu">
-                                <li><a href="./product-page.jsp">Product Page</a></li>
+                                <li><a href="./GoodsList.cos">Product Page</a></li>
                                 <li><a href="./shopping-cart.jsp">Shopping Card</a></li>
                                 <li><a href="./check-out.jsp">Check out</a></li>
                             </ul>
