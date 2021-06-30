@@ -2,27 +2,30 @@ package com.notice.db;
 
 import java.sql.ResultSet;
 
-
 import com.var.list.varlist;
 
-
-public class noticeDelete extends DBconnection{
+public class noticeDeleteCheck {
 	varlist var = new varlist();
-	private String tablename = var.getnoticelistTablename();
+	private String tablename = var.getMemberInfoTablename();
 	
-	public void doit(String noticeNum){
+	public int doit(String id ){
+		int x =0;
 		DBconnection con = new DBconnection();
 		setnoticetool notit = new setnoticetool();
 		ResultSet rs = null;
 		String sql = "";
 		
 			try {
-				sql = "delete from "+ tablename + " where noticeNum = "+ noticeNum;
-				con.delsql(sql);
 				
-
-
-				System.out.println("DAO : 공지 삭제 완료");
+				
+				if(id.equals("admin")){
+					x = 1;
+				}else{
+					x=0;
+				}
+				
+				
+				System.out.println("DAO : 삭제 유제 체크 완료 + x = "+ x);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -30,8 +33,7 @@ public class noticeDelete extends DBconnection{
 				con.closeDB();
 				
 			}
-
 		
-		
+		return x;
 	}
 }

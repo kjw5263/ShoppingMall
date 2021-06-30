@@ -14,7 +14,7 @@ public class setnoticetool {
 			noti.setNoticeContent(rs.getString("noticeContent"));
 			noti.setNoticeFile(rs.getString("noticeFile"));
 			noti.setNoticeType(rs.getInt("noticeType"));
-			
+			noti.setNoticeRealFileName(rs.getString("noticeRealFileName"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
