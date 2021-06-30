@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<context>
+<Context>
 	<Resource
 		name="jdbc/cosShopping"
 		auth="Container "
@@ -11,4 +11,4 @@
 		url="jdbc:mysql://localhost:3306/cosshopping"
 		maxWait="5000"
 	/>
-</context>
+</Context>

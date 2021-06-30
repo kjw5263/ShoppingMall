@@ -94,19 +94,17 @@ function func3() {
 		<div class="col-6">	
 			<div class="row">
 				<div class="col-3">
-					
-					<h4><a href="">장바구니</a></h4>
-					<h4><a href="">주문조회</a></h4>
-					<h4><a href="">찜목록</a></h4>
+					<a href=""><h5>장바구니</h5></a>
+					<a href=""><h5>주문조회</h5></a>
+					<a href="./getLike.li"><h5>찜목록</h5></a>
 					<hr>
-					<h4><a href="">내 쿠폰</a></h4>
-					<h4><a href="">포인트</a></h4>
+					<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
 					<hr>
-					<h5><a href="">내 화장품 사용기한 확인하기</a></h5>
+					<a href=""><h5>내 화장품 사용기한 
+					&nbsp;확인하기</h5></a>
 					<hr>
-					<h4><a href="./MemberUpdateInfo.me">회원 정보 수정</a></h4>
-					<h4><a href="./MemberDelete.me">탈퇴하기</a></h4>
-				
+					<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a>
+					<a href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
 				</div>
 				<div class="col-9">
 					

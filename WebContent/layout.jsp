@@ -69,23 +69,23 @@
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
-	<div class="row">
-		<div class="col-6 text-center" style="background-color: #2EFEC8;">
-			ㅇㅇ
+		<div class="row">
+			<div class="col-6 text-center" style="background-color: #2EFEC8;">
+				ㅇㅇ
+			</div>
+			<div class="col-6" style="background-color: #610B5E;">	
+				ㅇㅇ
+			</div>
 		</div>
-		<div class="col-6" style="background-color: #610B5E;">	
-			ㅇㅇ
+		
+		<div class="row">
+			<div class="col-6" style="background-color: #0B3B17;">
+				ㅎㅎ
+			</div>
+			<div class="col-6" style="background-color: #D8F781;">	
+				ㅎㅎ
+			</div>
 		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-6" style="background-color: #0B3B17;">
-			ㅎㅎ
-		</div>
-		<div class="col-6" style="background-color: #D8F781;">	
-			ㅎㅎ
-		</div>
-	</div>
 	
 	</div>
 	<!-- container 끝 -->	

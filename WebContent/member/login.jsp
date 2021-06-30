@@ -58,6 +58,12 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
 
+
+
+	<!-- 네이버 로그인 시작 -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	<!-- 네이버 로그인 끝 -->
+
 </head>
 <body>
     <!-- header 시작 -->
@@ -132,7 +138,15 @@
 						</ul>
 						
 					</div>
-					
+					<!-- 네이버 로그인 버튼 시작 -->
+						<div id="naverIdLogin" class="mt-3" >
+						
+							<a id="naverIdLogin_loginButton" href="#">
+								<img src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.0" height="60" width="100%">
+							</a>
+						
+						</div>
+					<!-- 네이버 로그인 버튼 끝 -->
 					
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
@@ -149,7 +163,6 @@
 				</form>
 				
 				<!-- 카카오 로그인 폼 끝 -->
-				
 				
 			</div>
 		</div>
@@ -172,7 +185,6 @@
 	          url: '/v2/user/me',
 	          success: function (response) {
 	        	  console.log(response)
-	        	  alert('카카오 로그인 성공')
 	        	  
 	        	  var k_id = response.id;
 	        	  var k_email = response.kakao_account.email;
@@ -183,17 +195,11 @@
 	        	  $('#userEmail').val(k_email)
 	        	  $('#userGender').val(k_gender)
 	        	  
-	        	  
 	        	  $('#kl').submit();
-	        	  
 	        	  
 // 	        	  alert(k_id)
 // 	        	  alert(k_email)
 // 	        	  alert(k_gender)
-	        	  
-	        	  
-	        	  
-  	  
 
 	          },
 	          fail: function (error) {
@@ -225,6 +231,26 @@
 	  }  
 	</script>
 	<!-- 카카오 로그인 스크립트 끝 -->
+	
+		
+		<!-- 네이버아디디로로그인 초기화 Script -->
+		<script type="text/javascript">
+		var naverLogin = new naver.LoginWithNaverId( 
+				{ 
+					clientId: "1mD8QYbgRfV_N72vzXmC",
+					callbackUrl: "http://localhost:8088/ShoppingMall/member/logincallback.jsp",
+					isPopup: false,
+					/* 팝업을 통한 연동처리 여부 */
+					//loginButton: {color: "green", type: 3, height: 60}
+					/* 로그인 버튼의 타입을 지정 */ 
+				}
+		);
+		
+		/* 설정정보를 초기화하고 연동을 준비 */
+		naverLogin.init();
+		</script>
+
+	<!-- // 네이버아이디로로그인 초기화 Script -->
 	
 	
 <!--===============================================================================================-->

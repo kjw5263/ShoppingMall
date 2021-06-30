@@ -24,19 +24,22 @@ public class BasketDeleteAction implements Action {
 			return forward;
 		}
 		
-		// 전달된 파라미터값 저장 (basketNum)
-		int basketNum = Integer.parseInt(request.getParameter("basketNum"));
-		
+		// 전달된 파라미터값 저장 (del-id)
+		String[] bNum = request.getParameterValues("del-id");
 		// DAO 객체 생성 - basketDelete(basketNum)
 		BasketDAO bkdao = new BasketDAO();
+		int[] basketNum = new int[bNum.length];
+		for(int i=0; i<bNum.length; i++){
+			basketNum[i] = Integer.parseInt(bNum[i]);
+		}
 		
-		bkdao.basketDelete(basketNum);
+		int result = bkdao.basketDelete(basketNum);
 		
 		// 페이지 이동 (./BasketList.ba)
 		forward.setPath("./BasketList.ba");
 		forward.setRedirect(true);
 		
-		return null;
+		return forward;
 	}
 
 }
