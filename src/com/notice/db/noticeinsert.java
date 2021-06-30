@@ -21,11 +21,16 @@ public class noticeinsert extends DBconnection{
 				rs = con.selsql(sql);
 				rs.next() ;
 				int num = rs.getInt(1)+1;
+				
+				//String sss = noti.getNoticeContent(); 
+				//sss = sss.replace(",", "s0i0m0p0u0").replace("\n", "<br>").replace("\r", "<br>");
 				sql = "insert into "+ tablename + " values "
-						+ "(" + num +","+ noti.getNoticeTitle() +","
-						+ noti.getNoticeContent()
-						+","+noti.getNoticeFile() +","+
-						noti.getNoticeType() +")";
+						+ "(" + num +","+ "'"+noti.getNoticeTitle()+ "'" +","
+						+ "'"+noti.getNoticeContent().replace("\n", "<br>").replace("\r", "<br>")+ "'"
+						+",'"+noti.getNoticeFile()
+						+"',"+
+						noti.getNoticeType()+",'"+noti.getNoticeRealFileName() +"')";
+				System.out.println("급한sql = " +sql);
 				con.insql(sql);
 
 

@@ -1,6 +1,6 @@
 package com.member.db;
 
-import java.sql.Date;
+
 
 
 public class MemberDTO {

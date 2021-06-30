@@ -10,8 +10,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,6 +34,66 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    
+    <style type="text/css">
+button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:34px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+table {
+    width: 80%;
+    margin-left : 5%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+   th {
+    background-color: #0d47a1;
+    color: #ffffff;
+  }
+  tbody tr:nth-child(2n) {
+    background-color: #bbdefb;
+  }
+  tbody tr:nth-child(2n+1) {
+    background-color: #e3f2fd;
+  }
+</style>
 </head>
 
 <body>
@@ -69,20 +128,20 @@
 		int a = (Integer.parseInt(pageNum)-1)*pageSize;
 	
 		int b = pageSize; 
+		System.out.println("직전위치");
 		List topnoticeList = noti.getTopNoticeList();
 		List noticeList = noti.getNoticeList(a, b);
 		
 	
 	%>
-	<h2>
-		게시판 글목록 [총 :
-		<%=cnt%>개]
-	</h2>
-	
-	<table border="1">
+	<br>
+	<button onclick="location.href='http://localhost:8088/ShoppingMall/noticewrite.nos'">글쓰기</button>
+	<br>
+	<br>
+	<table >
 		<tr>
-			<td>번호</td>
-			<td>제목</td>
+			<th> </th>
+			<th>제목</th>
 			
 
 		</tr>
@@ -96,7 +155,7 @@
 				
 		%>
 		<tr>
-			<td><%=notid.getNoticeNum()%></td>
+			<td>공지</td>
 			<td>
 			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
 					<%=notid.getNoticeTitle()%></a>
@@ -118,7 +177,7 @@
 				
 		%>
 		<tr>
-			<td><%=notid.getNoticeNum()%></td>
+			<td>이벤트</td>
 			<td>
 			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
 					<%=notid.getNoticeTitle()%></a>
@@ -161,14 +220,14 @@
     	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
     	if(startPage >= pageBlock){
     		%>
-	<a href="list.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a>
+	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage-pageBlock%>">[이전]</a>
 	<%
     	}   	
     	
     	// 숫자  1....5
     	for(int i=startPage;i<=endPage;i++){
     		%>
-	<a href="list.jsp?pageNum=<%=i%>">[<%=i %>]
+	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=i%>">[<%=i %>]
 	</a>
 	<%    		
     	}
@@ -176,7 +235,7 @@
     	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
     	if(endPage < pageCount){
     		%>
-	<a href="list.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a>
+	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage+pageBlock%>">[다음]</a>
 	<%
     	}
     }
