@@ -110,6 +110,9 @@
 						회원 가입 전 이메일 인증을 완료 해 주세요!
 					</span>
 
+						<input type="hidden" name="naverLogin" value="${param.naverLogin }">
+						<input type="hidden" name="kakaoLogin" value="${param.kakaoLogin }">
+						
 						* 이메일주소 
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "이메일 인증을 완료해주세요!">
 							<span class="ckMsg_mail"></span>
@@ -122,6 +125,8 @@
 							인증하러가기
 						</button>
 					</div>
+					${param.naverLogin }@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+					${param.kakaoLogin }######################################
 				</form>
 			</div>
 		</div>

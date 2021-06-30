@@ -30,6 +30,8 @@ public class MemberJoinAction implements Action {
       mdto.setUserGender(request.getParameter("userGender"));
       mdto.setUserSkinType(request.getParameter("userSkinType"));
       mdto.setUserTrouble(request.getParameter("userTrouble"));
+      mdto.setNaverLogin(request.getParameter("naverLogin"));
+      mdto.setKakaoLogin(request.getParameter("kakaoLogin"));
       
       String referral_id = request.getParameter("referral_id");
       
