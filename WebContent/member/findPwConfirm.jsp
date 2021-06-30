@@ -71,22 +71,31 @@
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
-							비밀번호 찾기 <br>
+							새 비밀번호 설정 <br>
 						</span>
 					</div>
 						
-					<div class="m-5" style="text-align: center;">
-						찾으시는 비밀번호는 ${userPass } 입니다.
-					</div>	
-					
-					<div>
-						<!-- 일반 로그인 버튼 시작 -->
-						<input class="login100-form-btn" type="button" value="login" onclick="location.href='./MemberLogin.me'"> 
-						<!-- 일반 로그인 버튼 끝 -->
-					</div>
+					<form action="./NewPassAction.me">	
+						<div class="" style="text-align: center;">
+							<div class="input-group">
+							 <input type="password" class="form-control" placeholder="새 비밀번호" aria-label="새 비밀번호" aria-describedby="basic-addon1" name="newPass">
+							</div>
+							<br>
+							 
+							<div class="input-group mb-3">
+							  <input type="password" class="form-control" placeholder="새 비밀번호 확인" aria-label="새 비밀번호 확인" aria-describedby="basic-addon1" name="newPass2">
+							</div>
+						</div>	
+						
+						<div>
+							<!-- 일반 로그인 버튼 시작 -->
+							<input class="login100-form-btn" type="submit" value="새 비밀번호 설정" > 
+							<!-- 일반 로그인 버튼 끝 -->
+						</div>
+					</form>
 					
 					<div class="row m-3" style="text-align: center;">
-						<a href="./MemberJoin.me">회원가입 </a>/ <a href="./FindPw.me">아이디 찾기</a>
+						<a href="./MemberJoin.me">회원가입 </a>/ <a href="./FindId.me">아이디 찾기</a>
 					</div>
 				<!-- 일반 로그인 폼 끝 -->
 				

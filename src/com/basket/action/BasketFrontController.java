@@ -70,6 +70,15 @@ public class BasketFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/BasketModify.ba")){
+			// 장바구니 정보 DB에서 삭제
+			action = new BasketModifyAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

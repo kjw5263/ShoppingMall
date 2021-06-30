@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+.skill-progress{
+    width: 280px;
+    color : black;
+    
+   
+}
+
+.skill-progress h1{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.item {
+    transition: 0.4s;
+
+}
+.item:hover {
+    border-radius: 3px;
+    box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.153);
+    transform: scale(1.80);            /*1.05배 커지게함*/
+    background-color: white;
+}
+
+.item p{
+    overflow: hidden;       /*p태그 높이 회복*/
+    margin-bottom : 0;      /* p태그 자체가 차지하는 마진을 없애기 */
+
+}
+
+/* p태그안에 있는 span을 왼쪽, 오른쪽 정렬을 시켜야함 */
+.item p span:nth-child(1){  /*span:first-child*/
+    float : left;
+}
+.item p span:nth-child(2){  /*span:end-child*/
+    float: right;
+}
+
+/* 그라데이션 막대를 감싸는 박스 */
+.progress{
+    border : 1px solid #6cd4c4;
+    padding : 5px;
+    border-radius: 3px;
+}
+
+/* 그라데이션 막대 */
+.progress-level{
+    height: 10px;
+    background : linear-gradient(to right, pink, gold);   /*방향(deg각도도 가능), 시작색상, 종료색상*/
+    animation: ani;
+    animation-duration: 5s;                               /*1초만에 발생한 애니메이션이 끝나게 함*/
+
+    animation-fill-mode: both; 
+    /*애니메이션이 반복이 끝나면 -> 무조건 keyframe에서 100%구간에 머무르게 해라
+    애니메이션은 기본적으로, 0%->100%->0%로 진행됨. 
+    근데, animation-fill-mode 설정이 없으면 100%구간에서 멈추지 않고 애니메이션이 부자연스러움
+    100%구간에서 멈추게 해서 -> 로딩 후, 바로 꽉찬 막대를 만들기 위해 fill-mode를 사용
+    */
+}
+
+/* 처음 로드될 때, 그라데이션바들이 서서히 차오르는 애니메이션 주기 */
+@keyframes ani{
+    0%{
+        width: 0;   /*시작할 때만 width가 0이게만 하면 됨*/
+    }
+}
+
+
+.skill-progress .item:nth-of-type(1) .progress-level{
+    animation-delay: 0s;
+}
+.skill-progress .item:nth-of-type(2) .progress-level{
+    animation-delay: 0.4s;
+}
+.skill-progress .item:nth-of-type(3) .progress-level{
+    animation-delay: 0.8s;
+}
+.skill-progress .item:nth-of-type(4) .progress-level{
+    animation-delay: 1.0s;
+}

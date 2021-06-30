@@ -29,7 +29,6 @@
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 
-
 </head>
 <script type="text/javascript">
 	function func1() {
@@ -54,27 +53,27 @@
 	}
 
 	//유효성체크
-	function pwcheck() {
-		if ($("#userPass").val() == "") {
+	function check() {
+		if (document.pw.userPass.value == "") {
 			alert("현재 비밀번호를 입력해주세요.");
-			$("#userPass").focus();
+			document.pw.userPass.focus();
 			return false;
 		}
-		if ($("#newpw1").val() != $("#newpw2").val()) {
+		if (document.pw.newpw1.value != document.pw.newpw2.value) {
 			alert("변경할 비밀번호가 서로 일치 하지 않습니다.");
-			$("newpw1").focus();
+			document.pw.newpw1.focus();
 			return false;
 		}
 
-		if ($("#newpw1").val() == "") {
+		if (document.pw.newpw1.value == "") {
 			alert("새 비밀번호를 입력해주세요.");
-			$("#newpw1").focus();
+			document.pw.newpw1.focus();
 			return false;
 		}
 
-		if ($("#newpw2").val() == "") {
+		if (document.pw.newpw2.value  == "") {
 			alert("새 비밀번호 확인을 입력해주세요.");
-			$("#newpw2").focus();
+			document.pw.newpw2.focus();
 			return false;
 		}
 
@@ -152,11 +151,13 @@
 								<td><%=mdto.getUserName()%></td>
 								<td></td>
 							</tr>
+							<tr>
+								<th>이메일</th>
+								<td><%=mdto.getUserEmail() %></td>
 							<!--전화변호 변경 구역  -->
 							<tr>
 								<th scope="row">전화번호</th>
 								<td>
-
 									<form action="MemberUpdateInfopro2.me" method="post">
 										<input type="hidden" name="id" value="<%=mdto.getUserId()%>">
 										<input type="hidden" name="number" value="1">
@@ -177,39 +178,13 @@
 								<td><button type="button" class="primary-btn look-btn"
 										style="background-color: #B0BCC2;" onclick="func1();">변경하기</button></td>
 							</tr>
-							<!--전번 구역 끝 이메일 구역 시작  -->
-							<tr>
-								<th scope="row">이메일</th>
-								<td>
-									<form action="MemberUpdateInfopro2.me" method="post"
-										onsubmit="return phcheck()">
-										<input type="hidden" name="id"
-											value="<%=mdto.getUserEmail()%>"> <input
-											type="hidden" name="number" value="2">
-										<div id="i4" style="display: none;">
-											<div>
-												<input type="text" name="userEmail" id="userEmail"
-													value="<%=mdto.getUserEmail()%>" class="form-control">
-											</div>
-											<br> <input type="submit" class="btn btn-outline-info"
-												value="변경하기"> <input type="button"
-												class="btn btn-outline-info" value="취소" onclick="func2();">
-
-										</div>
-
-										<div id="i3"><%=mdto.getUserEmail()%></div>
-									</form>
-								</td>
-								<td><button type="button" class="primary-btn look-btn"
-										style="background-color: #B0BCC2;" onclick="func2();">변경하기</button></td>
-							</tr>
-							<!--  -->
+							<!--전번 구역 끝 비밀번호 구역 시작 -->
 							<tr>
 								<th scope="row">비밀번호</th>
 
 								<td>
-									<form action="MemberUpdateInfopro2.me" method="post"
-										onsubmit="return pwcheck()">
+									<form action="MemberUpdateInfopro2.me" method="post" name="pw"
+										onsubmit="return check();">
 										<input type="hidden" name="id" value="<%=mdto.getUserId()%>">
 										<input type="hidden" name="number" value="3">
 										<div id="i6" style="display: none;">
@@ -339,7 +314,6 @@
 					</div>
 
 					<br> <br> <br> <br> <br> <br> <br>
-					<br>
 				</div>
 			</div>
 		</div>

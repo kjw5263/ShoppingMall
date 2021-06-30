@@ -37,6 +37,7 @@ public class MemberUpdateInfoproAction2 implements Action{
 	    	  mdto.setUserTel(request.getParameter("userTel"));
 	    	  mdao.updatemembertel(mdto);
 	    	  
+	    	  
 	    	  response.setContentType("text/html; charset=utf-8");
 	          PrintWriter out = response.getWriter();
 	          	out.print("<script>");
@@ -45,27 +46,17 @@ public class MemberUpdateInfoproAction2 implements Action{
 	          	out.print("</script>");
 	          	out.close();
 	          	return null;
-	    	
-	      }else if(number == 2 ){
 	    	  
-	    	  mdto.setUserEmail(request.getParameter("userEmail"));
-	    	  mdao.updatemembermail(mdto);
-	    	  
-	    	  response.setContentType("text/html; charset=utf-8");
-	    	  PrintWriter out = response.getWriter();
-	    	  out.print("<script>");
-	    	  out.print(" alert('변경완료되었습니다.'); ");
-	    	  out.print(" location.href = './MemberUpdateInfopro3.me'; ");
-	    	  out.print("</script>");
-	    	  out.close();
-	    	  return null;
-	      }else if(number == 3){
+	      }
+	      else if(number == 3){
 	    	  
 	    	  System.out.println("비밀번호 변경");
 		      String userPass = request.getParameter("userPass");
 		      String newpw1 = request.getParameter("newpw1");
-		      mdao.updatememberpw(userId,userPass,newpw1);
+		      int result = mdao.updatememberpw(userId,userPass,newpw1);
 		      
+		      System.out.println("result 값 "+ result);
+		      if(result == 1){
 		      response.setContentType("text/html; charset=utf-8");
 	    	  PrintWriter out = response.getWriter();
 	    	  out.print("<script>");
@@ -73,7 +64,26 @@ public class MemberUpdateInfoproAction2 implements Action{
 	    	  out.print(" location.href = './MemberUpdateInfopro3.me'; ");
 	    	  out.print("</script>");
 	    	  out.close();
-	    	  
+		      }else if(result == 0){
+	    		  response.setContentType("text/html; charset=utf-8");
+		          PrintWriter out = response.getWriter();
+		          	out.print("<script>");
+			    	out.print(" alert('비밀번호가 일치하지 않습니다.'); ");
+		          	out.print(" location.href = './MemberUpdateInfopro3.me'; ");
+		          	out.print("</script>");
+		          	out.close();
+		          	return null;
+	    	  }else if(result == -1){
+	    		  response.setContentType("text/html; charset=utf-8");
+		          PrintWriter out = response.getWriter();
+		          	out.print("<script>");
+			    	out.print(" alert('-1이라네용'); ");
+		          	out.print(" location.href = './MemberUpdateInfopro3.me'; ");
+		          	out.print("</script>");
+		          	out.close();
+		          	return null; 
+	    		  
+	    	  }
 	    	 
 	      }else if(number == 4){
 	    	  System.out.println("선택정보 변경");

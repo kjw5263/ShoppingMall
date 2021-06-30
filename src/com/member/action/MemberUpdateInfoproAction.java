@@ -36,7 +36,7 @@ public class MemberUpdateInfoproAction implements Action{
 
 			out.print("<script>");
 			out.print(" alert('비밀번호가 일치 하지 않습니다.'); ");
-			out.print(" history.back(); ");
+			out.print(" location.href = './MemberUpdateInfopro3.me'; ");
 			out.print("</script>");
 
 			out.close();

@@ -13,28 +13,26 @@ public class MemberKaKaoLoginAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String userEmail = request.getParameter("userEmail");
+		String k_Email = request.getParameter("userEmail");
 
 		// DAO객체 생성 -> idCheck(id,pass)
 			MemberDAO mdao = new MemberDAO();
 			
-			String check = mdao.kakaoIdCheck(userEmail);
+			String check = mdao.kakaoIdCheck(k_Email);
 	
 			// 결과에 따른 페이지 이동
 			// 컨트롤러 X - 비밀번호,아이디없음 오류(javascript)
 			// => 컨트롤러에는 가지만 페이지이동 X
 			
 			if (check.equals("")) { // 이메일 없음, 회원가입 권유
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter out = response.getWriter();
-	
-				out.print("<script>");
-				out.print(" alert('회원가입 하시겠습니까.'); ");
-				out.print(" history.back(); ");
-				out.print("</script>");
-	
-				out.close();
-				return null;
+				
+				// 페이지 이동 (./NConnectId.me)
+				request.setAttribute("k_Email", k_Email);
+				
+				ActionForward forward = new ActionForward();
+				forward.setPath("./member/KConnectId.jsp");
+				forward.setRedirect(false);
+				return forward;
 			}
 			
 			// 컨트롤러 O - 로그인성공
