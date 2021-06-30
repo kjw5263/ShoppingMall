@@ -28,9 +28,8 @@ public class MemberJoinAction implements Action {
 		String address2 = request.getParameter("address2");
 		String address3 = request.getParameter("address3");
 		mdto.setUserAddr(address1 + "," + address2 + "," +address3);
-		mdto.setUserTel(request.getParameter("userTel"));
-// DTO (setUserBirth: date -> String) 수정 확인 후 주석 풀기		
-//		mdto.setUserBirth(request.getParameter("userBirth"));
+		mdto.setUserTel(request.getParameter("userTel"));	
+		mdto.setUserBirth(request.getParameter("userBirth"));
 		mdto.setUserGender(request.getParameter("userGender"));
 		mdto.setUserSkinType(request.getParameter("userSkinType"));
 		mdto.setUserTrouble(request.getParameter("userTrouble"));
@@ -47,8 +46,7 @@ public class MemberJoinAction implements Action {
 		
 		
 		//회원가입 메서드  - insertMember();
-// DTO (setUserBirth: date -> String) 수정 확인 후 주석 풀기	
-//		mdao.insertMember(mdto,referral_id);
+		mdao.insertMember(mdto,referral_id);
 		
 		
 		// 페이지 이동(ActionForward객체)
