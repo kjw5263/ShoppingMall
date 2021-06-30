@@ -173,7 +173,7 @@ public class OrderDAO {
 				
 				sql = "insert into order_board values (?,?,?,?,?,"
 													+ "?,?,?,?,?,"
-													+ "?,?,?,?,?,"
+													+ "?,?,?,?,"
 													+ "?,?,now(),now(),?,"
 													+ "?,?,?)";
 				pstmt = conn.prepareStatement(sql);
@@ -193,14 +193,14 @@ public class OrderDAO {
 				pstmt.setString(12, oDTO.getO_msg());
 				pstmt.setInt(13, oDTO.getSumMoney());
 				pstmt.setInt(14, oDTO.getPayMoney());
-				pstmt.setInt(15, oDTO.getPayNum());	// 결제번호 - 이건필요 없을 수도 있음.. 삭제가능할듯
+				//pstmt.setInt(15, oDTO.getPayNum());	// 결제번호 - 이건필요 없을 수도 있음.. 삭제가능할듯
 				
-				pstmt.setString(16, oDTO.getPayerName());
-				pstmt.setString(17, oDTO.getPayType());
-				pstmt.setInt(18, 1);
-				pstmt.setInt(19, oDTO.getAddPoint());
-				pstmt.setInt(20, oDTO.getCpUseAmount());
-				pstmt.setInt(21, oDTO.getPtUseAmount());
+				pstmt.setString(15, oDTO.getPayerName());
+				pstmt.setString(16, oDTO.getPayType());
+				pstmt.setInt(17, 1);
+				pstmt.setInt(18, oDTO.getAddPoint());
+				pstmt.setInt(19, oDTO.getCpUseAmount());
+				pstmt.setInt(20, oDTO.getPtUseAmount());
 				
 				pstmt.executeUpdate();
 				

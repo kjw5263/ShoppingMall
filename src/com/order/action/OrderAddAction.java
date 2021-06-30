@@ -65,7 +65,7 @@ public class OrderAddAction implements Action{
 		request.getParameter("delCp");		// 사용한 쿠폰 종류
 		
 		forward.setPath("./OrderConfirm.or");
-		forward.setRedirect(false);
-		return null;
+		forward.setRedirect(true);
+		return forward;
 	}
 }
