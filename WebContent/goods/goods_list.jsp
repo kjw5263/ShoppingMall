@@ -209,30 +209,3 @@ table tr td {
 <script src="./js/mixitup.min.js"></script>
 <script src="./js/main.js"></script>
 <script type="text/javascript">
-<script type="text/javascript">
-	function update_form(b_no) {
-		$.ajax({
-			url : "./update_form.jsp",
-			type : "POST",
-			cache : false,
-			dataType : "json",
-			data : "b_no=" + b_no,
-			success : function(data) {
-				$('#b_no').val(data.b_no);
-				$('#b_type').val(data.b_type);
-				$('#b_title').val(data.b_title);
-				$('#b_content').val(data.b_content);
-				$('#b_file').val(data.b_file);
-				$('#b_user').val(data.b_user);
-				$('#btn_proc').html('저장');
-				$('#btn_proc').off('click');
-				$('#btn_proc').on('click', update_proc);
-			},
-			error : function(request, status, error) {
-				var msg = "ERROR : " + request.status + "<br>"
-				msg += +"내용 : " + request.responseText + "<br>" + error;
-				console.log(msg);
-			}
-		});
-	}
-</script>
