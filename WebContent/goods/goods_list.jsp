@@ -110,135 +110,91 @@ table tr td {
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
   
-  
-
   <%
-   
+//테스트 버전 업2!
   	listDAO gdao = new listDAO();
   	
     List goodsList = (List)request.getAttribute("goodsList");
-    JSONObject json = new JSONObject();
+    
 
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
     String http[][] = var.getHttp();
 	String cat[][] = var.getCat();	
-    String skin[][] = var.getSkin(); // 스킨타입
-    
+    String skin[][] = var.getSkin(); 
+    int size = goodsList.size();
   %>
-  <table  >
-  <tr>
-    <%for(int i = 0; i<http.length;i++){ %>
-	  <td  id = "one">
-       	<a href="<%=goHead%><%=http[i][0] %>"> &nbsp;&nbsp;<%=http[i][1] %> &nbsp;&nbsp; </a>
-      </td>
-      <%} %>
-    </tr>
-  
-  </table>
-  <br>
-   <table  >
-  <tr>
-    <%for(int i = 0; i<skin.length;i++){ %>
-	  <td  id = "one">
-       	<a href="<%=goHead%><%=skin[i][0] %>"> &nbsp;&nbsp; <%=skin[i][1] %> &nbsp;&nbsp; </a>
-      </td>
-      <%} %>
-    </tr>
-  
-  </table>
-  <br>
-  
-  <table  >
-  <tr>
-    <%for(int i = 0; i<cat.length;i++){ 
-    if(i == 8){
-    	%></tr><tr><td></td></tr>
-    	<tr><td></td></tr>
-    	<tr><td>.</td></tr><tr><% 
-    }
-    %>
-	  <td id = "one">
-       	<a href="<%=goHead%><%=cat[i][0] %>">  &nbsp;&nbsp; <%=cat[i][1] %> &nbsp;&nbsp; </a>
-      </td>
-      <%} %>
-    </tr>
-  
-  </table>
-
-  
-  <br>
-  <table >
-    
-    
-    <%
-      // 전체 상품 개수
-      
-      int size = goodsList.size();
-      // 열의 개수
-      int col =http.length;
-      // 행의 개수 
-      int row = (size/col)+((size%col>0)? 1:0);
-      // 상품 출력넘버 
-      int num = 0;
-      
-      // 행
-      for(int a=0;a<row;a++){
-    	  %>
-    	   <tr >
-    	  <%
-    	  // 열
-    	  for(int b=0;b<col;b++){
-    		  //System.out.print(" 상품1 ");
-    		  GoodsDTO dto = (GoodsDTO) goodsList.get(num);
-    		  %>
-    		     <td>
-    		         <img src="<%=dto.getCosImage()%>"
-	             	 width="120" height="120"
-	          		 ><br>
-	          		 
-	         	  	<a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><%=dto.getCosName() %></a><br>
-	           		<%=dto.getCosPrice() %>원  <br>
-	           		<button onclick="location.href='http://localhost:8088/
+	<section class="latest-products spad">
+        <div class="container">
+            <div class="product-filter">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="section-title">
+                            <h2>Latest Products</h2>
+                        </div>
+                        <ul class="product-controls">
+                            <li data-filter="*">All</li>
+                            <%
+                            for(int i = 1 ; i<http.length;i++){
+                            	
+                            %>
+                            <li data-filter=".<%=http[i][1] %>"><%=http[i][1] %></li>
+                            <%} %>
+                            
+                        </ul>
+                        <br>
+                         <ul class="product-controls">
+                            <li data-filter="*">All</li>
+                            <%
+                            for(int i = 1 ; i<cat.length;i++){
+                            	
+                            %>
+                            <li data-filter=".<%=cat[i][1] %>"><%=cat[i][1] %></li>
+                            <%} %>
+                            
+                        </ul>
+                         <br>
+                         <ul class="product-controls">
+                            <li data-filter="*">All</li>
+                            <%
+                            for(int i = 1 ; i<skin.length;i++){
+                            	
+                            %>
+                            <li data-filter=".<%=skin[i][1] %>"><%=skin[i][1] %></li>
+                            <%} %>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="product-list">
+            	<%for(int i = 0 ; i<size ;i++){ 
+            	GoodsDTO dto = (GoodsDTO) goodsList.get(i);
+            	%>
+                <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosBrand() %> <%=dto.getCosCategory() %> <%=dto.getCosSkinType() %>">
+                    <div class="single-product-item">
+                        <figure>
+                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="<%=dto.getCosImage()%>" alt=""></a>
+                            <div class="p-status">new</div>
+                        </figure>
+                        <div class="product-text">
+                            <h6><%=dto.getCosName()%></h6>
+                            <p><%=dto.getCosPrice() %>원  </p>
+                            <button onclick="location.href='http://localhost:8088/
 	           		ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%> '">장바구니 담기</button>	
-
-    		     </td>
-    		  <%   		  
-    		  num++;
-    		  if(size <= num) break;
-    	  }  
-    	  //System.out.println();
-    	  %>
-    	   </tr>
-    	  <%
-      }
-    
-    
-    %>
-    
-    
-    
-    <%-- <tr>
-      <% for(int i=0;i<goodsList.size();i++){
-    	  GoodsDTO dto = (GoodsDTO) goodsList.get(i);
-    	  %>
-       <td>
-	           <img src="./upload/<%=dto.getImage().split(",")[0]%>"
-	              width="120" height="120"
-	           ><br>
-	           <%=dto.getName() %><br>
-	           <%=dto.getPrice() %>원  <br>
-       </td>
-      <%} %>   
-    
-    </tr> --%>
-  
-  </table>
-  
+                        </div>
+                    </div>
+                </div>
+                <%} %>
+                
+            </div>
+        </div>
+    </section>
     <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
     
+  
   
   
 
