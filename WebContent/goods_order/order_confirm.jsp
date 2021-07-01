@@ -30,7 +30,39 @@
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
-	<h1>결제완료 화면입니다 !!!</h1>
+	
+	<!-- container 시작 -->	
+	<div class="container-fluid">	
+	
+		<div class="row">
+			<div class="col-3 text-center">
+			</div>
+			<div class="col-6" style="display: flex; align-items: center; padding-top:200px;">
+				<div style="float:left"><img src="./img/icons/check1.png"></div>
+				<div>
+					<div><h2>주문이 완료되었습니다.</h2></div>
+					<div><h4>이용해주셔서 감사합니다.</h4></div>
+				</div>
+			</div>
+			<div class="col-3">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-3">
+				ㅎㅎ
+			</div>
+			<div class="col-6" style="padding-bottom:200px;">	
+				ㅎㅎ
+			</div>
+			<div class="col-3" style="">	
+				ㅎㅎ
+			</div>
+		</div>
+	
+	</div>
+	<!-- container 끝 -->	
+
 	
 	
 	<!-- footer 시작 -->

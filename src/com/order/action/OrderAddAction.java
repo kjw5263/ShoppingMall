@@ -6,7 +6,9 @@ import java.util.Vector;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.basket.db.BasketDAO;
 import com.basket.db.BasketDTO;
+import com.coupon.db.CouponDTO;
 import com.goods.db.GoodsDTO;
 import com.order.db.OrderDAO;
 import com.order.db.OrderDTO;
@@ -17,19 +19,25 @@ public class OrderAddAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String userId = "jiwon";
+		
+		/* 세션 처리 */
 		/*if(id == null) {
 		forward.setPath("./MemberLogin.me");
 		forward.setRedirect(true);
 		return forward;
-	}*/
+		} */
+		
+		
 		ActionForward forward = new ActionForward();
-
 		request.setCharacterEncoding("UTF-8");
+		String user_id = request.getParameter("userId");
+		
 		OrderDTO oDTO = new OrderDTO();
 		
 		
+		/* 주문 테이블에 데이터 추가 */
 		// 주문자 정보 (Order Table)
-		oDTO.setO_userId(request.getParameter("userId"));
+		oDTO.setO_userId(user_id);
 	
 		// 수령인 정보 (Order Table)
 		oDTO.setReceiverName(request.getParameter("receiverName"));
@@ -53,8 +61,10 @@ public class OrderAddAction implements Action{
 		
 		oDTO.setPayType(request.getParameter("payType"));	// 결제 수단
 		
+		/* 주문 목록에 상품정보 넣기 위해 데이터 가져오기 */
 		OrderDAO orDAO = new OrderDAO();
-		Vector totalList = orDAO.getBasketList(userId);
+		BasketDAO bkDAO = new BasketDAO();
+		Vector totalList = bkDAO.getBasketList(userId);
 		
 		// 1-1. 장바구니 정보와 해당 상품정보들 꺼내기
 		List<BasketDTO> basketList = (List<BasketDTO>)totalList.get(0);
@@ -62,7 +72,20 @@ public class OrderAddAction implements Action{
 		orDAO.addOrder(oDTO, basketList, goodsList);
 		
 		
-		request.getParameter("delCp");		// 사용한 쿠폰 종류
+		/* 사용자 테이블에 누적사용금액, 사용한 포인트 차감, 레벨 변경 */
+		orDAO.updateUserInfo(oDTO);
+		
+		/* 장바구니 삭제하기 */
+		bkDAO.basketDelete(userId);
+		
+		/* 사용한 쿠폰 삭제하기 */
+		int cpUse = Integer.parseInt(request.getParameter("mcCouponNum"));
+		if (cpUse != -1) {
+			CouponDTO cDTO = new CouponDTO();
+			cDTO.setMcCouponNum(cpUse);
+			cDTO.setMcUserID(userId);
+			orDAO.deleteCoupon(cDTO);
+		}
 		
 		forward.setPath("./OrderConfirm.or");
 		forward.setRedirect(true);
