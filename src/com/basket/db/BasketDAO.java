@@ -199,6 +199,8 @@ public class BasketDAO {
 					gdto.setCosName(rs2.getString("cosName"));
 					gdto.setCosPrice(rs2.getInt("cosPrice"));
 					gdto.setCosImage(rs2.getString("cosImage"));
+					gdto.setCosNum(rs2.getInt("cosNum"));
+					gdto.setCosBrand(rs2.getString("cosBrand"));
 					
 					// 상품 리스트 한칸에 저장
 					goodsList.add(gdto);

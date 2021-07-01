@@ -59,7 +59,13 @@ public class OrderFrontController extends HttpServlet {
 			forward.setRedirect(false);
 		}
 		else if(command.equals("/OrderConfirm.or")) {
+			action = new OrderConfirmAction();
 			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
