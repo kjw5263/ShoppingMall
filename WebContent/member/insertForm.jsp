@@ -4,7 +4,7 @@
 <html lang="zxx">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
-	<title>Login V10</title>
+	<title>Login V10</title> 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -307,7 +307,13 @@
 	
 	</script>
 	<!-- 유효성 체크  끝 -->
-
+	<!-- 네이버 이메일 세션으로 가져오기 -->
+	<%
+	String naverLogin = (String)session.getAttribute("naverLogin");
+	String kakaoLogin = (String)session.getAttribute("kakaoLogin");
+	
+	%>
+					
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
@@ -316,6 +322,9 @@
 					<span class="login100-form-title p-b-51">
 						회원가입
 					</span>
+
+						<input type="hidden" name="naverLogin" value="<%=naverLogin %>">
+						<input type="hidden" name="kakaoLogin" value="<%=kakaoLogin %>">
 
 						*아이디 <span class="ckMsg_id"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "아이디를 입력해주세요">
@@ -354,20 +363,22 @@
 						</div>
 						
 						*이메일
-						<%-- <div class="wrap-input100 validate-input m-b-16">
-								<input class="input100" type="email" name="userEmail" 
-								<%if(request.getParameter("userEmail") != null){ %>
-								value=<%=request.getParameter("userEmail")%>
-								<%} %> placeholder="예) 세션값->email@email.com" readonly>
-							<span class="focus-input100"></span>
-						</div>     이메일 인증 연동할때 주석풀고 밑에 input form 삭제        --%>
 						
+						<% 					
+							//System.out.println("=====회원가입======");
+							String userEmail=(String)session.getAttribute("userEmail");
+						%>
 						<div class="wrap-input100 validate-input m-b-16">
-								<input class="input100" type="email" name="userEmail" 
-								placeholder="예) 세션값->email@email.com" >
+						<%
+						   if(userEmail != null){
+						%>
+							<input class="input100" type="email" name="userEmail" value="<%=userEmail%>" readonly>
+						<%	   
+						   }
+						%>	
 							<span class="focus-input100"></span>
-						</div>
-			
+						</div>  
+						
 						*성별
 						<div class="wrap-input100 validate-input m-b-16">
 								<input type="radio" name="userGender" value="남"> 남
@@ -413,7 +424,7 @@
 							<input type="radio" name="userTrouble" value="해당없음"> 해당없음
 						</div>
 						
-						*추천인 아이디 //(id,name="referral")
+						*추천인 아이디
 						<div class="wrap-input100 validate-input m-b-16">
 								<input type="text" id="referral_id" name="referral_id" placeholder="추천인 아이디">
 						</div>
@@ -424,6 +435,8 @@
 							
 						
 					</div>
+
+					
 
 				</form>
 			</div>

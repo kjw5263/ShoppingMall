@@ -75,17 +75,19 @@
 						</span>
 					</div>
 						
-					<div class="m-5" style="text-align: center;">
-						Kakao 인증이 완료 되었습니다. <br>
+					<div class="m-4" style="text-align: center;">
+						<span style="color: #e7e600;"><b>KAKAO</b></span> 인증이 완료 되었습니다. <br>
 						
-						추가 정보를 입력하시면 Kakao 아이디로 <br>
+						추가 정보를 입력하시면 <span style="color: #e7e600;"><b>KAKAO</b></span> 아이디로<br>
 						로그인 하실 수 있습니다. <br>
-						${k_Email }@@@@@@@@@@@@@@@@@@@@@@
 					</div>	
 					
 					<div>
 						<!-- 새로운 회원가입 및 연동 버튼 시작 -->
-						<input class="login100-form-btn" type="button" value="회원가입 및 연동하기" onclick="location.href='./MemberLogin.me'"> 
+						<form action="./emailJoin.me" method="post">
+							<input type="hidden" name="kakaoLogin" value="${k_Email }">
+							<input class="login100-form-btn" type="submit" value="회원가입 및 연동하기">
+						</form> 
 						<!-- 새로운 회원가입 및 연동 버튼 끝 -->
 					</div>
 					

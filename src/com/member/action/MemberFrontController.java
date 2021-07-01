@@ -420,8 +420,73 @@ public class MemberFrontController extends HttpServlet{
 			            e.printStackTrace();
 			         }
 			      }
+			      else if (command.equals("/emailJoin.me")) {
+				         System.out.println("2 : /emailJoin.me 주소 호출");
 
-				      
+				         forward = new ActionForward();
+				         forward.setPath("./member/email.jsp");
+				         forward.setRedirect(false);
+
+			      } else if (command.equals("/emailAddrCheckAction.me")) {
+
+			         System.out.println("2 : /emailAddrCheckAction.me 주소 호출");
+
+			         action = new emailAddrCheckAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+
+			      } else if (command.equals("/emailSendAction.me")) {
+
+			         System.out.println("2 : /emailSendAction.me 주소 호출");
+
+			         action = new emailSendAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+			         
+			      }else if (command.equals("/emailKeyCheckAction.me")) {
+
+			         System.out.println("2 : /emailKeyCheckAction.me 주소 호출");
+
+			         action = new emailKeyCheckAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+			      
+			      } else if (command.equals("/emailKeyCheck.me")) {
+
+			         System.out.println("2 : /emailKeyCheck.me 주소 호출");
+
+			         forward = new ActionForward();
+			         forward.setPath("./member/emailKeyCheck.jsp");
+			         forward.setRedirect(false);
+
+			      }
+				
+			      else if(command.equals("/Survey.me")){
+						System.out.println("C : /Survey.me 호출");
+						
+						forward = new ActionForward();
+						forward.setPath("./member/survey.jsp");
+						forward.setRedirect(false);
+						
+					}    
 				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");

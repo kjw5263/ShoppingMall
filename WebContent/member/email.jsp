@@ -1,3 +1,4 @@
+<%@page import="email.random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,12 +32,7 @@
 <!--===============================================================================================-->
 
 
-
-    <meta name="description" content="Yoga Studio Template">
-    <meta name="keywords" content="Yoga, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Violet | Template</title>
+    <title>이메일 인증페이지</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -51,65 +47,88 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-
-
-
-	<!-- jquery 준비 시작 -->
-	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-	<!-- jquery 준비 끝 -->
-
-
-
-	<!-- 네이버 로그인 시작 -->
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-	<!-- 네이버 로그인 끝 -->
+    
+    <!-- Ajax -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 </head>
+
 <body>
-    <!-- header 시작 -->
- 		<jsp:include page="../header/header.jsp" />
-	<!-- header 끝 -->
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+
+<!-- header 시작 -->
+	<jsp:include page="../header/header.jsp" />
+<!-- header 끝 -->
 	
+	
+<!-- 이메일 유효성확인 -->
+<script type="text/javascript">
+
+		var chkup = false;
+
+		$(document).ready(function(){
+			$("#fr").submit(function(){
+				 if($.trim($("#userEmail").val()) == null){
+					 $('.ckMsg_mail').text("이메일을 입력하세요");     
+		             $('.ckMsg_mail').css("color","red"); 
+		             $('.ckMsg_mail').css("padding-left","1rem"); 
+		             $("#userEmail").focus();
+		             return false;
+				 }
+				 if(chkup == false){
+					 return false;
+				 }
+			 });
+			 
+			 $("#userEmail").keyup(function(){
+				  
+					var Usermail = $("#userEmail").val();
+					var chk = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+					
+					if(Usermail.match(chk) != null){
+						$('.ckMsg_mail').text("");     
+						chkup = true;  
+					}else{
+						$('.ckMsg_mail').text("이메일을 정확히 입력하세요");     
+						$('.ckMsg_mail').css("color","red"); 
+						$('.ckMsg_mail').css("padding-left","1rem");
+						chkup = false; 
+					}
+				 	});
+		
+		});
+</script>
+<!-- 이메일 유효성 확인 -->
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-			
-				<!-- 일반 로그인 폼 시작 -->
-				<form class="login100-form validate-form flex-sb flex-w" action="./NConLoginAction.me" method="post">
-				
-					<div class="row">
-						<span class="login100-form-title p-b-51">
-							<span style="color: green;"><b>NAVER</b></span> 로그인 연동
-						</span>
-						<div class="m-5" style="text-align: center;">
-							기존 계정과 <span style="color: green;"><b>NAVER</b></span> 계정 연동을 위해 로그인 해주세요
-						</div>
-						
-						<div class="wrap-input100 validate-input m-b-16" data-validate = "ID를 입력해 주세요">
-							<input class="input100" type="text" id="userID" name="userId" placeholder="ID">
-							<span class="focus-input100"></span>
-						</div>
-						
-						<div class="wrap-input100 validate-input m-b-16" data-validate = "비밀번호를 입력해 주세요.">
-							<input class="input100" type="password" id="userPass" name="userPass" placeholder="Password">
-							<span class="focus-input100"></span>
-						</div>
-						
-						<!-- 네이버 이메일 값 히든으로 같이 넘기기 -->
-						<div>
-							<input type="hidden" name="n_email" value="${param.n_Email }">
-						</div>
-					</div>
-					
-					
-					
+				<form class="login100-form validate-form flex-sb flex-w" action="./emailAddrCheckAction.me" method="post" >
+					<span class="login100-form-title p-b-51">
+						회원 가입 전 이메일 인증을 완료 해 주세요!
+					</span>
 
+						<input type="hidden" name="naverLogin" value="${param.naverLogin }">
+						<input type="hidden" name="kakaoLogin" value="${param.kakaoLogin }">
+						
+						* 이메일주소 
+						<div class="wrap-input100 validate-input m-b-16" data-validate = "이메일 인증을 완료해주세요!">
+							<span class="ckMsg_mail"></span>
+								<input class="input100" type="text" id="userEmail" name="userEmail" placeholder="email을 입력해주세요">
+							<span class="focus-input100"></span>
+						</div>					
+						
 					<div class="container-login100-form-btn m-t-17">
-					
-						<!-- 일반 로그인 버튼 시작 -->
-						<input class="login100-form-btn" type="submit" value="기존 계정에 연결" id="submit"> 
-						<!-- 일반 로그인 버튼 끝 -->
+						<button class="login100-form-btn">
+							인증하러가기
+						</button>
 					</div>
+					<!-- 
+					${param.naverLogin }@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+					${param.kakaoLogin }######################################
+					 -->
 				</form>
 			</div>
 		</div>
@@ -117,7 +136,6 @@
 	
 
 	<div id="dropDownSelect1"></div>
-	
 	
 <!--===============================================================================================-->
 	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -137,7 +155,10 @@
 	<script src="./js/login.js"></script>
 
     <!-- footer 시작 -->
+    
    		<jsp:include page="../footer/footer.jsp" />
+   		 
+    
     <!-- footer 시작 -->
 
 </body>
