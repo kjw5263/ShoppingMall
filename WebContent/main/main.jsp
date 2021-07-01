@@ -37,7 +37,7 @@
 	</script>
 	
 	<style type="text/css">
-		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%;   bottom: 500px; }
+		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%; top: 90%; }
 	</style>
     
 
@@ -373,7 +373,7 @@
     
    	<!-- 플로팅 배너 시작 -->
 	<div id="banner" style=" position:block;">
-		<a href="./Survey.me"><img alt="" src="./img/main/question.png"></a>
+		<a href="./Question.que"><img alt="" src="./img/main/question.png"></a>
 	</div>
 	<!-- 플로팅 배너 끝 -->
 

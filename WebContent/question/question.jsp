@@ -1,3 +1,5 @@
+<%@page import="com.question.db.QuestionDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -69,73 +71,50 @@
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
-		<div class="row">
+		<div class="row m-5">
 			<div class="col-2">
-				ㅇㅇ
 			</div>
 			<div class="col-8 text-center">	
 				
-				<div>무료 피부 유형검사</div>
+				<div>당신의 피부타입은?!</div>
+				<br>
 				
-				<div>질문 1</div>
+				<%
+				 List queList = (List)request.getAttribute("queList");
+				
+				for(int i=0; i < 8 ; i++){
+				QuestionDTO qdto = (QuestionDTO) queList.get(i);
+					%>
+				
+				<div><%=qdto.getQsub() %></div>
 				<div>
 				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="1" value="<%= i %>">
+					<%for(int j=0; j < 5; j++){%>
+					<input type="radio" name="<%=i %>" value="<%=j %>">
 					 <%} %>
 				아니다
 				</div>
 				
-				<div>질문 2</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="2" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
+				<hr>
 				
-				<div>질문 3</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="3" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
-				
-				<div>질문 4</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="4" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
-				
-				<div>질문 5</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="5" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
-				
-				<div>질문 6</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="6" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
+				<%} %>
 				
 			</div>
 			<div class="col-2">	
-				ㅇㅇ
 			</div>
+			
 		</div>
+		
+		<div class="row m-4">
+				<div class="col-5"></div>
+				<div class="col-2">
+					<!-- 일반 로그인 버튼 시작 -->
+					<input class="login100-form-btn" type="submit" value="다음으로" id="submit"> 
+					<!-- 일반 로그인 버튼 끝 -->
+				</div>
+				<div class="col-5"></div>
+				
+			</div>
 	
 	</div>
 	<!-- container 끝 -->	
