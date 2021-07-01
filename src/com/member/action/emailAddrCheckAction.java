@@ -15,6 +15,11 @@ public class emailAddrCheckAction implements Action {
 		
 		String userEmail = request.getParameter("userEmail").trim();
 		
+		String naverLogin = request.getParameter("naverLogin");
+
+		String kakaoLogin = request.getParameter("kakaoLogin");
+
+		
 		MemberDAO mdao = new MemberDAO();
 		
 //		System.out.println(userEmail);
@@ -39,6 +44,8 @@ public class emailAddrCheckAction implements Action {
 				HttpSession session = request.getSession();
 				//인증 해야되는 메일주소
 				session.setAttribute("userEmail", userEmail);
+				session.setAttribute("naverLogin", naverLogin);
+				session.setAttribute("kakaoLogin", kakaoLogin);
 				
 					System.out.println("==============================================================");
 					System.out.println(userEmail);
