@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -22,6 +24,7 @@ public class OrderDAO {
 	private ResultSet rs = null;
 	private String sql = "";
 	
+
 	
 	//-----------DB 드라이버 정보--------------------
 	/*final String DRIVER = "com.mysql.jdbc.Driver";
@@ -142,6 +145,78 @@ public class OrderDAO {
 		return totalVector;
 	}
 	 /* getBasketList() 종료 */
+	
+	
+	/* addOrder() 시작 */
+	public void addOrder(OrderDTO oDTO, List<BasketDTO> basketList, List<GoodsDTO> goodsList) {
+		int o_tradeNum=0;
+		int o_num=0;
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		
+		try {
+			conn = getConnection();
+			sql = "select max(o_Num) from order_board";
+			pstmt= conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				o_num = rs.getInt("max(o_Num)")+1;
+			}
+			
+			o_tradeNum = o_num;
+			
+			// 주문 등록
+			for(int i=0; i<basketList.size(); i++) {
+				BasketDTO bkDTO = basketList.get(i);
+				GoodsDTO gDTO = goodsList.get(i);
+				
+				sql = "insert into order_board values (?,?,?,?,?,"
+													+ "?,?,?,?,?,"
+													+ "?,?,?,?,?,"
+													+ "?,?,now(),now(),?,"
+													+ "?,?,?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, o_num);
+				pstmt.setString(2, sdf.format(cal.getTime())+"-"+o_tradeNum);	// 	주문번호 생성
+				pstmt.setInt(3, bkDTO.getBasketCosNum());
+				pstmt.setString(4, gDTO.getCosName());
+				pstmt.setInt(5, bkDTO.getBasketCosAmount());
+				
+				pstmt.setString(6, bkDTO.getBasketUserId());
+				pstmt.setString(7, oDTO.getReceiverName());
+				pstmt.setString(8, oDTO.getReceiverAddr());
+				pstmt.setString(9, oDTO.getReceiverEmail());
+				pstmt.setString(10, oDTO.getReceiverTel());
+				
+				pstmt.setString(11, oDTO.getReceiverTel2());
+				pstmt.setString(12, oDTO.getO_msg());
+				pstmt.setInt(13, oDTO.getSumMoney());
+				pstmt.setInt(14, oDTO.getPayMoney());
+				pstmt.setInt(15, oDTO.getPayNum());	// 결제번호 - 이건필요 없을 수도 있음.. 삭제가능할듯
+				
+				pstmt.setString(16, oDTO.getPayerName());
+				pstmt.setString(17, oDTO.getPayType());
+				pstmt.setInt(18, 1);
+				pstmt.setInt(19, oDTO.getAddPoint());
+				pstmt.setInt(20, oDTO.getCpUseAmount());
+				pstmt.setInt(21, oDTO.getPtUseAmount());
+				
+				pstmt.executeUpdate();
+				
+				o_num++;
+				System.out.println("주문 디비 넣기 성공 ");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+				
+	}
+	/* addOrder() 시작 */
 	
 	
 }

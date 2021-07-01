@@ -32,12 +32,18 @@ public class OrderDTO {
 
     // 받는 사람 전화번호 
     private String receiverTel;
+    
+    // 받는 사람 전화번호2
+    private String receiverTel2;
 
     // 배송 메시지 
     private String o_msg;
 
     // 상품 가격 합계 합계 693,000원
-    private int totalMoney;
+    private int sumMoney;
+    
+    // 실제 결제 금액
+    private int payMoney;
 
     // 결제 번호 
     private int payNum;
@@ -46,7 +52,7 @@ public class OrderDTO {
     private String payerName;
 
     // 결제 방식 카드(0)/계좌이체(1)/카카오페이(2)
-    private int payType;
+    private String payType;
 
     // 결제 날짜 
     private Date payDate;
@@ -56,6 +62,14 @@ public class OrderDTO {
 
     // 주문 상태 상품준비/상품준비완료/주문취소/배송준비/배송중/배송완료
     private int orderStatus;
+    
+    // 적립 예정 포인트
+    private int addPoint;
+    // 사용한 쿠폰 할인 금액
+    private int cpUseAmount;
+    
+    // 사용한 포인트 할인금액
+    private int ptUseAmount;
 
 	public int getO_Num() {
 		return o_Num;
@@ -145,12 +159,21 @@ public class OrderDTO {
 		this.o_msg = o_msg;
 	}
 
-	public int getTotalMoney() {
-		return totalMoney;
+	public int getSumMoney() {
+		return sumMoney;
 	}
 
-	public void setTotalMoney(int totalMoney) {
-		this.totalMoney = totalMoney;
+	public void setSumMoney(int totalMoney) {
+		this.sumMoney = totalMoney;
+	}
+	
+
+	public int getPayMoney() {
+		return payMoney;
+	}
+
+	public void setPayMoney(int payMoney) {
+		this.payMoney = payMoney;
 	}
 
 	public int getPayNum() {
@@ -169,11 +192,12 @@ public class OrderDTO {
 		this.payerName = payerName;
 	}
 
-	public int getPayType() {
+
+	public String getPayType() {
 		return payType;
 	}
 
-	public void setPayType(int payType) {
+	public void setPayType(String payType) {
 		this.payType = payType;
 	}
 
@@ -200,16 +224,53 @@ public class OrderDTO {
 	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+	
+	
+
+	public String getReceiverTel2() {
+		return receiverTel2;
+	}
+
+	public void setReceiverTel2(String receiverTel2) {
+		this.receiverTel2 = receiverTel2;
+	}
+
+	public int getAddPoint() {
+		return addPoint;
+	}
+
+	public void setAddPoint(int addPoint) {
+		this.addPoint = addPoint;
+	}
+
+	public int getCpUseAmount() {
+		return cpUseAmount;
+	}
+
+	public void setCpUseAmount(int cpUseAmount) {
+		this.cpUseAmount = cpUseAmount;
+	}
+
+	public int getPtUseAmount() {
+		return ptUseAmount;
+	}
+
+	public void setPtUseAmount(int ptUseAmount) {
+		this.ptUseAmount = ptUseAmount;
+	}
 
 	@Override
 	public String toString() {
 		return "OrderDTO [o_Num=" + o_Num + ", o_tradeNum=" + o_tradeNum + ", o_cosNum=" + o_cosNum + ", o_cosName="
 				+ o_cosName + ", o_cosAmount=" + o_cosAmount + ", o_userId=" + o_userId + ", receiverName="
 				+ receiverName + ", receiverAddr=" + receiverAddr + ", receiverEmail=" + receiverEmail
-				+ ", receiverTel=" + receiverTel + ", o_msg=" + o_msg + ", totalMoney=" + totalMoney + ", payNum="
-				+ payNum + ", payerName=" + payerName + ", payType=" + payType + ", payDate=" + payDate + ", orderDate="
-				+ orderDate + ", orderStatus=" + orderStatus + "]";
+				+ ", receiverTel=" + receiverTel + ", receiverTel2=" + receiverTel2 + ", o_msg=" + o_msg + ", sumMoney="
+				+ sumMoney + ", payMoney=" + payMoney + ", payNum=" + payNum + ", payerName=" + payerName + ", payType="
+				+ payType + ", payDate=" + payDate + ", orderDate=" + orderDate + ", orderStatus=" + orderStatus
+				+ ", addPoint=" + addPoint + ", cpUseAmount=" + cpUseAmount + ", ptUseAmount=" + ptUseAmount + "]";
 	}
-    
+
+	
+
     
 }
