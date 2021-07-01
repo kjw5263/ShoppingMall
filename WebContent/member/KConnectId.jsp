@@ -75,12 +75,11 @@
 						</span>
 					</div>
 						
-					<div class="m-5" style="text-align: center;">
-						Kakao 인증이 완료 되었습니다. <br>
+					<div class="m-4" style="text-align: center;">
+						<span style="color: #e7e600;"><b>KAKAO</b></span> 인증이 완료 되었습니다. <br>
 						
-						추가 정보를 입력하시면 Kakao 아이디로 <br>
+						추가 정보를 입력하시면 <span style="color: #e7e600;"><b>KAKAO</b></span> 아이디로<br>
 						로그인 하실 수 있습니다. <br>
-						${k_Email }@@@@@@@@@@@@@@@@@@@@@@
 					</div>	
 					
 					<div>
