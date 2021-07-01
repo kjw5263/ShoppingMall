@@ -1,4 +1,4 @@
-<%@page import="org.json.simple.JSONObject"%>
+
 <%@page import="com.goods.db.listDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
@@ -199,6 +199,16 @@ table tr td {
   
 
 </body>
+
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.magnific-popup.min.js"></script>
+<script src="./js/jquery.slicknav.js"></script>
+<script src="./js/jquery.nice-select.min.js">
+<script src="./js/owl.carousel.min.js"></script></script>
+<script src="./js/mixitup.min.js"></script>
+<script src="./js/main.js"></script>
+<script type="text/javascript">
 <script type="text/javascript">
 	function update_form(b_no) {
 		$.ajax({
