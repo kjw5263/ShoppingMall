@@ -152,7 +152,7 @@
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
 				<div class="text-center mt-3">
-					<a href="./MemberJoin.me" >회원가입</a>
+					<a href="./emailJoin.me" >회원가입</a>
 				</div>
 				
 				

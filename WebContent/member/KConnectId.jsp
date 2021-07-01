@@ -85,7 +85,10 @@
 					
 					<div>
 						<!-- 새로운 회원가입 및 연동 버튼 시작 -->
-						<input class="login100-form-btn" type="button" value="회원가입 및 연동하기" onclick="location.href='./MemberLogin.me'"> 
+						<form action="./emailJoin.me" method="post">
+							<input type="hidden" name="kakaoLogin" value="${k_Email }">
+							<input class="login100-form-btn" type="submit" value="회원가입 및 연동하기">
+						</form> 
 						<!-- 새로운 회원가입 및 연동 버튼 끝 -->
 					</div>
 					

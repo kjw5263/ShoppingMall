@@ -945,11 +945,13 @@ public class MemberDAO {
 		//insertMember() 시작    -> 회원가입 폼에 있는 정보 DB로 전달
 		public void insertMember(MemberDTO mdto, String referral_id){
 		      
+			System.out.println(" 카카오에서 받아오는 값은 kkkkkkkkkkkkkkkkkk :" + mdto.getKakaoLogin());
+			System.out.println(" 네이버에서 받아오는 값은 nnnnnnnnnnnnnnnnnn :" + mdto.getNaverLogin());
+			
 		      int num = 0;
 		
 		      int point = 500;
 		   
-		      
 		   try {   
 		      conn = getConnection();
 		      
@@ -1049,6 +1051,38 @@ public class MemberDAO {
 		
 		            System.out.println("회원가입 신규회원: 포인트 지급 완료 (추천인x)");   
 		         
+		      }
+		      
+		      
+		      
+		      if(!mdto.getNaverLogin().equals(null) || !mdto.getNaverLogin().equals("")){
+		    	  conn = getConnection();
+			      
+			      sql = "update user_info set naverLogin=? where userId=?";
+			      
+			      pstmt = conn.prepareStatement(sql);
+			      
+		          pstmt.setString(1, mdto.getNaverLogin());
+		          pstmt.setString(2, mdto.getUserId());
+			      
+			      
+			      pstmt.executeUpdate();
+			      
+		      }
+		      
+		      if(!mdto.getKakaoLogin().equals(null) || !mdto.getKakaoLogin().equals("")){
+	    	  conn = getConnection();
+		      
+	    	  sql = "update user_info set kakaoLogin=? where userId=?";
+		      
+		      pstmt = conn.prepareStatement(sql);
+		      
+	          pstmt.setString(1, mdto.getKakaoLogin());
+	          pstmt.setString(2, mdto.getUserId());
+			      
+			      
+		      pstmt.executeUpdate();
+		    	  
 		      }
 		         
 		   } catch (SQLException e) {
