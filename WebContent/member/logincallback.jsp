@@ -36,7 +36,7 @@
 	    
 		document.fr.n_Email.value = naver_id_login.getProfileData('email');
 		
-		alert(document.fr.n_Email.value)
+		// alert(document.fr.n_Email.value)
 		
 	    document.getElementById("fr").submit();
 	  }

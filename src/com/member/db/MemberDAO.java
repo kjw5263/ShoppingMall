@@ -686,6 +686,7 @@ public class MemberDAO {
 					dto.setCouponDc(rs.getInt("couponDc"));
 					dto.setCouponName(rs.getString("couponName"));
 					dto.setCouponNote(rs.getString("couponNote"));
+					dto.setMcCouponNum(rs.getInt("mcCouponNum"));
 
 					couponList.add(dto);
 				}
@@ -1080,7 +1081,6 @@ public class MemberDAO {
 	          pstmt.setString(1, mdto.getKakaoLogin());
 	          pstmt.setString(2, mdto.getUserId());
 			      
-			      
 		      pstmt.executeUpdate();
 		    	  
 		      }
@@ -1093,8 +1093,46 @@ public class MemberDAO {
 		   }
 		
 		}
-		
 		//insertMember() 끝
+		
+		//insertCoupon(userId)
+	      public void insertCoupon(String userId){
+	         
+	         int num=0;
+	         
+	         try {
+	         conn = getConnection();
+
+	         sql = "select max(mcNum) from my_coupon";
+	      
+	            pstmt = conn.prepareStatement(sql);
+	            
+	            rs = pstmt.executeQuery();
+	            
+	            System.out.println("회원번호: "+num);
+	         
+	         if(rs.next()){
+	            num = rs.getInt(1)+1;
+	         }
+	            
+	         
+	         sql = "insert into my_coupon values(?,1,?,1)";
+	         
+	            pstmt.setInt(1, num);
+	            pstmt.setString(2, userId);
+	            
+	            pstmt.executeUpdate(); //insert, update, delete => int 형이라서 rs로 받을수 없음.
+	         
+	         } catch (SQLException e) {            
+	            e.printStackTrace();   
+	         }finally{
+	            closeDB();
+	         }
+
+	      }//
+
+	      //insertCoupon(userId)
+		
 		
 		/////////////// Member SignUp DAO /////////////////
 		
