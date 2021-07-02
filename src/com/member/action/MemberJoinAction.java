@@ -43,7 +43,7 @@ public class MemberJoinAction implements Action {
       //회원가입 메서드  - insertMember();
       mdao.insertMember(mdto,referral_id);
 	  //회원가입시 쿠폰 지급
-	  //mdao.insertCoupon(userId);
+	  mdao.insertCoupon(userId);
     		
       
       
