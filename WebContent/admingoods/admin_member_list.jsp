@@ -1,5 +1,6 @@
+<%@page import="com.member.db.MemberDTO"%>
 <%@page import="com.admin.goods.db.AdminGoodsDAO"%>
-<%@page import="com.goods.db.GoodsDTO"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -34,7 +35,7 @@
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
     
-<title>등록 상품 목록</title>
+<title>회원 정보 목록</title>
 </head>
 <body>
 <!-- Header Section Begin -->
@@ -58,13 +59,15 @@
 		
 		<div class="col-12 text-center">
 			
-    <!-- admin goods list Begin -->
+    <!-- admin member list Begin -->
     
    	<%
+   	List memberList = (List)request.getAttribute("memberList"); 
 	// AdminGoodsDAO 객체 생성
 	AdminGoodsDAO adao = new AdminGoodsDAO();
 	
-	// 디비에 상품의 수를 계산하는 메서드 생성 -> 호출
+	// 디비에 글의 수를 계산하는 메서드 생성 -> 호출
+	// getBoardCount();
 	int cnt = adao.getGoodsCount();
 	
 	////////////////////////////////////////////////////
@@ -84,16 +87,15 @@
 	int currentPage = Integer.parseInt(pageNum);
 	int startRow = (currentPage-1)*pageSize+1;
 	
-	
 	// 끝행 계산하기
 	// 1p->10번, 2p->20번, 3p->30번 ....=> 일반화
 	int endRow = currentPage*pageSize;
 	
 	// 디비에 저장된 모든 글중에서 원하는 만큼만 가져오기(페이지 사이즈)
-	ArrayList<GoodsDTO> goodsList = adao.getGoodsList(startRow,pageSize);
+	ArrayList<MemberDTO> getMemberList = adao.getMemberList(startRow,pageSize);
 	%>
     
-    <section class="admin_goods_list">
+    <section class="admin_member_list">
         <div class="container">
 	        <table>
 		    <tr>
@@ -102,7 +104,7 @@
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #899296; color:white;" ><b>상품목록</b></a>
+				        <a class="nav-link" href="./AdminGoodsList.ag"><b>상품목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
@@ -111,7 +113,7 @@
 				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
+				        <a class="nav-link" href="./AdminMemberList.ag" style="background-color: #899296; color:white;"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
@@ -121,58 +123,41 @@
 				</nav>
 		    </td>
 		    </tr>
-		    </table><br>
+		    </table>
+			<br>
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="12" style="background-color: #b0bcc2; text-align: center; color: white;" ><b>상품 등록 리스트</b></th>
+						<th colspan="12" style="background-color: #b0bcc2; text-align: center; color: white;"><b>회원 리스트</b></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th width="7%">번호</th>
-						<th>이미지</th>
-						<th>이름</th>
-						<th>가격</th>
-						<th width="9%">브랜드</th>
-						<th width="9%">카테고리</th>
+						<th width="6%">아이디</th>
+						<th width="8%">이름</th>
+						<th width="11%">이메일</th>
+						<th width="18%">주소</th>
+						<th width="15%">전화번호</th>
+						<th width="6%">성별</th>
 						<th width="9%">피부타입</th>
-						<th width="9%">피부고민</th>
-						<th width="7%">재고</th>
-						<th width="7%">용량</th>
-						<th width="7%">등록일</th>
-						<th width="10%">수정/삭제</th>
+						<th width="8%">피부고민</th>
+						<th width="8%">회원등급</th>
 					</tr>
 					
-					<% for(int i=0;i<goodsList.size();i++){
-						GoodsDTO dto = (GoodsDTO)goodsList.get(i);
+					<%for(int i=0;i<memberList.size();i++){
+						MemberDTO dto = (MemberDTO) memberList.get(i);
 					%>
 					
 					<tr>
-						<td><%=dto.getCosNum() %></td>
-						<td>
-							<img src="./admingoods/upload/<%=dto.getCosImage().split(",")[0] %>"
-								 width="100" height="100">
-						</td>
-						<td><%=dto.getCosName() %></td>
-						<td><%=dto.getCosPrice() %></td>
-						<td><%=dto.getCosBrand() %></td>
-						<td><%=dto.getCosCategory() %></td>
-						<td><%=dto.getCosSkinType() %></td>
-						<td><%=dto.getCosTrouble() %></td>
-						<td><%=dto.getCosAmount() %></td>
-						<td><%=dto.getCosVolumn() %>ml</td>
-						<td><%=dto.getCosWriteDate() %></td>
-						<td>
-						<ul class="nav flex-column ">
-						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsModify.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">수정</a>	
-						  </li>
-						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsDelete.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">삭제</a>
-						  </li>
-						</ul>
-						</td>
+						<td><%=dto.getUserId() %></td>
+						<td><%=dto.getUserName() %></td>
+						<td><%=dto.getUserEmail() %></td>
+						<td><%=dto.getUserAddr() %></td>
+						<td><%=dto.getUserTel() %></td>
+						<td><%=dto.getUserGender() %></td>
+						<td><%=dto.getUserSkinType() %></td>
+						<td><%=dto.getUserTrouble() %></td>
+						<td><%=dto.getUserLevel() %></td>
 					</tr>
 					<%} %>      	          
 				</tbody>
@@ -208,27 +193,24 @@
 	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
 	    	if(startPage > pageBlock){
 	    		%>
-	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-secondary btn-sm">이전</a>
+	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-secondary btn-sm">이전</a>
 	    		<%
 	    	}   	
 	    	
 	    	// 숫자  1....5
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
-	    		    <a href="./AdminGoodsList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"><%=i %></a> 
+	    		    <a href="./AdminMemberList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"><%=i %></a> 
 	    		<%    		
 	    	}
 	    	
 	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
 	    	if(endPage < pageCount){
 	    		%>
-	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-secondary btn-sm">다음</a>
+	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-secondary btn-sm">다음</a>
 	    		<%
 	    	}
-	    	
-	    	
-	    	
-	    	
+
 	    }
 	    //////////////////////////////////////////////////////
 	  %>
