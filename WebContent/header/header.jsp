@@ -12,6 +12,16 @@
  String userId = (String)session.getAttribute("userId");
 %>
 
+    <!-- Search model -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form" action="Goodssearch.cos" method="post">
+				<input type="text" name = "searchname" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
 	<!-- Header Section Begin -->
     <header class="header-section">
         <div class="container-fluid">
@@ -105,8 +115,17 @@
     <!-- Header Info End -->
     
     
-    <!-- Header End -->
-
 
 </body>
+    <!-- Header End -->
+ <!-- Js Plugins -->
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.magnific-popup.min.js"></script>
+    <script src="./js/jquery.slicknav.js"></script>
+    <script src="./js/owl.carousel.min.js"></script>
+    <script src="./js/jquery.nice-select.min.js"></script>
+    <script src="./js/mixitup.min.js"></script>
+    <script src="./js/main.js"></script>
+
 </html>
