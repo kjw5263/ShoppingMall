@@ -126,21 +126,22 @@
                 <ul class="inner_clrfix">
                     <li>
                         <span class="img_size11">
-
+                            <% if (reviewList.get(i).getReviewImage() !=null){%>
                             <img src="./goods_board/upload/<%=reviewList.get(i).getReviewImage() %>" alt=".." style="max-width: 15%">
-
+                            <% }%>
                         </span>
                     </li>
                 </ul>
             </div>
             <div class="recom_area">
-                <form action="reviewLike.rev" method="post">
+                <form action="./ReviewLike.rev" method="post">
                 <input type="hidden" name="reviewNum" value="<%=reviewList.get(i).getReviewNum() %>">
                 <input type="hidden" name="cosNum" value="<%=reviewList.get(i).getCosNum() %>">
                 <input type="hidden" name="userId" value="<%=reviewList.get(i).getUserid() %>">
                 <button type="submit" class="btn_recom">
                     이 리뷰가 도움이 돼요!
                 <span class="num1">
+                  <img src="./goods_board/style/img/IconGoods.png" alt="" style="width: 17px;padding: 0">
                     <%=reviewList.get(i).getReviewUp() %>
                 </span>
             </button>

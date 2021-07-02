@@ -25,9 +25,27 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+	
+	   $(window).scroll(function() {
+	      $("#banner").stop().animate({   "top" : ($(window).scrollTop() + 800) + "px"   }, 500);
+	   });
+	
+	</script>
+	
+	<style type="text/css">
+		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%;   bottom: 500px; }
+	</style>
+    
+
+    
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -51,18 +69,18 @@
     <!-- Hero Slider Begin -->
     <section class="hero-slider">
         <div class="hero-items owl-carousel">
-            <div class="single-slider-item set-bg" data-setbg="./img/slider-1.jpg">
+            <div class="single-slider-item set-bg" data-setbg="./img/cosmain.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>2019</h1>
-                            <h2>Lookbook.</h2>
+                            <h1>2021</h1>
+                            <h2>BEST SKIN CARE.</h2>
                             <a href="#" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-slider-item set-bg" data-setbg="./img/slider-2.jpg">
+            <div class="single-slider-item set-bg" data-setbg="./img/cosmain2.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -351,6 +369,18 @@
     <script src="./js/jquery.nice-select.min.js"></script>
     <script src="./js/mixitup.min.js"></script>
     <script src="./js/main.js"></script>
+    
+    
+   	<!-- 플로팅 배너 시작 -->
+	<div id="banner" style=" position:block;">
+		<a href="./Survey.me"><img alt="" src="./img/main/question.png"></a>
+	</div>
+	<!-- 플로팅 배너 끝 -->
+
+    
+    
+
+    
 </body>
 
 </html>

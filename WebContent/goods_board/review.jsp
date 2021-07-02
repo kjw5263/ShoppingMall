@@ -14,23 +14,38 @@
 <html>
 <head>
   <title>Title</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Yoga Studio Template">
+  <meta name="keywords" content="Yoga, unica, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+
+  <!-- Css Styles -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+  <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+  <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/style.css" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   <style>
 
-    /* 레이아웃 외곽 너비 400px 제한*/
-    body{
-      max-width: 480px;
-      margin: 0 auto; /* 화면 가운데로 */
-      background-color: #fff;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    textarea{
-      width: 100%;
-      padding: 10px;
-      box-sizing: border-box;
-    }
+    /*textarea{*/
+    /*  width: 100%;*/
+    /*  padding: 10px;*/
+    /*  box-sizing: border-box;*/
+    /*}*/
 
 
   </style>
@@ -48,15 +63,30 @@
 <title>리뷰 등록</title>
 <link rel="stylesheet" type="text/css" href="goods_board/style/starability-minified/starability-all.min.css"/>
 
-
 <body>
 
+<!-- Page Preloder -->
+<div id="preloder">
+  <div class="loader"></div>
+</div>
 
+<!-- Search model -->
+<div class="search-model">
+  <div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="search-close-switch">+</div>
+    <form class="search-model-form">
+      <input type="text" id="search-input" placeholder="Search here.....">
+    </form>
+  </div>
+</div>
+<jsp:include page="/header/header.jsp"/>
+<section class="section_area" style="max-width: 480px;margin-top:100px;background-color: #fff; height: 100%; padding: 20px; box-sizing: border-box; margin-bottom: 200px; margin-left: 40%;">
  <h1>별점과 리뷰를 남겨주세요.</h1>
-  <form  method="post" action="./reviewFormPro.rev" enctype="multipart/form-data">
+  <form  method="post" action="./ReviewFormPro.rev" enctype="multipart/form-data">
     <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 250px">
-        <fieldset class="starability-basic" id="rating" aria-required="false">
-          <legend>별점을 선택해 주세요.</legend>
+        <fieldset class="starability-basic" id="rating" aria-required="false" style="margin-right: 180px">
+          <br>
+          별점을 선택해 주세요.
           <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
           <input type="radio" id="rate1" name="rating" value="1" />
           <label for="rate1">1 star.</label>
@@ -83,16 +113,28 @@
 
     <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
     <label>
-      <textarea rows="10" minlength="5" name="reviewContent" required></textarea>
+      <textarea rows="10" minlength="5" name="reviewContent" required style="width: 350px; padding: 10px;box-sizing: border-box"></textarea>
     </label>
-
-      <input type="submit" id="save" value="등록">
-      <input type="reset" value="취소"><input type="file" name="file1">
-
-
+    <br>
+    <div>
+    <input type="submit" id="save" value="등록">
+    <input type="reset" value="취소">
+    <input type="file" name="file1">
+    </div>
 
   </form>
 
+</section>
+<jsp:include page="/footer/footer.jsp"/>
+
 </body>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.magnific-popup.min.js"></script>
+<script src="./js/jquery.slicknav.js"></script>
+<script src="./js/owl.carousel.min.js"></script>
+<script src="./js/jquery.nice-select.min.js"></script>
+<script src="./js/mixitup.min.js"></script>
+<script src="./js/main.js"></script>
 
 </html>
