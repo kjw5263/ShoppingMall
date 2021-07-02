@@ -102,20 +102,115 @@ public class AdminGoodsFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} if(command.equals("/AdminList.ag")){
-			System.out.println("C : /AdminList.ag 호출");
-			// 정보를 입력받는 페이지 -> view페이지 이동
+		///////////////////////////////////////////////////////////////////////////////////////
+		//adminList////////////////////////////////////////////////////////////////////////////
+		} else if(command.equals("/AdminMemberList.ag")){
+			System.out.println("C : /AdminMemberList.ag 호출");
+			// 주문정보 리스트
+			action = new AdminMemberListAction();
 			
-			forward = new ActionForward();
-			forward.setPath("./admingoods/admin_list.jsp");
-			forward.setRedirect(false);
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminCouponList.ag")){
+			System.out.println("C : /AdminCouponList.ag 호출");
+			// 주문정보 리스트
+			action = new AdminCouponListAction();
 			
-		}
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminCouponsAddAction.ag")){
+			System.out.println("C : /AdminCouponsAddAction.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminCouponsAddAction();
 		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminCouponsModify.ag")){
+			System.out.println("C : /AdminCouponsModify.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminCouponsModifyFormAction();
+		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminCouponsModifyAction.ag")){
+			System.out.println("C : /AdminCouponsModifyAction.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminCouponsModifyAction();
+		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminCouponsDelete.ag")){
+			System.out.println("C : /AdminCouponsDelete.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminCouponsDeleteAction();
+		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminOrderList.ag")){
+			System.out.println("C : /AdminOrderList.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminOrderListAction();
+		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/OrderStatusModify.ag")){
+			System.out.println("C : /OrderStatusModify.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminOrderStatusModifyAction();
+		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminOrderDetail.ag")){
+			System.out.println("C : /AdminOrderDetail.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminOrderDetailAction();
+		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AdminOrderDelete.ag")){
+			System.out.println("C : /AdminOrderDelete.ag 호출");
+			// GoodsAddAction() 객체 생성
+			action = new AdminOrderDeleteAction();
+		
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+		  
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
-	
 		
+
 		/******************* 3. 페이지 주소 이동 종류를 정하기 (제어) *******************/
 		// forward 가 null 이 아닐 때 : 페이지 이동 정보가 있을 때 
 		if(forward != null){

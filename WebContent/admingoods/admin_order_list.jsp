@@ -1,3 +1,4 @@
+<%@page import="com.order.db.OrderDTO"%>
 <%@page import="com.admin.goods.db.AdminGoodsDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -34,7 +35,7 @@
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
     
-<title>등록 상품 목록</title>
+<title>관리자 주문 목록</title>
 </head>
 <body>
 <!-- Header Section Begin -->
@@ -64,8 +65,9 @@
 	// AdminGoodsDAO 객체 생성
 	AdminGoodsDAO adao = new AdminGoodsDAO();
 	
-	// 디비에 상품의 수를 계산하는 메서드 생성 -> 호출
-	int cnt = adao.getGoodsCount();
+	// 디비에 글의 수를 계산하는 메서드 생성 -> 호출
+	// getBoardCount();
+	int cnt = adao.getOrderCount();
 	
 	////////////////////////////////////////////////////
 	//게시판 페이징 처리 : DB에서 원하는 만큼만 상품 가져오기
@@ -90,10 +92,10 @@
 	int endRow = currentPage*pageSize;
 	
 	// 디비에 저장된 모든 글중에서 원하는 만큼만 가져오기(페이지 사이즈)
-	ArrayList<GoodsDTO> goodsList = adao.getGoodsList(startRow,pageSize);
+	ArrayList<OrderDTO> orderList = adao.getOrderList(startRow,pageSize);
 	%>
     
-    <section class="admin_goods_list">
+    <section class="admin_order_list">
         <div class="container">
 	        <table>
 		    <tr>
@@ -102,13 +104,13 @@
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #899296; color:white;" ><b>상품목록</b></a>
+				        <a class="nav-link" href="./AdminGoodsList.ag"><b>상품목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
+				        <a class="nav-link" href="./AdminOrderList.ag" style="background-color: #899296; color:white;"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
@@ -130,51 +132,88 @@
 				</thead>
 				<tbody>
 					<tr>
-						<th width="7%">번호</th>
-						<th>이미지</th>
-						<th>이름</th>
-						<th>가격</th>
-						<th width="9%">브랜드</th>
-						<th width="9%">카테고리</th>
-						<th width="9%">피부타입</th>
-						<th width="9%">피부고민</th>
-						<th width="7%">재고</th>
-						<th width="7%">용량</th>
-						<th width="7%">등록일</th>
-						<th width="10%">수정/삭제</th>
+						<th>주문번호</th>
+						<th>주문자</th>
+						<th>상품명</th>
+						<th>결제방법</th>
+						<th>주문금액</th>
+						<th>주문상태</th>
+						<th>주문일시</th>
+						<th>수정/삭제</th>
 					</tr>
 					
-					<% for(int i=0;i<goodsList.size();i++){
-						GoodsDTO dto = (GoodsDTO)goodsList.get(i);
+					<% for(int i=0;i<orderList.size();i++){
+					   OrderDTO dto = (OrderDTO)orderList.get(i);
 					%>
-					
+
 					<tr>
-						<td><%=dto.getCosNum() %></td>
-						<td>
-							<img src="./admingoods/upload/<%=dto.getCosImage().split(",")[0] %>"
-								 width="100" height="100">
+						<td><%=dto.getO_tradeNum()%></td>
+						<td><%=dto.getO_userId() %></td>
+						<td><%=dto.getO_cosName() %></td>
+						<td><%=dto.getPayType() %></td>
+						<td><%=dto.getSumMoney() %></td>
+						<form name="form" method="post" action="./OrderStatusModify.ag">
+						<td>		
+							<input type="hidden" name="o_Num" class="o_Num" value="<%=dto.getO_Num() %>"/>				
+							<ul class="nav flex-column " style="width: 100px; margin-left: 0; margin-right: auto;">
+							  <li class="nav-item mb-2">
+								<select name="orderStatus" class="form-control">
+									<option value="결제완료"
+										<%if(dto.getOrderStatus().equals("결제완료")){ %>
+										selected
+										<%} %>
+									>결제완료</option>
+									<option value="상품준비"
+										<%if(dto.getOrderStatus().equals("상품준비")){ %>
+										selected
+										<%} %>
+									>상품준비</option>
+									<option value="상품준비완료"
+										<%if(dto.getOrderStatus().equals("상품준비완료")){ %>
+										selected
+										<%} %>							
+									>상품준비완료</option>
+									<option value="주문취소"
+										<%if(dto.getOrderStatus().equals("주문취소")){ %>
+										selected	
+										<%} %>						
+									>주문취소</option>
+									<option value="배송준비"
+										<%if(dto.getOrderStatus().equals("배송준비")){ %>
+										selected
+										<%} %>							
+									>배송준비</option>
+									<option value="배송중"
+										<%if(dto.getOrderStatus().equals("배송중")){ %>
+										selected
+										<%} %>							
+									>배송중</option>
+									<option value="배송완료"
+										<%if(dto.getOrderStatus().equals("배송완료")){ %>
+										selected
+										<%} %>							
+									>배송완료</option>								
+								</select>	
+							  </li>
+							  <li class="nav-item mb-2">
+	 						  <input type="submit" value="수정" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"/> 
+							  </li>
+							</ul>
 						</td>
-						<td><%=dto.getCosName() %></td>
-						<td><%=dto.getCosPrice() %></td>
-						<td><%=dto.getCosBrand() %></td>
-						<td><%=dto.getCosCategory() %></td>
-						<td><%=dto.getCosSkinType() %></td>
-						<td><%=dto.getCosTrouble() %></td>
-						<td><%=dto.getCosAmount() %></td>
-						<td><%=dto.getCosVolumn() %>ml</td>
-						<td><%=dto.getCosWriteDate() %></td>
+						</form>
+						<td><%=dto.getOrderDate() %></td>
 						<td>
 						<ul class="nav flex-column ">
 						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsModify.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">수정</a>	
+							<a href="./AdminOrderDetail.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">상세</a>	
 						  </li>
 						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsDelete.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">삭제</a>
+							<a href="./AdminOrderDelete.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">삭제</a>
 						  </li>
 						</ul>
 						</td>
 					</tr>
-					<%} %>      	          
+					<%} %>      
 				</tbody>
 			</table>	
         </div>
@@ -208,26 +247,23 @@
 	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
 	    	if(startPage > pageBlock){
 	    		%>
-	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-secondary btn-sm">이전</a>
+	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-secondary btn-sm">이전</a>
 	    		<%
 	    	}   	
 	    	
 	    	// 숫자  1....5
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
-	    		    <a href="./AdminGoodsList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"><%=i %></a> 
+	    		    <a href="./AdminOrderList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"><%=i %></a> 
 	    		<%    		
 	    	}
 	    	
 	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
 	    	if(endPage < pageCount){
 	    		%>
-	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-secondary btn-sm">다음</a>
+	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-secondary btn-sm">다음</a>
 	    		<%
 	    	}
-	    	
-	    	
-	    	
 	    	
 	    }
 	    //////////////////////////////////////////////////////
