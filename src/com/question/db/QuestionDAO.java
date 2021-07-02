@@ -69,7 +69,7 @@ public class QuestionDAO {
 		List queList = new ArrayList();
 		try {
 			conn = getConnection();
-			sql = "select * from question_type";
+			sql = "select * from question_list";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -94,6 +94,105 @@ public class QuestionDAO {
 		return queList;
 	}
 	// getFaqList() 끝
+	
+	// getListCount() 시작 ( 캠핑장 게시판 게시글 수 기능 )
+	public int getListCount() {
+
+		int cnt = 0;
+
+		try {
+			// 1, 2 드라이버로드, 디비연결
+			conn = getConnection();
+
+			// 3 sql 작성(select) & pstmt 객체 생성
+			sql = "select count(*) from question_list";
+
+			pstmt = conn.prepareStatement(sql);
+
+			// 4 sql 실행
+			rs = pstmt.executeQuery();
+
+			// 5 데이터 처리
+			if (rs.next()) {
+				cnt = rs.getInt(1);
+			} // try
+
+			System.out.println("SQL 구문 실행 완료!");
+			System.out.println(" 질문 개수 : " + cnt + "개");
+
+		} catch (Exception e) {
+			System.out.println(" 질문 개수 에러 발생 !!");
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return cnt;
+	}
+	// getBoardCount() 끝	
+	
+	// getBoardList(int startRow, int pageSize) 시작 ( 캠핑지 게시판 게시글 시작 끝 기능 )
+		public ArrayList getBoardList(int startRow, int pageSize) {
+			// DB데이터 1행의 정보를 BoardBean에 저장 -> ArrayList 한칸에 저장
+
+			// 게시판의 글 정보를 원하는 만큼 저장하는 가변길이 배열
+			ArrayList QueList = new ArrayList();
+
+			// 게시판 글 1개의 정보를 저장하는 객체
+			QuestionDTO qdto = null;
+
+			try {
+				// 1, 2 드라이버 로드, 디비 열결
+				conn = getConnection();
+
+				// 3sql 구문 & pstmtm객체
+				// 글 정보 정렬 - re_ref 값을 최신글 위쪽으로 정렬(내림차순)
+				//				- re_seq 값을 사용 (오름 차순)
+				//				- limit a, b (a 시작, b 개수)
+				//				ex) 1번글 -> 0번 인덱스
+				
+				
+				sql = "select * from question_list "
+						+ "order by Qnum asc"
+						+ " limit ?,?";
+				
+
+				//
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, startRow-1);
+				pstmt.setInt(2, pageSize);
+				
+				rs = pstmt.executeQuery();
+
+				// 5 데이터 처리
+				while (rs.next()) {
+					// 데이터 있을 때 bb 객체 생성
+					qdto = new QuestionDTO();
+
+					// DB정보를 Bean에 저장하기
+					qdto.setQnum(rs.getInt("Qnum"));
+					qdto.setQsub(rs.getString("Qsub"));
+					
+
+					
+					// Bean -> ArrayList 한칸에 저장
+					QueList.add(qdto);
+
+				} // while
+				
+				System.out.println(" 게시판 모든 정보 저장완료 ");
+				System.out.println(" 총 " + QueList.size() + " 개");
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+
+			return QueList;
+		}
+		// getBoardList(int startRow, int pageSize) 끝
 	
 //	// getFaqList(category) 시작
 //	public List getFaqList(String category) {

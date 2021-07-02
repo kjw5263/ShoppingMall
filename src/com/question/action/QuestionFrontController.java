@@ -48,8 +48,28 @@ public class QuestionFrontController extends HttpServlet {
 	            e.printStackTrace();
 	         }
 		}
-
+		else if(command.equals("/QuestionConfirm.que")){
 		
+			System.out.println("C : /findPwConfirm.me 호출");
+			// 화면을 보여주기=> view페이지로 이동
+			
+			forward = new ActionForward();
+			forward.setPath("./question/questionConfirm.jsp");
+			forward.setRedirect(false);
+		}
+		else if(command.equals("/QueRevise.que")){
+			
+			System.out.println("C : /Question.me 호출");
+			
+			// action = new Action();
+
+	         try {
+	            forward = action.execute(request, response);
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         }
+			
+		}
 		
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
