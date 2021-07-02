@@ -45,9 +45,6 @@ public class OrderDTO {
     // 실제 결제 금액
     private int payMoney;
 
-    // 결제 번호 
-    private int payNum;
-
     // 결제자 이름 
     private String payerName;
 
@@ -175,15 +172,7 @@ public class OrderDTO {
 	public void setPayMoney(int payMoney) {
 		this.payMoney = payMoney;
 	}
-
-	public int getPayNum() {
-		return payNum;
-	}
-
-	public void setPayNum(int payNum) {
-		this.payNum = payNum;
-	}
-
+	
 	public String getPayerName() {
 		return payerName;
 	}
@@ -265,7 +254,7 @@ public class OrderDTO {
 				+ o_cosName + ", o_cosAmount=" + o_cosAmount + ", o_userId=" + o_userId + ", receiverName="
 				+ receiverName + ", receiverAddr=" + receiverAddr + ", receiverEmail=" + receiverEmail
 				+ ", receiverTel=" + receiverTel + ", receiverTel2=" + receiverTel2 + ", o_msg=" + o_msg + ", sumMoney="
-				+ sumMoney + ", payMoney=" + payMoney + ", payNum=" + payNum + ", payerName=" + payerName + ", payType="
+				+ sumMoney + ", payMoney=" + payMoney + ", payerName=" + payerName + ", payType="
 				+ payType + ", payDate=" + payDate + ", orderDate=" + orderDate + ", orderStatus=" + orderStatus
 				+ ", addPoint=" + addPoint + ", cpUseAmount=" + cpUseAmount + ", ptUseAmount=" + ptUseAmount + "]";
 	}

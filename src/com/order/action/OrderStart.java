@@ -1,5 +1,6 @@
 package com.order.action;
 
+
 import java.util.List;
 import java.util.Vector;
 
@@ -7,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.basket.db.BasketDAO;
 import com.member.db.MemberDAO;
 import com.member.db.MemberDTO;
-import com.order.db.OrderDAO;
 
 public class OrderStart implements Action{
 
@@ -29,8 +30,8 @@ public class OrderStart implements Action{
 		
 		
 		// 1. 장바구니 DB의 장바구니 정보 가져오기
-		OrderDAO orDAO = new OrderDAO();
-		Vector totalVector = orDAO.getBasketList(userId);
+		BasketDAO bkDAO = new BasketDAO();
+		Vector totalVector = bkDAO.getBasketList(userId);
 		
 		// 1-1. 장바구니 정보와 해당 상품정보들 꺼내기
 		List basketList = (List)totalVector.get(0);
