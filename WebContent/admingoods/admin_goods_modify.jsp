@@ -55,7 +55,7 @@
 		</div>
 		<div class="col-12 text-center">
 			
-    <!-- admin goods write Begin -->
+    <!-- admin goods modify Begin -->
     
 	<%
 		GoodsDTO dto = (GoodsDTO) request.getAttribute("dto"); 
@@ -70,7 +70,7 @@
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #899296; color:white;" ><b>상품목록</b></a>
+				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #6c757d; color:white;" ><b>상품목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
@@ -224,15 +224,13 @@
  		        </tr> 	      	          
 				</tbody>
 			</table>
-			<table style="margin-left: auto; margin-right: auto;">
-			<tr>
-			    <td><input type="submit" value="상품수정" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
-		    </tr>
-		    </table>		
+			<div style="margin-left: auto; margin-right: auto;">
+			    <input type="submit" value="상품수정" class="btn btn-secondary">
+		    </div>		
 		</form>
         </div>
     </section>
-    <!-- admin goods write End -->
+    <!-- admin goods modify End -->
 			
 		</div>
 		<div class="col-0">	

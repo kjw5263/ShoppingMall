@@ -82,7 +82,7 @@
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminCouponList.ag" style="background-color: #899296; color:white;"><b>쿠폰목록</b></a>
+				        <a class="nav-link" href="./AdminCouponList.ag" style="background-color: #6c757d; color:white;"><b>쿠폰목록</b></a>
 				      </li>			      
 				    </ul>
 				  </div>
@@ -118,8 +118,8 @@
 							<td><%=dto.getCouponNote() %></td>
 							<td><%=dto.getCouponDc() %>%</td>
 							<td>
-								<a href="./AdminCouponsModify.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">수정</a>	
-								<a href="./AdminCouponsDelete.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">삭제</a>
+								<a href="./AdminCouponsModify.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-secondary btn-sm">수정</a>	
+								<a href="./AdminCouponsDelete.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-secondary btn-sm">삭제</a>
 							</td>						
 						</tr>
 					<%} %>      	          
@@ -150,17 +150,15 @@
 					</tr>		      	          
 					</tbody>
 				</table>
-				<table style="margin-left: auto; margin-right: auto;">
-				<tr>
-				    <td><input type="submit" value="쿠폰등록" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
-				    <td><input type="reset" value="쿠폰초기화" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>	
-			    </tr>
-			    </table>		
+				<div style="margin-left: auto; margin-right: auto;">
+				    <input type="submit" value="쿠폰등록" class="btn btn-secondary">
+				    <input type="reset" value="쿠폰초기화" class="btn btn-secondary">
+			    </div>		
 			</form>		
 		</div>
 	</section>
 
-    <!-- admin goods list End -->
+    <!-- admin coupon list End -->
 			
 		</div>
 		<div class="col-0">	

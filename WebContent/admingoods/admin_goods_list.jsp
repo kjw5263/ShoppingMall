@@ -102,7 +102,7 @@
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #899296; color:white;" ><b>상품목록</b></a>
+				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #6c757d; color:white;" ><b>상품목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
@@ -166,10 +166,10 @@
 						<td>
 						<ul class="nav flex-column ">
 						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsModify.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">수정</a>	
+							<a href="./AdminGoodsModify.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm">수정</a>	
 						  </li>
 						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsDelete.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">삭제</a>
+							<a href="./AdminGoodsDelete.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-secondary btn-sm">삭제</a>
 						  </li>
 						</ul>
 						</td>
@@ -208,21 +208,21 @@
 	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
 	    	if(startPage > pageBlock){
 	    		%>
-	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-secondary btn-sm">이전</a>
+	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-primary btn-sm">이전</a>
 	    		<%
 	    	}   	
 	    	
 	    	// 숫자  1....5
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
-	    		    <a href="./AdminGoodsList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"><%=i %></a> 
+	    		    <a href="./AdminGoodsList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm"><%=i %></a> 
 	    		<%    		
 	    	}
 	    	
 	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
 	    	if(endPage < pageCount){
 	    		%>
-	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-secondary btn-sm">다음</a>
+	    		<a href="./AdminGoodsList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-primary btn-sm">다음</a>
 	    		<%
 	    	}
 	    	
