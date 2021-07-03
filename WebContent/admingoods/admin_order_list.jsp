@@ -154,7 +154,7 @@
 						<td><%=dto.getSumMoney() %></td>
 						<form name="form" method="post" action="./OrderStatusModify.ag">
 						<td>		
-							<input type="hidden" name="o_Num" class="o_Num" value="<%=dto.getO_Num() %>"/>				
+							<input type="hidden" name="o_tradeNum" class="o_tradeNum" value="<%=dto.getO_tradeNum() %>"/>				
 							<ul class="nav flex-column ">
 							  <li class="nav-item mb-2">
 								<select name="orderStatus" class="form-control" style="padding: 6px 10px;">

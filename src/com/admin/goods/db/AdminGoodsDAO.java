@@ -826,11 +826,11 @@ public class AdminGoodsDAO {
 	public void OrderStatusModify(OrderDTO odto){
 		try {
 			conn = getConnection();
-			sql = "update order_board set orderStatus=? where o_Num=?";
+			sql = "update order_board set orderStatus=? where o_tradeNum=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, odto.getOrderStatus());
-			pstmt.setInt(2, odto.getO_Num());
+			pstmt.setString(2, odto.getO_tradeNum());
 			
 			pstmt.executeUpdate();
 
@@ -884,6 +884,7 @@ public class AdminGoodsDAO {
 				orDTO.setReceiverEmail(rs.getString("receiverEmail"));
 				orDTO.setReceiverName(rs.getString("receiverName"));
 				orDTO.setReceiverTel(rs.getString("receiverTel"));
+				orDTO.setReceiverTel2(rs.getString("receiverTel2"));
 				orDTO.setSumMoney(rs.getInt("sumMoney"));
 				goDTO.setCosImage(rs.getString("cosImage"));
 				goDTO.setCosPrice(rs.getInt("cosPrice"));

@@ -135,11 +135,19 @@
 				<tbody>
 					<tr>
 						<th>받는 사람</th>
-					    <td><%=orderInfo.getReceiverName() %></td>
+						<td><%=orderInfo.getReceiverName() %></td>
 					</tr>
 					<tr>
 					    <th>연락처</th>
 					    <td><%=orderInfo.getReceiverTel() %></td>
+					</tr>
+					<tr>
+					    <th>예비연락처</th>
+						<%if(orderInfo.getReceiverTel2() == null){%>
+						<td>없음</td>
+						<%} else {%>
+					    <td><%=orderInfo.getReceiverTel2() %></td>
+					    <%} %>
 					</tr>
 					<tr>
 					    <th>이메일</th>
@@ -151,9 +159,7 @@
 					</tr>	 
 					<tr>
 					    <th>요구사항</th>
-					    <%
-					    	if(orderInfo.getO_msg() == null){
-					    %>		
+					    <%if(orderInfo.getO_msg() == null){ %>		
 					    <td>없음</td>
 					    <%}else{ %>
 					    <td><%=orderInfo.getO_msg() %></td>
