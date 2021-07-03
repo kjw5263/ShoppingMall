@@ -154,7 +154,8 @@ table {
       </tr>
 
 <tr>
-<td height="300px" colspan="2" style="position: static; top: 3px; left: 5px; text-align: inherit;"><%=notit.getNoticeContent() %></td>
+<td height="300px" colspan="2" style="position: static; top: 3px; left: 5px; text-align: inherit;">
+<%=notit.getNoticeContent() %><br><img width="500px" height="500px" src = "./upload/<%=notit.getNoticeImg()%>"></td>
 
 </tr>
 </table>

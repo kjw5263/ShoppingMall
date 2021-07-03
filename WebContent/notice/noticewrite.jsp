@@ -46,6 +46,7 @@
 			
 			<input type="checkbox" value="0" id ="imp2" name = "imp2" checked="checked" class = "hidden" ><br> 
 			파일 : <input type="file" name="filename"><br> 
+			파일 : <input type="file" name="imgname"><br>
 			내용 :
 			<textarea rows="10" cols="30" name="content"></textarea>
 			<hr>

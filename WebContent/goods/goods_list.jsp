@@ -180,8 +180,7 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="location.href='http://localhost:8088/
-	           		ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%> '">장바구니 담기</button>	
+                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
                         </div>
                     </div>
                 </div>
@@ -208,4 +207,3 @@ table tr td {
 <script src="./js/owl.carousel.min.js"></script></script>
 <script src="./js/mixitup.min.js"></script>
 <script src="./js/main.js"></script>
-<script type="text/javascript">

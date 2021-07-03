@@ -71,7 +71,11 @@ public class listDAO extends DBconnection{
 
 		try {
 			
-			sql = "select * from "+ tablename + "where cosName like '%"+item+"%'";
+			sql = "select * from "+ tablename +
+					" where cosName like '%"+item+"%' or "
+							+ " cosBrand like '%"+item+"%' or "
+									+ " cosCategory like '%"+item+"%' ";
+			System.out.println("sql = "+  sql);
 			
 			rs = con.selsql(sql);
 			

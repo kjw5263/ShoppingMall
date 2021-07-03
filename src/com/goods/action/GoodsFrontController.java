@@ -71,6 +71,21 @@ public class GoodsFrontController extends HttpServlet {
        
         System.out.println("C : 2.페이지 주소 매핑  완료");
         }
+        if(command.equals("/Goodssearch.cos")){
+			System.out.println("C : /Goodssearch.cos 호출");
+			// DB정보를 화면이동 없이 출력
+			// GoodsListAction() 객체 생성
+			
+			action = new GoodsSearchAction();
+			
+			try {
+				forward = action.execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+       
+        System.out.println("C : 2.페이지 주소 매핑  완료");
+        }
 
 
 
