@@ -1,32 +1,30 @@
-package com.faq.action;
+package com.question.action;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.faq.action.ActionForward;
-import com.faq.db.FaqDAO;
+import com.question.action.ActionForward;
+import com.question.db.QuestionDAO;
 
-public class FaqDeleteAction implements Action {
+public class QueDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		System.out.println("M : MemberDeleteAction_execute() 호출");
 		
 		//한글처리 
 		request.setCharacterEncoding("UTF-8");
 		
 		// 전달정보 저장(id,pass)
-		int faqNum = Integer.parseInt(request.getParameter("faqNum"));
+		int Qnum = Integer.parseInt(request.getParameter("Qnum"));
 
-		System.out.println("넘어온 faqNum값은 @@@@@@@@@@@@@@@@@@@@ : " + faqNum);
+		System.out.println("넘어온 Qnum값은 @@@@@@@@@@@@@@@@@@@@ : " + Qnum);
 
         
-        FaqDAO dao = new FaqDAO();
-        int check = dao.deleteFaq(faqNum);
+		QuestionDAO qdao = new QuestionDAO();
+        int check = qdao.deleteQue(Qnum);
 
         
         response.setContentType("text/html; charset=utf-8");
@@ -34,7 +32,7 @@ public class FaqDeleteAction implements Action {
         
         if(check == -1){
         	out.print("<script>");
-        	out.print(" alert('존재하지 않는 게시글입니다.'); ");
+        	out.print(" alert('존재하지 않는 질문글 입니다.'); ");
         	out.print(" history.back(); ");
         	out.print("</script>");
         	out.close();
@@ -43,7 +41,7 @@ public class FaqDeleteAction implements Action {
         
      // 페이지 이동 (./FaqList.faq)
     ActionForward forward = new ActionForward();
-	forward.setPath("./FaqList.faq");
+	forward.setPath("./Question.que");
 	forward.setRedirect(true);
 	return forward;
 	}

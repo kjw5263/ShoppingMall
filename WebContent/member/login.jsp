@@ -137,7 +137,6 @@
 <!-- 							</li> -->
 							<!-- 카카오 로그아웃 시작 -->
 						</ul>
-						
 					</div>
 					<!-- 네이버 로그인 버튼 시작 -->
 						<div id="naverIdLogin" class="mt-3" >
@@ -152,6 +151,7 @@
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
 				<div class="text-center mt-3">
+					회원이 아니신가요? <br>
 					<a href="./emailJoin.me" >회원가입</a>
 				</div>
 				

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.faq.action.FaqReviseAction;
+import com.faq.action.FaqReviseProAction;
+import com.faq.action.FaqWriteAction;
 import com.question.action.ActionForward;
 
 @WebServlet("*.que")
@@ -57,11 +60,11 @@ public class QuestionFrontController extends HttpServlet {
 			forward.setPath("./question/questionConfirm.jsp");
 			forward.setRedirect(false);
 		}
-		else if(command.equals("/QueRevise.que")){
+		else if(command.equals("/QueDelete.que")){
 			
-			System.out.println("C : /Question.me 호출");
+			System.out.println("C : /QueDelete.que 호출");
 			
-			// action = new Action();
+			 action = new QueDeleteAction();
 
 	         try {
 	            forward = action.execute(request, response);
@@ -70,6 +73,62 @@ public class QuestionFrontController extends HttpServlet {
 	         }
 			
 		}
+		else if(command.equals("/QueWrite.que")){
+			
+			System.out.println("2 : /QueWrite.que 주소 호출");
+
+			forward = new ActionForward();
+			forward.setPath("./question/queWrite.jsp");
+			forward.setRedirect(false);
+			
+		}
+		else if(command.equals("/QueWriteAction.que")) {
+
+			System.out.println("2 : /QueWriteAction.que 주소 호출");
+
+			action = new QueWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if(command.equals("/QueRevise.que")) {
+
+			System.out.println("2 : /QueRevise.que 주소 호출");
+
+			action = new QueReviseAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/QueReviseProAction.que")) {
+
+			System.out.println("2 : /QueReviseProAction.que 주소 호출");
+
+			action = new QueReviseProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/Customized.que")) {
+
+			System.out.println("2 : /Customized.que 주소 호출");
+
+			action = new CustomizedAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+			
+		
 		
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	

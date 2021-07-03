@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -79,7 +81,9 @@
 				<div>당신의 피부타입은?!</div>
 			</div>
 			<div class="col-2 mt-3">
-				<button type="button" class="btn btn-primary btn-sm"> 글쓰기 </button>
+				<c:if test="${userId eq 'admin' }">
+					<button type="button" class="btn btn-secondary" id="write">글쓰기</button>
+				</c:if>
 			</div>
 		</div>
 		
@@ -104,27 +108,28 @@
 				qdto = (QuestionDTO) queQueList.get(i);
 				%>
 				
-				<div><%=qdto.getQsub() %></div>
+				<div><%=qdto.getQnum()%>. <%=qdto.getQsub() %></div>
 				<div>
-				그렇다
+				아니다
 				
 					<%for(int j=0; j < 5; j++){%>
 					<input type="radio" name="<%=qdto.getQnum() %>" value="<%=j %>" id="radio">
 					 <%} %>
 					 
-				아니다
+				그렇다
 				
 				</div>
 				
+				<c:if test="${userId eq 'admin' }">
 				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./QueRevise.que?Qnum=<%=qdto.getQnum() %>'"> 수정 </button>
 				 / 
 				 <button type="button" class="btn btn-danger btn-sm" onclick="location.href='./QueDelete.que?Qnum=<%=qdto.getQnum() %>'">삭제</button>
+				</c:if>
 				
 				
 				<hr>
 				
 				<%} %>
-				
 				
 				
 			</div>
@@ -173,15 +178,10 @@
 					// 페이지 블록의 끝 페이지 번호
 					int endPage = startPage+pageBlock-1;
 					
-					if(endPage > pageCount){
-						endPage = pageCount;
-					}
-					
-					// 이전
 					
 					%>
 					    
-					    <%if(endPage < pageCount){ %>
+					    <%if(currentPage < endPage){ %>
 					    <form action="./Question.que?pageNum=<%=currentPage + 1%>" method="post">
 					    	<input class="login100-form-btn" type="submit" value="다음으로" id="submit"> 
 					    </form>
@@ -195,14 +195,10 @@
 					     <%} %>
 					    <%
 				}
-				
 			%>
-					
 				</div>
 				<div class="col-5"></div>
-				
 			</div>
-	
 	</div>
 	<!-- container 끝 -->	
 	
@@ -219,8 +215,8 @@
 	<script type="text/javascript">
 		var sum = 0;
 
+		// 라디오 버튼 눌렸을 때 값 누적하는 제이쿼리 시작
 		$(document).ready(function () {
-			
 			
 			if(<%=currentPage%> > 1){
 				sum = sessionStorage.getItem("sum");
@@ -232,9 +228,9 @@
 				
 				sum = Number(sum) + Number(fnum);
 				
-		        alert("개별 번호는 " + fnum);
+		        // alert("개별 번호는 " + fnum);
 		        
-		        alert(" 점수 합계는 " + sum);
+		        // alert(" 점수 합계는 " + sum);
 		        
  		        sessionStorage.setItem("sum", sum);
 		        
@@ -245,8 +241,15 @@
 			 });
 			
 		});
-	
-	
+		// 라디오 버튼 눌렀을 때 값 누적하는 제이쿼리 끝
+		
+		
+		// 글쓰기 버튼 시작
+    	$('#write').click(function() {
+    		location.href='./QueWrite.que';
+		});    	
+    	// 글쓰기 버튼 끝
+
 	</script>
 
 	
