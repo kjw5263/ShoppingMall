@@ -59,7 +59,7 @@
         		 if(session.getAttribute("userId") == null){
         		%>
                 <div class="user-access">
-                    <a href="#">Register</a>
+                    <a href="./MemberJoin.me">Register</a>
                     <a href="./MemberLogin.me" class="in">Sign in</a>
                 </div>
                 <%}else{%>
@@ -70,16 +70,16 @@
                 <nav class="main-menu mobile-menu">
                     <ul>
                         <li><a class="active" href="./index.jsp">Home</a></li>
-                        <li><a href="./GoodsList.cos">Shop</a>
+                        <li><a href="./GoodsList.cos">Products</a>
                             <ul class="sub-menu">
                                 <li><a href="./product-page.jsp">Product Page</a></li>
                                 <li><a href="./shopping-cart.jsp">Shopping Card</a></li>
-                                <li><a href="./check-out.jsp">Check out</a></li>
+                                <li><a href="#">Check out</a></li>
                             </ul>
                         </li>
-                        <li><a href="./product-page.jsp">About</a></li>
-                        <li><a href="./check-out.jsp">Blog</a></li>
-                        <li><a href="./FaqList.faq">Contact</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="./notice.nos">공지사항</a></li>
+                        <li><a href="./FaqList.faq">FQA</a></li>
                     </ul>
                 </nav>
             </div>
@@ -106,7 +106,7 @@
                 <div class="col-md-4 text-left text-xl-right">
                     <div class="header-item">
                     <img src="./img/icons/sales.png" alt="">
-                    <p>30% off on dresses. Use code: 30OFF</p>
+                    <p>회원가입 시 <b>추천인</b> 입력하면 <b>500포인트</b> 즉시 적립! </p>
                 </div>
                 </div>
             </div>

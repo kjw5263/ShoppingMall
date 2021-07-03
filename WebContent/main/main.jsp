@@ -65,7 +65,7 @@
                         <div class="col-lg-12">
                             <h1>2021</h1>
                             <h2>BEST SKIN CARE.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+                            <a href="./GoodsList.cos" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
@@ -104,25 +104,32 @@
                     <div class="col-lg-4">
                         <div class="single-features-ads first">
                             <img src="./img/icons/f-delivery.png" alt="">
-                            <h4>${param.userEmail }</h4>
-                            <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal
-                                esuada aliquet libero viverra cursus. </p>
+                            <h4>JUST SKIN CARE</h4>
+                            <p> 립스틱, 아이라인, 섀도우, 파운데이션 ... 넘쳐나는 화장품 속,<br>
+                           		그리고 심지어 마스크까지! <br>
+                           		내 피부는 숨을 쉴 시간이 없어요. <br>
+                           		내 피부를 진정시켜줄, 스킨케어 제품들만 모아놓았어요.<br>
+                           		오전 10시 이전 주문 시, 당일배송이랍니다! </p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads second">
                             <img src="./img/icons/coin.png" alt="">
-                            <h4>100% Money back </h4>
-                            <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
-                                aliquet libero viverra cursus. </p>
+                            <h4>다양한 쿠폰과 알뜰살뜰 포인트</h4>
+                            <p> 제품 구매 시 구매금액의 1%에 해당하는 금액을,<br>
+                           		현금처럼 사용가능한 포인트로 적립해드려요.<br>
+                            	또한, 회원들에게 상시 다양한 쿠폰을 지급하니<br>
+                            	절대 놓치지 마세요! </p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads">
                             <img src="./img/icons/chat.png" alt="">
-                            <h4>Online support 24/7</h4>
-                            <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
-                                aliquet libero viverra cursus. </p>
+                            <h4>24시간 1:1 실시간 채팅</h4>
+                            <p> 저스트스킨에게 궁금한 점이 생기셨나요?<br>
+                             	홈페이지 하단 챗봇을 통해 질문해주세요.<br>
+                             	(주말, 공휴일 제외)
+                             	</p>
                         </div>
                     </div>
                 </div>
