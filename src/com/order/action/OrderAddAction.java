@@ -18,6 +18,8 @@ public class OrderAddAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		// HttpSession session = request.getSession();
+		// String id = (String)session.getAttribute("id");
 		String userId = "jiwon";
 		
 		/* 세션 처리 */
@@ -69,7 +71,7 @@ public class OrderAddAction implements Action{
 		// 1-1. 장바구니 정보와 해당 상품정보들 꺼내기
 		List<BasketDTO> basketList = (List<BasketDTO>)totalList.get(0);
 		List<GoodsDTO> goodsList = (List<GoodsDTO>)totalList.get(1);
-		orDAO.addOrder(oDTO, basketList, goodsList);
+		String tradeNumber =orDAO.addOrder(oDTO, basketList, goodsList);
 		
 		
 		/* 사용자 테이블에 누적사용금액, 사용한 포인트 차감, 레벨 변경 */
@@ -86,6 +88,8 @@ public class OrderAddAction implements Action{
 			cDTO.setMcUserID(userId);
 			orDAO.deleteCoupon(cDTO);
 		}
+		
+		request.setAttribute("tradeNumber", tradeNumber);
 		
 		forward.setPath("./OrderConfirm.or");
 		forward.setRedirect(true);

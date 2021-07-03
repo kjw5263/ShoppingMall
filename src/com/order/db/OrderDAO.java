@@ -86,7 +86,7 @@ public class OrderDAO {
 	
 	
 	/* addOrder() 시작 */
-	public void addOrder(OrderDTO oDTO, List<BasketDTO> basketList, List<GoodsDTO> goodsList) {
+	public String addOrder(OrderDTO oDTO, List<BasketDTO> basketList, List<GoodsDTO> goodsList) {
 		int o_tradeNum=0;
 		int o_num=0;
 		Calendar cal = Calendar.getInstance();
@@ -145,13 +145,13 @@ public class OrderDAO {
 				o_num++;
 			}
 			System.out.println("주문 디비 넣기 성공 ");
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			closeDB();
 		}
-		
+		return sdf.format(cal.getTime())+"-"+o_tradeNum;
 				
 	}
 	/* addOrder() 끝 */
