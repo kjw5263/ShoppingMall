@@ -35,7 +35,7 @@
                     <%
 						if(userId !=null && userId.equals("admin") ){
 					%>
-					   <img src="./img/icons/man.png" alt="" onclick="location.href='./AdminList.ag'">
+					   <img src="./img/icons/man.png" alt="" onclick="location.href='./AdminGoodsList.ag'">
 					<%
 					   } else {
 					%>
@@ -72,7 +72,7 @@
                         <li><a class="active" href="./index.jsp">Home</a></li>
                         <li><a href="./GoodsList.cos">Shop</a>
                             <ul class="sub-menu">
-                                <li><a href="./GoodsList.cos">Product Page</a></li>
+                                <li><a href="./product-page.jsp">Product Page</a></li>
                                 <li><a href="./shopping-cart.jsp">Shopping Card</a></li>
                                 <li><a href="./check-out.jsp">Check out</a></li>
                             </ul>

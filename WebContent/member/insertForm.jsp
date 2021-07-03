@@ -307,7 +307,13 @@
 	
 	</script>
 	<!-- 유효성 체크  끝 -->
-
+	<!-- 네이버 이메일 세션으로 가져오기 -->
+	<%
+	String naverLogin = (String)session.getAttribute("naverLogin");
+	String kakaoLogin = (String)session.getAttribute("kakaoLogin");
+	
+	%>
+					
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
@@ -316,6 +322,9 @@
 					<span class="login100-form-title p-b-51">
 						회원가입
 					</span>
+
+						<input type="hidden" name="naverLogin" value="<%=naverLogin %>">
+						<input type="hidden" name="kakaoLogin" value="<%=kakaoLogin %>">
 
 						*아이디 <span class="ckMsg_id"></span>
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "아이디를 입력해주세요">
@@ -426,6 +435,8 @@
 							
 						
 					</div>
+
+					
 
 				</form>
 			</div>

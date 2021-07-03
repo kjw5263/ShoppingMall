@@ -64,6 +64,7 @@
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 	<!-- 네이버 로그인 끝 -->
 
+	<!-- test -->
 </head>
 <body>
     <!-- header 시작 -->
@@ -151,7 +152,7 @@
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
 				<div class="text-center mt-3">
-					<a href="./MemberJoin.me" >회원가입</a>
+					<a href="./emailJoin.me" >회원가입</a>
 				</div>
 				
 				

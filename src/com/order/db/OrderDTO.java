@@ -45,9 +45,6 @@ public class OrderDTO {
     // 실제 결제 금액
     private int payMoney;
 
-    // 결제 번호 
-    private int payNum;
-
     // 결제자 이름 
     private String payerName;
 
@@ -60,8 +57,8 @@ public class OrderDTO {
     // 주문 날짜 
     private Date orderDate;
 
-    // 주문 상태 상품준비/상품준비완료/주문취소/배송준비/배송중/배송완료
-    private int orderStatus;
+    // 주문 상태 결제완료/상품준비/상품준비완료/주문취소/배송준비/배송중/배송완료
+    private String orderStatus;
     
     // 적립 예정 포인트
     private int addPoint;
@@ -175,15 +172,7 @@ public class OrderDTO {
 	public void setPayMoney(int payMoney) {
 		this.payMoney = payMoney;
 	}
-
-	public int getPayNum() {
-		return payNum;
-	}
-
-	public void setPayNum(int payNum) {
-		this.payNum = payNum;
-	}
-
+	
 	public String getPayerName() {
 		return payerName;
 	}
@@ -217,11 +206,11 @@ public class OrderDTO {
 		this.orderDate = orderDate;
 	}
 
-	public int getOrderStatus() {
+	public String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(int orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 	
@@ -265,12 +254,9 @@ public class OrderDTO {
 				+ o_cosName + ", o_cosAmount=" + o_cosAmount + ", o_userId=" + o_userId + ", receiverName="
 				+ receiverName + ", receiverAddr=" + receiverAddr + ", receiverEmail=" + receiverEmail
 				+ ", receiverTel=" + receiverTel + ", receiverTel2=" + receiverTel2 + ", o_msg=" + o_msg + ", sumMoney="
-				+ sumMoney + ", payMoney=" + payMoney + ", payNum=" + payNum + ", payerName=" + payerName + ", payType="
+				+ sumMoney + ", payMoney=" + payMoney + ", payerName=" + payerName + ", payType="
 				+ payType + ", payDate=" + payDate + ", orderDate=" + orderDate + ", orderStatus=" + orderStatus
 				+ ", addPoint=" + addPoint + ", cpUseAmount=" + cpUseAmount + ", ptUseAmount=" + ptUseAmount + "]";
 	}
 
-	
-
-    
 }

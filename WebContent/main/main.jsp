@@ -25,9 +25,27 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+	
+	   $(window).scroll(function() {
+	      $("#banner").stop().animate({   "top" : ($(window).scrollTop() + 800) + "px"   }, 500);
+	   });
+	
+	</script>
+	
+	<style type="text/css">
+		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%;   bottom: 500px; }
+	</style>
+    
+
+    
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -343,4 +361,20 @@
     <script src="./js/jquery.nice-select.min.js"></script>
     <script src="./js/mixitup.min.js"></script>
     <script src="./js/main.js"></script>
+
+    
+    
+   	<!-- 플로팅 배너 시작 -->
+	<div id="banner" style=" position:block;">
+		<a href="./Survey.me"><img alt="" src="./img/main/question.png"></a>
+	</div>
+	<!-- 플로팅 배너 끝 -->
+
+    
+    
+
+    
+</body>
+
+
 </html>

@@ -14,6 +14,7 @@ public class MemberJoinAction implements Action {
       System.out.println("M : MemberJoinAction_execute() 호출!!");
        
       request.setCharacterEncoding("UTF-8");
+      String userId = request.getParameter("userId");
       
       // 전달된 정보 파라미터 저장 
       MemberDTO mdto = new MemberDTO();
@@ -30,6 +31,8 @@ public class MemberJoinAction implements Action {
       mdto.setUserGender(request.getParameter("userGender"));
       mdto.setUserSkinType(request.getParameter("userSkinType"));
       mdto.setUserTrouble(request.getParameter("userTrouble"));
+      mdto.setNaverLogin(request.getParameter("naverLogin"));
+      mdto.setKakaoLogin(request.getParameter("kakaoLogin"));
       
       String referral_id = request.getParameter("referral_id");
       
@@ -39,6 +42,10 @@ public class MemberJoinAction implements Action {
       
       //회원가입 메서드  - insertMember();
       mdao.insertMember(mdto,referral_id);
+	  //회원가입시 쿠폰 지급
+	  mdao.insertCoupon(userId);
+    		
+      
       
       // 페이지 이동(ActionForward객체)
       ActionForward forward = new ActionForward();
