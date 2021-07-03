@@ -83,7 +83,7 @@
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminOrderList.ag" style="background-color: #899296; color:white;"><b>주문목록</b></a>
+				        <a class="nav-link" href="./AdminOrderList.ag" style="background-color: #6c757d; color:white;"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
@@ -108,7 +108,7 @@
 						<th>이미지</th>
 						<th>상품명</th>
 						<th>구매수량</th>
-						<th>구매가</th>
+						<th>합계금액</th>
 					</tr>
 				 
 			      <%for(int i=0;i<detailOrder.size();i++){ 
@@ -120,7 +120,7 @@
 						 width="80" height="80"></td>			      
 				         <td><%=orDTO.getO_cosName() %></td>
 				         <td><%=orDTO.getO_cosAmount() %></td>
-				         <td><%=orDTO.getPayMoney() %></td>
+				         <td><%=goDTO.getCosPrice() * orDTO.getO_cosAmount() %></td>
 				      </tr>
 					  <%} %>
 				</tbody>
@@ -151,7 +151,13 @@
 					</tr>	 
 					<tr>
 					    <th>요구사항</th>
+					    <%
+					    	if(orderInfo.getO_msg() == null){
+					    %>		
+					    <td>없음</td>
+					    <%}else{ %>
 					    <td><%=orderInfo.getO_msg() %></td>
+					    <%} %>
 					</tr>     					      
 				</tbody>	      
 			</table>
@@ -178,7 +184,7 @@
 			</table>
         </div>
     </section>
-    <!-- admin goods detail End -->
+    <!-- admin order detail End -->
 			
 		</div>
 		<div class="col-12">	

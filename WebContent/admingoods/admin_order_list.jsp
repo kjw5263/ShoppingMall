@@ -59,7 +59,7 @@
 		
 		<div class="col-12 text-center">
 			
-    <!-- admin goods list Begin -->
+    <!-- admin order list Begin -->
     
    	<%
 	// AdminGoodsDAO 객체 생성
@@ -110,7 +110,7 @@
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminOrderList.ag" style="background-color: #899296; color:white;"><b>주문목록</b></a>
+				        <a class="nav-link" href="./AdminOrderList.ag" style="background-color: #6c757d; color:white;"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
@@ -139,7 +139,7 @@
 						<th>주문금액</th>
 						<th>주문상태</th>
 						<th>주문일시</th>
-						<th>수정/삭제</th>
+						<th>상세/삭제</th>
 					</tr>
 					
 					<% for(int i=0;i<orderList.size();i++){
@@ -155,9 +155,9 @@
 						<form name="form" method="post" action="./OrderStatusModify.ag">
 						<td>		
 							<input type="hidden" name="o_Num" class="o_Num" value="<%=dto.getO_Num() %>"/>				
-							<ul class="nav flex-column " style="width: 100px; margin-left: 0; margin-right: auto;">
+							<ul class="nav flex-column ">
 							  <li class="nav-item mb-2">
-								<select name="orderStatus" class="form-control">
+								<select name="orderStatus" class="form-control" style="padding: 6px 10px;">
 									<option value="결제완료"
 										<%if(dto.getOrderStatus().equals("결제완료")){ %>
 										selected
@@ -196,19 +196,19 @@
 								</select>	
 							  </li>
 							  <li class="nav-item mb-2">
-	 						  <input type="submit" value="수정" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"/> 
+	 						  <input type="submit" value="수정" class="btn btn-secondary btn-sm"/> 
 							  </li>
-							</ul>
+							</ul>							  
 						</td>
 						</form>
 						<td><%=dto.getOrderDate() %></td>
 						<td>
 						<ul class="nav flex-column ">
 						  <li class="nav-item mb-2">
-							<a href="./AdminOrderDetail.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">상세</a>	
+							<a href="./AdminOrderDetail.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm">상세</a>	
 						  </li>
 						  <li class="nav-item mb-2">
-							<a href="./AdminOrderDelete.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;">삭제</a>
+							<a href="./AdminOrderDelete.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm">삭제</a>
 						  </li>
 						</ul>
 						</td>
@@ -247,28 +247,28 @@
 	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
 	    	if(startPage > pageBlock){
 	    		%>
-	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-secondary btn-sm">이전</a>
+	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-primary btn-sm">이전</a>
 	    		<%
 	    	}   	
 	    	
 	    	// 숫자  1....5
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
-	    		    <a href="./AdminOrderList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"><%=i %></a> 
+	    		    <a href="./AdminOrderList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm"><%=i %></a> 
 	    		<%    		
 	    	}
 	    	
 	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
 	    	if(endPage < pageCount){
 	    		%>
-	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-secondary btn-sm">다음</a>
+	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-primary btn-sm">다음</a>
 	    		<%
 	    	}
 	    	
 	    }
 	    //////////////////////////////////////////////////////
 	  %>
-    <!-- admin goods list End -->
+    <!-- admin order list End -->
 			
 		</div>
 		<div class="col-0">	

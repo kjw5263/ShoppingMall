@@ -109,8 +109,6 @@ public class AdminGoodsDAO {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("DAO : 관리자 상품 등록 완료!");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -183,8 +181,6 @@ public class AdminGoodsDAO {
 				goodsListAll.add(dto);
 				
 			}//while
-			System.out.println("DAO : 관리자 상품리스트 저장 완료");
-			System.out.println(" 총 "+goodsListAll.size()+"개");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -240,9 +236,6 @@ public class AdminGoodsDAO {
 				
 			}//while
 			
-			System.out.println("상품 모든정보 저장완료!");
-			System.out.println("총 "+goodsList.size()+"개");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -283,7 +276,7 @@ public class AdminGoodsDAO {
 				dto.setCosWarning(rs.getString("cosWarning"));
 				dto.setMadeCompany(rs.getString("madeCompany"));
 			}//if
-			System.out.println("DAO : 수정할 상품정보 저장완료!");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -323,8 +316,6 @@ public class AdminGoodsDAO {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("DAO : 상품정보 수정 완료!");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -343,8 +334,6 @@ public class AdminGoodsDAO {
 			
 			pstmt.setInt(1, cosNum);
 			pstmt.executeUpdate();
-			
-			System.out.println("DAO : 관리자 상품정보 삭제 완료");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -392,8 +381,6 @@ public class AdminGoodsDAO {
 				memberList.add(dto);
 			}
 			
-			System.out.println("DAO : 모든 회원 정보 저장 완료");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -439,8 +426,6 @@ public class AdminGoodsDAO {
 				memberListAll.add(dto);
 				
 			}//while
-			System.out.println("DAO : 관리자 회원리스트 저장 완료");
-			System.out.println(" 총 "+memberListAll.size()+"개");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -498,9 +483,6 @@ public class AdminGoodsDAO {
 				
 			}//while
 			
-			System.out.println("회원 모든정보 저장완료!");
-			System.out.println("총 "+memberList.size()+"명");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -537,8 +519,6 @@ public class AdminGoodsDAO {
 				couponList.add(dto);
 			}
 			
-			System.out.println("DAO : 모든 쿠폰 정보 저장 완료");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -572,8 +552,6 @@ public class AdminGoodsDAO {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("DAO : 관리자 쿠폰 등록 완료");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -603,7 +581,7 @@ public class AdminGoodsDAO {
 				dto.setCouponNote(rs.getString("couponNote"));
 				dto.setCouponNum(rs.getInt("couponNum"));
 			}
-			System.out.println("DAO : 수정할 쿠폰정보 저장완료!");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -630,8 +608,6 @@ public class AdminGoodsDAO {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("DAO : 관리자 쿠폰 수정 완료");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -651,9 +627,7 @@ public class AdminGoodsDAO {
 			
 			pstmt.setInt(1, couponNum);
 			pstmt.executeUpdate();
-			
-			System.out.println("DAO : 관리자 쿠폰정보 삭제 완료");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -677,7 +651,6 @@ public class AdminGoodsDAO {
 				cnt = rs.getInt(1);
 			}
 			
-			System.out.println("주문 개수 : "+cnt+"개");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -725,8 +698,6 @@ public class AdminGoodsDAO {
 				// 리스트 한칸 -> 1명 정보 저장
 				orderList.add(dto);
 			}
-			
-			System.out.println("DAO : 모든 회원 주문 정보 저장 완료");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -779,8 +750,7 @@ public class AdminGoodsDAO {
 				
 				orderListAll.add(dto);
 			}
-			System.out.println("DAO : 관리자 주문리스트 저장 완료");
-			System.out.println(" 총 "+orderListAll.size()+"개");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -842,9 +812,6 @@ public class AdminGoodsDAO {
 				orderList.add(dto);
 			}
 			
-			System.out.println("모든 주문정보 저장완료");
-			System.out.println("총 "+orderList.size()+"명");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -866,8 +833,7 @@ public class AdminGoodsDAO {
 			pstmt.setInt(2, odto.getO_Num());
 			
 			pstmt.executeUpdate();
-			
-			System.out.println("DAO : 주문 상태 수정 완료!");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -886,7 +852,7 @@ public class AdminGoodsDAO {
 		try {
 			conn = getConnection();
 			
-			sql = "select c.cosImage, o.* "
+			sql = "select c.cosImage, c.cosPrice, o.* "
 					+ "from order_board o join cos_list c "
 					+ "on o.o_cosNum = c.cosNum "
 					+ "where o.o_tradeNum=?";
@@ -920,12 +886,13 @@ public class AdminGoodsDAO {
 				orDTO.setReceiverTel(rs.getString("receiverTel"));
 				orDTO.setSumMoney(rs.getInt("sumMoney"));
 				goDTO.setCosImage(rs.getString("cosImage"));
+				goDTO.setCosPrice(rs.getInt("cosPrice"));
 				
 				// 리스트 한칸에 주문정보 객체 1개를 저장
 				detailOrder.add(orDTO);
 				detailGoods.add(goDTO);
 			}
-			System.out.println("DAO : 주문번호에 해당하는 상품 모두 저장완료");
+
 			totalDetail.add(detailGoods);
 			totalDetail.add(detailOrder);
 			
@@ -946,8 +913,7 @@ public class AdminGoodsDAO {
 			
 			pstmt.setString(1, o_tradeNum);
 			pstmt.executeUpdate();
-			
-			System.out.println("DAO : 관리자 주문내역 삭제 완료");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
