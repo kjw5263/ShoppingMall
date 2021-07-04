@@ -19,7 +19,7 @@ import com.goods.db.GoodsDTO;
 import com.member.action.ActionForward;
 import com.order.db.OrderDTO;
 
-public class UsedateDAO {
+public class UsedateDAO2 {
 		private Connection conn = null;
 		private PreparedStatement pstmt = null;
 		private ResultSet rs = null;
@@ -162,7 +162,6 @@ public class UsedateDAO {
 					
 					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
 					odto.setOrderDate(rs.getDate("orderDate"));
-					odto.setO_Num(rs.getInt("o_Num"));
 					
 					ustdo.setOpen_status(rs.getInt("open_status"));
 					ustdo.setRemain_amount(rs.getInt("remain_amount"));
@@ -190,7 +189,8 @@ public class UsedateDAO {
 		}
 		//getorderList
 		
-		//getordercount
+		//getorderList
+		
 		public int getordercount(String userId){
 			int cnt = 0;
 			
@@ -213,7 +213,7 @@ public class UsedateDAO {
 			}
 			return cnt;
 		}
-		//getordercount
+		//getorderList
 		
 		//getusedate
 		/**
@@ -244,9 +244,7 @@ public class UsedateDAO {
 					gdto.setCosCategory(rs.getString("cosCategory"));
 					gdto.setUseDate(rs.getInt("useDate"));
 					gdto.setCosName(rs.getString("cosName"));
-					udto.setOpenNum(rs.getInt("openNum"));
 					udto.setOpenDate(rs.getDate("openDate"));
-					
 					
 					useList.add(gdto);
 					openList.add(udto);
@@ -263,75 +261,9 @@ public class UsedateDAO {
 			return totalList;
 		}
 		//getusedate
-		
-		//regusedatefirstopen
-		/**
-		 * @param userId
-		 * @param cosNum
-		 * @param openstatus
-		 * @param cosAmount
-		 * @param statusnum
-		 * 화장품 첫 오픈시 호출 메소드
-		 */
-		public void regusedate1(String userId,int cosNum,int openstatus,int cosAmount,int statusnum,int oNum){
-			int status_Num = 0;
-			System.out.println("22222");
-			
-			try {
-				conn = getConnection();
-				sql = "select max(status_Num) from use_status";
-				pstmt = conn.prepareStatement(sql);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()){
-					status_Num = rs.getInt(1)+1;
-				}
-				System.out.println("33333");
-				
-					System.out.println("첫 오픈");
-					sql = "insert into use_status values(?,?,?,?,?,?,?,now())";
-					pstmt = conn.prepareStatement(sql);
-					
-					pstmt.setInt(1, status_Num);
-					pstmt.setInt(2, oNum);
-					pstmt.setInt(3,	cosNum);
-					pstmt.setString(4, userId);
-					pstmt.setInt(5, 1);
-					pstmt.setInt(6, cosAmount-1);
-					pstmt.setInt(7, 1);
-					
-					pstmt.executeUpdate();
-					System.out.println("DAO : regusedate 실행완료");
-					
-					sql =  "insert into open_date (o_Num,openCosNum,openUserId,openDate) values(?,?,?,now())";
-					PreparedStatement pstmt2 = conn.prepareStatement(sql);
-					pstmt2.setInt(1, oNum);
-					pstmt2.setInt(2, cosNum);
-					pstmt2.setString(3, userId);
-					
-					pstmt2.executeUpdate();
-					System.out.println("open_date에 insert 완");
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				closeDB();
-			}
-		}
-		//regusedate1
-		
 
-		//regusedate2
-		/**
-		 * @param userId
-		 * @param cosNum
-		 * @param openstatus
-		 * @param cosAmount
-		 * @param statusnum
-		 * 화장품 2번째 이후 오픈 메서드
-		 */
-		public void regusedate2(String userId,int cosNum,int openstatus,int cosAmount,int statusnum,int oNum){
+		//regusedate
+		public void regusedate(String userId,int cosNum,int openstatus,int cosAmount,int firstopen,int statusnum){
 			int status_Num = 0;
 			System.out.println("22222");
 
@@ -346,23 +278,34 @@ public class UsedateDAO {
 					}
 					System.out.println("33333");
 
+					//처음 오픈 누르기 일때 = 수량 갯수 컬럼 안 가져온  상황일때
+					if(firstopen == 0){
+						System.out.println("첫 오픈");
+						sql = "insert into use_status values(?,?,?,?,?,?,now())";
+						pstmt = conn.prepareStatement(sql);
+						
+						pstmt.setInt(1, status_Num);
+						pstmt.setInt(2,	cosNum);
+						pstmt.setString(3, userId);
+						pstmt.setInt(4, 1);
+						pstmt.setInt(5, cosAmount-1);
+						pstmt.setInt(6, 1);
+				
+						pstmt.executeUpdate();
+						System.out.println("DAO : regusedate 실행완료");
+					}
+					//처음 오픈x, 
+					else if(firstopen == 1){
 						System.out.println("첫 오픈x");
 						sql = "update use_status set remain_amount=remain_amount-1,first_date=now() where status_Num = ?"; 
 						PreparedStatement pstmt2 = conn.prepareStatement(sql);
 						pstmt2.setInt(1, statusnum);
 						
 						pstmt2.executeUpdate();
+						System.out.println("DAO : 첫 오픈x 실행 완료");
 					
+					}
 					System.out.println("44444");
-					sql =  "insert into open_date (o_Num,openCosNum,openUserId,openDate) values(?,?,?,now())";
-					pstmt2 = conn.prepareStatement(sql);
-					pstmt2.setInt(1, oNum);
-					pstmt2.setInt(2, cosNum);
-					pstmt2.setString(3, userId);
-					
-					pstmt2.executeUpdate();
-					System.out.println("open_date에 insert 완");
-					
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -372,6 +315,7 @@ public class UsedateDAO {
 				}
 			}
 		//regusedate
+		
 		
 		
 		/**
@@ -410,23 +354,6 @@ public class UsedateDAO {
 			
 		}
 		
-	public void completeuse(int openNum){
-		
-		try {
-			conn = getConnection();
-			sql = "delete from open_date where openNum=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, openNum);
-			
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			closeDB();
-		}
-		
-	}
-		
+	
 	}//UsedateDAO
 

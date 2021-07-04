@@ -8,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 
 @WebServlet("*.ud")
@@ -18,7 +16,8 @@ public class UsedateFrontController extends HttpServlet{
 	
 	// Get, Post 방식 상관없이 한번에 주소를 처리할 수 있는 메소드
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("C : Member_doProcess() 호출");
+		System.out.println("C : Like_doProcess() 호출");
+		
 		
 		/********************************* 1. 페이지 주소 파싱 *************************/
 		// (1) 가상주소 전체 가져오기
@@ -36,15 +35,27 @@ public class UsedateFrontController extends HttpServlet{
 		
 		
 		
-		/********************************* 2. 페이지 주소 매핑(연결) 시작 *******************/
+		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 		// -> 특정 주소일때 실행할 기능들 정의해주기
 		// 같은 패키지 안에 있는 Action을 호출 해주어야함!
 		Action action = null;
 		ActionForward forward = null;
-		
-		if(command.equals("/registerUse.ud")){
-			
+
+		if(command.equals("/Usedate.ud")){
 			action = new GetusedateAction();
+			
+		try {
+			forward = action.execute(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		}
+		else if(command.equals("/opencos.ud")){
+			
+			action = new opencosAction();
+			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -53,9 +64,10 @@ public class UsedateFrontController extends HttpServlet{
 			}
 			
 			
-		}else if(command.equals("/opencos.ud")){
+		}
+		else if(command.equals("/completeUse.ud")){
 			
-			action = new OpencosAction();
+			action = new completeUseAction();
 			
 			try {
 				forward = action.execute(request, response);
@@ -63,14 +75,11 @@ public class UsedateFrontController extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
 			
-		
 		}
 		
-		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
-		/********************************* 2. 페이지 주소 매핑(연결) 끝 *******************/
+		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
 		
 		/******************* 3. 페이지 주소 이동 종류를 정하기 (제어) *******************/
@@ -95,13 +104,13 @@ public class UsedateFrontController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("C : Member_doGet() 호출");
+		System.out.println("C : Like_doGet() 호출");
 		doProcess(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("C : Member_doPost() 호출");
+		System.out.println("C : Like_doPost() 호출");
 		doProcess(request, response);
 	}
 	
