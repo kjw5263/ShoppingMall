@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.usedate.db.UsedateDAO;
 
-public class OpencosAction implements Action{
+public class completeUseAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,14 +20,13 @@ public class OpencosAction implements Action{
         	forward.setRedirect(true);
         	return forward;
         }
-		
-        int usedate = Integer.parseInt(request.getParameter("usedate"));
+        
+        int openNum = Integer.parseInt(request.getParameter("openNum"));
+        
         UsedateDAO udao = new UsedateDAO();
-        udao.regusedate(usedate);
+        udao.completeuse(openNum);
         
-        
-		
-        forward.setPath("./usedate/usedate.jsp");
+    	forward.setPath("/Usedate.ud");
 		forward.setRedirect(false);
 		return forward;
 	}

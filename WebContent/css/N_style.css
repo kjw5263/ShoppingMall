@@ -1,0 +1,167 @@
+@CHARSET "UTF-8";
+
+
+*{
+	text-decoration: none;
+	
+}
+
+.contents1{
+  font-size: 20px;
+  font-weight: lighter;
+}
+.contents2{
+  font-size: 25px;
+}
+.contents3 {
+  font-size: 14px;
+  font-weight: 100;
+}
+.contents1_bold{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 주문조회 페이지 */
+.mypage-step{
+  top:-66px;
+  display: flex;
+  width: 100%;
+  background: #EAEAEA;
+  margin: auto;
+  border-radius: 10px;
+  height: 20%;
+}
+
+.mypage-step > li {
+list-style: none;
+  flex: 1;
+  height: 17%;
+}
+
+.mypage-step > ul > li { text-decoration:  none;}
+.mypage-step > li > div {
+  text-align: center;
+  margin-top:30px;
+  height:57px;
+}
+
+.mypage-step > li:not(:last-child) > div{
+  border-right:1px solid #BDBDBD;
+}
+
+.test {
+	text-decoration: none;
+	}
+
+
+.goods-view{
+	display: flex;
+}
+	
+.goods-view > li {
+list-style: none;
+  flex: 1;
+  height: 20%;
+}
+
+
+#orderList {
+	text-align: center;
+	
+}
+
+	
+.order-thead {
+	background-color: #F6F6F6;
+}	
+
+#price {
+	color: orange;
+	font-size: 12px;
+}
+
+
+#brand {
+ color: #A6A6A6;
+}
+
+
+.mypage-step-1{
+  top:-66px;
+  display: flex;
+  width: 100%;
+  background: #EAEAEA;
+  margin: auto;
+  border-radius: 10px;
+  height: 12%;
+}
+
+.mypage-step-1 > li {
+list-style: none;
+  flex: 1;
+  height: 20%;
+}
+
+#detail {
+	text-decoration: underline;
+	color: #BDBDBD;
+}
+/* 주문조회  */
+
+/* 상세 주문조회 */
+
+.orderday {
+  top:-66px;
+  display: flex;
+  width: 100%;
+  background: #EAEAEA;
+  margin: auto;
+  border-radius: 10px;
+  height: 12%;
+}
+
+.orderday > ul {
+	list-style: none;
+	display: flex;
+}
+
+.orderday > ul > li {
+	flex: 1;
+  	margin-left: 80%;
+}
+
+.orderday > li > div {
+  text-align: center;
+  margin-top:30px;
+  height:57px;
+  
+ 
+}
+
+/* 상세 주문조회 */
+
+
+/*info-page  */
+.mypage-step-1 > ul > li { text-decoration:  none;}
+.mypage-step-1 > li > div {
+  text-align: center;
+  margin-top:30px;
+  height:57px;
+}
+
+.mypage-step-1 > li:not(:last-child) > div{
+  border-right:1px solid #BDBDBD;
+}
+
+
+#info {
+	
+	border: 3px solid #B0BCC2; 
+	padding: 40px;
+	border-radius: 10px;
+	margin-bottom: 10%;
+}
+
+
+/*info-page  */

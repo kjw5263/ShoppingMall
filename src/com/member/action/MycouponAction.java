@@ -27,8 +27,8 @@ public class MycouponAction implements Action{
 	        }
 	        
 	     MemberDAO mdao = new MemberDAO();
-//	     List couponList = mdao.getCoupon(userId);
-//	     request.setAttribute("couponList", couponList);
+	     List couponList = mdao.getCoupon(userId);
+	     request.setAttribute("couponList", couponList);
 	     
 	    forward.setPath("./member/mycoupon.jsp");
 		forward.setRedirect(false);

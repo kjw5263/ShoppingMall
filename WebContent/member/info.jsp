@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./css/N_style.css" type="text/css">
 
 <style type="text/css">
 * {
@@ -85,19 +86,18 @@
 	%>
 	
 	<div class="row">
-		<div class="col-3"></div><!--여백 -->
-		<div class="col-6">
+		<div class="col-2"></div><!--여백 -->
+		<div class="col-8">
 			
-			<div class="row">
+		<div class="row">
 				<div class="col-3">
-					<a href=""><h5>장바구니</h5></a>
-					<a href=""><h5>주문조회</h5></a>
+					<a href="./BasketList.ba"><h5>장바구니</h5></a>
+					<a href="./getOrderList.or"><h5>주문조회</h5></a>
 					<a href="./getLike.li"><h5>찜목록</h5></a>
 					<hr>
-					<a href="./MyCoupon.me"><h5>내 쿠폰</h5></a>
-					<a href=""><h5>포인트</h5></a>
+					<a href="./MyCoupon.me"><h5>내 쿠폰/포인트</h5></a>
 					<hr>
-					<a href=""><h5>내 화장품 사용기한 
+					<a href="./Usedate.ud"><h5>내 화장품 사용기한 
 					&nbsp;확인하기</h5></a>
 					<a href="./ReviewList.rev"><h5>리뷰</h5></a>
 					<hr>
@@ -107,7 +107,7 @@
 				
 				<div class="col-9">
 					
-						<fieldset style="border: 4px solid #B0BCC2; padding: 40px;" >
+						<fieldset id="info" >
 
 							<div class="row">
 								<h3><%=mdto.getUserName()%>님의 정보
@@ -151,36 +151,51 @@
 								</table>
 							</div>
 						</fieldset>
-
-						<h3 style="margin-bottom: 10px; margin-top: 100px;">주문조회</h3>
-						<hr>
-						<div class="row" style="text-align: center; font-size: 16px;">
-							<div class="col-2">
-								<b>주문접수</b><br>0
-							</div>
-							<div class="col-2">
-								<b>결제완료</b><br>0
-							</div>
-							<div class="col-2">
-								<b>상품준비중</b><br>0
-							</div>
-							<div class="col-2">
-								<b>배송중</b><br>0
-							</div>
-							<div class="col-2">
-								<b>배송완료</b><br>0
-							</div>
-							<div class="col-2" style="margin: auto;">
-								<input type="button" class="primary-btn look-btn"
-									style="background-color: #B0BCC2;" value="주문조회"
-									onclick="location.href='./getorder.or'">
-							</div>
+					
+						<h4>주문 배송 조회</h4>
+						<div style="text-align: right;">
+						<a href="/getOrderList.or">> 더보기</a>
 						</div>
+						<br>
+						<ul class="mypage-step-1" style="text-decoration: none;">
+							<li>
+								<div>
+									<div class="contents1">주문접수</div>
+									<div class="contents2">0</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">결제완료</div>
+									<div class="contents2">0</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">상품준비중</div>
+									<div class="contents2">0</div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">배송중</div>
+									<div class="contents2">0</div>
+								</div>
+							</li>
+
+							<li>
+								<div>
+									<div class="contents1">배송완료</div>
+									<div class="contents2">0</div>
+								</div>
+							</li>
+						</ul>
+						
 						<br> <br>
 						<%if(LikeList.size() !=0){ %>
-						<h3 style="margin-bottom: 10px;">
+						<h4 style="margin-bottom: 10px;">
 							찜 목록 (총 <b style="color: orange;"><%=LikeList.size()%></b>개)
-						</h3>
+						</h4>
 						<h5 style="text-align: right;">
 							<a href="./getLike.li">> 더보기 </a>
 						</h5>
@@ -216,7 +231,7 @@
 						</fieldset>
 						<%}
 						else{%>
-						<h3 style="margin-bottom: 10px;">찜 목록 (총 0개)</h3>
+						<h4 style="margin-bottom: 10px;">찜 목록 (총 0개)</h4>
 						<h5 style="text-align: right;">
 							<a href="./getLike.li">> 더보기 </a>
 						</h5>
@@ -260,7 +275,7 @@
 			<!--6 -->
 
 
-			<div class="col-3"></div>
+			<div class="col-2"></div>
 		</div>
 		<!-- container 끝 -->
 

@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 	
 	<style type="text/css">
-	b {
+	#cp {
 	color: orange;
 	font-size: 25px;
 	
@@ -102,7 +102,7 @@
 					cnt += cdto.getMcAmount();
 					System.out.println(cnt);
 								}%>
-				<h4>총  <b><%=cnt %></b> 장의 쿠폰이 있습니다.</h4><br>
+				<h4>총  <b id="cp"><%=cnt %></b> 장의 쿠폰이 있습니다.</h4><br>
 								
 								<table class="table table-striped" width="862px;">
 									<tr>
