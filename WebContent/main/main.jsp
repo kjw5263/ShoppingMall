@@ -368,7 +368,6 @@
     <script src="./js/jquery.nice-select.min.js"></script>
     <script src="./js/mixitup.min.js"></script>
     <script src="./js/main.js"></script>
-
     
     
    	<!-- 플로팅 배너 시작 -->
