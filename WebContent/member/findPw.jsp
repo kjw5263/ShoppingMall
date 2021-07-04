@@ -63,14 +63,13 @@
  	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-	
 	<!-- 컨테이너 시작 -->
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
 			
 				<!-- 일반 로그인 폼 시작 -->
-				<form class="login100-form validate-form flex-sb flex-w" action="./FindPwAjax.me" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" action="./findPwCerAction.me" method="post">
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
@@ -93,29 +92,13 @@
 							
 						</div>
 						
-						<button type="button" class="login100-form-btn" id="certify">
+						<button type="submit" class="login100-form-btn">
 						  인증요청
 						</button>
-							
-							
 							
 					</div>
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
-								
-				<!-- 휴대폰 인증 폼 시작 -->				
-				<form action="./PwCheckAction.me" method="post">					
-					<div class="wrap-input100 validate-input m-b-16 mt-3" data-validate = "인증번호를 입력해주세요" style="display: none;" id="i1">
-						<input class="input100" type="text" id="checkNum" name="checkNum" placeholder="인증번호" >
-						
-						<!-- Button to Open the Modal -->
-						<button type="submit" class="btn btn-primary" id="confirm">
-						  확인
-						</button>
-						<span class="focus-input100"></span>
-					</div>
-				</form>
-				<!-- 휴대폰 인증 폼 끝 -->				
 						
 					
 			<div class="flex-sb-m w-full p-t-3 p-b-24">
@@ -130,15 +113,15 @@
 				</div>
 			</div>
 			
-			
 
-			<div class="container-login100-form-btn m-t-17">
-			
-				<!-- 일반 로그인 버튼 시작 -->
-				<input class="login100-form-btn" type="submit" value="비밀번호 찾기" id="submit"> 
-				<!-- 일반 로그인 버튼 끝 -->
-				
-			</div>
+			<form action="./PwCheckMove.me" method="post">
+				<div class="container-login100-form-btn m-t-17">
+					<!-- 일반 로그인 버튼 시작 -->
+					<input class="login100-form-btn" type="submit" value="새 비밀번호 설정" id="submit">
+					<input type="hidden" name="PwCerCheck" value="N"> 
+					<!-- 일반 로그인 버튼 끝 -->
+				</div>
+			</form>	
 	
 				
 			</div>
@@ -169,8 +152,6 @@
 <!--===============================================================================================-->
 	<script src="./js/login.js"></script>  
 <!--===============================================================================================-->
-	<!-- 비밀번호 찾기 에이잭스 -->
- 	<script src="./js/findPw.js"></script>
     
     
 </body>

@@ -25,7 +25,17 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+	
+	<style type="text/css">
+	b {
+	color: orange;
+	font-size: 25px;
+	
+	}
 
+
+	
+	</style>
 
 </head>
 <body>
@@ -39,6 +49,8 @@
     	response.sendRedirect("../MemberLogin.me");
     } 
 		List couponList = (List)request.getAttribute("couponList");
+		
+		
 	%>
 		
 	
@@ -73,26 +85,33 @@
 					<a href=""><h5>주문조회</h5></a>
 					<a href="./getLike.li"><h5>찜목록</h5></a>
 					<hr>
-					<a href="./MyCoupon.me"><h5>내 쿠폰</h5></a>
-					<a href=""><h5>포인트</h5></a>
+					<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
 					<hr>
 					<a href=""><h5>내 화장품 사용기한 
 					&nbsp;확인하기</h5></a>
 					<hr>
 					<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a>
-					<a href="./MemberDelete.me"><h5>탈퇴하기</h5></a>		
+					<a href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
 				</div>
 				<div class="col-9">
-				<h3>내 쿠폰</h3><br><br>
+				<h3>내 쿠폰</h3><br>
+				<%
+				int cnt = 0;
+				for(int i=0;i<couponList.size();i++){ 
+					CouponDTO cdto = (CouponDTO)couponList.get(i);
+					cnt += cdto.getMcAmount();
+					System.out.println(cnt);
+								}%>
+				<h4>총  <b><%=cnt %></b> 장의 쿠폰이 있습니다.</h4><br>
+								
 								<table class="table table-striped" width="862px;">
 									<tr>
 										<th>쿠폰명</th>
 										<th>할인율</th>
 										<th>보유 수량</th>
 									</tr>
-									
 									<%for(int i=0;i<couponList.size();i++){ 
-										CouponDTO cdto = (CouponDTO)couponList.get(i);
+									CouponDTO cdto = (CouponDTO)couponList.get(i);
 									%>
 									<tr>
 										<td><%=cdto.getCouponName() %></td>
@@ -103,6 +122,7 @@
 									<%} %>									
 								
 								</table>
+				<br><br><br>
 				</div>
 			</div>
 		</div>

@@ -102,8 +102,6 @@ public class BasketDAO {
 				result = pstmt.executeUpdate();
 			}
 			
-			System.out.println("DAO : 장바구니 상품 체크 완료! -> "+result);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -143,8 +141,6 @@ public class BasketDAO {
 			pstmt.setInt(4, bkDTO.getBasketCosAmount());
 			
 			pstmt.executeUpdate();
-			
-			System.out.println("DAO : 장바구니 추가 완료");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -199,18 +195,17 @@ public class BasketDAO {
 					gdto.setCosName(rs2.getString("cosName"));
 					gdto.setCosPrice(rs2.getInt("cosPrice"));
 					gdto.setCosImage(rs2.getString("cosImage"));
+					gdto.setCosNum(rs2.getInt("cosNum"));
+					gdto.setCosBrand(rs2.getString("cosBrand"));
 					
 					// 상품 리스트 한칸에 저장
 					goodsList.add(gdto);
 				}
 				
-				System.out.println("DAO : 상품정보 저장완료!");
-				
 			}// while
 			
 			totalList.add(basketList);
 			totalList.add(goodsList);
-			System.out.println("DAO : 장바구니정보 + 상품정보 저장완료!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -221,27 +216,37 @@ public class BasketDAO {
 		return totalList;
 	}
 	
-	// basketDelete
-	public void basketDelete(int basketNum){
+	// basketDelete(int[] basketNum)
+	public int basketDelete(int[] basketNum) {
+		
+		int result = 0;
+		
+		String params = "";
+		
+		for(int i=0; i<basketNum.length; i++){
+			params += basketNum[i];
+			
+			if(i < basketNum.length-1){
+				params += ",";
+			}
+		}
 		
 		try {
 			conn = getConnection();
-			sql = "delete from basket_list where basketNum=?";
+			sql = "delete from basket_list where basketNum in ("+params+")";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, basketNum);
-			
-			pstmt.executeUpdate();
-			
-			System.out.println("DAO : 회원 장바구니 정보 삭제 완료");
+			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			closeDB();
 		}
+		
+		return result;
 	}
-	// basketDelete
+	// basketDelete(int[] basketNum)
 	
 	// basketDelete(userId) - 구매 후 장바구니 전체 제거
 	public void basketDelete(String userId){
@@ -256,8 +261,6 @@ public class BasketDAO {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("DAO : 구매 후 장바구니 제거");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -266,6 +269,23 @@ public class BasketDAO {
 	}
 	// basketDelete(userId) - 구매 후 장바구니 전체 제거
 	
-	
-
+	// modifyBasket(bkdto)
+	public void modifyBasket(BasketDTO bkdto){
+		try {
+			conn = getConnection();
+			sql = "update basket_list set basketCosAmount=? where basketNum=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bkdto.getBasketCosAmount());
+			pstmt.setInt(2, bkdto.getBasketNum());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
 }

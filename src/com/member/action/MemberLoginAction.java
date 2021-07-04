@@ -30,7 +30,7 @@ public class MemberLoginAction implements Action {
 			PrintWriter out = response.getWriter();
 
 			out.print("<script>");
-			out.print(" alert('비밀번호 오류~!'); ");
+			out.print(" alert('비밀번호가 다릅니다.'); ");
 			out.print(" history.back(); ");
 			out.print("</script>");
 
@@ -41,7 +41,7 @@ public class MemberLoginAction implements Action {
 			PrintWriter out = response.getWriter();
 
 			out.print("<script>");
-			out.print(" alert('아이디 없음~!'); ");
+			out.print(" alert('없는 아이디입니다.'); ");
 			out.print(" history.back(); ");
 			out.print("</script>");
 

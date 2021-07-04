@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-//import org.apache.jasper.tagplugins.jstl.core.Out;
-
 
 import com.coupon.db.CouponDTO;
 
@@ -112,17 +110,17 @@ public class MemberDAO {
 		
 		
 		// kakaoIdCheck(userEmail)
-		public String kakaoIdCheck(String userEmail){
+		public String kakaoIdCheck(String k_Email){
 			String check = "";
 
 			try {
 				// 1,2 디비연결
 				conn = getConnection();
 				// 3 sql 구문 & pstmt 객체생성
-				sql = "select userId, userEmail from user_info where userEmail=?";
+				sql = "select userId, kakaoLogin from user_info where kakaoLogin=?";
 				pstmt = conn.prepareStatement(sql);
 				//?
-				pstmt.setString(1, userEmail);
+				pstmt.setString(1, k_Email);
 				// 4 sql 실행
 				rs = pstmt.executeQuery();
 				// 5 데이터 처리 (본인확인)
@@ -228,7 +226,52 @@ public class MemberDAO {
 		
 	
 		// findPwAjax(userId, userEmail, userTel) 시작
-		public int findPwAjax(String userId, String userEmail, String userTel){
+//		public int findPwAjax(String userId, String userEmail, String userTel){
+//			int check = -1;
+//
+//			System.out.println("넘어온 userId 는 : @@@@@@@@@@@@@@ " + userId);
+//			System.out.println("넘어온 userEmail 는 : @@@@@@@@@@@@@@ " + userEmail);
+//			System.out.println("넘어온 userTel 는 : @@@@@@@@@@@@@@ " + userTel);
+//			
+//			try {
+//				// 1,2 디비연결
+//				conn = getConnection();
+//				// 3 sql 구문 & pstmt 객체생성
+//				sql = "select userPass from user_info where userId=? and userEmail=? and userTel =?";
+//				pstmt = conn.prepareStatement(sql);
+//				//?
+//				pstmt.setString(1, userId);
+//				pstmt.setString(2, userEmail);
+//				pstmt.setString(3, userTel);
+//				
+//				// 4 sql 실행
+//				rs = pstmt.executeQuery();
+//				// 5 데이터 처리 (본인확인)
+//				if(rs.next()){
+//					check = 0;
+//					
+//				}else{
+//					// 회원정보 x
+//					check = -1;
+//				}
+//				System.out.println("DAO : 로그인 처리 결과 "+check);
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				closeDB();
+//			}
+//			
+//			return check;
+//		}
+		// findPwAjax(userId, userEmail, userTel) 끝
+		
+		
+		
+		
+		// findPwCerAction 시작
+		
+		public int findPwCerAction(String userId, String userEmail, String userTel){
 			int check = -1;
 
 			System.out.println("넘어온 userId 는 : @@@@@@@@@@@@@@ " + userId);
@@ -266,7 +309,9 @@ public class MemberDAO {
 			
 			return check;
 		}
-		// findPwAjax(userId, userEmail, userTel) 끝
+		
+		
+		// findPwCerAction 끝
 		
 		
 		// CheckPw(userId, rm) 시작
@@ -300,10 +345,10 @@ public class MemberDAO {
 		
 		
 		// PwCheck(checkNum) 시작 .. 가져온 인증번호를 디비에 대비해보는 메소드
-		public String PwCheck(String checkNum, String PwCheckId){
+		public String PwCheck(String checkNum, String rm){
 			String check = "";
 			
-			System.out.println("PwCheckId 는 @@@@@@@@ " + PwCheckId);
+			System.out.println("PwCheckId 는 @@@@@@@@ " + rm);
 			
 			try {
 				// 1,2 디비연결
@@ -313,7 +358,7 @@ public class MemberDAO {
 				pstmt = conn.prepareStatement(sql);
 				//?
 				pstmt.setString(1, checkNum);
-				pstmt.setString(2, PwCheckId);
+				// pstmt.setString(2, PwCheckId);
 
 				// 4 sql 실행
 				rs = pstmt.executeQuery();
@@ -361,7 +406,7 @@ public class MemberDAO {
 					dto.setUserEmail(rs.getString("userEmail"));
 					dto.setUserAddr(rs.getString("userAddr"));
 					dto.setUserTel(rs.getString("userTel"));
-					dto.setUserBirth(rs.getDate("userBirth"));
+					dto.setUserBirth(rs.getString("userBirth"));
 					dto.setUserGender(rs.getString("userGender"));
 					dto.setUserSkinType(rs.getString("userSkinType"));
 					dto.setUserTrouble(rs.getString("userTrouble"));
@@ -624,37 +669,471 @@ public class MemberDAO {
 		 * @return
 		 * 쿠폰 목록 가져오는 메소드
 		 */
-//		public List getCoupon(String userId) {
-//			List couponList = new ArrayList();
-//
-//			try {
-//				conn = getConnection();
-//				sql = "select * from coupon_type t join my_coupon m on m.mcCouponNum = t.couponNum where m.mcUserId=?";
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setString(1, userId);
-//				rs = pstmt.executeQuery();
-//
-//				while (rs.next()) {
-//					CouponDTO dto = new CouponDTO();
-//
-//					dto.setMcAmount(rs.getInt("mcAmount"));
-//					dto.setCouponDc(rs.getInt("couponDc"));
-//					dto.setCouponName(rs.getString("couponName"));
-//					dto.setCouponNote(rs.getString("couponNote"));
-//
-//					couponList.add(dto);
-//				}
-//				System.out.println("DAO : 쿠폰 정보 저장완료");
-//				System.out.println(couponList);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//			return couponList;
-//		}
-		// mycouponlist(userId);
-		
-		
+		public List getCoupon(String userId) {
+			List couponList = new ArrayList();
 
+			try {
+				conn = getConnection();
+				sql = "select * from coupon_type t join my_coupon m on m.mcCouponNum = t.couponNum where m.mcUserId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					CouponDTO dto = new CouponDTO();
+
+					dto.setMcAmount(rs.getInt("mcAmount"));
+					dto.setCouponDc(rs.getInt("couponDc"));
+					dto.setCouponName(rs.getString("couponName"));
+					dto.setCouponNote(rs.getString("couponNote"));
+					dto.setMcCouponNum(rs.getInt("mcCouponNum"));
+
+					couponList.add(dto);
+				}
+				System.out.println("DAO : 쿠폰 정보 저장완료");
+				System.out.println(couponList);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return couponList;
+		}
+	// mycouponlist(userId);
+		
+		// NewPassCheck(String newPass) 시작
+		public void NewPassCheck(String newPass, String userId){
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "update user_info set userPass=? where userId=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, newPass);
+				pstmt.setString(2, userId);
+				
+				// 4 sql 실행
+				pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+		}
+		// NewPassCheck(String newPass) 끝
+		
+		// NaverIdCheck(n_Email)
+		public String NaverIdCheck(String n_Email){
+			String check = "";
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userId, naverLogin from user_info where naverLogin=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, n_Email);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				if(rs.next()){
+					
+					check = rs.getString("userId");
+					
+				}else{
+					// 회원정보 x
+					check = "";
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		// NaverIdCheck(n_Email)
+		
+		
+		// ConNaver(userId, userPass, n_email) 시작
+		public int ConNaver(String userId,String userPass, String n_email){
+			int check = -1;
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userId);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				//아이디 있음
+				if(rs.next()){
+					if(userPass.equals(rs.getString("userPass"))){
+						// 비밀번호 일치 본인 
+						sql = "update user_info set naverLogin=? where userId=?";
+						pstmt = conn.prepareStatement(sql);
+						//?
+						pstmt.setString(1, n_email);
+						pstmt.setString(2, userId);
+						
+						// 4 sql 실행
+						pstmt.executeUpdate();
+						check = 1;
+					}else{
+						// 비밀번호 오류
+						check = 0;
+					}
+				}else{
+					// 회원정보 x
+					check = -1;
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		
+		// ConNaver(userId, userPass, n_email) 끝
+		
+		
+		// ConKakao(userId, userPass, k_email) 시작
+		public int ConKakao(String userId,String userPass, String k_email){
+			int check = -1;
+
+
+			try {
+				// 1,2 디비연결
+				conn = getConnection();
+				// 3 sql 구문 & pstmt 객체생성
+				sql = "select userPass from user_info where userId=?";
+				pstmt = conn.prepareStatement(sql);
+				//?
+				pstmt.setString(1, userId);
+				// 4 sql 실행
+				rs = pstmt.executeQuery();
+				// 5 데이터 처리 (본인확인)
+				
+				//아이디 있음
+				if(rs.next()){
+					if(userPass.equals(rs.getString("userPass"))){
+						// 비밀번호 일치 본인 
+						sql = "update user_info set kakaoLogin=? where userId=?";
+						pstmt = conn.prepareStatement(sql);
+						//?
+						pstmt.setString(1, k_email);
+						pstmt.setString(2, userId);
+						
+						// 4 sql 실행
+						pstmt.executeUpdate();
+						check = 1;
+					}else{
+						// 비밀번호 오류
+						check = 0;
+					}
+				}else{
+					// 회원정보 x
+					check = -1;
+				}
+				
+				System.out.println("DAO : 로그인 처리 결과 "+check);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return check;
+		}
+		
+		// ConKakao(userId, userPass, k_email) 끝
+		
+		/////////////// Member Join DAO /////////////////
+		        
+		//mailAddrCheck() -> 이메일이 DB에 있는지 확인
+		
+		public int mailAddrCheck(String mail){
+		   
+		   int result = 0;
+		   
+		   try {
+		      conn = getConnection();
+		
+		      sql="select * from user_info where userEmail=?";
+		   
+		      pstmt = conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, mail);
+		      
+		      rs = pstmt.executeQuery();
+		      
+		      if(rs.next()){
+		         result=1; //메일주소 있음 사용x
+		      }else{
+		         result=0; //메일주소 없음 사용ㅇ
+		      }
+		
+		   } catch (SQLException e) {
+		      
+		      e.printStackTrace();
+		   }finally{
+		      closeDB();
+		   }
+		   
+		   return result;
+		}
+		
+		//mailAddrCheck() -> 이메일이 DB에 있는지 확인
+		
+		
+		//signUpIdCheck() ->ajax 중복 id 확인
+		
+		public int signUpIdCheck(String userId) {
+		    
+		   int result = 0;
+		
+		   try {
+		      conn = getConnection();
+		      
+		      sql="select * from user_info where userId=?";
+		      
+		      PreparedStatement pstmt = conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, userId);
+		      
+		      rs = pstmt.executeQuery();
+		      
+		      if(rs.next()){
+		            return 1;      //아이디 있음 사용X
+		      }else{
+		            return 0;      //아이디 없음 사용O
+		      }
+		      
+		      } catch (SQLException e) {
+		      
+		      e.printStackTrace();
+		      } finally{
+		         closeDB();
+		      }
+		   
+		   
+		   return result;
+		}
+		
+		//signUpIdCheck() ->ajax 중복 id 확인
+		
+		//insertMember() 시작    -> 회원가입 폼에 있는 정보 DB로 전달
+		public void insertMember(MemberDTO mdto, String referral_id){
+		      
+			System.out.println(" 카카오에서 받아오는 값은 kkkkkkkkkkkkkkkkkk :" + mdto.getKakaoLogin());
+			System.out.println(" 네이버에서 받아오는 값은 nnnnnnnnnnnnnnnnnn :" + mdto.getNaverLogin());
+			
+		      int num = 0;
+		
+		      int point = 500;
+		   
+		   try {   
+		      conn = getConnection();
+		      
+		      sql = "select max(userNum) from user_info";
+		      
+		      pstmt = conn.prepareStatement(sql);
+		      
+		      rs = pstmt.executeQuery();
+		      
+		         System.out.println("회원번호: "+num);
+		      
+		      if(rs.next()){
+		         num = rs.getInt(1)+1;
+		      }
+		      
+		         
+		      if(referral_id != ""){
+		         System.out.println("추천인 아이디: "+referral_id);
+		            conn = getConnection();
+		            //추천인 아이디가 있을 경우, 회원정보 입력
+		         
+		            sql="insert into user_info (userNum, userId, userPass, userName, userEmail, userAddr, userTel, "
+		                  + "userBirth, userGender, userSkinType, userTrouble) values(?,?,?,?,?,?,?,?,?,?,?)";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            pstmt.setInt(1, num);
+		            pstmt.setString(2, mdto.getUserId());
+		            pstmt.setString(3, mdto.getUserPass());
+		            pstmt.setString(4, mdto.getUserName());
+		            pstmt.setString(5, mdto.getUserEmail());
+		            pstmt.setString(6, mdto.getUserAddr());
+		            pstmt.setString(7, mdto.getUserTel());
+		            pstmt.setString(8, mdto.getUserBirth());
+		            pstmt.setString(9, mdto.getUserGender());
+		            pstmt.setString(10, mdto.getUserSkinType());
+		            pstmt.setString(11, mdto.getUserTrouble());
+		   
+		            
+		            pstmt.executeUpdate();
+		            
+		            System.out.println("회원가입: 저장완료");      
+		            
+		            conn = getConnection();
+		
+		            sql="update user_info set userPoint=userPoint+? where userId=? "
+		                  + "or userId=?";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            pstmt.setInt(1,point);
+		            pstmt.setString(2, mdto.getUserId());
+		            pstmt.setString(3, referral_id);
+		            
+		            pstmt.executeUpdate();
+		            
+		      //      System.out.println("회원가입 추천인,신규회원: 포인트 지급 완료");                           
+		         
+		      
+		         }else {
+		            //추천인 아이디가 없을 경우, 회원 가입만 시키기.
+		            
+		            conn = getConnection();
+		            
+		            sql="insert into user_info (userNum, userId, userPass, userName, userEmail, userAddr, userTel, "
+		                  + "userBirth, userGender, userSkinType, userTrouble) values(?,?,?,?,?,?,?,?,?,?,?)";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            
+		            pstmt.setInt(1, num);
+		            pstmt.setString(2, mdto.getUserId());
+		            pstmt.setString(3, mdto.getUserPass());
+		            pstmt.setString(4, mdto.getUserName());
+		            pstmt.setString(5, mdto.getUserEmail());
+		            pstmt.setString(6, mdto.getUserAddr());
+		            pstmt.setString(7, mdto.getUserTel());
+		            pstmt.setString(8, mdto.getUserBirth());
+		            pstmt.setString(9, mdto.getUserGender());
+		            pstmt.setString(10, mdto.getUserSkinType());
+		            pstmt.setString(11, mdto.getUserTrouble());
+		   
+		            pstmt.executeUpdate();
+		            
+		         //   System.out.println("회원가입: 저장완료");      
+		            
+		            conn = getConnection();
+		            sql="update user_info set userPoint=userPoint+? where userId=?";
+		            
+		            pstmt = conn.prepareStatement(sql);
+		            
+		            pstmt.setInt(1, mdto.getUserPoint()+point);
+		            pstmt.setString(2, mdto.getUserId());
+		            
+		            
+		            pstmt.executeUpdate();
+		
+		            System.out.println("회원가입 신규회원: 포인트 지급 완료 (추천인x)");   
+		         
+		      }
+		      
+		      
+		      
+		      if(!mdto.getNaverLogin().equals(null) || !mdto.getNaverLogin().equals("")){
+		    	  conn = getConnection();
+			      
+			      sql = "update user_info set naverLogin=? where userId=?";
+			      
+			      pstmt = conn.prepareStatement(sql);
+			      
+		          pstmt.setString(1, mdto.getNaverLogin());
+		          pstmt.setString(2, mdto.getUserId());
+			      
+			      
+			      pstmt.executeUpdate();
+			      
+		      }
+		      
+		      if(!mdto.getKakaoLogin().equals(null) || !mdto.getKakaoLogin().equals("")){
+	    	  conn = getConnection();
+		      
+	    	  sql = "update user_info set kakaoLogin=? where userId=?";
+		      
+		      pstmt = conn.prepareStatement(sql);
+		      
+	          pstmt.setString(1, mdto.getKakaoLogin());
+	          pstmt.setString(2, mdto.getUserId());
+			      
+		      pstmt.executeUpdate();
+		    	  
+		      }
+		         
+		   } catch (SQLException e) {
+		      
+		      e.printStackTrace();
+		   } finally{
+		      closeDB();
+		   }
+		
+		}
+		//insertMember() 끝
+		
+		//insertCoupon(userId)
+	      public void insertCoupon(String userId){
+	         
+	         int num=0;
+	         
+	         try {
+	         conn = getConnection();
+
+	         sql = "select max(mcNum) from my_coupon";
+	      
+	            pstmt = conn.prepareStatement(sql);
+	            
+	            rs = pstmt.executeQuery();
+	            
+	            System.out.println("회원번호: "+num);
+	         
+	         if(rs.next()){
+	            num = rs.getInt(1)+1;
+	         }
+	            
+	         
+	         sql = "insert into my_coupon values(?,1,?,1)";
+	         
+	            pstmt.setInt(1, num);
+	            pstmt.setString(2, userId);
+	            
+	            pstmt.executeUpdate(); //insert, update, delete => int 형이라서 rs로 받을수 없음.
+	         
+	         } catch (SQLException e) {            
+	            e.printStackTrace();   
+	         }finally{
+	            closeDB();
+	         }
+
+	      }//
+
+	      //insertCoupon(userId)
+		
+		
+		/////////////// Member SignUp DAO /////////////////
+		
 }

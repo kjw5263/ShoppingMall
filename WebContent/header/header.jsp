@@ -12,6 +12,16 @@
  String userId = (String)session.getAttribute("userId");
 %>
 
+    <!-- Search model -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form" action="Goodssearch.cos" method="post">
+				<input type="text" name = "searchname" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
 	<!-- Header Section Begin -->
     <header class="header-section">
         <div class="container-fluid">
@@ -25,14 +35,14 @@
                     <%
 						if(userId !=null && userId.equals("admin") ){
 					%>
-					   <img src="./img/icons/man.png" alt="" onclick="location.href='./AdminList.ag'">
+					   <img src="./img/icons/man.png" alt="" onclick="location.href='./AdminGoodsList.ag'">
 					<%
 					   } else {
 					%>
                     <img src="./img/icons/man.png" alt="" onclick="location.href='./MemberInfo.me'">
                     <% } %>
                     <a href="#">
-                        <img src="./img/icons/bag.png" alt="">
+                        <img src="./img/icons/bag.png" alt="" onclick="location.href='./BasketList.ba'">
                         <span>2</span>
                     </a>
                     
@@ -49,7 +59,7 @@
         		 if(session.getAttribute("userId") == null){
         		%>
                 <div class="user-access">
-                    <a href="#">Register</a>
+                    <a href="./MemberJoin.me">Register</a>
                     <a href="./MemberLogin.me" class="in">Sign in</a>
                 </div>
                 <%}else{%>
@@ -60,16 +70,16 @@
                 <nav class="main-menu mobile-menu">
                     <ul>
                         <li><a class="active" href="./index.jsp">Home</a></li>
-                        <li><a href="./GoodsList.cos">Shop</a>
+                        <li><a href="./GoodsList.cos">Products</a>
                             <ul class="sub-menu">
                                 <li><a href="./product-page.jsp">Product Page</a></li>
                                 <li><a href="./shopping-cart.jsp">Shopping Card</a></li>
-                                <li><a href="./check-out.jsp">Check out</a></li>
+                                <li><a href="#">Check out</a></li>
                             </ul>
                         </li>
-                        <li><a href="./product-page.jsp">About</a></li>
-                        <li><a href="./check-out.jsp">Blog</a></li>
-                        <li><a href="./contact.jsp">Contact</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="./notice.nos">공지사항</a></li>
+                        <li><a href="./FaqList.faq">FQA</a></li>
                     </ul>
                 </nav>
             </div>
@@ -96,7 +106,7 @@
                 <div class="col-md-4 text-left text-xl-right">
                     <div class="header-item">
                     <img src="./img/icons/sales.png" alt="">
-                    <p>30% off on dresses. Use code: 30OFF</p>
+                    <p>회원가입 시 <b>추천인</b> 입력하면 <b>500포인트</b> 즉시 적립! </p>
                 </div>
                 </div>
             </div>
@@ -105,8 +115,17 @@
     <!-- Header Info End -->
     
     
-    <!-- Header End -->
-
 
 </body>
+    <!-- Header End -->
+ <!-- Js Plugins -->
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.magnific-popup.min.js"></script>
+    <script src="./js/jquery.slicknav.js"></script>
+    <script src="./js/owl.carousel.min.js"></script>
+    <script src="./js/jquery.nice-select.min.js"></script>
+    <script src="./js/mixitup.min.js"></script>
+    <script src="./js/main.js"></script>
+
 </html>

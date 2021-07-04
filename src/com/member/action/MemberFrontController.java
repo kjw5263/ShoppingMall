@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 @WebServlet("*.me")
@@ -22,12 +21,16 @@ public class MemberFrontController extends HttpServlet{
 		/********************************* 1. 페이지 주소 파싱 *************************/
 		// (1) 가상주소 전체 가져오기
 		String requestURI = request.getRequestURI();
+
 		
 		// (2) 프로젝트명 가져오기
 		String ContextPath = request.getContextPath();
 		
 		// (3) 필요한 가상주소 생성
 		String command = requestURI.substring(ContextPath.length());
+		
+//		String command2 = request.getPathInfo();
+		
 		System.out.println("command : " + command);
 		System.out.println("C : 1.페이지 주소 파싱");
 		
@@ -88,7 +91,7 @@ public class MemberFrontController extends HttpServlet{
 					System.out.println("C : /MemberKaKaoLoginAction.me 호출");
 					// DB 사용 => MemberLoginAction() 객체를 생성해야함.
 					action = new MemberKaKaoLoginAction();
-					System.out.println("C : 로그인처리 메소드 호출");
+					System.out.println("C : 카카오 로그인처리 메소드 호출");
 					try {
 						forward = action.execute(request, response);
 					} catch (Exception e) {
@@ -129,9 +132,6 @@ public class MemberFrontController extends HttpServlet{
 					System.out.println("C : /FindIdConfirm.me 호출");
 					// 화면을 보여주기=> view페이지로 이동
 					
-					
-					System.out.println("받아온 request 값은 @@@@@@@@@@@@@@"+ request.getAttribute("userId"));
-					
 					forward = new ActionForward();
 					forward.setPath("./member/findIdConfirm.jsp");
 					forward.setRedirect(false);
@@ -144,10 +144,23 @@ public class MemberFrontController extends HttpServlet{
 					forward.setPath("./member/findPw.jsp");
 					forward.setRedirect(false);
 					
-				}else if(command.equals("/FindPwAction.me")){
-					System.out.println("C : /FindPwAction.me 호출");
+					
+				// 새로 추가된 비밀번호 찾기 페이지 시작
+				}else if(command.equals("/findPwCer.me")){
+					System.out.println("C : /findPwCer.me 호출");
+					// 화면을 보여주기=> view페이지로 이동
+					
+					forward = new ActionForward();
+					forward.setPath("./member/findPwCer.jsp");
+					forward.setRedirect(false);
+					
+				}
+				// 새로 추가된 비밀번호 찾기 페이지 끝
+				else if(command.equals("/findPwCerAction.me")){
+					System.out.println("C : /findPwCerAction.me 호출");
 					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
-					action = new FindPwAction();
+					
+					action = new findPwCerAction();
 					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
 					try {
 						forward = action.execute(request, response);
@@ -155,12 +168,25 @@ public class MemberFrontController extends HttpServlet{
 						e.printStackTrace();
 					}
 					
-				}else if(command.equals("/FindPwAjax.me")){
-					System.out.println("C : /FindPwAjax.me 호출");
+				}
+				else if(command.equals("/PwCheckMove.me")){
+					System.out.println("C : /PwCheckMove.me 호출");
 					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
 					
+					action = new PwCheckMoveAction();
+					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					
-					action = new FindPwAjax();
+				}
+				
+				else if(command.equals("/FindPwAction.me")){
+					System.out.println("C : /FindPwAction.me 호출");
+					// DB 사용 => /FindPwAction.me 객체를 생성해야함.
+					action = new FindPwAction();
 					System.out.println("C : 비밀번호 찾기처리 메소드 호출");
 					try {
 						forward = action.execute(request, response);
@@ -235,8 +261,6 @@ public class MemberFrontController extends HttpServlet{
 					}
 				}
 				
-				
-				
 				else if(command.equals("/MemberDelete.me")){
 					System.out.println("C : /MemberDelete.me 호출");
 					
@@ -267,8 +291,6 @@ public class MemberFrontController extends HttpServlet{
 					
 				}
 				
-				
-				
 				else if(command.equals("/MemberInfo.me")){
 					System.out.println("C : /MemberInfo.me 호출");
 					// DB정보를 가져와서 view페이지에 출력
@@ -281,18 +303,191 @@ public class MemberFrontController extends HttpServlet{
 					}
 					
 				}
-//				else if(command.equals("/MemberLogout.me")){
-//					System.out.println("C : /MemberLogout.me 호출");
-//					// MemberLogoutAction() 객체 생성
-//					action = new MemberLogoutAction();
-//					
-//					try {
-//						forward = action.execute(request, response);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}	
-		
-		
+				
+				else if(command.equals("/NewPassAction.me")){
+					System.out.println("C : /NewPassAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					// MemberInfoAction() 객체 생성
+					action = new NewPassAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				else if(command.equals("/MemberNaverLoginAction.me")){
+					
+					System.out.println("C : /MemberNaverLoginAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					action = new MemberNaverLoginAction();
+					System.out.println("C : 네이버 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				else if(command.equals("/NConnectId.me")){
+					
+					System.out.println("C : /NConnectId.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					
+					forward = new ActionForward();
+					forward.setPath("./member/NConnectId.jsp");
+					forward.setRedirect(false);	
+					
+				}
+				else if(command.equals("/NloginConnected.me")){
+					
+					System.out.println("C : /NloginConnected.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/NloginConnected.jsp");
+					forward.setRedirect(false);	
+				}
+				else if(command.equals("/NConLoginAction.me")){
+					
+					System.out.println("C : /NConLoginAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					action = new NConLoginAction();
+					System.out.println("C : 네이버 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				else if(command.equals("/KloginConnected.me")){
+					
+					System.out.println("C : /KloginConnected.me 호출");
+					
+					forward = new ActionForward();
+					forward.setPath("./member/KloginConnected.jsp");
+					forward.setRedirect(false);	
+				}
+					else if(command.equals("/KConLoginAction.me")){
+					
+					System.out.println("C : /KConLoginAction.me 호출");
+					// DB정보를 가져와서 view페이지에 출력
+					action = new KConLoginAction();
+					System.out.println("C : 네이버 로그인처리 메소드 호출");
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				
+				else if (command.equals("/MemberJoin.me")) {
+
+			         System.out.println("C 회원가입 호출: /MemberJoin.me 호출");
+
+			         forward = new ActionForward();
+			         forward.setPath("./member/insertForm.jsp");
+			         forward.setRedirect(false);
+
+			      } else if (command.equals("/MemberJoinAction.me")) {
+
+			         System.out.println("C 회원가입 호출: /MemberJoinAction.me 호출");
+
+			         System.out.println("2 : / 주소 호출");
+
+			         action = new MemberJoinAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+
+			      } else if (command.equals("/MemberCheckAction.me")) {
+
+			         System.out.println("2 id 중복체크:  호출");
+
+			         action = new MemberCheckAction();
+
+			         System.out.println("2 id 중복체크:  호출 종료");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+			      }
+			      else if (command.equals("/emailJoin.me")) {
+				         System.out.println("2 : /emailJoin.me 주소 호출");
+
+				         forward = new ActionForward();
+				         forward.setPath("./member/email.jsp");
+				         forward.setRedirect(false);
+
+			      } else if (command.equals("/emailAddrCheckAction.me")) {
+
+			         System.out.println("2 : /emailAddrCheckAction.me 주소 호출");
+
+			         action = new emailAddrCheckAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+
+			      } else if (command.equals("/emailSendAction.me")) {
+
+			         System.out.println("2 : /emailSendAction.me 주소 호출");
+
+			         action = new emailSendAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+			         
+			      }else if (command.equals("/emailKeyCheckAction.me")) {
+
+			         System.out.println("2 : /emailKeyCheckAction.me 주소 호출");
+
+			         action = new emailKeyCheckAction();
+
+			         System.out.println("C : 로그인처리 메소드 호출");
+
+			         try {
+			            forward = action.execute(request, response);
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         }
+			      
+			      } else if (command.equals("/emailKeyCheck.me")) {
+
+			         System.out.println("2 : /emailKeyCheck.me 주소 호출");
+
+			         forward = new ActionForward();
+			         forward.setPath("./member/emailKeyCheck.jsp");
+			         forward.setRedirect(false);
+
+			      }
+				
+			      else if(command.equals("/Survey.me")){
+						System.out.println("C : /Survey.me 호출");
+						
+						forward = new ActionForward();
+						forward.setPath("./member/survey.jsp");
+						forward.setRedirect(false);
+						
+					}    
+				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) 끝 *******************/

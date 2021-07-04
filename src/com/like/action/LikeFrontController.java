@@ -42,11 +42,26 @@ public class LikeFrontController extends HttpServlet{
 		ActionForward forward = null;
 		if (command.equals("/getLike.li")) {
 			
-			System.out.println("겟라이크 이동완료");
 			action = new getLikeListAction();
 			
+			try {
+				 forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/deleteLike.li")){
+
+			action = new deleteLikeAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/

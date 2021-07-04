@@ -65,10 +65,14 @@ public class noticeWriteProAction implements Action{
 		notit.setNoticeTitle(multi.getParameter("title"));
 		notit.setNoticeContent(multi.getParameter("content"));
 		notit.setNoticeType(Integer.parseInt(multi.getParameter("imp2")));
-		notit.setNoticeFile(multi.getParameter("filename"));
+		notit.setNoticeRealFileName(multi.getOriginalFileName("filename"));
+		notit.setNoticeFile(multi.getFilesystemName("filename"));
+		notit.setNoticeRealImgName(multi.getOriginalFileName("imgname"));
+		notit.setNoticeImg(multi.getFilesystemName("imgname"));
 		// List goodsList =  gdao.getGoodsList();
 		// => Action 페이지에서 사용하는 경우
-		System.out.println(notit.toString());
+		
+		
 		noti.insertNotice(notit);
 		
 		// 페이지 이동

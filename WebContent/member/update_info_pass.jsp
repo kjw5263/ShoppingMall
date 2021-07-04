@@ -92,7 +92,7 @@
 							<br>
 							<form action="./MemberUpdateInfopro.me" method="post">
 								<div class="form-group mx-sm-3 mb-2">
-										<input type="text" placeholder="비밀번호" name="userPass" class="form-control" placeholder="Password">
+										<input type="password" placeholder="비밀번호" name="userPass" class="form-control" placeholder="Password">
 										
 										<br>
 								</div>
