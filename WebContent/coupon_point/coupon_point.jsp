@@ -25,16 +25,18 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-	
+    <link rel="stylesheet" href="./css/N_style.css" type="text/css">
+<script type="text/javascript">
+
+
+
+</script>	
 	<style type="text/css">
 	#cp {
 	color: orange;
 	font-size: 25px;
 	
 	}
-
-
-	
 	</style>
 
 </head>
@@ -76,9 +78,9 @@
 	
 	<div class="container-fluid">	
 	<div class="row">
-		<div class="col-3">
+		<div class="col-2">
 		</div>
-		<div class="col-6">	
+		<div class="col-8">	
 			<div class="row">
 				<div class="col-3">
 					<a href=""><h5>장바구니</h5></a>
@@ -123,10 +125,68 @@
 								
 								</table>
 				<br><br><br>
+				<fieldset>
+					<form>
+					<input type="button" value="1개월" onclick="location.href='/pointcheck.cp?searchmonth=-1';">				
+					<input type="button" value="3개월" onclick="location.href='/pointcheck.cp?searchmonth=-3';">				
+					<input type="button" value="6개월" onclick="location.href='/pointcheck.cp?searchmonth=-6';">	
+					<br><br>
+					<select name="startyear">
+						<option name="2021">2021</option>
+						<option name="2020">2020</option>
+						<option name="2019">2019</option>
+						<option name="2018">2018</option>
+						<option name="2017">2017</option>
+					</select>년
+					
+					<select name="startmonth">
+						<%for(int i=1;i<13;i++) {%>
+						<option name="<%=i%>"><%=i %></option>
+						<%} %>
+					</select>월
+					
+					<select name="startdate">
+						<%for(int i=1;i<32;i++) {%>
+						<option name="<%=i%>"><%=i %></option>
+						<%} %>
+					</select>일
+					
+					&nbsp;~&nbsp;
+					
+						<select name="endyear">
+						<option name="2021">2021</option>
+						<option name="2020">2020</option>
+						<option name="2019">2019</option>
+						<option name="2018">2018</option>
+						<option name="2017">2017</option>
+					</select>년
+					
+					<select name="endmonth">
+						<%for(int i=1;i<13;i++) {%>
+						<option name="<%=i%>"><%=i %></option>
+						<%} %>
+					</select>월
+					
+					<select name="enddate">
+						<%for(int i=1;i<32;i++) {%>
+						<option name="<%=i%>">><%=i %></option>
+						<%} %>
+					</select>일
+					
+					<input type="submit" onclick ="return datecheck();">
+				</form>
+				</fieldset>
+				
+				<table class= "table table-bordered">
+					
+				
+				</table>
+				
+				
 				</div>
 			</div>
 		</div>
-		<div class="col-3"></div>
+		<div class="col-2"></div>
 	</div>
 	
 	

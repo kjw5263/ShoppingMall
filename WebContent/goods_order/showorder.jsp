@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="com.order.db.OrderDTO"%>
 <%@page import="java.util.List"%>
@@ -95,38 +96,77 @@
 					</div>
 					<div class="col-9">
 					
+						
 						<h4>주문 배송 조회</h4>
 						<br>
+						<%
+						int status1 = 0;
+						int status2 = 0;
+						int status3= 0;
+						int status4 = 0;
+						int status5 = 0;
+						int status6 = 0;
+						int status7 = 0;
+						int status8 = 0;
+						String status = "";
+						for(int i=0;i<orderList.size();i++){
+							OrderDTO odto2 = (OrderDTO)orderList.get(i);
+							status = odto2.getOrderStatus();
+						
+						}	
+							switch (status) {
+							case "결제완료" : status1++;
+							case "상품준비" : status2++; 
+							case "상품준비완료" : status3++;
+							case "배송준비" : status4++; 
+							case "배송중" : status5++;
+							case "배송완료" : status6++;
+							case "주문취소" : status7++; 
+							}
+				
+						
+						%>
 						<ul class="mypage-step" style="text-decoration: none;">
 							<li>
 								<div>
-									<div class="contents1">주문접수</div>
-									<div class="contents2">0</div>
-								</div>
-							</li>
-							<li>
-								<div>
 									<div class="contents1">결제완료</div>
-									<div class="contents2">0</div>
+									<div class="contents2"><%=status1 %></div>
 								</div>
 							</li>
 							<li>
 								<div>
-									<div class="contents1">상품준비중</div>
-									<div class="contents2">0</div>
+									<div class="contents1">상품준비</div>
+									<div class="contents2"><%=status2%></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">준비완료</div>
+									<div class="contents2"><%=status3 %></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">배송준비</div>
+									<div class="contents2"><%=status4 %></div>
 								</div>
 							</li>
 							<li>
 								<div>
 									<div class="contents1">배송중</div>
-									<div class="contents2">0</div>
+									<div class="contents2"><%=status5 %></div>
 								</div>
 							</li>
-
 							<li>
 								<div>
 									<div class="contents1">배송완료</div>
-									<div class="contents2">0</div>
+									<div class="contents2"><%=status6 %></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">주문취소</div>
+									<div class="contents2"><%=status7 %></div>
 								</div>
 							</li>
 						</ul>

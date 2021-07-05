@@ -30,7 +30,7 @@
   background: #EAEAEA;
   margin: auto;
   border-radius: 10px;
-  height: 20%;
+  height: 17%;
 }
 
 .mypage-step > li {
@@ -68,6 +68,8 @@ list-style: none;
 
 #orderList {
 	text-align: center;
+	margin-top: 2%;
+	margin-bottom: 10%;
 	
 }
 
@@ -94,7 +96,7 @@ list-style: none;
   background: #EAEAEA;
   margin: auto;
   border-radius: 10px;
-  height: 12%;
+  height: 10%;
 }
 
 .mypage-step-1 > li {
@@ -111,33 +113,11 @@ list-style: none;
 
 /* 상세 주문조회 */
 
-.orderday {
-  top:-66px;
-  display: flex;
-  width: 100%;
-  background: #EAEAEA;
-  margin: auto;
-  border-radius: 10px;
-  height: 12%;
-}
+#money {
+	color: red;
+	font-size: 15px;
+	}
 
-.orderday > ul {
-	list-style: none;
-	display: flex;
-}
-
-.orderday > ul > li {
-	flex: 1;
-  	margin-left: 80%;
-}
-
-.orderday > li > div {
-  text-align: center;
-  margin-top:30px;
-  height:57px;
-  
- 
-}
 
 /* 상세 주문조회 */
 
@@ -162,6 +142,7 @@ list-style: none;
 	border-radius: 10px;
 	margin-bottom: 10%;
 }
+
 
 
 /*info-page  */

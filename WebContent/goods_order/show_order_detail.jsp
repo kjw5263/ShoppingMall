@@ -97,18 +97,22 @@
 					<div class="col-9">
 					
 						<h3>주문 상세 조회</h3><br>
-						
-						<fieldset class="orderday">
-							<ul>
-								<li><div>구매일자</div></li>
-								<li><div>주문번호</div></li>
-							</ul>
-						</fieldset>
-						
+						<ul class="mypage-step" style="text-decoration: none;">
+							<li>
+								<div>
+									<div class="contents1">구매일자</div>
+									<div class="contents2"></div>
+								</div>
+								<div>
+									<div class="contents1">주문일자</div>
+									<div class="contents2"></div>
+								</div>
+							</li>
+						</ul>
 						
 						
 						<h4>구매내역</h4>
-						<table class= "table table-bordered" style="margin-top: 8%" id="orderList">
+						<table class= "table table-bordered"  id="orderList">
 							<thead class="order-thead">
 								<tr>
 									<th colspan="2">상품명</th>
@@ -142,7 +146,7 @@
 						</table>
 						
 						<h4>배송지 정보</h4>
-						<table class= "table table-bordered" style="margin-top: 8%" id="orderList">
+						<table class= "table table-bordered" id="orderList">
 						<% OrderDTO odto = (OrderDTO)orderList.get(0);
 							GoodsDTO gdto = (GoodsDTO)goodsList.get(1);%>
 							<tr>
@@ -150,24 +154,22 @@
 								<td><%=odto.getReceiverName() %></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>연락처</td>
+								<td><%=odto.getReceiverTel() %></td>
+								<td>예비 연락처</td>
+								<td><%=odto.getReceiverTel2() %></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>이메일</td>
+								<td><%=odto.getReceiverEmail() %></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<td>주소</td>
+								<td><%=odto.getReceiverAddr() %></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
+								<td>배송시 주의사항</td>
+								<td><%=odto.getO_msg() %></td>
 							</tr>
 						
 						
@@ -175,7 +177,25 @@
 						
 						
 						<h4>결제 정보</h4>
-				
+						
+						<table class= "table table-bordered" id="orderList">
+							<tr>
+								<td>총 상품 금액<br><b id="money"><%=odto.getSumMoney() %></b>원</td>
+								<td>쿠폰 할인 금액<br><b id="money"><%=odto.getCpUseAmount() %></b>원</td>
+								<td>적립 포인트<br><b id="money"><%=odto.getAddPoint() %></b>p</td>
+							</tr>
+							<tr>
+								<td colspan="3"><b>총 결제 금액 :</b><b id="money"><%=odto.getPayMoney() %></b>원
+								<br>ㄴ 결제 수단 :<%=odto.getPayType() %></td>
+							</tr>
+						
+						</table>
+						
+						<div style="text-align: center;">
+							<input type="button" class="primary-btn look-btn" style="background-color: #B0BCC2;" value="목록" onclick="history.back();">
+						</div>	
+						
+					
 					</div>
 				</div>
 			</div>

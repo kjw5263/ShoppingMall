@@ -139,6 +139,7 @@ public class LikeDAO {
 		return cnt;
 	}
 	//getlistCount()
+	
 	//getLikeList(userId,startRow,pageSize)
 	public List getLikeList(String userId, int startRow,int pageSize){
 		List LikeList2 = new ArrayList();
