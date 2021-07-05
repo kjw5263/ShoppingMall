@@ -115,7 +115,7 @@ table tr td {
   	listDAO gdao = new listDAO();
   	
     List goodsList = (List)request.getAttribute("goodsList");
-    
+    List bestgoodsList = (List)request.getAttribute("bestgoodsList");
 
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
@@ -123,6 +123,7 @@ table tr td {
 	String cat[][] = var.getCat();	
     String skin[][] = var.getSkin(); 
     int size = goodsList.size();
+    int bestsize = bestgoodsList.size();
   %>
 	<section class="latest-products spad">
         <div class="container">
@@ -133,9 +134,13 @@ table tr td {
                             <h2>Latest Products</h2>
                         </div>
                         <ul class="product-controls">
-                            <li data-filter="*">All</li>
+                       	 	<li data-filter=".allgoods">All</li>
+                           
+                            <li data-filter=".베스트상품">베스트상품</li>
+
+                         
                             <%
-                            for(int i = 1 ; i<http.length;i++){
+                            for(int i = 2 ; i<http.length;i++){
                             	
                             %>
                             <li data-filter=".<%=http[i][1] %>"><%=http[i][1] %></li>
@@ -144,7 +149,7 @@ table tr td {
                         </ul>
                         <br>
                          <ul class="product-controls">
-                            <li data-filter="*">All</li>
+                            <li data-filter=".allgoods">All</li>
                             <%
                             for(int i = 1 ; i<cat.length;i++){
                             	
@@ -155,7 +160,7 @@ table tr td {
                         </ul>
                          <br>
                          <ul class="product-controls">
-                            <li data-filter="*">All</li>
+                            <li data-filter=".allgoods">All</li>
                             <%
                             for(int i = 1 ; i<skin.length;i++){
                             	
@@ -171,10 +176,27 @@ table tr td {
             	<%for(int i = 0 ; i<size ;i++){ 
             	GoodsDTO dto = (GoodsDTO) goodsList.get(i);
             	%>
-                <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosBrand() %> <%=dto.getCosCategory() %> <%=dto.getCosSkinType() %>">
+                <div class="col-lg-3 col-sm-6 mix all allgoods <%=dto.getCosBrand() %> <%=dto.getCosCategory() %> <%=dto.getCosSkinType() %>">
                     <div class="single-product-item">
                         <figure>
-                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="<%=dto.getCosImage()%>" alt=""></a>
+                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
+                            <div class="p-status">new</div>
+                        </figure>
+                        <div class="product-text">
+                            <h6><%=dto.getCosName()%></h6>
+                            <p><%=dto.getCosPrice() %>원  </p>
+                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
+                        </div>
+                    </div>
+                </div>
+                <%} %>
+                <%for(int i = 0 ; i<bestsize ;i++){ 
+            	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
+            	%>
+                <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">>
+                    <div class="single-product-item">
+                        <figure>
+                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
