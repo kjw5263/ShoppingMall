@@ -2,6 +2,7 @@ package com.member.action;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import com.goods.db.GoodsDTO;
 import com.like.db.LikeDAO;
 import com.member.db.MemberDAO;
 import com.member.db.MemberDTO;
+import com.order.db.OrderDAO;
 
 public class MemberInfoAction implements Action{
 
@@ -40,6 +42,11 @@ public class MemberInfoAction implements Action{
 		request.setAttribute("couponList", couponList);
 		request.setAttribute("LikeList", LikeList);
 		request.setAttribute("mdto", mdto);
+		
+		OrderDAO odao = new OrderDAO();
+		Vector totalList = odao.getOrderList(userId);
+		request.setAttribute("orderList", totalList.get(0));
+		
 		
 		forward.setPath("./member/info.jsp");
 		forward.setRedirect(false);

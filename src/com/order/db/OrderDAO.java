@@ -291,6 +291,13 @@ public class OrderDAO {
 		
 		
 		//getorderdetail(userId,tradeNum)
+		/**
+		 * @param userId
+		 * @param tradeNum
+		 * @return goodsList,orderList
+		 * 주문 상세조회 리스트 가져오기 메소드
+		 * 
+		 */
 		public Vector getorderdetail(String userId,String tradeNum){
 			Vector totalList = new Vector();
 			List goodsList = new ArrayList();
@@ -349,7 +356,6 @@ public class OrderDAO {
 			
 			return totalList;
 		}
-		
 		//getorderdetail(userId,tradeNum)
 		
 		

@@ -25,11 +25,34 @@ public class getLikeListAction implements Action{
 		}
 		
 		
-		LikeDAO ldao = new LikeDAO();
-		List LikeList = ldao.getLikeList(userId);
+
 		
-		request.setAttribute("LikeList", LikeList);
 	     
+		
+		int pageSize = 3;
+		
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null){pageNum = "1";}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage-1)*pageSize+1;
+		int endRow = currentPage*pageSize;
+		
+		LikeDAO ldao = new LikeDAO();
+		//List LikeList = ldao.getLikeList(userId);
+		List LikeList = ldao.getLikeList(userId,startRow,pageSize);
+		request.setAttribute("LikeList", LikeList);
+		
+		
+		int cnt = ldao.getlistCount(userId);
+		request.setAttribute("cnt", cnt);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("startRow", startRow);
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("currentPage", currentPage);
+		
+		
+		
 	    forward.setPath("./member/likelist.jsp");
 		forward.setRedirect(false);
 		return forward; 

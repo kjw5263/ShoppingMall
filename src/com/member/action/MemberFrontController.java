@@ -278,19 +278,6 @@ public class MemberFrontController extends HttpServlet{
 						e.printStackTrace();
 					}		
 				}
-				else if(command.equals("/MyCoupon.me")){
-					System.out.println("C : /MyCoupon.me 호출");
-					
-					action = new MycouponAction();
-					try {
-						forward = action.execute(request, response);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-				}
-				
 				else if(command.equals("/MemberInfo.me")){
 					System.out.println("C : /MemberInfo.me 호출");
 					// DB정보를 가져와서 view페이지에 출력

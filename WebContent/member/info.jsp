@@ -1,3 +1,4 @@
+<%@page import="com.order.db.OrderDTO"%>
 <%@page import="com.coupon.db.CouponDTO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
@@ -81,7 +82,7 @@
 	MemberDTO mdto  = (MemberDTO)request.getAttribute("mdto");
 	List LikeList = (List) request.getAttribute("LikeList");
 	List couponList = (List)request.getAttribute("couponList");
-
+	List orderList = (List)request.getAttribute("orderList");
 		
 	%>
 	
@@ -95,7 +96,7 @@
 					<a href="./getOrderList.or"><h5>주문조회</h5></a>
 					<a href="./getLike.li"><h5>찜목록</h5></a>
 					<hr>
-					<a href="./MyCoupon.me"><h5>내 쿠폰/포인트</h5></a>
+					<a href="./MyCoupon.cp"><h5>내 쿠폰/포인트</h5></a>
 					<hr>
 					<a href="./Usedate.ud"><h5>내 화장품 사용기한 
 					&nbsp;확인하기</h5></a>
@@ -154,42 +155,84 @@
 					
 						<h4>주문 배송 조회</h4>
 						<div style="text-align: right;">
-						<a href="/getOrderList.or">> 더보기</a>
+						<a href="./getOrderList.or">> 더보기</a>
 						</div>
 						<br>
+						<%
+						int status1 = 0;
+						int status2 = 0;
+						int status3= 0;
+						int status4 = 0;
+						int status5 = 0;
+						int status6 = 0;
+						int status7 = 0;
+						int status8 = 0;
+						String status = "";
+						for(int i=0;i<orderList.size();i++){
+							OrderDTO odto2 = (OrderDTO)orderList.get(i);
+							status = odto2.getOrderStatus();
+						}
+						
+							switch (status) {
+							case "결제완료" : status1++;
+							case "상품준비" : status2++; 
+							case "상품준비완료" : status3++;
+							case "배송준비" : status4++; 
+							case "배송중" : status5++;
+							case "배송완료" : status6++;
+							case "주문취소" : status7++; 
+							}
+						
+						
+						%>
 						<ul class="mypage-step-1" style="text-decoration: none;">
 							<li>
 								<div>
-									<div class="contents1">주문접수</div>
-									<div class="contents2">0</div>
-								</div>
-							</li>
-							<li>
-								<div>
 									<div class="contents1">결제완료</div>
-									<div class="contents2">0</div>
+									<div class="contents2"><b><%=status1 %></b></div>
 								</div>
 							</li>
 							<li>
 								<div>
-									<div class="contents1">상품준비중</div>
-									<div class="contents2">0</div>
+									<div class="contents1">상품준비</div>
+									<div class="contents2"><b><%=status2%></b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">준비완료</div>
+									<div class="contents2"><b><%=status3 %></b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">배송준비</div>
+									<div class="contents2"><b><%=status4 %></b></div>
 								</div>
 							</li>
 							<li>
 								<div>
 									<div class="contents1">배송중</div>
-									<div class="contents2">0</div>
+									<div class="contents2"><b><%=status5 %></b></div>
 								</div>
 							</li>
-
 							<li>
 								<div>
 									<div class="contents1">배송완료</div>
-									<div class="contents2">0</div>
+									<div class="contents2"><b><%=status6 %></b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">주문취소</div>
+									<div class="contents2"><b><%=status7 %></b></div>
 								</div>
 							</li>
 						</ul>
+						
+						
+						
+						
 						
 						<br> <br>
 						<%if(LikeList.size() !=0){ %>
@@ -217,8 +260,9 @@
 												GoodsDTO gdto = (GoodsDTO)LikeList.get(num);
 											%>
 										<td><a
-											href="./GoodsDetail.cos?cosNum=<%=gdto.getCosNum()%>"> <img
-												src="<%=gdto.getCosImage()%>" width="120" height="120"></a>
+											href="./GoodsDetail.cos?cosNum=<%=gdto.getCosNum()%>"> 
+											<img src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>" width="120" height="120">
+												</a>
 											<br> <%=gdto.getCosBrand() %><br> <%=gdto.getCosName() %>
 										</td>
 										<%

@@ -62,20 +62,6 @@
 </style>
 <script src="../jq/jquery-3.6.0.js"></script>
 <script src="../jq/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-/* 	function check() {
-			if(!(confirm('오픈하시겠습니까?'))) {
-				return false;
-			}else{
-				
-				
-				
-				
-			}
-		}
-	 */
-	
-</script>
 </head>
 <body>
 	<!-- header 시작 -->
@@ -167,7 +153,7 @@
 							%>
 							<tr style="font-size: 20px;">
 									
-									<td rowspan="2"><img src="<%=gdto2.getCosImage() %>" width="150px"
+									<td rowspan="2"><img src="./admingoods/upload/<%=gdto2.getCosImage().split(",")[0] %>" width="150px"
 										height="150px">
 									<td rowspan="2"><b><%=gdto2.getCosName()%></b><br> <br>
 										개봉 후 사용 기한 : <b><%=gdto2.getUseDate() %></b> 개월 <br>
