@@ -59,7 +59,7 @@
 		
 		<div class="col-12 text-center">
 			
-    <!-- admin coupon list Begin -->
+    <!-- admin coupons modify Begin -->
     
     <%
 		CouponDTO dto = (CouponDTO) request.getAttribute("dto");
@@ -86,7 +86,7 @@
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminCouponList.ag" style="background-color: #899296; color:white;"><b>쿠폰목록</b></a>
+				        <a class="nav-link" href="./AdminCouponList.ag" style="background-color: #6c757d; color:white;"><b>쿠폰목록</b></a>
 				      </li>			      
 				    </ul>
 				  </div>
@@ -123,14 +123,14 @@
 			</table>
 			<table style="margin-left: auto; margin-right: auto;">
 			<tr>
-			    <td><input type="submit" value="쿠폰수정" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
+			    <td><input type="submit" value="쿠폰수정" class="btn btn-secondary"></td>  
 		    </tr>
 		    </table>		
 		</form>	
 		</div>
 	</section>
 
-    <!-- admin goods list End -->
+    <!-- admin coupons modify End -->
 			
 		</div>
 		<div class="col-0">	

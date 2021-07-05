@@ -113,7 +113,7 @@
 				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminMemberList.ag" style="background-color: #899296; color:white;"><b>회원목록</b></a>
+				        <a class="nav-link" href="./AdminMemberList.ag" style="background-color: #6c757d; color:white;"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
@@ -193,28 +193,28 @@
 	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
 	    	if(startPage > pageBlock){
 	    		%>
-	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-secondary btn-sm">이전</a>
+	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-primary btn-sm">이전</a>
 	    		<%
 	    	}   	
 	    	
 	    	// 숫자  1....5
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
-	    		    <a href="./AdminMemberList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"><%=i %></a> 
+	    		    <a href="./AdminMemberList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm"><%=i %></a> 
 	    		<%    		
 	    	}
 	    	
 	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
 	    	if(endPage < pageCount){
 	    		%>
-	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-secondary btn-sm">다음</a>
+	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-primary btn-sm">다음</a>
 	    		<%
 	    	}
 
 	    }
 	    //////////////////////////////////////////////////////
 	  %>
-    <!-- admin goods list End -->
+    <!-- admin member list End -->
 			
 		</div>
 		<div class="col-0">	

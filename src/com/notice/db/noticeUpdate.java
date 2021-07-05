@@ -17,12 +17,16 @@ public class noticeUpdate extends DBconnection{
 		String sql = "";
 		
 			try {
-						sql = "update "+ tablename + " set "
-						+ "noticeNum =" + noti.getNoticeNum() +", noticeTitle = '"+ noti.getNoticeTitle() +"',"
-						+ "noticeContent = '"+noti.getNoticeContent()+ "'"
-						+",noticeFile = "+"'"+noti.getNoticeFile() +"'"+","+
-						"noticeType = '"+noti.getNoticeType() +"'"+", noticeRealFileName = '"+
-						noti.getNoticeRealFileName() +"' where  noticeNum = "+noti.getNoticeNum()+" ";
+				sql = "update "+ tablename + " set "
+				+ " noticeNum =" + noti.getNoticeNum() +","
+				+ " noticeTitle = '"+ noti.getNoticeTitle() +"',"
+				+ " noticeContent = '"+noti.getNoticeContent()+ "',"
+				+ " noticeFile = "+"'"+noti.getNoticeFile() +"',"
+				+ " noticeType = '"+noti.getNoticeType() +"',"
+				+ " noticeRealFileName = '"+noti.getNoticeRealFileName() +"',"
+				+ " noticeImg = '"+noti.getNoticeImg() +"',"
+				+ " noticeRealImgName = '"+noti.getNoticeRealImgName() +"'"
+				+ " where  noticeNum = "+noti.getNoticeNum()+" ";
 				System.out.println("수정 sql = "+ sql );
 				con.upsql(sql);
 				

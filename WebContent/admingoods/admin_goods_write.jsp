@@ -68,7 +68,7 @@
 				        <a class="nav-link" href="./AdminGoodsList.ag"><b>상품목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./GoodsAdd.ag" style="background-color: #899296; color:white;"><b>상품등록</b></a>
+				        <a class="nav-link" href="./GoodsAdd.ag" style="background-color: #6c757d; color:white;"><b>상품등록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
@@ -189,12 +189,10 @@
 		         </tr>		      	          
 				</tbody>
 			</table>
-			<table style="margin-left: auto; margin-right: auto;">
-			<tr>
-			    <td><input type="submit" value="상품등록" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
-			    <td><input type="reset" value="상품초기화" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>	
-		    </tr>
-		    </table>		
+			<div style="margin-left: auto; margin-right: auto;">
+			    <input type="submit" value="상품등록" class="btn btn-secondary">
+			    <input type="reset" value="상품초기화" class="btn btn-secondary">
+		    </div>		
 		</form>
         </div>
     </section>

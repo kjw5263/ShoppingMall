@@ -86,7 +86,7 @@ public class OrderDAO {
 	
 	
 	/* addOrder() 시작 */
-	public void addOrder(OrderDTO oDTO, List<BasketDTO> basketList, List<GoodsDTO> goodsList) {
+	public String addOrder(OrderDTO oDTO, List<BasketDTO> basketList, List<GoodsDTO> goodsList) {
 		int o_tradeNum=0;
 		int o_num=0;
 		Calendar cal = Calendar.getInstance();
@@ -145,13 +145,13 @@ public class OrderDAO {
 				o_num++;
 			}
 			System.out.println("주문 디비 넣기 성공 ");
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			closeDB();
 		}
-		
+		return sdf.format(cal.getTime())+"-"+o_tradeNum;
 				
 	}
 	/* addOrder() 끝 */
@@ -222,4 +222,135 @@ public class OrderDAO {
 	/* 사용한 쿠폰 삭제하기 ; deleteCoupon(CouponDTO) */
 	
 	
+	//getOrderList()
+		/**
+		 * @param userId
+		 * @return odto
+		 * 주문목록 조회 메소드
+		 */
+		public Vector getOrderList(String userId){
+			Vector totalList = new Vector();
+			List orderList = new ArrayList();
+			List goodsList = new ArrayList();
+			
+			try {
+				conn = getConnection();
+				sql = "select * from order_board ob join cos_list cl on ob.o_cosNum = cl.cosNum where ob.o_userId = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					OrderDTO odto = new OrderDTO();
+					GoodsDTO gdto = new GoodsDTO();
+					
+					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
+					odto.setO_cosName(rs.getString("o_cosName"));
+					odto.setO_cosNum(rs.getInt("o_cosNum"));
+					odto.setO_msg(rs.getString("o_msg"));
+					odto.setO_Num(rs.getInt("o_Num"));
+					odto.setO_tradeNum(rs.getString("o_tradeNum"));
+					odto.setO_userId(rs.getString("o_userId"));
+					odto.setOrderDate(rs.getDate("orderDate"));
+					odto.setOrderStatus(rs.getString("orderStatus"));
+					odto.setPayDate(rs.getDate("payDate"));
+					odto.setPayerName(rs.getString("payerName"));
+					odto.setReceiverAddr(rs.getString("receiverAddr"));
+					odto.setReceiverEmail(rs.getString("receiverEmail"));
+					odto.setReceiverName(rs.getString("receiverName"));
+					odto.setReceiverTel(rs.getString("receiverTel"));
+					odto.setAddPoint(rs.getInt("addPoint"));
+					odto.setSumMoney(rs.getInt("sumMoney"));
+					odto.setPayType(rs.getString("payType"));
+					odto.setCpUseAmount(rs.getInt("cpUseAmount"));
+					odto.setPtUseAmount(rs.getInt("ptUseAmount"));
+					
+					
+					gdto.setCosBrand(rs.getString("cosBrand"));
+					gdto.setCosImage(rs.getString("cosImage"));
+					
+					
+
+					orderList.add(odto);
+					goodsList.add(gdto);
+				}
+				
+				totalList.add(orderList);
+				totalList.add(goodsList);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				closeDB();
+			}
+			return totalList;
+			
+		}//getOrderList()
+		
+		
+		//getorderdetail(userId,tradeNum)
+		public Vector getorderdetail(String userId,String tradeNum){
+			Vector totalList = new Vector();
+			List goodsList = new ArrayList();
+			List orderList = new ArrayList();
+			
+			try {
+				conn = getConnection();
+				sql = "select * from order_board ob join cos_list cl on ob.o_cosNum = cl.cosNum where ob.o_tradeNum = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, tradeNum);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					GoodsDTO gdto = new GoodsDTO();
+					OrderDTO odto = new OrderDTO();
+					
+					gdto.setCosAmount(rs.getInt("cosAmount"));
+					gdto.setCosBrand(rs.getString("cosBrand"));
+					gdto.setCosCategory(rs.getString("cosCategory"));
+					gdto.setCosImage(rs.getString("cosImage"));
+					gdto.setCosMethod(rs.getString("cosMethod"));
+					gdto.setCosName(rs.getString("cosName"));
+					gdto.setCosNum(rs.getInt("cosNum"));
+					gdto.setCosPrice(rs.getInt("cosPrice"));
+					gdto.setCosBrand(rs.getString("cosBrand"));
+					
+					odto.setAddPoint(rs.getInt("addPoint"));
+					odto.setCpUseAmount(rs.getInt("cpUseAmount"));
+					odto.setO_msg(rs.getString("o_msg"));
+					odto.setOrderStatus(rs.getString("orderStatus"));
+					odto.setPayDate(rs.getDate("payDate"));
+					odto.setPayerName(rs.getString("payerName"));
+					odto.setPayMoney(rs.getInt("payMoney"));
+					odto.setPayType(rs.getString("payType"));
+					odto.setPtUseAmount(rs.getInt("ptUseAmount"));
+					odto.setReceiverAddr(rs.getString("receiverAddr"));
+					odto.setReceiverEmail(rs.getString("receiverEmail"));
+					odto.setReceiverName(rs.getString("receiverName"));
+					odto.setReceiverTel(rs.getString("receiverTel"));
+					odto.setReceiverTel2(rs.getString("receiverTel2"));
+					odto.setSumMoney(rs.getInt("SumMoney"));
+					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
+					
+					
+					goodsList.add(gdto);
+					orderList.add(odto);
+				}
+				totalList.add(goodsList);
+				totalList.add(orderList);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return totalList;
+		}
+		
+		//getorderdetail(userId,tradeNum)
+		
+		
 }

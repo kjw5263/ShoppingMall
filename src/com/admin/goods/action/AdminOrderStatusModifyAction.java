@@ -29,7 +29,7 @@ public class AdminOrderStatusModifyAction implements Action {
 		// 전달된 수정할 정보를 저장(DTO)
 		// 폼태그에서 전달되는 정보
 		OrderDTO odto = new OrderDTO();
-		odto.setO_Num(Integer.parseInt(request.getParameter("o_Num")));
+		odto.setO_tradeNum(request.getParameter("o_tradeNum"));
 		odto.setOrderStatus(request.getParameter("orderStatus"));
 		
 		AdminGoodsDAO agdao = new AdminGoodsDAO();

@@ -5,11 +5,19 @@ import java.sql.Date;
 public class UsedateDTO {
 
 	private int openNum;
+	private int o_Num;
 	private String openUserId;
 	private int openCosNum;
 	private Date openDate;
 	private Date CalDate;
 	
+	
+	public int getO_Num() {
+		return o_Num;
+	}
+	public void setO_Num(int o_Num) {
+		this.o_Num = o_Num;
+	}
 	public Date getCalDate() {
 		return CalDate;
 	}

@@ -50,7 +50,7 @@
 
 
 <h1>별점과 리뷰를 수정해주세요</h1>
-<form  method="post" action="reviewUpdate.rev">
+<form  method="post" action="./ReviewUpdate.rev">
 <%--  <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 350px">--%>
   <fieldset class="starability-basic" id="rating" aria-required="false">
     <legend>별점을 선택해 주세요.</legend>

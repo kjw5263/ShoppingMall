@@ -67,11 +67,12 @@ public class noticeWriteProAction implements Action{
 		notit.setNoticeType(Integer.parseInt(multi.getParameter("imp2")));
 		notit.setNoticeRealFileName(multi.getOriginalFileName("filename"));
 		notit.setNoticeFile(multi.getFilesystemName("filename"));
+		notit.setNoticeRealImgName(multi.getOriginalFileName("imgname"));
+		notit.setNoticeImg(multi.getFilesystemName("imgname"));
 		// List goodsList =  gdao.getGoodsList();
 		// => Action 페이지에서 사용하는 경우
 		
-		System.out.println("여기 지나감159");
-		System.out.println(notit.toString());
+		
 		noti.insertNotice(notit);
 		
 		// 페이지 이동
