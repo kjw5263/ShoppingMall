@@ -22,12 +22,8 @@ public class FaqDeleteAction implements Action {
 		// 전달정보 저장(id,pass)
 		int faqNum = Integer.parseInt(request.getParameter("faqNum"));
 
-		System.out.println("넘어온 faqNum값은 @@@@@@@@@@@@@@@@@@@@ : " + faqNum);
-
-        
         FaqDAO dao = new FaqDAO();
         int check = dao.deleteFaq(faqNum);
-
         
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();

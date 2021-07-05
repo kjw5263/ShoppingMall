@@ -78,11 +78,13 @@
 		<div class="row mt-5">
 			<div class="col-2"></div>
 			<div class="col-8 text-center">
-				<div>당신의 피부타입은?!</div>
+				<div><h3>나의 피부타입은?!</h3></div>
+				<div>(아니다 0점, ~ 그렇다 4점)</div>
 			</div>
 			<div class="col-2 mt-3">
 				<c:if test="${userId eq 'admin' }">
 					<button type="button" class="btn btn-secondary" id="write">글쓰기</button>
+					<button type="button" class="btn btn-secondary" id="setting">⚙</button>
 				</c:if>
 			</div>
 		</div>
@@ -109,14 +111,14 @@
 				%>
 				
 				<div><%=qdto.getQnum()%>. <%=qdto.getQsub() %></div>
-				<div>
-				아니다
+				<div class="mt-3">
+				<h5>아니다&nbsp;
 				
 					<%for(int j=0; j < 5; j++){%>
 					<input type="radio" name="<%=qdto.getQnum() %>" value="<%=j %>" id="radio">
 					 <%} %>
 					 
-				그렇다
+				&nbsp;그렇다</h5>
 				
 				</div>
 				
@@ -182,13 +184,13 @@
 					%>
 					    
 					    <%if(currentPage < endPage){ %>
-					    <form action="./Question.que?pageNum=<%=currentPage + 1%>" method="post">
-					    	<input class="login100-form-btn" type="submit" value="다음으로" id="submit"> 
+					    <form action="./Question.que?pageNum=<%=currentPage + 1%>" method="post" >
+					    	<input class="login100-form-btn" type="submit" value="다음으로" id="submit" onclick="return check()"> 
 					    </form>
 					    
 					     <%}else{ %>
 						<form action="./QuestionConfirm.que" method="post">
-					    	<input class="login100-form-btn" type="submit" value="제출하기" id="submit"> 
+					    	<input class="login100-form-btn" type="submit" value="제출하기" id="submit" onclick="return check()"> 
 					    	<input type="hidden" value="" name="sum" id="sum">
 					    </form>					     
 					     
@@ -234,7 +236,7 @@
 		        
  		        sessionStorage.setItem("sum", sum);
 		        
- 		        alert("세션에 저장된 값은 "+sessionStorage.getItem("sum"));
+ 		       // alert("세션에 저장된 값은 "+sessionStorage.getItem("sum"));
  		        
 		        $('#sum').val(sessionStorage.getItem("sum"));
 		        
@@ -250,6 +252,35 @@
 		});    	
     	// 글쓰기 버튼 끝
 
+    	// 세팅 버튼 시작
+    	$('#setting').click(function() {
+    		location.href='./QueSetting.que';
+		}); 
+    	// 세팅 버튼 끝    	
+    	
+    	// 라디오버튼 유효성 체크 시작
+		function check() {
+
+    		var frm = document.all;
+    		
+    		var radio_num = document.all.radio.length;
+    		var chk_i = 0;
+    		
+    		for(var i = 0; i<radio_num; i++){
+    			if(frm.radio[i].checked == true){
+    				chk_i++;
+    			}
+    		}
+    		
+    		if(chk_i <= 4){
+    			alert("모든 질문에 답해주세요");
+    			return false;    			
+    		}
+
+    	}
+    	// 라디오버튼 유효성 체크 끝
+
+    	
 	</script>
 
 	

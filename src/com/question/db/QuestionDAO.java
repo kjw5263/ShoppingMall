@@ -385,6 +385,72 @@ public class QuestionDAO {
 	// getGoodsList()	
 	
 	
+	// queWrite()
+	public void queSetting(QuestionScoreDTO qsDTO){
+		
+		try {
+			conn = getConnection();
+			sql = "update question_score set score1=?, score2=?, score3=?, score4=?, score5=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qsDTO.getScore1());
+			pstmt.setInt(2, qsDTO.getScore2());
+			pstmt.setInt(3, qsDTO.getScore3());
+			pstmt.setInt(4, qsDTO.getScore4());
+			pstmt.setInt(5, qsDTO.getScore5());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DAO : 피부 테스트 점수 세팅 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		
+	}
+	
+	// queSetting()
+	
+	// QueListAction()
+		public QuestionScoreDTO QueListAction(){
+			
+			
+			QuestionScoreDTO qsdto = new QuestionScoreDTO();
+			
+			try {
+				conn = getConnection();
+				sql = "select * from question_score";
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					qsdto.setScore1(rs.getInt("score1"));
+					qsdto.setScore2(rs.getInt("score2"));
+					qsdto.setScore3(rs.getInt("score3"));
+					qsdto.setScore4(rs.getInt("score4"));
+					qsdto.setScore5(rs.getInt("score5"));
+					
+				}
+				
+				
+				System.out.println("DAO : 피부 테스트 점수 세팅 완료");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			
+			return qsdto;
+		}
+		
+		// QueListAction()
+	
+	
+	
 	
 	
 }

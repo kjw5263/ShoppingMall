@@ -86,15 +86,15 @@
 		</div>
 	
 	
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-2"> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-8 text-center" > -->
-<%-- 				점수는 ${param.sum} 입니다. <br> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-2">	 -->
-<!-- 			</div>			 -->
-<!-- 		</div> -->
+		<div class="row">
+			<div class="col-2">
+			</div>
+			<div class="col-8 text-center" >
+				점수는 ${sum} 입니다. <br>
+			</div>
+			<div class="col-2">	
+			</div>			
+		</div>
 		
 		<div class="row">
 			<div class="col-2">
@@ -102,22 +102,23 @@
 			<div class="col-8 text-center" >
 			  
 				당신의 피부타입은
+				
 				<c:choose>
-		         <c:when test = "${param.sum < 10}">
+		         <c:when test = "${sum <= qsdto.score1}">
 		           	건성입니다.
 		           	<%
 		           	request.setAttribute("userSkinType", "건성");
 		           	userSkinType = "건성";
 		           	%>
 		         </c:when>
-		         <c:when test = "${param.sum < 30 && param.sum < 11}">
+		         <c:when test = "${qsdto.score2 <= sum && sum <= qsdto.score3}">
 		         	중성입니다.
 		           	<%
 		           	request.setAttribute("userSkinType", "중성");
 		           	userSkinType = "중성";
 		         	%>
 		         </c:when>
-				 <c:when test = "${param.sum < 40 && param.sum < 31}">
+				 <c:when test = "${qsdto.score4 <= sum && sum <= qsdto.score5}">
 		         	복합성입니다.
 		           	<%
 		           	request.setAttribute("userSkinType", "복합성"); 

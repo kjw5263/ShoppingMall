@@ -19,12 +19,6 @@ public class QuestionListAction implements Action {
 		
 		// 디비 처리 객체 GoodsDAO 생성
 		QuestionDAO qdao = new QuestionDAO();
-	
-		
-		
-		
-		
-		
 		
 		int cnt = qdao.getListCount();
 		
@@ -56,13 +50,6 @@ public class QuestionListAction implements Action {
 		
 		// 디비에 저장된 모든 글 중에서 원하는 만큼만 가져오기.(페이지 사이즈만큼)
 		ArrayList boardList = qdao.getBoardList(startRow, pageSize);
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		// 정보 저장 -> 영역 저장

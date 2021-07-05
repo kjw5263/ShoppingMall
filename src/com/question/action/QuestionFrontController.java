@@ -41,25 +41,25 @@ public class QuestionFrontController extends HttpServlet {
 		
 		if(command.equals("/Question.que")){
 			System.out.println("C : /Question.me 호출");
-			
 			action = new QuestionListAction();
-
-
 	         try {
 	            forward = action.execute(request, response);
 	         } catch (Exception e) {
 	            e.printStackTrace();
 	         }
 		}
-		else if(command.equals("/QuestionConfirm.que")){
 		
-			System.out.println("C : /findPwConfirm.me 호출");
-			// 화면을 보여주기=> view페이지로 이동
+		else if(command.equals("/QuestionConfirm.que")){
 			
-			forward = new ActionForward();
-			forward.setPath("./question/questionConfirm.jsp");
-			forward.setRedirect(false);
+			System.out.println("C : /Question.me 호출");
+			action = new QueConfirmAction();
+	         try {
+	            forward = action.execute(request, response);
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         }
 		}
+		
 		else if(command.equals("/QueDelete.que")){
 			
 			System.out.println("C : /QueDelete.que 호출");
@@ -121,6 +121,40 @@ public class QuestionFrontController extends HttpServlet {
 			System.out.println("2 : /Customized.que 주소 호출");
 
 			action = new CustomizedAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+//		else if(command.equals("/QueSetting.que")){
+//			
+//			System.out.println("2 : /QueSetting.que 주소 호출");
+//
+//			forward = new ActionForward();
+//			forward.setPath("./question/queSetting.jsp");
+//			forward.setRedirect(false);
+//			
+//		}
+		
+		else if(command.equals("/QueSetting.que")){
+			System.out.println("2 : /Customized.que 주소 호출");
+
+			action = new QueSettingListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		else if(command.equals("/QueSettingAction.que")) {
+
+			System.out.println("2 : /QueSettingAction.que 주소 호출");
+
+			action = new QueSettingAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
