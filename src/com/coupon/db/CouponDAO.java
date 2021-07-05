@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -106,33 +107,32 @@ public class CouponDAO {
 	}
 	// mycouponlist(userId);
 	
-	//insertCoupon(userId)
-    public void insertCoupon(String userId){
+	
+	//insertCoupon(userId, mcCouponNum): 발급된 쿠폰번호를 my_coupon에 insert
+    public void insertCoupon(String userId, int mcCouponNum){
        
        int num=0;
        
        try {
-       conn = getConnection();
+	       conn = getConnection();
+	       sql = "select max(mcNum) from my_coupon";
+	       pstmt = conn.prepareStatement(sql);
+	       rs = pstmt.executeQuery();
 
-       sql = "select max(mcNum) from my_coupon";
-    
-          pstmt = conn.prepareStatement(sql);
-          
-          rs = pstmt.executeQuery();
-          
-          System.out.println("회원번호: "+num);
-       
        if(rs.next()){
-          num = rs.getInt(1)+1;
+           num = rs.getInt(1)+1;
        }
-          
+       		System.out.println("회원번호: "+num);
        
-       sql = "insert into my_coupon values(?,1,?,1)";
+       		sql = "insert into my_coupon values(?,?,?,1)";
        
-          pstmt.setInt(1, num);
-          pstmt.setString(2, userId);
+       		pstmt = conn.prepareStatement(sql);
+       		
+       		pstmt.setInt(1, num);
+       		pstmt.setInt(2, mcCouponNum);
+       		pstmt.setString(3, userId);
           
-          pstmt.executeUpdate(); //insert, update, delete => int 형이라서 rs로 받을수 없음.
+       		pstmt.executeUpdate(); //insert, update, delete => int 형이라서 rs로 받을수 없음.
        
        } catch (SQLException e) {            
           e.printStackTrace();   
@@ -140,9 +140,40 @@ public class CouponDAO {
           closeDB();
        }
 
-    }//
-
-    //insertCoupon(userId)
-	
-
+    }
+    //insertCoupon(userId, mcCouponNum)
+    
+	//couponNumList(): 쿠폰 번호 배열에 저장
+	public List couponNumList(CouponDTO cdto){
+		
+		LinkedList couponNumList = new LinkedList();
+		
+		try {
+			conn=getConnection();
+			sql="select couponNum from coupon_type";
+			//1:가입축하 10% (회원가입시 자동 발급), 2:생일 20% 할인쿠폰, 3:전회원 10% 할인, 4: 여름맞이 50% 할인, 5: 첫구매 30%
+			pstmt=conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				CouponDTO cpNum = new CouponDTO();
+				
+				cpNum.setCouponNum(rs.getInt("couponNum"));
+				
+				couponNumList.add(cpNum);
+			}
+			
+				System.out.println("쿠폰번호 리스트에 저장완료");
+				System.out.println("쿠폰번호 리스트: "+couponNumList);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return couponNumList;
+		
+	}//couponNumList()
+   
 }
