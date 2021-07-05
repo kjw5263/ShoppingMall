@@ -147,19 +147,10 @@ public class QuestionDAO {
 			// 1, 2 드라이버 로드, 디비 열결
 			conn = getConnection();
 
-			// 3sql 구문 & pstmtm객체
-			// 글 정보 정렬 - re_ref 값을 최신글 위쪽으로 정렬(내림차순)
-			//				- re_seq 값을 사용 (오름 차순)
-			//				- limit a, b (a 시작, b 개수)
-			//				ex) 1번글 -> 0번 인덱스
-			
-			
 			sql = "select * from question_list "
 					+ "order by Qnum asc"
 					+ " limit ?,?";
-			
 
-			//
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, startRow-1);
@@ -175,8 +166,6 @@ public class QuestionDAO {
 				// DB정보를 Bean에 저장하기
 				qdto.setQnum(rs.getInt("Qnum"));
 				qdto.setQsub(rs.getString("Qsub"));
-				
-
 				
 				// Bean -> ArrayList 한칸에 저장
 				QueList.add(qdto);
@@ -239,11 +228,6 @@ public class QuestionDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			//select max(num) from itwill_goods;
-			// => 값이 없을 경우 null표시,
-			//    내장함수 호출하는경우 항상 커서가 존재함 (rs.next()==true)
-			//select num from itwill_goods;
-			// => 값이 없을 경우 null표시, 커서는 X(rs.next()==false)
 			if(rs.next()){
 				num = rs.getInt(1)+1;
 				//num = rs.getInt("max(num)")+1;
@@ -269,7 +253,7 @@ public class QuestionDAO {
 		}
 		
 	}	
-	// faqWrite(faqdto) 끝
+	// queWrite(faqdto) 끝
 	
 	// reviseQue(Qnum) 시작
 	public String reviseQue(int Qnum) {
@@ -295,7 +279,7 @@ public class QuestionDAO {
 		}
 		return Qsub;
 	}	
-	// reviseFaq(faqNum) 끝
+	// reviseQue(Qnum) 끝
 	
 	// queRevisePro 시작
 	public void queRevisePro(int Qnum, String Qsub){
@@ -331,10 +315,10 @@ public class QuestionDAO {
 		}
 		
 	}	
-	// faqRevisePro 끝
+	// queRevisePro 끝
 	
 	
-	// CustomizedList()
+	// CustomizedList() 시작
 	public ArrayList CustomizedList(String userSkinType){
 
 		// 상품 정보를 모두 저장하는 가변길이 배열
@@ -382,10 +366,10 @@ public class QuestionDAO {
 		return CustomizedList;
 		
 	}
-	// getGoodsList()	
+	// CustomizedList() 끝
 	
 	
-	// queWrite()
+	// queSetting() 시작
 	public void queSetting(QuestionScoreDTO qsDTO){
 		
 		try {
@@ -411,11 +395,10 @@ public class QuestionDAO {
 		
 	}
 	
-	// queSetting()
+	// queSetting() 끝
 	
-	// QueListAction()
+	// QueListAction() 시작
 		public QuestionScoreDTO QueListAction(){
-			
 			
 			QuestionScoreDTO qsdto = new QuestionScoreDTO();
 			
@@ -432,11 +415,7 @@ public class QuestionDAO {
 					qsdto.setScore3(rs.getInt("score3"));
 					qsdto.setScore4(rs.getInt("score4"));
 					qsdto.setScore5(rs.getInt("score5"));
-					
 				}
-				
-				
-				System.out.println("DAO : 피부 테스트 점수 세팅 완료");
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -447,10 +426,7 @@ public class QuestionDAO {
 			return qsdto;
 		}
 		
-		// QueListAction()
-	
-	
-	
+		// QueListAction() 끝
 	
 	
 }

@@ -16,7 +16,7 @@ public class QueSettingAction implements Action {
 		// 한글처리 
 		request.setCharacterEncoding("UTF-8");
 		
-		// 전달정보 저장(id,pass)
+		// 전달정보 저장
 		int score1 = Integer.parseInt(request.getParameter("score1"));
 		int score2 = Integer.parseInt(request.getParameter("score2"));
 		int score3 = Integer.parseInt(request.getParameter("score3"));

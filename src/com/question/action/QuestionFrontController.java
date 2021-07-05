@@ -32,7 +32,6 @@ public class QuestionFrontController extends HttpServlet {
 		/********************************* 1. 페이지 주소 파싱 *************************/
 		
 		
-		
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 		// -> 특정 주소일때 실행할 기능들 정의해주기
 		// 같은 패키지 안에 있는 Action을 호출 해주어야함!
@@ -48,7 +47,6 @@ public class QuestionFrontController extends HttpServlet {
 	            e.printStackTrace();
 	         }
 		}
-		
 		else if(command.equals("/QuestionConfirm.que")){
 			
 			System.out.println("C : /Question.me 호출");
@@ -93,7 +91,6 @@ public class QuestionFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
 		else if(command.equals("/QueRevise.que")) {
 
 			System.out.println("2 : /QueRevise.que 주소 호출");
@@ -127,16 +124,6 @@ public class QuestionFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-//		else if(command.equals("/QueSetting.que")){
-//			
-//			System.out.println("2 : /QueSetting.que 주소 호출");
-//
-//			forward = new ActionForward();
-//			forward.setPath("./question/queSetting.jsp");
-//			forward.setRedirect(false);
-//			
-//		}
-		
 		else if(command.equals("/QueSetting.que")){
 			System.out.println("2 : /Customized.que 주소 호출");
 
@@ -148,8 +135,6 @@ public class QuestionFrontController extends HttpServlet {
 			}
 			
 		}
-		
-		
 		else if(command.equals("/QueSettingAction.que")) {
 
 			System.out.println("2 : /QueSettingAction.que 주소 호출");
@@ -162,11 +147,8 @@ public class QuestionFrontController extends HttpServlet {
 			}
 		}
 			
-		
-		
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
-		
 		/******************* 3. 페이지 주소 이동 종류를 정하기 (제어) *******************/
 		// forward 가 null 이 아닐 때 : 페이지 이동 정보가 있을 때 
 		if(forward != null){

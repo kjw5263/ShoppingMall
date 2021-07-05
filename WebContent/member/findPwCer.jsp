@@ -131,10 +131,10 @@
 			
 			<form action="./PwCheckMove.me" method="post">
 				<div class="container-login100-form-btn m-t-17">
-					<!-- 일반 로그인 버튼 시작 -->
+					<!-- 새 비밀번호 설정 버튼 시작 -->
 					<input class="login100-form-btn" type="submit" value="새 비밀번호 설정" id="submit">
 					<input type="hidden" name="PwCerCheck" value="N" id="PwCerCheck"> 
-					<!-- 일반 로그인 버튼 끝 -->
+					<!-- 새 비밀번호 설정 버튼 끝 -->
 				</div>
 			</form>	
 	
