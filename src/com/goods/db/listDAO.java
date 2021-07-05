@@ -156,7 +156,46 @@ public class listDAO extends DBconnection{
 
 		return goodsList;
 	}
+	// getGoodsList(item)
+		public List getbestGoodsList() {
 
+			// item에 따라서 다른 결과를 처리
+			// item - all/best/그외 카테고리
+			List goodsList = new ArrayList();
+
+			StringBuffer SQL = new StringBuffer();
+			
+			try {
+				
+				sql ="select * from "+ tablename + " order by "
+						+ "orderCount desc limit 0 , 10";
+			
+			
+				
+				rs = con.selsql(sql);
+				
+				while (rs.next()) {
+					GoodsDTO goods = new GoodsDTO();
+					
+					goods = setTool.setdata(goods, rs);
+					
+					// 리스트 한칸에 상품 1개를 저장
+					
+					goodsList.add(goods);
+
+				} 
+
+				System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+
+			} catch (SQLException e) {
+				System.out.println("인젝션 에러");
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+
+			return goodsList;
+		}
 
 	
 

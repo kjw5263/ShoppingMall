@@ -72,7 +72,7 @@ public class GoodsListAction implements Action{
 //		 request.setAttribute("goodsList", gdao.getGoodsList());
 		
 		request.setAttribute("goodsList", gdao.getGoodsList(item, cat ,skin));
-		
+		request.setAttribute("bestgoodsList", gdao.getbestGoodsList());
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
 		forward.setPath("./goods/goods_list.jsp");

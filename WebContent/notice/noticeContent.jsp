@@ -115,7 +115,7 @@ table {
 			type = "이벤트";
 		}
 		
-		if(notit.getNoticeFile().equals("null")){
+		if(notit.getNoticeFile().equals("null") || notit.getNoticeFile() == null ){
 			notit.setNoticeFile("파일없음");
 			notit.setNoticeRealFileName("파일없음");
 		}

@@ -48,6 +48,24 @@
 		NoticeDAO noti = new NoticeDAO();
 		notit = noti.getNoticeData(num);
 		//bdao.getBoard(num).getNum(); (x)
+		
+String id =  (String)request.getParameter("userId");
+// 전달정보 저장 - 액션태그 (자바빈)- num,pass
+
+int check1 = noti.deleteCheckNotice(id);
+
+
+ if(check1 == 1){
+ 	
+  }else{
+	  %>
+<script type="text/javascript">
+	alert("수정 권한이 없습니다");
+	history.back();
+</script>
+<%
+	}
+
 	%>
 
 	<!-- Db에 처리해야하는 데이터 폼태그 안에 저장(hidden)
