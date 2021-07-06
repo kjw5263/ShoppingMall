@@ -1101,7 +1101,11 @@ public class MemberDAO {
 	         int num=0;
 	         
 	         try {
-	         conn = getConnection();
+	            
+	            conn = getConnection();
+	         
+	         //mcNum, mcCouponNum, mcUserId, mcAmount
+	         // mcCouponNum = 1 -> 회원가입 축하 쿠폰 No.
 
 	         sql = "select max(mcNum) from my_coupon";
 	      
@@ -1109,27 +1113,32 @@ public class MemberDAO {
 	            
 	            rs = pstmt.executeQuery();
 	            
-	            System.out.println("회원번호: "+num);
-	         
 	         if(rs.next()){
 	            num = rs.getInt(1)+1;
 	         }
-	            
 	         
+	         System.out.println("mcNum : "+num);
+	         
+	         conn = getConnection();
 	         sql = "insert into my_coupon values(?,1,?,1)";
+	         
+	         pstmt = conn.prepareStatement(sql);
 	         
 	            pstmt.setInt(1, num);
 	            pstmt.setString(2, userId);
 	            
+	            
 	            pstmt.executeUpdate(); //insert, update, delete => int 형이라서 rs로 받을수 없음.
 	         
+	            System.out.println("회원가입 축하 쿠폰 지급 완료");
+	            
 	         } catch (SQLException e) {            
 	            e.printStackTrace();   
 	         }finally{
 	            closeDB();
 	         }
 
-	      }//
+	      }
 
 	      //insertCoupon(userId)
 		

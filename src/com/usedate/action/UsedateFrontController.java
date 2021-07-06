@@ -54,7 +54,7 @@ public class UsedateFrontController extends HttpServlet{
 		}
 		else if(command.equals("/opencos.ud")){
 			
-			action = new opencosAction();
+			// action = new opencosAction();
 			
 			try {
 				forward = action.execute(request, response);

@@ -77,7 +77,7 @@
 
 	<div class="container-fluid">
 
-		<% 
+	<% 
 	String userId = (String)session.getAttribute("userId");
 	MemberDTO mdto  = (MemberDTO)request.getAttribute("mdto");
 	List LikeList = (List) request.getAttribute("LikeList");
@@ -100,7 +100,7 @@
 					<hr>
 					<a href="./Usedate.ud"><h5>내 화장품 사용기한 
 					&nbsp;확인하기</h5></a>
-					<a href="./ReviewList.rev"><h5>리뷰</h5></a>
+					<a href="reviewList.rev"><h5>리뷰</h5></a>
 					<hr>
 					<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a>
 					<a href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
@@ -147,7 +147,7 @@
 										%>
 										<td><a href="./MyCoupon.me"><b><%=cnt %></b></a> 장</td>
 										<td><a href="" style="color: orange;"><b><%=mdto.getUserPoint() %></b></a>P</td>
-										<td><a href="" style="color: orange;"><b><%=mdto.getUserPoint() %></b></a>원</td>
+										<td><a href="" style="color: orange;"><b><%=mdto.getUserTotal() %></b></a>원</td>
 									</tr>
 								</table>
 							</div>

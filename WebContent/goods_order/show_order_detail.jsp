@@ -97,21 +97,14 @@
 					<div class="col-9">
 					
 						<h3>주문 상세 조회</h3><br>
-						<ul class="mypage-step" style="text-decoration: none;">
-							<li>
-								<div>
-									<div class="contents1">구매일자</div>
-									<div class="contents2"></div>
-								</div>
-								<div>
-									<div class="contents1">주문일자</div>
-									<div class="contents2"></div>
-								</div>
-							</li>
-						</ul>
+						<%	OrderDTO odto1 = (OrderDTO)orderList.get(0);%>
+						<fieldset id="order-detail">
+							<ul>
+								<li>구매일자 : <%=odto1.getOrderDate() %></li>
+							</ul>
+						</fieldset>						
 						
-						
-						<h4>구매내역</h4>
+						<h4 id="detail-h4">구매내역</h4>
 						<table class= "table table-bordered"  id="orderList">
 							<thead class="order-thead">
 								<tr>
@@ -145,7 +138,7 @@
 						
 						</table>
 						
-						<h4>배송지 정보</h4>
+						<h4 id="detail-h4">배송지 정보</h4>
 						<table class= "table table-bordered" id="orderList">
 						<% OrderDTO odto = (OrderDTO)orderList.get(0);
 							GoodsDTO gdto = (GoodsDTO)goodsList.get(1);%>
@@ -156,8 +149,17 @@
 							<tr>
 								<td>연락처</td>
 								<td><%=odto.getReceiverTel() %></td>
+							</tr>
+							<tr>
 								<td>예비 연락처</td>
-								<td><%=odto.getReceiverTel2() %></td>
+								<td>
+								<%
+								if(odto.getReceiverTel2() == null){%>
+								0	
+								<% }else{
+								 odto.getReceiverTel2();
+								} %>
+								</td>
 							</tr>
 							<tr>
 								<td>이메일</td>
@@ -169,14 +171,21 @@
 							</tr>
 							<tr>
 								<td>배송시 주의사항</td>
-								<td><%=odto.getO_msg() %></td>
+								<td>
+								<%
+								if(odto.getO_msg() == null){%>
+							  		없음
+								<% }else{
+								 odto.getO_msg();
+								} %>
+								</td>
 							</tr>
 						
 						
 						</table>
 						
 						
-						<h4>결제 정보</h4>
+						<h4 id="detail-h4">결제 정보</h4>
 						
 						<table class= "table table-bordered" id="orderList">
 							<tr>
@@ -185,7 +194,7 @@
 								<td>적립 포인트<br><b id="money"><%=odto.getAddPoint() %></b>p</td>
 							</tr>
 							<tr>
-								<td colspan="3"><b>총 결제 금액 :</b><b id="money"><%=odto.getPayMoney() %></b>원
+								<td colspan="3" id="allmoney"><b>총 결제 금액  : </b><b id="money"><%=odto.getPayMoney() %></b>원
 								<br>ㄴ 결제 수단 :<%=odto.getPayType() %></td>
 							</tr>
 						

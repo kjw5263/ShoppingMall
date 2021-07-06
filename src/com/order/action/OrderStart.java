@@ -17,16 +17,16 @@ public class OrderStart implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		/* 세션 처리 */
-		// HttpSession session = request.getSession();
-		// String id = (String)session.getAttribute("id");
-		String userId = "jiwon";
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("userId");
+		System.out.println("OrderStartAction >>>>> " + userId);
 		
 		ActionForward forward = new ActionForward();
-		/*if(id == null) {
+		if(userId == null) {
 			forward.setPath("./MemberLogin.me");
 			forward.setRedirect(true);
 			return forward;
-		}*/
+		}
 		
 		
 		// 1. 장바구니 DB의 장바구니 정보 가져오기

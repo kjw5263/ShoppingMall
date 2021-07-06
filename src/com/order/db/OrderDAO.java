@@ -151,6 +151,7 @@ public class OrderDAO {
 		} finally {
 			closeDB();
 		}
+		
 		return sdf.format(cal.getTime())+"-"+o_tradeNum;
 				
 	}

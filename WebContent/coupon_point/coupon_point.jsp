@@ -1,3 +1,7 @@
+<%@page import="com.order.db.OrderDTO"%>
+<%@page import="com.sun.xml.internal.txw2.Document"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.List"%>
 <%@page import="com.coupon.db.CouponDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +16,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
@@ -26,8 +31,33 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <link rel="stylesheet" href="./css/N_style.css" type="text/css">
+<script src="../jq/jquery-3.6.0.js"></script>
+<script src="../jq/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-
+function datecheck(){
+	
+	var startyear = $('#startyear').val();
+	var endyear = $('#endyear').val();
+	var startmonth = $('#startmonth').val();
+	var endmonth = $('#endmonth').val();
+	var startday = $('#startday').val();
+	var endday = $('#endday').val();
+	
+	var startdate = startyear +"-"+ startmonth +"-"+ startday;
+	var enddate = endyear + "-" + endmonth +"-"+ endday
+	
+	$('#startdate').val(startdate);
+	$('#enddate').val(enddate);
+	
+	if(startdate > enddate){
+		alert('검색 종료일을 검색 시작일 보다 늦은 날짜로 지정해주세요.');
+		return false;
+	}else if(endyear - startyear > 2){
+		alert('최대 검색 가능 기간은 1년 입니다.');
+		return false;
+	}
+	
+}
 
 
 </script>	
@@ -51,8 +81,8 @@
     	response.sendRedirect("../MemberLogin.me");
     } 
 		List couponList = (List)request.getAttribute("couponList");
-		
-		
+		List orderList = (List)request.getAttribute("orderList");
+		List orderList2 = (List)request.getAttribute("orderList2");
 	%>
 		
 	
@@ -87,7 +117,7 @@
 					<a href=""><h5>주문조회</h5></a>
 					<a href="./getLike.li"><h5>찜목록</h5></a>
 					<hr>
-					<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
+					<a href="./MyCoupon.cp"><h5>내 쿠폰 / 포인트</h5></a>
 					<hr>
 					<a href=""><h5>내 화장품 사용기한 
 					&nbsp;확인하기</h5></a>
@@ -125,65 +155,126 @@
 								
 								</table>
 				<br><br><br>
-				<fieldset>
-					<form>
-					<input type="button" value="1개월" onclick="location.href='/pointcheck.cp?searchmonth=-1';">				
-					<input type="button" value="3개월" onclick="location.href='/pointcheck.cp?searchmonth=-3';">				
-					<input type="button" value="6개월" onclick="location.href='/pointcheck.cp?searchmonth=-6';">	
+				<fieldset id="checkline">
 					<br><br>
-					<select name="startyear">
+					<form action="pointcheck.cp" method="post" onsubmit="return datecheck()">
+					<input type="hidden" id="startdate" name="startdate">
+					<input type="hidden" id="enddate" name="enddate">
+					<input type="button" value="1개월" class="btn btn-outline-info" onclick="location.href='pointcheck.cp?searchmonth=1';">				
+					<input type="button" value="3개월" class="btn btn-outline-info" onclick="location.href='pointcheck.cp?searchmonth=3';">				
+					<input type="button" value="6개월" class="btn btn-outline-info" onclick="location.href='pointcheck.cp?searchmonth=6';">	
+					
+					<br><br>
+					
+					<select name="startyear" id="startyear" class="custom-select" style="width: 100px;">
 						<option name="2021">2021</option>
 						<option name="2020">2020</option>
 						<option name="2019">2019</option>
 						<option name="2018">2018</option>
 						<option name="2017">2017</option>
-					</select>년
+					</select>년&nbsp;&nbsp;
 					
-					<select name="startmonth">
+					<select name="startmonth" id="startmonth" class="custom-select" style="width: 100px;">
 						<%for(int i=1;i<13;i++) {%>
 						<option name="<%=i%>"><%=i %></option>
 						<%} %>
-					</select>월
+					</select>월&nbsp;&nbsp;
 					
-					<select name="startdate">
+					<select name="startday" id="startday" class="custom-select" style="width: 100px;">
 						<%for(int i=1;i<32;i++) {%>
 						<option name="<%=i%>"><%=i %></option>
 						<%} %>
 					</select>일
 					
-					&nbsp;~&nbsp;
+					<b class="wave">~</b>
 					
-						<select name="endyear">
+						<select name="endyear" id="endyear" class="custom-select" style="width: 100px;">
 						<option name="2021">2021</option>
 						<option name="2020">2020</option>
 						<option name="2019">2019</option>
 						<option name="2018">2018</option>
 						<option name="2017">2017</option>
-					</select>년
+					</select>년&nbsp;&nbsp;
 					
-					<select name="endmonth">
+					<select name="endmonth" id="endmonth" class="custom-select" style="width: 100px;">
 						<%for(int i=1;i<13;i++) {%>
 						<option name="<%=i%>"><%=i %></option>
 						<%} %>
-					</select>월
+					</select>월&nbsp;&nbsp;
 					
-					<select name="enddate">
+					<select name="endday" id="endday" class="custom-select" style="width: 100px;">
 						<%for(int i=1;i<32;i++) {%>
-						<option name="<%=i%>">><%=i %></option>
+						<option name="<%=i%>"><%=i %></option>
 						<%} %>
-					</select>일
+					</select>일&nbsp;&nbsp;
 					
-					<input type="submit" onclick ="return datecheck();">
-				</form>
+				
+					<input type="submit" value="조회하기" class="btn btn-info">
+				
+					</form>
+					<br><br>
 				</fieldset>
 				
+				
+				
 				<table class= "table table-bordered">
+					<thead style="text-align: center;">
+						<tr>
+							<td>적립일자</td>						
+							<td>내역</td>						
+							<td>적립</td>						
+							<td>사용</td>						
+						</tr>
+					</thead>
+					<tbody>
+						<%
+						
+						if(orderList2 != null){
+						for(int j=0;j<orderList2.size();j++){
+							OrderDTO odto2 = (OrderDTO)orderList2.get(j);%>
+						<tr>
+							<td><%=odto2.getOrderDate() %></td>
+							<td><%=odto2.getO_cosName() %></td>
+							<td><b id="add"><%=odto2.getAddPoint() %></b>P</td>
+							<td><b id="sub"><%=odto2.getPtUseAmount()%></b>P</td>
+						</tr>
+					</tbody>
 					
+						<%} 
+						}%>
+					<!-- ----------------------------------------------------------- -->
+					<tbody>
+						<%if(orderList != null){
+						for(int i=0;i<orderList.size();i++){
+							OrderDTO odto = (OrderDTO)orderList.get(i);%>
+						<tr>
+							<td><%=odto.getOrderDate() %></td>
+							<td><%=odto.getO_cosName() %></td>
+							<td><b id="add"><%=odto.getAddPoint() %></b>P</td>
+							<td><b id="sub"><%=odto.getPtUseAmount()%></b>P</td>
+						</tr>
+					</tbody>
+						
+						<!-- 1,3,6 개월 조회  -->
+					<tbody>
+					<%} 
+						} else if(orderList == null && orderList2 == null){%>
+						<tbody>
+							<tr id="nopnt"><td colspan="4">
+							<div id="nopnt-text">
+							적립 / 사용한 포인트가 없습니다.
+							</div>
+							</td></tr>
+						</tbody>
+						<%} %>
+				
 				
 				</table>
+					<hr>
 				
-				
-				</div>
+					
+					
+				</div><!--col-9  -->
 			</div>
 		</div>
 		<div class="col-2"></div>

@@ -65,7 +65,6 @@
 	
 <!-- 이메일 유효성확인 -->
 <script type="text/javascript">
-
 		var chkup = false;
 
 		$(document).ready(function(){

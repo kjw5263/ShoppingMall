@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.coupon.db.CouponDAO;
 import com.coupon.db.CouponDTO;
 import com.member.db.MemberDAO;
 import com.member.db.MemberDTO;
@@ -26,8 +27,8 @@ public class MycouponAction implements Action{
 	        	return forward;
 	        }
 	        
-	     MemberDAO mdao = new MemberDAO();
-	     List couponList = mdao.getCoupon(userId);
+	     CouponDAO cdao = new CouponDAO();
+	     List couponList = cdao.getCoupon(userId);
 	     request.setAttribute("couponList", couponList);
 	     
 	    forward.setPath("./coupon_point/coupon_point.jsp");

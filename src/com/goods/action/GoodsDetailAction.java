@@ -18,14 +18,12 @@ public class GoodsDetailAction implements Action{
         ArrayList<GoodsReviewDTO> reviewList = new ArrayList<GoodsReviewDTO>();
        int page = 1;
        int limit = 10;
-        int cosNum = 0;
 
         if (request.getParameter("page") !=null){
             page = Integer.parseInt(request.getParameter("page"));
         }
-        if (request.getParameter("cosNum")!=null){
-            cosNum = Integer.parseInt(request.getParameter("cosNum"));
-        }
+        int cosNum = Integer.parseInt(request.getParameter("cosNum"));
+
 
         // DAO 객체 생성 - getGoods(cosNum);
         GoodsReviewDAO grdao = new GoodsReviewDAO();
