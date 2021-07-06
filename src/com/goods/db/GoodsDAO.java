@@ -95,6 +95,26 @@ public class GoodsDAO {
         }
             return goods;
     }
+    public int getGoodsCnt(){
+        int cnt = 0;
+        try {
+            conn = getConnection();
+            sql="select count(*) from cos_list";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()){
+                cnt = rs.getInt(1);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            closeDB();
+        }
+        return cnt;
+    }
 
 
 }

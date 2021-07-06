@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
-
+    <script src="./js/chatbot.js" type="text/javascript"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script>
 	

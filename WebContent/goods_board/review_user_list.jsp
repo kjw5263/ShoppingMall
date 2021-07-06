@@ -6,6 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.goods.db.GoodsDTO" %>
 <%@ page import="com.goods_board.db.PageInfo" %>
+<%@ page import="com.goods.db.GoodsDAO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -32,9 +33,25 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-
+    <script src="./js/chatbot.js" type="text/javascript"></script>
     <link rel="stylesheet" href="goods_board/style/review_user_list.css">
+    <script type="text/javascript">
+        function insertPopup(){
+            var test = [];
+            $("input[name=test_check]:checked").each(function (){
+                test.push($(this).val());
+            })
+            if ($("#check_num").is(":checked")==true){
 
+                console.log("체크된 값 total" +test);
+                window.name="./ReviewList.rev"
+                window.open("ReviewUpdateForm.rev?reviewNum="+test, "new",
+                    "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=700, height=700, left=0, top=0" );
+            }else {
+                alert("체크해주세요");
+            }
+        }
+    </script>
 </head>
 <%
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
@@ -44,9 +61,9 @@
     int maxPage = pageInfo.getMaxPage();
     int startPage = pageInfo.getStartPage();
     int endPage = pageInfo.getEndPage();
+    List cosList = (List) request.getAttribute("cosList");
     GoodsDTO dto = new GoodsDTO();
-
-
+    GoodsDAO dso = new GoodsDAO();
 %>
 <body>
 <!-- header 시작 -->
@@ -70,29 +87,29 @@
         <div class="mypage-ix1">
             <div class="mypage-lnb1">
                 <ul>
-                    <li>
+                    <li style="list-style: none">
                         <h2>마이 쇼핑</h2>
-                        <ul>
+                        <ul style="list-style: none">
                             <li class="subMenu"><a href="">주문/배송조회</a></li>
                             <li class="subMenu"><a href="">취소/반품/교환내역</a></li>
                         </ul>
-                        <ul class="line">
+                        <ul class="line" style="list-style: none">
                             <li class="subMenu"><a href="">장바구니</a></li>
                             <li class="subMenu"><a href="">좋아요</a></li>
                             <li class="subMenu"><a href="">쿠폰</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li style="list-style: none">
                         <h2>마이 활동</h2>
-                        <ul>
+                        <ul style="list-style: none">
                             <li class="subMenu"><a href="">1:1문의내역</a></li>
                             <li class="subMenu"><a href="">리뷰</a></li>
                             <li class="subMenu"><a href="">상품Q&A내역</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li style="list-style: none">
                         <h2>마이 정보</h2>
-                        <ul>
+                        <ul style="list-style: none">
                             <li class="subMenu"><a href="">회원정보수정</a></li>
                             <li class="ubMenu"><a href="">배송지/환불계좌</a></li>
                             <li class="subMenu"><a href="">회원탈퇴</a></li>
@@ -113,15 +130,23 @@
                 <%
                     for (int i = 0; i <reviewList.size() ; i++) {
                 %>
-                <form action="./reviewDelete.rev" method="post" id= "delete_action" >
+
+                <form action="./ReviewDelete.rev" method="post" id= "delete_action" >
+
                 <ul class="comm1sTabs">
+                    <input type="checkbox" id="check_num" name="test_check" value="<%=reviewList.get(i).getReviewNum() %>">
                     <li class="mypage_review">
                         <div class="table_list">
                             <div class="list_image">
 
+                        <%
+                            dto= dso.getGoods(reviewList.get(i).getCosNum());
+
+                        %>
+                                <img src="admingoods/upload/<%=dto.getCosImage().split(",")[0] %>" alt="">
                             </div>
                             <div class="list_cos_title">
-
+                            <%=dto.getCosName() %>
                             </div>
                         </div>
                         <div class="table_bottom">
@@ -181,12 +206,13 @@
                                 </div>
                                 <div class="button_view">
                                     <div>
-                                        <button class="update_btn" type="button" onclick="location.href='reviewUpdateForm.rev?reviewNum=<%=reviewList.get(i).getReviewNum() %>'">수정하기</button>
+                                        <input type="hidden" name="reviewNum" value="<%=reviewList.get(i).getReviewNum() %>">
+                                        <button class="update_btn" type="button" onclick="insertPopup()">수정하기</button>
 
                                     </div>
                                     <button type="submit" class="delete_btn" id="delete">
                                         <span class="btn_img">
-                                            <img src="../goods_board/style/img/iconX.png" alt=""></span>
+                                            <img src="./goods_board/style/img/iconX.png" alt=""></span>
                                         <span class="blind">리뷰 삭제</span>
                                     </button>
                                 </div>
@@ -194,7 +220,8 @@
                         </div>
                     </li>
 
-                <input type="hidden" name="reviewNum" value="<%=reviewList.get(i).getReviewNum() %>">
+
+
                     <% }%>
                 </ul>
                 </form>
@@ -204,14 +231,14 @@
                     [이전]
 
                     <%}else{ %>
-                    <a href="reviewList.rev?page=<%=nowPage-1 %>">[이전]</a>&nbsp;
+                    <a href="./ReviewList.rev?page=<%=nowPage-1 %>">[이전]</a>&nbsp;
                     <%} %>
 
                     <%for(int a=startPage;a<=endPage;a++){
                         if(a==nowPage){%>
                     [<%=a %>]
                     <%}else{ %>
-                    <a id="#click" href="reviewList.rev?page=<%=a %>" onclick="focusOn()">[<%=a %>]
+                    <a id="#click" href="./ReviewList.rev?page=<%=a %>" onclick="focusOn()">[<%=a %>]
                     </a>&nbsp;
                     <%} %>
                     <%} %>
@@ -219,7 +246,7 @@
                     <%if(nowPage>=maxPage){ %>
                     [다음]
                     <%}else{ %>
-                    <a href="reviewList.rev?page=<%=nowPage+1 %>">[다음]</a>
+                    <a href="./ReviewList.rev?page=<%=nowPage+1 %>">[다음]</a>
                     <%
                         }
                     %>
