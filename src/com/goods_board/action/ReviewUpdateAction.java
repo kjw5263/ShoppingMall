@@ -24,8 +24,8 @@ public class ReviewUpdateAction implements Action {
         grdto.setRating(Integer.parseInt(request.getParameter("rating")));
         grdto.setReviewContent(request.getParameter("reviewContent"));
         grdao.updateReview(reviewNum,grdto);
-        forward.setPath("/reviewList.rev");
-        forward.setRedirect(false);
+        forward.setPath("./ReviewList.rev");
+        forward.setRedirect(true);
 
         return forward;
     }

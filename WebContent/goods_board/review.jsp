@@ -22,22 +22,22 @@
 
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
+<%--  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">--%>
+<%--  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"--%>
+<%--        rel="stylesheet">--%>
 
   <!-- Css Styles -->
-  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-  <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
-  <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
-  <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
-  <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
-  <link rel="stylesheet" href="./css/style.css" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%--  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">--%>
+<%--  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">--%>
+<%--  <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">--%>
+<%--  <link rel="stylesheet" href="./css/nice-select.css" type="text/css">--%>
+<%--  <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">--%>
+<%--  <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">--%>
+<%--  <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">--%>
+<%--  <link rel="stylesheet" href="./css/style.css" type="text/css">--%>
+<%--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--%>
+<%--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+<%--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
 
   <style>
 
@@ -65,26 +65,12 @@
 
 <body>
 
-<!-- Page Preloder -->
-<div id="preloder">
-  <div class="loader"></div>
-</div>
 
-<!-- Search model -->
-<div class="search-model">
-  <div class="h-100 d-flex align-items-center justify-content-center">
-    <div class="search-close-switch">+</div>
-    <form class="search-model-form">
-      <input type="text" id="search-input" placeholder="Search here.....">
-    </form>
-  </div>
-</div>
-<jsp:include page="/header/header.jsp"/>
-<section class="section_area" style="max-width: 480px;margin-top:100px;background-color: #fff; height: 100%; padding: 20px; box-sizing: border-box; margin-bottom: 200px; margin-left: 40%;">
- <h1>별점과 리뷰를 남겨주세요.</h1>
-  <form  method="post" action="./ReviewFormPro.rev" enctype="multipart/form-data">
-    <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 250px">
-        <fieldset class="starability-basic" id="rating" aria-required="false" style="margin-right: 180px">
+<section class="section_area" style="max-width: 480px;margin-top:10px;background-color: #fff; height: 100%; padding: 10px; box-sizing: border-box; margin-bottom: 200px; margin-left: 24%;">
+ <h1 style="margin-left: 50px">별점과 리뷰를 남겨주세요.</h1>
+  <form  method="post" action="./ReviewFormPro.rev" enctype="multipart/form-data" target="ReviewFormPro.rev>
+    <img src="./admingoods/upload/<%= gdto.getCosImage().split(",")[0]%>" alt="상품...." style="width: 250px; margin-left: 45px">
+        <fieldset class="starability-basic" id="rating" aria-required="false" style="margin-left: 100px">
           <br>
           별점을 선택해 주세요.
           <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
@@ -113,28 +99,45 @@
 
     <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
     <label>
-      <textarea rows="10" minlength="5" name="reviewContent" required style="width: 350px; padding: 10px;box-sizing: border-box"></textarea>
+      <textarea rows="10" minlength="5" name="reviewContent" required style="width: 350px; padding: 10px;box-sizing: border-box;"></textarea>
     </label>
     <br>
     <div>
-    <input type="submit" id="save" value="등록">
-    <input type="reset" value="취소">
+    <input type="submit" id="save" value="등록" onclick="window.close()">
+    <input type="reset" value="취소" onclick="closePopup()">
     <input type="file" name="file1">
-    </div>
 
+    </div>
   </form>
 
 </section>
-<jsp:include page="/footer/footer.jsp"/>
+<%--<jsp:include page="/footer/footer.jsp"/>--%>
 
 </body>
-<script src="./js/jquery-3.3.1.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/jquery.magnific-popup.min.js"></script>
-<script src="./js/jquery.slicknav.js"></script>
-<script src="./js/owl.carousel.min.js"></script>
-<script src="./js/jquery.nice-select.min.js"></script>
-<script src="./js/mixitup.min.js"></script>
-<script src="./js/main.js"></script>
+<script type="text/javascript">
+  function closePopup(){
+    window.close();
+
+  }
+  function popupClose(form){
+    form.target = opener.name;
+    form.submit();
+    if (opener !=null){
+      opener.insert =null;
+      self.close();
+    }
+  }
+
+
+
+</script>
+<%--<script src="./js/jquery-3.3.1.min.js"></script>--%>
+<%--<script src="./js/bootstrap.min.js"></script>--%>
+<%--<script src="./js/jquery.magnific-popup.min.js"></script>--%>
+<%--<script src="./js/jquery.slicknav.js"></script>--%>
+<%--<script src="./js/owl.carousel.min.js"></script>--%>
+<%--<script src="./js/jquery.nice-select.min.js"></script>--%>
+<%--<script src="./js/mixitup.min.js"></script>--%>
+<%--<script src="./js/main.js"></script>--%>
 
 </html>
