@@ -56,11 +56,9 @@
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
 
-
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
-
 
 
 </head>
@@ -151,39 +149,13 @@
 	</div>
 	<!-- container 끝 -->	
 	
-	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
     
-    <!-- 스크립스 시작 -->
-    <script type="text/javascript">
-	// 제이쿼리 시작    
-    $(function() {
-    	// 질문 클릭시 답변 보이기 시작
-    	$('td').click(function() {
-    		// alert('클릭됐습니다.');
-    		
-			var fnum = $(this).attr('id');
-			
-			var con = document.getElementById(fnum + "_answer");
-			con.style.display = (con.style.display != 'none') ? "none" : "";
-			
-			//alert(fnum);
-
-    	});
-    	// 질문 클릭시 답변 보이기 끝
-    	
-    	// 글쓰기 버튼 시작
-    	$('#write').click(function() {
-    		location.href='./FaqWrite.faq';
-		});    	
-    	// 글쓰기 버튼 끝
-
-    	
-    });
- 	// 제이쿼리 끝
-    </script>
+    <!-- 질문 클릭시 답변 보이기 스크립스 시작 -->
+    <script src="./js/faq_list.js"></script>
+    <!-- 질문 클릭시 답변 보이기 스크립스 끝 -->
 	
 </body>
 </html>

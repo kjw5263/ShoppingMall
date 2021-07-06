@@ -98,7 +98,6 @@
 				<!-- 제목 인풋 끝 -->
 				<hr>
 				
-				
 					<button type="submit" class="btn btn-primary mb-3">글 수정하기</button>
 				</form>
 			
@@ -118,15 +117,7 @@
 	
 	
 	<!-- 유효성 검사 스크립트 시작 -->
-	<script type="text/javascript">
-	function check(){
-		
-		if($.trim($("#Qsub").val())==""){
-			alert('질문을 쓰세요')
-			return false;
-		}
-	}
-	</script>
+	<script src="./js/question/queRevise.js"></script>
 	<!-- 유효성 검사 스크립트 끝 -->
 	
 	

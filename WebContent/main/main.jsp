@@ -45,49 +45,58 @@
 		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%; top: 90%; }
 	</style>
     <style type="text/css">
-button{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:34px;
-  font-size:1em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+		button{
+		  background:#1AAB8A;
+		  color:#fff;
+		  border:none;
+		  position:relative;
+		  height:34px;
+		  font-size:1em;
+		  padding:0 2em;
+		  cursor:pointer;
+		  transition:800ms ease all;
+		  outline:none;
+		}
+		button:hover{
+		  background:#fff;
+		  color:#1AAB8A;
+		}
+		button:before,button:after{
+		  content:'';
+		  position:absolute;
+		  top:0;
+		  right:0;
+		  height:2px;
+		  width:0;
+		  background: #1AAB8A;
+		  transition:400ms ease all;
+		}
+		button:after{
+		  right:inherit;
+		  top:inherit;
+		  left:0;
+		  bottom:0;
+		}
+		button:hover:before,button:hover:after{
+		  width:100%;
+		  transition:800ms ease all;
+		}
 
     </style>
+
+
+	<!-- 사이드 배너 css 시작 -->
+	<style type="text/css">
+	#sidebanner { position:fixed; top:20%; left:95%;  width:100px; height:200px; }
+	</style>
+	<!-- 사이드 배너 css 끝 -->
 
     
 </head>
 
 <body>
+
+
 
     <!-- Page Preloder -->
     <div id="preloder">
@@ -335,8 +344,21 @@ button:hover:before,button:hover:after{
     </div>
     <!-- Logo Section End -->
 
+
+	<!-- 사이드 배너 시작 -->
+    <div id="sidebanner">
+    	<a href="./Question.que"><img alt="" src="./img/main/search.png">
+    	<div class="text-center">
+    		나에게 맞는<br>
+    		화장품은?
+    	</div>
+    	</a>
+	</div>
+    <!-- 사이드 배너 끝 -->
+
+
     <!-- footer 시작 -->
-   		<jsp:include page="../footer/footer.jsp" />
+   	<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
     
 
@@ -352,18 +374,6 @@ button:hover:before,button:hover:after{
     <script src="./js/mixitup.min.js"></script>
     <script src="./js/main.js"></script>
     
-    
-   	<!-- 플로팅 배너 시작 -->
-	<div id="banner" style=" position:block;">
-		<a href="./Question.que"><img alt="" src="./img/main/question.png"></a>
-	</div>
-	<!-- 플로팅 배너 끝 -->
-
-    
-    
-
-    
-</body>
 
 
 </html>

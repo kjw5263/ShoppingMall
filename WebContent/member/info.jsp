@@ -77,7 +77,7 @@
 
 	<div class="container-fluid">
 
-		<% 
+	<% 
 	String userId = (String)session.getAttribute("userId");
 	MemberDTO mdto  = (MemberDTO)request.getAttribute("mdto");
 	List LikeList = (List) request.getAttribute("LikeList");

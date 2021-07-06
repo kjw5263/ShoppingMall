@@ -55,128 +55,48 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
-
+	<!-- 화장품 리스트 css 시작 -->
+    <link rel="stylesheet" href="./css/question/queCustomizedlist.css" type="text/css">
+	<!-- 화장품 리스트 css 끝 -->
 
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
 
-
-
-<style type="text/css">
-button{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:34px;
-  font-size:1em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
-
-
-
-
-	#one{
-	  border-right:	1px solid #444444;
-	}
-	#one:last-child {
-	border-right: 0;
-	}
-table {
-	margin-top : 10px;
-	margin-bottom : 10px;
-	margin-left : 50px;
-    border-collapse: collapse;
-}
-table td {
-    border:  0px solid black;
-}
-table tr {
-    border-top: 0;
-}
-table tr {
-    border-bottom: 0;
-}
-table tr td {
-    border-left: 10;
-}
-table tr td {
-    
-}
-
-
-</style>
-
-
 </head>
 <body>
 
-<%
-	List CumtomizedList = (List)request.getAttribute("CumtomizedList");
-	String userSkinType = (String)request.getAttribute("userSkinType");
-%>
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-	
-	
-	<div class="container-fluid">
-	
-	</div>
-	
+	<div class="container-fluid"></div>
 	<!-- container 시작 -->	
 	<div class="container text-center mt-5">	
-		<%=userSkinType %> 피부타입을 위한 추천 화장품		
+		${userSkinType} 피부타입을 위한 추천 화장품		
 		
 		<div class="row mt-5">
-			<%for(int i=0;i<CumtomizedList.size();i++){
-	    	  GoodsDTO  dto = (GoodsDTO) CumtomizedList.get(i);
-	    	  %>
-               <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosBrand() %> <%=dto.getCosCategory() %> <%=dto.getCosSkinType() %>">
+		
+			<c:forEach var="i" items="${ CumtomizedList }">
+			
+			
+               <div class="col-lg-3 col-sm-6 mix all ${i.cosBrand} ${i.cosCategory} ${i.cosSkinType}">
                    <div class="single-product-item">
                        <figure>
-                           <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="<%=dto.getCosImage()%>" alt=""></a>
+                           <a href="./GoodsDetail.cos?cosNum=${i.cosNum}"><img src="${i.cosImage}" alt=""></a>
                            <div class="p-status">new</div>
                        </figure>
                        <div class="product-text">
-                           <h6><%=dto.getCosName()%></h6>
-                           <p><%=dto.getCosPrice() %>원  </p>
+                           <h6>${i.cosName}</h6>
+                           <p>${i.cosPrice}원  </p>
                            
-                           <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%> '">장바구니 담기</button>	
+                           <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=${i.cosNum} '">장바구니 담기</button>	
            		
                        </div>
                    </div>
                </div>
-               <%} %>	
+             </c:forEach>
+               
 			
 			</div>
 		</div>
@@ -199,18 +119,16 @@ table tr td {
 		</div>
 			
 	</div>
-	
-	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
 	
 	
-	<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.magnific-popup.min.js"></script>
 <script src="./js/jquery.slicknav.js"></script>
-<script src="./js/jquery.nice-select.min.js">
+<script src="./js/jquery.nice-select.min.js"></script>
 <script src="./js/owl.carousel.min.js"></script>
 <script src="./js/mixitup.min.js"></script>
 <script src="./js/main.js"></script>

@@ -29,8 +29,6 @@
 	<link rel="stylesheet" type="text/css" href="./css/login.css">
 <!--===============================================================================================-->
 
-
-
     <meta name="description" content="Yoga Studio Template">
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,8 +48,6 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-
-
 
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -106,24 +102,12 @@
 	</div>
 	<!-- container 끝 -->	
 	
-	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
 	
-	
 	<!-- 유효성 검사 스크립트 시작 -->
-	
-	<script type="text/javascript">
-	function check(){
-		
-		if($.trim($("#Qsub").val())==""){
-			alert('질문을 쓰세요')
-			return false;
-		}
-		
-	}
-	</script>
+	<script src="./js/question/queWrite.js"></script>
 	<!-- 유효성 검사 스크립트 끝 -->
 	
 </body>

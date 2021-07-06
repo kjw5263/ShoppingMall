@@ -202,24 +202,7 @@
 	
 	
 	<!-- 유효성 검사 스크립트 시작 -->
-	<script type="text/javascript">
-	function check(){
-		if($.trim($("#faqCategory").val())==""){
-			alert('카테고리를 정하세요')
-			return false;
-		}
-		
-		if($.trim($("#faqQuestion").val())==""){
-			alert('자주묻는 질문을 쓰세요')
-			return false;
-		}
-		
-		if($.trim($("#faqAnswer").val())==""){
-			alert('답변을 쓰세요')
-			return false;
-		}
-	}
-	</script>
+	<script src="./js/faqRevise.js"></script>
 	<!-- 유효성 검사 스크립트 끝 -->
 	
 	

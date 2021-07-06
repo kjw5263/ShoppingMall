@@ -59,7 +59,6 @@
 	<!-- jquery 준비 끝 -->
 
 
-
 	<!-- 네이버 로그인 시작 -->
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 	<!-- 네이버 로그인 끝 -->
@@ -174,83 +173,12 @@
 	
 	<!-- 카카오 로그인 스크립트 시작 -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script>
-	Kakao.init('b1ca6ddb15d32d81700309a8f4611657'); //발급받은 키 중 javascript키를 사용해준다.
-	console.log(Kakao.isInitialized()); // sdk초기화여부판단
-	
-	//카카오로그인
-	function kakaoLogin() {
-	    Kakao.Auth.loginForm({
-	      success: function (response) {
-	        Kakao.API.request({
-	          url: '/v2/user/me',
-	          success: function (response) {
-	        	  console.log(response)
-	        	  
-	        	  var k_id = response.id;
-	        	  var k_email = response.kakao_account.email;
-	        	  var k_nickname = response.properties.nickname;
-	        	  var k_gender = response.kakao_account.gender;
-	        	  // 연령대, 생일 가져오기
-	        	  
-	        	  $('#userEmail').val(k_email)
-	        	  $('#userGender').val(k_gender)
-	        	  
-	        	  $('#kl').submit();
-	        	  
-// 	        	  alert(k_id)
-// 	        	  alert(k_email)
-// 	        	  alert(k_gender)
-
-	          },
-	          fail: function (error) {
-	            console.log(error)
-	          },
-	        })
-	      },
-	      fail: function (error) {
-	        console.log(error)
-	      },
-	    })
-	  }
-	
-	//카카오로그아웃  
-	function kakaoLogout() {
-	    if (Kakao.Auth.getAccessToken()) {
-	      Kakao.API.request({
-	        url: '/v1/user/unlink',
-	        success: function (response) {
-	        	console.log(response)
-	        	alert('카카오 로그아웃 성공')
-	        },
-	        fail: function (error) {
-	          console.log(error)
-	        },
-	      })
-	      Kakao.Auth.setAccessToken(undefined)
-	    }
-	  }  
-	</script>
+	<script src="./js/kakaologin.js"> </script>
 	<!-- 카카오 로그인 스크립트 끝 -->
 	
 		
-		<!-- 네이버아디디로로그인 초기화 Script -->
-		<script type="text/javascript">
-		var naverLogin = new naver.LoginWithNaverId( 
-				{ 
-					clientId: "1mD8QYbgRfV_N72vzXmC",
-					callbackUrl: "http://localhost:8088/ShoppingMall/member/logincallback.jsp",
-					isPopup: false,
-					/* 팝업을 통한 연동처리 여부 */
-					//loginButton: {color: "green", type: 3, height: 60}
-					/* 로그인 버튼의 타입을 지정 */ 
-				}
-		);
-		
-		/* 설정정보를 초기화하고 연동을 준비 */
-		naverLogin.init();
-		</script>
-
+	<!-- 네이버아디디로로그인 초기화 Script -->
+	<script src="./js/naverlogin.js"></script>
 	<!-- // 네이버아이디로로그인 초기화 Script -->
 	
 	
@@ -272,7 +200,7 @@
 	<script src="./js/login.js"></script>
 
     <!-- footer 시작 -->
-   		<jsp:include page="../footer/footer.jsp" />
+   	<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
 
 </body>

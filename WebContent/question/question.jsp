@@ -61,8 +61,6 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
 
-
-
 </head>
 <body>
 
@@ -97,42 +95,31 @@
 				
 				<br>
 				
-				<%
+				<c:forEach var="i" items="${ queQueList }">
 				
-				 List queQueList = (List)request.getAttribute("queQueList");
-				int cnt = (int)request.getAttribute("cnt");
-				
-				int sum = 0;
-				
-				QuestionDTO qdto = null;
-				
-				for(int i=0; i < queQueList.size() ; i++){
-				qdto = (QuestionDTO) queQueList.get(i);
-				%>
-				
-				<div><%=qdto.getQnum()%>. <%=qdto.getQsub() %></div>
+				<div>${i.qnum}. ${i.qsub}</div>
 				<div class="mt-3">
 				<h5>아니다&nbsp;
 				
-					<%for(int j=0; j < 5; j++){%>
-					<input type="radio" name="<%=qdto.getQnum() %>" value="<%=j %>" id="radio">
-					 <%} %>
+					<c:forEach var="j" begin="0" end="4" step="1">
+					
+					<input type="radio" name="${i.qnum}" value="${j }" id="radio">
+					 </c:forEach>
 					 
 				&nbsp;그렇다</h5>
 				
 				</div>
 				
 				<c:if test="${userId eq 'admin' }">
-				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./QueRevise.que?Qnum=<%=qdto.getQnum() %>'"> 수정 </button>
+				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./QueRevise.que?Qnum=${i.qnum}'"> 수정 </button>
 				 / 
-				 <button type="button" class="btn btn-danger btn-sm" onclick="location.href='./QueDelete.que?Qnum=<%=qdto.getQnum() %>'">삭제</button>
+				 <button type="button" class="btn btn-danger btn-sm" onclick="location.href='./QueDelete.que?Qnum=${i.qnum}'">삭제</button>
 				</c:if>
 				
 				
 				<hr>
 				
-				<%} %>
-				
+      			</c:forEach>
 				
 			</div>
 			<div class="col-2">	
@@ -148,6 +135,9 @@
 				<!-- 다음으로 버튼 시작 -->
 					
 				<%
+				
+				int cnt = (int)request.getAttribute("cnt");
+
 				
 				int pageSize = 5;
 				
@@ -205,13 +195,9 @@
 	<!-- container 끝 -->	
 	
 	
-	
-	
-	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
-
 
 
 	<script type="text/javascript">
@@ -271,7 +257,6 @@
     				chk_i++;
     			}
     		}
-    		
     		if(chk_i <= 4){
     			alert("모든 질문에 답해주세요");
     			return false;    			
@@ -279,7 +264,6 @@
 
     	}
     	// 라디오버튼 유효성 체크 끝
-
     	
 	</script>
 

@@ -133,20 +133,5 @@
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
 	
-	
-	<!-- 유효성 검사 스크립트 시작 -->
-	
-	<script type="text/javascript">
-	function check(){
-		
-// 		if($.trim($("#Qsub").val())==""){
-// 			alert('질문을 쓰세요')
-// 			return false;
-// 		}
-		
-	}
-	</script>
-	<!-- 유효성 검사 스크립트 끝 -->
-	
 </body>
 </html>
