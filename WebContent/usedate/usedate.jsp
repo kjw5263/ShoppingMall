@@ -1,3 +1,8 @@
+<%@page import="com.usedate.db.UsestatusDTO"%>
+<%@page import="java.util.Vector"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.usedate.db.UsedateDAO"%>
+<%@page import="com.order.db.OrderDTO"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.Date"%>
@@ -57,13 +62,6 @@
 </style>
 <script src="../jq/jquery-3.6.0.js"></script>
 <script src="../jq/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-	function check() {
-		if (!(confirm('오픈하시겠습니까?'))) {
-			return false;
-		}
-	}
-</script>
 </head>
 <body>
 	<!-- header 시작 -->
@@ -75,8 +73,24 @@
 		if (userId == null) {
 			response.sendRedirect("../MemberLogin.me");
 		}
-		List goodsList = (List) request.getAttribute("goodsList");
+		
+		List useList = (List) request.getAttribute("useList");
 		List openList = (List) request.getAttribute("openList");
+	
+
+		List goodsList= (List)request.getAttribute("goodsList");
+		List orderList = (List)request.getAttribute("orderList");
+		List usestatusList = (List)request.getAttribute("usestatusList");
+	
+	
+		int cnt = (int)request.getAttribute("cnt");
+		int pageSize = (int)request.getAttribute("pageSize");
+		int startRow = (int)request.getAttribute("startRow");
+		String pageNum1 = (String)request.getAttribute("pageNum");
+	 	int pageNum = Integer.parseInt(pageNum1);
+		int currentPage = (int)request.getAttribute("currentPage");
+		
+	
 	%>
 
 
@@ -105,8 +119,8 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
+			<div class="col-2"></div>
+			<div class="col-8">
 				<div class="row">
 					<div class="col-2">
 						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
@@ -128,33 +142,93 @@
 							</tr>
 
 							<%
-							if(goodsList.size() != 0){
-								for (int i = 0; i < goodsList.size(); i++) {
-									GoodsDTO gdto = (GoodsDTO) goodsList.get(i);
+							int oNum;
+							if(orderList.size() != 0){
+								for (int i = 0; i < orderList.size(); i++) {
+									OrderDTO odto = (OrderDTO)orderList.get(i);
+									GoodsDTO gdto2 = (GoodsDTO) goodsList.get(i);
+									UsestatusDTO ustdo = (UsestatusDTO)usestatusList.get(i);
+								oNum = odto.getO_Num();
+								
 							%>
 							<tr style="font-size: 20px;">
-								<form action="opencos.ud" method="post"
-									onsubmit="return check();">
-									<input type="hidden" value="<%=userId%>" id="userId">
-									<td><img src="<%=gdto.getCosImage()%>" width="150px"
+									
+									<td rowspan="2"><img src="./admingoods/upload/<%=gdto2.getCosImage().split(",")[0] %>" width="150px"
 										height="150px">
-									<td><b><%=gdto.getCosBrand()%></b><br> <%=gdto.getCosName()%><br>
-										개봉 후 사용 기한 : <b><%=gdto.getUseDate()%></b> 개월 <input
-										type="hidden" value="<%=gdto.getUseDate()%>" name="usedate">
+									<td rowspan="2"><b><%=gdto2.getCosName()%></b><br> <br>
+										개봉 후 사용 기한 : <b><%=gdto2.getUseDate() %></b> 개월 <br>
+										주문일자 <%=odto.getOrderDate() %><br>
+										<%if(ustdo.getOpen_status() == 1){ %>
+										수량 : <%=ustdo.getRemain_amount()%> 개
+										<%} else{ %>
+										수량 : <%=odto.getO_cosAmount()%> 개
+										<%} %>
 									</td>
-									<td><input type="submit" value="OPEN" class="btn btn-info">
+									<%if(ustdo.getFirst_open() == 1 && ustdo.getRemain_amount() <= 0){%>
+									<tr>
+									<td>
+									<input type="button" value="OPEN 완료" class="btn btn-secondary" id="open" onclick="alert('모두 사용했습니다.')">
 									</td>
-								</form>
+									</tr>
+									<%}else{%>
+									<tr>
+										<td><input type="button" value="OPEN" class="btn btn-info" 
+										onclick="location.href='opencos.ud?cosNum=<%=odto.getO_cosNum() %>&openstatus=<%=ustdo.getOpen_status()%>&openstatus=<%=ustdo.getOpen_status()%>&cosAmount=<%=odto.getO_cosAmount() %>&firstopen=<%=ustdo.getFirst_open()%>&statusnum=<%=ustdo.getStatus_Num() %>&oNum=<%=oNum%>'">
+									</td>
+									</tr>
 							</tr>
 							<%
+									}
 								}
 							}
+							
 							%>
 
 						</table>
 
-
-
+						<!--페이징 처리  -->
+						<div style="margin-left: 45%;">
+						<ul class="pagination">
+						
+						<%if(cnt != 0){
+							
+							int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
+							
+							int pageBlock = 1;
+							
+							int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
+							
+							int endPage = startPage + pageBlock-1;
+							
+							if(endPage > pageCount){
+								endPage = pageCount;
+							}
+							
+							if(startPage > pageBlock){
+								%>
+								<li class="page-item"><a  class="page-link" href="./Usedate.ud?pageNum=<%=startPage-pageBlock %>" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+								</a></li>
+								 <%
+							}
+							
+							for(int i=startPage;i<=endPage;i++){
+								%>
+								<li class="page-item"><a  class="page-link" href="./Usedate.ud?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
+								<%
+							}
+							
+							if(endPage < pageCount){
+								%>
+								<li class="page-item"><a class="page-link" href="./Usedate.ud?pageNum=<%=startPage+pageBlock %>" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								<%
+							}
+							
+						} %>
+						</a></li>
+						</ul>
+						</div>
 						<br><br>
 						<h3>화장품 사용기한 확인하기</h3><br>
 						<h5>*사용 완료 하신 경우 오른쪽의 사용완료 버튼을 눌러주세요!</h5>
@@ -168,10 +242,10 @@
 								<th>사용완료 여부</th>
 							</tr>
 							<%
-							if( goodsList.size()!=0){
+							if( useList.size()!=0){
 							
-								for (int i = 0; i < goodsList.size(); i++) {
-									GoodsDTO gdto = (GoodsDTO) goodsList.get(i);
+								for (int i = 0; i < useList.size(); i++) {
+									GoodsDTO gdto = (GoodsDTO) useList.get(i);
 									UsedateDTO udto = (UsedateDTO) openList.get(i);
 
 									/* 끝 날자 구하기 */
@@ -239,20 +313,22 @@
 									
 								</td>
 								<td><%=closedate%></td>
-								<td><input type="submit" class="btn" style="background-color: #B0BCC2; color: white;" value="사용완료"></td>
+								<td>
+								<input type="button" class="btn" style="background-color: #B0BCC2; color: white;" value="사용완료" 
+								onclick="location.href='./completeUse.ud?openNum=<%=udto.getOpenNum()%>'"></td>
 							</tr>
-							<%
-								}
-							}
-							%>
+							
+							<%}
+								}%>
+							</form>
 						</table>
-
+						 
 
 
 					</div>
 				</div>
 			</div>
-			<div class="col-3"></div>
+			<div class="col-2"></div>
 		</div>
 
 

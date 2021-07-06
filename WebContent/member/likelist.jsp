@@ -67,6 +67,13 @@
 		
 		
 		List LikeList = (List) request.getAttribute("LikeList");
+		
+		int cnt = (int)request.getAttribute("cnt");
+		int pageSize = (int)request.getAttribute("pageSize");
+		int startRow = (int)request.getAttribute("startRow");
+		String pageNum1 = (String)request.getAttribute("pageNum");
+	 	int pageNum = Integer.parseInt(pageNum1);
+		int currentPage = (int)request.getAttribute("currentPage");
 		%>
 
 
@@ -109,7 +116,7 @@
 							href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
 					</div>
 					<div class="col-9">
-						<h3>나의 찜목록 (총 <b style="color: orange;"><%=LikeList.size()%></b>개)</h3>
+						<h3>나의 찜목록 (총 <b style="color: orange;"><%=cnt%></b>개)</h3>
 						<br>
 						
 						<table class="table">
@@ -127,7 +134,7 @@
 								<form action="./deleteLike.li" method="get">
 							<tr>
 								<input type="hidden" name="cosnum" value="<%=gdto.getCosNum()%>">
-								<td><img src="<%=gdto.getCosImage()%>" width="150px" height="150px"></td>
+								<td><img src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>" width="150px" height="150px"></td>
 								<td><b><%=gdto.getCosBrand() %></b><br>
 								<%=gdto.getCosName() %>
 								<h4><%=gdto.getCosPrice() %>원</h4></td>
@@ -142,22 +149,50 @@
 							 }
 							%> 
 						</table>
-					
-					<!-- 페이징 처리 -->
-								<div class="number_button" style="display: flex;">
-					
-					<div class="numbers"  style="font-size: 20px; text-align: left; width: 50%;">
-						
-						  <ul class="pagination">
-								 
-						    
-						  </ul>
-							
-					</div>
 				
-		 			</div>
-					
-					
+						<!--페이징 처리  -->
+						<div style="margin-left: 45%;">
+						<ul class="pagination">
+						
+						<%if(cnt != 0){
+							
+							int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
+							
+							int pageBlock = 1;
+							
+							int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
+							
+							int endPage = startPage + pageBlock-1;
+							
+							if(endPage > pageCount){
+								endPage = pageCount;
+							}
+							
+							if(startPage > pageBlock){
+								%>
+								<li class="page-item"><a  class="page-link" href="./getLike.li?pageNum=<%=startPage-pageBlock %>" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+								</a></li>
+								 <%
+							}
+							
+							for(int i=startPage;i<=endPage;i++){
+								%>
+								<li class="page-item"><a  class="page-link" href="./getLike.li?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
+								<%
+							}
+							
+							if(endPage < pageCount){
+								%>
+								<li class="page-item"><a class="page-link" href="./getLike.li?pageNum=<%=startPage+pageBlock %>" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+								<%
+							}
+							
+						} %>
+						</a></li>
+						</ul>
+						</div>
 					<!-- 페이징 처리 -->
 					
 					

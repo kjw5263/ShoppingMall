@@ -50,14 +50,41 @@
 	<div class="container-fluid">	
 	
 	<div class="row">
-		<div class="col-3 text-center">
+		<div class="col-0 text-center">
 		<!-- left -->
 		</div>
-		<div class="col-6 text-center">
+		<div class="col-12 text-center">
 			
     <!-- admin goods write Begin -->
     <section class="admin_goods_write">
         <div class="container">
+	        <table>
+		    <tr>
+		    <td>
+			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+				  <div class="collapse navbar-collapse">
+				    <ul class="navbar-nav">
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminGoodsList.ag"><b>상품목록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./GoodsAdd.ag" style="background-color: #6c757d; color:white;"><b>상품등록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
+				      </li>			      
+				    </ul>
+				  </div>
+				</nav>
+		    </td>
+		    </tr>
+		    </table><br>
 		<form method="post" action="./GoodsAddAction.ag" enctype="multipart/form-data">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
@@ -67,21 +94,21 @@
 				</thead>
 				<tbody>
 				 <tr>
-		           <td>상품이름</td>
-		           <td><input type="text" name="cosName"></td>           
+		           <th>상품이름</th>
+		           <td><input type="text" name="cosName" class="form-control" required></td>           
 		         </tr>
 				 <tr>
-		           <td>상품가격</td>
-		           <td><input type="text" name="cosPrice"></td>           
+		           <th>상품가격</th>
+		           <td><input type="text" name="cosPrice" class="form-control" required></td>           
 		         </tr>
 		         <tr>
-					<td>브랜드</td>
-					<td><input type="text" name="cosBrand"></td> 
+					<th>브랜드</th>
+					<td><input type="text" name="cosBrand" class="form-control" required></td> 
 				</tr>
 				<tr>
-					<td>카테고리</td>
+					<th>카테고리</th>
 					<td>
-						<select name="cosCategory">
+						<select name="cosCategory" class="form-control">
 							<option value="스킨">스킨</option>
 							<option value="에센스">에센스</option>
 							<option value="로션">로션</option>
@@ -92,9 +119,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td>피부타입</td>
+					<th>피부타입</th>
 					<td>
-						<select name="cosSkinType">
+						<select name="cosSkinType" class="form-control">
 							<option value="건성">건성</option>
 							<option value="중성">중성</option>
 							<option value="지성">지성</option>
@@ -102,9 +129,9 @@
 					</td>
 				</tr>								
 				<tr>
-					<td>피부고민</td>
+					<th>피부고민</th>
 					<td>
-						<select name="cosTrouble">
+						<select name="cosTrouble" class="form-control">
 							<option value="민감성">민감성</option>
 							<option value="여드름">여드름</option>
 							<option value="아토피">아토피</option>
@@ -113,68 +140,66 @@
 					</td>
 				</tr>	
 				<tr>
-		           <td>수량</td>
-		           <td><input type="text" name="cosAmount"></td>           
+		           <th>수량</th>
+		           <td><input type="text" name="cosAmount" class="form-control" required></td>           
 		        </tr>
  				<tr>
-		           <td>용량</td>
-		           <td><input type="text" name="cosVolumn"></td>           
+		           <th>용량</th>
+		           <td><input type="text" name="cosVolumn" class="form-control" required></td>           
 		        </tr> 
 				<tr>
-		           <td>회사</td>
-		           <td><input type="text" name="madeCompany"></td>           
+		           <th>회사</th>
+		           <td><input type="text" name="madeCompany" class="form-control" required></td>           
 		        </tr>      
 				<tr>
-		           <td>성분</td>
-		           <td><textarea name="ingredient" rows="4" cols="25"></textarea></td>           
+		           <th>성분</th>
+		           <td><textarea name="ingredient" rows="4" cols="25" class="form-control" required></textarea></td>           
 		        </tr> 
 				<tr>
-		           <td>사용방법</td>
-		           <td><textarea name="cosMethod" rows="4" cols="25"></textarea></td>           
+		           <th>사용방법</th>
+		           <td><textarea name="cosMethod" rows="4" cols="25" class="form-control" required></textarea></td>           
 		        </tr>
 				<tr>
-		           <td>주의사항</td>
-		           <td><textarea name="cosWarning" rows="4" cols="25"></textarea></td>           
+		           <th>주의사항</th>
+		           <td><textarea name="cosWarning" rows="4" cols="25" class="form-control" required></textarea></td>           
 		        </tr>
 		         <tr>
-		           <td>제품이미지1(메인)</td>
+		           <th>제품이미지1(메인)</th>
 		           <td>
 		              <input type="file" name="file1" accept="cosImage/*,.pdf">           
 		           </td>
 		         </tr>
 		           <tr>
-		           <td>제품이미지2</td>
+		           <th>제품이미지2</th>
 		           <td>
 		             <input type="file" name="file2">
 		           </td>
 		         </tr>
 		           <tr>
-		           <td>제품이미지3</td>
+		           <th>제품이미지3</th>
 		           <td>
 		             <input type="file" name="file3">
 		           </td>
 		         </tr>
 		           <tr>
-		           <td>제품이미지4</td>
+		           <th>제품이미지4</th>
 		           <td>
 		             <input type="file" name="file4">
 		           </td>
 		         </tr>		      	          
 				</tbody>
 			</table>
-			<table style="margin-left: auto; margin-right: auto;">
-			<tr>
-			    <td><input type="submit" value="상품등록" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
-			    <td><input type="reset" value="상품초기화" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>	
-		    </tr>
-		    </table>		
+			<div style="margin-left: auto; margin-right: auto;">
+			    <input type="submit" value="상품등록" class="btn btn-secondary">
+			    <input type="reset" value="상품초기화" class="btn btn-secondary">
+		    </div>		
 		</form>
         </div>
     </section>
     <!-- admin goods write End -->
 			
 		</div>
-		<div class="col-3">	
+		<div class="col-12">	
 		<!-- right -->
 		</div>
 	</div>

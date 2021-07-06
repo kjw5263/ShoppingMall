@@ -1,3 +1,4 @@
+<%@page import="com.coupon.db.CouponDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.goods.db.GoodsDTO"%>
@@ -209,7 +210,21 @@ $(document).ready(function () {
 	$('#selectCoupon').change(function(){
 		var e = Number($('#selectCoupon option:selected').val());
 		var cname = $('#selectCoupon option:selected').text();
-		$('#delCp').prop('value', cname);
+		
+		var cplist = $('#mcCouponNum').val();
+		
+		if (cname=='쿠폰선택안함'){
+			$('#mcCouponNum').prop('value',-1);
+		}else {
+			for(var i=0; i<cplist.split(",").length; i++){
+				var cptype = cplist.split(",")[i];
+				if(cptype.split("|")[1] == cname){
+					$('#mcCouponNum').prop('value',cptype.split("|")[0]);
+					break;
+				}
+			}
+		}
+		$('#couponName').prop('value', cname);
 		var dcNum = sumMoney * e/100;		//할인율(10%)
 		$('#usecoupon').text(addComma(dcNum*(-1)));	//차감될금액(-1000원) 화면에 표시
 		cpDc = dcNum;
@@ -272,13 +287,22 @@ $(document).ready(function () {
 		List goodsList = (List)request.getAttribute("goodsList");
 		MemberDTO mDTO = (MemberDTO)request.getAttribute("memberDTO");
 		List couponList = (List)request.getAttribute("couponList");
-		
+		String str ="";
+		String strValue = "";
+		for(int i=0; i<couponList.size(); i++){
+			CouponDTO cDTO = (CouponDTO)couponList.get(i);
+			str = cDTO.getMcCouponNum()+"|"+cDTO.getCouponName();
+			if(i != couponList.size()-1){
+				strValue += str+",";
+			} else if( i == couponList.size()-1){
+				strValue += str;
+			}
+		}
 		DecimalFormat fmMoney = new DecimalFormat("###,###");
 		int sumAmount=0;
 		int sumMoney =0;
 
 	%>
-	
 	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
@@ -336,7 +360,7 @@ $(document).ready(function () {
 		<input type="hidden" name="goodsTitle" id="goodsTitle" value="<%=gdto.getCosName()%> 외 <%=basketList.size()-1 %>개">
 		<!-- 새로운 inner Layout : 사용자/쿠폰 영역, 금액영역 -->
 		<input type="hidden" name="userId" value="<%=mDTO.getUserId() %>">			<!-- 사용자 아이디  -->
-		<input type="hidden" name="delCp" value="" id="delCp"> 						<!--사용한 쿠폰이름 -->
+		<input type="hidden" name="couponName" value="" id="couponName"> 						<!--사용한 쿠폰이름 -->
 		<input type="hidden" name="sumMoneyData" id="sumMoneyData" value="<%=sumMoney %>"> <!-- 합계금액 -->
 		<input type="hidden" name="ttmoneyData" id="ttmoneyData" value="<%=sumMoney%>"> 	<!-- 최종금액 -->
 		<input type="hidden" name="addPoint" id="addPoint" value=<%=sumMoney*1/100 %>><!-- 적립예정 포인트 -->
@@ -344,6 +368,7 @@ $(document).ready(function () {
 		<input type="hidden" name="userName" value="<%=mDTO.getUserName() %>">		<!--  사용자 이메일 -->
 		<input type="hidden" name="cpUseAmount" id="cpUseAmount" value=0>			<!-- 사용한 쿠폰 할인율 -->
 		<input type="hidden" name="ptUseAmount" id="ptUseAmount" value=0>			<!-- 사용한 포인트 할인율 -->
+		<input type="hidden" id="mcCouponNum" name="mcCouponNum" value="<%=strValue %>">
 		<div class="row">
 		<div class="col-8">
 		
@@ -424,7 +449,7 @@ $(document).ready(function () {
 				<th scope="row" class="table-active" style="width:150px;">쿠폰</th>
 				<td>
 					<select class="form-control" name="selectCoupon" id="selectCoupon">
-						<option value="0">쿠폰선택 안함</option>
+						<option value="nocoupon">쿠폰선택안함</option>
 						<c:forEach var="i" items="${couponList }">
 						<option value="${i.couponDc }">${i.couponName }</option>
 						</c:forEach>

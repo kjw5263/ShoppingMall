@@ -79,11 +79,10 @@
 				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
-							SNS 로그인 연동
+							<span style="color: green;"><b>NAVER</b></span> 로그인 연동
 						</span>
 						<div class="m-5" style="text-align: center;">
-							기존 계정과 연동을 위해 로그인 해주세요
-							${param.n_Email }@@@@@@@@@@@@@@@@@@@@@@
+							기존 계정과 <span style="color: green;"><b>NAVER</b></span> 계정 연동을 위해 로그인 해주세요
 						</div>
 						
 						<div class="wrap-input100 validate-input m-b-16" data-validate = "ID를 입력해 주세요">

@@ -6,7 +6,8 @@ public class varlist {
 	
 	private String GoodslistTablename =  "cos_list";
 	private String noticelistTablename =  "notice_board";
-	private String noticecontentListSt = "noticeContent?noticeNum=";
+	private String noticecontentListSt = "noticeContent.nos?noticeNum=";
+	private String MemberInfoTablename = "user_info";
 	private String http[][] = new String[][]
     		{{"" ," 전체"},
     	{"?item=best","베스트상품"},
@@ -32,7 +33,15 @@ public class varlist {
 	   	{"?cat=blackmonster","블랙몬스터"},
 	   	{"?cat=cnp","차앤박"}
 	   	
-	   		};//이부분만 수정		
+	   		};//이부분만 수정
+	   		
+	private String skin[][] = new String[][]
+    		{{"" ," 전체"},
+    	{"?skin=wet","지성"},
+    	{"?skin=mid","중성"},
+    	{"?skin=trd","건성"}
+    	};
+    	
 	
 	public String getDatabasename() {
 		return databasename;
@@ -57,6 +66,22 @@ public class varlist {
 	}
 	public String getnoticecontentListSt(){
 		return noticecontentListSt;
+	}
+
+	public String getMemberInfoTablename() {
+		return MemberInfoTablename;
+	}
+
+	public void setMemberInfoTablename(String memberInfoTablename) {
+		MemberInfoTablename = memberInfoTablename;
+	}
+
+	public String[][] getSkin() {
+		return skin;
+	}
+
+	public void setSkin(String[][] skin) {
+		this.skin = skin;
 	}
 	
 	

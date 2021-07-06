@@ -1,3 +1,4 @@
+<%@page import="com.notice.db.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,6 +35,26 @@
   <!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
+<%	
+
+String id =  (String)request.getParameter("userId");
+// 전달정보 저장 - 액션태그 (자바빈)- num,pass
+NoticeDAO noti = new NoticeDAO();
+int check1 = noti.deleteCheckNotice(id);
+
+
+ if(check1 == 1){
+ 	
+  }else{
+	  %>
+<script type="text/javascript">
+	alert("글쓰기 권한이 없습니다");
+	history.back();
+</script>
+<%
+	}
+
+%>
 
 
 	<h1>공지사항 쓰기</h1>
@@ -46,6 +67,7 @@
 			
 			<input type="checkbox" value="0" id ="imp2" name = "imp2" checked="checked" class = "hidden" ><br> 
 			파일 : <input type="file" name="filename"><br> 
+			파일 : <input type="file" name="imgname"><br>
 			내용 :
 			<textarea rows="10" cols="30" name="content"></textarea>
 			<hr>

@@ -1,3 +1,8 @@
+
+<%@page import="com.goods.db.listDAO"%>
+<%@page import="com.goods.db.GoodsDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.var.list.varlist"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,29 +30,90 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+	
+	   $(window).scroll(function() {
+	      $("#banner").stop().animate({   "top" : ($(window).scrollTop() + 800) + "px"   }, 500);
+	   });
+	
+	</script>
+	
+	<style type="text/css">
+		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%;   bottom: 500px; }
+	</style>
+    <style type="text/css">
+button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:34px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+    </style>
+
+    
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
     
-    <!-- Search model -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
-
+    
     <!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
+  <%
+//테스트 버전 업2!
+  	listDAO gdao = new listDAO();
+  
+ 	
+   
+    List bestgoodsList = gdao.getbestGoodsList();
 
+    String goHead = "./GoodsList.cos";
+    varlist var = new varlist();
+    String http[][] = var.getHttp();
+	String cat[][] = var.getCat();	
+    String skin[][] = var.getSkin(); 
+   
+    int bestsize = bestgoodsList.size();
+  %>
     <!-- Hero Slider Begin -->
     <section class="hero-slider">
         <div class="hero-items owl-carousel">
@@ -57,7 +123,7 @@
                         <div class="col-lg-12">
                             <h1>2021</h1>
                             <h2>BEST SKIN CARE.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+                            <a href="./GoodsList.cos" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
@@ -96,25 +162,32 @@
                     <div class="col-lg-4">
                         <div class="single-features-ads first">
                             <img src="./img/icons/f-delivery.png" alt="">
-                            <h4>${param.userEmail }</h4>
-                            <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal
-                                esuada aliquet libero viverra cursus. </p>
+                            <h4>JUST SKIN CARE</h4>
+                            <p> 립스틱, 아이라인, 섀도우, 파운데이션 ... 넘쳐나는 화장품 속,<br>
+                           		그리고 심지어 마스크까지! <br>
+                           		내 피부는 숨을 쉴 시간이 없어요. <br>
+                           		내 피부를 진정시켜줄, 스킨케어 제품들만 모아놓았어요.<br>
+                           		오전 10시 이전 주문 시, 당일배송이랍니다! </p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads second">
                             <img src="./img/icons/coin.png" alt="">
-                            <h4>100% Money back </h4>
-                            <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
-                                aliquet libero viverra cursus. </p>
+                            <h4>다양한 쿠폰과 알뜰살뜰 포인트</h4>
+                            <p> 제품 구매 시 구매금액의 1%에 해당하는 금액을,<br>
+                           		현금처럼 사용가능한 포인트로 적립해드려요.<br>
+                            	또한, 회원들에게 상시 다양한 쿠폰을 지급하니<br>
+                            	절대 놓치지 마세요! </p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads">
                             <img src="./img/icons/chat.png" alt="">
-                            <h4>Online support 24/7</h4>
-                            <p>Urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vesti bulum mal esuada
-                                aliquet libero viverra cursus. </p>
+                            <h4>24시간 1:1 실시간 채팅</h4>
+                            <p> 저스트스킨에게 궁금한 점이 생기셨나요?<br>
+                             	홈페이지 하단 챗봇을 통해 질문해주세요.<br>
+                             	(주말, 공휴일 제외)
+                             	</p>
                         </div>
                     </div>
                 </div>
@@ -175,111 +248,36 @@
                             <h2>Latest Products</h2>
                         </div>
                         <ul class="product-controls">
-                            <li data-filter="*">All</li>
-                            <li data-filter=".dresses">Dresses</li>
-                            <li data-filter=".bags">Bags</li>
-                            <li data-filter=".shoes">Shoes</li>
-                            <li data-filter=".accesories">Accesories</li>
+                        	<li data-filter=".*">All</li>
+                          <%
+                            for(int i = 2 ; i<http.length;i++){
+                            	
+                            %>
+                            <li data-filter=".<%=http[i][1] %>"><%=http[i][1] %></li>
+                            <%} %>
+                            
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row" id="product-list">
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                <%for(int i = 0 ; i<bestsize ;i++){ 
+            	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
+            	%>
+                <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosCategory() %> ">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="./img/products/img-1.jpg" alt=""></a>
+                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
-                            <h6>Green Dress with details</h6>
-                            <p>$22.90</p>
+                            <h6><%=dto.getCosName()%></h6>
+                            <p><%=dto.getCosPrice() %>원  </p>
+                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-2.jpg" alt=""></a>
-                            <div class="p-status sale">sale</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Yellow Maxi Dress</h6>
-                            <p>$25.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all shoes accesories">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-3.jpg" alt=""></a>
-                            <div class="p-status">new</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>One piece bodysuit</h6>
-                            <p>$19.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all shoes accesories">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-4.jpg" alt=""></a>
-                            <div class="p-status popular">popular</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Blue Dress with details</h6>
-                            <p>$35.50</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses shoes">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-5.jpg" alt=""></a>
-                            <div class="p-status">new</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Green Dress with details</h6>
-                            <p>$22.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all accesories bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-6.jpg" alt=""></a>
-                            <div class="p-status sale">sale</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Yellow Maxi Dress</h6>
-                            <p>$25.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-7.jpg" alt=""></a>
-                        </figure>
-                        <div class="product-text">
-                            <h6>One piece bodysuit</h6>
-                            <p>$19.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all accesories bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-8.jpg" alt=""></a>
-                            <div class="p-status popular">popular</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Blue Dress with details</h6>
-                            <p>$35.50</p>
-                        </div>
-                    </div>
-                </div>
+                <%} %>
             </div>
         </div>
     </section>
@@ -342,7 +340,9 @@
     <!-- footer 끝 -->
     
 
-    <!-- Js Plugins -->
+   
+</body>
+ <!-- Js Plugins -->
     <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.magnific-popup.min.js"></script>
@@ -351,6 +351,19 @@
     <script src="./js/jquery.nice-select.min.js"></script>
     <script src="./js/mixitup.min.js"></script>
     <script src="./js/main.js"></script>
+    
+    
+   	<!-- 플로팅 배너 시작 -->
+	<div id="banner" style=" position:block;">
+		<a href="./Survey.me"><img alt="" src="./img/main/question.png"></a>
+	</div>
+	<!-- 플로팅 배너 끝 -->
+
+    
+    
+
+    
 </body>
+
 
 </html>

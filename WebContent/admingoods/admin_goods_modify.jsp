@@ -50,12 +50,12 @@
 	<div class="container-fluid">	
 	
 	<div class="row">
-		<div class="col-3 text-center">
+		<div class="col-0 text-center">
 		<!-- left -->
 		</div>
-		<div class="col-6 text-center">
+		<div class="col-12 text-center">
 			
-    <!-- admin goods write Begin -->
+    <!-- admin goods modify Begin -->
     
 	<%
 		GoodsDTO dto = (GoodsDTO) request.getAttribute("dto"); 
@@ -63,6 +63,33 @@
 	
     <section class="admin_goods_modify">
         <div class="container">
+	        <table>
+		    <tr>
+		    <td>
+			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+				  <div class="collapse navbar-collapse">
+				    <ul class="navbar-nav">
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #6c757d; color:white;" ><b>상품목록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
+				      </li>			      
+				    </ul>
+				  </div>
+				</nav>
+		    </td>
+		    </tr>
+		    </table><br>
 		<form method="post" action="./AdminGoodsModifyAction.ag">
 			<!-- 상품번호 저장 -->
 			<input type="hidden" name="cosNum" value="<%=dto.getCosNum() %>">
@@ -74,21 +101,21 @@
 				</thead>
 				<tbody>
 				 <tr>
-		           <td>상품이름</td>
-		           <td><input type="text" name="cosName" value="<%=dto.getCosName() %>"></td>           
+		           <th>상품이름</th>
+		           <td><input type="text" name="cosName" value="<%=dto.getCosName() %>" class="form-control" required></td>           
 		         </tr>
 				 <tr>
-		           <td>상품가격</td>
-		           <td><input type="text" name="cosPrice" value="<%=dto.getCosPrice() %>"></td>           
+		           <th>상품가격</th>
+		           <td><input type="text" name="cosPrice" value="<%=dto.getCosPrice() %>" class="form-control" required></td>           
 		         </tr>
 		         <tr>
-					<td>브랜드</td>
-					<td><input type="text" name="cosBrand" value="<%=dto.getCosBrand() %>"></td> 
+					<th>브랜드</th>
+					<td><input type="text" name="cosBrand" value="<%=dto.getCosBrand() %>" class="form-control" required></td> 
 				</tr>
 				<tr>
-					<td>카테고리</td>
+					<th>카테고리</th>
 					<td>
-						<select name="cosCategory">
+						<select name="cosCategory" class="form-control">
 							<option value="스킨"
 								<%if(dto.getCosCategory().equals("스킨")){ %>
 								selected
@@ -123,9 +150,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td>피부타입</td>
+					<th>피부타입</th>
 					<td>
-						<select name="cosSkinType">
+						<select name="cosSkinType" class="form-control">
 							<option value="건성"
 								<%if(dto.getCosSkinType().equals("건성")){ %>
 								selected
@@ -145,9 +172,9 @@
 					</td>
 				</tr>								
 				<tr>
-					<td>피부고민</td>
+					<th>피부고민</th>
 					<td>
-						<select name="cosTrouble">
+						<select name="cosTrouble" class="form-control" required>
 							<option value="민감성"
 								<%if(dto.getCosTrouble().equals("민감성")){ %>
 								selected
@@ -172,44 +199,41 @@
 					</td>
 				</tr>	
 				<tr>
-		           <td>수량</td>
-		           <td><input type="text" name="cosAmount" value="<%=dto.getCosAmount()%>"></td>           
+		           <th>수량</th>
+		           <td><input type="text" name="cosAmount" value="<%=dto.getCosAmount()%>" class="form-control" required></td>           
 		        </tr>
  				<tr>
-		           <td>용량</td>
-		           <td><input type="text" name="cosVolumn" value="<%=dto.getCosVolumn() %>"></td>           
+		           <th>용량</th>
+		           <td><input type="text" name="cosVolumn" value="<%=dto.getCosVolumn() %>" class="form-control" required></td>           
 		        </tr> 
 				<tr>
-		           <td>회사</td>
-		           <td><input type="text" name="madeCompany" value="<%=dto.getMadeCompany() %>"></td>           
+		           <th>회사</th>
+		           <td><input type="text" name="madeCompany" value="<%=dto.getMadeCompany() %>" class="form-control" required></td>           
 		        </tr>      
  				<tr> 
- 		           <td>성분</td> 
- 		           <td><textarea name="ingredient" rows="4" cols="25"><%=dto.getIngredient() %></textarea></td>            
+ 		           <th>성분</th> 
+ 		           <td><textarea name="ingredient" rows="4" cols="25" class="form-control" required><%=dto.getIngredient() %></textarea></td>            
  		        </tr>  
  				<tr> 
- 		           <td>사용방법</td> 
- 		           <td><textarea name="cosMethod" rows="4" cols="25"><%=dto.getCosMethod() %></textarea></td>            
+ 		           <th>사용방법</th> 
+ 		           <td><textarea name="cosMethod" rows="4" cols="25" class="form-control" required><%=dto.getCosMethod() %></textarea></td>            
  		        </tr> 
  				<tr> 
- 		           <td>주의사항</td> 
- 		           <td><textarea name="cosWarning" rows="4" cols="25"><%=dto.getCosWarning() %></textarea></td>            
+ 		           <th>주의사항</th> 
+ 		           <td><textarea name="cosWarning" rows="4" cols="25" class="form-control" required><%=dto.getCosWarning() %></textarea></td>            
  		        </tr> 	      	          
 				</tbody>
 			</table>
-			<table style="margin-left: auto; margin-right: auto;">
-			<tr>
-			    <td><input type="submit" value="상품수정" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>  
-			    <td><input type="reset" value="상품초기화" class="btn btn-secondary" style="background-color: #b0bcc2;"></td>	
-		    </tr>
-		    </table>		
+			<div style="margin-left: auto; margin-right: auto;">
+			    <input type="submit" value="상품수정" class="btn btn-secondary">
+		    </div>		
 		</form>
         </div>
     </section>
-    <!-- admin goods write End -->
+    <!-- admin goods modify End -->
 			
 		</div>
-		<div class="col-3">	
+		<div class="col-0">	
 		<!-- right -->
 		</div>
 	</div>

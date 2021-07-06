@@ -35,8 +35,9 @@ public class noticeDeleteProAction implements Action{
 		
 		
 		
-		noticeDTO notit = (noticeDTO)request.getAttribute("noti");
-		noti.deleteNotice(notit);
+		String noticeNum = (String)request.getParameter("noticeNum");
+		System.out.println("여기임!!! +"+noticeNum);
+		noti.deleteNotice(noticeNum);
 		
 		
 		

@@ -26,7 +26,10 @@ public class noticeUpdateAction implements Action{
 		// 파라미터를 처리
 		// item=best
 		
-		
+		String pageNum = request.getParameter("pageNum");
+		String num = request.getParameter("noticeNum");
+		System.out.println(pageNum);
+		System.out.println("여기임 = "+num);
 		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();

@@ -59,10 +59,38 @@ public class OrderFrontController extends HttpServlet {
 			forward.setRedirect(false);
 		}
 		else if(command.equals("/OrderConfirm.or")) {
+			action = new OrderConfirmAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/getOrderList.or")){
+			action = new getOrderListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		
-		
+		else if(command.equals("/Orderdetail.or")){
+			
+			action = new OrderdetailAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}	
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
 		

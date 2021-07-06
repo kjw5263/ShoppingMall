@@ -58,7 +58,7 @@
 		
 		<div class="col-12 text-center">
 			
-    <!-- goods_basket_list start -->
+    <!-- goods basket list start -->
     
 	<%
 		// 전달된 정보를 저장
@@ -69,13 +69,9 @@
     <section class="admin_goods_list">
         <div class="container">
         <form name="form" method="post" action="./BasketList.ba">
-	        <table>
-		    <tr>
-			    <td>
-			    	<input type="submit" value="선택삭제" onclick="javascript: form.action='BasketDelete.ba'" class="btn btn-secondary" style="background-color: #b0bcc2;"/>
-			    </td>
-		    </tr>
-		    </table><br>
+	        <div align="left">
+			    <input type="submit" value="선택삭제" onclick="javascript: form.action='BasketDelete.ba'" class="btn btn-secondary"/>
+		    </div><hr>
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					
@@ -136,43 +132,43 @@
 							<input type="number" name="amount" min="1" style="width:45px" value="<%=bkDTO.getBasketCosAmount()%>">	
 						  </li>
 						  <li class="nav-item mb-2">
- 						  <input type="submit" value="수정" class="btn btn-secondary btn-sm" style="background-color: #b0bcc2;"
-						  	onclick="javascript: form.action='BasketModify.ba?'"/> 
+ 						  <input type="submit" value="수정" class="btn btn-secondary btn-sm"
+						  	onclick="javascript: form.action='BasketModify.ba'"/> 
 						  </li>
 						</ul>
 					</td>
 					</form>
 				</tr>
-				
 				<%} %>
 				</tbody>
-			</table>	
-			</form>
+			</table>
+				<hr>
+				<%
+				int count = 0;
+				int hap = 0;
+				int mul = 0;
+				for(int i=0; i<basketList.size();i++){
+					BasketDTO bkDTO = (BasketDTO) basketList.get(i);
+					GoodsDTO gDTO = (GoodsDTO) goodsList.get(i);
+					mul = gDTO.getCosPrice() * bkDTO.getBasketCosAmount();
+					count += bkDTO.getBasketCosAmount();
+					hap += mul;
+				} %>
+				<p>
+				<div align="right">
+					<button class="btn btn-secondary" onclick="#'">주문하기</button>
+					<button class="btn btn-secondary" onclick="javascript: form.action='GoodsList.cos'">계속 쇼핑하기</button>
+				</div>
+				</p>
+				<div align="right">
+					<b style="text-align: right; font-size: 20px;">상품갯수 : <%=count %></b><br>
+					<b style="text-align: right; color: #0A82FF; font-size: 20px;">합계금액 : <%=hap %></b>
+		        </div>
+        	</form>
         </div>
     </section>
     
-	  <hr>
-		<%
-		int count = 0;
-		int hap = 0;
-		int mul = 0;
-		for(int i=0; i<basketList.size();i++){
-			BasketDTO bkDTO = (BasketDTO) basketList.get(i);
-			GoodsDTO gDTO = (GoodsDTO) goodsList.get(i);
-			mul = gDTO.getCosPrice() * bkDTO.getBasketCosAmount();
-			count += bkDTO.getBasketCosAmount();
-			hap += mul;
-		} %>
-		
-		<p>
-			<b>상품갯수 : <%=count %></b><br>
-			<b>합계금액 : <%=hap %></b><br>
-		</p>
-
-		<a href="#"><button class="btn btn-secondary" style="background-color: #b0bcc2;">주문하기</button></a>
-		<a href="./GoodsList.cos"><button class="btn btn-secondary" style="background-color: #b0bcc2;">계속 쇼핑하기</button></a>
-		
-    <!-- admin goods list End -->
+    <!-- goods basket list End -->
 			
 		</div>
 		<div class="col-0">	

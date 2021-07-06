@@ -21,15 +21,6 @@ public class AdminGoodsDeleteAction implements Action {
 		AdminGoodsDAO agdao = new AdminGoodsDAO();
 		agdao.deleteGoods(cosNum);
 		
-/*        response.setContentType("text/html; charset=utf-8");
-        PrintWriter out = response.getWriter();
-        
-        out.print("<script>");
-    	out.print(" alert('s!'); ");
-    	out.print("</script>");
-    	out.close();*/
-    	
-		
 		// 페이지 이동(./AdminGoodsList.ag)
 		ActionForward forward = new ActionForward();
 		forward.setPath("./AdminGoodsList.ag");

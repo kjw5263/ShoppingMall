@@ -17,17 +17,19 @@ public class noticeUpdate extends DBconnection{
 		String sql = "";
 		
 			try {
-				sql = "select max(noticeNum) as num from "+ tablename;
-				rs = con.selsql(sql);
-				rs.next() ;
-				int num = rs.getInt(1)+1;
 				sql = "update "+ tablename + " set "
-						+ "(" + noti.getNoticeNum() +","+ noti.getNoticeTitle() +","
-						+ noti.getNoticeContent()
-						+","+noti.getNoticeFile() +","+
-						noti.getNoticeType() +" )";
-				con.insql(sql);
-
+				+ " noticeNum =" + noti.getNoticeNum() +","
+				+ " noticeTitle = '"+ noti.getNoticeTitle() +"',"
+				+ " noticeContent = '"+noti.getNoticeContent()+ "',"
+				+ " noticeFile = "+"'"+noti.getNoticeFile() +"',"
+				+ " noticeType = '"+noti.getNoticeType() +"',"
+				+ " noticeRealFileName = '"+noti.getNoticeRealFileName() +"',"
+				+ " noticeImg = '"+noti.getNoticeImg() +"',"
+				+ " noticeRealImgName = '"+noti.getNoticeRealImgName() +"'"
+				+ " where  noticeNum = "+noti.getNoticeNum()+" ";
+				System.out.println("수정 sql = "+ sql );
+				con.upsql(sql);
+				
 
 				System.out.println("DAO : 공지 등록 완료");
 

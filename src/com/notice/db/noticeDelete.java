@@ -10,14 +10,14 @@ public class noticeDelete extends DBconnection{
 	varlist var = new varlist();
 	private String tablename = var.getnoticelistTablename();
 	
-	public void doit(noticeDTO noti){
+	public void doit(String noticeNum){
 		DBconnection con = new DBconnection();
 		setnoticetool notit = new setnoticetool();
 		ResultSet rs = null;
 		String sql = "";
 		
 			try {
-				sql = "delete from "+ tablename + " where noticeNum = "+noti.getNoticeNum();
+				sql = "delete from "+ tablename + " where noticeNum = "+ noticeNum;
 				con.delsql(sql);
 				
 

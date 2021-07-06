@@ -1,6 +1,6 @@
 package com.member.db;
 
-import java.sql.Date;
+
 
 
 public class MemberDTO {
@@ -46,6 +46,28 @@ public class MemberDTO {
 	
 	 // 회원 등급 누적금액에 대한 회원 등급(1-4)
 	 private int userLevel;
+	 
+	 // 카카오로그인 시 저장할 이메일
+	 private String kakaoLogin;
+	 
+	 public String getKakaoLogin() {
+		return kakaoLogin;
+	}
+
+	public void setKakaoLogin(String kakaoLogin) {
+		this.kakaoLogin = kakaoLogin;
+	}
+
+	public String getNaverLogin() {
+		return naverLogin;
+	}
+
+	public void setNaverLogin(String naverLogin) {
+		this.naverLogin = naverLogin;
+	}
+
+	// 네이버로그인 시 저장할 이메일
+	 private String naverLogin;
 
 	public int getUserNum() {
 		return userNum;
@@ -165,7 +187,7 @@ public class MemberDTO {
 				+ userName + ", userEmail=" + userEmail + ", userAddr=" + userAddr + ", userTel=" + userTel
 				+ ", userBirth=" + userBirth + ", userGender=" + userGender + ", userSkinType=" + userSkinType
 				+ ", userTrouble=" + userTrouble + ", userPoint=" + userPoint + ", userTotal=" + userTotal
-				+ ", userLevel=" + userLevel + "]";
+				+ ", userLevel=" + userLevel + ", kakaoLogin=" + kakaoLogin + ", naverLogin=" + naverLogin + "]";
 	}
 	 
 

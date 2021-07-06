@@ -16,6 +16,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.basket.db.BasketDTO;
+import com.coupon.db.CouponDTO;
 import com.goods.db.GoodsDTO;
 
 public class OrderDAO {
@@ -83,72 +84,9 @@ public class OrderDAO {
 	}
 	
 	
-	/* getBasketList()
-	 * 설명 : 장바구니 목록 가져오기 메소드
-	 * return : vector  */
-	public Vector getBasketList(String userId) {
-		Vector totalVector = new Vector();
-		
-		List basketList = new ArrayList();
-		List goodsList = new ArrayList();
-		
-		
-		try {
-			conn = getConnection();
-			sql = "select * from basket_list where basketUserId=?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, userId);
-			rs = pstmt.executeQuery();
-			
-			// 1. 장바구니 목록 가져오기 : 아이디에 해당하는 장바구니 데이터 있을 때
-			while(rs.next()){
-				// 화면에 뿌려주기 위해 DTO통째로 List에 저장하여 넘겨줘야함
-				BasketDTO bkDTO = new BasketDTO();
-				bkDTO.setBasketNum(rs.getInt("basketNum"));
-				bkDTO.setBasketUserId(rs.getString("basketUserId"));
-				bkDTO.setBasketCosNum(rs.getInt("basketCosNum"));
-				bkDTO.setBasketCosAmount(rs.getInt("basketCosAmount"));
-				
-				// 장바구니 목록 한칸에 저장하기
-				basketList.add(bkDTO);
-				
-				// 2. 상품 목록 가져오기 : 장바구니에 해당하는 상품 상세 정보저장
-				sql = "select * from cos_list where cosNum=?";
-				PreparedStatement pstmt2 = conn.prepareStatement(sql);
-				pstmt2.setInt(1, rs.getInt("basketCosNum"));
-				
-				ResultSet rs2 = pstmt2.executeQuery();
-				
-				// 상품정보가 있을 때
-				if(rs2.next()) {
-					GoodsDTO gDTO = new GoodsDTO();
-					gDTO.setCosNum(rs2.getInt("cosNum"));
-					gDTO.setCosName(rs2.getString("cosName"));
-					gDTO.setCosBrand(rs2.getString("cosBrand"));
-					gDTO.setCosPrice(rs2.getInt("cosPrice"));
-					gDTO.setCosImage(rs2.getString("cosImage"));
-					
-					goodsList.add(gDTO);
-				}
-			}
-			
-			totalVector.add(basketList);
-			totalVector.add(goodsList);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			closeDB();
-		}
-		
-		
-		return totalVector;
-	}
-	 /* getBasketList() 종료 */
-	
 	
 	/* addOrder() 시작 */
-	public void addOrder(OrderDTO oDTO, List<BasketDTO> basketList, List<GoodsDTO> goodsList) {
+	public String addOrder(OrderDTO oDTO, List<BasketDTO> basketList, List<GoodsDTO> goodsList) {
 		int o_tradeNum=0;
 		int o_num=0;
 		Calendar cal = Calendar.getInstance();
@@ -173,7 +111,7 @@ public class OrderDAO {
 				
 				sql = "insert into order_board values (?,?,?,?,?,"
 													+ "?,?,?,?,?,"
-													+ "?,?,?,?,?,"
+													+ "?,?,?,?,"
 													+ "?,?,now(),now(),?,"
 													+ "?,?,?)";
 				pstmt = conn.prepareStatement(sql);
@@ -193,30 +131,232 @@ public class OrderDAO {
 				pstmt.setString(12, oDTO.getO_msg());
 				pstmt.setInt(13, oDTO.getSumMoney());
 				pstmt.setInt(14, oDTO.getPayMoney());
-				pstmt.setInt(15, oDTO.getPayNum());	// 결제번호 - 이건필요 없을 수도 있음.. 삭제가능할듯
+				//pstmt.setInt(15, oDTO.getPayNum());	// 결제번호 - 이건필요 없을 수도 있음.. 삭제가능할듯
 				
-				pstmt.setString(16, oDTO.getPayerName());
-				pstmt.setString(17, oDTO.getPayType());
-				pstmt.setInt(18, 1);
-				pstmt.setInt(19, oDTO.getAddPoint());
-				pstmt.setInt(20, oDTO.getCpUseAmount());
-				pstmt.setInt(21, oDTO.getPtUseAmount());
+				pstmt.setString(15, oDTO.getPayerName());
+				pstmt.setString(16, oDTO.getPayType());
+				pstmt.setInt(17, 1);
+				pstmt.setInt(18, oDTO.getAddPoint());
+				pstmt.setInt(19, oDTO.getCpUseAmount());
+				pstmt.setInt(20, oDTO.getPtUseAmount());
 				
 				pstmt.executeUpdate();
 				
 				o_num++;
-				System.out.println("주문 디비 넣기 성공 ");
 			}
+			System.out.println("주문 디비 넣기 성공 ");
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return sdf.format(cal.getTime())+"-"+o_tradeNum;
+				
+	}
+	/* addOrder() 끝 */
+	
+	/* updateUserInfo(oDTO) 시작 : 결제 후 사용자 정보 변경하기 */
+	public void updateUserInfo(OrderDTO oDTO) {
+		// 1. 사용자가 사용한 포인트 차감하기
+		// 2. 누적 사용금액 더하기
+		// 3. 누적금액에 따라 사용자 레벨 변경하기
+		
+		try {
+			conn = getConnection();
+			sql = "update user_info set userPoint=userPoint+?, userTotal=userTotal+? where userId=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oDTO.getPtUseAmount());
+			pstmt.setInt(2, oDTO.getPayMoney());
+			pstmt.setString(3, oDTO.getO_userId());
+			
+			// 포인트 빼야하는데 플러스로 연산한 이유
+			// -> oDTO에 저장된 사용한 포인트값이 음수로 되어있기 때문
+			pstmt.executeUpdate();
+			
+			sql = "update user_info set userLevel = case when (userTotal between 0 and 99999) then 1 "
+					   + "when (userTotal between 100000 and 149999) then 2 "
+					   + "when (userTotal between 150000 and 199999) then 3 "
+					   + "else 4 end "
+					   + "where userId=?";
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, oDTO.getO_userId());
+			int result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeDB();
 		}
 		
-				
 	}
-	/* addOrder() 시작 */
+	/* updateUserInfo(oDTO) 끝 */
 	
 	
+	
+	/* 사용한 쿠폰 삭제하기 ; deleteCoupon(CouponDTO) */
+	public void deleteCoupon(CouponDTO cDTO) {
+		try {
+			conn = getConnection();
+			sql = "select * from my_coupon where mcUserId=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cDTO.getMcUserID());
+			
+			rs = pstmt.executeQuery();
+			System.out.println("dkdk >>>>>>>>>" + cDTO.getMcCouponNum());
+			
+			if(rs.next()) {
+				sql = "delete from my_coupon where mcUserId=? and mcCouponNum=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, cDTO.getMcUserID());
+				pstmt.setInt(2, cDTO.getMcCouponNum());
+				pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
+	/* 사용한 쿠폰 삭제하기 ; deleteCoupon(CouponDTO) */
+	
+	
+	//getOrderList()
+		/**
+		 * @param userId
+		 * @return odto
+		 * 주문목록 조회 메소드
+		 */
+		public Vector getOrderList(String userId){
+			Vector totalList = new Vector();
+			List orderList = new ArrayList();
+			List goodsList = new ArrayList();
+			
+			try {
+				conn = getConnection();
+				sql = "select * from order_board ob join cos_list cl on ob.o_cosNum = cl.cosNum where ob.o_userId = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					OrderDTO odto = new OrderDTO();
+					GoodsDTO gdto = new GoodsDTO();
+					
+					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
+					odto.setO_cosName(rs.getString("o_cosName"));
+					odto.setO_cosNum(rs.getInt("o_cosNum"));
+					odto.setO_msg(rs.getString("o_msg"));
+					odto.setO_Num(rs.getInt("o_Num"));
+					odto.setO_tradeNum(rs.getString("o_tradeNum"));
+					odto.setO_userId(rs.getString("o_userId"));
+					odto.setOrderDate(rs.getDate("orderDate"));
+					odto.setOrderStatus(rs.getString("orderStatus"));
+					odto.setPayDate(rs.getDate("payDate"));
+					odto.setPayerName(rs.getString("payerName"));
+					odto.setReceiverAddr(rs.getString("receiverAddr"));
+					odto.setReceiverEmail(rs.getString("receiverEmail"));
+					odto.setReceiverName(rs.getString("receiverName"));
+					odto.setReceiverTel(rs.getString("receiverTel"));
+					odto.setAddPoint(rs.getInt("addPoint"));
+					odto.setSumMoney(rs.getInt("sumMoney"));
+					odto.setPayType(rs.getString("payType"));
+					odto.setCpUseAmount(rs.getInt("cpUseAmount"));
+					odto.setPtUseAmount(rs.getInt("ptUseAmount"));
+					
+					
+					gdto.setCosBrand(rs.getString("cosBrand"));
+					gdto.setCosImage(rs.getString("cosImage"));
+					
+					
+
+					orderList.add(odto);
+					goodsList.add(gdto);
+				}
+				
+				totalList.add(orderList);
+				totalList.add(goodsList);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				closeDB();
+			}
+			return totalList;
+			
+		}//getOrderList()
+		
+		
+		//getorderdetail(userId,tradeNum)
+		/**
+		 * @param userId
+		 * @param tradeNum
+		 * @return goodsList,orderList
+		 * 주문 상세조회 리스트 가져오기 메소드
+		 * 
+		 */
+		public Vector getorderdetail(String userId,String tradeNum){
+			Vector totalList = new Vector();
+			List goodsList = new ArrayList();
+			List orderList = new ArrayList();
+			
+			try {
+				conn = getConnection();
+				sql = "select * from order_board ob join cos_list cl on ob.o_cosNum = cl.cosNum where ob.o_tradeNum = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, tradeNum);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					GoodsDTO gdto = new GoodsDTO();
+					OrderDTO odto = new OrderDTO();
+					
+					gdto.setCosAmount(rs.getInt("cosAmount"));
+					gdto.setCosBrand(rs.getString("cosBrand"));
+					gdto.setCosCategory(rs.getString("cosCategory"));
+					gdto.setCosImage(rs.getString("cosImage"));
+					gdto.setCosMethod(rs.getString("cosMethod"));
+					gdto.setCosName(rs.getString("cosName"));
+					gdto.setCosNum(rs.getInt("cosNum"));
+					gdto.setCosPrice(rs.getInt("cosPrice"));
+					gdto.setCosBrand(rs.getString("cosBrand"));
+					
+					odto.setAddPoint(rs.getInt("addPoint"));
+					odto.setCpUseAmount(rs.getInt("cpUseAmount"));
+					odto.setO_msg(rs.getString("o_msg"));
+					odto.setOrderStatus(rs.getString("orderStatus"));
+					odto.setPayDate(rs.getDate("payDate"));
+					odto.setPayerName(rs.getString("payerName"));
+					odto.setPayMoney(rs.getInt("payMoney"));
+					odto.setPayType(rs.getString("payType"));
+					odto.setPtUseAmount(rs.getInt("ptUseAmount"));
+					odto.setReceiverAddr(rs.getString("receiverAddr"));
+					odto.setReceiverEmail(rs.getString("receiverEmail"));
+					odto.setReceiverName(rs.getString("receiverName"));
+					odto.setReceiverTel(rs.getString("receiverTel"));
+					odto.setReceiverTel2(rs.getString("receiverTel2"));
+					odto.setSumMoney(rs.getInt("SumMoney"));
+					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
+					
+					
+					goodsList.add(gdto);
+					orderList.add(odto);
+				}
+				totalList.add(goodsList);
+				totalList.add(orderList);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return totalList;
+		}
+		//getorderdetail(userId,tradeNum)
+		
+		
 }

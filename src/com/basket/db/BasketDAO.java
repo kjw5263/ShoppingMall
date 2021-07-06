@@ -102,8 +102,6 @@ public class BasketDAO {
 				result = pstmt.executeUpdate();
 			}
 			
-			System.out.println("DAO : 장바구니 상품 체크 완료! -> "+result);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -143,8 +141,6 @@ public class BasketDAO {
 			pstmt.setInt(4, bkDTO.getBasketCosAmount());
 			
 			pstmt.executeUpdate();
-			
-			System.out.println("DAO : 장바구니 추가 완료");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -199,18 +195,17 @@ public class BasketDAO {
 					gdto.setCosName(rs2.getString("cosName"));
 					gdto.setCosPrice(rs2.getInt("cosPrice"));
 					gdto.setCosImage(rs2.getString("cosImage"));
+					gdto.setCosNum(rs2.getInt("cosNum"));
+					gdto.setCosBrand(rs2.getString("cosBrand"));
 					
 					// 상품 리스트 한칸에 저장
 					goodsList.add(gdto);
 				}
 				
-				System.out.println("DAO : 상품정보 저장완료!");
-				
 			}// while
 			
 			totalList.add(basketList);
 			totalList.add(goodsList);
-			System.out.println("DAO : 장바구니정보 + 상품정보 저장완료!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -243,8 +238,6 @@ public class BasketDAO {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println("DAO : 회원 장바구니 정보 삭제 완료");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -268,8 +261,6 @@ public class BasketDAO {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("DAO : 구매 후 장바구니 제거");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -291,7 +282,6 @@ public class BasketDAO {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("DAO : 상품정보 수정 완료!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
