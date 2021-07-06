@@ -60,7 +60,7 @@ public class OrderFrontController extends HttpServlet {
 		}
 		else if(command.equals("/OrderConfirm.or")) {
 			action = new OrderConfirmAction();
-			
+			System.out.println("request >>>>>>>>>  	" + request.getAttribute("tradeNumber"));
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
