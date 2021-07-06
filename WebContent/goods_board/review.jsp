@@ -68,8 +68,8 @@
 
 <section class="section_area" style="max-width: 480px;margin-top:10px;background-color: #fff; height: 100%; padding: 10px; box-sizing: border-box; margin-bottom: 200px; margin-left: 24%;">
  <h1 style="margin-left: 50px">별점과 리뷰를 남겨주세요.</h1>
-  <form  method="post" action="./ReviewFormPro.rev" enctype="multipart/form-data" target="ReviewFormPro.rev>
-    <img src="./admingoods/upload/<%= gdto.getCosImage().split(",")[0]%>" alt="상품...." style="width: 250px; margin-left: 45px">
+  <form  method="post" action="./ReviewFormPro.rev" enctype="multipart/form-data" target="ReviewFormPro.rev">
+    <img src="./admingoods/upload/<%= gdto.getCosImage().split(",")[0]%>" alt="상품...." style="width: 250px; margin-left: 45px;">
         <fieldset class="starability-basic" id="rating" aria-required="false" style="margin-left: 100px">
           <br>
           별점을 선택해 주세요.
