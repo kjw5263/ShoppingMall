@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.basket.db.BasketDAO;
 import com.basket.db.BasketDTO;
@@ -18,19 +19,19 @@ public class OrderAddAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		// HttpSession session = request.getSession();
-		// String id = (String)session.getAttribute("id");
-		String userId = "jiwon";
-		
-		/* 세션 처리 */
-		/*if(id == null) {
-		forward.setPath("./MemberLogin.me");
-		forward.setRedirect(true);
-		return forward;
-		} */
-		
-		
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("userId");
 		ActionForward forward = new ActionForward();
+		//System.out.println("OrderAddction >>>>> " + userId);
+		/* 세션 처리 */
+		if(userId == null) {
+			forward.setPath("./MemberLogin.me");
+			forward.setRedirect(true);
+			return forward;
+		}
+		
+		
+		
 		request.setCharacterEncoding("UTF-8");
 		String user_id = request.getParameter("userId");
 		
@@ -81,15 +82,20 @@ public class OrderAddAction implements Action{
 		bkDAO.basketDelete(userId);
 		
 		/* 사용한 쿠폰 삭제하기 */
-		int cpUse = Integer.parseInt(request.getParameter("mcCouponNum"));
-		if (cpUse != -1) {
-			CouponDTO cDTO = new CouponDTO();
-			cDTO.setMcCouponNum(cpUse);
-			cDTO.setMcUserID(userId);
-			orDAO.deleteCoupon(cDTO);
+		String mccp = request.getParameter("mcCouponNum");
+		if(!mccp.equals("")) {
+			int cpUse = Integer.parseInt(request.getParameter("mcCouponNum"));
+			if (cpUse != -1) {
+				CouponDTO cDTO = new CouponDTO();
+				cDTO.setMcCouponNum(cpUse);
+				cDTO.setMcUserID(userId);
+				orDAO.deleteCoupon(cDTO);
+			}
 		}
+		System.out.println(">>>>>>>>>>>OrderAdd 에서의 넘버는 ? >>>>>>>> " +tradeNumber);
 		
-		request.setAttribute("tradeNumber", tradeNumber);
+		//request.setAttribute("tradeNumber", tradeNumber);
+		session.setAttribute("tradeNumber", tradeNumber);
 		
 		forward.setPath("./OrderConfirm.or");
 		forward.setRedirect(true);
