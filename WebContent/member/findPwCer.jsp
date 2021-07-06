@@ -68,10 +68,8 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-			
 				<!-- 일반 로그인 폼 시작 -->
 				<form class="login100-form validate-form flex-sb flex-w" action="./FindPwAjax.me" method="post">
-				
 					<div class="row">
 						<span class="login100-form-title p-b-51">
 							비밀번호 찾기 <br>
@@ -96,9 +94,6 @@
 						<button type="button" class="login100-form-btn">
 						  인증요청
 						</button>
-							
-							
-							
 					</div>
 				</form>
 				<!-- 일반 로그인 폼 끝 -->
@@ -131,10 +126,10 @@
 			
 			<form action="./PwCheckMove.me" method="post">
 				<div class="container-login100-form-btn m-t-17">
-					<!-- 일반 로그인 버튼 시작 -->
+					<!-- 새 비밀번호 설정 버튼 시작 -->
 					<input class="login100-form-btn" type="submit" value="새 비밀번호 설정" id="submit">
 					<input type="hidden" name="PwCerCheck" value="N" id="PwCerCheck"> 
-					<!-- 일반 로그인 버튼 끝 -->
+					<!-- 새 비밀번호 설정 버튼 끝 -->
 				</div>
 			</form>	
 	
@@ -150,42 +145,7 @@
 	
 	
 	<!-- 확인 에이잭스 시작 -->
-	<script type="text/javascript">
-	$(function() {
-		
-	        $('#confirm').click(function(){
-        	
-				var checkNum = $('#checkNum').val();
-
-	           $.ajax({
-	            url: "./PwCheckAction.me",
-	            type:"post",
-	            data:{checkNum:checkNum},
-	            success:function(data){
-
-	            	if(data == 1){
-
-  		            	alert('확인됐습니다.')
-		            	
-  						$('#PwCerCheck').val('Y');
-  		            	
-  		            	
- 	               }else{
- 	            	   
- 	            	   	alert('인증번호가 다릅니다.')
-
-  						$('#PwCerCheck').val('N');
-
- 	               } // if else
-            	   
-	            }
-	         });
-           
-           
-	        })   
-		});
-	
-	</script>
+	<script src="./js/findPwCer.js"></script>
 	<!-- 확인 에이잭스 끝 -->
 	
 <!--===============================================================================================-->

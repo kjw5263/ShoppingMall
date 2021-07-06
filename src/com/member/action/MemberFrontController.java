@@ -466,14 +466,6 @@ public class MemberFrontController extends HttpServlet{
 
 			      }
 				
-			      else if(command.equals("/Survey.me")){
-						System.out.println("C : /Survey.me 호출");
-						
-						forward = new ActionForward();
-						forward.setPath("./member/survey.jsp");
-						forward.setRedirect(false);
-						
-					}    
 				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");

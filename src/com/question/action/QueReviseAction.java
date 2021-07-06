@@ -1,36 +1,35 @@
-package com.faq.action;
+package com.question.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.faq.action.ActionForward;
-import com.faq.db.FaqDAO;
-import com.faq.db.FaqDTO;
+import com.question.action.ActionForward;
+import com.question.db.QuestionDAO;
 
-public class FaqReviseAction implements Action {
+public class QueReviseAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 	System.out.println("M : FqaReviseAction_execute() 호출");
 	
 	//한글처리 
 	request.setCharacterEncoding("UTF-8");
 	
 	// 전달정보 저장(id,pass)
-	int faqNum = Integer.parseInt(request.getParameter("faqNum"));
+	int Qnum = Integer.parseInt(request.getParameter("Qnum"));
 
-	System.out.println("넘어온 faqNum값은 @@@@@@@@@@@@@@@@@@@@ : " + faqNum);
-
+	System.out.println("넘어온 Qnum값은 @@@@@@@@@@@@@@@@@@@@ : " + Qnum);
     
-    FaqDAO faqdao = new FaqDAO();
-    FaqDTO faqdto = (FaqDTO)faqdao.reviseFaq(faqNum);
+	QuestionDAO qdao = new QuestionDAO();
+	
+    String Qsub = qdao.reviseQue(Qnum);
 
-    request.setAttribute("faqdto", faqdto);
+    request.setAttribute("Qsub", Qsub);
+    request.setAttribute("Qnum", Qnum);
         
      // 페이지 이동 (./FaqList.faq)
     ActionForward forward = new ActionForward();
-	forward.setPath("./faq_board/faqRevise.jsp");
+	forward.setPath("./question/queRevise.jsp");
 	forward.setRedirect(false);
 	return forward;
 	}

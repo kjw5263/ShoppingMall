@@ -1,4 +1,4 @@
-<%@page import="com.faq.db.FaqDTO"%>
+<%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -55,12 +55,13 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
+	<!-- 화장품 리스트 css 시작 -->
+    <link rel="stylesheet" href="./css/question/queCustomizedlist.css" type="text/css">
+	<!-- 화장품 리스트 css 끝 -->
 
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
-	<script src="./js/chatbot.js" type="text/javascript"></script>
-
 
 </head>
 <body>
@@ -69,94 +70,71 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
+	<div class="container-fluid"></div>
 	<!-- container 시작 -->	
-	<div class="container-fluid">	
-	
-	<!-- 제목 시작 -->
-	  <div class="col-md-12 text-center p-5 row">
-	  
-		  <div class="col-2"></div>
-		  <div class="col-4">
-		   	<a href="./FaqList.faq" style="text-decoration-line: none; color: black;"> <h3>고객 센터 - 자주묻는 질문</h3> </a>
-		  </div>
-		  <div class="col-6"></div>
+	<div class="container text-center mt-5">	
+		${userSkinType} 피부타입을 위한 추천 화장품		
 		
-	  </div>
-	<!-- 제목 끝 --> 	
-				
-	<!-- 글쓰기 버튼 시작 -->			
-		<div class="row">
-			<div class="col-9"></div>
-			<div class="col-3">
-				<c:if test="${userId eq 'admin' }">
-					<button type="button" class="btn btn-secondary" id="write">글쓰기</button>
-				</c:if>
+		<div class="row mt-5">
+		
+			<c:forEach var="i" items="${ CumtomizedList }">
+			
+			
+               <div class="col-lg-3 col-sm-6 mix all ${i.cosBrand} ${i.cosCategory} ${i.cosSkinType}">
+                   <div class="single-product-item">
+                       <figure>
+                           <a href="./GoodsDetail.cos?cosNum=${i.cosNum}"><img src="${i.cosImage}" alt=""></a>
+                           <div class="p-status">new</div>
+                       </figure>
+                       <div class="product-text">
+                           <h6>${i.cosName}</h6>
+                           <p>${i.cosPrice}원  </p>
+                           
+                           <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=${i.cosNum} '">장바구니 담기</button>	
+           		
+                       </div>
+                   </div>
+               </div>
+             </c:forEach>
+               
+			
 			</div>
 		</div>
-	<!-- 글쓰기 버튼 시작 -->
-	
-		<div class="row">
-			<div class="col-2 text-center"></div>
-			<div class="col-8">	
-				
-				<!-- 테이블 카테고리 시작 -->
-				<table class="table mb-0 mt-5">
-				  <thead class="table table-bordered text-center">
-				  	<tr>
-				      <th scope="col"><a href="./FaqList.faq">전체</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=회원관련">회원관련</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=주문결제">주문결제</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=포인트">포인트</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=환불">환불</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=배송안내">배송안내</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=상품관련">상품관련</a></th>
-				      <th scope="col"><a href="./FaqList.faq?category=기타">기타</a></th>
-				    </tr>
-				  </thead>
-				</table>
-				<!-- 테이블 카테고리 끝 -->
-				
-				<!-- faq 테이블 시작 -->
-				<table class="table">
-				  <tbody>
-				  	<tr>
-				      <th class="text-center">유형</th>
-				      <th class="text-center">내용</th>
-				    </tr>
-				    <c:forEach var="i" items="${ faqList }">
-				    <tr>
-				      <th class="text-center">${i.faqCategory }</th>
-				      <td class="text-center" style='cursor:pointer;' id="${i.faqNum }">
-				      	${i.faqQuestion }<br><br>
-				       </td>
-				      <c:if test="${userId eq 'admin' }">
-					  <th id="${i.faqNum }">
-				      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> /
-				       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=${i.faqNum }'">삭제</span>					  
-					  </th>
-					  </c:if>			       
-				    </tr>
-				    <tr style="display: none;" id="${i.faqNum }_answer">
-					  <th class="text-center">답변</th>
-					  <td class="text-center"><b style="width: 737;">${i.faqAnswer }</b></td>
-				    </tr>
-				    </c:forEach>
-				  </tbody>
-				</table>
-				<!-- faq 테이블 끝 -->
-			</div>
-			<div class="col-2">	</div>
-		</div>
-	</div>
 	<!-- container 끝 -->	
 	
+	<hr>
+	
+	
+	<div class="container-fluid">
+	
+		<div class="row m-5">
+			<div class="col-5"></div>
+			<div class="col-2 text-center">
+					<!-- 일반 로그인 버튼 시작 -->
+					<input class="login100-form-btn" type="button" value="더 많은 제품 보러가기" onclick="location.href='./GoodsList.cos'"> 
+					<!-- 일반 로그인 버튼 끝 -->
+			</div>
+			<div class="col-5"></div>
+		
+		</div>
+			
+	</div>
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->
-    
-    <!-- 질문 클릭시 답변 보이기 스크립스 시작 -->
-    <script src="./js/faq_list.js"></script>
-    <!-- 질문 클릭시 답변 보이기 스크립스 끝 -->
+	
+	
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/jquery.magnific-popup.min.js"></script>
+<script src="./js/jquery.slicknav.js"></script>
+<script src="./js/jquery.nice-select.min.js"></script>
+<script src="./js/owl.carousel.min.js"></script>
+<script src="./js/mixitup.min.js"></script>
+<script src="./js/main.js"></script>
+<script type="text/javascript"></script>
+	
 	
 </body>
+
 </html>

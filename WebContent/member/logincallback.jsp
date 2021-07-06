@@ -42,18 +42,6 @@
 	  }
 	</script>
 	<!-- 네이버 로그인 정보 받아오기 끝 -->
-	<script>
-// 	제이쿼리 시작
-// 	$(function() {
-// 		$('#n_Email').val = n_Email;
-		
-// 		alert($('#n_Email').val());
-		
-// 		$('#fr').submit();
-		
-// 	});
-	// 제이쿼리 끝
-	</script>
 </head>
 <body>
 
