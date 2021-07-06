@@ -34,13 +34,13 @@ public class ReviewFrontController extends HttpServlet {
         Action action = null;
         ActionForward forward = null;
 
-        if (command.equals("/reviewForm.rev")){
+        if (command.equals("/ReviewForm.rev")){
             forward = new ActionForward();
             forward.setPath("./goods_board/review.jsp");
 
         }
 
-        else if (command.equals("/reviewFormPro.rev")){
+        else if (command.equals("/ReviewFormPro.rev")){
             System.out.println("C : ");
             action = new ReviewWriteFormAction();
             try {
@@ -49,7 +49,7 @@ public class ReviewFrontController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        else if (command.equals("/reviewList.rev")){
+        else if (command.equals("/ReviewList.rev")){
             action = new ReviewListAction();
             try {
                 forward = action.execute(req, resp);
@@ -57,7 +57,7 @@ public class ReviewFrontController extends HttpServlet {
                 e.printStackTrace();
             }
 
-        }else if (command.equals("/reviewUpdateForm.rev")){
+        }else if (command.equals("/ReviewUpdateForm.rev")){
             action = new ReviewUpdateForm();
             try {
                 forward = action.execute(req, resp);
@@ -66,7 +66,7 @@ public class ReviewFrontController extends HttpServlet {
             }
         }
 
-        else if (command.equals("/reviewUpdate.rev")){
+        else if (command.equals("/ReviewUpdate.rev")){
             action = new ReviewUpdateAction();
             try {
                 forward = action.execute(req, resp);
@@ -74,7 +74,7 @@ public class ReviewFrontController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        else if (command.equals("/reviewDelete.rev")){
+        else if (command.equals("/ReviewDelete.rev")){
             action = new ReviewDeleteAction();
             try {
                 forward = action.execute(req, resp);
@@ -82,7 +82,7 @@ public class ReviewFrontController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        else if (command.equals("/reviewLike.rev")){
+        else if (command.equals("/ReviewLike.rev")){
             action = new ReviewLikeAction();
             try {
                 forward = action.execute(req, resp);

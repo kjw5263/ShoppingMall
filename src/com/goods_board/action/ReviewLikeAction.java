@@ -44,7 +44,7 @@ public class ReviewLikeAction implements Action {
             grdao.reviewUp(reviewNum);
             likeDAO.insertLike(likeDTO);
         }
-        forward.setPath("GoodsDetail.cos?cosNum="+cosNum);
+        forward.setPath("./GoodsDetail.cos?cosNum="+cosNum);
         forward.setRedirect(false);
         return forward;
 

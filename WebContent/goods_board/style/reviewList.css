@@ -1,8 +1,9 @@
 .review_list_wrap {
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
-    margin: 100px 50px 100px 150px;
-    width: 78%;
+    margin: 10px 50px 100px 205px;
+    width: 68%;
+
 
 }
 .info_test {
@@ -175,7 +176,5 @@ review_thum_type1 ul.inner_clrfix li {
     content: "";
     width: 17px;
     height: 18px;
-    background: url("/goods_board/style/img/goodsIcon.png");
-    background-size: 17px auto;
 
 }

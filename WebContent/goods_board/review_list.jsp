@@ -124,11 +124,12 @@
             </div>
             <div class="review_thum_type1">
                 <ul class="inner_clrfix">
-                    <li>
+                    <li style="list-style: none">
                         <span class="img_size11">
-                            <% if (reviewList.get(i).getReviewImage() !=null){%>
-                            <img src="./goods_board/upload/<%=reviewList.get(i).getReviewImage() %>" alt=".." style="max-width: 15%">
-                            <% }%>
+
+                            <img src="./goods_board/upload/<%=reviewList.get(i).getReviewImage()%>" alt=".." style="max-width: 15%">
+
+
                         </span>
                     </li>
                 </ul>
@@ -140,8 +141,8 @@
                 <input type="hidden" name="userId" value="<%=reviewList.get(i).getUserid() %>">
                 <button type="submit" class="btn_recom">
                     이 리뷰가 도움이 돼요!
-                <span class="num1">
-                  <img src="./goods_board/style/img/IconGoods.png" alt="" style="width: 17px;padding: 0">
+                <span class="num1" style="padding: 0 15px;">
+                  <img src="./goods_board/style/img/goodsIcon.png" alt="" style="width: 17px;">
                     <%=reviewList.get(i).getReviewUp() %>
                 </span>
             </button>
