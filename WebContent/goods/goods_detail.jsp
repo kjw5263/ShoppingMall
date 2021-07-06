@@ -46,7 +46,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <script src="./js/chatbot.js" type="text/javascript"></script>
     <title>상세페이지</title>
     <script type="text/javascript">
         function isBasket() {
@@ -63,6 +63,7 @@
                 document.gfr.submit();
             }
         }
+
     </script>
 
 </head>
@@ -77,6 +78,9 @@
     GoodsReviewDAO grdao = new GoodsReviewDAO();
     int cnt = pageInfo.getListCount();
     int avg = grdao.getRating(dto.getCosNum());
+    GoodsDAO dao = new GoodsDAO();
+    int count = dao.getGoodsCnt();
+
 
 %>
 <!-- Page Preloder -->
@@ -111,8 +115,8 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="page-breadcrumb">
-                    <%-- <h2><%=dto.getCosCategory() %><span>.</span></h2> --%>
-                    <a href="#">홈</a>
+                     <h2><%=dto.getCosCategory() %><span>.</span></h2>
+                    <a href="./GoodsList.cos">홈</a>
                     <a href="#"><%= dto.getCosBrand()%></a>
                     <a class="active" href="#"><%=dto.getCosCategory() %></a>
                 </div>
@@ -130,8 +134,18 @@
 <section class="product-page">
     <div class="container">
         <div class="product-control">
+                <% if (dto.getCosNum() == 1){ %>
+            <a href="GoodsDetail.cos?cosNum=<%=count%>">Previous</a>
+                <%}else { %>
             <a href="GoodsDetail.cos?cosNum=<%=dto.getCosNum()-1%>">Previous</a>
+                <% }%>
+            <% if (dto.getCosNum()==count){ %>
+            <a href="GoodsDetail.cos?cosNum=1">Next</a>
+            <% } else {%>
             <a href="GoodsDetail.cos?cosNum=<%=dto.getCosNum()+1 %>">Next</a>
+            <%}%>
+
+
         </div>
         <input type="hidden" name="cosNum" value="<%= dto.getCosNum()%>">
         <div class="row">
@@ -145,7 +159,7 @@
                     </div>
                     <div class="product-img">
                         <figure>
-                            <img src="<%= dto.getCosImage()%>" alt="">
+                            <img src="admingoods/upload/<%= dto.getCosImage().split(",")[0]%>" alt="">
                             <div class="p-status">new</div>
                         </figure>
                     </div>
@@ -236,21 +250,27 @@
 </section>
 </form>
 <!-- Product Page Section End -->
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+
 
 <div>
+
     <ul class="nav nav-tabs">
-        <li class='active'><a href="#tabmenu_01" data-toggle="tab">상세이미지</a></li>
-        <li><a href="#tabmenu_02" data-toggle="tab">사용설명</a></li>
-        <li><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=cnt %>)</a></li>
+      <p style="width: 400px;">
+        <li class='active' style="width: 200px; text-align: center; font-size: 20px"><a href="#tabmenu_01" data-toggle="tab">상세이미지</a></li>
+        <li style="width: 200px;text-align: center; font-size: 20px"><a href="#tabmenu_02" data-toggle="tab">사용설명</a></li>
+        <li style="width: 200px;text-align: center;font-size: 20px"><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=cnt %>)</a></li>
+    </p>
     </ul>
+
     <div class="tab-content">
         <div class="tab-pane fade in active" id="tabmenu_01">
-            <p style="margin: 100px 0 200px 400px">
-                <img src="<%=dto.getCosImage() %>" alt="이미지...">
+            <p style="text-align: center">
+                <% for (int i = 1; i < dto.getCosImage().split(",").length; i++) {%>
+                <img src="admingoods/upload/<%=dto.getCosImage().split(",")[i] %>" alt=".">
+                <%}%>
             </p>
         </div>
         <div class="tab-pane fade" id="tabmenu_02">
@@ -282,8 +302,8 @@
         </div>
         <div class="tab-pane fade" id="tabmenu_03">
 
-            <h3>리뷰</h3>
-            <div class="wrap_area_view" style="width: 80%; margin: 50px 50px 100px 150px;">
+
+            <div class="wrap_area_view" style="width: 80%; margin: 50px 50px 10px 130px; padding: 60px">
              <div class="review_rating_area">
                 <div class="inner">
                     <div class="grade_img">
@@ -384,9 +404,11 @@
                     <div class="write_info">
                         <dl>
                             <dt>리뷰를 써보세요</dt>
+
                         </dl>
                         <p class="alignCenter">
-                            <button class="btn-primary" onclick="location.href='/reviewForm.rev?cosNum=<%=dto.getCosNum() %>'" >글등록</button>
+                            <button class="btn-primary" onclick="insertPopup()" >글등록</button>
+
                         </p>
                     </div>
                 </div>
@@ -405,6 +427,13 @@
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
+    <script type="text/javascript">
+        function insertPopup(){
+            window.name="ReviewFormPro.rev"
+            window.open("./ReviewForm.rev?cosNum=<%=dto.getCosNum() %>", "new",
+                "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=700, height=700, left=0, top=0" );
+        }
+    </script>
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.magnific-popup.min.js"></script>

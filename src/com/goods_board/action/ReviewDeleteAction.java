@@ -16,7 +16,7 @@ public class ReviewDeleteAction implements Action{
         ActionForward forward = new ActionForward();
         GoodsReviewDAO grdao = new GoodsReviewDAO();
         grdao.deleteReview(reviewNum);
-        forward.setPath("/reviewList.rev");
+        forward.setPath("./ReviewList.rev");
         forward.setRedirect(true);
         return forward;
     }

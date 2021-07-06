@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-    
+	<script src="./js/chatbot.js" type="text/javascript"></script>
     <style type="text/css">
 button{
   background:#1AAB8A;

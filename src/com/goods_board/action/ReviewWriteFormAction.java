@@ -50,7 +50,7 @@ public class ReviewWriteFormAction implements Action{
             PrintWriter out = response.getWriter();
             out.println("<script>");
             out.println("alert('이미 글을 등록 하셨습니다.')");
-            out.println("location.href='/'");
+            out.println("location.href='./'");
             out.println("</script>");
             out.close();
 
@@ -59,8 +59,8 @@ public class ReviewWriteFormAction implements Action{
         else {
             grdao.createReview(grdto);
         }
-        forward.setPath("GoodsDetail.cos?cosNum="+grdto.getCosNum());
-        forward.setRedirect(false);
+        forward.setPath("./GoodsDetail.cos?cosNum="+cosNum);
+        forward.setRedirect(true);
         return forward;
     }
 }

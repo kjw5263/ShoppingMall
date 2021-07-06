@@ -50,7 +50,7 @@
 
 
 <h1>별점과 리뷰를 수정해주세요</h1>
-<form  method="post" action="./ReviewUpdate.rev">
+<form  method="post" action="./ReviewUpdate.rev" target="./ReviewList.rev">
 <%--  <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 350px">--%>
   <fieldset class="starability-basic" id="rating" aria-required="false">
     <legend>별점을 선택해 주세요.</legend>
@@ -86,11 +86,25 @@
     <textarea rows="10" minlength="5" name="reviewContent" required></textarea>
   </label>
 
-  <input type="submit" id="save" value="수정">
-  <input type="reset" value="취소">
+
+  <input type="submit" id="save" value="수정" onclick="window.close()">
+  <input type="reset" value="취소" onclick="closePopup()">
   <input type="file" name="reviewImage">
 </form>
+<script type="text/javascript">
+  function closePopup(){
+    window.close();
 
+  }
+  function popupClose(form){
+    form.target = opener.name;
+    form.submit();
+    if (opener !=null){
+      opener.insert =null;
+      self.close();
+    }
+  }
+</script>
 </body>
 
 </html>
