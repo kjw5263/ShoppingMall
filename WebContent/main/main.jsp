@@ -87,7 +87,7 @@
 
 	<!-- 사이드 배너 css 시작 -->
 	<style type="text/css">
-	#sidebanner { position:fixed; top:20%; left:95%;  width:100px; height:200px; }
+	#sidebanner { position:fixed; top:20%; left:95%;  width:100px; height:200px; z-index: 1; }
 	</style>
 	<!-- 사이드 배너 css 끝 -->
 
@@ -349,8 +349,8 @@
     <div id="sidebanner">
     	<a href="./Question.que"><img alt="" src="./img/main/search.png">
     	<div class="text-center">
-    		나에게 맞는<br>
-    		화장품은?
+    	<b>나에게 맞는<br>
+    		화장품은?</b>
     	</div>
     	</a>
 	</div>
