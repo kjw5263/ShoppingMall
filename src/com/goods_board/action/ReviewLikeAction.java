@@ -28,24 +28,35 @@ public class ReviewLikeAction implements Action {
         likeDTO.setReviewNum(reviewNum);
         int check = likeDAO.checkLike(id,reviewNum);
         ActionForward forward = new ActionForward();
-
-        if (check==1){
+        if (id == null){
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");
-            out.println("alert('이미 글을 등록 하셨습니다.')");
-            out.println("location.href='/'");
+            out.println("alert('로그인 해주세요')");
+            out.println("location.href='./MemberLogin.me'");
             out.println("</script>");
             out.close();
 
             return null;
         }
+        if (check==1){
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('이미 글을 등록 하셨습니다.')");
+            out.println("location.href='./'");
+            out.println("</script>");
+            out.close();
+
+            return null;
+        }
+
         else {
             grdao.reviewUp(reviewNum);
             likeDAO.insertLike(likeDTO);
         }
         forward.setPath("./GoodsDetail.cos?cosNum="+cosNum);
-        forward.setRedirect(false);
+        forward.setRedirect(true);
         return forward;
 
 
