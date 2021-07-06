@@ -25,7 +25,7 @@ public class setGoodsTool {
         goods.setIngredient(rs.getString("ingredient"));
         goods.setCosMethod(rs.getString("cosMethod"));
         goods.setCosWarning(rs.getString("cosWarning"));
-        goods.setCosImage(rs.getString("cosImage"));
+        goods.setCosImage(rs.getString("cosImage").split(",")[0]);
         goods.setOrderCount(rs.getInt("orderCount"));
         goods.setUseDate(rs.getInt("useDate"));
 		}catch(SQLException e){

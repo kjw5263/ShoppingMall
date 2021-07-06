@@ -1,3 +1,8 @@
+
+<%@page import="com.goods.db.listDAO"%>
+<%@page import="com.goods.db.GoodsDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.var.list.varlist"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,7 +44,45 @@
 	<style type="text/css">
 		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%; top: 90%; }
 	</style>
-    
+    <style type="text/css">
+button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:34px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+    </style>
 
     
 </head>
@@ -55,7 +98,22 @@
     <!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
+  <%
+//테스트 버전 업2!
+  	listDAO gdao = new listDAO();
+  
+ 	
+   
+    List bestgoodsList = gdao.getbestGoodsList();
 
+    String goHead = "./GoodsList.cos";
+    varlist var = new varlist();
+    String http[][] = var.getHttp();
+	String cat[][] = var.getCat();	
+    String skin[][] = var.getSkin(); 
+   
+    int bestsize = bestgoodsList.size();
+  %>
     <!-- Hero Slider Begin -->
     <section class="hero-slider">
         <div class="hero-items owl-carousel">
@@ -190,111 +248,36 @@
                             <h2>Latest Products</h2>
                         </div>
                         <ul class="product-controls">
-                            <li data-filter="*">All</li>
-                            <li data-filter=".dresses">Dresses</li>
-                            <li data-filter=".bags">Bags</li>
-                            <li data-filter=".shoes">Shoes</li>
-                            <li data-filter=".accesories">Accesories</li>
+                        	<li data-filter=".*">All</li>
+                          <%
+                            for(int i = 2 ; i<http.length;i++){
+                            	
+                            %>
+                            <li data-filter=".<%=http[i][1] %>"><%=http[i][1] %></li>
+                            <%} %>
+                            
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row" id="product-list">
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                <%for(int i = 0 ; i<bestsize ;i++){ 
+            	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
+            	%>
+                <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosCategory() %> ">
                     <div class="single-product-item">
                         <figure>
-                            <a href="#"><img src="./img/products/img-1.jpg" alt=""></a>
+                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
-                            <h6>Green Dress with details</h6>
-                            <p>$22.90</p>
+                            <h6><%=dto.getCosName()%></h6>
+                            <p><%=dto.getCosPrice() %>원  </p>
+                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-2.jpg" alt=""></a>
-                            <div class="p-status sale">sale</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Yellow Maxi Dress</h6>
-                            <p>$25.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all shoes accesories">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-3.jpg" alt=""></a>
-                            <div class="p-status">new</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>One piece bodysuit</h6>
-                            <p>$19.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all shoes accesories">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-4.jpg" alt=""></a>
-                            <div class="p-status popular">popular</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Blue Dress with details</h6>
-                            <p>$35.50</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses shoes">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-5.jpg" alt=""></a>
-                            <div class="p-status">new</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Green Dress with details</h6>
-                            <p>$22.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all accesories bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-6.jpg" alt=""></a>
-                            <div class="p-status sale">sale</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Yellow Maxi Dress</h6>
-                            <p>$25.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all dresses bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-7.jpg" alt=""></a>
-                        </figure>
-                        <div class="product-text">
-                            <h6>One piece bodysuit</h6>
-                            <p>$19.90</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mix all accesories bags">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="#"><img src="./img/products/img-8.jpg" alt=""></a>
-                            <div class="p-status popular">popular</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6>Blue Dress with details</h6>
-                            <p>$35.50</p>
-                        </div>
-                    </div>
-                </div>
+                <%} %>
             </div>
         </div>
     </section>
