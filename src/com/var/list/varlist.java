@@ -24,7 +24,7 @@ public class varlist {
 	   	{"?cat=bringgreen","브링그린"},
 	   	{"?cat=anua","아누아"},
 	   	{"?cat=ordinary","디오디너리"},
-	   	{"?cat=abib","아바브"},
+	   	{"?cat=abib","아비브"},
 	   	{"?cat=senka","센카"},
 	   	{"?cat=milktouch","밀크터치"},
 	   	{"?cat=mynunc","미샤"},

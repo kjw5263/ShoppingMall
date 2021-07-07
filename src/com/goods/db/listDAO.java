@@ -61,7 +61,7 @@ public class listDAO extends DBconnection{
 	// getGoodsList() 검색창에 사용할 테이터 
 	//*** 검색창에 넣은 string 값을 item 으로 받아오면 
 	// item 의 값이 들어간 이름의 것을 출력해냄!
-	public List getGoodsList(String item ) {
+	public List getseGoodsList(String item ) {
 
 		// item에 따라서 다른 결과를 처리
 		// item - all/best/그외 카테고리
