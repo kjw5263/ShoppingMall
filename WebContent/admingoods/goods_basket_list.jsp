@@ -150,7 +150,6 @@
 					count += bkDTO.getBasketCosAmount();
 					hap += mul;
 				} %>
-				
 				<tr class="table-active">
 					<th scope="col" colspan="3" style="color:black;">합계</th>
 					<td style="color:black;">

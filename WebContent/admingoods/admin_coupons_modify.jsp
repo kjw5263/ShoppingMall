@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.admin.goods.db.AdminGoodsDAO"%>
 <%@page import="com.coupon.db.CouponDTO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -99,7 +100,7 @@
 		<div class="container">
 		<form method="post" action="./AdminCouponsModifyAction.ag">
 			<!-- 상품번호 저장 -->
-			<input type="hidden" name="couponNum" value="<%=dto.getCouponNum() %>">
+			<input type="hidden" name="couponNum" value="${dto.couponNum}">
 			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
@@ -109,15 +110,15 @@
 				<tbody>
 				 <tr>
 		           <th>쿠폰이름</th>
-		           <td><input type="text" name="couponName" value="<%=dto.getCouponName() %>" class="form-control" required></td>           
+		           <td><input type="text" name="couponName" value="${dto.couponName}" class="form-control" required></td>           
 		         </tr>
 				 <tr>
 		           <th>쿠폰정보</th>
-		           <td><input type="text" name="couponNote" value="<%=dto.getCouponNote() %>" class="form-control" required></td>           
+		           <td><input type="text" name="couponNote" value="${dto.couponNote}" class="form-control" required></td>           
 		         </tr>
 		         <tr>
 					<th>할인율</th>
-					<td><input type="text" name="couponDc" value="<%=dto.getCouponDc() %>" class="form-control" required></td> 
+					<td><input type="text" name="couponDc" value="${dto.couponDc}" class="form-control" required></td> 
 				</tr>
 				</tbody>
 			</table>

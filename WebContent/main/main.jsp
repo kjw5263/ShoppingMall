@@ -40,6 +40,16 @@
 
     </script>
     
+    <!-- 사이드 배너 css 시작 -->  
+	<style type="text/css">
+	#sidebanner { position:fixed; top:20%; left:95%;  width:100px; height:200px; z-index: 1; }
+	</style>
+	<!-- 사이드 배너 css 끝 -->
+	
+	<!-- 챗봇 시작 -->
+	<script src="./js/chatbot.js" type="text/javascript"></script>
+	<!-- 챗봇 끝 -->
+    
 </head>
 
 <body>
@@ -280,27 +290,23 @@
     </section>
     <!-- skincare Section End -->
 
-    <!-- Logo Section Begin -->
-    <div class="logo-section spad">
-        <div class="logo-items owl-carousel">
-            <div class="logo-item">
-                <img src="./img/logos/logo-1.png" alt="">
-            </div>
-            <div class="logo-item">
-                <img src="./img/logos/logo-2.png" alt="">
-            </div>
-            <div class="logo-item">
-                <img src="./img/logos/logo-3.png" alt="">
-            </div>
-            <div class="logo-item">
-                <img src="./img/logos/logo-4.png" alt="">
-            </div>
-            <div class="logo-item">
-                <img src="./img/logos/logo-5.png" alt="">
-            </div>
+    <!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 200px;">
+        <div class="container">
         </div>
-    </div>
-    <!-- Logo Section End -->
+    </section>
+    <!-- Page Add Section End -->
+    
+    <!-- 사이드 배너 시작 -->  
+    <div id="sidebanner">
+    	<a href="./Question.que"><img alt="" src="./img/main/search.png">
+    	<div class="text-center">
+    	<b>나에게 맞는<br>
+    		화장품은?</b>
+    	</div>
+    	</a>
+	</div>
+    <!-- 사이드 배너 끝 -->
 
     <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />

@@ -1,10 +1,9 @@
-<%@page import="com.member.db.MemberDTO"%>
 <%@page import="com.admin.goods.db.AdminGoodsDAO"%>
-<%@page import="java.util.List"%>
+<%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,7 +35,7 @@
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
     
-<title>회원 정보 목록</title>
+<title>등록 상품 목록</title>
 </head>
 <body>
 <!-- Header Section Begin -->
@@ -60,14 +59,12 @@
 		
 		<div class="col-12 text-center">
 			
-    <!-- admin member list Begin -->
-
+    <!-- admin goods list Begin -->
+    
    	<%
-   	List memberList = (List)request.getAttribute("memberList"); 
 	// AdminGoodsDAO 객체 생성
 	AdminGoodsDAO adao = new AdminGoodsDAO();
-	
-	// 디비에 글의 수를 계산하는 메서드 생성 -> 호출
+
 	int cnt = adao.getGoodsCount();
 
 	// 한페이지당 보여줄 상품의 개수
@@ -87,10 +84,10 @@
 	int endRow = currentPage*pageSize;
 	
 	// 디비에 저장된 모든 글중에서 원하는 만큼만 가져오기(페이지 사이즈)
-	ArrayList<MemberDTO> getMemberList = adao.getMemberList(startRow,pageSize);
+	ArrayList<GoodsDTO> goodsList = adao.getGoodsList(startRow,pageSize);
 	%>
     
-    <section class="admin_member_list">
+    <section class="admin_goods_list">
         <div class="container">
 	        <table>
 		    <tr>
@@ -99,7 +96,7 @@
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminGoodsList.ag"><b>상품목록</b></a>
+				        <a class="nav-link active" href="./AdminGoodsList.ag"><b>상품목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
@@ -108,7 +105,7 @@
 				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link active" href="./AdminMemberList.ag"><b>회원목록</b></a>
+				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
@@ -119,46 +116,62 @@
 		    </td>
 		    </tr>
 		    </table><br>
-			<br>
 			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
-						<th colspan="12" style="text-align: center;"><b>회원 리스트</b></th>
+						<th colspan="12" style="text-align: center;"><b>상품 등록 리스트</b></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th width="6%">아이디</th>
-						<th width="8%">이름</th>
-						<th width="11%">이메일</th>
-						<th width="18%">주소</th>
-						<th width="15%">전화번호</th>
-						<th width="6%">성별</th>
+						<th width="6%">번호</th>
+						<th width="12%">이미지</th>
+						<th>이름</th>
+						<th>가격</th>
+						<th width="9%">브랜드</th>
+						<th width="9%">카테고리</th>
 						<th width="9%">피부타입</th>
-						<th width="8%">피부고민</th>
-						<th width="8%">회원등급</th>
+						<th width="7%">재고</th>
+						<th width="7%">용량</th>
+						<th width="7%">등록일</th>
+						<th width="9%">수정/삭제</th>
 					</tr>
 					
-					<c:forEach var="i" items="${ memberList }">
+					<c:forEach var="i" items="${ goodsList }">
 
 					<tr>
-						<td>${i.userId }</td>
-						<td>${i.userName }</td>
-						<td>${i.userEmail }</td>
-						<td>${i.userAddr }</td>
-						<td>${i.userTel }</td>
-						<td>${i.userGender }</td>
-						<td>${i.userSkinType }</td>
-						<td>${i.userTrouble }</td>
-						<td>${i.userLevel }</td>
-					</tr>     
-					</c:forEach>	          
+						<td><b>${i.cosNum }</b></td>
+						<td>
+							<img src="./admingoods/upload/${i.cosImage.split(',')[0]}"
+								 width="120px" height="120px">
+						</td>
+						<td>${i.cosName }</td>
+						<td>${i.cosPrice }</td>
+						<td>${i.cosBrand }</td>
+						<td>${i.cosCategory }</td>
+						<td>${i.cosSkinType }</td>
+						<td>${i.cosAmount }</td>
+						<td>${i.cosVolumn }ml</td>
+						<td>${i.cosWriteDate }</td>
+						<td>
+						<ul class="nav flex-column ">
+						  <li class="nav-item mb-2">
+							<a href="./AdminGoodsModify.ag?cosNum=${i.cosNum }" class="btn btn-primary btn-sm">수정</a>	
+						  </li>
+						  <li class="nav-item mb-2">
+							<a href="./AdminGoodsDelete.ag?cosNum=${i.cosNum }" class="btn btn-danger btn-sm">삭제</a>
+						  </li>
+						</ul>
+						</td>
+					</tr>
+					</c:forEach>   	          
 				</tbody>
 			</table>	
         </div>
     </section>
     
-	  <hr>
+    <hr>
+    
     <!-- 페이징 처리 -->
     <div style="margin-left: 45%;">
 	  <ul class="pagination">
@@ -182,7 +195,7 @@
 	    	if(startPage > pageBlock){
 	    		%>
 	    		<li class="page-item">
-		    		<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=startPage-pageBlock%>" aria-label="Previous">
+		    		<a class="page-link" href="./AdminGoodsList.ag?pageNum=<%=startPage-pageBlock%>" aria-label="Previous">
 		    		<span aria-hidden="true">&laquo;</span>
 		    		</a>
 		    		</span>
@@ -194,7 +207,7 @@
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
 	    		<li class="page-item">
-	    			<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=i%>"><%=i %></a>
+	    			<a class="page-link" href="./AdminGoodsList.ag?pageNum=<%=i%>"><%=i %></a>
 	    		</li>
 	    		<%    		
 	    	}
@@ -203,7 +216,7 @@
 	    	if(endPage < pageCount){
 	    		%>
 	    		<li class="page-item">
-	    			<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=startPage+pageBlock%>" aria-label="Next">
+	    			<a class="page-link" href="./AdminGoodsList.ag?pageNum=<%=startPage+pageBlock%>" aria-label="Next">
 	    		<span aria-hidden="true">&raquo;</span>
 	    		<%
 	    	}
@@ -213,7 +226,12 @@
 	  </ul>
 	  </div>
 	  <!-- 페이징 처리 -->
-    <!-- admin member list End -->
+	  
+    
+  
+    
+	 
+    <!-- admin goods list End -->
 			
 		</div>
 		<div class="col-0">	
