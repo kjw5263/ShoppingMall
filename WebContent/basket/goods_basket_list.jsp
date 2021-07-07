@@ -71,14 +71,13 @@
         <form name="form" method="post" action="./BasketList.ba">
 	        <div align="left">
 			    <input type="submit" value="선택삭제" onclick="javascript: form.action='BasketDelete.ba'" class="btn btn-secondary"/>
-		    </div><hr>
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-				<thead>
-					
+		    </div>
+			<table class="table" class="table" style="text-align: center; margin-top:25px; font-size:19px">
+				<thead class="thead-light">
 					<tr>
-						<th style="background-color: #b0bcc2; text-align: center; color: white;">
-						<input type="checkbox" name="allCheck" id="allCheck"/><label for="allCheck">
-						&nbsp;모두 선택</label>
+						<th>
+						<input type="checkbox" name="allCheck" id="allCheck"/>
+						<label for="allCheck" style="color:black; margin-bottom:-10px; font-size:18px">&nbsp;모두 선택</label>
 						<script>
 							$("#allCheck").click(function(){
 								var chk = $("#allCheck").prop("checked");
@@ -90,14 +89,13 @@
 							});
 						</script>						
 						</th>
-						<th colspan="12" style="background-color: #b0bcc2; text-align: center; color: white;"></th>
+						<th colspan="12"></th>
 					</tr>
 				</thead>
 				<tbody>
-				<tr style="text-align: center; color: #7b7b7b;">
-					<th>선택</th>
-					<th>이미지</th>
-					<th>이름</th>
+				<tr>
+					<th scope="col">선택</th>
+					<th scope="col" colspan="2">상품정보</th>
 					<th>가격</th>
 					<th colspan="4">수량</th>
 				</tr>
@@ -127,12 +125,12 @@
 					<form name="form" method="post" action="./BasketList.ba">
 					<input type="hidden" name="bkNum" class="bkNum" value="<%=bkDTO.getBasketNum() %>"/>
 					<td>
-						<ul class="nav flex-column " style="width: 100px; margin-left: 0; margin-right: auto;">
+						<ul class="nav flex-column " style="width: 100px; margin-left: 0; margin-right:20px;">
 						  <li class="nav-item mb-2">
 							<input type="number" name="amount" min="1" style="width:45px" value="<%=bkDTO.getBasketCosAmount()%>">	
 						  </li>
 						  <li class="nav-item mb-2">
- 						  <input type="submit" value="수정" class="btn btn-secondary btn-sm"
+ 						  <input type="submit" value="수정" class="btn btn-primary btn-sm"
 						  	onclick="javascript: form.action='BasketModify.ba'"/> 
 						  </li>
 						</ul>
@@ -141,8 +139,6 @@
 				</tr>
 				<%} %>
 				</tbody>
-			</table>
-				<hr>
 				<%
 				int count = 0;
 				int hap = 0;
@@ -154,16 +150,19 @@
 					count += bkDTO.getBasketCosAmount();
 					hap += mul;
 				} %>
-				<p>
+				<tr class="table-active">
+					<th scope="col" colspan="3" style="color:black;">합계</th>
+					<td style="color:black;"><strong><%=hap %>원</strong></td>
+					<td colspan="3" style="color:black;"><strong><%=count %></strong></td>
+				</tr>
+			</table>
 				<div align="right">
-					<button class="btn btn-secondary" onclick="#'">주문하기</button>
-					<button class="btn btn-secondary" onclick="javascript: form.action='GoodsList.cos'">계속 쇼핑하기</button>
+					<button class="btn btn-secondary" onclick="javascript: form.action='OrderStart.or'"
+					style="margin-bottom: -45px;">주문하기</button>
+					<button class="btn btn-secondary" onclick="javascript: form.action='GoodsList.cos'"
+					style="margin-bottom: -45px;"
+					>계속 쇼핑하기</button>
 				</div>
-				</p>
-				<div align="right">
-					<b style="text-align: right; font-size: 20px;">상품갯수 : <%=count %></b><br>
-					<b style="text-align: right; color: #0A82FF; font-size: 20px;">합계금액 : <%=hap %></b>
-		        </div>
         	</form>
         </div>
     </section>
@@ -183,7 +182,7 @@
 
     
     <!-- Page Add Section Begin -->
-    <section class="page-add">
+    <section class="page-add" style="margin-bottom: 170px;">
         <div class="container">
         </div>
     </section>
