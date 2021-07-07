@@ -156,6 +156,59 @@ public class listDAO extends DBconnection{
 
 		return goodsList;
 	}
+	public List getGoodsList(String item , String cat ,String skin ,int startRow , int pageSize ) {
+
+		// item에 따라서 다른 결과를 처리
+		// item - all/best/그외 카테고리
+		List goodsList = new ArrayList();
+
+		StringBuffer SQL = new StringBuffer();
+		
+		try {
+			if(item.equals("베스트")){
+				sql ="select * from "+ tablename + " order by "
+						+ "orderCount desc limit 0 , 10";
+			}else{
+				if(!cat.equals("all")){
+					sql = "select * from "+tablename + 
+							" where cosBrand = '" + cat+"' order by cosNum desc limit " + startRow +" , "+ pageSize;
+					}else if(!item.equals("all")){
+						sql = "select * from "+tablename + 
+								" where cosCategory = '" + item+"' order by cosNum desc limit " + startRow +" , "+ pageSize;
+						
+					}else if(!skin.equals("all")){
+						sql = "select * from "+tablename + 
+								" where cosSkinType = '" + skin+"' order by cosNum desc limit " + startRow +" , "+ pageSize;
+					}
+					else{
+						sql = "select * from "+tablename + "order by cosNum desc limit " + startRow +" , "+ pageSize;
+					}
+			}
+			System.out.println(sql);
+			rs = con.selsql(sql);
+			
+			while (rs.next()) {
+				GoodsDTO goods = new GoodsDTO();
+				
+				goods = setTool.setdata(goods, rs);
+				
+				// 리스트 한칸에 상품 1개를 저장
+				
+				goodsList.add(goods);
+
+			} // while
+
+			System.out.println("DAO : 상품 정보 저장 완료(일반사용자 상품 목록)");
+
+		} catch (SQLException e) {
+			System.out.println("인젝션 에러");
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+
+		return goodsList;
+	}
 	// getGoodsList(item)
 		public List getbestGoodsList() {
 
@@ -197,6 +250,82 @@ public class listDAO extends DBconnection{
 			return goodsList;
 		}
 
+		
+		public String[] getbrandGoodsList() {
+
+			 String[] arr = new String[1];
+			 List<String> testList = new ArrayList<String>();
+			try {
+				
+				sql ="select distinct cosBrand from cos_list";
+				rs = con.selsql(sql);
+				
+				while (rs.next()) {
+					testList.add(rs.getString("cosBrand"));
+				} 
+
+				System.out.println("DAO : 브랜드 목록");
+
+			} catch (SQLException e) {
+				System.out.println("인젝션 에러");
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			arr = new String[ testList.size() ];
+	        testList.toArray(arr);
+			return arr;
+		}
+		public String[] getCateGoodsList() {
+
+			 String[] arr = new String[1];
+			 List<String> testList = new ArrayList<String>();
+			try {
+				
+				sql ="select distinct cosCategory from cos_list";
+				rs = con.selsql(sql);
+				
+				while (rs.next()) {
+					testList.add(rs.getString("cosCategory"));
+				} 
+
+				System.out.println("DAO : 카테고리타입 목록");
+
+			} catch (SQLException e) {
+				System.out.println("인젝션 에러");
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			arr = new String[ testList.size() ];
+	        testList.toArray(arr);
+			return arr;
+		}
+		public String[] getSkinGoodsList() {
+
+			 String[] arr = new String[1];
+			 List<String> testList = new ArrayList<String>();
+			try {
+				
+				sql ="select distinct cosSkinType from cos_list";
+				rs = con.selsql(sql);
+				
+				while (rs.next()) {
+					testList.add(rs.getString("cosSkinType"));
+				} 
+
+				System.out.println("DAO : 스킨타입 목록");
+
+			} catch (SQLException e) {
+				System.out.println("인젝션 에러");
+				e.printStackTrace();
+			} finally {
+				closeDB();
+			}
+			arr = new String[ testList.size() ];
+	        testList.toArray(arr);
+			return arr;
+		}
 	
 
 }

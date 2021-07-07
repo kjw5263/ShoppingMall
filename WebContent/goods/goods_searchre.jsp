@@ -125,6 +125,9 @@ table tr td {
     String skin[][] = var.getSkin(); 
     int size = goodsList.size();
    
+    
+    
+   
   %>
 	<section class="latest-products spad">
         <div class="container">

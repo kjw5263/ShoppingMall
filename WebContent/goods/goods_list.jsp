@@ -115,16 +115,19 @@ table tr td {
 //테스트 버전 업2!
   	listDAO gdao = new listDAO();
   	
-    List goodsList = (List)request.getAttribute("goodsList");
-    List bestgoodsList = (List)request.getAttribute("bestgoodsList");
+  List goodsList = (List)request.getAttribute("goodsList");
+  List bestgoodsList = (List)request.getAttribute("bestgoodsList");
 
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
-    String http[][] = var.getHttp();
-	String cat[][] = var.getCat();	
-    String skin[][] = var.getSkin(); 
+    String http[] = gdao.getCateGoodsList();
+	String cat[] =  gdao.getbrandGoodsList();
+    String skin[] =  gdao.getSkinGoodsList();
+   	
     int size = goodsList.size();
     int bestsize = bestgoodsList.size();
+    
+   
   %>
 	<section class="latest-products spad">
         <div class="container">
@@ -144,7 +147,7 @@ table tr td {
                             for(int i = 2 ; i<http.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=http[i][1] %>"><%=http[i][1] %></li>
+                            <li data-filter=".<%=http[i] %>"><%=http[i] %></li>
                             <%} %>
                             
                         </ul>
@@ -155,7 +158,7 @@ table tr td {
                             for(int i = 1 ; i<cat.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=cat[i][1] %>"><%=cat[i][1] %></li>
+                            <li data-filter=".<%=cat[i] %>"><%=cat[i] %></li>
                             <%} %>
                             
                         </ul>
@@ -166,7 +169,7 @@ table tr td {
                             for(int i = 1 ; i<skin.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=skin[i][1] %>"><%=skin[i][1] %></li>
+                            <li data-filter=".<%=skin[i] %>"><%=skin[i] %></li>
                             <%} %>
                             
                         </ul>
