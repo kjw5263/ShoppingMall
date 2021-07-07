@@ -9,7 +9,33 @@
 .hidden { display:none;}
 .shown {display:;} 
 </style>
-    <meta charset="UTF-8">
+   	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="./img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="./vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="./vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/util.css">
+	<link rel="stylesheet" type="text/css" href="./css/login.css">
+<!--===============================================================================================-->
+
+
+
     <meta name="description" content="Yoga Studio Template">
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +55,14 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-    
+
+
+
+	<!-- jquery 준비 시작 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<!-- jquery 준비 끝 -->
+
+
      <style type="text/css">
 button{
   background:#1AAB8A;
@@ -115,10 +148,10 @@ table {
 			type = "이벤트";
 		}
 		
-		if(notit.getNoticeFile().equals("null") || notit.getNoticeFile() == null ){
+		/* if(notit.getNoticeFile().equals("null") || notit.getNoticeFile() == null ){
 			notit.setNoticeFile("파일없음");
 			notit.setNoticeRealFileName("파일없음");
-		}
+		} */
 		
 	%> 
 	<br>
@@ -139,7 +172,8 @@ table {
         
         
         <%
-        if (notit.getNoticeFile().equals("파일없음")){
+        System.out.println("ssss "+notit.getNoticeFile());
+        if (notit.getNoticeFile()==null){
         	%>
         	첨부파일 없음
         	<%
@@ -155,7 +189,18 @@ table {
 
 <tr>
 <td height="300px" colspan="2" style="position: static; top: 3px; left: 5px; text-align: inherit;">
-<%=notit.getNoticeContent() %><br><img width="500px" height="500px" src = "./upload/<%=notit.getNoticeImg()%>"></td>
+<%=notit.getNoticeContent() %><br>
+<%
+ if (notit.getNoticeImg()==null){
+        	%>
+        	
+        	<%
+        	
+        }else{
+        %><img width="500px" height="500px" src = "./upload/<%=notit.getNoticeImg()%>"><%
+        }
+       %>
+</td>
 
 </tr>
 </table>

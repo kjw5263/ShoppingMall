@@ -186,7 +186,7 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
+                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기</button>	
                         </div>
                     </div>
                 </div>
@@ -203,7 +203,7 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
+                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기 </button>	
                         </div>
                     </div>
                 </div>
@@ -222,11 +222,28 @@ table tr td {
 
 </body>
 
+<script type="text/javascript">
+
+function basketact(x) {
+	var sure  = confirm("장바구니에 담으시겠습니까?");
+	if(sure == true){
+	 location.href = "http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum="+x;
+	}else{
+		
+	}
+	
+}
+
+
+
+
+</script>
+
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.magnific-popup.min.js"></script>
 <script src="./js/jquery.slicknav.js"></script>
-<script src="./js/jquery.nice-select.min.js">
-<script src="./js/owl.carousel.min.js"></script></script>
+<script src="./js/jquery.nice-select.min.js"></script>
+<script src="./js/owl.carousel.min.js"></script>
 <script src="./js/mixitup.min.js"></script>
 <script src="./js/main.js"></script>
