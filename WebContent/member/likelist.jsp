@@ -19,7 +19,8 @@
 
 <script src="../jq/jquery-3.6.0.js"></script>
 <script src="../jq/jquery-3.6.0.min.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- Google Font -->
 <link
@@ -37,12 +38,11 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+
 <style type="text/css">
-
 #cb {
- zoom : 1.5;
- 
-
+	zoom: 1.5;
 }
 </style>
 <script type="text/javascript">
@@ -101,60 +101,85 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
+			<div class="col-2"></div>
+			<div class="col-8">
 				<div class="row">
-					<div class="col-3">
-						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
-							href="./getLike.li"><h5>찜목록</h5></a>
-						<hr>
-						<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
-						<hr>
-						<a href=""><h5>내 화장품 사용기한 &nbsp;확인하기</h5></a>
-						<hr>
-						<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a> <a
-							href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
-					</div>
-					<div class="col-9">
-						<h3>나의 찜목록 (총 <b style="color: orange;"><%=cnt%></b>개)</h3>
+					<div class="col-2">
+					<div class="mypage-lnb1">
+								<ul>
+									<li>
+										<h2>나의 쇼핑</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./getOrderList.or">주문/배송조회</a></li>
+											<li class="subMenu"><a href="">취소/반품/교환내역</a></li>
+										</ul>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./BasketList.ba">장바구니</a></li>
+											<li class="subMenu"><a href="./getLike.li">좋아요</a></li>
+											<li class="subMenu"><a href="./MyCoupon.cp">포인트 / 쿠폰</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 활동</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./ReviewList.rev">리뷰</a></li>
+											<li class="subMenu"><a href="./Usedate.ud">화장품 사용기한 조회</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 정보</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./MemberUpdateInfo.me">회원정보수정</a></li>
+											<li class="subMenu"><a href="./MemberDelete.me">회원탈퇴</a></li>
+										</ul>
+									</li>
+								</ul>
+								</div>
+						</div>
+					<div class="col-10">
+						<h3>
+							나의 찜목록 (총 <b style="color: orange;"><%=cnt%></b>개)
+						</h3>
 						<br>
-						
+
 						<table class="table">
 							<tr>
 								<th colspan="2">상품</th>
 								<th>관리</th>
 							</tr>
 
-							 <%
+							<%
 							 if(LikeList.size() != 0){
 								for (int i = 0; i < LikeList.size(); i++) {
 									GoodsDTO gdto = (GoodsDTO) LikeList.get(i);
 									
 							%>
-								<form action="./deleteLike.li" method="get">
-							<tr>
-								<input type="hidden" name="cosnum" value="<%=gdto.getCosNum()%>">
-								<td><img src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>" width="150px" height="150px"></td>
-								<td><b><%=gdto.getCosBrand() %></b><br>
-								<%=gdto.getCosName() %>
-								<h4><%=gdto.getCosPrice() %>원</h4></td>
-								
-								<td>
-									<input type="image" src="./img/icons/heart.png" width="40px" style="margin-top: 80%" >
-								</td>
-								</form>
+							<form action="./deleteLike.li" method="get">
+								<tr>
+									<input type="hidden" name="cosnum"
+										value="<%=gdto.getCosNum()%>">
+									<td><img
+										src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>"
+										width="150px" height="150px"></td>
+									<td><b><%=gdto.getCosBrand() %></b><br> <%=gdto.getCosName() %>
+										<h4><%=gdto.getCosPrice() %>원
+										</h4></td>
+
+									<td><input type="image" src="./img/icons/heart.png"
+										width="40px" style="margin-top: 80%"></td>
+							</form>
 							</tr>
 							<%
 								}
 							 }
-							%> 
+							%>
 						</table>
-				
+
 						<!--페이징 처리  -->
 						<div style="margin-left: 45%;">
-						<ul class="pagination">
-						
-						<%if(cnt != 0){
+							<ul class="pagination">
+
+								<%if(cnt != 0){
 							
 							int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
 							
@@ -170,39 +195,42 @@
 							
 							if(startPage > pageBlock){
 								%>
-								<li class="page-item"><a  class="page-link" href="./getLike.li?pageNum=<%=startPage-pageBlock %>" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
+								<li class="page-item"><a class="page-link"
+									href="./getLike.li?pageNum=<%=startPage-pageBlock %>"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
-								 <%
+								<%
 							}
 							
 							for(int i=startPage;i<=endPage;i++){
 								%>
-								<li class="page-item"><a  class="page-link" href="./getLike.li?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
+								<li class="page-item"><a class="page-link"
+									href="./getLike.li?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
 								<%
 							}
 							
 							if(endPage < pageCount){
 								%>
-								<li class="page-item"><a class="page-link" href="./getLike.li?pageNum=<%=startPage+pageBlock %>" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-								<%
+								<li class="page-item"><a class="page-link"
+									href="./getLike.li?pageNum=<%=startPage+pageBlock %>"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										<%
 							}
 							
 						} %>
-						</a></li>
-						</ul>
+								</a></li>
+							</ul>
 						</div>
-					<!-- 페이징 처리 -->
-					
-					
-					
-					
-					
+						<!-- 페이징 처리 -->
+
+
+
+
+
 					</div>
 				</div>
 			</div>
-			<div class="col-3"></div>
+			<div class="col-2"></div>
 		</div>
 
 
