@@ -37,6 +37,8 @@ public class GoodsListAction implements Action{
 			item = "크림";
 		}else if(item.equals("maskpack")){
 			item = "마스크팩";
+		}else if(item.equals("lostion")){
+			item = "로션";
 		}else{
 			item = "all";
 		}

@@ -36,11 +36,11 @@ public class GoodsSearchAction implements Action{
 		// 정보 저장 -> 영역 저장
 //		 request.setAttribute("goodsList", gdao.getGoodsList());
 		
-		request.setAttribute("goodsList", gdao.getGoodsList(paka));
-		
+		request.setAttribute("goodsList", gdao.getseGoodsList(paka));
+		request.setAttribute("bestgoodsList", gdao.getbestGoodsList());
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
-		forward.setPath("./goods/goods_list.jsp");
+		forward.setPath("./goods/goods_searchre.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

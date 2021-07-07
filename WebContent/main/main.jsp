@@ -203,7 +203,7 @@
                             <h2>Best Skincare</h2>
                         </div>
                         <ul class="product-controls">
-                        	<li data-filter=".*">All</li>
+                        	<li data-filter=".allgoods">All</li>
                           <%
                             for(int i = 2 ; i<http.length;i++){
                             	
@@ -219,7 +219,9 @@
                 <%for(int i = 0 ; i<bestsize ;i++){ 
             	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
             	%>
-                <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosCategory() %> " style="width: 100px;">
+
+                <div class="col-lg-3 col-sm-6 mix all allgoods <%=dto.getCosCategory() %> ">
+
                     <div class="single-product-item">
                         <figure>
                             <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>">
