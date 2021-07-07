@@ -82,13 +82,6 @@
 
 	<div class="container-fluid">
 
-		<% 
-	String userId = (String)session.getAttribute("userId");
-	List LikeList = (List) request.getAttribute("LikeList");
-	List couponList = (List)request.getAttribute("couponList");
-	List orderList = (List)request.getAttribute("orderList");
-		
-	%>
 	<c:set var="mdto" value="${mdto}"/>
 	<c:set var="odto" value="${odto}"/>
 	
