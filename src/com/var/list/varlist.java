@@ -14,7 +14,8 @@ public class varlist {
     	{"?item=skin","스킨"},
     	{"?item=essence","에센스"},
     	{"?item=cream","크림"},
-    	{"?item=maskpack","마스크팩"}
+    	{"?item=maskpack","마스크팩"},
+    	{"?item=lostion","로션"}
     		};//이부분만 수정
     private String cat[][] = new String[][]
 	   		{{"" ," 전체"},
@@ -31,6 +32,9 @@ public class varlist {
 	   	{"?cat=skinfood","스킨푸드"},
 	   	{"?cat=koelcia","코엘시아"},
 	   	{"?cat=blackmonster","블랙몬스터"},
+	   	{"?cat=aestura","에스트라"},
+	   	{"?cat=numbuzin","넘버즈인"},
+	   	{"?cat=larocheposay","라로슈포제"},
 	   	{"?cat=cnp","차앤박"}
 	   	
 	   		};//이부분만 수정
@@ -39,6 +43,7 @@ public class varlist {
     		{{"" ," 전체"},
     	{"?skin=wet","지성"},
     	{"?skin=mid","중성"},
+    	{"?skin=mix","복합성"},
     	{"?skin=trd","건성"}
     	};
     	

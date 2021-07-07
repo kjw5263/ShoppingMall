@@ -194,11 +194,11 @@ table tr td {
                 <%for(int i = 0 ; i<bestsize ;i++){ 
             	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
             	%>
-                <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">>
+                <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">
                     <div class="single-product-item">
                         <figure>
                             <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
-                            <div class="p-status">new</div>
+                            <div class="p-status">best</div>
                         </figure>
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
