@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,6 +27,8 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+
 
 
 </head>
@@ -40,8 +43,6 @@
 			response.sendRedirect("../MemberLogin.me");
 		}
 	%>
-
-
 
 	<!-- container 시작 -->
 
@@ -67,28 +68,49 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
+			<div class="col-2"></div>
+			<div class="col-8">
 				<div class="row">
-					<div class="col-3">
-						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
-							href="./getLike.li"><h5>찜목록</h5></a>
-						<hr>
-						<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
-						<hr>
-						<a href=""><h5>내 화장품 사용기한 &nbsp;확인하기</h5></a>
-						<hr>
-						<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a> <a
-							href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
-					</div>
+						<div class="col-2">
+						<div class="mypage-lnb1">
+								<ul>
+									<li>
+										<h2>나의 쇼핑</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./getOrderList.or">주문/배송조회</a></li>
+											<li class="subMenu"><a href="">취소/반품/교환내역</a></li>
+										</ul>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./BasketList.ba">장바구니</a></li>
+											<li class="subMenu"><a href="./getLike.li">좋아요</a></li>
+											<li class="subMenu"><a href="./MyCoupon.cp">포인트 / 쿠폰</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 활동</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./ReviewList.rev">리뷰</a></li>
+											<li class="subMenu"><a href="./Usedate.ud">화장품 사용기한 조회</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 정보</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./MemberUpdateInfo.me">회원정보수정</a></li>
+											<li class="subMenu"><a href="./MemberDelete.me">회원탈퇴</a></li>
+										</ul>
+									</li>
+								</ul>
+								</div>
+						</div>
 					<div class="col-9">
 						<fieldset
 							style="border: 2px solid #EAEAEA; text-align: center; padding: 20px;">
-							<img src="./img/icons/warning.png"
+							<img src="./img/icons/chat.png"
 								style="background-position: center;" width="130px;"> <br>
 							<br>
 							<h3>탈퇴하시겠습니까?</h3>
-							<br>
+							<br><br>
 
 							<h5>모든 쿠폰, Point 및 개인정보가 삭제됩니다</h5>
 							<br> <br>
@@ -122,7 +144,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3"></div>
+			<div class="col-2"></div>
 		</div>
 
 

@@ -52,9 +52,9 @@ public class UsedateFrontController extends HttpServlet{
 		}
 			
 		}
-		else if(command.equals("/opencos.ud")){
+		else if(command.equals("/opencosAction.ud")){
 			
-			// action = new opencosAction();
+			action = new opencosAction();
 			
 			try {
 				forward = action.execute(request, response);
@@ -65,7 +65,7 @@ public class UsedateFrontController extends HttpServlet{
 			
 			
 		}
-		else if(command.equals("/completeUse.ud")){
+		else if(command.equals("/completeUseAction.ud")){
 			
 			action = new completeUseAction();
 			

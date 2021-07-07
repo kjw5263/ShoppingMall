@@ -28,6 +28,8 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+
 
 </head>
 <script type="text/javascript">
@@ -118,22 +120,42 @@
 		%>
 
 		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6">
+			<div class="col-2"></div>
+			<div class="col-8">
 				<div class="row">
-					<div class="col-3">
-						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
-							href="./getLike.li"><h5>찜목록</h5></a>
-						<hr>
-						<a href="./MyCoupon.me"><h5>내 쿠폰</h5></a> <a href=""><h5>포인트</h5></a>
-						<hr>
-						<a href=""><h5>내 화장품 사용기한 &nbsp;확인하기</h5></a>
-						<hr>
-						<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a> <a
-							href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
-
+					<div class="col-2">
+						<div class="mypage-lnb1">
+								<ul>
+									<li>
+										<h2>나의 쇼핑</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./getOrderList.or">주문/배송조회</a></li>
+											<li class="subMenu"><a href="">취소/반품/교환내역</a></li>
+										</ul>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./BasketList.ba">장바구니</a></li>
+											<li class="subMenu"><a href="./getLike.li">좋아요</a></li>
+											<li class="subMenu"><a href="./MyCoupon.cp">포인트 / 쿠폰</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 활동</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./ReviewList.rev">리뷰</a></li>
+											<li class="subMenu"><a href="./Usedate.ud">화장품 사용기한 조회</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 정보</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./MemberUpdateInfo.me">회원정보수정</a></li>
+											<li class="subMenu"><a href="./MemberDelete.me">회원탈퇴</a></li>
+										</ul>
+									</li>
+								</ul>
+								</div>
 					</div>
-					<div class="col-9">
+					<div class="col-10">
 
 						<h3>기본 회원 정보</h3>
 						<br>
@@ -154,7 +176,7 @@
 							<tr>
 								<th>이메일</th>
 								<td><%=mdto.getUserEmail() %></td>
-							<!--전화변호 변경 구역  -->
+								<!--전화변호 변경 구역  -->
 							<tr>
 								<th scope="row">전화번호</th>
 								<td>
@@ -280,23 +302,23 @@
 										민감성 <input type="radio" name="skinTrouble" value="해당없음">
 										해당없음 <%
  	} else if (mdto.getUserTrouble().equals("아토피")) {
- %> <input type="radio" name="skinTrouble" value="여드름">
-										여드름 <input type="radio" name="skinTrouble" value="아토피" checked>
+ %> <input type="radio" name="skinTrouble" value="여드름"> 여드름 <input
+										type="radio" name="skinTrouble" value="아토피" checked>
 										아토피 <input type="radio" name="skinTrouble" value="민감성">
 										민감성 <input type="radio" name="skinTrouble" value="해당없음">
 										해당없음 <%
  	} else if (mdto.getUserTrouble().equals("민감성")) {
- %> <input type="radio" name="skinTrouble" value="여드름">
-										여드름 <input type="radio" name="skinTrouble" value="아토피">
-										아토피 <input type="radio" name="skinTrouble" value="민감성" checked>
+ %> <input type="radio" name="skinTrouble" value="여드름"> 여드름 <input
+										type="radio" name="skinTrouble" value="아토피"> 아토피 <input
+										type="radio" name="skinTrouble" value="민감성" checked>
 										민감성 <input type="radio" name="skinTrouble" value="해당없음">
 										해당없음 <%
  	} else if (mdto.getUserTrouble().equals("해당없음")) {
- %> <input type="radio" name="skinTrouble" value="여드름">
-										여드름 <input type="radio" name="skinTrouble" value="아토피">
-										아토피 <input type="radio" name="skinTrouble" value="민감성">
-										민감성 <input type="radio" name="skinTrouble" value="해당없음"
-										checked> 해당없음 <%
+ %> <input type="radio" name="skinTrouble" value="여드름"> 여드름 <input
+										type="radio" name="skinTrouble" value="아토피"> 아토피 <input
+										type="radio" name="skinTrouble" value="민감성"> 민감성 <input
+										type="radio" name="skinTrouble" value="해당없음" checked>
+										해당없음 <%
  	}
  %>
 									</td>
@@ -317,7 +339,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-3"></div>
+		<div class="col-2"></div>
 	</div>
 
 
