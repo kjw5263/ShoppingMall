@@ -100,7 +100,7 @@
 	        <table>
 		    <tr>
 		    <td>
-			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+			    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
@@ -113,7 +113,7 @@
 				        <a class="nav-link" href="./AdminOrderList.ag"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminMemberList.ag" style="background-color: #6c757d; color:white;"><b>회원목록</b></a>
+				        <a class="nav-link active" href="./AdminMemberList.ag"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
@@ -123,12 +123,12 @@
 				</nav>
 		    </td>
 		    </tr>
-		    </table>
+		    </table><br>
 			<br>
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
-						<th colspan="12" style="background-color: #b0bcc2; text-align: center; color: white;"><b>회원 리스트</b></th>
+						<th colspan="12" style="text-align: center;"><b>회원 리스트</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -166,24 +166,19 @@
     </section>
     
 	  <hr>
-	  <%
-	    //////////////////////////////////////////////////////
-	    // 페이징 처리 - 하단부 페이지 링크
+    <!-- 페이징 처리 -->
+    <div style="margin-left: 45%;">
+	  <ul class="pagination">
+    
+ 	  <%
 	    if(cnt != 0){// 글이있을때 표시
-	
-	    	//전체 페이지수 계산
-	    	// ex)  총 50개 -> 한페이지당 10개 출력, 5개
-			//      총 57개 ->       "        , 6개
+
 			int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
-			
-			// 한 화면에 보여줄 페이지 번호의 개수 (페이지 블럭)
+
 			int pageBlock = 2;
-			
-			// 페이지 블럭의 시작페이지 번호 
-			// ex)  1~10 페이지 : 1, 11~20페이지 : 11, 21~30페이지 : 21
+
 	        int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
-			
-			// 페이지 블럭의 끝 페이지 번호
+
 			int endPage = startPage+pageBlock-1;
 			
 			if(endPage > pageCount){
@@ -193,27 +188,38 @@
 	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
 	    	if(startPage > pageBlock){
 	    		%>
-	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-primary btn-sm">이전</a>
+	    		<li class="page-item">
+		    		<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=startPage-pageBlock%>" aria-label="Previous">
+		    		<span aria-hidden="true">&laquo;</span>
+		    		</a>
+		    		</span>
+	    		</li>
 	    		<%
 	    	}   	
 	    	
 	    	// 숫자  1....5
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
-	    		    <a href="./AdminMemberList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm"><%=i %></a> 
+	    		<li class="page-item">
+	    			<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=i%>"><%=i %></a>
+	    		</li>
 	    		<%    		
 	    	}
 	    	
 	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
 	    	if(endPage < pageCount){
 	    		%>
-	    		<a href="./AdminMemberList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-primary btn-sm">다음</a>
+	    		<li class="page-item">
+	    			<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=startPage+pageBlock%>" aria-label="Next">
+	    		<span aria-hidden="true">&raquo;</span>
 	    		<%
 	    	}
-
 	    }
-	    //////////////////////////////////////////////////////
 	  %>
+	  </a></li>
+	  </ul>
+	  </div>
+	  <!-- 페이징 처리 -->
     <!-- admin member list End -->
 			
 		</div>

@@ -73,7 +73,7 @@
 	        <table>
 		    <tr>
 		    <td>
-			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+			    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
@@ -83,7 +83,7 @@
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminOrderList.ag" style="background-color: #6c757d; color:white;"><b>주문목록</b></a>
+				        <a class="nav-link active" href="./AdminOrderList.ag"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
@@ -97,10 +97,10 @@
 		    </td>
 		    </tr>
 		    </table><br>
-			<table border="1" class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
-						<th colspan="6" style="background-color: #b0bcc2; text-align: left; font-size: 20px;">구매 내역</th>
+						<th colspan="6" style="text-align: left;">구매 내역</th>
 					</tr>
 				</thead>
 				<tbody>		     
@@ -126,10 +126,10 @@
 				</tbody>
  			</table>
  			<br>
-			<table border="1" class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>				  
 					<tr>
-					  <th colspan="6" style="background-color: #b0bcc2; text-align: left; font-size: 20px;">배송지 정보</th>      
+					  <th colspan="6" style="text-align: left;">배송지 정보</th>      
 					</tr>
 				</thead>
 				<tbody>
@@ -168,9 +168,9 @@
 				</tbody>	      
 			</table>
 			<br>	
-			<table border="1" class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>     
-					<th colspan="6" style="background-color: #b0bcc2; text-align: left; font-size: 20px;">결제 정보</th>      
+					<th colspan="6" style="text-align: left;">결제 정보</th>      
 				</thead>
 				<tbody>
 					<tr>

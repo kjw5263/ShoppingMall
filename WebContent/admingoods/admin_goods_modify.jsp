@@ -66,11 +66,11 @@
 	        <table>
 		    <tr>
 		    <td>
-			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+			    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminGoodsList.ag" style="background-color: #6c757d; color:white;" ><b>상품목록</b></a>
+				        <a class="nav-link active" href="./AdminGoodsList.ag"><b>상품목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
@@ -93,10 +93,10 @@
 		<form method="post" action="./AdminGoodsModifyAction.ag">
 			<!-- 상품번호 저장 -->
 			<input type="hidden" name="cosNum" value="<%=dto.getCosNum() %>">
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
-						<th colspan="2" style="background-color: #b0bcc2; text-align: center; color: white;"><b>관리자 상품수정</b></th>
+						<th colspan="2"><b>관리자 상품수정</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -225,7 +225,7 @@
 				</tbody>
 			</table>
 			<div style="margin-left: auto; margin-right: auto;">
-			    <input type="submit" value="상품수정" class="btn btn-secondary">
+			    <input type="submit" value="상품수정" class="btn btn-primary">
 		    </div>		
 		</form>
         </div>

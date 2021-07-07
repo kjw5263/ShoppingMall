@@ -1,4 +1,3 @@
-
 <%@page import="com.goods.db.listDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.List"%>
@@ -31,72 +30,19 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
-    <script src="./js/chatbot.js" type="text/javascript"></script>
+
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script>
 	
 	   $(window).scroll(function() {
 	      $("#banner").stop().animate({   "top" : ($(window).scrollTop() + 800) + "px"   }, 500);
 	   });
-	
-	</script>
-	
-	<style type="text/css">
-		#banner {   position: absolute;    width: 80px;    height: 80px;   left: 95%; top: 90%; }
-	</style>
-    <style type="text/css">
-		button{
-		  background:#1AAB8A;
-		  color:#fff;
-		  border:none;
-		  position:relative;
-		  height:34px;
-		  font-size:1em;
-		  padding:0 2em;
-		  cursor:pointer;
-		  transition:800ms ease all;
-		  outline:none;
-		}
-		button:hover{
-		  background:#fff;
-		  color:#1AAB8A;
-		}
-		button:before,button:after{
-		  content:'';
-		  position:absolute;
-		  top:0;
-		  right:0;
-		  height:2px;
-		  width:0;
-		  background: #1AAB8A;
-		  transition:400ms ease all;
-		}
-		button:after{
-		  right:inherit;
-		  top:inherit;
-		  left:0;
-		  bottom:0;
-		}
-		button:hover:before,button:hover:after{
-		  width:100%;
-		  transition:800ms ease all;
-		}
 
-    </style>
-
-
-	<!-- 사이드 배너 css 시작 -->
-	<style type="text/css">
-	#sidebanner { position:fixed; top:20%; left:95%;  width:100px; height:200px; z-index: 1; }
-	</style>
-	<!-- 사이드 배너 css 끝 -->
-
+    </script>
     
 </head>
 
 <body>
-
-
 
     <!-- Page Preloder -->
     <div id="preloder">
@@ -137,24 +83,24 @@
                     </div>
                 </div>
             </div>
-            <div class="single-slider-item set-bg" data-setbg="./img/cosmain2.jpg">
+            <div class="single-slider-item set-bg" data-setbg="./img/cream3.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>2019</h1>
-                            <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+                            <h1>2021</h1>
+                            <h2>BEST SKIN CARE.</h2>
+                            <a href="./GoodsList.cos" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-slider-item set-bg" data-setbg="./img/slider-3.jpg">
+            <div class="single-slider-item set-bg" data-setbg="./img/skincare1.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1>2019</h1>
-                            <h2>Lookbook.</h2>
-                            <a href="#" class="primary-btn">See More</a>
+                            <h1>2021</h1>
+                            <h2>BEST SKIN CARE.</h2>
+                            <a href="./GoodsList.cos" class="primary-btn">See More</a>
                         </div>
                     </div>
                 </div>
@@ -172,7 +118,7 @@
                         <div class="single-features-ads first">
                             <img src="./img/icons/f-delivery.png" alt="">
                             <h4>JUST SKIN CARE</h4>
-                            <p> 립스틱, 아이라인, 섀도우, 파운데이션 ... 넘쳐나는 화장품 속,<br>
+                            <p> 립스틱, 아이라인, 파운데이션... 넘쳐나는 화장품 속,<br>
                            		그리고 심지어 마스크까지! <br>
                            		내 피부는 숨을 쉴 시간이 없어요. <br>
                            		내 피부를 진정시켜줄, 스킨케어 제품들만 모아놓았어요.<br>
@@ -221,11 +167,11 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="single-box-item second-box">
-                                    <img src="./img/f-box-2.jpg" alt="">
+                                    <img src="./img/orange.jpg" alt="orange">
                                     <div class="box-text">
-                                        <span class="trend-year">2019 Trend</span>
-                                        <h2>Footwear</h2>
-                                        <span class="trend-alert">Bold & Black</span>
+                                        <span class="trend-year">2021 Trend</span>
+                                        <h2 style="color:yellow;">skincare</h2>
+                                        <span class="trend-alert" style="color:dark-gray;">orange & lemon</span>
                                     </div>
                                 </div>
                             </div>
@@ -233,11 +179,11 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="single-box-item large-box">
-                            <img src="./img/f-box-3.jpg" alt="">
+                            <img src="./img/lemon.jpg" alt="">
                             <div class="box-text">
-                                <span class="trend-year">2019 Party</span>
-                                <h2>Collection</h2>
-                                <div class="trend-alert">Trend Allert</div>
+                                <span class="trend-year" style="color:white;">2021 skincare</span>
+                                <h2 style="color:yellow;">Collection</h2>
+                                <div class="trend-alert" style="color:dark-gray;">Trend skincare</div>
                             </div>
                         </div>
                     </div>
@@ -247,14 +193,14 @@
     </section>
     <!-- Features Section End -->
 
-    <!-- Latest Product Begin -->
-    <section class="latest-products spad">
+    <!-- Best Skincare Begin -->
+    <section class="bast-skincare spad">
         <div class="container">
             <div class="product-filter">
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="section-title">
-                            <h2>Latest Products</h2>
+                            <h2>Best Skincare</h2>
                         </div>
                         <ul class="product-controls">
                         	<li data-filter=".*">All</li>
@@ -273,54 +219,66 @@
                 <%for(int i = 0 ; i<bestsize ;i++){ 
             	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
             	%>
-                <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosCategory() %> ">
+                <div class="col-lg-3 col-sm-6 mix all <%=dto.getCosCategory() %> " style="width: 100px;">
                     <div class="single-product-item">
                         <figure>
-                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
+                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>">
+                            <img src="./admingoods/upload/<%=dto.getCosImage()%>" alt="">
+                            </a>
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
-                            <h6><%=dto.getCosName()%></h6>
-                            <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
+                        	<div>
+								<div><%=dto.getCosName()%></div>
+                            	<div><%=dto.getCosPrice() %>원</div>                          	
+                        	</div>
+                            <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
+                            onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
+                            <img src="./img/icons/heart.png" width="40px" 
+                            onclick="location.href='#'">
+                        	</p>
                         </div>
                     </div>
                 </div>
                 <%} %>
             </div>
-        </div>
+            </div>
     </section>
-    <!-- Latest Product End -->
+    <!-- best skincare End -->
 
-    <!-- Lookbok Section Begin -->
+    <!-- skincare Section Begin -->
     <section class="lookbok-section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 offset-lg-1">
                     <div class="lookbok-left">
                         <div class="section-title">
-                            <h2>2019 <br />#lookbook</h2>
+                            <h2>2021 <br />#skincare</h2>
                         </div>
-                        <p>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis velit. Vestibulum malesuada
-                            aliquet libero viverra cursus. Aliquam erat volutpat. Morbi id dictum quam, ut commodo
-                            lorem. In at nisi nec arcu porttitor aliquet vitae at dui. Sed sollicitudin nulla non leo
-                            viverra scelerisque. Phasellus facilisis lobortis metus, sit amet viverra lectus finibus ac.
-                            Aenean non felis dapibus, placerat libero auctor, ornare ante. Morbi quis ex eleifend,
-                            sodales nulla vitae, scelerisque ante. Nunc id vulputate dui. Suspendisse consectetur rutrum
-                            metus nec scelerisque. s</p>
-                        <a href="#" class="primary-btn look-btn">See More</a>
+                        <p>민감하고 건조한 피부에 보습을 위한 스킨 케어 방법
+							피부 관리를 통해 민감하고 건조한 피부를 개선하기 위해서는 
+							올바른 스킨 케어를 수행하는 것이 중요합니다. 
+							피부에 맞는 스킨 케어 화장품을 선택할 뿐만 아니라 
+							올바르게 사용하는 것도 매우 중요합니다. 
+							여기에서는 민감하고 건조한 피부에 적합한 스킨 케어 방법을 소개합니다.
+							보습제가 적절한 역할을 하기 위해서는 올바르게 사용하고 
+							적절한 양을 사용하는 것이 중요합니다. 
+							사용되는 물의 양이 작으면 습기와 오일이 충분히 충분히 부족할 수 없습니다. 
+							적절한 양의 다수 보습제를 사용함으로써 피부의 장벽 기능 없이 
+							피부의 건조를 효과적으로 방지할 수 있습니다.</p>
+                        <a href="./GoodsList.cos" class="primary-btn look-btn">See More</a>
                     </div>
                 </div>
                 <div class="col-lg-5 offset-lg-1">
                     <div class="lookbok-pic">
-                        <img src="./img/lookbok.jpg" alt="">
-                        <div class="pic-text">fashion</div>
+                        <img src="./img/lemon2.jpg" alt="">
+                        <div class="pic-text">skincare</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Lookbok Section End -->
+    <!-- skincare Section End -->
 
     <!-- Logo Section Begin -->
     <div class="logo-section spad">
@@ -344,21 +302,8 @@
     </div>
     <!-- Logo Section End -->
 
-
-	<!-- 사이드 배너 시작 -->
-    <div id="sidebanner">
-    	<a href="./Question.que"><img alt="" src="./img/main/search.png">
-    	<div class="text-center">
-    	<b>나에게 맞는<br>
-    		화장품은?</b>
-    	</div>
-    	</a>
-	</div>
-    <!-- 사이드 배너 끝 -->
-
-
     <!-- footer 시작 -->
-   	<jsp:include page="../footer/footer.jsp" />
+   		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
     
 
@@ -374,6 +319,18 @@
     <script src="./js/mixitup.min.js"></script>
     <script src="./js/main.js"></script>
     
+    
+   	<!-- 플로팅 배너 시작 -->
+	<div id="banner" style=" position:block;">
+		<a href="./Survey.me"><img alt="" src="./img/main/question.png"></a>
+	</div>
+	<!-- 플로팅 배너 끝 -->
+
+    
+    
+
+    
+</body>
 
 
 </html>
