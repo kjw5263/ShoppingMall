@@ -54,8 +54,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-
-
+    <link rel="stylesheet" href="./css/question/question.css" type="text/css">
 
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -63,8 +62,6 @@
 
 </head>
 <body>
-
-
 
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
@@ -77,7 +74,6 @@
 			<div class="col-2"></div>
 			<div class="col-8 text-center">
 				<div><h3>나의 피부타입은?!</h3></div>
-				<div>(아니다 0점, ~ 그렇다 4점)</div>
 			</div>
 			<div class="col-2 mt-3">
 				<c:if test="${userId eq 'admin' }">
@@ -97,22 +93,33 @@
 				
 				<c:forEach var="i" items="${ queQueList }">
 				
-				<div>${i.qnum}. ${i.qsub}</div>
-				<div class="mt-3">
-				<h5>아니다&nbsp;
-				
+				<div class="mt-4"><h5>${i.qnum}. ${i.qsub}</h5></div>
+				<div class="mt-3" id="div1">
+								
 					<c:forEach var="j" begin="0" end="4" step="1">
 					
-					<input type="radio" name="${i.qnum}" value="${j }" id="radio">
+					
+						<label class="box-radio-input">
+							<input type="radio" name="${i.qnum}" value="${j }" id="radio">
+							<span>
+								<c:if test="${j eq 0}"> 아니다</c:if>
+								<c:if test="${j eq 1}"> 조금그렇다</c:if>
+								<c:if test="${j eq 2}"> 보통이다</c:if>
+								<c:if test="${j eq 3}"> 그렇다</c:if>
+								<c:if test="${j eq 4}"> 매우그렇다</c:if>
+							</span>
+						</label>
+					
+					
 					 </c:forEach>
 					 
-				&nbsp;그렇다</h5>
+					 
+					 
 				
 				</div>
 				
 				<c:if test="${userId eq 'admin' }">
 				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./QueRevise.que?Qnum=${i.qnum}'"> 수정 </button>
-				 / 
 				 <button type="button" class="btn btn-danger btn-sm" onclick="location.href='./QueDelete.que?Qnum=${i.qnum}'">삭제</button>
 				</c:if>
 				
@@ -200,37 +207,8 @@
     <!-- footer 시작 -->
 
 
-	<script type="text/javascript">
-		var sum = 0;
 
-		// 라디오 버튼 눌렸을 때 값 누적하는 제이쿼리 시작
-		$(document).ready(function () {
-			
-			if(<%=currentPage%> > 1){
-				sum = sessionStorage.getItem("sum");
-			}
-			
-			$("input:radio[id='radio']").click(function(){
-				        
-				var fnum = $(this).attr('value');
-				
-				sum = Number(sum) + Number(fnum);
-				
-		        // alert("개별 번호는 " + fnum);
-		        
-		        // alert(" 점수 합계는 " + sum);
-		        
- 		        sessionStorage.setItem("sum", sum);
-		        
- 		       // alert("세션에 저장된 값은 "+sessionStorage.getItem("sum"));
- 		        
-		        $('#sum').val(sessionStorage.getItem("sum"));
-		        
-			 });
-			
-		});
-		// 라디오 버튼 눌렀을 때 값 누적하는 제이쿼리 끝
-		
+	<script type="text/javascript">
 		
 		// 글쓰기 버튼 시작
     	$('#write').click(function() {
@@ -245,6 +223,7 @@
     	// 세팅 버튼 끝    	
     	
     	// 라디오버튼 유효성 체크 시작
+    	
 		function check() {
 
     		var frm = document.all;
@@ -252,6 +231,38 @@
     		var radio_num = document.all.radio.length;
     		var chk_i = 0;
     		
+    		if(<%=currentPage%> == 1){
+        		var sum = 0;
+
+			}else {
+				sum = Number(sessionStorage.getItem("sum"));
+			}
+				
+    		var sum2 = 0;
+			
+    		  
+            for (var i=1; i<16; i++) {
+        
+           	 var value = $('#radio:checked').attr('value');	
+           	 var name = $('#radio:checked').attr('name');	
+           	
+           	 
+           	 if($(":input:radio[name="+i+"]:checked").val() != null){
+          	 	value = $(":input:radio[name="+i+"]:checked").val();
+
+           	 	sum2 = Number(value) + sum2;
+            	
+            	sessionStorage.setItem("sum", sum + sum2 );
+            	
+           	 }
+            }
+    		
+
+        	
+        	$('#sum').val(sessionStorage.getItem("sum"));
+    		
+    		
+    		// 유효성 시작
     		for(var i = 0; i<radio_num; i++){
     			if(frm.radio[i].checked == true){
     				chk_i++;
