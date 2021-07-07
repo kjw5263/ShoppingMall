@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
-    
+
  <!--  다음 우편번호 API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="./js/jquery-3.6.0.js"></script>
@@ -80,6 +80,7 @@ function openAddrPop() {
 }
 </script>
 <script type="text/javascript">
+	 
 
 	 function redirectFunc() {
 		 document.getElementById("submitForm").submit();
@@ -257,18 +258,36 @@ $(document).ready(function () {
 	
 
 	
-// 	$('input[name="payType"]').change(function(){
-// 		if($('input[name="payType"]:checked').val() == "cardPay"){
-			
-// 		} else {
-			
-// 		}
-// 	});
 	
+	$('input[name="payType"]').click(function(){
+		if($('#cardPay').is(':checked')){
+			$('#cardPayArea').show();
+			$('#cardPayArea2').show();
+			$('#cardPayArea3').show();
+			$('#kakaoPayArea').hide();
+			$('#accountPayArea').hide();
+			$('#cashBill').hide();
+		} else if($('#accountPay').is(':checked')){
+			$('#cardPayArea').hide();
+			$('#cardPayArea2').hide();
+			$('#cardPayArea3').hide();
+			$('#kakaoPayArea').hide();
+			$('#accountPayArea').show();
+			$('#cashBill').show();
+		} else if($('#kakaoPay').is(':checked')){
+			$('#cardPayArea').hide();
+			$('#cardPayArea2').hide();
+			$('#cardPayArea3').hide();
+			$('#kakaoPayArea').show();
+			$('#accountPayArea').hide();
+			$('#cashBill').hide();
+		}
+	});
 	
 	
 	
 });
+
 
 
 </script>
@@ -310,10 +329,10 @@ $(document).ready(function () {
 	<div class="col-8 " style="padding-bottom:100px;">
 	
 	<h2 style="margin:30px 30px 30px 0;">주문/결제</h2>
-	<div style="margin:50px 30px 10px 0;"><h4>배송상품</h4></div>
+	<div style="margin:50px 30px 10px 0;"><h3>배송상품</h3></div>
 	<div style="margin:10px 30px 10px 0;"><h5>총 <%=basketList.size() %>개의 상품</h5></div> 
 	<div style="width : 100%;">
-		<table class="table" style="text-align: center; margin-bottom:50px;">
+		<table class="table" style="text-align: center; margin-bottom:100px; font-size:19px;">
 			<thead class="thead-light">
 				<tr>
 					<th scope="col" colspan="2">상품정보</th>
@@ -331,7 +350,7 @@ $(document).ready(function () {
 						sumMoney += (bkDTO.getBasketCosAmount()*gDTO.getCosPrice());
 				%>
 				<tr>
-					<td><img src="<%=gDTO.getCosImage().split(",")[0] %>" width="100" height="100"></td>
+					<td><img src="./admingoods/upload/<%=gDTO.getCosImage().split(",")[0] %>" width="100" height="100"></td>
 					<td><b><%=gDTO.getCosBrand() %></b><br><%=gDTO.getCosName() %></td>
 					<td><%=fmMoney.format(gDTO.getCosPrice()) %>원</td>
 					<td><%=bkDTO.getBasketCosAmount() %></td>
@@ -379,8 +398,8 @@ $(document).ready(function () {
 			<tr>
 				<th scope="row" class="table-active" style="width:150px;">배송지 선택</th>
 				<td>
-					<span><input type="radio" name="addrType" id="savedAddr" checked value="savedAddr">기존 배송지</span>
-					<span><input type="radio" name="addrType" id="newAddr" value="newAddr">신규 배송지</span>
+					<span style="margin-right:20px;"><input type="radio" name="addrType" id="savedAddr" checked value="savedAddr"> 기존 배송지</span>
+					<span><input type="radio" name="addrType" id="newAddr" value="newAddr"> 신규 배송지</span>
 				</td>
 			</tr>
 			<tr>
@@ -446,7 +465,7 @@ $(document).ready(function () {
 			<tr>
 				<th scope="row" class="table-active" style="width:150px;">쿠폰</th>
 				<td>
-					<select class="form-control" name="selectCoupon" id="selectCoupon">
+					<select class="custom-select custom-select"  name="selectCoupon" id="selectCoupon" style="width:300px;">
 						<option value="nocoupon">쿠폰선택안함</option>
 						<c:forEach var="i" items="${couponList }">
 						<option value="${i.couponDc }">${i.couponName }</option>
@@ -467,18 +486,91 @@ $(document).ready(function () {
 		<h4  style="margin:50px 30px 10px 0;">결제수단 선택</h4>
 		<div  style="width : 100%;">
 		<table class="table" id="payTable">
-			<tr>
+			<tr >
 				<td colspan="2">
-					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="cardPay" value="카드" checked>카드결제</span>
-					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="accountPay" value="계좌이체">계좌이체</span>
-					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="kakaoPay" value="카카오페이">카카오페이</span>
-					<span id="ptFloat" style="display: inline-block;"><input type="radio" name="payType" id="cashPay" value="무통장입금">무통장입금</span>
+					<span id="ptFloat" style="display: inline-block; margin-right:15px;"><input type="radio"  name="payType" id="cardPay" value="카드결제" checked> 카드결제</span>
+					<span id="ptFloat" style="display: inline-block; margin-right:15px;"><input type="radio" name="payType" id="accountPay" value="계좌이체"> 계좌이체</span>
+					<span id="ptFloat" style="display: inline-block; margin-right:15px;"><input type="radio" name="payType" id="kakaoPay" value="카카오페이"> 카카오페이</span>
+<!-- 					<span id="ptFloat" style="display: inline-block;"><input type="radio"  name="payType" id="cashPay" value="무통장입금"> 무통장입금</span> -->
 				</td>
 			</tr>
-			<tr id="payArea" >
-				<!-- 추후에 해결하기  -->
+			<tr id="cardPayArea" >
+				<th class="table-active">카드종류</th>
+				<td>
+					<select name="card" class="custom-select custom-select-sm" style="width:200px;">
+						<option>카드를 선택해주세요.</option>
+						<option>BC카드</option>
+						<option>하나비자</option>
+						<option>우리카드</option>
+						<option>신협카드</option>
+						<option>수협카드</option>
+						<option>전북카드</option>
+						<option>씨티카드</option>
+						<option>삼성카드</option>
+						<option>신한카드</option>
+						<option>광주비자</option>
+						<option>제주카드</option>
+						<option>현대카드</option>
+						<option>롯데카드</option>
+						<option>KB카드</option>
+						<option>NH카드</option>
+						<option>외환카드</option>
+					</select>
+				</td>
+			</tr>
+			<tr id="cardPayArea2">
+				<th class="table-active">할부종류</th>
+				<td>
+					<select name="payMonth" class="custom-select custom-select-sm" style="width:200px;">
+						<option>일시불</option>
+						<%if(sumMoney >= 50000){ %>
+						<option>2개월</option>
+						<option>3개월</option>
+						<option>4개월</option>
+						<option>5개월</option>
+						<option>6개월</option>
+						<option>7개월</option>
+						<option>8개월</option>
+						<option>9개월</option>
+						<option>10개월</option>
+						<option>11개월</option>
+						<option>12개월</option>
+						<%} %>
+					</select>
+				</td>
+			</tr>
+			<tr id="cashBill" style="display:none;">
+				<th class="table-active">현금영수증</th>
+				<td>
+				 <select name="cashbill" class="custom-select custom-select-sm" style="width:200px;">
+					<option>신청안함</option>
+				 </select>
+				</td>
 			</tr>
 		</table>
+		<div id="cardPayArea3" style="color:#999999; font-size:13px;">
+			<ul>
+			 <li style="margin-left:20px;">신한카드 캐시백 혜택 7/1~8/31</li>
+			 <li style="margin-left:20px;">신한(이벤트)카드로 누적 10만원 이상 결제시 현금 7만원 지급!</li>
+			 <li style="margin-left:20px;">자세한 내용은 이벤트에서 확인 가능합니다. </li>
+			 <li style="margin-left:20px;">신용/체크카드 결제금액이 30만원 이상인 경우 공인인증서가 필요합니다.</li>
+			</ul>
+		</div>
+		<div id="kakaoPayArea"  style="color:#999999; display:none; font-size:13px;">
+			  <ul>
+				<li style="margin-left:20px;">무이자할부는 카카오페이 모바일 결제창에서 선택하실 수 있습니다.</li>
+				<li style="margin-left:20px;">휴대폰과 카드명의자가 동일해야 결제 가능합니다.</li>
+				<li style="margin-left:20px;">카카오페이로 결제 시, 제휴카드 할인/적립(CJ카드, 임직원할인 포함)이 적용되지 않습니다.</li>
+				<li style="margin-left:20px;">카드 영수증 및 현금영수증 확인은 카카오페이 홈페이지에서 확인 가능합니다.(카카오페이 홈 > 설정 > 결제내역)</li>
+				<li style="margin-left:20px;">카카오페이 고객센터 : 1644-7405</li>
+			  </ul>
+		</div>
+		<div id="accountPayArea"  style="color:#999999; display:none; font-size:13px;">
+			  <ul>
+				<li style="margin-left:20px;">계좌이체로 결제 완료시 본인 계좌에서 즉시 이체 처리됩니다.</li>
+				<li style="margin-left:20px;">실시간 계좌이체는 은행별 이용시간이 다를 수 있습니다.</li>
+			  </ul>
+		</div>
 		</div> <!-- 결제수단 테이블 묶는 div -->
 		
 		
@@ -487,9 +579,37 @@ $(document).ready(function () {
 		
 		<!-- 금액 영역 묶는 div -->
 		<div class="col-4" >
+		<div style="margin:10px 30px 10px 0;"><h4>서비스 이용약관 </h4></div>
+		<div style="width : 100%;">
+		<table class="table table-bordered" style="margin-bottom:50px;">
+			<tr height="150" >
+				<td scope="row" style="width:200px;"><b>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</b><br>
+				<span><input type="checkbox"> 모두 동의</span></td>
+			</tr>
+			<tr height="150" >
+				<td scope="row" style="width:200px;"><strong>주문 상품정보에 대한 동의</strong><br>
+				<input type="checkbox"><span style="font-size:14px; color:#aaaaaa;"> 주문하실 상품,가격,할인내역 등을 최종 확인하였으며, 구매에 동의합니다.<br>
+				(전상거래법 제8조 제2항)</span></td>
+			</tr>
+			<tr height="150" >
+				<td scope="row" style="width:200px;"><b>결제대행 서비스 이용약관 동의</b><br>
+				<div style="font-size:14px; color:#aaaaaa;">
+					<input type="checkbox"> 전자금융거래 기본약관<br>
+					<input type="checkbox"> 개인정보 수집 및 이용 동의<br>
+					<input type="checkbox"> 개인정보 제공 및 위탁 동의<br>
+				</div>
+				</td>
+			</tr>
+		</table>
+		</div> <!-- 금액 테이블 묶는 div -->
+		
+		
+		
+		
+		
 		<div  style="margin:10px 30px 10px 0;"><h4>최종 결제정보 </h4></div>
 		<div style="width : 100%;">
-		<table class="table table-bordered">
+		<table class="table table-bordered" style="border:2px solid black;">
 			<tr>
 				<th scope="row" style="width:200px;">총 상품금액</th>
 				<td style="width:200px; font-weight:bold; text-align:right;"><span id="summoney"><%=fmMoney.format(sumMoney) %></span> 원</td>
@@ -508,8 +628,8 @@ $(document).ready(function () {
 			</tr>
 			
 			<tr>
-				<th scope="row" style="width:200px;" ><strong>최종금액</strong></th>
-				<td style="width:200px; font-weight:bold; text-align:right; color:#0054FF"><span id="ttmoney"><%=fmMoney.format(sumMoney) %></span> 원</td>
+				<th scope="row" style="width:200px; font-size:20px;" ><strong>최종금액</strong></th>
+				<td style="width:200px; font-weight:bold; text-align:right; color:#0054FF; font-size:20px;"><span id="ttmoney"><%=fmMoney.format(sumMoney) %></span> 원</td>
 			</tr>
 			<tr>
 				<td scope="row" colspan="2" style="text-align:center;"><input type="button" onclick="payClick()" id="payButton" class="btn btn-secondary btn-lg" value="결제하기"></td>

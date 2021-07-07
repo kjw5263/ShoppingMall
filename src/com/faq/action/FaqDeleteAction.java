@@ -14,7 +14,7 @@ public class FaqDeleteAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-System.out.println("M : MemberDeleteAction_execute() 호출");
+		System.out.println("M : MemberDeleteAction_execute() 호출");
 		
 		//한글처리 
 		request.setCharacterEncoding("UTF-8");
@@ -22,12 +22,8 @@ System.out.println("M : MemberDeleteAction_execute() 호출");
 		// 전달정보 저장(id,pass)
 		int faqNum = Integer.parseInt(request.getParameter("faqNum"));
 
-		System.out.println("넘어온 faqNum값은 @@@@@@@@@@@@@@@@@@@@ : " + faqNum);
-
-        
         FaqDAO dao = new FaqDAO();
         int check = dao.deleteFaq(faqNum);
-
         
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
@@ -46,6 +42,6 @@ System.out.println("M : MemberDeleteAction_execute() 호출");
 	forward.setPath("./FaqList.faq");
 	forward.setRedirect(true);
 	return forward;
-}
+	}
 
 }

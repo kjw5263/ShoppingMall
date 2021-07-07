@@ -58,7 +58,6 @@
 	<!-- jquery 준비 끝 -->
 
 
-
 </head>
 <body>
 
@@ -70,78 +69,64 @@
 	<div class="container-fluid">	
 	
 		<div class="row">
-			<div class="col-2">
-				ㅇㅇ
-			</div>
-			<div class="col-8 text-center">	
-				
-				<div>무료 피부 유형검사</div>
-				
-				<div>질문 1</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="1" value="<%= i %>">
-					 <%} %>
-				아니다
+			<div class="col-2 text-center"></div>
+			
+			
+			<div class="col-8">
+			
+				<!-- 제목 시작 -->
+				<div class="col-md-12 text-center p-5 row">
+					<div class="col-2"></div>
+					<div class="col-4">
+						<h3>질문 - 설정하기</h3>
+					</div>
+					<div class="col-6"></div>
 				</div>
+				<!-- 제목 끝 --> 
 				
-				<div>질문 2</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="2" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
+				<hr>
 				
-				<div>질문 3</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="3" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
+				<!-- 글쓰기 폼 시작 -->
+				<form action="./QueSettingAction.que" method="post" id="fr" onsubmit="return check()">
 				
-				<div>질문 4</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="4" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
-				
-				<div>질문 5</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="5" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
-				
-				<div>질문 6</div>
-				<div>
-				그렇다
-					<%for(int i=0; i < 5; i++){%>
-					<input type="radio" name="6" value="<%= i %>">
-					 <%} %>
-				아니다
-				</div>
+					<div class="input-group input-group-lg mt-3 mb-3">
+						건성타입 &#60;
+					  <input type="text" class="form-control" placeholder="점수" name="score1" id="score1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+					  value="${qsdto.score1 }">
+					</div>
+					
+					<div class="input-group input-group-lg mt-3 mb-3">
+						<input type="text" class="form-control" placeholder="점수" name="score2" id="score2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+						 value="${qsdto.score2 }">
+						&#60; 중성타입 &#60;
+						<input type="text" class="form-control" placeholder="점수" name="score3" id="score3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+						value="${qsdto.score3 }">
+					</div>
+					
+					<div class="input-group input-group-lg mt-3 mb-3">
+						
+					  <input type="text" class="form-control" placeholder="점수" name="score4" id="score4" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+					  value="${qsdto.score4 }">
+					  &#60; 복합성타입 &#60;
+					  <input type="text" class="form-control" placeholder="점수" name="score5" id="score5" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+					  value="${qsdto.score5 }">
+					</div>
+					
+					이외 지성					
+					
+					<hr>
+					<button type="submit" class="btn btn-primary mb-3">세팅하기</button>
+				</form>
+				<!-- 글쓰기 폼 끝 -->
 				
 			</div>
+			
 			<div class="col-2">	
-				ㅇㅇ
-			</div>
+			</div>			
 		</div>
-	
+		
 	</div>
 	<!-- container 끝 -->	
-	
-	
-	
 	
 	
 	<!-- footer 시작 -->

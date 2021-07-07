@@ -75,15 +75,15 @@
 						</span>
 					</div>
 						
-					<form action="./NewPassAction.me">	
+					<form action="./NewPassAction.me" id="fr" name="fr" onsubmit="return check()">	
 						<div class="" style="text-align: center;">
 							<div class="input-group">
-							 <input type="password" class="form-control" placeholder="새 비밀번호" aria-label="새 비밀번호" aria-describedby="basic-addon1" name="newPass">
+							 <input type="password" class="form-control" placeholder="새 비밀번호" aria-label="새 비밀번호" aria-describedby="basic-addon1" name="newPass" id="newPass">
 							</div>
 							<br>
 							 
 							<div class="input-group mb-3">
-							  <input type="password" class="form-control" placeholder="새 비밀번호 확인" aria-label="새 비밀번호 확인" aria-describedby="basic-addon1" name="newPass2">
+							  <input type="password" class="form-control" placeholder="새 비밀번호 확인" aria-label="새 비밀번호 확인" aria-describedby="basic-addon1" name="newPass2" id="newPass2">
 							</div>
 						</div>	
 						
@@ -95,7 +95,7 @@
 					</form>
 					
 					<div class="row m-3" style="text-align: center;">
-						<a href="./MemberJoin.me">회원가입 </a>/ <a href="./FindId.me">아이디 찾기</a>
+						<a href="./emailJoin.me">회원가입 </a>/ <a href="./FindId.me">아이디 찾기</a>
 					</div>
 				<!-- 일반 로그인 폼 끝 -->
 				
@@ -126,6 +126,7 @@
 	<script src="./vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="./js/login.js"></script>    
+    <script src="./js/pwcheck.js"></script>
     
     
 </body>

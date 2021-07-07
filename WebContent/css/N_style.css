@@ -65,11 +65,13 @@ list-style: none;
   height: 20%;
 }
 
-
 #orderList {
 	text-align: center;
-	margin-top: 2%;
-	margin-bottom: 10%;
+}
+
+
+#orderList > td {
+	vertical-align: middle;
 	
 }
 
@@ -80,7 +82,7 @@ list-style: none;
 
 #price {
 	color: orange;
-	font-size: 12px;
+	font-size: 15px;
 }
 
 
@@ -115,9 +117,39 @@ list-style: none;
 
 #money {
 	color: red;
-	font-size: 15px;
+	font-size: 20px;
 	}
+	
+#detail-h4{
+	margin-top: 8%;
+	margin-bottom: 2%;
+	
+	
+}
 
+#allmoney {
+	font-size: 20px;
+}
+
+#order-detail{
+	border: 2px solid #EAEAEA;	
+	border-radius: 10px;
+	height: 5%;
+}
+
+#order-detail > ul {
+	list-style: none;
+	display: flex;
+	margin-top: 2%;
+	
+}
+
+#order-detail > ul > li {
+	flex : 1;
+	margin-left: 5%;
+	font-size: 20px;
+	
+}
 
 /* 상세 주문조회 */
 
@@ -146,3 +178,29 @@ list-style: none;
 
 
 /*info-page  */
+
+
+/*쿠폰, 포인트 페이지*/
+
+#nopnt {
+	text-align: center;
+	height: 300px;
+	
+}
+
+#nopnt-text {
+	margin-top: 15%;
+	
+}
+	
+
+
+.wave {
+	margin: 20px;
+}
+
+#ptcheck {
+	text-align: right;
+}
+
+/*쿠폰, 포인트 페이지*/

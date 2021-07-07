@@ -211,3 +211,8 @@ div {
     cursor:pointer;
     -webkit-appearance: none;
 }
+
+.mypage-lnb1 > ul > li {
+	list-style: none;
+	
+}

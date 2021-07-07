@@ -100,7 +100,7 @@
 	        <table>
 		    <tr>
 		    <td>
-			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+			    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
@@ -110,7 +110,7 @@
 				        <a class="nav-link" href="./GoodsAdd.ag"><b>상품등록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminOrderList.ag" style="background-color: #6c757d; color:white;"><b>주문목록</b></a>
+				        <a class="nav-link active" href="./AdminOrderList.ag"><b>주문목록</b></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
@@ -124,10 +124,10 @@
 		    </td>
 		    </tr>
 		    </table><br>
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
-						<th colspan="12" style="background-color: #b0bcc2; text-align: center; color: white;" ><b>상품 등록 리스트</b></th>
+						<th colspan="12" style="text-align: center;" ><b>회원 주문 리스트</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -196,7 +196,7 @@
 								</select>	
 							  </li>
 							  <li class="nav-item mb-2">
-	 						  <input type="submit" value="수정" class="btn btn-secondary btn-sm"/> 
+	 						  <input type="submit" value="수정" class="btn btn-primary btn-sm"/> 
 							  </li>
 							</ul>							  
 						</td>
@@ -205,10 +205,10 @@
 						<td>
 						<ul class="nav flex-column ">
 						  <li class="nav-item mb-2">
-							<a href="./AdminOrderDetail.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm">상세</a>	
+							<a href="./AdminOrderDetail.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-primary btn-sm">상세</a>	
 						  </li>
 						  <li class="nav-item mb-2">
-							<a href="./AdminOrderDelete.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-secondary btn-sm">삭제</a>
+							<a href="./AdminOrderDelete.ag?o_tradeNum=<%=dto.getO_tradeNum()%>" class="btn btn-danger btn-sm">삭제</a>
 						  </li>
 						</ul>
 						</td>
@@ -220,24 +220,21 @@
     </section>
     
 	  <hr>
-	  <%
-	    //////////////////////////////////////////////////////
-	    // 페이징 처리 - 하단부 페이지 링크
+    <!-- admin order list End -->
+    
+    <!-- 페이징 처리 -->
+    <div style="margin-left: 45%;">
+	  <ul class="pagination">
+    
+ 	  <%
 	    if(cnt != 0){// 글이있을때 표시
-	
-	    	//전체 페이지수 계산
-	    	// ex)  총 50개 -> 한페이지당 10개 출력, 5개
-			//      총 57개 ->       "        , 6개
+
 			int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
-			
-			// 한 화면에 보여줄 페이지 번호의 개수 (페이지 블럭)
+
 			int pageBlock = 2;
-			
-			// 페이지 블럭의 시작페이지 번호 
-			// ex)  1~10 페이지 : 1, 11~20페이지 : 11, 21~30페이지 : 21
+
 	        int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
-			
-			// 페이지 블럭의 끝 페이지 번호
+
 			int endPage = startPage+pageBlock-1;
 			
 			if(endPage > pageCount){
@@ -247,28 +244,39 @@
 	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
 	    	if(startPage > pageBlock){
 	    		%>
-	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage-pageBlock%>" class="btn btn-primary btn-sm">이전</a>
+	    		<li class="page-item">
+		    		<a class="page-link" href="./AdminOrderList.ag?pageNum=<%=startPage-pageBlock%>" aria-label="Previous">
+		    		<span aria-hidden="true">&laquo;</span>
+		    		</a>
+		    		</span>
+	    		</li>
 	    		<%
 	    	}   	
 	    	
 	    	// 숫자  1....5
 	    	for(int i=startPage;i<=endPage;i++){
 	    		%>
-	    		    <a href="./AdminOrderList.ag?pageNum=<%=i%>"class="btn btn-secondary btn-sm"><%=i %></a> 
+	    		<li class="page-item">
+	    			<a class="page-link" href="./AdminOrderList.ag?pageNum=<%=i%>"><%=i %></a>
+	    		</li>
 	    		<%    		
 	    	}
 	    	
 	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
 	    	if(endPage < pageCount){
 	    		%>
-	    		<a href="./AdminOrderList.ag?pageNum=<%=startPage+pageBlock%>" class="btn btn-primary btn-sm">다음</a>
+	    		<li class="page-item">
+	    			<a class="page-link" href="./AdminOrderList.ag?pageNum=<%=startPage+pageBlock%>" aria-label="Next">
+	    		<span aria-hidden="true">&raquo;</span>
 	    		<%
 	    	}
-	    	
 	    }
-	    //////////////////////////////////////////////////////
 	  %>
-    <!-- admin order list End -->
+	  </a></li>
+	  </ul>
+	  </div>
+	  <!-- 페이징 처리 -->
+ 
 			
 		</div>
 		<div class="col-0">	

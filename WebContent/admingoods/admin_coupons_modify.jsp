@@ -70,7 +70,7 @@
 	        <table>
 		    <tr>
 		    <td>
-			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+			    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
@@ -86,7 +86,7 @@
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminCouponList.ag" style="background-color: #6c757d; color:white;"><b>쿠폰목록</b></a>
+				        <a class="nav-link active" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
 				      </li>			      
 				    </ul>
 				  </div>
@@ -100,10 +100,10 @@
 		<form method="post" action="./AdminCouponsModifyAction.ag">
 			<!-- 상품번호 저장 -->
 			<input type="hidden" name="couponNum" value="<%=dto.getCouponNum() %>">
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
-						<th colspan="2" style="background-color: #b0bcc2; text-align: center; color: white;"><b>관리자 쿠폰수정</b></th>
+						<th colspan="2" style="text-align: center;"><b>관리자 쿠폰수정</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -123,7 +123,7 @@
 			</table>
 			<table style="margin-left: auto; margin-right: auto;">
 			<tr>
-			    <td><input type="submit" value="쿠폰수정" class="btn btn-secondary"></td>  
+			    <td><input type="submit" value="쿠폰수정" class="btn btn-primary"></td>  
 		    </tr>
 		    </table>		
 		</form>	

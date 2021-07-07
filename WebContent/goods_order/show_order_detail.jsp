@@ -31,6 +31,8 @@
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./css/N_style.css" type="text/css">
+<link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+
 
 
 
@@ -80,39 +82,57 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-2"></div><!--여백   -->
-			<div class="col-8"><!--내용 넣는 공간  -->
+			<div class="col-2"></div>
+			<!--여백   -->
+			<div class="col-8">
+				<!--내용 넣는 공간  -->
 				<div class="row">
-					<div class="col-3">
-						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
-							href="./getLike.li"><h5>찜목록</h5></a>
-						<hr>
-						<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
-						<hr>
-						<a href=""><h5>내 화장품 사용기한 &nbsp;확인하기</h5></a>
-						<hr>
-						<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a> <a
-							href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
+					<div class="col-2">
+						<div class="mypage-lnb1">
+							<ul>
+								<li>
+									<h2>나의 쇼핑</h2>
+									<ul style="list-style: none">
+										<li class="subMenu"><a href="./getOrderList.or">주문/배송조회</a></li>
+										<li class="subMenu"><a href="">취소/반품/교환내역</a></li>
+									</ul>
+									<ul style="list-style: none">
+										<li class="subMenu"><a href="./BasketList.ba">장바구니</a></li>
+										<li class="subMenu"><a href="./getLike.li">좋아요</a></li>
+										<li class="subMenu"><a href="./MyCoupon.cp">포인트 / 쿠폰</a></li>
+									</ul>
+								</li>
+								<li class="line" style="list-style: none">
+									<h2>나의 활동</h2>
+									<ul style="list-style: none">
+										<li class="subMenu"><a href="./ReviewList.rev">리뷰</a></li>
+										<li class="subMenu"><a href="">상품Q&A내역</a></li>
+									</ul>
+								</li>
+								<li class="line" style="list-style: none">
+									<h2>나의 정보</h2>
+									<ul style="list-style: none">
+										<li class="subMenu"><a href="./MemberUpdateInfo.me">회원정보수정</a></li>
+										<li class="subMenu"><a href="./MemberDelete.me">회원탈퇴</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
 					</div>
-					<div class="col-9">
-					
-						<h3>주문 상세 조회</h3><br>
-						<ul class="mypage-step" style="text-decoration: none;">
-							<li>
-								<div>
-									<div class="contents1">구매일자</div>
-									<div class="contents2"></div>
-								</div>
-								<div>
-									<div class="contents1">주문일자</div>
-									<div class="contents2"></div>
-								</div>
-							</li>
-						</ul>
-						
-						
-						<h4>구매내역</h4>
-						<table class= "table table-bordered"  id="orderList">
+					<div class="col-10">
+
+						<h3>주문 상세 조회</h3>
+						<br>
+						<%	OrderDTO odto1 = (OrderDTO)orderList.get(0);%>
+						<fieldset id="order-detail">
+							<ul>
+								<li>구매일자 : <%=odto1.getOrderDate() %></li>
+								<li>주문번호 : <%=odto1.getO_tradeNum() %></li>
+							</ul>
+						</fieldset>
+
+						<h4 id="detail-h4">구매내역</h4>
+						<table class="table table-bordered" id="orderList">
 							<thead class="order-thead">
 								<tr>
 									<th colspan="2">상품명</th>
@@ -122,32 +142,29 @@
 								</tr>
 							</thead>
 							<tbody>
-							<%for(int i=0;i<orderList.size();i++){
+								<%for(int i=0;i<orderList.size();i++){
 								GoodsDTO gdto = (GoodsDTO)goodsList.get(i);
 								OrderDTO odto = (OrderDTO)orderList.get(i);
 							%>
 								<tr>
-									<td>
-									
-									<img src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>" width="100px" height="100px">
-									</td>
-									<td>
-									<b id="brand"><%=gdto.getCosBrand() %></b><br>
-									<%=gdto.getCosName() %>
+									<td><img
+										src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>"
+										width="100px" height="100px"></td>
+									<td><b id="brand"><%=gdto.getCosBrand() %></b><br> <%=gdto.getCosName() %>
 									</td>
 									<td><%=gdto.getCosPrice() %></td>
 									<td><%=odto.getO_cosAmount() %>개</td>
 									<td><%=odto.getOrderStatus() %></td>
-								
+
 								</tr>
-							<%} %>
+								<%} %>
 							</tbody>
-						
+
 						</table>
-						
-						<h4>배송지 정보</h4>
-						<table class= "table table-bordered" id="orderList">
-						<% OrderDTO odto = (OrderDTO)orderList.get(0);
+
+						<h4 id="detail-h4">배송지 정보</h4>
+						<table class="table table-bordered" id="orderList">
+							<% OrderDTO odto = (OrderDTO)orderList.get(0);
 							GoodsDTO gdto = (GoodsDTO)goodsList.get(1);%>
 							<tr>
 								<td>받는 사람</td>
@@ -156,8 +173,15 @@
 							<tr>
 								<td>연락처</td>
 								<td><%=odto.getReceiverTel() %></td>
+							</tr>
+							<tr>
 								<td>예비 연락처</td>
-								<td><%=odto.getReceiverTel2() %></td>
+								<td>
+									<%
+								if(odto.getReceiverTel2() == null){%> 0 <% }else{
+								 odto.getReceiverTel2();
+								} %>
+								</td>
 							</tr>
 							<tr>
 								<td>이메일</td>
@@ -169,37 +193,51 @@
 							</tr>
 							<tr>
 								<td>배송시 주의사항</td>
-								<td><%=odto.getO_msg() %></td>
+								<td>
+									<%
+								if(odto.getO_msg() == null){%> 없음 <% }else{
+								 odto.getO_msg();
+								} %>
+								</td>
 							</tr>
-						
-						
+
+
 						</table>
-						
-						
-						<h4>결제 정보</h4>
-						
-						<table class= "table table-bordered" id="orderList">
+
+
+						<h4 id="detail-h4">결제 정보</h4>
+
+						<table class="table table-bordered" id="orderList">
 							<tr>
-								<td>총 상품 금액<br><b id="money"><%=odto.getSumMoney() %></b>원</td>
-								<td>쿠폰 할인 금액<br><b id="money"><%=odto.getCpUseAmount() %></b>원</td>
-								<td>적립 포인트<br><b id="money"><%=odto.getAddPoint() %></b>p</td>
+								<td>총 상품 금액<br>
+								<b id="money"><%=odto.getSumMoney() %></b>원
+								</td>
+								<td>쿠폰 할인 금액<br>
+								<b id="money"><%=odto.getCpUseAmount() %></b>원
+								</td>
+								<td>적립 포인트<br>
+								<b id="money"><%=odto.getAddPoint() %></b>p
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3"><b>총 결제 금액 :</b><b id="money"><%=odto.getPayMoney() %></b>원
-								<br>ㄴ 결제 수단 :<%=odto.getPayType() %></td>
+								<td colspan="3" id="allmoney"><b>총 결제 금액 : </b><b
+									id="money"><%=odto.getPayMoney() %></b>원 <br>ㄴ 결제 수단 :<%=odto.getPayType() %></td>
 							</tr>
-						
+
 						</table>
-						
+
 						<div style="text-align: center;">
-							<input type="button" class="primary-btn look-btn" style="background-color: #B0BCC2;" value="목록" onclick="history.back();">
-						</div>	
-						
-					
+							<input type="button" class="primary-btn look-btn"
+								style="background-color: #B0BCC2;" value="목록"
+								onclick="history.back();">
+						</div>
+
+
 					</div>
 				</div>
 			</div>
-			<div class="col-2"></div><!--여백   -->
+			<div class="col-2"></div>
+			<!--여백   -->
 		</div>
 
 

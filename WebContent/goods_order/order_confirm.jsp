@@ -36,6 +36,7 @@
 		List orderList = (List)request.getAttribute("orderList");
 		List goodsList = (List)request.getAttribute("goodsList");
 		DecimalFormat fmMoney = new DecimalFormat("###,###");
+		OrderDTO odto = (OrderDTO)orderList.get(0);
 		int sumMoney=0;
 		int sumAmount=0;
 	%>
@@ -54,8 +55,8 @@
 				<div style="float:inline-block; padding-left:15%;"><img src="./img/icons/check1.png"></div>
 				<div style="padding-left:4%;">
 					<div><h2>주문이 완료되었습니다.</h2></div>
-					<div><h4 style="color:#999999; padding-top:4px;">이용해주셔서 감사합니다.</h4></div>
-					<div><h6 style="color:#a3a3a3; padding-top:6px;">주문 상세내역은 마이페이지&gt<a href="#">주문조회</a> 에서 확인하실 수 있습니다.</h6></div>
+					<div><h4 style="color:#555555; padding-top:4px;">이용해주셔서 감사합니다.</h4></div>
+					<div><h6 style="color:#a3a3a3; padding-top:6px;">주문 상세내역은 마이페이지&gt<a href="./Orderdetail.or">주문조회</a> 에서 확인하실 수 있습니다.</h6></div>
 				</div>
 			</div>
 			<div class="col-3">
@@ -69,7 +70,9 @@
 			<h3 style="color:#535353;">주문 상세 내역</h3>
 			<div style="margin: 10px 10px 10px 0;"><span style="margin:0 15px 0 3px;">주문번호</span><span style="color:orange;"><strong><%=((OrderDTO)orderList.get(0)).getO_tradeNum() %></strong></span>
 			<span style="margin:0 10px 0 10px;">주문일자</span><span><strong><%=((OrderDTO)orderList.get(0)).getOrderDate() %></strong></span></div>
-			<table class="table" style="text-align: center; margin-bottom:50px;">
+			
+			<!-- 주문 상세 내역 테이블 -->
+			<table class="table" style="text-align: center; margin-bottom:100px; font-size:19px;">
 				<thead class="thead-light">
 				<tr>
 					<th scope="col" colspan="2">상품정보</th>
@@ -84,7 +87,7 @@
 						GoodsDTO gDTO = (GoodsDTO)goodsList.get(i);
 						%>
 						<tr>
-							<td><img src="<%=gDTO.getCosImage().split(",")[0] %>" width="100" height="100"></td>
+							<td><img src="./admingoods/upload/<%=gDTO.getCosImage().split(",")[0] %>" width="100" height="100"></td>
 							<td><%=orDTO.getO_cosName() %></td>
 							<td><%=fmMoney.format(gDTO.getCosPrice()) %>원</td>
 							<td><%=orDTO.getO_cosAmount() %></td>
@@ -94,17 +97,75 @@
 				</tbody>
 				<tr></tr>
 			</table>
+			<!-- 주문 상세 내역 테이블 -->
 			
-			
-			<h3 style="color:#535353;">결제 상세 내역</h3>
-			<table>
+			<!-- 배송 정보 테이블 -->
+			<h3 style="color:#535353; margin-bottom:10px;">배송지 정보</h3>
+			<table class="table" style="text-align: center; margin-bottom:100px;">
 			<thead>
-				<tr></tr>
+				<tr>
+					<th class="table-active">수령인</th>
+					<td><%=odto.getReceiverName() %></td>
+					<th class="table-active">주문날짜</th>
+					<td><%=odto.getOrderDate() %></td>
+				</tr>
 			</thead>
 			<tbody>
-			
+				<tr>
+					<th class="table-active">연락처1</th>
+					<td>
+						<%=odto.getReceiverTel().replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3") %> </td>
+					<th class="table-active">주문상태</th>
+					<td style="color:#ff5546; font-weight:bold;">주문완료(결제완료)</td>
+				</tr>
+				<tr>
+					<th class="table-active">연락처2</th>
+					<td>
+						<% if(odto.getReceiverTel2().equals("")){ %> - <%} else {%> <%=odto.getReceiverTel2().replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3") %> <%} %>
+					</td>
+					<th class="table-active">이메일</th>
+					<td><% if(odto.getReceiverEmail().equals("")){ %> - <%} else {%> <%=odto.getReceiverEmail() %> <%} %></td>
+				</tr>
+				<tr>
+					<th class="table-active">배송지</th>
+					<td>(<%=odto.getReceiverAddr().split(",")[0] %>)
+					 <%=odto.getReceiverAddr().split(",")[1] %> <%=odto.getReceiverAddr().split(",")[2] %>
+					</td>
+					<th class="table-active">배송 메시지</th>
+					<td><% if(odto.getO_msg().equals("")){ %> - <%} else {%> <%=odto.getO_msg() %> <%} %></td>
+				</tr>
 			</tbody>
 			</table>
+			<!-- 배송 정보 테이블 -->
+			
+			
+			<!-- 결제 상세 내역 테이블 -->
+			<h3 style="color:#535353;">결제 상세 내역</h3>
+			<table class="table" style="text-align: center;">
+			<thead>
+				<tr class="table-active">
+					<th>주문금액</th>
+					<th>할인금액</th>
+					<th>총 결제금액</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="table-light">
+					<th style="font-size: 20px;"><%=fmMoney.format(odto.getSumMoney()) %>원</th>
+					<th style="color: #0A82FF; font-size: 20px;">
+						<span style="color:black;">&nbsp&nbsp&nbsp쿠&nbsp&nbsp폰 : </span><%=fmMoney.format(odto.getCpUseAmount()) %>원<br>
+						<span style="color:black;">포인트 : </span><%=fmMoney.format(odto.getPtUseAmount()) %>원
+					</th>
+					<th style="font-size:20px; color:#ff5546"><%=fmMoney.format(odto.getPayMoney()) %>원<br>
+					<span style="font-size:15px;">(<%=odto.getPayType() %>)</span></th>
+				</tr>
+			</tbody>
+			</table>
+			<!-- 결제 상세 내역 테이블 -->
+			<ul style="color:#999999;">
+				<li style="margin-left:20px;">카드결제시 현금영수증/세금계산서 발급이 불가능하며 카드전표로 대체하실 수 있습니다.</li>
+				<li style="margin-left:20px;">PG사 또는 카드사에서 제공하는 즉시 할인은 최종 결제 금액에 반영되지 않습니다.</li>
+			</ul>
 			</div>
 			<div class="col-2" style="">
 			</div>

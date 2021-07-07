@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 
 import com.coupon.db.CouponDTO;
+import com.order.db.OrderDTO;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -144,5 +146,135 @@ public class CouponDAO {
 
     //insertCoupon(userId)
 	
+    //pointcheck(startdate,enddate)
+    /*
+    public List pointcheck(Date sdt,Date edt,String userId){
+    	System.out.println(sdt);
+    	System.out.println(edt);
+    	
+    	List orderList = new ArrayList();
+    	try {
+    		conn = getConnection();
+    		sql = "select distinct o_tradeNum,orderDate,addPoint,cpUseAmount,ptUseAmount from order_board where orderDate between ? and ? where o_userId = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setDouble(1, sdt);
+			pstmt.setDouble(2, edt);
+			pstmt.setString(3, userId);
+			System.out.println("sql 실행완료....");
+			if(rs.next()){
+			while(rs.next()){
+				OrderDTO odto = new OrderDTO();
+				odto.setOrderDate(rs.getDate("orderDate"));
+				odto.setPtUseAmount(rs.getInt("ptUseAmount"));
+				odto.setAddPoint(rs.getInt("addPoint"));
+				odto.setO_tradeNum(rs.getString("o_tradeNum"));
+				
+				orderList.add(odto);
+				System.out.println(odto);
+			}
+		}else{
+			
+			System.out.println("없음 test중");
+			
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+    	System.out.println(orderList);
+		return orderList;
+    }*/
+    //pointcheck(startdate,enddate)
+    //pointcheck(startdate,enddate)
+    public List pointcheck(String startdate,String enddate,String userId){
+    	System.out.println(startdate);
+    	System.out.println(enddate);
+    	
+    	List orderList = new ArrayList();
+    	try {
+    		conn = getConnection();
+    		sql = "select distinct o_tradeNum,orderDate,addPoint,cpUseAmount,ptUseAmount,o_cosName from order_board where orderDate between ? and ? and o_userId = ?";
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setString(1, startdate);
+    		pstmt.setString(2, enddate);
+    		pstmt.setString(3, userId);
+    		
+    		rs =pstmt.executeQuery();
+    		System.out.println("sql 실행완료....");
+    		if(!rs.next()){
+    			System.out.println("없음 test중");
+    			}else{
+    			
+    			while(rs.next()){
+    				OrderDTO odto = new OrderDTO();
+    				odto.setOrderDate(rs.getDate("orderDate"));
+    				odto.setPtUseAmount(rs.getInt("ptUseAmount"));
+    				odto.setAddPoint(rs.getInt("addPoint"));
+    				odto.setO_tradeNum(rs.getString("o_tradeNum"));
+    				odto.setO_cosName(rs.getString("o_cosName"));
+    				
+    				orderList.add(odto);
+    				System.out.println(odto);
+    			
+    				}
+    			}
+    	}catch (SQLException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}finally {
+    		closeDB();
+    	}
+    	System.out.println(orderList);
+    	return orderList;
+    }
+    //pointcheck(startdate,enddate)
+    
+    //pointcheck2(searchmonth1,userId);
+    public List pointcheck2(String searchmonth2,String userId){
+    	
+    	List orderList2 = new ArrayList();
+    	try {
+    		conn = getConnection();
+    		sql = "select distinct o_tradeNum,orderDate,addPoint,cpUseAmount,ptUseAmount,o_cosName from order_board where orderDate between ? and now() and o_userId = ?";
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setString(1, searchmonth2);
+    		pstmt.setString(2, userId);
+    		
+    		rs =pstmt.executeQuery();
+    		System.out.println("sql 실행완료....제발유...");
+    		if(!rs.next()){
+    			System.out.println("없음 test중");
+    			}else{
+    			
+    			while(rs.next()){
+    				OrderDTO odto2 = new OrderDTO();
+    				odto2.setOrderDate(rs.getDate("orderDate"));
+    				odto2.setPtUseAmount(rs.getInt("ptUseAmount"));
+    				odto2.setAddPoint(rs.getInt("addPoint"));
+    				odto2.setO_tradeNum(rs.getString("o_tradeNum"));
+    				odto2.setO_cosName(rs.getString("o_cosName"));
+    				
+    				orderList2.add(odto2);
+    				System.out.println(odto2);
+    			
+    				}
+    			}
+    	}catch (SQLException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}finally {
+    		closeDB();
+    	}
+    	System.out.println(orderList2);
+    	return orderList2;
+    }
+    
+    //pointcheck2(searchmonth1,userId);
+
+
+    
+    
 
 }

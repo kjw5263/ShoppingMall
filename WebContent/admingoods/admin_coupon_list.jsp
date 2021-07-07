@@ -66,7 +66,7 @@
 	        <table>
 		    <tr>
 		    <td>
-			    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b0bcc2;">
+			    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <div class="collapse navbar-collapse">
 				    <ul class="navbar-nav">
 				      <li class="nav-item">
@@ -82,7 +82,7 @@
 				        <a class="nav-link" href="./AdminMemberList.ag"><b>회원목록</b></a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="./AdminCouponList.ag" style="background-color: #6c757d; color:white;"><b>쿠폰목록</b></a>
+				        <a class="nav-link active" href="./AdminCouponList.ag"><b>쿠폰목록</b></a>
 				      </li>			      
 				    </ul>
 				  </div>
@@ -90,10 +90,10 @@
 		    </td>
 		    </tr>
 		    </table><br>
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
-						<th colspan="12" style="background-color: #b0bcc2; text-align: center; color: white;" ><b>관리자 쿠폰 리스트</b></th>
+						<th colspan="12" style="text-align: center;" ><b>관리자 쿠폰 리스트</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -118,8 +118,8 @@
 							<td><%=dto.getCouponNote() %></td>
 							<td><%=dto.getCouponDc() %>%</td>
 							<td>
-								<a href="./AdminCouponsModify.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-secondary btn-sm">수정</a>	
-								<a href="./AdminCouponsDelete.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-secondary btn-sm">삭제</a>
+								<a href="./AdminCouponsModify.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-primary btn-sm">수정</a>	
+								<a href="./AdminCouponsDelete.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-danger btn-sm">삭제</a>
 							</td>						
 						</tr>
 					<%} %>      	          
@@ -129,10 +129,10 @@
     <br>
 		<div class="container">
 			<form method="post" action="./AdminCouponsAddAction.ag">
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<table class="table table-active" style="text-align: center; background-color: white;">
 					<thead>
 						<tr>
-							<th colspan="2" style="background-color: #b0bcc2; text-align: center; color: white;"><b>관리자 쿠폰등록</b></th>
+							<th colspan="2" style="text-align: center;"><b>관리자 쿠폰등록</b></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -151,8 +151,8 @@
 					</tbody>
 				</table>
 				<div style="margin-left: auto; margin-right: auto;">
-				    <input type="submit" value="쿠폰등록" class="btn btn-secondary">
-				    <input type="reset" value="쿠폰초기화" class="btn btn-secondary">
+				    <input type="submit" value="쿠폰등록" class="btn btn-primary">
+				    <input type="reset" value="쿠폰초기화" class="btn btn-primary">
 			    </div>		
 			</form>		
 		</div>

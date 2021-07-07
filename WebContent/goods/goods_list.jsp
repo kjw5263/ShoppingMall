@@ -115,16 +115,19 @@ table tr td {
 //테스트 버전 업2!
   	listDAO gdao = new listDAO();
   	
-    List goodsList = (List)request.getAttribute("goodsList");
-    List bestgoodsList = (List)request.getAttribute("bestgoodsList");
+  List goodsList = (List)request.getAttribute("goodsList");
+  List bestgoodsList = (List)request.getAttribute("bestgoodsList");
 
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
-    String http[][] = var.getHttp();
-	String cat[][] = var.getCat();	
-    String skin[][] = var.getSkin(); 
+    String http[] = gdao.getCateGoodsList();
+	String cat[] =  gdao.getbrandGoodsList();
+    String skin[] =  gdao.getSkinGoodsList();
+   	
     int size = goodsList.size();
     int bestsize = bestgoodsList.size();
+    
+   
   %>
 	<section class="latest-products spad">
         <div class="container">
@@ -141,10 +144,10 @@ table tr td {
 
                          
                             <%
-                            for(int i = 2 ; i<http.length;i++){
+                            for(int i = 0 ; i<http.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=http[i][1] %>"><%=http[i][1] %></li>
+                            <li data-filter=".<%=http[i] %>"><%=http[i] %></li>
                             <%} %>
                             
                         </ul>
@@ -152,10 +155,10 @@ table tr td {
                          <ul class="product-controls">
                             <li data-filter=".allgoods">All</li>
                             <%
-                            for(int i = 1 ; i<cat.length;i++){
+                            for(int i = 0 ; i<cat.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=cat[i][1] %>"><%=cat[i][1] %></li>
+                            <li data-filter=".<%=cat[i] %>"><%=cat[i] %></li>
                             <%} %>
                             
                         </ul>
@@ -163,10 +166,10 @@ table tr td {
                          <ul class="product-controls">
                             <li data-filter=".allgoods">All</li>
                             <%
-                            for(int i = 1 ; i<skin.length;i++){
+                            for(int i = 0 ; i<skin.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=skin[i][1] %>"><%=skin[i][1] %></li>
+                            <li data-filter=".<%=skin[i] %>"><%=skin[i] %></li>
                             <%} %>
                             
                         </ul>
@@ -186,7 +189,7 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
+                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기</button>	
                         </div>
                     </div>
                 </div>
@@ -194,16 +197,16 @@ table tr td {
                 <%for(int i = 0 ; i<bestsize ;i++){ 
             	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
             	%>
-                <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">>
+                <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">
                     <div class="single-product-item">
                         <figure>
                             <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
-                            <div class="p-status">new</div>
+                            <div class="p-status">best</div>
                         </figure>
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">장바구니 담기</button>	
+                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기 </button>	
                         </div>
                     </div>
                 </div>
@@ -222,11 +225,28 @@ table tr td {
 
 </body>
 
+<script type="text/javascript">
+
+function basketact(x) {
+	var sure  = confirm("장바구니에 담으시겠습니까?");
+	if(sure == true){
+	 location.href = "http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum="+x;
+	}else{
+		
+	}
+	
+}
+
+
+
+
+</script>
+
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/jquery.magnific-popup.min.js"></script>
 <script src="./js/jquery.slicknav.js"></script>
-<script src="./js/jquery.nice-select.min.js">
-<script src="./js/owl.carousel.min.js"></script></script>
+<script src="./js/jquery.nice-select.min.js"></script>
+<script src="./js/owl.carousel.min.js"></script>
 <script src="./js/mixitup.min.js"></script>
 <script src="./js/main.js"></script>
