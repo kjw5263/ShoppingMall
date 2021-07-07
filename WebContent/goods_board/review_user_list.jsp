@@ -44,12 +44,11 @@
             $("input[name=test_check]:checked").each(function (){
                 test.push($(this).val());
             })
-            if ($("#check_num").is(":checked")==true){
-
-                console.log("체크된 값 total" +test);
-                window.name="./ReviewList.rev"
-                window.open("ReviewUpdateForm.rev?reviewNum="+test, "new",
-                    "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=700, height=700, left=0, top=0" );
+            if ($("input[name=test_check]:checked").is(":checked") ===true){
+            console.log("체크된 값 total" +test);
+            window.name="./ReviewList.rev"
+            window.open("ReviewUpdateForm.rev?reviewNum="+test, "new",
+                "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=600, height=500, left=0, top=0" );
             }else {
                 alert("체크해주세요");
             }
@@ -141,29 +140,33 @@
 
 					<form action="./ReviewDelete.rev" method="post" id="delete_action">
 
-						<ul class="comm1sTabs">
-							<input type="checkbox" id="check_num" name="test_check"
-								value="<%=reviewList.get(i).getReviewNum() %>">
-							<li class="mypage_review">
-								<div class="table_list">
-									<div class="list_image">
+
+                <ul class="comm1sTabs">
+                    <input type="radio" name="test_check" id="check_num" value="<%= reviewList.get(i).getReviewNum()%>" style="">
+
+                    <li class="mypage_review">
+                        <div class="table_list">
+                            <div class="list_image">
+
 
 										<%
                             dto= dso.getGoods(reviewList.get(i).getCosNum());
 
                         %>
-										<img
-											src="admingoods/upload/<%=dto.getCosImage().split(",")[0] %>"
-											alt="">
-									</div>
-									<div class="list_cos_title">
-										<%=dto.getCosName() %>
-									</div>
-								</div>
-								<div class="table_bottom">
-									<div class="bottom_list">
-										<div class="bottom_content">
-											<span class="rating_view_wrap"> <%
+
+                                <input type="hidden" name="cosNum" value="<%= reviewList.get(i).getCosNum()%>">
+                                <img src="admingoods/upload/<%=dto.getCosImage().split(",")[0] %>" alt="">
+                            </div>
+                            <div class="list_cos_title">
+                            <%=dto.getCosName() %>
+                            </div>
+                        </div>
+                        <div class="table_bottom">
+                            <div class="bottom_list">
+                                <div class="bottom_content">
+                                    <span class="rating_view_wrap">
+                                        <%
+
                                             switch (reviewList.get(i).getRating()){
                                                 case 5:
                                         %> <i class="fa fa-star"></i> <i

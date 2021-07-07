@@ -125,9 +125,11 @@
             <div class="review_thum_type1">
                 <ul class="inner_clrfix">
                     <li style="list-style: none">
-                        <span class="img_size11">
+                        <span class="img_size11" style="max-width: 100%">
+                            <% if (reviewList.get(i).getReviewImage() !=null){%>
+                            <img src="./goods_board/upload/<%=reviewList.get(i).getReviewImage()%>" alt="..">
+                            <%}%>
 
-                            <img src="./goods_board/upload/<%=reviewList.get(i).getReviewImage()%>" alt=".." style="max-width: 15%">
 
 
                         </span>
