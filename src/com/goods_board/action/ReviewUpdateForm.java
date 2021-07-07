@@ -7,6 +7,7 @@ import com.goods_board.db.GoodsReviewDTO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 public class ReviewUpdateForm implements Action{
     @Override
@@ -14,6 +15,9 @@ public class ReviewUpdateForm implements Action{
         HttpSession session = request.getSession();
         String id = (String) session.getAttribute("userId");
         int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
+        GoodsReviewDAO grdao = new GoodsReviewDAO();
+        request.setAttribute("list",grdao.getReview(id));
+        GoodsDAO gdao = new GoodsDAO();
         ActionForward forward = new ActionForward();
         forward.setPath("./goods_board/review_update.jsp");
 
