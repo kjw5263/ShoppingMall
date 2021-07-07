@@ -64,42 +64,7 @@
 
 
      <style type="text/css">
-button{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:34px;
-  font-size:1em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+
 table {
     width: 80%;
     margin-left : 5%;
@@ -112,15 +77,11 @@ table {
     text-align: center;
   }
    th {
-    background-color: #0d47a1;
+   
+   
     color: #ffffff;
   }
-  tbody tr:nth-child(2n) {
-    background-color: #bbdefb;
-  }
-  tbody tr:nth-child(2n+1) {
-    background-color: #e3f2fd;
-  }
+ 
   </style>
 </head>
 <body>
@@ -133,13 +94,18 @@ table {
 <%
 		// 페이지 이동시 전달정보가 있으면(파라미터) 항상 가장먼저 저장
 		// num,pageNum
-		
+		String userId = (String)session.getAttribute("userId");
+
 	    String pageNum = request.getParameter("pageNum");
 		String num = request.getParameter("noticeNum");
 	    // BoardDAO 객체 생성
 	    
 	    noticeDTO notit = (noticeDTO)request.getAttribute("noti");
 		// DB에서 글번호(num)에 해당하 글정보를 모두 가져와서 출력
+		
+		if (userId == null) {
+			userId = "null";
+		}
 		
 		String type;
 		if(notit.getNoticeType()==1){
@@ -155,10 +121,10 @@ table {
 		
 	%> 
 	<br>
-<button onclick="location.href='http://localhost:8088/ShoppingMall/notice.nos'">목록으로</button>	
+<button class="btn btn-secondary" onclick="location.href='http://localhost:8088/ShoppingMall/notice.nos'">목록으로</button>	
 <br>
-<table>
-<tr>
+<table class="table table-striped">
+<tr class="table-active">
 <td><%=type %>
 </td>
 <td><%=notit.getNoticeTitle() %></td>
@@ -206,8 +172,13 @@ table {
 </table>
 <br>
 <br>
-<button onclick="location.href='http://localhost:8088/ShoppingMall/noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
-<button onclick="location.href='http://localhost:8088/ShoppingMall/noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>	
+
+<%if(userId.equals("admin")){ %>
+<button class="btn btn-danger" onclick="location.href='http://localhost:8088/ShoppingMall/noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
+<button  class="btn btn-warning" onclick="location.href='http://localhost:8088/ShoppingMall/noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>	
+	<% } %>
+	<br>
+	
 <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
