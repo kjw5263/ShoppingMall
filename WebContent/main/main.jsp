@@ -237,7 +237,7 @@
                             <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
                             onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
                             <img src="./img/icons/heart.png" width="40px" 
-                            onclick="location.href='#'">
+                            onclick="location.href='#'" style='cursor:pointer;'>
                         	</p>
                         </div>
                     </div>
