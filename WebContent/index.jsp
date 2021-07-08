@@ -15,10 +15,11 @@
 		//response.sendRedirect("./MemberLogin.me");
 		 
 		 // 메인 페이지로 이동
-		 response.sendRedirect("./Main.me");
+		
+		 //response.sendRedirect("./Main.me");
 		// 내가 모델2에서 실행할 수 있는 jsp 파일은, index.jsp 밖에 없다!
 		
-		
+		response.sendRedirect("./couponEvent.cp");
 		
 		// 쇼핑몰 - 상품등록/관리/주문/장바구니
 		

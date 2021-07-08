@@ -1,70 +1,52 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Login V10</title>
+<title>Just Skin</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-<link rel="icon" type="image/png" href="../img/icons/favicon.ico" />
+<link rel="icon" type="image/png" href="./img/icons/favicon.ico" />
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="./vendor/animate/animate.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="./vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="../css/util.css">
-<link rel="stylesheet" type="text/css" href="../css/login.css">
+<link rel="stylesheet" type="text/css" href="./css/util.css">
+<link rel="stylesheet" type="text/css" href="./css/login.css">
 <!--===============================================================================================-->
-
-
-
-<meta name="description" content="Yoga Studio Template">
-<meta name="keywords" content="Yoga, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Violet | Template</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
 	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
+<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
 	rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="../css/font-awesome.min.css"
+<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="./css/font-awesome.min.css"
 	type="text/css">
-<link rel="stylesheet" href="../css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="../css/owl.carousel.min.css"
+<link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="./css/owl.carousel.min.css"
 	type="text/css">
-<link rel="stylesheet" href="../css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="../css/style.css" type="text/css">
-
-
+<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="./css/style.css" type="text/css">
 
 <!-- jquery 준비 시작 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -72,10 +54,68 @@
 	crossorigin="anonymous"></script>
 <!-- jquery 준비 끝 -->
 
-
-
 </head>
 <body>
+
+<script type="text/javascript">
+/* java->jstl->html->js */
+ 
+ var id = "<c:out value='${sessionScope.userId}'/>";
+ console.log(id);
+ 
+$(document).ready(function () {
+
+	$("#cp1").click(function(){
+		
+ 		if(id==""){
+			alert("로그인 하러가기");
+			location.href="./MemberLogin.me";
+		}else{
+			$("#myModal").show();
+		}
+		 
+ 		$("#myModal").show();	
+	});
+
+	$("#modalExit").click(function(){
+		
+		$("#myModal").hide();
+		
+	});
+	
+	$("#cpImg1").click(function(){
+		$.ajax({
+			url : './CouponDown.cp',
+			type : 'post',
+			data : {"couponNum" : $("#cpImg1").val(), "userId" :id},
+			success : function(data) {
+				
+				if (data > 0) {
+					alert("쿠폰 발급 대상이 아닙니다.");
+				}else {
+					alert("ㅎ");
+			 	}
+				
+			},
+			error : function() {
+			}
+		});
+		
+	})
+	
+	
+	
+
+	
+		function coupon(rnum){
+		
+		};
+});
+
+
+
+
+</script>
 
 	<!-- header 시작 -->
 	<jsp:include page="../header/header.jsp" />
@@ -83,61 +123,70 @@
 
 	<!-- container 시작 -->
 	<div class="container-fluid">
-
 		<div class="row">
-			<div class="col-6 text-center" style="background-color: #2EFEC8;">
-				ㅇㅇ</div>
-			<div class="col-6" style="background-color: #610B5E;">ㅇㅇ</div>
+			<div class="col-2" style="background-color: #610B5E;"></div>
+			<div class="col-8" align="center">
+				<img alt="couponEventImg" src="./img/coupon/couponInfo.png">
+			
+			</div> 
+			<div class="col-2" style="background-color: #610B5E;">
+			</div>
 		</div>
-
 		<div class="row">
-			<div class="col-6" style="background-color: #0B3B17;">ㅎㅎ</div>
-			<div class="col-6" style="background-color: #D8F781;">
+			<div class="col-2" style="background-color: #610B5E;"></div>
+			<div class="col-8" align="center">
 
-				<!-- Button to Open the Modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#myModal">Open modal</button>
-
+				<button class="btn btn-secondary" id="cp1">
+					쿠폰 다운받기
+				</button>
+	
+			</div> 
+			<div class="col-2" style="background-color: #610B5E;">
+			</div>
+		</div>
+		
 				<!-- The Modal -->
-				<div class="modal" id="myModal">
-					<div class="modal-dialog">
+				<div class="modal" id="myModal" style="display: none;">
+					<div class="modal-dialog" style="max-width: 100%; width: auto;">
 						<div class="modal-content">
 
 							<!-- Modal Header -->
 							<div class="modal-header">
-								<h4 class="modal-title">Modal Heading</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">쿠폰받아랑</h4>
+								<button type="button" class="close" data-dismiss="modal" id="modalExit">&times;</button>
 							</div>
 
 							<!-- Modal body -->
 							<div class="modal-body">
-							
-							JSP 페이지
-							Modal body..
-							
-							
-							
-							
+							<!-- css 정리해야함 -->
+								<div class="row" align="center">
+									<div style="margin-bottom: 15px">
+									 <input type="image" src="./img/coupon/coupon1.png" width="50%" id="cpImg1" value="${couponList[2].couponNum }">
+									</div>
+								</div>	
+								<div class="row" align="center">
+									<div style="margin-bottom: 15px">
+									 <input type="image" src="./img/coupon/coupon2.png" width="50%" id="cpImg2" value="${couponList[3].couponNum }">
+									</div>
+								</div>	
+								<div class="row" align="center">
+									<div style="margin-bottom: 15px">
+									 <input type="image" src="./img/coupon/coupon3.png" width="50%" id="cpImg3" value="${couponList[4].couponNum }">
+									</div>
+								</div>		
+									
 							</div>
 
 							<!-- Modal footer -->
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger"
-									data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 							</div>
 
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-
 	</div>
-
 	<!-- container 끝 -->
-
-
-
 
 
 	<!-- footer 시작 -->
@@ -145,14 +194,14 @@
 	<!-- footer 시작 -->
 
 	<!-- Js Plugins -->
-	<script src="../js/jquery-3.3.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/jquery.slicknav.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.nice-select.min.js"></script>
-	<script src="../js/mixitup.min.js"></script>
-	<script src="../js/main.js"></script>
+	<script src="./js/jquery-3.3.1.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/jquery.magnific-popup.min.js"></script>
+	<script src="./js/jquery.slicknav.js"></script>
+	<script src="./js/owl.carousel.min.js"></script>
+	<script src="./js/jquery.nice-select.min.js"></script>
+	<script src="./js/mixitup.min.js"></script>
+	<script src="./js/main.js"></script>
 
 </body>
 </html>

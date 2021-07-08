@@ -145,23 +145,24 @@ public class CouponDAO {
     //insertCoupon(userId, mcCouponNum)
     
 	//couponNumList(): 쿠폰 번호 배열에 저장
-	public List couponNumList(CouponDTO cdto){
+	public List couponNumList(){
 		
-		LinkedList couponNumList = new LinkedList();
+		List couponNumList = new ArrayList();
 		
 		try {
 			conn=getConnection();
 			sql="select couponNum from coupon_type";
-			//1:가입축하 10% (회원가입시 자동 발급), 2:생일 20% 할인쿠폰, 3:전회원 10% 할인, 4: 여름맞이 50% 할인, 5: 첫구매 30%
+			//1:가입축하 10% (회원가입시 자동 발급), 2:생일 20% 할인쿠폰, 여기부터 사용-> 3:전회원 10% 할인, 4: 여름맞이 50% 할인, 5: 첫구매 30%
 			pstmt=conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				CouponDTO cpNum = new CouponDTO();
+
+				CouponDTO cdto = new CouponDTO();
 				
-				cpNum.setCouponNum(rs.getInt("couponNum"));
+				cdto.setCouponNum(rs.getInt("couponNum"));
 				
-				couponNumList.add(cpNum);
+				couponNumList.add(cdto);
 			}
 			
 				System.out.println("쿠폰번호 리스트에 저장완료");

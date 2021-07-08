@@ -8,29 +8,21 @@
 <!--===============================================================================================-->
 <link rel="icon" type="image/png" href="./img/icons/favicon.ico" />
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="./vendor/animate/animate.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="./vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="./vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="./vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="./css/util.css">
 <link rel="stylesheet" type="text/css" href="./css/login.css">
@@ -39,28 +31,24 @@
 
 <title>회원가입</title>
 
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
-	rel="stylesheet">
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	  rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
+	  rel="stylesheet">
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="../css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet" href="../css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="../css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet" href="../css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="../css/style.css" type="text/css">
 
-<!-- JQuery -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
+
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 
@@ -71,8 +59,7 @@
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function DaumPostcode() {
 		new daum.Postcode(
-				{
-					oncomplete : function(data) {
+				{oncomplete : function(data) {
 						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
@@ -121,85 +108,84 @@
 
 	<!-- 유효성 체크  시작  (name, id, pw, pw1, phone, address) -->
 	<script type="text/javascript">
-		$(document).ready(
-			function() {
-				
-				var ck1 = false; //id
-				var ck2 = false; //pw
-				var ck3 = false; //pw1
-				var ck4 = false; //name
-				var ck5 = false; //phone
-				var ck6 = false; //address2
-				var ck7 = false; //address3
+	
+	$(document).ready(function() {
+			
+		var ck1 = false; //id
+		var ck2 = false; //pw
+		var ck3 = false; //pw1
+		var ck4 = false; //name
+		var ck5 = false; //phone
+		var ck6 = false; //address2
+		var ck7 = false; //address3
 
-		$("#signUp").submit(
-					function() {
+		$("#signUp").submit(function() {
 
-						if ($.trim($("#userId").val()) == "") {
-							$('.ckMsg_id').text("아이디를 입력하세요");
-							$('.ckMsg_id').css("color","red");
-							$('.ckMsg_id').css("padding-left","1rem");
-							$("#userId").focus();
-							return false;
-						}
-						if ($.trim($("#pw").val()) == "") {
-							$('.ckMsg_pw').text("비밀번호를 입력하세요");
-							$('.ckMsg_pw').css("color", "red");
-							$('.ckMsg_pw').css("padding-left","1rem");
-							$("#pw").focus();
-							return false;
-						}
-						if ($.trim($("#pw1").val()) == "") {
-							$('.ckMsg_pw1').text("비밀번호 확인을 입력하세요");
-							$('.ckMsg_pw1').css("color", "red");
-							$('.ckMsg_pw1').css("padding-left","1rem");
-							$("#pw1").focus();
-							return false;
-						}
-						if ($.trim($("#name").val()) == "") {
-							$('.ckMsg_name').text("이름을 입력하세요");
-							$('.ckMsg_name').css("color", "red");
-							$('.ckMsg_name').css("padding-left","1rem");
-							$("#name").focus();
-							return false;
-						}
-						if ($.trim($("#phone").val()) == "") {
-							$('.ckMsg_ph').text("연락처를 입력하세요");
-							$('.ckMsg_ph').css("color","red");
-							$('.ckMsg_ph').css("padding-left","1rem");
-							$("#phone").focus();
-							return false;
-						}
-						if ($.trim($("#address1").val()) == "") {
-							$('.ckMsg_addr1').text("주소를 입력하세요");
-							$('.ckMsg_addr1').css("color", "red");
-							$('.ckMsg_addr1').css("padding-left","1rem");
-							$("#address1").focus();
-							return false;
-						}
-						if ($.trim($("#address2").val()) == "") {
-							$('.ckMsg_addr2').text("주소를 입력하세요");
-							$('.ckMsg_addr2').css("color", "red");
-							$('.ckMsg_addr2').css("padding-left","1rem");
-							$("#address2").focus();
-							return false;
-						}
+			if ($.trim($("#userId").val()) == "") {
+				$('.ckMsg_id').text("아이디를 입력하세요");
+				$('.ckMsg_id').css("color","red");
+				$('.ckMsg_id').css("padding-left","1rem");
+				$("#userId").focus();
+				return false;
+			}
+			if ($.trim($("#pw").val()) == "") {
+				$('.ckMsg_pw').text("비밀번호를 입력하세요");
+				$('.ckMsg_pw').css("color", "red");
+				$('.ckMsg_pw').css("padding-left","1rem");
+				$("#pw").focus();
+				return false;
+			}
+			if ($.trim($("#pw1").val()) == "") {
+				$('.ckMsg_pw1').text("비밀번호 확인을 입력하세요");
+				$('.ckMsg_pw1').css("color", "red");
+				$('.ckMsg_pw1').css("padding-left","1rem");
+				$("#pw1").focus();
+				return false;
+			}
+			if ($.trim($("#name").val()) == "") {
+				$('.ckMsg_name').text("이름을 입력하세요");
+				$('.ckMsg_name').css("color", "red");
+				$('.ckMsg_name').css("padding-left","1rem");
+				$("#name").focus();
+				return false;
+			}
+			if ($.trim($("#phone").val()) == "") {
+				$('.ckMsg_ph').text("연락처를 입력하세요");
+				$('.ckMsg_ph').css("color","red");
+				$('.ckMsg_ph').css("padding-left","1rem");
+				$("#phone").focus();
+				return false;
+			}
+			if ($.trim($("#address1").val()) == "") {
+				$('.ckMsg_addr1').text("주소를 입력하세요");
+				$('.ckMsg_addr1').css("color", "red");
+				$('.ckMsg_addr1').css("padding-left","1rem");
+				$("#address1").focus();
+				return false;
+			}
+			if ($.trim($("#address2").val()) == "") {
+				$('.ckMsg_addr2').text("주소를 입력하세요");
+				$('.ckMsg_addr2').css("color", "red");
+				$('.ckMsg_addr2').css("padding-left","1rem");
+				$("#address2").focus();
+				return false;
+			}
 
-						if ($.trim($("#address3").val()) == "") {
-							$('.ckMsg_addr3').text("상세주소를 입력하세요");
-							$('.ckMsg_addr3').css("color", "red");
-							$('.ckMsg_addr3').css("padding-left","1rem");
-							$("#address3").focus();
-							return false;
-						}
+			if ($.trim($("#address3").val()) == "") {
+				$('.ckMsg_addr3').text("상세주소를 입력하세요");
+				$('.ckMsg_addr3').css("color", "red");
+				$('.ckMsg_addr3').css("padding-left","1rem");
+				$("#address3").focus();
+				return false;
+			}
 
-						if (ck1 == false || ck2 == false || ck3 == false || ck4 == false 
-								|| ck5 == false || ck6 == false || ck7 == false) {
-							return false;
-						}
+			if (ck1 == false || ck2 == false || ck3 == false || ck4 == false 
+					|| ck5 == false || ck6 == false || ck7 == false) {
+				return false;
+			}
 
-					}); // signUp (공백체크)
-
+		}); // signUp (공백체크)    
+		
 
 		$("#userId").keyup(function() {
 				var userId = $("#userId").val();
@@ -211,138 +197,132 @@
 						data : {"userId" : userId},
 						success : function(data) {
 							
-							if (data > 0) {
-								$('.ckMsg_id').text("이미 존재하는 아이디입니다");
-								$('.ckMsg_id').css("color","red");
-								$('.ckMsg_id').css("padding-left","1rem");
-								ck1 = false;} 
-							else {
-								if (userId.match(check) != null) {
-									$('.ckMsg_id').text("사용가능한 아이디입니다");
-									$('.ckMsg_id').css("color","green");
-									ck1 = true;}
-								else {$('.ckMsg_id').text("아이디는 4~15자리만 가능합니다");
-									  $('.ckMsg_id').css("color","red");
-									  $('.ckMsg_id').css("padding-left","1rem");
-									  ck1 = false;}
-								}
+						if (data > 0) {
+							$('.ckMsg_id').text("이미 존재하는 아이디입니다");
+							$('.ckMsg_id').css("color","red");
+							$('.ckMsg_id').css("padding-left","11px");
+							ck1 = false;} 
+						else {
+							if (userId.match(check) != null) {
+								$('.ckMsg_id').text("사용가능한 아이디입니다");
+								$('.ckMsg_id').css("color","green");
+								ck1 = true;}
+							else {$('.ckMsg_id').text("아이디는 4~15자리만 가능합니다");
+								  $('.ckMsg_id').css("color","red");
+								  $('.ckMsg_id').css("padding-left","11px");
+								  ck1 = false;}
+							}
 						 },
 						error : function() {alert("에러입니다");}
 				});
 		});//id 중복확인 
 
-							$("#pw")
-									.keyup(
-											function() {
-												var userPass = $("#pw").val();
-												var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/
-														.test(userPass);
+		$("#pw").keyup(function() {
+				var userPass = $("#pw").val();
+				var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/
+						.test(userPass);
 
-												if (userPass == null) {
-													$('.ckMsg_pw').text(
-															"비밀번호를 입력하세요");
-													$('.ckMsg_pw').css("color",
-															"red");
-													$('.ckMsg_pw').css(
-															"padding-left",
-															"1rem");
-													ck2 = false;
+				if (userPass == null) {
+					$('.ckMsg_pw').text(
+							"비밀번호를 입력하세요");
+					$('.ckMsg_pw').css("color",
+							"red");
+					$('.ckMsg_pw').css(
+							"padding-left",
+							"1rem");
+					ck2 = false;
 
-												} else if (check) {
-													$('.ckMsg_pw').text(
-															"사용 가능한 비밀번호입니다");
-													$('.ckMsg_pw').css("color",
-															"green");
-													$('.ckMsg_pw').css(
-															"padding-left",
-															"1rem");
-													ck2 = true;
-												} else {
-													$('.ckMsg_pw')
-															.text(
-																	"대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");
-													$('.ckMsg_pw').css("color",
-															"red");
-													$('.ckMsg_pw').css(
-															"padding-left",
-															"1rem");
-													ck2 = false;
-												}
+				} else if (check) {
+					$('.ckMsg_pw').text(
+							"사용 가능한 비밀번호입니다");
+					$('.ckMsg_pw').css("color",
+							"green");
+					$('.ckMsg_pw').css(
+							"padding-left",
+							"1rem");
+					ck2 = true;
+				} else {
+					$('.ckMsg_pw')
+							.text(
+									"대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");
+					$('.ckMsg_pw').css("color",
+							"red");
+					$('.ckMsg_pw').css(
+							"padding-left",
+							"1rem");
+					ck2 = false;
+				}
 
-											});//pw
+			});//pw
 
-							$("#pw1")
-									.keyup(
-											function() {
+		$("#pw1").keyup(function() {
 
-												if ($("#pw").val() != $("#pw1")
-														.val()) {
-													$('.ckMsg_pw1').text(
-															"비밀번호가 일치하지 않습니다");
-													$('.ckMsg_pw1').css(
-															"color", "red");
-													$('.ckMsg_pw1').css(
-															"padding-left",
-															"1rem");
-													ck3 = false;
-												} else {
-													$('.ckMsg_pw1').text(
-															"비밀번호가 일치합니다");
-													$('.ckMsg_pw1').css(
-															"color", "green");
-													$('.ckMsg_pw1').css(
-															"padding-left",
-															"1rem");
-													ck3 = true;
-												}
+				if ($("#pw").val() != $("#pw1")
+						.val()) {
+					$('.ckMsg_pw1').text(
+							"비밀번호가 일치하지 않습니다");
+					$('.ckMsg_pw1').css(
+							"color", "red");
+					$('.ckMsg_pw1').css(
+							"padding-left",
+							"1rem");
+					ck3 = false;
+				} else {
+					$('.ckMsg_pw1').text(
+							"비밀번호가 일치합니다");
+					$('.ckMsg_pw1').css(
+							"color", "green");
+					$('.ckMsg_pw1').css(
+							"padding-left",
+							"1rem");
+					ck3 = true;
+				}
 
-											});//pw1 (pw확인)
+			});//pw1 (pw확인)
 
-							$("#name").keyup(
-									function() {
+		$("#name").keyup(function() {
 
-										var name = $("#name").val();
-										var check = /^[A-Z|a-z|가-힣]{2,5}$/;
-										if (name.match(check) != null) {
-											$('.ckMsg_name').text("");
-											ck4 = true;
-										} else {
-											$('.ckMsg_name').text(
-													"이름을 정확히 입력하세요");
-											$('.ckMsg_name')
-													.css("color", "red");
-											$('.ckMsg_name').css(
-													"padding-left", "1rem");
-											ck4 = false;
-										}
+				var name = $("#name").val();
+				var check = /^[A-Z|a-z|가-힣]{2,5}$/;
+				
+				if (name.match(check) != null) {
+					$('.ckMsg_name').text("");
+					ck4 = true;
+				} else {
+					$('.ckMsg_name').text(
+							"이름을 정확히 입력하세요");
+					$('.ckMsg_name')
+							.css("color", "red");
+					$('.ckMsg_name').css(
+							"padding-left", "1rem");
+					ck4 = false;
+				}
 
-									});//name
+			});//name
 
-							$("#phone")
-									.keyup(
-											function() {
+		$("#phone").keyup(function() {
 
-												var phone = $("#phone").val();
-												var check1 = /^010([0-9]{8})$/;
-												var check2 = /^01([1|6|7|8|9])([0-9]{3})([0-9]{4})$/;
-												if (phone.match(check1) != null
-														|| phone.match(check2) != null) {
-													$('.ckMsg_phone').text("");
-													ck5 = true;
-												} else {
-													$('.ckMsg_phone').text(
-															"연락처를 확인해주세요");
-													$('.ckMsg_phone').css(
-															"color", "red");
-													$('.ckMsg_phone').css(
-															"padding-left",
-															"1rem");
-													chkup5 = false;
-												}
+						var phone = $("#phone").val();
+						var check1 = /^010([0-9]{8})$/;
+						var check2 = /^01([1|6|7|8|9])([0-9]{3})([0-9]{4})$/;
+						if (phone.match(check1) != null
+								|| phone.match(check2) != null) {
+							$('.ckMsg_phone').text("");
+							ck5 = true;
+						} else {
+							$('.ckMsg_phone').text(
+									"연락처를 확인해주세요");
+							$('.ckMsg_phone').css(
+									"color", "red");
+							$('.ckMsg_phone').css(
+									"padding-left",
+									"1rem");
+							chkup5 = false;
+						}
 
-											});//phone
+					});//phone
 
-						});//signUp
+		});//signUp
 	</script>
 	<!-- 유효성 체크  끝 -->
 
