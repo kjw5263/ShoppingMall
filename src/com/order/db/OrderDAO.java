@@ -342,6 +342,8 @@ public class OrderDAO {
 					odto.setReceiverTel2(rs.getString("receiverTel2"));
 					odto.setSumMoney(rs.getInt("SumMoney"));
 					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
+					odto.setOrderDate(rs.getDate("orderDate"));
+					odto.setO_tradeNum(rs.getString("o_tradeNum"));
 					
 					
 					goodsList.add(gdto);

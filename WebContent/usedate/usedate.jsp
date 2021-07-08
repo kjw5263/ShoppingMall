@@ -46,11 +46,15 @@
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./css/progress.css" type="text/css">
+<link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+
 
 
 
 <style type="text/css">
-*{margin: 0;}
+* {
+	margin: 0;
+}
 
 #cb {
 	zoom: 1.5;
@@ -123,16 +127,37 @@
 			<div class="col-8">
 				<div class="row">
 					<div class="col-2">
-						<a href=""><h5>장바구니</h5></a> <a href=""><h5>주문조회</h5></a> <a
-							href="./getLike.li"><h5>찜목록</h5></a>
-						<hr>
-						<a href="./MyCoupon.me"><h5>내 쿠폰 / 포인트</h5></a>
-						<hr>
-						<a href=""><h5>내 화장품 사용기한 &nbsp;확인하기</h5></a>
-						<hr>
-						<a href="./MemberUpdateInfo.me"><h5>회원 정보 수정</h5></a> <a
-							href="./MemberDelete.me"><h5>탈퇴하기</h5></a>
-					</div>
+						<div class="mypage-lnb1">
+								<ul>
+									<li>
+										<h2>나의 쇼핑</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./getOrderList.or">주문/배송조회</a></li>
+											<li class="subMenu"><a href="">취소/반품/교환내역</a></li>
+										</ul>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./BasketList.ba">장바구니</a></li>
+											<li class="subMenu"><a href="./getLike.li">좋아요</a></li>
+											<li class="subMenu"><a href="./MyCoupon.cp">포인트 / 쿠폰</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 활동</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./ReviewList.rev">리뷰</a></li>
+											<li class="subMenu"><a href="./Usedate.ud">화장품 사용기한 조회</a></li>
+										</ul>
+									</li>
+									<li class="line" style="list-style: none">
+										<h2>나의 정보</h2>
+										<ul style="list-style: none">
+											<li class="subMenu"><a href="./MemberUpdateInfo.me">회원정보수정</a></li>
+											<li class="subMenu"><a href="./MemberDelete.me">회원탈퇴</a></li>
+										</ul>
+									</li>
+								</ul>
+								</div>
+						</div>
 					<div class="col-10">
 
 						<table class="table">
@@ -152,30 +177,28 @@
 								
 							%>
 							<tr style="font-size: 20px;">
-									
-									<td rowspan="2"><img src="./admingoods/upload/<%=gdto2.getCosImage().split(",")[0] %>" width="150px"
-										height="150px">
-									<td rowspan="2"><b><%=gdto2.getCosName()%></b><br> <br>
-										개봉 후 사용 기한 : <b><%=gdto2.getUseDate() %></b> 개월 <br>
-										주문일자 <%=odto.getOrderDate() %><br>
-										<%if(ustdo.getOpen_status() == 1){ %>
-										수량 : <%=ustdo.getRemain_amount()%> 개
-										<%} else{ %>
-										수량 : <%=odto.getO_cosAmount()%> 개
-										<%} %>
-									</td>
-									<%if(ustdo.getFirst_open() == 1 && ustdo.getRemain_amount() <= 0){%>
-									<tr>
-									<td>
-									<input type="button" value="OPEN 완료" class="btn btn-secondary" id="open" onclick="alert('모두 사용했습니다.')">
-									</td>
-									</tr>
-									<%}else{%>
-									<tr>
-										<td><input type="button" value="OPEN" class="btn btn-info" 
-										onclick="location.href='opencos.ud?cosNum=<%=odto.getO_cosNum() %>&openstatus=<%=ustdo.getOpen_status()%>&openstatus=<%=ustdo.getOpen_status()%>&cosAmount=<%=odto.getO_cosAmount() %>&firstopen=<%=ustdo.getFirst_open()%>&statusnum=<%=ustdo.getStatus_Num() %>&oNum=<%=oNum%>'">
-									</td>
-									</tr>
+
+								<td rowspan="2"><img
+									src="./admingoods/upload/<%=gdto2.getCosImage().split(",")[0] %>"
+									width="150px" height="150px">
+								<td rowspan="2"><b><%=gdto2.getCosName()%></b><br> <br>
+									개봉 후 사용 기한 : <b><%=gdto2.getUseDate() %></b> 개월 <br> 주문일자
+									<%=odto.getOrderDate() %><br> <%if(ustdo.getOpen_status() == 1){ %>
+									수량 : <%=ustdo.getRemain_amount()%> 개 <%} else{ %> 수량 : <%=odto.getO_cosAmount()%>
+									개 <%} %></td>
+								<%if(ustdo.getFirst_open() == 1 && ustdo.getRemain_amount() <= 0){%>
+							
+							<tr>
+								<td><input type="button" value="OPEN 완료"
+									class="btn btn-secondary" id="open"
+									onclick="alert('모두 사용했습니다.')"></td>
+							</tr>
+							<%}else{%>
+							<tr>
+								<td><input type="button" value="OPEN" class="btn btn-info"
+									onclick="location.href='opencosAction.ud?cosNum=<%=odto.getO_cosNum() %>&openstatus=<%=ustdo.getOpen_status()%>&openstatus=<%=ustdo.getOpen_status()%>&cosAmount=<%=odto.getO_cosAmount() %>&firstopen=<%=ustdo.getFirst_open()%>&statusnum=<%=ustdo.getStatus_Num() %>&oNum=<%=oNum%>'">
+								</td>
+							</tr>
 							</tr>
 							<%
 									}
@@ -188,9 +211,9 @@
 
 						<!--페이징 처리  -->
 						<div style="margin-left: 45%;">
-						<ul class="pagination">
-						
-						<%if(cnt != 0){
+							<ul class="pagination">
+
+								<%if(cnt != 0){
 							
 							int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
 							
@@ -206,31 +229,36 @@
 							
 							if(startPage > pageBlock){
 								%>
-								<li class="page-item"><a  class="page-link" href="./Usedate.ud?pageNum=<%=startPage-pageBlock %>" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
+								<li class="page-item"><a class="page-link"
+									href="./Usedate.ud?pageNum=<%=startPage-pageBlock %>"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
-								 <%
+								<%
 							}
 							
 							for(int i=startPage;i<=endPage;i++){
 								%>
-								<li class="page-item"><a  class="page-link" href="./Usedate.ud?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
+								<li class="page-item"><a class="page-link"
+									href="./Usedate.ud?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
 								<%
 							}
 							
 							if(endPage < pageCount){
 								%>
-								<li class="page-item"><a class="page-link" href="./Usedate.ud?pageNum=<%=startPage+pageBlock %>" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-								<%
+								<li class="page-item"><a class="page-link"
+									href="./Usedate.ud?pageNum=<%=startPage+pageBlock %>"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										<%
 							}
 							
 						} %>
-						</a></li>
-						</ul>
+								</a></li>
+							</ul>
 						</div>
-						<br><br>
-						<h3>화장품 사용기한 확인하기</h3><br>
+						<br>
+						<br>
+						<h3>화장품 사용기한 확인하기</h3>
+						<br>
 						<h5>*사용 완료 하신 경우 오른쪽의 사용완료 버튼을 눌러주세요!</h5>
 						<br>
 						<table class="table">
@@ -302,27 +330,30 @@
 										<div class="item">
 
 											<div class="progress">
-												<div class="progress-level" style="width: <%=(useday/year)*100%>%" aria-valuenow="<%=useday %>"
-											aria-valuemin="0" aria-valuemax="<%=year%>"></div>
+												<div class="progress-level"
+													style="width: <%=(useday/year)*100%>%"
+													aria-valuenow="<%=useday %>" aria-valuemin="0"
+													aria-valuemax="<%=year%>"></div>
 											</div>
 											<p>
-												<span><%=diffDays%>일 남았습니다.</span> <span><%=useDays %>일 사용</span>
+												<span><%=diffDays%>일 남았습니다.</span> <span><%=useDays %>일
+													사용</span>
 											</p>
 										</div>
 									</div>
-									
+
 								</td>
 								<td><%=closedate%></td>
-								<td>
-								<input type="button" class="btn" style="background-color: #B0BCC2; color: white;" value="사용완료" 
-								onclick="location.href='./completeUse.ud?openNum=<%=udto.getOpenNum()%>'"></td>
+								<td><input type="button" class="btn"
+									style="background-color: #B0BCC2; color: white;" value="사용완료"
+									onclick="location.href='./completeUseAction?openNum=<%=udto.getOpenNum()%>'"></td>
 							</tr>
-							
+
 							<%}
 								}%>
 							</form>
 						</table>
-						 
+
 
 
 					</div>

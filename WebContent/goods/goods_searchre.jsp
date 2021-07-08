@@ -115,17 +115,17 @@ table tr td {
 //테스트 버전 업2!
   	listDAO gdao = new listDAO();
   	
-  List goodsList = (List)request.getAttribute("goodsList");
-  List bestgoodsList = (List)request.getAttribute("bestgoodsList");
+    List goodsList = (List)request.getAttribute("goodsList");
+    
 
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
-    String http[] = gdao.getCateGoodsList();
-	String cat[] =  gdao.getbrandGoodsList();
-    String skin[] =  gdao.getSkinGoodsList();
-   	
+    String http[][] = var.getHttp();
+	String cat[][] = var.getCat();	
+    String skin[][] = var.getSkin(); 
     int size = goodsList.size();
-    int bestsize = bestgoodsList.size();
+   
+    
     
    
   %>
@@ -135,44 +135,9 @@ table tr td {
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="section-title">
-                            <h2>Latest Products</h2>
+                            <h2>search Result</h2>
                         </div>
-                        <ul class="product-controls">
-                       	 	<li data-filter=".allgoods">All</li>
-                           
-                            <li data-filter=".베스트상품">베스트상품</li>
-
-                         
-                            <%
-                            for(int i = 0 ; i<http.length;i++){
-                            	
-                            %>
-                            <li data-filter=".<%=http[i] %>"><%=http[i] %></li>
-                            <%} %>
-                            
-                        </ul>
-                        <br>
-                         <ul class="product-controls">
-                            <li data-filter=".allgoods">All</li>
-                            <%
-                            for(int i = 0 ; i<cat.length;i++){
-                            	
-                            %>
-                            <li data-filter=".<%=cat[i] %>"><%=cat[i] %></li>
-                            <%} %>
-                            
-                        </ul>
-                         <br>
-                         <ul class="product-controls">
-                            <li data-filter=".allgoods">All</li>
-                            <%
-                            for(int i = 0 ; i<skin.length;i++){
-                            	
-                            %>
-                            <li data-filter=".<%=skin[i] %>"><%=skin[i] %></li>
-                            <%} %>
-                            
-                        </ul>
+                       
                     </div>
                 </div>
             </div>
@@ -194,23 +159,7 @@ table tr td {
                     </div>
                 </div>
                 <%} %>
-                <%for(int i = 0 ; i<bestsize ;i++){ 
-            	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
-            	%>
-                <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">
-                    <div class="single-product-item">
-                        <figure>
-                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
-                            <div class="p-status">best</div>
-                        </figure>
-                        <div class="product-text">
-                            <h6><%=dto.getCosName()%></h6>
-                            <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기 </button>	
-                        </div>
-                    </div>
-                </div>
-                <%} %>
+                
                 
             </div>
         </div>

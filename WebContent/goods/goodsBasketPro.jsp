@@ -33,7 +33,7 @@
 
  <script type="text/javascript">
    alert("완료!");
-   location.href = "http://localhost:8088/ShoppingMall/GoodsList.cos";
+   location.href = "http://localhost:8088/ShoppingMall/BasketList.ba";
    </script>
    
    
