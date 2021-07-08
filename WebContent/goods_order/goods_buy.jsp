@@ -145,7 +145,7 @@ $(document).ready(function () {
 			for(var i=0; i<cplist.split(",").length; i++){
 				var cptype = cplist.split(",")[i];
 				if(cptype.split("|")[1] == cname){
-					alert(cptype.split("|")[1]);
+					//alert(cptype.split("|")[1]);
 					$('#mcCouponNum').val(cptype.split("|")[0]);
 					break;
 				}

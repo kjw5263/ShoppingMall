@@ -4,6 +4,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,10 +35,10 @@
 <body>
 
 	<%
-		List orderList = (List)request.getAttribute("orderList");
-		List goodsList = (List)request.getAttribute("goodsList");
-		DecimalFormat fmMoney = new DecimalFormat("###,###");
-		OrderDTO odto = (OrderDTO)orderList.get(0);
+		//List orderList = (List)request.getAttribute("orderList");
+		//List goodsList = (List)request.getAttribute("goodsList");
+		//DecimalFormat fmMoney = new DecimalFormat("###,###");
+		//OrderDTO odto = (OrderDTO)orderList.get(0);
 		int sumMoney=0;
 		int sumAmount=0;
 	%>
@@ -68,8 +70,8 @@
 			</div>
 			<div class="col-8" style="padding-bottom:200px;">
 			<h3 style="color:#535353;">주문 상세 내역</h3>
-			<div style="margin: 10px 10px 10px 0;"><span style="margin:0 15px 0 3px;">주문번호</span><span style="color:orange;"><strong><%=((OrderDTO)orderList.get(0)).getO_tradeNum() %></strong></span>
-			<span style="margin:0 10px 0 10px;">주문일자</span><span><strong><%=((OrderDTO)orderList.get(0)).getOrderDate() %></strong></span></div>
+			<div style="margin: 10px 10px 10px 0;"><span style="margin:0 15px 0 3px;">주문번호</span><span style="color:orange;"><strong>${orderList[0].o_tradeNum }</strong></span>
+			<span style="margin:0 10px 0 10px;">주문일자</span><span><strong>${orderList[0].orderDate }</strong></span></div>
 			
 			<!-- 주문 상세 내역 테이블 -->
 			<table class="table" style="text-align: center; margin-bottom:100px; font-size:19px;">
@@ -82,18 +84,15 @@
 				</tr>
 				</thead>
 				<tbody>
-					<%for(int i=0; i<orderList.size(); i++){ 
-						OrderDTO orDTO = (OrderDTO)orderList.get(i);
-						GoodsDTO gDTO = (GoodsDTO)goodsList.get(i);
-						%>
+					<c:forEach var="orlist" items="${orderList }" varStatus="gd">
 						<tr>
-							<td><img src="./admingoods/upload/<%=gDTO.getCosImage().split(",")[0] %>" width="100" height="100"></td>
-							<td><%=orDTO.getO_cosName() %></td>
-							<td><%=fmMoney.format(gDTO.getCosPrice()) %>원</td>
-							<td><%=orDTO.getO_cosAmount() %></td>
-							<td><%=fmMoney.format(orDTO.getO_cosAmount()*gDTO.getCosPrice()) %>원</td>
+							<td><img src="./admingoods/upload/${goodsList[gd.index].cosImage.split(',')[0] }" width="100" height="100"></td>
+							<td>${orlist.o_cosName }</td>
+							<td><fmt:formatNumber value="${goodsList[gd.index].cosPrice }" pattern="#,###"/>원</td>
+							<td>${orlist.o_cosAmount}</td>
+							<td><fmt:formatNumber value="${orlist.o_cosAmount * goodsList[gd.index].cosPrice}" pattern="#,###" />원</td>
 						</tr>
-					<%} %>
+					</c:forEach>
 				</tbody>
 				<tr></tr>
 			</table>
@@ -105,34 +104,48 @@
 			<thead>
 				<tr>
 					<th class="table-active">수령인</th>
-					<td><%=odto.getReceiverName() %></td>
+					<td>${orderList[0].receiverName }</td>
 					<th class="table-active">주문날짜</th>
-					<td><%=odto.getOrderDate() %></td>
+					<td>${orderList[0].orderDate }</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th class="table-active">연락처1</th>
 					<td>
-						<%=odto.getReceiverTel().replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3") %> </td>
+						${orderList[0].receiverTel.replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3")}
+<%-- 						${orderList[0].receiverTel.replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3")} --%>
 					<th class="table-active">주문상태</th>
 					<td style="color:#ff5546; font-weight:bold;">주문완료(결제완료)</td>
 				</tr>
 				<tr>
 					<th class="table-active">연락처2</th>
 					<td>
-						<% if(odto.getReceiverTel2().equals("")){ %> - <%} else {%> <%=odto.getReceiverTel2().replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3") %> <%} %>
+						<c:choose>
+							<c:when test="${orderList[0].receiverTel2 eq ''}" >-</c:when>
+							<c:otherwise>${orderList[0].receiverTel2.replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3")}</c:otherwise>
+						</c:choose>
 					</td>
 					<th class="table-active">이메일</th>
-					<td><% if(odto.getReceiverEmail().equals("")){ %> - <%} else {%> <%=odto.getReceiverEmail() %> <%} %></td>
+					<td>
+						<c:choose>
+							<c:when test="${orderList[0].receiverEmail eq '' }" >-</c:when>
+							<c:otherwise>${orderList[0].receiverEmail}</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 				<tr>
 					<th class="table-active">배송지</th>
-					<td>(<%=odto.getReceiverAddr().split(",")[0] %>)
-					 <%=odto.getReceiverAddr().split(",")[1] %> <%=odto.getReceiverAddr().split(",")[2] %>
+					<td>(${orderList[0].receiverAddr.split(',')[0] })
+					 ${orderList[0].receiverAddr.split(',')[1] }  ${orderList[0].receiverAddr.split(',')[2]}
 					</td>
 					<th class="table-active">배송 메시지</th>
-					<td><% if(odto.getO_msg().equals("")){ %> - <%} else {%> <%=odto.getO_msg() %> <%} %></td>
+					<td>
+						<c:choose>
+							<c:when test="${orderList[0].o_msg eq '' }" >-</c:when>
+							<c:otherwise>${orderList[0].o_msg}</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 			</tbody>
 			</table>
@@ -151,13 +164,13 @@
 			</thead>
 			<tbody>
 				<tr class="table-light">
-					<th style="font-size: 20px;"><%=fmMoney.format(odto.getSumMoney()) %>원</th>
+					<th style="font-size: 20px;"><fmt:formatNumber value="${orderList[0].sumMoney}" pattern="#,###"/>원</th>
 					<th style="color: #0A82FF; font-size: 20px;">
-						<span style="color:black;">쿠&nbsp&nbsp&nbsp폰 : </span><%=fmMoney.format(odto.getCpUseAmount()) %>원<br>
-						<span style="color:black;">포인트 : </span><%=fmMoney.format(odto.getPtUseAmount()) %>원
+						<span style="color:black;">쿠&nbsp&nbsp&nbsp폰 : </span><fmt:formatNumber value="${orderList[0].cpUseAmount}" pattern="#,###"/> 원<br>
+						<span style="color:black;">포인트 : </span><fmt:formatNumber value="${orderList[0].ptUseAmount}" pattern="#,###"/>원
 					</th>
-					<th style="font-size:20px; color:#ff5546"><%=fmMoney.format(odto.getPayMoney()) %>원<br>
-					<span style="font-size:15px;">(<%=odto.getPayType() %>)</span></th>
+					<th style="font-size:20px; color:#ff5546"><fmt:formatNumber value="${orderList[0].payMoney}" pattern="#,###"/>원<br>
+					<span style="font-size:15px;">(${orderList[0].payType })</span></th>
 				</tr>
 			</tbody>
 			</table>
