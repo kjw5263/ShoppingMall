@@ -1,12 +1,15 @@
 package com.member.action;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.like.db.LikeDAO;
 import com.member.db.MemberDAO;
+import com.member.db.MemberDTO;
 
 public class MemberDeleteAction implements Action {
 
@@ -28,8 +31,8 @@ public class MemberDeleteAction implements Action {
         
         MemberDAO dao = new MemberDAO();
         int check = dao.deleteMember(userId,userPass);
-
-        
+	
+		
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
         
