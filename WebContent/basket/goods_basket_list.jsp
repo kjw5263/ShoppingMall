@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -67,8 +68,24 @@
 		List basketList = (List) request.getAttribute("basketList");
 		List goodsList = (List) request.getAttribute("goodsList");
 	%>
-    
+
     <section class="admin_goods_list">
+        <c:choose>
+        <c:when test="${fn:length(basketList) == 0}">
+	        <div class="container">
+	        <section class="page-add">
+	        <p><img src="./img/cart.png" alt="sale" style="margin-top: 50px;"></p><br>
+	        <p style="text-align: center; font-size:19px; color:black;"><b>장바구니에 담긴 상품이 없습니다.</b></p>
+	        <p style="margin-top: -10px;">원하는 상품을 장바구니에 담아보세요!</p>
+	        <button class="btn btn-secondary btn-lg" onclick="location.href='GoodsList.cos';"
+					style="margin-bottom: -40px; margin-top: 10px"
+			>계속 쇼핑하기</button>
+	        <div class="container">
+	        </div>
+	    	</section>
+	        </div>
+        </c:when>
+        <c:otherwise>
         <div class="container">
         <form name="form" method="post" action="./BasketList.ba">
 	        <div align="left">
@@ -136,6 +153,7 @@
 					</td>
 					</form>
 				</tr>
+				
 				</c:forEach>
 				</tbody>
 				
@@ -168,6 +186,8 @@
 				</div>
         	</form>
         </div>
+        </c:otherwise>
+       </c:choose>
     </section>
     
     <!-- goods basket list End -->
