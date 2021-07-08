@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주문완료 - 주문상세내역</title>
 
 <meta charset="UTF-8">
 <meta name="description" content="Yoga Studio Template">
@@ -153,7 +153,7 @@
 				<tr class="table-light">
 					<th style="font-size: 20px;"><%=fmMoney.format(odto.getSumMoney()) %>원</th>
 					<th style="color: #0A82FF; font-size: 20px;">
-						<span style="color:black;">&nbsp&nbsp&nbsp쿠&nbsp&nbsp폰 : </span><%=fmMoney.format(odto.getCpUseAmount()) %>원<br>
+						<span style="color:black;">쿠&nbsp&nbsp&nbsp폰 : </span><%=fmMoney.format(odto.getCpUseAmount()) %>원<br>
 						<span style="color:black;">포인트 : </span><%=fmMoney.format(odto.getPtUseAmount()) %>원
 					</th>
 					<th style="font-size:20px; color:#ff5546"><%=fmMoney.format(odto.getPayMoney()) %>원<br>
