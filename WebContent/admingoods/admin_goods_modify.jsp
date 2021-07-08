@@ -175,27 +175,27 @@
 				</tr>	
 				<tr>
 		           <th>수량</th>
-		           <td><input type="text" name="cosAmount" value="<%=dto.getCosAmount()%>" class="form-control" required></td>           
+		           <td><input type="text" name="cosAmount" value="${dto.cosAmount}" class="form-control" required></td>           
 		        </tr>
  				<tr>
 		           <th>용량</th>
-		           <td><input type="text" name="cosVolumn" value="<%=dto.getCosVolumn() %>" class="form-control" required></td>           
+		           <td><input type="text" name="cosVolumn" value="${dto.cosVolumn}" class="form-control" required></td>           
 		        </tr> 
 				<tr>
 		           <th>회사</th>
-		           <td><input type="text" name="madeCompany" value="<%=dto.getMadeCompany() %>" class="form-control" required></td>           
+		           <td><input type="text" name="madeCompany" value="${dto.madeCompany}" class="form-control" required></td>           
 		        </tr>      
  				<tr> 
  		           <th>성분</th> 
- 		           <td><textarea name="ingredient" rows="4" cols="25" class="form-control" required><%=dto.getIngredient() %></textarea></td>            
+ 		           <td><textarea name="ingredient" rows="4" cols="25" class="form-control" required>${dto.ingredient}</textarea></td>            
  		        </tr>  
  				<tr> 
  		           <th>사용방법</th> 
- 		           <td><textarea name="cosMethod" rows="4" cols="25" class="form-control" required><%=dto.getCosMethod() %></textarea></td>            
+ 		           <td><textarea name="cosMethod" rows="4" cols="25" class="form-control" required>${dto.cosMethod}</textarea></td>            
  		        </tr> 
  				<tr> 
  		           <th>주의사항</th> 
- 		           <td><textarea name="cosWarning" rows="4" cols="25" class="form-control" required><%=dto.getCosWarning() %></textarea></td>            
+ 		           <td><textarea name="cosWarning" rows="4" cols="25" class="form-control" required>${dto.cosWarning}</textarea></td>            
  		        </tr> 	      	          
 				</tbody>
 			</table>
