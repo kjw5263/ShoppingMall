@@ -240,8 +240,11 @@
                         	</div>
                             <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
                             onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
-                            <img src="./img/icons/heart.png" width="40px" 
-                            onclick="location.href='#'">
+                            
+                            
+                            <img src="./img/icons/heart.png" width="40px" onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
+                            
+                            
                         	</p>
                         </div>
                     </div>
