@@ -89,31 +89,55 @@
 				<!-- 글쓰기 폼 시작 -->
 				<form action="./QueSettingAction.que" method="post" id="fr" onsubmit="return check()">
 				
-					<div class="input-group input-group-lg mt-3 mb-3">
-						건성타입 &#60;
-					  <input type="text" class="form-control" placeholder="점수" name="score1" id="score1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-					  value="${qsdto.score1 }">
-					</div>
+				
 					
-					<div class="input-group input-group-lg mt-3 mb-3">
-						<input type="text" class="form-control" placeholder="점수" name="score2" id="score2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-						 value="${qsdto.score2 }">
-						&#60; 중성타입 &#60;
-						<input type="text" class="form-control" placeholder="점수" name="score3" id="score3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-						value="${qsdto.score3 }">
-					</div>
-					
-					<div class="input-group input-group-lg mt-3 mb-3">
-						
-					  <input type="text" class="form-control" placeholder="점수" name="score4" id="score4" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-					  value="${qsdto.score4 }">
-					  &#60; 복합성타입 &#60;
-					  <input type="text" class="form-control" placeholder="점수" name="score5" id="score5" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-					  value="${qsdto.score5 }">
-					</div>
-					
-					이외 지성					
-					
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">타입</th>
+					      <th scope="col" class="text-center">범위</th>
+					      
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">건성타입</th>
+					      <td>
+					      점수 &#60;
+					      	<input type="text" class="form-control" placeholder="점수" name="score1" id="score1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+					  		value="${qsdto.score1 }" style="width: 50px">
+					      </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">중성타입</th>
+					      <td>
+					      	<input type="text" class="form-control" placeholder="점수" name="score2" id="score2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+								 value="${qsdto.score2 }" style="width: 50px">
+								&#60; 점수 &#60;
+								<input type="text" class="form-control" placeholder="점수" name="score3" id="score3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+								value="${qsdto.score3 }" style="width: 50px">
+					      </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">복합성타입</th>
+					      <td>
+					      	
+					      	<input type="text" class="form-control" placeholder="점수" name="score4" id="score4" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+							  value="${qsdto.score4 }" style="width: 50px">
+							  &#60; 점수 &#60;
+							  <input type="text" class="form-control" placeholder="점수" name="score5" id="score5" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+							  value="${qsdto.score5 }" style="width: 50px">
+					      </td>
+					    </tr>
+					    
+					    <tr>
+					      <th colspan="2">이외 지성</th>
+					      
+					    </tr>
+					  </tbody>
+					</table>
+				
+				
 					<hr>
 					<button type="submit" class="btn btn-primary mb-3">세팅하기</button>
 				</form>

@@ -6,6 +6,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.goods.db.GoodsDTO;
+import com.member.db.MemberDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -178,6 +179,104 @@ public class LikeDAO {
 	}
 	//getLikeList(userId,startRow,pageSize)
     
-    
+	
+	// insertLike 시작
+	public int insertLike(String id, int cosNum){
+		int check = 0;
+		int num = 0;
+
+		try {
+			// 1 드라이버 로드
+			// 2 디비 연결
+			// => 한번에 처리하는 메소드로 변경
+			conn = getConnection();
+			
+			sql = "select * from like_list where likeUserId=?";
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+							
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()){
+				
+				// 현재 캠핑지 이름이 DB안의 캠핑지 이름중에 존재할 때
+				if(rs.getInt("likeCosNum") == cosNum){
+					// 이미 존재하는 즐겨찾기 목록이다.
+					System.out.println("디비에 있는 화장품 번호는 @@@@@@@@@@ : " + rs.getString("likeCosNum"));			
+					System.out.println("현재 게시글 화장품 번호는 ########## : " + cosNum);
+					check = -1;
+				}else{
+					// 겹치는 목록 없음
+					System.out.println("디비에 있는 화장품 번호는 @@@@@@@@@@ : " + rs.getString("likeCosNum"));			
+					System.out.println("현재 게시글 화장품 번호는 ########## : " + cosNum);						
+					// 3 sql (글 번호를 계산하는 구문)
+					}
+				}
+			
+				if(check == 0){
+					sql = "select max(likeNum) from like_list";
+
+					pstmt = conn.prepareStatement(sql);
+
+					// 4 sql 실행
+					rs = pstmt.executeQuery();
+
+					// 5 데이터 처리
+					// max(num) - sql 함수를 실행했을 경우 커서 이동 가능(데이터 여부 상관없음)
+					// num - sql 칼럼의 경우 커서 이동 불가능
+					if (rs.next()) {
+						// num = rs.getInt("mxa(num)") + 1;
+						num = rs.getInt(1) + 1;
+					}
+
+					System.out.println(" 글 번호 : " + num);
+					
+					// 3 sql 작성 (insert) & pstmt 객체 생성
+					sql = "insert into like_list values(?, ?, ?)";
+
+					pstmt = conn.prepareStatement(sql);
+
+					pstmt.setInt(1, num);
+					pstmt.setString(2, id);
+					pstmt.setInt(3, cosNum);
+
+					// 4 sql 실행
+
+					pstmt.executeUpdate();
+
+					System.out.println("sql구문 실행 완료 : 찜 추가 완료");
+					
+					
+					// camp_camp 테이블의 count 1올리는 sql
+					
+//					sql = "update camp_camp set count = count + 1 where name= ?";
+//					
+//					pstmt = conn.prepareStatement(sql);
+//					
+//					pstmt.setString(1, lb.getBname());						
+//										
+//					pstmt.execute();
+//
+//					System.out.println("즐겨찾기 cout증가 완료 !!!!!!!!!!!");
+				}
+	     
+	         
+	   } catch (SQLException e) {
+	      
+	      e.printStackTrace();
+	   } finally{
+	      closeDB();
+	   }
+		
+		return check;
+
+	
+	}
+	// insertLike 끝
+	
+	
    
 }//DAO
