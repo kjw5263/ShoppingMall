@@ -166,13 +166,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="single-box-item first-box">
-                                    <img src="./img/f-box-1.jpg" alt="">
-                                    <div class="box-text">
-                                        <span class="trend-year">2019 Party</span>
-                                        <h2>Jewelry</h2>
-                                        <span class="trend-alert">Trend Allert</span>
-                                        <a href="#" class="primary-btn">See More</a>
-                                    </div>
+                                    <img src="./img/sale.jpg" alt="sale" onclick="location.href='#'">
                                 </div>
                             </div>
                             <div class="col-lg-12">

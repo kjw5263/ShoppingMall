@@ -1,7 +1,6 @@
 <%@page import="com.admin.goods.db.AdminGoodsDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -64,9 +63,13 @@
    	<%
 	// AdminGoodsDAO 객체 생성
 	AdminGoodsDAO adao = new AdminGoodsDAO();
-
+	
+	// 디비에 상품의 수를 계산하는 메서드 생성 -> 호출
 	int cnt = adao.getGoodsCount();
-
+	
+	////////////////////////////////////////////////////
+	//게시판 페이징 처리 : DB에서 원하는 만큼만 상품 가져오기
+	
 	// 한페이지당 보여줄 상품의 개수
 	int pageSize = 10;
 	
@@ -77,19 +80,18 @@
 	}
 	
 	// 페이지별 시작행 계산하기
+	// 1p -> 1번, 2p -> 11번,3p->21번, ....=>일반화
 	int currentPage = Integer.parseInt(pageNum);
 	int startRow = (currentPage-1)*pageSize+1;
 	
+	
 	// 끝행 계산하기
+	// 1p->10번, 2p->20번, 3p->30번 ....=> 일반화
 	int endRow = currentPage*pageSize;
 	
 	// 디비에 저장된 모든 글중에서 원하는 만큼만 가져오기(페이지 사이즈)
 	ArrayList<GoodsDTO> goodsList = adao.getGoodsList(startRow,pageSize);
 	%>
-    
-    <c:set var="x" value="Hello" />
-    
-    String x = "Hello";
     
     <section class="admin_goods_list">
         <div class="container">
@@ -141,34 +143,36 @@
 						<th width="9%">수정/삭제</th>
 					</tr>
 					
-					<c:forEach var="i" items="${ goodsList }">
-
+					<% for(int i=0;i<goodsList.size();i++){
+						GoodsDTO dto = (GoodsDTO)goodsList.get(i);
+					%>
+					
 					<tr>
-						<td><b>${i.cosNum }</b></td>
+						<td><b><%=dto.getCosNum() %></b></td>
 						<td>
-							<img src="./admingoods/upload/${i.cosImage.split(',')[0]}"
+							<img src="./admingoods/upload/<%=dto.getCosImage().split(",")[0] %>"
 								 width="120px" height="120px">
 						</td>
-						<td>${i.cosName }</td>
-						<td>${i.cosPrice }</td>
-						<td>${i.cosBrand }</td>
-						<td>${i.cosCategory }</td>
-						<td>${i.cosSkinType }</td>
-						<td>${i.cosAmount }</td>
-						<td>${i.cosVolumn }ml</td>
-						<td>${i.cosWriteDate }</td>
+						<td><%=dto.getCosName() %></td>
+						<td><%=dto.getCosPrice() %></td>
+						<td><%=dto.getCosBrand() %></td>
+						<td><%=dto.getCosCategory() %></td>
+						<td><%=dto.getCosSkinType() %></td>
+						<td><%=dto.getCosAmount() %></td>
+						<td><%=dto.getCosVolumn() %>ml</td>
+						<td><%=dto.getCosWriteDate() %></td>
 						<td>
 						<ul class="nav flex-column ">
 						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsModify.ag?cosNum=${i.cosNum }" class="btn btn-primary btn-sm">수정</a>	
+							<a href="./AdminGoodsModify.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-primary btn-sm">수정</a>	
 						  </li>
 						  <li class="nav-item mb-2">
-							<a href="./AdminGoodsDelete.ag?cosNum=${i.cosNum }" class="btn btn-danger btn-sm">삭제</a>
+							<a href="./AdminGoodsDelete.ag?cosNum=<%=dto.getCosNum()%>" class="btn btn-danger btn-sm">삭제</a>
 						  </li>
 						</ul>
 						</td>
 					</tr>
-					</c:forEach>   	          
+					<%} %>      	          
 				</tbody>
 			</table>	
         </div>
