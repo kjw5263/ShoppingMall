@@ -54,17 +54,31 @@
 	crossorigin="anonymous"></script>
 <!-- jquery 준비 끝 -->
 
+	<!-- Js Plugins -->
+	<script src="./js/jquery-3.3.1.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/jquery.magnific-popup.min.js"></script>
+	<script src="./js/jquery.slicknav.js"></script>
+	<script src="./js/owl.carousel.min.js"></script>
+	<script src="./js/jquery.nice-select.min.js"></script>
+	<script src="./js/mixitup.min.js"></script>
+	<script src="./js/main.js"></script>
+
+
 </head>
 <body>
 
 <script type="text/javascript">
 /* java->jstl->html->js */
  
+ alert("페이지 시작");
  var id = "<c:out value='${sessionScope.userId}'/>";
- console.log(id);
- 
-$(document).ready(function () {
+	alert(id);
 
+
+$(document).ready(function () {
+	
+	
 	$("#cp1").click(function(){
 		
  		if(id==""){
@@ -72,9 +86,10 @@ $(document).ready(function () {
 			location.href="./MemberLogin.me";
 		}else{
 			$("#myModal").show();
+			
+			
 		}
-		 
- 		$("#myModal").show();	
+
 	});
 
 	$("#modalExit").click(function(){
@@ -83,36 +98,39 @@ $(document).ready(function () {
 		
 	});
 	
-	$("#cpImg1").click(function(){
+	$("#modalExit2").click(function(){
+		
+		$("#myModal").hide();
+		
+	});
+	
+	$(".cpButton").click(function(){
+		var cpNum =  $(this).val();
+		
 		$.ajax({
-			url : './CouponDown.cp',
+			url : './couponDown.cp',
 			type : 'post',
-			data : {"couponNum" : $("#cpImg1").val(), "userId" :id},
+			data : {"couponNum" : cpNum, "userId" :id},
 			success : function(data) {
-				
+			
 				if (data > 0) {
 					alert("쿠폰 발급 대상이 아닙니다.");
 				}else {
-					alert("ㅎ");
+					
 			 	}
 				
 			},
-			error : function() {
+				error : function() {
 			}
 		});
-		
-	})
+	});
 	
 	
 	
-
-	
-		function coupon(rnum){
-		
-		};
 });
 
 
+alert("페이지 끝");
 
 
 </script>
@@ -135,9 +153,9 @@ $(document).ready(function () {
 		<div class="row">
 			<div class="col-2" style="background-color: #610B5E;"></div>
 			<div class="col-8" align="center">
-
+                <%=request.getAttribute("aaaa") %>
 				<button class="btn btn-secondary" id="cp1">
-					쿠폰 다운받기
+					쿠폰 다운받기   
 				</button>
 	
 			</div> 
@@ -147,31 +165,32 @@ $(document).ready(function () {
 		
 				<!-- The Modal -->
 				<div class="modal" id="myModal" style="display: none;">
-					<div class="modal-dialog" style="max-width: 100%; width: auto;">
+					<div class="modal-dialog" style="max-width: 50%; width: auto;">
 						<div class="modal-content">
 
 							<!-- Modal Header -->
 							<div class="modal-header">
-								<h4 class="modal-title">쿠폰받아랑</h4>
+								<h4 class="modal-title">쿠폰받아랑@@@</h4>
 								<button type="button" class="close" data-dismiss="modal" id="modalExit">&times;</button>
 							</div>
 
 							<!-- Modal body -->
 							<div class="modal-body">
 							<!-- css 정리해야함 -->
+								
 								<div class="row" align="center">
 									<div style="margin-bottom: 15px">
-									 <input type="image" src="./img/coupon/coupon1.png" width="50%" id="cpImg1" value="${couponList[2].couponNum }">
+									 <input type="image" class="cpButton" src="./img/coupon/coupon1.png" width="50%" id="cpImg1" value="${couponList[2].couponNum }">
 									</div>
 								</div>	
 								<div class="row" align="center">
 									<div style="margin-bottom: 15px">
-									 <input type="image" src="./img/coupon/coupon2.png" width="50%" id="cpImg2" value="${couponList[3].couponNum }">
+									 <input type="image" class="cpButton" src="./img/coupon/coupon2.png" width="50%" id="cpImg2" value="${couponList[3].couponNum }">
 									</div>
 								</div>	
 								<div class="row" align="center">
 									<div style="margin-bottom: 15px">
-									 <input type="image" src="./img/coupon/coupon3.png" width="50%" id="cpImg3" value="${couponList[4].couponNum }">
+									 <input type="image" class="cpButton" src="./img/coupon/coupon3.png" width="50%" id="cpImg3" value="${couponList[4].couponNum }">
 									</div>
 								</div>		
 									
@@ -179,7 +198,7 @@ $(document).ready(function () {
 
 							<!-- Modal footer -->
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal" id="modalExit2">Close</button>
 							</div>
 
 						</div>
@@ -193,15 +212,7 @@ $(document).ready(function () {
 	<jsp:include page="../footer/footer.jsp" />
 	<!-- footer 시작 -->
 
-	<!-- Js Plugins -->
-	<script src="./js/jquery-3.3.1.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/jquery.magnific-popup.min.js"></script>
-	<script src="./js/jquery.slicknav.js"></script>
-	<script src="./js/owl.carousel.min.js"></script>
-	<script src="./js/jquery.nice-select.min.js"></script>
-	<script src="./js/mixitup.min.js"></script>
-	<script src="./js/main.js"></script>
+
 
 </body>
 </html>

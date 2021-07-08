@@ -20,18 +20,24 @@ public class CouponEventAction implements Action{
 		
 			HttpSession session = request.getSession();
 		
-			String userId = request.getParameter("userId");
+			String userId = (String)session.getAttribute("userId");
+			System.out.println("아아아아아아아>>>>>>>>>>"+userId);
 			session.setAttribute("userId", userId);
 		
 			CouponDAO cdao = new CouponDAO();
 		
 			List couponNumList = cdao.couponNumList();
-			request.setAttribute("couponList", couponNumList);
+			request.setAttribute("aaaa", couponNumList);
 			
+			System.out.println("==============CouponEventAction================================");
+			System.out.println(couponNumList);
 			ActionForward forward = new ActionForward();
 		
-			forward.setPath("./couponInfo.cp");
-			forward.setRedirect(true);
+//			forward.setPath("./couponInfo.cp");
+//			forward.setRedirect(true);
+//			return forward; 
+			forward.setPath("./coupon_point/couponEvent.jsp");
+			forward.setRedirect(false);
 			return forward; 
 	
 	

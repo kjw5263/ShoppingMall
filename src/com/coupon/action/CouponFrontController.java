@@ -91,16 +91,18 @@ public class CouponFrontController extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if(command.equals("/couponInfo.cp")){
-			System.out.println("C : couponInfo.cp호출");
-			// 화면을 보여주기=> view페이지로 이동
-			
-			forward = new ActionForward();
-			forward.setPath("./coupon_point/couponEvent.jsp");
-			forward.setRedirect(false);
-			
 		}
 		
+//		else if(command.equals("/couponInfo.cp")){
+//			System.out.println("C : couponInfo.cp호출");
+//			// 화면을 보여주기=> view페이지로 이동
+//			
+//			forward = new ActionForward();
+//			forward.setPath("./coupon_point/couponEvent.jsp");
+//			forward.setRedirect(false);
+//			
+//		}
+//		
 		
 		
 		
