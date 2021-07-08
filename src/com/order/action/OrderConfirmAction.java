@@ -16,7 +16,7 @@ public class OrderConfirmAction implements Action {
 		
 		HttpSession session = request.getSession();
 		String userId = (String)session.getAttribute("userId");
-		String tradeNum = (String)session.getAttribute("tradeNumber");
+		String tradeNum = request.getParameter("tradeNumber");
 		ActionForward forward = new ActionForward();
 		//System.out.println("OrderConfirmAction >>>>> " + userId);
 		/* 세션 처리 */
@@ -29,7 +29,6 @@ public class OrderConfirmAction implements Action {
 	
 		AdminGoodsDAO agDAO = new AdminGoodsDAO();
 		
-		System.out.println(">>>>>>>>>>>>아아아 Confirm액션에서의 넘버는 >>>>>>>>>>> " + tradeNum);
 		Vector orVector = agDAO.detailOrder(tradeNum);
 		List goodsList = (List)orVector.get(0);
 		List orderList = (List)orVector.get(1);

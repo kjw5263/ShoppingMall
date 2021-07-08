@@ -3,7 +3,8 @@
 <%@ page import="com.goods.db.GoodsDTO" %>
 <%@ page import="com.goods_board.db.GoodsReviewDTO" %>
 <%@ page import="com.goods.db.GoodsDAO" %>
-<%@ page import="com.goods_board.db.GoodsReviewDAO" %><%--
+<%@ page import="com.goods_board.db.GoodsReviewDAO" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: jun
   Date: 2021/06/16
@@ -17,25 +18,40 @@
 
   <style>
 
-    /* 레이아웃 외곽 너비 400px 제한*/
-    body{
-      max-width: 480px;
-      margin: 0 auto; /* 화면 가운데로 */
-      background-color: #fff;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    textarea{
-      width: 100%;
-      padding: 10px;
-      box-sizing: border-box;
-    }
+     /*레이아웃 외곽 너비 400px 제한*/
+    /*body{*/
+    /*  max-width: 480px;*/
+    /*  margin: 0 auto; !* 화면 가운데로 *!*/
+    /*  background-color: #fff;*/
+    /*  height: 100%;*/
+    /*  padding: 20px;*/
+    /*  box-sizing: border-box;*/
+    /*}*/
+    /*textarea{*/
+    /*  width: 100%;*/
+    /*  padding: 10px;*/
+    /*  box-sizing: border-box;*/
+    /*}*/
 
 
   </style>
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+  <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+  <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/style.css" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <%
       int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
+//      GoodsDAO dao = new GoodsDAO();
+//      GoodsDTO gdto = new GoodsDTO();
+
+
   %>
 
 
@@ -48,16 +64,13 @@
 
 <body>
 
-
-<h1>별점과 리뷰를 수정해주세요</h1>
+<div style="margin-left: 90px; max-width: 480px;padding: 20px; height: 100%; margin-top: 30px">
+<div style="font-size: 35px; float: left; width: 500px;margin-right: 10px ">별점과 리뷰를 수정해주세요</div>
 <form  method="post" action="./ReviewUpdate.rev" target="./ReviewList.rev">
-<%--  <img src="<%= gdto.getCosImage()%>" alt="상품...." style="width: 350px">--%>
-  <fieldset class="starability-basic" id="rating" aria-required="false">
-    <legend>별점을 선택해 주세요.</legend>
-        <input type="hidden" name="reviewNum" value="<%= reviewNum%>"/>
 
-
-
+  <div style="margin-left: 80px; width: 300px;font-size: 30px;">별점을 선택해 주세요.</div>
+  <fieldset class="starability-basic" id="rating" aria-required="false" style="margin-left: 120px;">
+        <input type="hidden" name="reviewNum" value="<%= reviewNum%>">
 
     <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
     <input type="radio" id="rate1" name="rating" value="1" />
@@ -80,17 +93,22 @@
 
 <%--  <input type="hidden" name="cosNum" value="<%=grdto.getCosNum() %>">--%>
 
-  <br>
-  <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-  <label>
-    <textarea rows="10" minlength="5" name="reviewContent" required></textarea>
+
+  <div class="warning_msg" style="margin-left: 30px">5자 이상으로 작성해 주세요.</div>
+  <label style="margin-left: 30px">
+    <textarea rows="10"  class="form-control" cols="40" minlength="5" name="reviewContent" required>
+    </textarea>
   </label>
 
-
-  <input type="submit" id="save" value="수정" onclick="window.close()">
-  <input type="reset" value="취소" onclick="closePopup()">
-  <input type="file" name="reviewImage">
+  <br>
+  <div style="margin-left: 30px">
+  <button type="submit" class="btn btn-primary" onclick="window.close()">수정</button>
+  <button type="reset" class="btn btn-danger" onclick="closePopup()">취소</button>
+  <button class="btn btn-secondary" id="btn-upload">파일 등록</button>
+  <input type="file" id="file1"  style="display: none" name="file1" onchange="changeValue()">
+  </div>
 </form>
+</div>
 <script type="text/javascript">
   function closePopup(){
     window.close();
@@ -104,7 +122,24 @@
       self.close();
     }
   }
+
 </script>
+<script>
+  $(function () {
+
+    $('#btn-upload').click(function (e) {
+
+      e.preventDefault();
+      $('#file1').click();
+    });
+  });
+  function changeValue(obj){
+
+    alert(obj.value);
+
+  }
+</script>
+
 </body>
 
 </html>

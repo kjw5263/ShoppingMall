@@ -99,7 +99,7 @@ table {
 	
 	<%if(userId.equals("admin")){ %>
 	
-	<button class="btn btn-primary" onclick="location.href='http://localhost:8088/ShoppingMall/noticewrite.nos'">글쓰기</button>
+	<button class="btn btn-primary" onclick="location.href='http://localhost:8090/ShoppingMall/noticewrite.nos'">글쓰기</button>
 	
 	<% } %>
 	<br>

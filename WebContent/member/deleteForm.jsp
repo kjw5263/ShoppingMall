@@ -43,6 +43,8 @@
 			response.sendRedirect("../MemberLogin.me");
 		}
 	%>
+	
+			
 
 	<!-- container 시작 -->
 
@@ -116,7 +118,7 @@
 							<br> <br>
 							<form action="./MemberDeleteAction.me" method="post">
 								비밀번호를 입력해주세요.<br> <br> <input type="hidden"
-									name="userId" value="<%=userId%>">
+									name="userId" value="${userId }">
 								<div class="form-group mx-sm-3 mb-2">
 									<input type="password" name="userPass" id="userPass"
 										class="form-control" placeholder="Password"><br>
@@ -125,22 +127,14 @@
 							</form>
 						</fieldset>
 						<br> <br>
-
-						<fieldset style="border: 1px solid #B0BCC2; padding: 50px;">
-							<div class="row" style="text-align: center; font-size: 20px;">
-								<div class="col-3"></div>
-
-								<div class="col-3">
-									<img src="./img/icons/coupon.png" width="200px;"> 쿠폰 솰라솰라
-									이만큼 잇어요
-								</div>
-								<div class="col-3">
-									<img src="./img/icons/coin2.png" width="200px;"> 코인도 이만큼
-									있슴다
-								</div>
-								<div class="col-3"></div>
-							</div>
-						</fieldset>
+						
+						<!-- 코드 -->
+						<c:set var="mdto" value="${mdto}"/>
+						<c:set var="cnt" value="0"/>
+							<c:forEach var="result" items="${couponList}" varStatus="status">
+								<c:set var="cnt" value="${cnt+result.mcAmount}" />
+							</c:forEach>
+						<!-- 코드 -->
 					</div>
 				</div>
 			</div>

@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,19 +61,15 @@
 		<div class="col-12 text-center">
 			
     <!-- admin member list Begin -->
-    
+
    	<%
    	List memberList = (List)request.getAttribute("memberList"); 
 	// AdminGoodsDAO 객체 생성
 	AdminGoodsDAO adao = new AdminGoodsDAO();
 	
 	// 디비에 글의 수를 계산하는 메서드 생성 -> 호출
-	// getBoardCount();
 	int cnt = adao.getGoodsCount();
-	
-	////////////////////////////////////////////////////
-	//게시판 페이징 처리 : DB에서 원하는 만큼만 상품 가져오기
-	
+
 	// 한페이지당 보여줄 상품의 개수
 	int pageSize = 10;
 	
@@ -83,12 +80,10 @@
 	}
 	
 	// 페이지별 시작행 계산하기
-	// 1p -> 1번, 2p -> 11번,3p->21번, ....=>일반화
 	int currentPage = Integer.parseInt(pageNum);
 	int startRow = (currentPage-1)*pageSize+1;
 	
 	// 끝행 계산하기
-	// 1p->10번, 2p->20번, 3p->30번 ....=> 일반화
 	int endRow = currentPage*pageSize;
 	
 	// 디비에 저장된 모든 글중에서 원하는 만큼만 가져오기(페이지 사이즈)
@@ -144,22 +139,20 @@
 						<th width="8%">회원등급</th>
 					</tr>
 					
-					<%for(int i=0;i<memberList.size();i++){
-						MemberDTO dto = (MemberDTO) memberList.get(i);
-					%>
-					
+					<c:forEach var="i" items="${ memberList }">
+
 					<tr>
-						<td><%=dto.getUserId() %></td>
-						<td><%=dto.getUserName() %></td>
-						<td><%=dto.getUserEmail() %></td>
-						<td><%=dto.getUserAddr() %></td>
-						<td><%=dto.getUserTel() %></td>
-						<td><%=dto.getUserGender() %></td>
-						<td><%=dto.getUserSkinType() %></td>
-						<td><%=dto.getUserTrouble() %></td>
-						<td><%=dto.getUserLevel() %></td>
-					</tr>
-					<%} %>      	          
+						<td>${i.userId }</td>
+						<td>${i.userName }</td>
+						<td>${i.userEmail }</td>
+						<td>${i.userAddr }</td>
+						<td>${i.userTel }</td>
+						<td>${i.userGender }</td>
+						<td>${i.userSkinType }</td>
+						<td>${i.userTrouble }</td>
+						<td>${i.userLevel }</td>
+					</tr>     
+					</c:forEach>	          
 				</tbody>
 			</table>	
         </div>

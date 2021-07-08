@@ -64,8 +64,6 @@
 	width: 500px;
 }
 </style>
-<script src="../jq/jquery-3.6.0.js"></script>
-<script src="../jq/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<!-- header 시작 -->
@@ -78,15 +76,6 @@
 			response.sendRedirect("../MemberLogin.me");
 		}
 		
-		List useList = (List) request.getAttribute("useList");
-		List openList = (List) request.getAttribute("openList");
-	
-
-		List goodsList= (List)request.getAttribute("goodsList");
-		List orderList = (List)request.getAttribute("orderList");
-		List usestatusList = (List)request.getAttribute("usestatusList");
-	
-	
 		int cnt = (int)request.getAttribute("cnt");
 		int pageSize = (int)request.getAttribute("pageSize");
 		int startRow = (int)request.getAttribute("startRow");
@@ -159,200 +148,67 @@
 								</div>
 						</div>
 					<div class="col-10">
-
+							
+						
+						
 						<table class="table">
 							<tr>
-								<th colspan="2" style="text-align: center;">내가 구매한 상품</th>
+								<th colspan="4" style="text-align: center;">내가 구매한 상품</th>
 								<th>개봉하기</th>
 							</tr>
-
-							<%
-							int oNum;
-							if(orderList.size() != 0){
-								for (int i = 0; i < orderList.size(); i++) {
-									OrderDTO odto = (OrderDTO)orderList.get(i);
-									GoodsDTO gdto2 = (GoodsDTO) goodsList.get(i);
-									UsestatusDTO ustdo = (UsestatusDTO)usestatusList.get(i);
-								oNum = odto.getO_Num();
-								
-							%>
-							<tr style="font-size: 20px;">
-
-								<td rowspan="2"><img
-									src="./admingoods/upload/<%=gdto2.getCosImage().split(",")[0] %>"
-									width="150px" height="150px">
-								<td rowspan="2"><b><%=gdto2.getCosName()%></b><br> <br>
-									개봉 후 사용 기한 : <b><%=gdto2.getUseDate() %></b> 개월 <br> 주문일자
-									<%=odto.getOrderDate() %><br> <%if(ustdo.getOpen_status() == 1){ %>
-									수량 : <%=ustdo.getRemain_amount()%> 개 <%} else{ %> 수량 : <%=odto.getO_cosAmount()%>
-									개 <%} %></td>
-								<%if(ustdo.getFirst_open() == 1 && ustdo.getRemain_amount() <= 0){%>
 							
-							<tr>
-								<td><input type="button" value="OPEN 완료"
-									class="btn btn-secondary" id="open"
-									onclick="alert('모두 사용했습니다.')"></td>
-							</tr>
-							<%}else{%>
-							<tr>
-								<td><input type="button" value="OPEN" class="btn btn-info"
-									onclick="location.href='opencosAction.ud?cosNum=<%=odto.getO_cosNum() %>&openstatus=<%=ustdo.getOpen_status()%>&openstatus=<%=ustdo.getOpen_status()%>&cosAmount=<%=odto.getO_cosAmount() %>&firstopen=<%=ustdo.getFirst_open()%>&statusnum=<%=ustdo.getStatus_Num() %>&oNum=<%=oNum%>'">
-								</td>
-							</tr>
-							</tr>
-							<%
-									}
-								}
-							}
-							
-							%>
-
+							<c:set var="result" value="0"/>
+							<c:choose>
+								<c:when test="${orderList != null}">
+									<c:forEach begin="0" var="orderList" items="${orderList}" varStatus="status">
+										<!-- 설정값   -->
+									
+										<c:choose>
+										<c:when test="${usestatus[status.index].open_status == 1}">
+											<c:set var="result" value="${usestatus[status.index].remain_amount}"/>
+										</c:when>
+										<c:when test="${usestatus[status.index].open_status == 0}">
+											<c:set var="result" value="${orderList.o_cosAmount}"/>
+										</c:when>
+										</c:choose>
+									
+											<c:choose>
+											<c:when test="${usestatus[status.index].first_open == 1 && usestatus[status.index].remain_amount <= 0 }">
+												<input type="button" value="OPEN 완료"
+												class="btn btn-secondary" id="open"
+												onclick="alert('모두 사용했습니다.')">
+											</c:when>
+										
+										</c:choose>
+										
+										<c:if test="${usestatus[status.index].first_open == 0 && usestatus[status.index].remain_amount > 0 }">
+												<input type="button" value="OPEN" class="btn btn-info"
+												onclick="location.href='opencosAction.ud?cosNum=${orderList.o_cosNum}&openstatus=${usestatus[status.index].open_status}&openstatus=${usestatus[status.index].open_status}&cosAmount=${orderList.o_cosAmount}&firstopen=${usestatus[status.index].first_open}&statusnum=${usestatus[status.index].status_Num}&oNum=${o_Num}'">
+												
+										</c:if>
+									
+										<c:set var="oNum" value="${orderList.o_Num}"/>
+										
+										<!-- 설정값   -->
+									
+									<tr>
+										<td>
+										<img src="./admingoods/upload/${goodsList[status.index].cosImage.split(",")[0]}"
+											width="150px" height="150px"></td>
+										<td>
+											<b>${goodsList[status.index].cosName}</b><br> <br>
+											개봉 후 사용 기한 : <b>${goodsList[status.index].useDate}</b> 개월 <br> 주문일자
+											${orderList.orderDate}<br>
+											수량 : ${result} 개
+										</td>
+									 </tr>
+									</c:forEach>
+								</c:when>
+							</c:choose>
 						</table>
 
 						<!--페이징 처리  -->
-						<div style="margin-left: 45%;">
-							<ul class="pagination">
-
-								<%if(cnt != 0){
-							
-							int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
-							
-							int pageBlock = 1;
-							
-							int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
-							
-							int endPage = startPage + pageBlock-1;
-							
-							if(endPage > pageCount){
-								endPage = pageCount;
-							}
-							
-							if(startPage > pageBlock){
-								%>
-								<li class="page-item"><a class="page-link"
-									href="./Usedate.ud?pageNum=<%=startPage-pageBlock %>"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-								<%
-							}
-							
-							for(int i=startPage;i<=endPage;i++){
-								%>
-								<li class="page-item"><a class="page-link"
-									href="./Usedate.ud?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
-								<%
-							}
-							
-							if(endPage < pageCount){
-								%>
-								<li class="page-item"><a class="page-link"
-									href="./Usedate.ud?pageNum=<%=startPage+pageBlock %>"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										<%
-							}
-							
-						} %>
-								</a></li>
-							</ul>
-						</div>
-						<br>
-						<br>
-						<h3>화장품 사용기한 확인하기</h3>
-						<br>
-						<h5>*사용 완료 하신 경우 오른쪽의 사용완료 버튼을 눌러주세요!</h5>
-						<br>
-						<table class="table">
-							<tr>
-								<th>상품명</th>
-								<th>개봉일자</th>
-								<th>사용기한</th>
-								<th>종료일자</th>
-								<th>사용완료 여부</th>
-							</tr>
-							<%
-							if( useList.size()!=0){
-							
-								for (int i = 0; i < useList.size(); i++) {
-									GoodsDTO gdto = (GoodsDTO) useList.get(i);
-									UsedateDTO udto = (UsedateDTO) openList.get(i);
-
-									/* 끝 날자 구하기 */
-									Date opendate = udto.getOpenDate();
-									int usedate = gdto.getUseDate();
-
-									Calendar cal = Calendar.getInstance();
-									cal.setTime(opendate);
-									DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-									System.out.println("current: " + df.format(cal.getTime()));
-									cal.add(Calendar.MONTH, usedate);
-									String closedate = df.format(cal.getTime());
-
-									System.out.println(closedate);
-
-									/* 끝 날짜 -  오늘 날짜  = 남은 일수 구하기 */
-									Calendar getToday = Calendar.getInstance();
-									getToday.setTime(new Date()); //금일 날짜
-
-									Date date = new SimpleDateFormat("yyyy-MM-dd").parse(closedate);
-									Calendar closedate1 = Calendar.getInstance();
-									closedate1.setTime(date); //특정 일자
-
-									long diffSec = (closedate1.getTimeInMillis() - getToday.getTimeInMillis()) / 1000;
-									long diffDays = diffSec > 0 ? (diffSec / (24 * 60 * 60)) + 1 : (diffSec / (24 * 60 * 60)); //일자수 차이
-
-									System.out.println("남은 일수(초) -" + diffSec);
-									System.out.println("남은 일수" + diffDays);
-									
-									/*사용일수 구하기*/
-									Calendar opendate2 = Calendar.getInstance();
-									opendate2.setTime(opendate); //
-									
-									long useSec = (getToday.getTimeInMillis()-opendate2.getTimeInMillis()) / 1000;
-									long useDays = useSec > 0 ? (useSec / (24 * 60 * 60)) + 1 : (useSec / (24 * 60 * 60)); //일자수 차이
-
-									System.out.println("사용 초 - " + useSec);
-									System.out.println("사용일수 -"+ useDays);
-									
-									
-									/*% 구하기*/
-						
-
-									//계산위해 int로 변경
-									double useday = (double)useDays;
-									double year = ((double)usedate*30.41);									
-									
-							%>
-							<tr>
-								<td><%=gdto.getCosName()%></td>
-								<td><%=opendate%></td>
-								<td>
-									<div class="skill-progress">
-										<div class="item">
-
-											<div class="progress">
-												<div class="progress-level"
-													style="width: <%=(useday/year)*100%>%"
-													aria-valuenow="<%=useday %>" aria-valuemin="0"
-													aria-valuemax="<%=year%>"></div>
-											</div>
-											<p>
-												<span><%=diffDays%>일 남았습니다.</span> <span><%=useDays %>일
-													사용</span>
-											</p>
-										</div>
-									</div>
-
-								</td>
-								<td><%=closedate%></td>
-								<td><input type="button" class="btn"
-									style="background-color: #B0BCC2; color: white;" value="사용완료"
-									onclick="location.href='./completeUseAction?openNum=<%=udto.getOpenNum()%>'"></td>
-							</tr>
-
-							<%}
-								}%>
-							</form>
-						</table>
+						<!--여기에에에엥에ㅔㅔ엥  -->
 
 
 

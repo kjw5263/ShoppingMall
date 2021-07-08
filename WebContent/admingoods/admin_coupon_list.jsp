@@ -4,6 +4,7 @@
 <%@page import="com.coupon.db.CouponDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,6 +62,10 @@
 			
     <!-- admin coupon list Begin -->
     
+    <%
+    	List couponList = (List) request.getAttribute("couponList");
+    %>
+    
     <section class="admin_coupon_list">
         <div class="container">
 	        <table>
@@ -105,24 +110,18 @@
 						<th>수정/삭제</th>
 					</tr>
 					
-						<% 
-							List couponList = (List) request.getAttribute("couponList");
-							
-							for(int i=0; i<couponList.size(); i++){
-								CouponDTO dto = (CouponDTO) couponList.get(i);
-						%>
-					
-						<tr>
-							<td><%=dto.getCouponNum() %></td>
-							<td><%=dto.getCouponName() %></td>
-							<td><%=dto.getCouponNote() %></td>
-							<td><%=dto.getCouponDc() %>%</td>
-							<td>
-								<a href="./AdminCouponsModify.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-primary btn-sm">수정</a>	
-								<a href="./AdminCouponsDelete.ag?couponNum=<%=dto.getCouponNum()%>" class="btn btn-danger btn-sm">삭제</a>
-							</td>						
-						</tr>
-					<%} %>      	          
+					<c:forEach var="i" items="${ couponList }">	
+					<tr>
+						<td>${i.couponNum }</td>
+						<td>${i.couponName }</td>
+						<td>${i.couponNote }</td>
+						<td>${i.couponDc }</td>
+						<td>
+							<a href="./AdminCouponsModify.ag?couponNum=${i.couponNum }" class="btn btn-primary btn-sm">수정</a>	
+							<a href="./AdminCouponsDelete.ag?couponNum=${i.couponNum }" class="btn btn-danger btn-sm">삭제</a>
+						</td>						
+					</tr>
+					</c:forEach>   	          
 				</tbody>
 			</table>	
         </div>

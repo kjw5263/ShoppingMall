@@ -8,6 +8,8 @@
 
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%--
 
   Created by IntelliJ IDEA.
@@ -171,7 +173,8 @@
                     <h2 style="margin-bottom: 20px"><%=dto.getCosName() %></h2>
 
                     <div class="pc-meta">
-                        <h5><%= dto.getCosPrice()%>원</h5>
+                        <h5><fmt:formatNumber value="<%= dto.getCosPrice()%>" pattern="#,###" />원</h5>
+
 
                         <div class="rating">
                             <%
@@ -269,8 +272,14 @@
         <div class="tab-pane fade in active" id="tabmenu_01">
             <p style="text-align: center">
                 <% for (int i = 1; i < dto.getCosImage().split(",").length; i++) {%>
-                <img src="admingoods/upload/<%=dto.getCosImage().split(",")[i] %>" alt=".">
-                <%}%>
+                        <% if(!dto.getCosImage().split(",")[i].equals("null") ){%>
+                    <img src="admingoods/upload/<%=dto.getCosImage().split(",")[i] %>" alt=".">
+                <%
+                        }
+
+
+                }%>
+
             </p>
         </div>
         <div class="tab-pane fade" id="tabmenu_02">
@@ -407,7 +416,7 @@
 
                         </dl>
                         <p class="alignCenter">
-                            <button class="btn-primary" onclick="insertPopup()" >글등록</button>
+                            <button class="btn btn-primary" onclick="insertPopup()" >글등록</button>
 
                         </p>
                     </div>

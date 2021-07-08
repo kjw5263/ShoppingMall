@@ -1,6 +1,7 @@
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -92,7 +93,7 @@
 		    </table><br>
 		<form method="post" action="./AdminGoodsModifyAction.ag">
 			<!-- 상품번호 저장 -->
-			<input type="hidden" name="cosNum" value="<%=dto.getCosNum() %>">
+			<input type="hidden" name="cosNum" value="${dto.cosNum}">
 			<table class="table table-active" style="text-align: center; background-color: white;">
 				<thead>
 					<tr>
@@ -102,49 +103,37 @@
 				<tbody>
 				 <tr>
 		           <th>상품이름</th>
-		           <td><input type="text" name="cosName" value="<%=dto.getCosName() %>" class="form-control" required></td>           
+		           <td><input type="text" name="cosName" value="${dto.cosName}" class="form-control" required></td>           
 		         </tr>
 				 <tr>
 		           <th>상품가격</th>
-		           <td><input type="text" name="cosPrice" value="<%=dto.getCosPrice() %>" class="form-control" required></td>           
+		           <td><input type="text" name="cosPrice" value="${dto.cosPrice }" class="form-control" required></td>           
 		         </tr>
 		         <tr>
 					<th>브랜드</th>
-					<td><input type="text" name="cosBrand" value="<%=dto.getCosBrand() %>" class="form-control" required></td> 
+					<td><input type="text" name="cosBrand" value="${dto.cosBrand }" class="form-control" required></td> 
 				</tr>
 				<tr>
 					<th>카테고리</th>
 					<td>
 						<select name="cosCategory" class="form-control">
 							<option value="스킨"
-								<%if(dto.getCosCategory().equals("스킨")){ %>
-								selected
-								<%} %>
+							<c:if test="${dto.cosCategory eq '스킨'}">selected</c:if>
 							>스킨</option>
 							<option value="에센스"
-								<%if(dto.getCosCategory().equals("에센스")){ %>
-								selected
-								<%} %>
+							<c:if test="${dto.cosCategory eq '에센스'}">selected</c:if>
 							>에센스</option>
 							<option value="로션"
-								<%if(dto.getCosCategory().equals("로션")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosCategory eq '로션'}">selected</c:if>						
 							>로션</option>
 							<option value="크림"
-								<%if(dto.getCosCategory().equals("크림")){ %>
-								selected	
-								<%} %>						
+							<c:if test="${dto.cosCategory eq '크림'}">selected</c:if>					
 							>크림</option>
 							<option value="클렌징"
-								<%if(dto.getCosCategory().equals("클렌징")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosCategory eq '클렌징'}">selected</c:if>						
 							>클렌징</option>
 							<option value="마스크팩"
-								<%if(dto.getCosCategory().equals("마스크팩")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosCategory eq '마스크팩'}">selected</c:if>						
 							>마스크팩</option>
 						</select>
 					</td>
@@ -154,19 +143,13 @@
 					<td>
 						<select name="cosSkinType" class="form-control">
 							<option value="건성"
-								<%if(dto.getCosSkinType().equals("건성")){ %>
-								selected
-								<%} %>
+							<c:if test="${dto.cosSkinType eq '건성'}">selected</c:if>
 							>건성</option>
 							<option value="중성"
-								<%if(dto.getCosSkinType().equals("중성")){ %>
-								selected
-								<%} %>
+							<c:if test="${dto.cosSkinType eq '중성'}">selected</c:if>
 							>중성</option>
 							<option value="지성"
-								<%if(dto.getCosSkinType().equals("지성")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosSkinType eq '지성'}">selected</c:if>
 							>지성</option>
 						</select>
 					</td>
@@ -176,51 +159,43 @@
 					<td>
 						<select name="cosTrouble" class="form-control" required>
 							<option value="민감성"
-								<%if(dto.getCosTrouble().equals("민감성")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosTrouble eq '민감성'}">selected</c:if>
 							>민감성</option>
 							<option value="여드름"
-								<%if(dto.getCosTrouble().equals("여드름")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosTrouble eq '여드름'}">selected</c:if>
 							>여드름</option>
 							<option value="아토피"
-								<%if(dto.getCosTrouble().equals("아토피")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosTrouble eq '아토피'}">selected</c:if>
 							>아토피</option>							
 							<option value="해당없음"
-								<%if(dto.getCosTrouble().equals("해당없음")){ %>
-								selected
-								<%} %>							
+							<c:if test="${dto.cosTrouble eq '해당없음'}">selected</c:if>
 							>해당없음</option>
 						</select>
 					</td>
 				</tr>	
 				<tr>
 		           <th>수량</th>
-		           <td><input type="text" name="cosAmount" value="<%=dto.getCosAmount()%>" class="form-control" required></td>           
+		           <td><input type="text" name="cosAmount" value="${dto.cosAmount}" class="form-control" required></td>           
 		        </tr>
  				<tr>
 		           <th>용량</th>
-		           <td><input type="text" name="cosVolumn" value="<%=dto.getCosVolumn() %>" class="form-control" required></td>           
+		           <td><input type="text" name="cosVolumn" value="${dto.cosVolumn}" class="form-control" required></td>           
 		        </tr> 
 				<tr>
 		           <th>회사</th>
-		           <td><input type="text" name="madeCompany" value="<%=dto.getMadeCompany() %>" class="form-control" required></td>           
+		           <td><input type="text" name="madeCompany" value="${dto.madeCompany}" class="form-control" required></td>           
 		        </tr>      
  				<tr> 
  		           <th>성분</th> 
- 		           <td><textarea name="ingredient" rows="4" cols="25" class="form-control" required><%=dto.getIngredient() %></textarea></td>            
+ 		           <td><textarea name="ingredient" rows="4" cols="25" class="form-control" required>${dto.ingredient}</textarea></td>            
  		        </tr>  
  				<tr> 
  		           <th>사용방법</th> 
- 		           <td><textarea name="cosMethod" rows="4" cols="25" class="form-control" required><%=dto.getCosMethod() %></textarea></td>            
+ 		           <td><textarea name="cosMethod" rows="4" cols="25" class="form-control" required>${dto.cosMethod}</textarea></td>            
  		        </tr> 
  				<tr> 
  		           <th>주의사항</th> 
- 		           <td><textarea name="cosWarning" rows="4" cols="25" class="form-control" required><%=dto.getCosWarning() %></textarea></td>            
+ 		           <td><textarea name="cosWarning" rows="4" cols="25" class="form-control" required>${dto.cosWarning}</textarea></td>            
  		        </tr> 	      	          
 				</tbody>
 			</table>

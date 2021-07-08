@@ -27,17 +27,17 @@
 <%--        rel="stylesheet">--%>
 
   <!-- Css Styles -->
-<%--  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">--%>
-<%--  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">--%>
-<%--  <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">--%>
-<%--  <link rel="stylesheet" href="./css/nice-select.css" type="text/css">--%>
-<%--  <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">--%>
-<%--  <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">--%>
-<%--  <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">--%>
-<%--  <link rel="stylesheet" href="./css/style.css" type="text/css">--%>
-<%--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--%>
-<%--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
-<%--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+  <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+  <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+  <link rel="stylesheet" href="./css/style.css" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   <style>
 
@@ -49,6 +49,24 @@
 
 
   </style>
+  <script type="text/javascript">
+
+    $(function () {
+
+      $('#btn-upload').click(function (e) {
+
+        e.preventDefault();
+        $('#file1').click();
+      });
+    });
+    function changeValue(obj){
+
+      alert(obj.value);
+
+    }
+  </script>
+
+
   <%
     GoodsDAO gdao = new GoodsDAO();
     int cosNum = Integer.parseInt(request.getParameter("cosNum"));
@@ -67,7 +85,7 @@
 
 
 <section class="section_area" style="max-width: 480px;margin-top:10px;background-color: #fff; height: 100%; padding: 10px; box-sizing: border-box; margin-bottom: 200px; margin-left: 24%;">
- <h1 style="margin-left: 50px">별점과 리뷰를 남겨주세요.</h1>
+ <h1 style="margin-left: 0px">별점과 리뷰를 남겨주세요.</h1>
   <form  method="post" action="./ReviewFormPro.rev" enctype="multipart/form-data" target="ReviewFormPro.rev">
     <img src="./admingoods/upload/<%= gdto.getCosImage().split(",")[0]%>" alt="상품...." style="width: 250px; margin-left: 45px;">
         <fieldset class="starability-basic" id="rating" aria-required="false" style="margin-left: 100px">
@@ -103,9 +121,10 @@
     </label>
     <br>
     <div>
-    <input type="submit" id="save" value="등록" onclick="window.close()">
-    <input type="reset" value="취소" onclick="closePopup()">
-    <input type="file" name="file1">
+      <button class="btn btn-primary" type="submit" onclick="window.close()">등록</button>
+      <button class="btn badge-danger" type="reset" onclick="closePopup()">취소</button>
+      <button class="btn btn-secondary" id="btn-upload">파일 등록</button>
+    <input type="file" id="file1"  style="display: none" name="file1" onchange="changeValue()">
 
     </div>
   </form>
