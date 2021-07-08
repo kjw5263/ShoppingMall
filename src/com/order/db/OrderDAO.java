@@ -135,7 +135,7 @@ public class OrderDAO {
 				
 				pstmt.setString(15, oDTO.getPayerName());
 				pstmt.setString(16, oDTO.getPayType());
-				pstmt.setInt(17, 1);
+				pstmt.setString(17, "결제완료");
 				pstmt.setInt(18, oDTO.getAddPoint());
 				pstmt.setInt(19, oDTO.getCpUseAmount());
 				pstmt.setInt(20, oDTO.getPtUseAmount());
