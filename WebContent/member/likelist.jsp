@@ -6,6 +6,9 @@
 <%@page import="com.coupon.db.CouponDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,8 +20,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<script src="../jq/jquery-3.6.0.js"></script>
-<script src="../jq/jquery-3.6.0.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -45,11 +46,8 @@
 	zoom: 1.5;
 }
 </style>
-<script type="text/javascript">
-	$('#allch')
 
 
-</script>
 
 </head>
 <body>
@@ -147,78 +145,72 @@
 								<th colspan="2">상품</th>
 								<th>관리</th>
 							</tr>
-
-							<%
-							 if(LikeList.size() != 0){
-								for (int i = 0; i < LikeList.size(); i++) {
-									GoodsDTO gdto = (GoodsDTO) LikeList.get(i);
-									
-							%>
-							<form action="./deleteLike.li" method="get">
+							<c:if test="${LikeList != null}">
+								<c:forEach var="LikeList" items="${LikeList}">
+									<form action="./deleteLike.li" method="get">
 								<tr>
 									<input type="hidden" name="cosnum"
-										value="<%=gdto.getCosNum()%>">
+										value="${LikeList.cosNum}">
 									<td><img
-										src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>"
+										src="./admingoods/upload/${LikeList.cosImage.split(",")[0]}"
 										width="150px" height="150px"></td>
-									<td><b><%=gdto.getCosBrand() %></b><br> <%=gdto.getCosName() %>
-										<h4><%=gdto.getCosPrice() %>원
+									<td><b>${LikeList.cosBrand }</b><br> ${LikeList.cosName }
+										<h4> ${LikeList.cosPrice }원
 										</h4></td>
 
 									<td><input type="image" src="./img/icons/heart.png"
 										width="40px" style="margin-top: 80%"></td>
 							</form>
 							</tr>
-							<%
-								}
-							 }
-							%>
+								
+								</c:forEach>
+							</c:if>
+							
+							
+							
 						</table>
 
 						<!--페이징 처리  -->
 						<div style="margin-left: 45%;">
 							<ul class="pagination">
-
-								<%if(cnt != 0){
-							
-							int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
-							
-							int pageBlock = 1;
-							
-							int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
-							
-							int endPage = startPage + pageBlock-1;
-							
-							if(endPage > pageCount){
-								endPage = pageCount;
-							}
-							
-							if(startPage > pageBlock){
-								%>
-								<li class="page-item"><a class="page-link"
-									href="./getLike.li?pageNum=<%=startPage-pageBlock %>"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-								<%
-							}
-							
-							for(int i=startPage;i<=endPage;i++){
-								%>
-								<li class="page-item"><a class="page-link"
-									href="./getLike.li?pageNum=<%=i %>" class="btn btn-primary btn"><%=i %></a></li>
-								<%
-							}
-							
-							if(endPage < pageCount){
-								%>
-								<li class="page-item"><a class="page-link"
-									href="./getLike.li?pageNum=<%=startPage+pageBlock %>"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										<%
-							}
-							
-						} %>
-								</a></li>
+								<c:if test="${cnt != 0}">
+									
+									<c:set var="pageCount" value="${cnt/pageSize+(cnt % pageSize == 0? 0:1)}"/>
+									<c:set var="pageBlock" value="1"/>
+									<fmt:parseNumber var= "startPage" integerOnly= "true" value="${((currentPage-1)/2) * 2 + 1}" />
+									<c:set var="endPage" value="${startPage + pageBlock-1 }"/>
+								
+									
+									<c:choose>
+										<c:when test="${startPage > pageBlock}">
+												<li class="page-item"><a class="page-link"
+											href="./getLike.li?pageNum=${startPage-pageBlock}"
+											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:when>
+									</c:choose>
+									
+										<c:forEach begin="${startPage }" end="${endPage}" var="i">
+											<li class="page-item"><a class="page-link"
+																		href="./getLike.li?pageNum=${i}" class="btn btn-primary btn">${i}</a></li>
+										</c:forEach>
+									
+									<c:choose>	
+										<c:when test="${endPage > pageCount }">
+											<c:set var="endPage" value="${pageCount}"/> 
+										</c:when>
+										
+										<c:when test="${endPage < pageCount}">
+											<li class="page-item"><a class="page-link"
+										href="./getLike.li?pageNum=${startPage+pageBlock}" ara-label="Next"> 
+										<span aria-hidden="true">&raquo;</span></a></li>
+										</c:when>
+									</c:choose>
+									
+									
+									
+								</c:if>
+								
 							</ul>
 						</div>
 						<!-- 페이징 처리 -->

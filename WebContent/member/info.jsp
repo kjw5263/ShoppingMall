@@ -142,7 +142,6 @@
 											<th>등급</th>
 											<th>쿠폰</th>
 											<th>포인트</th>
-											<th>적립금</th>
 										</tr>
 										<tr>
 											<td>
@@ -169,7 +168,6 @@
 										<td><a href="./MyCoupon.cp"><b><c:out value="${cnt}"/></b>
 											</a> 장</td>
 											<td><a href="" style="color: orange;"><b>${mdto.userPoint}</b></a>P</td>
-											<td><a href="" style="color: orange;"><b>${mdto.userTotal}</b></a>원</td>
 										</tr>
 									</table>
 								</div>
@@ -252,7 +250,6 @@
 								<a href="./getLike.li">> 더보기 </a>
 							</h5>
 							<hr>
-							<!-- v필드세세세세세세세세세  -->
 							<fieldset style="padding: 20px;"">
 								<div class="row">
 									<table style="text-align: center;">
