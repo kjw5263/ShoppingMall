@@ -229,7 +229,7 @@
                     <div class="single-product-item">
                         <figure>
                             <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>">
-                            <img src="./admingoods/upload/<%=dto.getCosImage()%>" alt="">
+                            <img src="./admingoods/upload/<%=dto.getCosImage().split(",")[0]%>" alt="">
                             </a>
                             <div class="p-status">new</div>
                         </figure>

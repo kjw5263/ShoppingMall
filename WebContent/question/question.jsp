@@ -182,12 +182,12 @@
 					    
 					    <%if(currentPage < endPage){ %>
 					    <form action="./Question.que?pageNum=<%=currentPage + 1%>" method="post" >
-					    	<input class="login100-form-btn" type="submit" value="다음으로" id="submit" onclick="return check()"> 
+					    	<input class="login100-form-btn" type="submit" value="다음으로" id="submit" onclick="return check()" style='cursor:pointer;'> 
 					    </form>
 					    
 					     <%}else{ %>
 						<form action="./QuestionConfirm.que" method="post">
-					    	<input class="login100-form-btn" type="submit" value="제출하기" id="submit" onclick="return check()"> 
+					    	<input class="login100-form-btn" type="submit" value="제출하기" id="submit" onclick="return check()" style='cursor:pointer;'> 
 					    	<input type="hidden" value="" name="sum" id="sum">
 					    </form>					     
 					     
