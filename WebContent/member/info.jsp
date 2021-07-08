@@ -317,9 +317,16 @@
 										<b>피부고민</b><br>${mdto.userTrouble}
 									</div>
 									<div class="col-6" style="margin: auto;">
-										<input type="button" class="primary-btn look-btn"
-											style="background-color: #B0BCC2;" value="내 피부에 맞는 화장품 보러가기">
+									
+									
+									<form action="./Customized.que" method="post">
+										<input type="hidden" name="userSkinType" value="${mdto.userSkinType}">
+										<input type="submit" class="primary-btn look-btn"
+											style="background-color: #B0BCC2; cursor: pointer;"  value="내 피부에 맞는 화장품 보러가기">
+									</form>		
+											
 									</div>
+									
 								</div>
 							</fieldset>
 							

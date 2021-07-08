@@ -111,7 +111,7 @@
 			<div class="col-5"></div>
 			<div class="col-2 text-center">
 					<!-- 일반 로그인 버튼 시작 -->
-					<input class="login100-form-btn" type="button" value="더 많은 제품 보러가기" onclick="location.href='./GoodsList.cos'"> 
+					<input class="login100-form-btn" type="button" value="더 많은 제품 보러가기" onclick="location.href='./GoodsList.cos'" style='cursor:pointer;'> 
 					<!-- 일반 로그인 버튼 끝 -->
 			</div>
 			<div class="col-5"></div>

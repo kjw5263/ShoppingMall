@@ -18,6 +18,8 @@ public class QueConfirmAction implements Action {
 
 		int sum = Integer.parseInt(request.getParameter("sum"));
 	
+		
+		System.out.println("넘어온 sum 값은 2222222222222222222" + sum);
 		QuestionScoreDTO qsdto;
 		
 		

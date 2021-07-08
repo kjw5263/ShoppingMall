@@ -119,26 +119,37 @@
 				<!-- faq 테이블 시작 -->
 				<table class="table">
 				  <tbody>
-				  	<tr>
+				  	<tr class="table-active">
 				      <th class="text-center">유형</th>
 				      <th class="text-center">내용</th>
+				      <th class="text-center"></th>
+				      
 				    </tr>
 				    <c:forEach var="i" items="${ faqList }">
 				    <tr>
-				      <th class="text-center">${i.faqCategory }</th>
+				      <th class="text-center" style="width: 10%">${i.faqCategory }</th>
 				      <td class="text-center" style='cursor:pointer;' id="${i.faqNum }">
 				      	${i.faqQuestion }<br><br>
 				       </td>
-				      <c:if test="${userId eq 'admin' }">
-					  <th id="${i.faqNum }">
-				      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> /
-				       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=${i.faqNum }'">삭제</span>					  
-					  </th>
-					  </c:if>			       
+
+				      <c:choose>
+					      <c:when test="${userId eq 'admin' }">
+						  <th id="${i.faqNum }" style="width: 10%">
+					      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> /
+					       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=${i.faqNum }'">삭제</span>					  
+						  </th>
+						  </c:when>
+						  <c:otherwise>
+						  	<th id="${i.faqNum }" style="width: 10%"></th>
+						  </c:otherwise>
+					  </c:choose>
+					  
 				    </tr>
-				    <tr style="display: none;" id="${i.faqNum }_answer">
+				    <tr style="display: none;" id="${i.faqNum }_answer" class="table-secondary">
 					  <th class="text-center">답변</th>
-					  <td class="text-center"><b style="width: 737;">${i.faqAnswer }</b></td>
+					  <td class="text-center" style="width: 650px"><b style="width: 737;">${i.faqAnswer }</b></td>
+					  <th></th>
+					  
 				    </tr>
 				    </c:forEach>
 				  </tbody>
