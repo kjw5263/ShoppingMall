@@ -63,7 +63,7 @@
 <body>
 
 	<!-- header 시작 -->
- 		<jsp:include page="../header/header.jsp" />
+ 		<jsp:include page="./header/header.jsp" />
 	<!-- header 끝 -->
 	
 	<!-- container 시작 -->	

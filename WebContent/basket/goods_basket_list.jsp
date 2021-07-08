@@ -1,6 +1,8 @@
 <%@page import="com.goods.db.GoodsDTO"%>
 <%@page import="com.basket.db.BasketDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -100,14 +102,11 @@
 					<th colspan="4">수량</th>
 				</tr>
 				
-				<%for(int i=0;i<basketList.size();i++){
-					BasketDTO bkDTO = (BasketDTO) basketList.get(i);
-					GoodsDTO gDTO = (GoodsDTO) goodsList.get(i);
-				%>
+				<c:forEach var="i" items="${ basketList }" varStatus="god">
 				
 				<tr>
 					<td>
-						<input type="checkbox" name="del-id" class="del-id" value="<%=bkDTO.getBasketNum() %>"/>
+						<input type="checkbox" name="del-id" class="del-id" value="${i.basketNum}"/>
  							<script>
  							 $(".del-id").click(function(){
  							  $("#allCheck").prop("checked", false);
@@ -115,19 +114,19 @@
  							</script>			
 					</td>
 					<td>
-						<input type="hidden" name="bkNum" class="bkNum" value="<%=bkDTO.getBasketNum() %>"/>
-						<img src="./admingoods/upload/<%=gDTO.getCosImage().split(",")[0] %>"
+						<input type="hidden" name="bkNum" class="bkNum" value="${i.basketNum}"/>
+						<img src="./admingoods/upload/${goodsList[god.index].cosImage.split(',')[0] }"
 						width="80" height="80">
 					</td>
-					<td><%=gDTO.getCosName() %></td>
-					<td><%=gDTO.getCosPrice() %></td>
-					<td><input type=hidden name="sell_price" value="<%=gDTO.getCosPrice() %>"><td>
+					<td>${goodsList[god.index].cosName }</td>
+					<td>₩<fmt:formatNumber value="${goodsList[god.index].cosPrice }" pattern="#,###"/></td>
+					<td><input type=hidden name="sell_price" value="${goodsList[god.index].cosPrice }"><td>
 					<form name="form" method="post" action="./BasketList.ba">
-					<input type="hidden" name="bkNum" class="bkNum" value="<%=bkDTO.getBasketNum() %>"/>
+					<input type="hidden" name="bkNum" class="bkNum" value="${i.basketNum}"/>
 					<td>
 						<ul class="nav flex-column " style="width: 100px; margin-left: 0; margin-right:20px;">
 						  <li class="nav-item mb-2">
-							<input type="number" name="amount" min="1" style="width:45px" value="<%=bkDTO.getBasketCosAmount()%>">	
+							<input type="number" name="amount" min="1" style="width:45px" value="${i.basketCosAmount}">	
 						  </li>
 						  <li class="nav-item mb-2">
  						  <input type="submit" value="수정" class="btn btn-primary btn-sm"
@@ -137,8 +136,9 @@
 					</td>
 					</form>
 				</tr>
-				<%} %>
+				</c:forEach>
 				</tbody>
+				
 				<%
 				int count = 0;
 				int hap = 0;
@@ -150,9 +150,12 @@
 					count += bkDTO.getBasketCosAmount();
 					hap += mul;
 				} %>
+				
 				<tr class="table-active">
 					<th scope="col" colspan="3" style="color:black;">합계</th>
-					<td style="color:black;"><strong><%=hap %>원</strong></td>
+					<td style="color:black;">
+					<strong>₩<fmt:formatNumber value="<%=hap %>" pattern="#,###"/>
+					</strong></td>
 					<td colspan="3" style="color:black;"><strong><%=count %></strong></td>
 				</tr>
 			</table>
@@ -174,9 +177,6 @@
 		<!-- right -->
 		</div>
 	</div>
-	
-	
-	
 	</div>
 	<!-- container 끝 -->	
 

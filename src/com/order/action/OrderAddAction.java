@@ -84,20 +84,20 @@ public class OrderAddAction implements Action{
 		/* 사용한 쿠폰 삭제하기 */
 		String mccp = request.getParameter("mcCouponNum");
 		if(!mccp.equals("")) {
-			int cpUse = Integer.parseInt(request.getParameter("mcCouponNum"));
-			if (cpUse != -1) {
+			int cpUse = Integer.parseInt(mccp);
+			if (cpUse != 0) {
 				CouponDTO cDTO = new CouponDTO();
 				cDTO.setMcCouponNum(cpUse);
 				cDTO.setMcUserID(userId);
 				orDAO.deleteCoupon(cDTO);
 			}
 		}
-		System.out.println(">>>>>>>>>>>OrderAdd 에서의 넘버는 ? >>>>>>>> " +tradeNumber);
 		
 		//request.setAttribute("tradeNumber", tradeNumber);
-		session.setAttribute("tradeNumber", tradeNumber);
+		//session.setAttribute("tradeNumber", tradeNumber);
+		// 포워딩 할 때만 request가 가능하고, 그게 아니라면 세션이나 url뒤 파라미터로 넘겨주는 방법
 		
-		forward.setPath("./OrderConfirm.or");
+		forward.setPath("./OrderConfirm.or?tradeNumber="+tradeNumber);
 		forward.setRedirect(true);
 		return forward;
 	}

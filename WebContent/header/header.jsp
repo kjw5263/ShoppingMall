@@ -27,7 +27,7 @@
         <div class="container-fluid">
             <div class="inner-header">
                 <div class="logo">
-                    <a href="./Main.me"><img src="./img/logo.png" alt=""></a>
+                    <a href="./Main.me"><img src="./img/logo5.png" alt="" style=" margin-top:-22px; margin-left: 16px; "></a>
                 </div>
                 
                 <div class="header-right">
@@ -59,7 +59,7 @@
         		 if(session.getAttribute("userId") == null){
         		%>
                 <div class="user-access">
-                    <a href="./MemberJoin.me">Register</a>
+                    <a href="./emailJoin.me">Register</a>
                     <a href="./MemberLogin.me" class="in">Sign in</a>
                 </div>
                 <%}else{%>

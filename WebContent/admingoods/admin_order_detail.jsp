@@ -5,6 +5,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,8 +66,6 @@
    <%
    	  List detailGoods = (List)request.getAttribute("detailGoods");
    	  List detailOrder = (List)request.getAttribute("detailOrder");
-   	  
-   	  OrderDTO orderInfo = (OrderDTO) detailOrder.get(0);
    %>
     <section class="admin_goods_write">
         <div class="container">
@@ -108,21 +107,19 @@
 						<th>이미지</th>
 						<th>상품명</th>
 						<th>구매수량</th>
-						<th>합계금액</th>
+						<th>가격</th>
+						<th>합계</th>
 					</tr>
-				 
-			      <%for(int i=0;i<detailOrder.size();i++){ 
-			           OrderDTO orDTO = (OrderDTO) detailOrder.get(i);
-			           GoodsDTO goDTO = (GoodsDTO) detailGoods.get(i);
-			      %>
+					
+				 	<c:forEach var="i" items="${ detailGoods }" varStatus="deo">
 				      <tr>  
-						 <td><img src="./admingoods/upload/<%=goDTO.getCosImage().split(",")[0] %>"
-						 width="80" height="80"></td>			      
-				         <td><%=orDTO.getO_cosName() %></td>
-				         <td><%=orDTO.getO_cosAmount() %></td>
-				         <td><%=goDTO.getCosPrice() * orDTO.getO_cosAmount() %></td>
-				      </tr>
-					  <%} %>
+						 <td><img src="./admingoods/upload/${i.cosImage.split(',')[0] }"
+						 width="80" height="80"></td>	
+				         <td>${detailOrder[deo.index].o_cosName }</td>
+				         <td>${detailOrder[deo.index].o_cosAmount }</td>
+				         <td>${i.cosPrice }</td>
+				         <td>${i.cosPrice * detailOrder[deo.index].o_cosAmount }</td>
+				    </c:forEach>
 				</tbody>
  			</table>
  			<br>
@@ -135,37 +132,44 @@
 				<tbody>
 					<tr>
 						<th>받는 사람</th>
-						<td><%=orderInfo.getReceiverName() %></td>
+						<td>${detailOrder[0].receiverName }</td>
 					</tr>
 					<tr>
 					    <th>연락처</th>
-					    <td><%=orderInfo.getReceiverTel() %></td>
+					    <td>${detailOrder[0].receiverTel }</td>
 					</tr>
 					<tr>
 					    <th>예비연락처</th>
-						<%if(orderInfo.getReceiverTel2() == null){%>
-						<td>없음</td>
-						<%} else {%>
-					    <td><%=orderInfo.getReceiverTel2() %></td>
-					    <%} %>
+					    <c:choose>
+					        <c:when test="${detailOrder[0].receiverTel2 eq null}">
+					        <td>없음</td>
+					        </c:when>
+						<c:otherwise>
+						<td>${detailOrder[0].receiverTel2 }</td>
+					    </c:otherwise>
+					    </c:choose>					    
+					    
 					</tr>
 					<tr>
 					    <th>이메일</th>
-					    <td><%=orderInfo.getReceiverEmail() %></td>
+					    <td>${detailOrder[0].receiverEmail }</td>
 					</tr>
 					<tr>
 					    <th>주소</th>
-					    <td><%=orderInfo.getReceiverAddr() %></td>
+					    <td>${detailOrder[0].receiverAddr }</td>
 					</tr>	 
 					<tr>
 					    <th>요구사항</th>
-					    <%if(orderInfo.getO_msg() == null){ %>		
-					    <td>없음</td>
-					    <%}else{ %>
-					    <td><%=orderInfo.getO_msg() %></td>
-					    <%} %>
+					    <c:choose>
+					        <c:when test="${detailOrder[0].o_msg eq null}">
+					       	<td>없음</td>
+					        </c:when>
+						<c:otherwise>
+							<td>${detailOrder[0].o_msg }</td>
+					    </c:otherwise>
+					    </c:choose>
 					</tr>     					      
-				</tbody>	      
+				</tbody>	
 			</table>
 			<br>	
 			<table class="table table-active" style="text-align: center; background-color: white;">
@@ -179,16 +183,18 @@
 						<th style="font-size: 20px;">총 결제금액</th>
 					</tr>
 					<tr>  		      
-				        <th style="font-size: 20px;"><%=orderInfo.getSumMoney() %></th>
+				        <th style="font-size: 20px;">${detailOrder[0].sumMoney }</th>
 				        <th style="color: #0A82FF; font-size: 20px;">
-				        	쿠폰 : <%=orderInfo.getCpUseAmount() %><br>
-				        	포인트 : <%=orderInfo.getPtUseAmount() %>
+				        
+				        	쿠폰 : ${detailOrder[0].cpUseAmount }<br>
+				        	포인트 : ${detailOrder[0].ptUseAmount }
 				        </th>
-				        <th style="font-size: 20px;"><%=orderInfo.getPayMoney() %></th>
+				        <th style="font-size: 20px;">${detailOrder[0].payMoney }</th>
 				    </tr> 
 				</tbody>
 			</table>
         </div>
+        
     </section>
     <!-- admin order detail End -->
 			

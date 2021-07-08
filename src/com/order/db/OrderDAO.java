@@ -135,7 +135,7 @@ public class OrderDAO {
 				
 				pstmt.setString(15, oDTO.getPayerName());
 				pstmt.setString(16, oDTO.getPayType());
-				pstmt.setInt(17, 1);
+				pstmt.setString(17, "결제완료");
 				pstmt.setInt(18, oDTO.getAddPoint());
 				pstmt.setInt(19, oDTO.getCpUseAmount());
 				pstmt.setInt(20, oDTO.getPtUseAmount());
@@ -342,6 +342,8 @@ public class OrderDAO {
 					odto.setReceiverTel2(rs.getString("receiverTel2"));
 					odto.setSumMoney(rs.getInt("SumMoney"));
 					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
+					odto.setOrderDate(rs.getDate("orderDate"));
+					odto.setO_tradeNum(rs.getString("o_tradeNum"));
 					
 					
 					goodsList.add(gdto);

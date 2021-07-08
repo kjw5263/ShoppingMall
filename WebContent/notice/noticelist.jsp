@@ -36,42 +36,6 @@
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 	<script src="./js/chatbot.js" type="text/javascript"></script>
     <style type="text/css">
-button{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:34px;
-  font-size:1em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
 table {
     width: 80%;
     margin-left : 5%;
@@ -84,15 +48,10 @@ table {
     text-align: center;
   }
    th {
-    background-color: #0d47a1;
-    color: #ffffff;
+   
+ 
   }
-  tbody tr:nth-child(2n) {
-    background-color: #bbdefb;
-  }
-  tbody tr:nth-child(2n+1) {
-    background-color: #e3f2fd;
-  }
+ 
 </style>
 </head>
 
@@ -109,14 +68,16 @@ table {
 		request.setCharacterEncoding("UTF-8");
 
 		NoticeDAO noti = new NoticeDAO();	
-	
+		String userId = (String)session.getAttribute("userId");
 		varlist var = new varlist();
 		String noticecontentLink = var.getnoticecontentListSt(); 
 		int topcnt = noti.topnoticount();
 		int cnt = noti.notiCount();
 		int toppageSize = topcnt;
 		int pageSize = 10 - toppageSize;
-		
+		if (userId == null) {
+			userId = "null";
+		}
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null) {
 			pageNum = "1";
@@ -135,11 +96,16 @@ table {
 	
 	%>
 	<br>
-	<button onclick="location.href='http://localhost:8088/ShoppingMall/noticewrite.nos'">글쓰기</button>
+	
+	<%if(userId.equals("admin")){ %>
+	
+	<button class="btn btn-primary" onclick="location.href='http://localhost:8090/ShoppingMall/noticewrite.nos'">글쓰기</button>
+	
+	<% } %>
 	<br>
 	<br>
-	<table >
-		<tr>
+	<table   class="table table-striped">
+		<tr class="table-active">
 			<th> </th>
 			<th>제목</th>
 			

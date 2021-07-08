@@ -393,10 +393,8 @@ public class AdminGoodsDAO {
 	// getMemberList()
 	public ArrayList getMemberList(){
 
-		// 상품 정보를 모두 저장하는 가변길이 배열
 		ArrayList memberListAll = new ArrayList();
 		
-		// 상품 1개의 정보를 저장하는 객체 
 		MemberDTO dto = null;
 		
 		try {
@@ -440,13 +438,9 @@ public class AdminGoodsDAO {
 	
 	// getGoodsList(startRow,pageSize)
 	public ArrayList<MemberDTO> getMemberList(int startRow,int pageSize){
-		
-		// DB데이터 1row 정보를 GoodsDTO 저장 -> ArrayList 한칸에 저장
-		
-		// 상품리스트의 정보를 원하는 만큼 저장하는 가변길이 배열
+
 		ArrayList<MemberDTO> memberList = new ArrayList<MemberDTO>();
-		
-		// 상품 1개의 정보를 저장하는 객체 
+
 		MemberDTO dto = null;
 		
 		try {
