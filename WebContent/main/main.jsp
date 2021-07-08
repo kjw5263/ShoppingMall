@@ -166,7 +166,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="single-box-item first-box">
-                                    <img src="./img/sale.jpg" alt="sale" onclick="location.href='#'">
+                                    <img src="./img/sale.jpg" alt="sale" onclick="location.href='./couponEvent.cp'">
                                 </div>
                             </div>
                             <div class="col-lg-12">
