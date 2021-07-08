@@ -216,10 +216,10 @@
 									<th>상태</th>
 								</tr>
 							</thead>
+							
 							<%for(int i=0;i<orderList.size();i++){
 								OrderDTO odto = (OrderDTO)orderList.get(i);
 								GoodsDTO gdto = (GoodsDTO)goodsList.get(i);
-								
 								
 								%>
 								

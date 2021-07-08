@@ -111,6 +111,8 @@ public class LikeDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeDB();
 		}
     	return check;
     }
@@ -225,10 +227,7 @@ public class LikeDAO {
 					rs = pstmt.executeQuery();
 
 					// 5 데이터 처리
-					// max(num) - sql 함수를 실행했을 경우 커서 이동 가능(데이터 여부 상관없음)
-					// num - sql 칼럼의 경우 커서 이동 불가능
 					if (rs.next()) {
-						// num = rs.getInt("mxa(num)") + 1;
 						num = rs.getInt(1) + 1;
 					}
 
@@ -262,7 +261,6 @@ public class LikeDAO {
 //
 //					System.out.println("즐겨찾기 cout증가 완료 !!!!!!!!!!!");
 				}
-	     
 	         
 	   } catch (SQLException e) {
 	      
@@ -270,9 +268,7 @@ public class LikeDAO {
 	   } finally{
 	      closeDB();
 	   }
-		
 		return check;
-
 	
 	}
 	// insertLike 끝

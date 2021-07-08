@@ -24,7 +24,7 @@ public class UsedateDAO {
 		private PreparedStatement pstmt = null;
 		private ResultSet rs = null;
 		private String sql = "";
-		
+		private PreparedStatement pstmt2 =null;
 		
 		//-----------DB 드라이버 정보--------------------
 		/*final String DRIVER = "com.mysql.jdbc.Driver";
@@ -65,6 +65,7 @@ public class UsedateDAO {
 				if(rs != null) rs.close();
 				if(pstmt != null) pstmt.close();
 				if(conn != null) conn.close();
+				if(pstmt2 != null) pstmt2.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -282,7 +283,6 @@ public class UsedateDAO {
 				sql = "select max(status_Num) from use_status";
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
-				
 				if(rs.next()){
 					status_Num = rs.getInt(1)+1;
 				}
@@ -304,19 +304,20 @@ public class UsedateDAO {
 					System.out.println("DAO : regusedate 실행완료");
 					
 					sql =  "insert into open_date (o_Num,openCosNum,openUserId,openDate) values(?,?,?,now())";
-					PreparedStatement pstmt2 = conn.prepareStatement(sql);
+					pstmt2 = conn.prepareStatement(sql);
 					pstmt2.setInt(1, oNum);
 					pstmt2.setInt(2, cosNum);
 					pstmt2.setString(3, userId);
 					
 					pstmt2.executeUpdate();
 					System.out.println("open_date에 insert 완");
-				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				closeDB();
+				
+			
 			}
 		}
 		//regusedate1

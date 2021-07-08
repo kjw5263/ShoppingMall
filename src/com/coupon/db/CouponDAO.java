@@ -102,6 +102,8 @@ public class CouponDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeDB();
 		}
 
 		return couponList;
@@ -146,47 +148,7 @@ public class CouponDAO {
 
     //insertCoupon(userId)
 	
-    //pointcheck(startdate,enddate)
-    /*
-    public List pointcheck(Date sdt,Date edt,String userId){
-    	System.out.println(sdt);
-    	System.out.println(edt);
-    	
-    	List orderList = new ArrayList();
-    	try {
-    		conn = getConnection();
-    		sql = "select distinct o_tradeNum,orderDate,addPoint,cpUseAmount,ptUseAmount from order_board where orderDate between ? and ? where o_userId = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setDouble(1, sdt);
-			pstmt.setDouble(2, edt);
-			pstmt.setString(3, userId);
-			System.out.println("sql 실행완료....");
-			if(rs.next()){
-			while(rs.next()){
-				OrderDTO odto = new OrderDTO();
-				odto.setOrderDate(rs.getDate("orderDate"));
-				odto.setPtUseAmount(rs.getInt("ptUseAmount"));
-				odto.setAddPoint(rs.getInt("addPoint"));
-				odto.setO_tradeNum(rs.getString("o_tradeNum"));
-				
-				orderList.add(odto);
-				System.out.println(odto);
-			}
-		}else{
-			
-			System.out.println("없음 test중");
-			
-		}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			closeDB();
-		}
-    	System.out.println(orderList);
-		return orderList;
-    }*/
-    //pointcheck(startdate,enddate)
+   
     //pointcheck(startdate,enddate)
     public List pointcheck(String startdate,String enddate,String userId){
     	System.out.println(startdate);
@@ -272,8 +234,6 @@ public class CouponDAO {
     }
     
     //pointcheck2(searchmonth1,userId);
-
-
     
     
 

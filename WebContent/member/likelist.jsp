@@ -60,18 +60,6 @@
 		if (userId == null) {
 			response.sendRedirect("../MemberLogin.me");
 		}
-		
-		LikeDAO ldao = new LikeDAO();
-		
-		
-		List LikeList = (List) request.getAttribute("LikeList");
-		
-		int cnt = (int)request.getAttribute("cnt");
-		int pageSize = (int)request.getAttribute("pageSize");
-		int startRow = (int)request.getAttribute("startRow");
-		String pageNum1 = (String)request.getAttribute("pageNum");
-	 	int pageNum = Integer.parseInt(pageNum1);
-		int currentPage = (int)request.getAttribute("currentPage");
 		%>
 
 
@@ -136,7 +124,7 @@
 						</div>
 					<div class="col-10">
 						<h3>
-							나의 찜목록 (총 <b style="color: orange;"><%=cnt%></b>개)
+							나의 찜목록 (총 <b style="color: orange;">${cnt }</b>개)
 						</h3>
 						<br>
 
@@ -206,9 +194,6 @@
 										<span aria-hidden="true">&raquo;</span></a></li>
 										</c:when>
 									</c:choose>
-									
-									
-									
 								</c:if>
 								
 							</ul>
