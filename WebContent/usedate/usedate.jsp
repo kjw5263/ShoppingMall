@@ -76,13 +76,13 @@
 			response.sendRedirect("../MemberLogin.me");
 		}
 		
-		int cnt = (int)request.getAttribute("cnt");
-		int pageSize = (int)request.getAttribute("pageSize");
-		int startRow = (int)request.getAttribute("startRow");
-		String pageNum1 = (String)request.getAttribute("pageNum");
-	 	int pageNum = Integer.parseInt(pageNum1);
-		int currentPage = (int)request.getAttribute("currentPage");
-		
+
+		List useList = (List) request.getAttribute("useList");
+		List openList = (List) request.getAttribute("openList");
+
+		List goodsList= (List)request.getAttribute("goodsList");
+		List orderList = (List)request.getAttribute("orderList");
+		List usestatusList = (List)request.getAttribute("usestatusList");
 	
 	%>
 
@@ -208,25 +208,153 @@
 						</table>
 
 						<!--페이징 처리  -->
-						<!--여기에에에엥에ㅔㅔ엥  -->
+						<div style="margin-left: 45%;">
+							<ul class="pagination">
+								<c:if test="${cnt != 0}">
+									
+									<c:set var="pageCount" value="${cnt/pageSize+(cnt % pageSize == 0? 0:1)}"/>
+									<c:set var="pageBlock" value="1"/>
+									<fmt:parseNumber var= "startPage" integerOnly= "true" value="${((currentPage-1)/2) * 2 + 1}" />
+									<c:set var="endPage" value="${startPage + pageBlock-1 }"/>
+								
+									
+									<c:choose>
+										<c:when test="${startPage > pageBlock}">
+												<li class="page-item"><a class="page-link"
+											href="./getLike.li?pageNum=${startPage-pageBlock}"
+											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:when>
+									</c:choose>
+									
+										<c:forEach begin="${startPage }" end="${endPage}" var="i">
+											<li class="page-item"><a class="page-link"
+																		href="./getLike.li?pageNum=${i}" class="btn btn-primary btn">${i}</a></li>
+										</c:forEach>
+									
+									<c:choose>	
+										<c:when test="${endPage > pageCount }">
+											<c:set var="endPage" value="${pageCount}"/> 
+										</c:when>
+										
+										<c:when test="${endPage < pageCount}">
+											<li class="page-item"><a class="page-link"
+										href="./getLike.li?pageNum=${startPage+pageBlock}" ara-label="Next"> 
+										<span aria-hidden="true">&raquo;</span></a></li>
+										</c:when>
+									</c:choose>
+								</c:if>
+								
+							</ul>
+						</div>
+						<!-- 페이징 처리 -->
+						
+						<br><br>
+						<h3>화장품 사용기한 확인하기</h3><br>
+						<h5>*사용 완료 하신 경우 오른쪽의 사용완료 버튼을 눌러주세요!</h5>
+						<br>
+						<table class="table">
+							<tr>
+								<th>상품명</th>
+								<th>개봉일자</th>
+								<th>사용기한</th>
+								<th>종료일자</th>
+								<th>사용완료 여부</th>
+							</tr>
+							<%
+							if( useList.size()!=0){
+							
+								for (int i = 0; i < useList.size(); i++) {
+									GoodsDTO gdto = (GoodsDTO) useList.get(i);
+									UsedateDTO udto = (UsedateDTO) openList.get(i);
 
+									/* 끝 날자 구하기 */
+									Date opendate = udto.getOpenDate();
+									int usedate = gdto.getUseDate();
 
+									Calendar cal = Calendar.getInstance();
+									cal.setTime(opendate);
+									DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+									System.out.println("current: " + df.format(cal.getTime()));
+									cal.add(Calendar.MONTH, usedate);
+									String closedate = df.format(cal.getTime());
+
+									System.out.println(closedate);
+
+									/* 끝 날짜 -  오늘 날짜  = 남은 일수 구하기 */
+									Calendar getToday = Calendar.getInstance();
+									getToday.setTime(new Date()); //금일 날짜
+
+									Date date = new SimpleDateFormat("yyyy-MM-dd").parse(closedate);
+									Calendar closedate1 = Calendar.getInstance();
+									closedate1.setTime(date); //특정 일자
+
+									long diffSec = (closedate1.getTimeInMillis() - getToday.getTimeInMillis()) / 1000;
+									long diffDays = diffSec > 0 ? (diffSec / (24 * 60 * 60)) + 1 : (diffSec / (24 * 60 * 60)); //일자수 차이
+
+									System.out.println("남은 일수(초) -" + diffSec);
+									System.out.println("남은 일수" + diffDays);
+									
+									/*사용일수 구하기*/
+									Calendar opendate2 = Calendar.getInstance();
+									opendate2.setTime(opendate); //
+									
+									long useSec = (getToday.getTimeInMillis()-opendate2.getTimeInMillis()) / 1000;
+									long useDays = useSec > 0 ? (useSec / (24 * 60 * 60)) + 1 : (useSec / (24 * 60 * 60)); //일자수 차이
+
+									System.out.println("사용 초 - " + useSec);
+									System.out.println("사용일수 -"+ useDays);
+									
+									
+									/*% 구하기*/
+						
+
+									//계산위해 int로 변경
+									double useday = (double)useDays;
+									double year = ((double)usedate*30.41);									
+									
+							%>
+							<tr>
+								<td><%=gdto.getCosName()%></td>
+								<td><%=opendate%></td>
+								<td>
+									<div class="skill-progress">
+										<div class="item">
+
+											<div class="progress">
+												<div class="progress-level" style="width: <%=(useday/year)*100%>%" aria-valuenow="<%=useday %>"
+											aria-valuemin="0" aria-valuemax="<%=year%>"></div>
+											</div>
+											<p>
+												<span><%=diffDays%>일 남았습니다.</span> <span><%=useDays %>일 사용</span>
+											</p>
+										</div>
+									</div>
+									
+								</td>
+								<td><%=closedate%></td>
+								<td>
+								<input type="button" class="btn" style="background-color: #B0BCC2; color: white;" value="사용완료" 
+								onclick="location.href='./completeUse.ud?openNum=<%=udto.getOpenNum()%>'"></td>
+							</tr>
+							
+							<%}
+								}%>
+							</form>
+						</table>
+						 
 
 					</div>
 				</div>
 			</div>
 			<div class="col-2"></div>
 		</div>
-
-
-
 	</div>
 	<!-- Page Add Section Begin -->
 	<section class="page-add"></section>
 	<!-- Page Add Section End -->
 
 	<!-- container 끝 -->
-
 
 	<!-- footer 시작 -->
 	<jsp:include page="../footer/footer.jsp" />

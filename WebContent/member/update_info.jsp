@@ -30,7 +30,10 @@
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./goods_board/style/review_user_list.css">
 
+<!-- JQuery -->
+<script src="./js/jquery-3.6.0.js"></script>
 
+	
 </head>
 <script type="text/javascript">
 	function func1() {
@@ -78,8 +81,44 @@
 			document.pw.newpw2.focus();
 			return false;
 		}
-
+		
+		
+		
 	}
+	
+	$(document).ready(function(){
+		
+		var ck1=false;			//id
+		var ck2=false;			//pw
+		var ck3=false;			//pw1
+		var ck4=false;			//name
+		var ck5=false;			//phone
+		var ck6=false;			//address2
+		var ck7=false;			//address3	
+	
+	 
+	$("#newpw2").keyup(function(){
+		
+		 var userPass = $("#userPass").val();
+		var newpw2 = $("#newpw2").val();
+		var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/.test(userPass);
+		
+		if(check){
+			 	$('#pwck_msg2').text("사용 가능한 비밀번호입니다");     
+				$('#pwck_msg2').css("color","green");
+				$('#pwck_msg2').css("padding-left","1rem");
+				ck2 = true;
+		 }else{
+			 	$('#pwck_msg2').text("대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");     
+				$('#pwck_msg2').css("color","red"); 
+			 	$('#pwck_msg2').css("padding-left","1rem");
+			 	ck2 = false;
+		 }
+		 
+		 });
+	
+	});
+	
 </script>
 <body>
 	<!-- header 시작 -->
@@ -214,17 +253,24 @@
 												<tr>
 													<th>현재비밀번호</th>
 													<th><input type="password" name="userPass"
-														id="userPass" class="form-control"></th>
+														id="userPass" class="form-control" onkeyup="ckfunc();"></th>
+													<td></td>
 												</tr>
+												<tr><td colspan="2"></td></tr>
 												<tr>
 													<th>새 비밀번호</th>
 													<th><input type="password" name="newpw1" id="newpw1"
 														class="form-control"></th>
+													<td></td>
 												</tr>
 												<tr>
 													<th>새 비밀번호 확인</th>
 													<th><input type="password" name="newpw2" id="newpw2"
 														class="form-control"></th>
+													
+												</tr>
+												<tr>
+												<td colspan="2"><b id="pwck_msg2"></b></td>
 												</tr>
 												<tr>
 													<td colspan="2"><input type="submit"

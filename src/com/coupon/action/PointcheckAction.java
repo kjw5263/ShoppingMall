@@ -49,7 +49,6 @@ public class PointcheckAction implements Action{
 		today.add(Calendar.MONTH, -searchmonth);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String searchmonth2 = dateFormat.format(today.getTime());
-		System.out.println(searchmonth2  + "애드 후 투데이...후에...데이터 포맷");
 		
 		
 		CouponDAO cdao2 = new CouponDAO();
