@@ -37,11 +37,12 @@
 	<!-- header 끝 -->
 <%	
 
-String id =  (String)request.getParameter("userId");
+String userId = (String)session.getAttribute("userId");
 // 전달정보 저장 - 액션태그 (자바빈)- num,pass
 NoticeDAO noti = new NoticeDAO();
-int check1 = noti.deleteCheckNotice(id);
+int check1 = noti.deleteCheckNotice(userId);
 
+System.out.println("userId = "+userId);
 
  if(check1 == 1){
  	

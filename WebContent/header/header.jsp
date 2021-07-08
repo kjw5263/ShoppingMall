@@ -59,7 +59,7 @@
         		 if(session.getAttribute("userId") == null){
         		%>
                 <div class="user-access">
-                    <a href="./MemberJoin.me">Register</a>
+                    <a href="./emailJoin.me">Register</a>
                     <a href="./MemberLogin.me" class="in">Sign in</a>
                 </div>
                 <%}else{%>
