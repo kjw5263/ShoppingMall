@@ -44,7 +44,8 @@ public class noticeinsert {
 						+ "'"+noti.getNoticeContent().replace("\n", "<br>").replace("\r", "<br>")+ "'"
 						+",'"+noti.getNoticeFile()
 						+"',"+
-						noti.getNoticeType()+",'"+noti.getNoticeRealFileName() +"')";
+						noti.getNoticeType()+",'"+noti.getNoticeRealFileName() +"' ,'"
+								+noti.getNoticeImg()+"','" +noti.getNoticeRealImgName()+ "')";
 				System.out.println("급한sql = " +sql);
 				conn = getConnection();
 				
