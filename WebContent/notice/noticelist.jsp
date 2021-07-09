@@ -37,12 +37,17 @@
 	<script src="./js/chatbot.js" type="text/javascript"></script>
     <style type="text/css">
 table {
-    width: 80%;
-    margin-left : 5%;
+   
+     margin-right :5%;
+     
+         margin-left : 5%;
+   
+    
     border-top: 1px solid #444444;
     border-collapse: collapse;
   }
   th, td {
+  width: 400px;
     border-bottom: 1px solid #444444;
     padding: 10px;
     text-align: center;
@@ -104,21 +109,17 @@ table {
 	<% } %>
 	<br>
 	<br>
+	<div>
+    <div style="margin-right:30%">
 	<table   class="table table-striped">
 		<tr class="table-active">
-			<th> </th>
-			<th>제목</th>
-			
-
+			<th style ="width:30%"> </th>
+			<th style ="width:70%">제목</th>
 		</tr>
-
 		<%
-		
 			for (int i = 0; i < topnoticeList.size(); i++) {
 				
-				noticeDTO notid = (noticeDTO) topnoticeList.get(i);
-				
-				
+				noticeDTO notid = (noticeDTO) topnoticeList.get(i);	
 		%>
 		<tr>
 			<td>공지</td>
@@ -126,21 +127,14 @@ table {
 			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
 					<%=notid.getNoticeTitle()%></a>
 			</td>
-			
-
 			<%
-			
-			
 			%>
 		</tr>
 		<%
 			}
-		
 			for (int i = 0; i < noticeList.size(); i++) {
 				
-				noticeDTO notid = (noticeDTO) noticeList.get(i);
-				
-				
+				noticeDTO notid = (noticeDTO) noticeList.get(i);	
 		%>
 		<tr>
 			<td>이벤트</td>
@@ -150,14 +144,15 @@ table {
 			</td>
 
 			<%
-			
-			
+
 			%>
 		</tr>
 		<%
 			}
 		%>
 	</table>
+	     </div>
+</div>
 	<hr>
 	<%
     //////////////////////////////////////////////////////
