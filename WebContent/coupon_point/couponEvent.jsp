@@ -99,14 +99,14 @@ $(document).ready(function () {
 	
 	$(".cpButton").click(function(){
 		var cpNum =  $(this).val();
-		alert(cpNum);
+		//alert(cpNum);
 
 		$.ajax({
 			url : './couponDown.cp',
 			type : 'post',
 			data : {"couponNum" : cpNum, "userId" :id},
 			success : function(data) {
-				alert(data);
+				//alert(data);
 				if (data == 1) {
 					alert("쿠폰이 발급되었습니다!");
 				}else if(data == 2) {
