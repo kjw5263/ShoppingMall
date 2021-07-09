@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -110,19 +112,14 @@
 							</span>
 						</label>
 					
-					
 					 </c:forEach>
 					 
-					 
-					 
-				
 				</div>
 				
 				<c:if test="${userId eq 'admin' }">
 				<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./QueRevise.que?Qnum=${i.qnum}'"> 수정 </button>
 				 <button type="button" class="btn btn-danger btn-sm" onclick="location.href='./QueDelete.que?Qnum=${i.qnum}'">삭제</button>
 				</c:if>
-				
 				
 				<hr>
 				
@@ -139,62 +136,41 @@
 				<div class="col-2">
 				
 				
-				<!-- 다음으로 버튼 시작 -->
-					
-				<%
+				<c:if test="${empty pageNum }">
+					<c:set var="pageNum" value="1" />
+				</c:if>		
 				
-				int cnt = (int)request.getAttribute("cnt");
-
+				<c:if test="${cnt != 0}">
 				
-				int pageSize = 5;
-				
-				String pageNum = request.getParameter("pageNum");
-				
-				if(pageNum == null){
-					pageNum = "1";
-				}
-				
-				// 페이지별 시작 행 계산하기
-				// 1p -> 1번 글부터, 2p -> 11번 글부터 3p -> 21번 글 부터 ... -> 일반화
-				int currentPage = Integer.parseInt(pageNum);
-				///////////////////////////////////////////////////
-				// 페이징 처리 - 하단부 링크
-				if(cnt != 0){
-					// 글이 있을 때 표시
-					// 전체 페이지 수 계산
-					// ex) 50개 -> 한 페이지당 10개씩 출력, 필요한 페이지 개수 = 5개
-					//     57개 -> 필요한 페이지 개수 = 6개
+					<c:set var="pageCount" value="${cnt/pageSize+(cnt % pageSize == 0? 0:1)}"/>
 					
-					int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
+					<c:set var="pageBlock" value="3"/>
 					
-					// 한 화면에 보여줄 페이지 번호의 개수 (페이지 블록)
-					int pageBlock = 3;
+					<fmt:parseNumber var= "startPage" integerOnly= "true" value="${((currentPage-1)/2) * 2 + 1}" />
 					
-					// 페이지 블록의 시작페이지 번호
-					// ex) 1~5페이지 : 1~10 페이지 : 1, 11~20페이지 : 11
-					int startPage = ((currentPage-1)/pageBlock) * pageBlock +1;
-					
-					// 페이지 블록의 끝 페이지 번호
-					int endPage = startPage+pageBlock-1;
+					<c:set var="endPage" value="${startPage + pageBlock-1 }"/>
 					
 					
-					%>
-					    
-					    <%if(currentPage < endPage){ %>
-					    <form action="./Question.que?pageNum=<%=currentPage + 1%>" method="post" >
-					    	<input class="login100-form-btn" type="submit" value="다음으로" id="submit" onclick="return check()" style='cursor:pointer;'> 
-					    </form>
-					    
-					     <%}else{ %>
-						<form action="./QuestionConfirm.que" method="post">
-					    	<input class="login100-form-btn" type="submit" value="제출하기" id="submit" onclick="return check()" style='cursor:pointer;'> 
-					    	<input type="hidden" value="" name="sum" id="sum">
-					    </form>					     
-					     
-					     <%} %>
-					    <%
-				}
-			%>
+						<c:if test="${currentPage < pageCount}">
+						
+							<form action="./Question.que?pageNum=${currentPage + 1}" method="post" >
+					    		<input class="login100-form-btn" type="submit" value="다음으로" id="submit" onclick="return check()" style='cursor:pointer;'> 
+					    	</form>
+							
+						</c:if>
+						
+						<c:if test="${currentPage == pageCount}">
+						
+							<form action="./QuestionConfirm.que" method="post">
+						    	<input class="login100-form-btn" type="submit" value="제출하기" id="submit" onclick="return check()" style='cursor:pointer;'> 
+						    	<input type="hidden" value="" name="sum" id="sum">
+						    </form>	
+						
+						</c:if>
+						
+					
+				</c:if>
+					
 				</div>
 				<div class="col-5"></div>
 			</div>
@@ -231,7 +207,7 @@
     		var radio_num = document.all.radio.length;
     		var chk_i = 0;
     		
-    		if(<%=currentPage%> == 1){
+    		if(${currentPage} == 1){
         		var sum = 0;
 
 			}else {
@@ -253,14 +229,10 @@
            	 	sum2 = Number(value) + sum2;
             	
             	sessionStorage.setItem("sum", sum + sum2 );
-            	
            	 }
             }
-    		
-
         	
         	$('#sum').val(sessionStorage.getItem("sum"));
-    		
     		
     		// 유효성 시작
     		for(var i = 0; i<radio_num; i++){
