@@ -268,8 +268,75 @@ public class CouponDAO {
 		
 	}//couponNumList()
 	
-	//insertCoupon(userId, mcCouponNum): 발급된 쿠폰번호를 my_coupon에 insert
-    public void insertCoupon(String userId, int mcCouponNum){
+	//couponCheck(userId, couponNum)
+	
+	public int couponCheck(String userId, int couponNum){
+		
+		//쿠폰 보유 체크
+		int result = 0;   
+		
+		//  1 = 쿠폰이 발급되었습니다!
+		//  2 = 이미 발급 받은 쿠폰입니다!
+		//  3 = 발급 조건에 맞지않습니다!
+
+		int num = 0;
+		
+		try {
+			
+			conn = getConnection();
+			
+			sql = "select mcCouponNum from my_coupon where mcCouponNum=? and mcUserId=?";		
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couponNum);
+			pstmt.setString(2, userId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+					result= 2;		//이미 발급받은 쿠폰.(다운x)
+			
+			}else{
+				
+				if(couponNum == 5){
+						//첫구매 쿠폰 클릭 했으나, 구매금액이 0원이 아닌 회원 (다운X)
+					sql = "select userId from user_info where userTotal='0' and userId=?";
+					pstmt = conn.prepareStatement(sql);
+						
+					pstmt.setString(1, userId);
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()){
+						
+						insertCoupon(userId, couponNum);
+						
+						result=1;
+			       		   		
+					}else{
+						result=3;// 발급조건에 맞지않음!
+					}
+				
+				}else{//5번이 아닐경우 (구매금액 0원이 아니면서 쿠폰 x 회원들)
+						insertCoupon(userId,couponNum);
+						
+						result=1;
+				}
+		} // else 끝	
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		} 
+	
+			return result;
+	}
+	//couponCheck(userId, couponNum)
+	
+	//insertCoupon(userId, couponNum): 발급된 쿠폰번호를 my_coupon에 insert
+    public void insertCoupon(String userId, int couponNum){
        
        int num=0;
        
@@ -289,20 +356,19 @@ public class CouponDAO {
        		pstmt = conn.prepareStatement(sql);
        		
        		pstmt.setInt(1, num);
-       		pstmt.setInt(2, mcCouponNum);
+       		pstmt.setInt(2, couponNum);
        		pstmt.setString(3, userId);
           
        		pstmt.executeUpdate(); //insert, update, delete => int 형이라서 rs로 받을수 없음.
        
-       		System.out.println("쿠폰 다운 완료: "+num+","+mcCouponNum+","+userId);
+       		System.out.println("쿠폰 다운 완료: "+num+","+couponNum+","+userId);
        } catch (SQLException e) {            
           e.printStackTrace();   
        }finally{
           closeDB();
        }
-
     }
-    //insertCoupon(userId, mcCouponNum)
+    //insertCoupon(userId, couponNum)
 
 }
 

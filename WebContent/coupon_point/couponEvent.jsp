@@ -101,18 +101,19 @@ $(document).ready(function () {
 	$(".cpButton").click(function(){
 		var cpNum =  $(this).val();
 		alert(cpNum);
+
 		$.ajax({
 			url : './couponDown.cp',
 			type : 'get',
 			data : {"couponNum" : cpNum, "userId" :id},
 			success : function(data) {
 			
-				if (data > 0) {
-					alert("쿠폰 발급 대상이 아닙니다.");
-				}else {
-					alert("받아땅");
+				if (data == 1) {
+					alert("쿠폰이 발급되었습니다!");
+				}else (data == 2) {
+					alert("이미 발급 받은 쿠폰입니다!");
 			 	}
-				
+					alert("발급 조건에 맞지 않습니다!");
 			},
 				error : function() {
 			}
