@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.notice.db.DBconnection;
 import com.var.list.varlist;
 
 import javax.naming.Context;

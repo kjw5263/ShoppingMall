@@ -29,21 +29,7 @@ public class listDAO extends DBconnection{
 	
 	DBconnection con = new DBconnection();
 	setGoodsTool setTool = new setGoodsTool();
-	public void closeDB() {
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	public List getGoodsList() {
 		List goodsList = new ArrayList();
 		try {
@@ -366,6 +352,41 @@ public class listDAO extends DBconnection{
 	        testList.toArray(arr);
 			return arr;
 		}
-	
+		protected Connection getConnection() {
+			try {
+				// Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
+				Context initCTX = new InitialContext();
+				// DB연동 정보를 불러오기(context.xml)
+				
+				DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/"+ databasename);
+
+				conn = ds.getConnection();
+
+				System.out.println(" 드라이버 로드, 디비연결 성공! ");
+				System.out.println(conn);
+
+			} catch (NamingException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			setConn(conn);
+			return conn;
+		}
+		public void closeDB() {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 }
