@@ -58,7 +58,7 @@
 				<div style="padding-left:4%;">
 					<div><h2>주문이 완료되었습니다.</h2></div>
 					<div><h4 style="color:#555555; padding-top:4px;">이용해주셔서 감사합니다.</h4></div>
-					<div><h6 style="color:#a3a3a3; padding-top:6px;">주문 상세내역은 마이페이지&gt<a href="./Orderdetail.or">주문조회</a> 에서 확인하실 수 있습니다.</h6></div>
+					<div><h6 style="color:#a3a3a3; padding-top:6px;">주문 상세내역은 마이페이지&gt<a href="./Orderdetail.or?tradeNum=${orderList[0].o_tradeNum }">주문조회</a> 에서 확인하실 수 있습니다.</h6></div>
 				</div>
 			</div>
 			<div class="col-3">

@@ -76,13 +76,12 @@ public class BasketDAO {
 			// 기존의 추가된 상품이 있는지 체크 => 상품이 있을 때 1리턴 + 상품의 수량만 update
 			//						 => 상품이 없을 때 0리턴
 			sql = "select * from basket_list where basketCosNum=? and "
-					+ "basketCosAmount=? and "
 					+ "basketUserId=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, bkDTO.getBasketCosNum());
-			pstmt.setInt(2, bkDTO.getBasketCosAmount());
-			pstmt.setString(3, bkDTO.getBasketUserId());
+			//pstmt.setInt(2, bkDTO.getBasketCosAmount());
+			pstmt.setString(2, bkDTO.getBasketUserId());
 			
 			rs = pstmt.executeQuery();
 			

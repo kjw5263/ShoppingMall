@@ -54,19 +54,25 @@
     <script src="./js/chatbot.js" type="text/javascript"></script>
     <title>상세페이지</title>
     <script type="text/javascript">
-        function isBasket() {
-            //alert("장바구니 동작");
-            if (document.gfr.cosAmount.value == "") {
-                alert(" 구매 수량을 입력하세요. ");
-                document.gfr.cosAmount.focus();
-                return;
-            }
-            var result = confirm("장바구니에 저장 하시겠습니까?");
+        function isBasket(num) {
+        	if(num==1){
+        		//alert("장바구니 동작");
+                if (document.gfr.cosAmount.value == "") {
+                    alert(" 구매 수량을 입력하세요. ");
+                    document.gfr.cosAmount.focus();
+                    return;
+                }
+                var result = confirm("장바구니에 저장 하시겠습니까?");
 
-            if(result){
-                document.gfr.action = "./BasketAdd.ba";
+                if(result){
+                    document.gfr.action = "./BasketAdd.ba";
+                    document.gfr.submit();
+                }
+        	} else {
+        		document.gfr.action = "./BasketAdd.ba";
                 document.gfr.submit();
-            }
+        	}
+            
         }
     </script>
 
@@ -278,8 +284,8 @@
                                 <input type="number" name="cosAmount" value="1">
                             </div>
                         </div>
-                        <a href="javascript:isBasket();" class="primary-btn pc-btn">장바구니</a>
-                        <a href="" class="primary-btn pc-btn"> 구매 </a>
+                        <a href="javascript:isBasket(1);" class="primary-btn pc-btn">장바구니</a>
+                        <a href="javascript:isBasket(2);" class="primary-btn pc-btn"> 구매 </a>
 
                     </div>
                 </div>
