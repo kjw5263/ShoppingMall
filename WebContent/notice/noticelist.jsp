@@ -14,59 +14,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Yoga Studio Template">
-    <meta name="keywords" content="Yoga, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Violet | Template</title>
+<meta charset="UTF-8">
+<meta name="description" content="Yoga Studio Template">
+<meta name="keywords" content="Yoga, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Violet | Template</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
-	<script src="./js/chatbot.js" type="text/javascript"></script>
-    <style type="text/css">
+<!-- Css Styles -->
+<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="./css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="./css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="./css/style.css" type="text/css">
+<script src="./js/chatbot.js" type="text/javascript"></script>
+<style type="text/css">
 table {
-   
-     margin-right :5%;
-     
-         margin-left : 5%;
-   
-    
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-  }
-  th, td {
-  width: 400px;
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-    text-align: center;
-  }
-   th {
-   
- 
-  }
- 
+	margin-right: 5%;
+	margin-left: 19%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	width: 400px;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: center;
+}
+
+th {
+	
+}
 </style>
 </head>
 
 <body>
 
-  <!-- header 시작 -->
- 		<jsp:include page="../header/header.jsp" />
+	<!-- header 시작 -->
+	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
-  
-  
+
+
 
 
 	<%
@@ -101,60 +100,60 @@ table {
 	
 	%>
 	<br>
-	
+
 	<%if(userId.equals("admin")){ %>
-	
-	<button class="btn btn-primary" onclick="location.href='./noticewrite.nos'">글쓰기</button>
-	
+
+	<button style="float: right; margin-right: 15%" class="btn btn-primary"
+		onclick="location.href='./noticewrite.nos'">글쓰기</button>
+
 	<% } %>
 	<br>
 	<br>
 	<div>
-    <div style="margin-right:30%">
-	<table   class="table table-striped">
-		<tr class="table-active">
-			<th style ="width:30%"> </th>
-			<th style ="width:70%">제목</th>
-		</tr>
-		<%
+		<div style="margin-right: 28%">
+			<table class="table table-striped">
+				<tr class="table-active">
+					<th style="width: 30%"></th>
+					<th style="width: 70%">제목</th>
+				</tr>
+				<%
 			for (int i = 0; i < topnoticeList.size(); i++) {
 				
 				noticeDTO notid = (noticeDTO) topnoticeList.get(i);	
 		%>
-		<tr>
-			<td>공지</td>
-			<td>
-			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
-					<%=notid.getNoticeTitle()%></a>
-			</td>
-			<%
+				<tr>
+					<td>공지</td>
+					<td><a
+						href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
+							<%=notid.getNoticeTitle()%></a></td>
+					<%
 			%>
-		</tr>
-		<%
+				</tr>
+				<%
 			}
 			for (int i = 0; i < noticeList.size(); i++) {
 				
 				noticeDTO notid = (noticeDTO) noticeList.get(i);	
 		%>
-		<tr>
-			<td>이벤트</td>
-			<td>
-			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
-					<%=notid.getNoticeTitle()%></a>
-			</td>
+				<tr>
+					<td>이벤트</td>
+					<td><a
+						href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
+							<%=notid.getNoticeTitle()%></a></td>
 
-			<%
+					<%
 
 			%>
-		</tr>
-		<%
+				</tr>
+				<%
 			}
 		%>
-	</table>
-	     </div>
-</div>
+			</table>
+		</div>
+	</div>
 	<hr>
-	<%
+	<div style="float: right; margin-right: 50%;">
+		<%
     //////////////////////////////////////////////////////
     // 페이징 처리 - 하단부 페이지 링크
     if(cnt != 0){// 글이있을때 표시
@@ -181,31 +180,39 @@ table {
     	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
     	if(startPage >= pageBlock){
     		%>
-	<a href="./notice.nos?pageNum=<%=startPage-pageBlock%>">[이전]</a>
-	<%
-    	}   	
-    	
-    	// 숫자  1....5
+		<a href="./notice.nos?pageNum=<%=startPage-pageBlock%>"> <span
+			class="badge bg-secondary"> <font size=3em color="white">[이전]
+			</font></span></a>
+		<%
+    	}  
     	for(int i=startPage;i<=endPage;i++){
     		%>
-	<a href="./notice.nos?pageNum=<%=i%>">[<%=i %>]
-	</a>
-	<%    		
+
+		<a href="./notice.nos?pageNum=<%=i%>"> <span
+			class="badge bg-secondary"> <font size=3em color="white">[<%=i %>]
+			</font></span></a>
+		<%  
     	}
-    	
-    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
+
     	if(endPage < pageCount){
     		%>
-	<a href="./notice.nos?pageNum=<%=startPage+pageBlock%>">[다음]</a>
-	<%
+		<a href="./notice.nos?pageNum=<%=startPage+pageBlock%>"> <span
+			class="badge bg-secondary"> <font size=3em color="white">[다음]
+			</font></span></a>
+		<%
     	}
     }
-    //////////////////////////////////////////////////////
+  
   %>
-	 <!-- footer 시작 -->
-   		<jsp:include page="../footer/footer.jsp" />
-    <!-- footer 끝 -->
-    
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- footer 시작 -->
+	<jsp:include page="../footer/footer.jsp" />
+	<!-- footer 끝 -->
+
 
 </body>
 </html>
