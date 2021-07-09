@@ -355,6 +355,8 @@ public class OrderDAO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				closeDB();
 			}
 			
 			return totalList;

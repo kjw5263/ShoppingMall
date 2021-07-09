@@ -201,7 +201,9 @@ public class BasketDAO {
 					// 상품 리스트 한칸에 저장
 					goodsList.add(gdto);
 				}
-				
+				rs2.close();
+				pstmt2.close();
+
 			}// while
 			
 			totalList.add(basketList);

@@ -27,7 +27,7 @@ public class CouponEventAction implements Action{
 			CouponDAO cdao = new CouponDAO();
 		
 			List couponNumList = cdao.couponNumList();
-			request.setAttribute("aaaa", couponNumList);
+			request.setAttribute("couponList", couponNumList);
 			
 			System.out.println("==============CouponEventAction================================");
 			System.out.println(couponNumList);

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -103,6 +102,8 @@ public class CouponDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeDB();
 		}
 
 		return couponList;
@@ -303,7 +304,5 @@ public class CouponDAO {
     }
     //insertCoupon(userId, mcCouponNum)
 
-    
-    
-
 }
+

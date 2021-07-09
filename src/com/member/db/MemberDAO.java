@@ -695,6 +695,8 @@ public class MemberDAO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				closeDB();
 			}
 
 			return couponList;
@@ -936,7 +938,6 @@ public class MemberDAO {
 		      } finally{
 		         closeDB();
 		      }
-		   
 		   
 		   return result;
 		}

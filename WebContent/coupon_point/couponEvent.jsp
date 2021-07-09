@@ -70,10 +70,8 @@
 
 <script type="text/javascript">
 /* java->jstl->html->js */
- 
- alert("페이지 시작");
- var id = "<c:out value='${sessionScope.userId}'/>";
-	alert(id);
+
+var id = "<c:out value='${sessionScope.userId}'/>";
 
 
 $(document).ready(function () {
@@ -86,8 +84,6 @@ $(document).ready(function () {
 			location.href="./MemberLogin.me";
 		}else{
 			$("#myModal").show();
-			
-			
 		}
 
 	});
@@ -95,28 +91,26 @@ $(document).ready(function () {
 	$("#modalExit").click(function(){
 		
 		$("#myModal").hide();
-		
 	});
 	
 	$("#modalExit2").click(function(){
 		
 		$("#myModal").hide();
-		
 	});
 	
 	$(".cpButton").click(function(){
 		var cpNum =  $(this).val();
-		
+		alert(cpNum);
 		$.ajax({
 			url : './couponDown.cp',
-			type : 'post',
+			type : 'get',
 			data : {"couponNum" : cpNum, "userId" :id},
 			success : function(data) {
 			
 				if (data > 0) {
 					alert("쿠폰 발급 대상이 아닙니다.");
 				}else {
-					
+					alert("받아땅");
 			 	}
 				
 			},
@@ -129,8 +123,6 @@ $(document).ready(function () {
 	
 });
 
-
-alert("페이지 끝");
 
 
 </script>
@@ -153,7 +145,6 @@ alert("페이지 끝");
 		<div class="row">
 			<div class="col-2" style="background-color: #610B5E;"></div>
 			<div class="col-8" align="center">
-                <%=request.getAttribute("aaaa") %>
 				<button class="btn btn-secondary" id="cp1">
 					쿠폰 다운받기   
 				</button>

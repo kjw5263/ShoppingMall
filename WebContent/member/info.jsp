@@ -179,64 +179,84 @@
 							</div>
 							<br>
 							
-							<ul class="mypage-step-1" style="text-decoration: none;">
-								<li>
-									<div>
-										<div class="contents1">결제완료</div>
-										<div class="contents2">
-											<b></b>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div class="contents1">상품준비</div>
-										<div class="contents2">
-											<b></b>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div class="contents1">준비완료</div>
-										<div class="contents2">
-											<b></b>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div class="contents1">배송준비</div>
-										<div class="contents2">
-											<b></b>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div class="contents1">배송중</div>
-										<div class="contents2">
-											<b></b>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div class="contents1">배송완료</div>
-										<div class="contents2">
-											<b></b>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div>
-										<div class="contents1">주문취소</div>
-										<div class="contents2">
-											<b></b>
-										</div>
-									</div>
-								</li>
-							</ul>
+							<c:set var="odc1" value="0"/>
+						<c:set var="odc2" value="0"/>
+						<c:set var="odc3" value="0"/>
+						<c:set var="odc4" value="0"/>
+						<c:set var="odc5" value="0"/>
+						<c:set var="odc6" value="0"/>
+						<c:set var="odc7" value="0"/>
+							
+						
+						<c:forEach var="odto" items="${orderList}" begin="0" end="${fn:length(orderList)}">
+							<c:choose>
+								<c:when test="${odto.orderStatus == '결제완료' }">
+									<c:set var="odc1" value="${odc1 +1 }"/>
+								</c:when>
+								<c:when test="${odto.orderStatus == '상품준비' }">
+									<c:set var="odc2" value="${odc2 +1 }"/>
+								</c:when>
+								<c:when test="${odto.orderStatus == '상품준비완료' }">
+									<c:set var="odc3" value="${odc3 +1 }"/>
+								</c:when>
+								<c:when test="${odto.orderStatus == '배송준비' }">
+									<c:set var="odc4" value="${odc4 +1 }"/>
+								</c:when>
+								<c:when test="${odto.orderStatus == '배송중' }">
+									<c:set var="odc5" value="${odc5 +1 }"/>
+								</c:when>
+								<c:when test="${odto.orderStatus == '배송완료' }">
+									<c:set var="odc6" value="${odc6 +1 }"/>
+								</c:when>
+								<c:when test="${odto.orderStatus == '주문취소' }">
+									<c:set var="odc7" value="${odc7 +1 }"/>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<ul class="mypage-step-1" style="text-decoration: none;" id="mypage-step-1">
+							<li>
+								<div>
+									<div class="contents1">결제완료</div>
+									<div class="contents2"><b id="odcor1">${odc1}</b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">상품준비</div>
+									<div class="contents2"><b id="odcor2">${odc2}</b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">준비완료</div>
+									<div class="contents2"><b id="odcor3">${odc3}</b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">배송준비</div>
+									<div class="contents2"><b id="odcor4">${odc4}</b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">배송중</div>
+									<div class="contents2"><b id="odcor5">${odc5}</b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">배송완료</div>
+									<div class="contents2"><b id="odcor6">${odc6}</b></div>
+								</div>
+							</li>
+							<li>
+								<div>
+									<div class="contents1">주문취소</div>
+									<div class="contents2"><b id="odcor7">${odc7}</b></div>
+								</div>
+							</li>
+						</ul>
 
 
 
