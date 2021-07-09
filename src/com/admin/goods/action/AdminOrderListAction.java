@@ -14,7 +14,6 @@ public class AdminOrderListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("M : AdminCouponsAddAction_execute() 호출");
 
-		// 세션제어 (세션+관리자)
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
 
@@ -25,17 +24,28 @@ public class AdminOrderListAction implements Action {
 			return forward;
 		}
 		
-		// DAO 객체 생성 -> 주문 내역 전부 가져오기
-		AdminGoodsDAO dao = new AdminGoodsDAO();
-		List orderList = dao.getAdminOrderList();
+		int pageSize = 10;
+
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null){pageNum = "1";}
 		
-		// list 정보를 저장(request 영역)
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage-1)*pageSize+1;
+		int endRow = currentPage*pageSize;
+		
+		AdminGoodsDAO agdao = new AdminGoodsDAO();
+		List orderList = agdao.getOrderList(startRow,pageSize);
 		request.setAttribute("orderList", orderList);
 		
-		// 페이지 이동(forward- ./member/list.jsp)
+		int cnt = agdao.getOrderCount();
+		request.setAttribute("cnt", cnt);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("startRow", startRow);
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("currentPage", currentPage);		
+		
 		forward.setPath("./admingoods/admin_order_list.jsp");
 		forward.setRedirect(false);
-
 		return forward;		
 
 	}

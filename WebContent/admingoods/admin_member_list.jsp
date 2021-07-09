@@ -2,9 +2,12 @@
 <%@page import="com.admin.goods.db.AdminGoodsDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,34 +64,6 @@
 		<div class="col-12 text-center">
 			
     <!-- admin member list Begin -->
-
-   	<%
-   	List memberList = (List)request.getAttribute("memberList"); 
-	// AdminGoodsDAO 객체 생성
-	AdminGoodsDAO adao = new AdminGoodsDAO();
-	
-	// 디비에 글의 수를 계산하는 메서드 생성 -> 호출
-	int cnt = adao.getGoodsCount();
-
-	// 한페이지당 보여줄 상품의 개수
-	int pageSize = 10;
-	
-	// 현페이지가 몇페이지인지 확인
-	String pageNum = request.getParameter("pageNum");
-	if(pageNum == null){
-		pageNum = "1";
-	}
-	
-	// 페이지별 시작행 계산하기
-	int currentPage = Integer.parseInt(pageNum);
-	int startRow = (currentPage-1)*pageSize+1;
-	
-	// 끝행 계산하기
-	int endRow = currentPage*pageSize;
-	
-	// 디비에 저장된 모든 글중에서 원하는 만큼만 가져오기(페이지 사이즈)
-	ArrayList<MemberDTO> getMemberList = adao.getMemberList(startRow,pageSize);
-	%>
     
     <section class="admin_member_list">
         <div class="container">
@@ -157,62 +132,47 @@
 			</table>	
         </div>
     </section>
-    
+
 	  <hr>
-    <!-- 페이징 처리 -->
-    <div style="margin-left: 45%;">
-	  <ul class="pagination">
-    
- 	  <%
-	    if(cnt != 0){// 글이있을때 표시
+	  
+						<!--페이징 처리  -->
+						<div style="margin-left: 45%;">
+							<ul class="pagination">
+								<c:if test="${cnt != 0}">
+									
+									<c:set var="pageCount" value="${cnt/pageSize+(cnt % pageSize == 0? 0:1)}"/>
+									<c:set var="pageBlock" value="1"/>
+									<fmt:parseNumber var= "startPage" integerOnly= "true" value="${((currentPage-1)/pageBlock) * pageBlock + 1}" />
+									<c:set var="endPage" value="${startPage + pageBlock-1 }"/>
+									<c:if test="${endPage > pageBlock}">
+										<c:set var="endPage" value="${pageCount}"/>
+									</c:if>
+								
+									
+									<c:if test="${startPage > pageBlock}">
+											<li class="page-item"><a class="page-link"
+											href="./AdminMemberList.ag?pageNum=${startPage-pageBlock}"
+											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+									</c:if>
+	
+									
+										<c:forEach begin="${startPage }" end="${endPage}" var="i">
+											<li class="page-item"><a class="page-link"
+											href="./AdminMemberList.ag?pageNum=${i}" class="btn btn-primary btn">${i}</a></li>
+										</c:forEach>
 
-			int pageCount = cnt/pageSize+(cnt % pageSize == 0? 0:1);
+									
+									<c:if test="${endPage < pageCount }">
+											<li class="page-item"><a class="page-link"
+										href="./AdminMemberList.ag?pageNum=${startPage+pageBlock}" ara-label="Next"> 
+										<span aria-hidden="true">&raquo;</span></a></li>
+									</c:if>
+								</c:if>
+							</ul>
+						</div>
+						<!-- 페이징 처리 -->
 
-			int pageBlock = 2;
-
-	        int startPage = ((currentPage-1)/pageBlock) * pageBlock + 1;
-
-			int endPage = startPage+pageBlock-1;
-			
-			if(endPage > pageCount){
-				endPage = pageCount;
-			}
-	    	
-	    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
-	    	if(startPage > pageBlock){
-	    		%>
-	    		<li class="page-item">
-		    		<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=startPage-pageBlock%>" aria-label="Previous">
-		    		<span aria-hidden="true">&laquo;</span>
-		    		</a>
-		    		</span>
-	    		</li>
-	    		<%
-	    	}   	
-	    	
-	    	// 숫자  1....5
-	    	for(int i=startPage;i<=endPage;i++){
-	    		%>
-	    		<li class="page-item">
-	    			<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=i%>"><%=i %></a>
-	    		</li>
-	    		<%    		
-	    	}
-	    	
-	    	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
-	    	if(endPage < pageCount){
-	    		%>
-	    		<li class="page-item">
-	    			<a class="page-link" href="./AdminMemberList.ag?pageNum=<%=startPage+pageBlock%>" aria-label="Next">
-	    		<span aria-hidden="true">&raquo;</span>
-	    		<%
-	    	}
-	    }
-	  %>
-	  </a></li>
-	  </ul>
-	  </div>
-	  <!-- 페이징 처리 -->
     <!-- admin member list End -->
 			
 		</div>
