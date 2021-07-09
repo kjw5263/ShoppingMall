@@ -46,12 +46,15 @@ public class insertLikeAction implements Action{
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print(" alert('찜하기 완료.'); ");
-			out.print(" history.back() ");
+			out.print(" var result = confirm('좋아요 완료. 좋아요 목록으로 가시겠습니까?'); ");
+			out.print(" if(result){ ");
+			out.print(" location.href='./getLike.li' ");
+			out.print(" }else{ ");
+			out.print(" history.back(); ");
+			out.print(" } ");
 			out.print("</script>");
 
 			out.close();
-			
 		}
 		
 		if(check == -1){

@@ -58,6 +58,12 @@ public class QuestionListAction implements Action {
 		request.setAttribute("cnt", qdao.getListCount());
 		
 		
+		
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("startRow", startRow);
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("currentPage", currentPage);
+		
 		// 페이지 이동
 		ActionForward forward = new ActionForward();
 		forward.setPath("./question/question.jsp");
