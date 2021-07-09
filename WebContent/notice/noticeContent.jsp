@@ -121,7 +121,7 @@ table {
 		
 	%> 
 	<br>
-<button class="btn btn-secondary" onclick="location.href='http://localhost:8088/ShoppingMall/notice.nos'">목록으로</button>	
+<button class="btn btn-secondary" onclick="location.href='./notice.nos'">목록으로</button>	
 <br>
 <table class="table table-striped">
 <tr class="table-active">
@@ -174,8 +174,8 @@ table {
 <br>
 
 <%if(userId.equals("admin")){ %>
-<button class="btn btn-danger" onclick="location.href='http://localhost:8088/ShoppingMall/noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
-<button  class="btn btn-warning" onclick="location.href='http://localhost:8088/ShoppingMall/noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>	
+<button class="btn btn-danger" onclick="location.href='./noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
+<button  class="btn btn-warning" onclick="location.href='./noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>	
 	<% } %>
 	<br>
 	

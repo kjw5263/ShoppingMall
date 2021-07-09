@@ -99,7 +99,7 @@ table {
 	
 	<%if(userId.equals("admin")){ %>
 	
-	<button class="btn btn-primary" onclick="location.href='http://localhost:8090/ShoppingMall/noticewrite.nos'">글쓰기</button>
+	<button class="btn btn-primary" onclick="location.href='./noticewrite.nos'">글쓰기</button>
 	
 	<% } %>
 	<br>
@@ -186,14 +186,14 @@ table {
     	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
     	if(startPage >= pageBlock){
     		%>
-	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage-pageBlock%>">[이전]</a>
+	<a href="./notice.nos?pageNum=<%=startPage-pageBlock%>">[이전]</a>
 	<%
     	}   	
     	
     	// 숫자  1....5
     	for(int i=startPage;i<=endPage;i++){
     		%>
-	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=i%>">[<%=i %>]
+	<a href="./notice.nos?pageNum=<%=i%>">[<%=i %>]
 	</a>
 	<%    		
     	}
@@ -201,7 +201,7 @@ table {
     	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
     	if(endPage < pageCount){
     		%>
-	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage+pageBlock%>">[다음]</a>
+	<a href="./notice.nos?pageNum=<%=startPage+pageBlock%>">[다음]</a>
 	<%
     	}
     }
