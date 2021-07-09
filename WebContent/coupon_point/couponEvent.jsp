@@ -76,7 +76,6 @@ var id = "<c:out value='${sessionScope.userId}'/>";
 
 $(document).ready(function () {
 	
-	
 	$("#cp1").click(function(){
 		
  		if(id==""){
@@ -104,23 +103,22 @@ $(document).ready(function () {
 
 		$.ajax({
 			url : './couponDown.cp',
-			type : 'get',
+			type : 'post',
 			data : {"couponNum" : cpNum, "userId" :id},
 			success : function(data) {
-			
+				alert(data);
 				if (data == 1) {
 					alert("쿠폰이 발급되었습니다!");
-				}else (data == 2) {
+				}else if(data == 2) {
 					alert("이미 발급 받은 쿠폰입니다!");
-			 	}
-					alert("발급 조건에 맞지 않습니다!");
+			 	}else{
+					alert("발급 조건에 맞지 않습니다!");}
 			},
 				error : function() {
-			}
+				}
+			
 		});
 	});
-	
-	
 	
 });
 
