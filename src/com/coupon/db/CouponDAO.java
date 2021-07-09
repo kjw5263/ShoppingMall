@@ -235,6 +235,140 @@ public class CouponDAO {
     
     //pointcheck2(searchmonth1,userId);
     
-    
+	//couponNumList(): 쿠폰 번호 배열에 저장
+	public List couponNumList(){
+		
+		List couponNumList = new ArrayList();
+		
+		try {
+			conn=getConnection();
+			sql="select couponNum from coupon_type";
+			//1:가입축하 10% (회원가입시 자동 발급), 2:생일 20% 할인쿠폰, 3:전회원 10% 할인, 4: 여름맞이 50% 할인, 5: 첫구매 30%
+			pstmt=conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				CouponDTO cdto = new CouponDTO();
+				
+				cdto.setCouponNum(rs.getInt("couponNum"));
+				
+				couponNumList.add(cdto);
+			}
+			
+				System.out.println("쿠폰번호 리스트에 저장완료");
+				System.out.println("쿠폰번호 리스트: "+couponNumList);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return couponNumList;
+		
+	}//couponNumList()
+	
+	//couponCheck(userId, couponNum)
+	
+	public int couponCheck(String userId, int couponNum){
+		
+		//쿠폰 보유 체크
+		int result = 0;   
+		
+		//  1 = 쿠폰이 발급되었습니다!
+		//  2 = 이미 발급 받은 쿠폰입니다!
+		//  3 = 발급 조건에 맞지않습니다!
+
+		int num = 0;
+		
+		try {
+			
+			conn = getConnection();
+			
+			sql = "select mcCouponNum from my_coupon where mcCouponNum=? and mcUserId=?";		
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, couponNum);
+			pstmt.setString(2, userId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+					result= 2;		//이미 발급받은 쿠폰.(다운x)
+			
+			}else{
+				
+				if(couponNum == 5){
+						//첫구매 쿠폰 클릭 했으나, 구매금액이 0원이 아닌 회원 (다운X)
+					sql = "select userId from user_info where userTotal='0' and userId=?";
+					pstmt = conn.prepareStatement(sql);
+						
+					pstmt.setString(1, userId);
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()){
+						
+						insertCoupon(userId, couponNum);
+						
+						result=1;
+			       		   		
+					}else{
+						result=3;// 발급조건에 맞지않음!
+					}
+				
+				}else{//5번이 아닐경우 (구매금액 0원이 아니면서 쿠폰 x 회원들)
+						insertCoupon(userId,couponNum);
+						
+						result=1;
+				}
+		} // else 끝	
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		} 
+	
+			return result;
+	}
+	//couponCheck(userId, couponNum)
+	
+	//insertCoupon(userId, couponNum): 발급된 쿠폰번호를 my_coupon에 insert
+    public void insertCoupon(String userId, int couponNum){
+       
+       int num=0;
+       
+       try {
+	       conn = getConnection();
+	       sql = "select max(mcNum) from my_coupon";
+	       pstmt = conn.prepareStatement(sql);
+	       rs = pstmt.executeQuery();
+
+       if(rs.next()){
+           num = rs.getInt(1)+1;
+       }
+       		System.out.println("회원번호: "+num);
+       
+       		sql = "insert into my_coupon values(?,?,?,1)";
+       
+       		pstmt = conn.prepareStatement(sql);
+       		
+       		pstmt.setInt(1, num);
+       		pstmt.setInt(2, couponNum);
+       		pstmt.setString(3, userId);
+          
+       		pstmt.executeUpdate(); //insert, update, delete => int 형이라서 rs로 받을수 없음.
+       
+       		System.out.println("쿠폰 다운 완료: "+num+","+couponNum+","+userId);
+       } catch (SQLException e) {            
+          e.printStackTrace();   
+       }finally{
+          closeDB();
+       }
+    }
+    //insertCoupon(userId, couponNum)
 
 }
+
