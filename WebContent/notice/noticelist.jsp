@@ -37,12 +37,17 @@
 	<script src="./js/chatbot.js" type="text/javascript"></script>
     <style type="text/css">
 table {
-    width: 80%;
-    margin-left : 5%;
+   
+     margin-right :5%;
+     
+         margin-left : 5%;
+   
+    
     border-top: 1px solid #444444;
     border-collapse: collapse;
   }
   th, td {
+  width: 400px;
     border-bottom: 1px solid #444444;
     padding: 10px;
     text-align: center;
@@ -99,26 +104,22 @@ table {
 	
 	<%if(userId.equals("admin")){ %>
 	
-	<button class="btn btn-primary" onclick="location.href='http://localhost:8090/ShoppingMall/noticewrite.nos'">글쓰기</button>
+	<button class="btn btn-primary" onclick="location.href='./noticewrite.nos'">글쓰기</button>
 	
 	<% } %>
 	<br>
 	<br>
+	<div>
+    <div style="margin-right:30%">
 	<table   class="table table-striped">
 		<tr class="table-active">
-			<th> </th>
-			<th>제목</th>
-			
-
+			<th style ="width:30%"> </th>
+			<th style ="width:70%">제목</th>
 		</tr>
-
 		<%
-		
 			for (int i = 0; i < topnoticeList.size(); i++) {
 				
-				noticeDTO notid = (noticeDTO) topnoticeList.get(i);
-				
-				
+				noticeDTO notid = (noticeDTO) topnoticeList.get(i);	
 		%>
 		<tr>
 			<td>공지</td>
@@ -126,21 +127,14 @@ table {
 			<a href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
 					<%=notid.getNoticeTitle()%></a>
 			</td>
-			
-
 			<%
-			
-			
 			%>
 		</tr>
 		<%
 			}
-		
 			for (int i = 0; i < noticeList.size(); i++) {
 				
-				noticeDTO notid = (noticeDTO) noticeList.get(i);
-				
-				
+				noticeDTO notid = (noticeDTO) noticeList.get(i);	
 		%>
 		<tr>
 			<td>이벤트</td>
@@ -150,14 +144,15 @@ table {
 			</td>
 
 			<%
-			
-			
+
 			%>
 		</tr>
 		<%
 			}
 		%>
 	</table>
+	     </div>
+</div>
 	<hr>
 	<%
     //////////////////////////////////////////////////////
@@ -186,14 +181,14 @@ table {
     	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
     	if(startPage >= pageBlock){
     		%>
-	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage-pageBlock%>">[이전]</a>
+	<a href="./notice.nos?pageNum=<%=startPage-pageBlock%>">[이전]</a>
 	<%
     	}   	
     	
     	// 숫자  1....5
     	for(int i=startPage;i<=endPage;i++){
     		%>
-	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=i%>">[<%=i %>]
+	<a href="./notice.nos?pageNum=<%=i%>">[<%=i %>]
 	</a>
 	<%    		
     	}
@@ -201,7 +196,7 @@ table {
     	// 다음 (기존의 페이지 블럭보다 페이지의 수가 많을때)
     	if(endPage < pageCount){
     		%>
-	<a href="http://localhost:8088/ShoppingMall/notice.nos?pageNum=<%=startPage+pageBlock%>">[다음]</a>
+	<a href="./notice.nos?pageNum=<%=startPage+pageBlock%>">[다음]</a>
 	<%
     	}
     }

@@ -14,9 +14,6 @@ public class AdminMemberListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("M : MemberListAction_execute() 호출");
-
-		// 세션제어 (세션+관리자)
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
 
@@ -26,14 +23,27 @@ public class AdminMemberListAction implements Action {
 			forward.setRedirect(true);
 			return forward;
 		}
-		// DAO 객체 -> 회원 정보 전부 가져오기(list형태)
-		AdminGoodsDAO dao = new AdminGoodsDAO();
-		List memberList = dao.getAdminMemberList();
 		
-		// list 정보를 저장(request영역)
-		request.setAttribute("memberList", memberList);
+		int pageSize = 10;
 
-		// 페이지 이동(forward- ./member/list.jsp)
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null){pageNum = "1";}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage-1)*pageSize+1;
+		int endRow = currentPage*pageSize;
+		
+		AdminGoodsDAO dao = new AdminGoodsDAO();
+		List memberList = dao.getMemberList(startRow,pageSize);
+		request.setAttribute("memberList", memberList);
+		
+		int cnt = dao.getMemberCount();
+		request.setAttribute("cnt", cnt);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("startRow", startRow);
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("currentPage", currentPage);		
+
 		forward.setPath("./admingoods/admin_member_list.jsp");
 		forward.setRedirect(false);
 
