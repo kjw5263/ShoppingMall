@@ -39,20 +39,36 @@
 <script src="./js/chatbot.js" type="text/javascript"></script>
 <link rel="stylesheet" href="goods_board/style/review_user_list.css">
 <script type="text/javascript">
-        function insertPopup(){
-            var test = [];
-            $("input[name=test_check]:checked").each(function (){
-                test.push($(this).val());
-            })
-            if ($("input[name=test_check]:checked").is(":checked") ===true){
-            console.log("체크된 값 total" +test);
-            window.name="./ReviewList.rev"
-            window.open("ReviewUpdateForm.rev?reviewNum="+test, "new",
-                "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=600, height=500, left=0, top=0" );
-            }else {
-                alert("체크해주세요");
-            }
-        }
+	function delete_fun() {
+		var test1 = [];
+		var deleteForm = document.delete_form;
+		$("input[id=check_num]:checked").each(function (){
+			test1.push($(this).val());
+		})
+		if ($("input[id=check_num]:checked").is(":checked") ===true){
+			if (confirm("삭제 하시겠습니까?") === true) {
+				deleteForm.submit();
+			}
+
+		}else {
+			alert("체크해주세요");
+		}
+	}
+
+	function insertPopup(){
+		var test = [];
+		$("input[id=check_num]:checked").each(function (){
+			test.push($(this).val());
+		})
+		if ($("input[id=check_num]:checked").is(":checked") ===true){
+			console.log("체크된 값 total" +test);
+			window.name="./ReviewList.rev"
+			window.open("ReviewUpdateForm.rev?reviewNum="+test, "new",
+					"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=600, height=500, left=0, top=0" );
+		}else {
+			alert("체크해주세요");
+		}
+	}
     </script>
 </head>
 <%
@@ -138,11 +154,11 @@
                     for (int i = 0; i <reviewList.size() ; i++) {
                 %>
 
-					<form action="./ReviewDelete.rev" method="post" id="delete_action">
+					<form action="./ReviewDelete.rev" method="post" name="delete_form">
 
 
                 <ul class="comm1sTabs">
-                    <input type="radio" name="test_check" id="check_num" value="<%= reviewList.get(i).getReviewNum()%>" style="">
+                    <input type="radio" name="reviewNum" id="check_num" value="<%= reviewList.get(i).getReviewNum()%>" style="">
 
                     <li class="mypage_review">
                         <div class="table_list">
@@ -197,17 +213,16 @@
 										</div>
 										<div class="button_view">
 											<div>
-												<input type="hidden" name="reviewNum"
-													value="<%=reviewList.get(i).getReviewNum() %>">
 												<button class="update_btn" type="button"
 													onclick="insertPopup()">수정하기</button>
 
 											</div>
-											<button type="submit" class="delete_btn" id="delete">
-												<span class="btn_img"> <img
-													src="./goods_board/style/img/iconX.png" alt=""></span> <span
-													class="blind">리뷰 삭제</span>
+											<button type="button" class="delete_btn" id="delete" onclick="delete_fun()">
+                                        <span class="btn_img">
+                                            <img src="./goods_board/style/img/iconX.png" alt=""></span>
+												<span class="blind">리뷰 삭제</span>
 											</button>
+
 										</div>
 									</div>
 								</div>
