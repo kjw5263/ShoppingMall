@@ -41,7 +41,7 @@
 <style type="text/css">
 table {
 	margin-right: 5%;
-	margin-left: 19%;
+	margin-left: 29%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 }
@@ -110,11 +110,11 @@ th {
 	<br>
 	<br>
 	<div>
-		<div style="margin-right: 28%">
+		<div style="margin-right: 38%">
 			<table class="table table-striped">
 				<tr class="table-active">
-					<th style="width: 30%"></th>
-					<th style="width: 70%">제목</th>
+					<th style="width: 20%">구분</th>
+					<th style="width: 60%">제목</th>
 				</tr>
 				<%
 			for (int i = 0; i < topnoticeList.size(); i++) {
@@ -122,7 +122,7 @@ th {
 				noticeDTO notid = (noticeDTO) topnoticeList.get(i);	
 		%>
 				<tr>
-					<td>공지</td>
+					<td><font color="red"><b>공지</b></font></td>
 					<td><a
 						href="<%=noticecontentLink %><%=notid.getNoticeNum()%>&pageNum=<%=pageNum%>">
 							<%=notid.getNoticeTitle()%></a></td>
@@ -176,33 +176,51 @@ th {
 		if(endPage > pageCount){
 			endPage = pageCount;
 		}
-    	
-    	// 이전 (해당 페이지블럭의 첫번째 페이지 호출)
-    	if(startPage >= pageBlock){
-    		%>
-		<a href="./notice.nos?pageNum=<%=startPage-pageBlock%>"> <span
-			class="badge bg-secondary"> <font size=3em color="white">[이전]
-			</font></span></a>
-		<%
-    	}  
+		
+		String pre = new String("");
+		String next = new String("");
+		
+		if(startPage >= pageBlock){
+			pre = "./notice.nos?pageNum="+(startPage-pageBlock);
+			next = "./notice.nos?pageNum="+(startPage+pageBlock);
+		}else{
+			pre = "#";
+			next = "#";
+		}
+		
+		
+		
+		%>
+		<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item"><a class="page-link"
+				href="<%=pre%>"
+				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+			</a></li>
+			<%
+    	  
     	for(int i=startPage;i<=endPage;i++){
     		%>
+			<li class="page-item"><a class="page-link"
+				href="./notice.nos?pageNum=<%=i%>"> <%=i %></a></li>
 
-		<a href="./notice.nos?pageNum=<%=i%>"> <span
-			class="badge bg-secondary"> <font size=3em color="white">[<%=i %>]
-			</font></span></a>
-		<%  
+			<%  
     	}
-
+		%>
+			<li class="page-item"><a class="page-link"
+				href="<%=next%>"
+				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			</a></li>
+		</ul>
+		</nav>
+		<%
     	if(endPage < pageCount){
     		%>
-		<a href="./notice.nos?pageNum=<%=startPage+pageBlock%>"> <span
-			class="badge bg-secondary"> <font size=3em color="white">[다음]
-			</font></span></a>
+
 		<%
+    	
     	}
     }
-  
   %>
 	</div>
 	<br>
