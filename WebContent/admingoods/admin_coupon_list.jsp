@@ -115,7 +115,7 @@
 						<td>${i.couponNum }</td>
 						<td>${i.couponName }</td>
 						<td>${i.couponNote }</td>
-						<td>${i.couponDc }</td>
+						<td>${i.couponDc }%</td>
 						<td>
 							<a href="./AdminCouponsModify.ag?couponNum=${i.couponNum }" class="btn btn-primary btn-sm">수정</a>	
 							<a href="./AdminCouponsDelete.ag?couponNum=${i.couponNum }" class="btn btn-danger btn-sm">삭제</a>

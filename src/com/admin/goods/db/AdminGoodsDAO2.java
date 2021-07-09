@@ -19,7 +19,7 @@ import com.goods.db.GoodsDTO;
 import com.member.db.MemberDTO;
 import com.order.db.OrderDTO;
 
-public class AdminGoodsDAO {
+public class AdminGoodsDAO2 {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -118,7 +118,7 @@ public class AdminGoodsDAO {
 	}
 	// insertGoods(gdto)
 	
-	// getGoodsCount()
+	// getBoardCount()
 	public int getGoodsCount(){
 		
 		int cnt = 0;
@@ -141,14 +141,13 @@ public class AdminGoodsDAO {
 		
 		return cnt;
 	}
-	// getGoodsCount()
+	// getBoardCount()
 	
-	// getGoodsList(startRow, pageSize)
+	// getGoodsList()
 	public List getGoodsList(int startRow, int pageSize){
 		
 		List goodsList = new ArrayList();
-		GoodsDTO dto = null;
-		
+
 		try {
 			conn = getConnection();
 			sql = "select * from cos_list order by cosNum desc limit ?,?";
@@ -161,9 +160,7 @@ public class AdminGoodsDAO {
 			rs = pstmt.executeQuery();	
 
 			while(rs.next()){
-				
-				dto = new GoodsDTO();
-
+				GoodsDTO dto = new GoodsDTO();
 				dto.setCosAmount(rs.getInt("cosAmount"));
 				dto.setCosBrand(rs.getString("cosBrand"));
 				dto.setCosCategory(rs.getString("cosCategory"));
@@ -189,7 +186,6 @@ public class AdminGoodsDAO {
 		
 		return goodsList;
 	}
-	// getGoodsList(startRow, pageSize)
 	
 	
 	// getGoods(cosNum)
@@ -230,6 +226,7 @@ public class AdminGoodsDAO {
 		
 		return dto;
 	}
+	
 	// getGoods(cosNum)
 	
 	// modifyGoods(gdto)
@@ -291,48 +288,20 @@ public class AdminGoodsDAO {
 	// 관리자 주문, 회원, 쿠폰 리스트
 	///////////////////////////////////////////////////////////////////
 	
-	// getMemberCount()
-	public int getMemberCount(){
-		
-		int cnt = 0;
-		
-		try {
-			conn = getConnection();
-			sql = "select count(*) from user_info where userId != 'admin'";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()){
-				cnt = rs.getInt(1);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			closeDB();
-		}
-		
-		return cnt;
-		
-	}
-	// getMemberCount()
-
-	// getAdminMemberList(startRow,pageSize)
-	public List getMemberList(int startRow,int pageSize){
+	// getAdminMemberList()
+	public List getAdminMemberList(){
 		
 		List memberList = new ArrayList();
 		
 		try {
+			// 1, 2 디비연결
 			conn = getConnection();
-			sql = "select * from user_info where userId != 'admin' order by userNum desc limit ?,?";
-			
+			// 3 sql 작성 & pstmt 객체 생성
+			sql = "select * from user_info where userId != 'admin'";
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, startRow-1);
-			pstmt.setInt(2, pageSize);
-			
+			//4 sql 실행
 			rs = pstmt.executeQuery();
-
+			//5 데이터 처리
 			while(rs.next()){
 				MemberDTO dto = new MemberDTO();
 				dto.setUserAddr(rs.getString("userAddr"));
@@ -349,6 +318,7 @@ public class AdminGoodsDAO {
 				dto.setUserTotal(rs.getInt("userTotal"));
 				dto.setUserTrouble(rs.getString("userTrouble"));
 				
+				// 리스트 한칸 -> 1명 정보 저장
 				memberList.add(dto);
 			}
 			
@@ -359,7 +329,105 @@ public class AdminGoodsDAO {
 		}
 		return memberList;
 	}
-	// getAdminMemberList(startRow,pageSize)
+	// getAdminMemberList()
+	
+	// getMemberList()
+	public ArrayList getMemberList(){
+
+		ArrayList memberListAll = new ArrayList();
+		
+		MemberDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			sql = "select * from user_info";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				dto = new MemberDTO();
+				
+				dto.setUserAddr(rs.getString("userAddr"));
+				dto.setUserBirth(rs.getString("userBirth"));
+				dto.setUserEmail(rs.getString("userEmail"));
+				dto.setUserGender(rs.getString("userGender"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserLevel(rs.getInt("userLevel"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setUserNum(rs.getInt("userNum"));
+				dto.setUserPoint(rs.getInt("userPoint"));
+				dto.setUserSkinType(rs.getString("userSkinType"));
+				dto.setUserTel(rs.getString("userTel"));
+				dto.setUserTotal(rs.getInt("userTotal"));
+				dto.setUserTrouble(rs.getString("userTrouble"));
+				
+				memberListAll.add(dto);
+				
+			}//while
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return memberListAll;
+		
+	}
+	// getGoodsList()
+	
+	// getGoodsList(startRow,pageSize)
+	public ArrayList<MemberDTO> getMemberList(int startRow,int pageSize){
+
+		ArrayList<MemberDTO> memberList = new ArrayList<MemberDTO>();
+
+		MemberDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			sql = "select * from user_info order by userNum desc limit ?,?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, startRow-1);
+			pstmt.setInt(2, pageSize);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				dto = new MemberDTO();
+				
+				dto.setUserAddr(rs.getString("userAddr"));
+				dto.setUserBirth(rs.getString("userBirth"));
+				dto.setUserEmail(rs.getString("userEmail"));
+				dto.setUserGender(rs.getString("userGender"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserLevel(rs.getInt("userLevel"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setUserNum(rs.getInt("userNum"));
+				dto.setUserPoint(rs.getInt("userPoint"));
+				dto.setUserSkinType(rs.getString("userSkinType"));
+				dto.setUserTel(rs.getString("userTel"));
+				dto.setUserTotal(rs.getInt("userTotal"));
+				dto.setUserTrouble(rs.getString("userTrouble"));
+				
+				memberList.add(dto);
+				
+				
+			}//while
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return memberList;
+		
+	}
+	// getGoodsList(startRow,pageSize)
 	
 	// getAdminCouponList()
 	public List getAdminCouponList(){
@@ -527,24 +595,133 @@ public class AdminGoodsDAO {
 	}
 	// getOrderCount()
 	
-	// getAdminOrderList(startRow, pageSize)
-	public List getOrderList(int startRow,int pageSize){
+	// getAdminOrderList()
+	public List getAdminOrderList(){
 	
 		List orderList = new ArrayList();
 		
 		try {
 			conn = getConnection();
+			sql = "select * from order_board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				OrderDTO dto = new OrderDTO();
+				
+				dto.setAddPoint(rs.getInt("addPoint"));
+				dto.setCpUseAmount(rs.getInt("cpUseAmount"));
+				dto.setO_cosAmount(rs.getInt("o_cosAmount"));
+				dto.setO_cosName(rs.getString("o_cosName"));
+				dto.setO_cosNum(rs.getInt("o_cosNum"));
+				dto.setO_msg(rs.getString("o_msg"));
+				dto.setO_Num(rs.getInt("o_Num"));
+				dto.setO_tradeNum(rs.getString("o_tradeNum"));
+				dto.setO_userId(rs.getString("o_userId"));
+				dto.setOrderDate(rs.getDate("orderDate"));
+				dto.setOrderStatus(rs.getString("orderStatus"));
+				dto.setPayDate(rs.getDate("payDate"));
+				dto.setPayerName(rs.getString("payerName"));
+				dto.setPayMoney(rs.getInt("payMoney"));
+				dto.setPayType(rs.getString("payType"));
+				dto.setPtUseAmount(rs.getInt("ptUseAmount"));
+				dto.setReceiverAddr(rs.getString("receiverAddr"));
+				dto.setReceiverEmail(rs.getString("receiverEmail"));
+				dto.setReceiverName(rs.getString("receiverName"));
+				dto.setReceiverTel(rs.getString("receiverTel"));
+				dto.setSumMoney(rs.getInt("sumMoney"));
+				
+				// 리스트 한칸 -> 1명 정보 저장
+				orderList.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		return orderList;
+	}
+	// getAdminOrderList()
+	
+	// getOrderList();
+	public ArrayList getOrderList(){
+		
+		// 주문 정보를 모두 저장하는 가변길이 배열
+		ArrayList orderListAll = new ArrayList();
+		
+		// 주문 정보 1개를 저장하는 객체
+		OrderDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			sql = "select * from order_board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				dto = new OrderDTO();
+				
+				dto.setAddPoint(rs.getInt("addPoint"));
+				dto.setCpUseAmount(rs.getInt("cpUseAmount"));
+				dto.setO_cosAmount(rs.getInt("o_cosAmount"));
+				dto.setO_cosName(rs.getString("o_cosName"));
+				dto.setO_cosNum(rs.getInt("o_cosNum"));
+				dto.setO_msg(rs.getString("o_msg"));
+				dto.setO_Num(rs.getInt("o_Num"));
+				dto.setO_tradeNum(rs.getString("o_tradeNum"));
+				dto.setO_userId(rs.getString("o_userId"));
+				dto.setOrderDate(rs.getDate("orderDate"));
+				dto.setOrderStatus(rs.getString("orderStatus"));
+				dto.setPayDate(rs.getDate("payDate"));
+				dto.setPayerName(rs.getString("payerName"));
+				dto.setPayMoney(rs.getInt("payMoney"));
+				dto.setPayType(rs.getString("payType"));
+				dto.setPtUseAmount(rs.getInt("ptUseAmount"));
+				dto.setReceiverAddr(rs.getString("receiverAddr"));
+				dto.setReceiverEmail(rs.getString("receiverEmail"));
+				dto.setReceiverName(rs.getString("receiverName"));
+				dto.setReceiverTel(rs.getString("receiverTel"));
+				dto.setSumMoney(rs.getInt("sumMoney"));
+				
+				orderListAll.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return orderListAll;
+	}
+	// getOrderList();
+	
+	// getOrderList(startRow,pageSize)
+	public ArrayList<OrderDTO> getOrderList(int startRow,int pageSize){
+		
+		// DB데이터 1row 정보를 OrderDTO 저장 -> ArrayList 한칸에 저장
+		
+		// 주문리스트의 정보를 원하는 만큼 저장하는 가변길이 배열
+		ArrayList<OrderDTO> orderList = new ArrayList<OrderDTO>();
+		
+		// 주문 정보 1개를 저장하는 객체
+		OrderDTO dto = null;
+		
+		try {
+			conn = getConnection();
 			sql = "select * from order_board order by o_Num desc limit ?,?";
 			
-			pstmt = conn.prepareStatement(sql);
+			pstmt =conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, startRow-1);
+			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, pageSize);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				OrderDTO dto = new OrderDTO();
+				
+				dto = new OrderDTO();
+				
 				dto.setAddPoint(rs.getInt("addPoint"));
 				dto.setCpUseAmount(rs.getInt("cpUseAmount"));
 				dto.setO_cosAmount(rs.getInt("o_cosAmount"));
@@ -575,10 +752,10 @@ public class AdminGoodsDAO {
 		} finally {
 			closeDB();
 		}
+		
 		return orderList;
 	}
-	// getAdminOrderList(startRow, pageSize)
-	
+	// getOrderList(startRow,pageSize)
 	
 	// OrderStatusModify(odto)
 	public void OrderStatusModify(OrderDTO odto){
