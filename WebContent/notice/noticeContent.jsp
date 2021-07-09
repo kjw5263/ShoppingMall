@@ -143,8 +143,10 @@ table {
         
         
         <%
-        System.out.println("ssss "+notit.getNoticeFile());
-        if (notit.getNoticeFile()==null){
+      
+        
+        if (notit.getNoticeFile()==null || notit.getNoticeFile().equals(null)
+        		||  notit.getNoticeFile().equals("null")){
         	%>
         	첨부파일 없음
         	<%
