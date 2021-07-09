@@ -48,10 +48,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <%
       int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
-//      GoodsDAO dao = new GoodsDAO();
-//      GoodsDTO gdto = new GoodsDTO();
-
-
   %>
 
 
