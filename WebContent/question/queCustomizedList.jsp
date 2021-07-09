@@ -69,7 +69,7 @@
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
-	
+
 	<div class="container-fluid"></div>
 	<!-- container 시작 -->	
 	<div class="container text-center mt-5">	
@@ -79,11 +79,10 @@
 		
 			<c:forEach var="i" items="${ CumtomizedList }">
 			
-			
                <div class="col-lg-3 col-sm-6 mix all ${i.cosBrand} ${i.cosCategory} ${i.cosSkinType}">
                    <div class="single-product-item">
                        <figure>
-                           <a href="./GoodsDetail.cos?cosNum=${i.cosNum}"><img src="${i.cosImage}" alt=""></a>
+                           <a href="./GoodsDetail.cos?cosNum=${i.cosNum}"><img src="./admingoods/upload/${i.cosImage.split(',')[0]}" alt=""></a>
                            <div class="p-status">new</div>
                        </figure>
                        <div class="product-text">
