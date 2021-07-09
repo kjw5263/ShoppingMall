@@ -3,7 +3,7 @@ package com.goods.db;
 import com.basket.db.BasketDAO;
 import com.basket.db.BasketDTO;
 
-public class goodsbasket extends DBconnection{
+public class goodsbasket {
 
 	
 	
