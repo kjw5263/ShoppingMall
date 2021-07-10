@@ -1,5 +1,7 @@
 package com.usedate.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +27,17 @@ public class completeUseAction implements Action{
         
         UsedateDAO udao = new UsedateDAO();
         udao.completeuse(openNum);
+
+        response.setContentType("text/html; charset=utf-8");
+		
+        PrintWriter out = response.getWriter();
+
+		out.print("<script>");
+		out.print(" alert('사용 완료 처리 되었습니다.'); ");
+		out.print("location.href='./Usedate.ud';");
+		out.print("</script>");
+
+		out.close();
         
     	forward.setPath("/Usedate.ud");
 		forward.setRedirect(false);

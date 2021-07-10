@@ -4,6 +4,9 @@
 <%@page import="com.coupon.db.CouponDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -120,14 +123,14 @@
 						</div>
 					</div>
 					<div class="col-10">
+						<c:set var="odto1" value="${orderList.get(0) }"/>
 
 						<h3>주문 상세 조회</h3>
 						<br>
-						<%	OrderDTO odto1 = (OrderDTO)orderList.get(0);%>
 						<fieldset id="order-detail">
 							<ul>
-								<li>구매일자 : <%=odto1.getOrderDate() %></li>
-								<li>주문번호 : <%=odto1.getO_tradeNum() %></li>
+								<li>구매일자 : <fmt:formatDate value="${odto1.orderDate }" pattern="yyyy-MM-dd"/></li>
+								<li>주문번호 : ${odto1.o_tradeNum}</li>
 							</ul>
 						</fieldset>
 
@@ -142,62 +145,57 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%for(int i=0;i<orderList.size();i++){
-								GoodsDTO gdto = (GoodsDTO)goodsList.get(i);
-								OrderDTO odto = (OrderDTO)orderList.get(i);
-							%>
+							
+							<c:forEach var="odto3" items="${orderList}" varStatus="st" end="${fn:length(orderList)}">
 								<tr>
 									<td><img
-										src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>"
+										src="./admingoods/upload/${goodsList[st.index].cosImage.split(',')[0]}"
 										width="100px" height="100px"></td>
-									<td><b id="brand"><%=gdto.getCosBrand() %></b><br> <%=gdto.getCosName() %>
+									<td><b id="brand">${goodsList[st.index].cosBrand}</b><br>${goodsList[st.index].cosName}
 									</td>
-									<td><%=gdto.getCosPrice() %></td>
-									<td><%=odto.getO_cosAmount() %>개</td>
-									<td><%=odto.getOrderStatus() %></td>
-
+									<td>₩<fmt:formatNumber value="${goodsList[st.index].cosPrice}" pattern="#,###"/></td>
+									<td>${odto3.o_cosAmount} 개</td>
+									<td>${odto3.orderStatus}</td>
 								</tr>
-								<%} %>
+							</c:forEach>
+								
 							</tbody>
 
 						</table>
-
 						<h4 id="detail-h4">배송지 정보</h4>
 						<table class="table table-bordered" id="orderList">
-							<% OrderDTO odto = (OrderDTO)orderList.get(0);
-							GoodsDTO gdto = (GoodsDTO)goodsList.get(1);%>
 							<tr>
 								<td>받는 사람</td>
-								<td><%=odto.getReceiverName() %></td>
+								<td>${odto1.receiverName}</td>
 							</tr>
 							<tr>
 								<td>연락처</td>
-								<td><%=odto.getReceiverTel() %></td>
+								<td>${odto1.receiverTel}</td>
 							</tr>
 							<tr>
 								<td>예비 연락처</td>
 								<td>
-									<%
-								if(odto.getReceiverTel2() == null){%> 0 <% }else{
-								 odto.getReceiverTel2();
-								} %>
+								<c:choose>
+									<c:when test="${odto1.receiverTel2 eq null}">없음</c:when>
+									<c:otherwise>${odto1.receiverTel2 }</c:otherwise>
+								</c:choose>
 								</td>
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<td><%=odto.getReceiverEmail() %></td>
+								<td>${odto1.receiverEmail }</td>
 							</tr>
 							<tr>
 								<td>주소</td>
-								<td><%=odto.getReceiverAddr() %></td>
+								<td>${odto1.receiverAddr }</td>
 							</tr>
 							<tr>
 								<td>배송시 주의사항</td>
 								<td>
-									<%
-								if(odto.getO_msg() == null){%> 없음 <% }else{
-								 odto.getO_msg();
-								} %>
+								<c:choose>
+									<c:when test="${odto1.o_msg eq null }">없음</c:when>
+									<c:otherwise>${odto1.o_msg}</c:otherwise>
+								</c:choose>
 								</td>
 							</tr>
 
@@ -210,18 +208,27 @@
 						<table class="table table-bordered" id="orderList">
 							<tr>
 								<td>총 상품 금액<br>
-								<b id="money"><%=odto.getSumMoney() %></b>원
+								<b id="money">${odto1.sumMoney}</b> 원
 								</td>
 								<td>쿠폰 할인 금액<br>
-								<b id="money"><%=odto.getCpUseAmount() %></b>원
+								<b id="money">${odto1.cpUseAmount}</b> 원
 								</td>
 								<td>적립 포인트<br>
-								<b id="money"><%=odto.getAddPoint() %></b>p
+								<b id="money">${odto1.addPoint}</b> p
 								</td>
 							</tr>
 							<tr>
 								<td colspan="3" id="allmoney"><b>총 결제 금액 : </b><b
-									id="money"><%=odto.getPayMoney() %></b>원 <br>ㄴ 결제 수단 :<%=odto.getPayType() %></td>
+									id="money"><fmt:formatNumber value="${odto1.payMoney}" pattern="#,###"/>
+									</b> <br>
+									ㄴ <b>결제 수단 :</b>
+									<c:choose>
+										<c:when test="${odto1.payType == 0}">카드</c:when>
+										<c:when test="${odto1.payType == 1}">계좌이체</c:when>
+										<c:when test="${odto1.payType == 2}">카카오 페이</c:when>
+									
+									</c:choose>
+									</td>
 							</tr>
 
 						</table>

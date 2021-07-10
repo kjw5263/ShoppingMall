@@ -37,6 +37,17 @@ public class opencosAction implements Action{
 			udao.regusedate2(userId,cosNum,openstatus,cosAmount,statusnum,oNum);
 		}
 		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		out.print("<script>");
+		out.print(" alert('오픈 완료!'); ");
+		out.print("location.href='./Usedate.ud';");
+		out.print("</script>");
+
+		out.close();
+		
+		
 		
 		forward.setPath("/Usedate.ud");
 		forward.setRedirect(false);

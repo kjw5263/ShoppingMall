@@ -188,8 +188,9 @@ function datecheck(){
 						<h3>포인트 조회</h3>
 						<fieldset id="checkline">
 							<br>
-							<form action="pointcheck.cp" method="post"
+							<form action="pointcheck.cp" method="get"
 								onsubmit="return datecheck()">
+								<input type="hidden" name="searchmonth" value="0">
 								<input type="hidden" id="startdate" name="startdate"> <input
 									type="hidden" id="enddate" name="enddate"> <input
 									type="button" value="1개월" class="btn btn-outline-info"
@@ -252,6 +253,7 @@ function datecheck(){
 									<td>적립</td>
 									<td>사용</td>
 								</tr>
+								
 							</thead>
 							<tbody>
 								<%

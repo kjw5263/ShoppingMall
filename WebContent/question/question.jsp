@@ -99,8 +99,6 @@
 				<div class="mt-3" id="div1">
 								
 					<c:forEach var="j" begin="0" end="4" step="1">
-					
-					
 						<label class="box-radio-input">
 							<input type="radio" name="${i.qnum}" value="${j }" id="radio">
 							<span>
@@ -111,7 +109,7 @@
 								<c:if test="${j eq 4}"> 매우그렇다</c:if>
 							</span>
 						</label>
-					
+
 					 </c:forEach>
 					 
 				</div>

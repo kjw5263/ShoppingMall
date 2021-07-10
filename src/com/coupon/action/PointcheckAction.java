@@ -32,8 +32,10 @@ public class PointcheckAction implements Action{
 	
 		String startdate = request.getParameter("startdate");
 		String enddate = request.getParameter("enddate");
+		
+		
 		int searchmonth = Integer.parseInt(request.getParameter("searchmonth"));
-
+		
 		List orderList = new ArrayList();
 		List orderList2 = new ArrayList();
 		

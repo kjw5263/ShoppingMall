@@ -8,6 +8,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zxx">
@@ -167,7 +168,7 @@
 										</c:forEach>
 										<td><a href="./MyCoupon.cp"><b><c:out value="${cnt}"/></b>
 											</a> 장</td>
-											<td><a href="" style="color: orange;"><b>${mdto.userPoint}</b></a>P</td>
+											<td><a href="./MyCoupon.cp" style="color: orange;"><b>${mdto.userPoint}</b></a>P</td>
 										</tr>
 									</table>
 								</div>

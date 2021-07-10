@@ -3,6 +3,7 @@
 
 *{
 	text-decoration: none;
+	cursor:pointer;
 	
 }
 
@@ -24,13 +25,12 @@
 
 /* 주문조회 페이지 */
 .mypage-step{
-  top:-66px;
   display: flex;
   width: 100%;
   background: #EAEAEA;
   margin: auto;
   border-radius: 10px;
-  height: 17%;
+  height: 18%;
 }
 
 .mypage-step > li {
@@ -205,3 +205,6 @@ list-style: none;
 }
 
 /*쿠폰, 포인트 페이지*/
+
+
+

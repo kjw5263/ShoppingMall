@@ -2,6 +2,7 @@
 <%@page import="com.member.db.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,6 +30,9 @@
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+<link rel="stylesheet" href="./css/question/question.css" type="text/css">
+
+
 
 <!-- JQuery -->
 <script src="./js/jquery-3.6.0.js"></script>
@@ -57,6 +61,53 @@
 		con.style.display = (con.style.display != 'none') ? "none" : "block";
 	}
 
+	
+	
+	$(document).ready(function(){
+		
+		var ck1=false;			//id
+		var ck2=false;			//pw
+		var ck3=false;			//pw1
+		var ck4=false;			//name
+		var ck5=false;			//phone
+		var ck6=false;			//address2
+		var ck7=false;			//address3	
+	
+	 
+	$("#newpw2").keyup(function(){
+		var userPass = $("#newpw2").val();
+		var newpw2 = $("#newpw2").val();
+		var newpw1 = $("#newpw1").val();
+		 var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/.test(userPass);
+		
+		if(newpw1 != newpw2 ){
+			 $('#pwck_msg2').text("새 비밀번호가 서로 일치하지 않습니다."); 
+			 $('#pwck_msg2').css("color","red"); 
+			 $('#pwck_msg2').css("padding-left","1rem");	
+			 ck2 = false;
+		}else if(newpw1 = newpw2 ){
+			 $('#pwck_msg2').text("비밀번호가 일치합니다.");     
+			$('#pwck_msg2').css("color","green");
+			$('#pwck_msg2').css("padding-left","1rem");
+			 ck2 = true;}
+		
+		if(check){
+			 	$('#pwck_msg2').text("사용 가능한 비밀번호입니다");     
+				$('#pwck_msg2').css("color","green");
+				$('#pwck_msg2').css("padding-left","1rem");
+				ck2 = true;
+		 }else{
+			 	$('#pwck_msg2').text("대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");     
+				$('#pwck_msg2').css("color","red"); 
+			 	$('#pwck_msg2').css("padding-left","1rem");
+			 	ck2 = false;
+		 }
+			 
+		 
+		 });
+	
+	});
+	
 	//유효성체크
 	function check() {
 		if (document.pw.userPass.value == "") {
@@ -81,43 +132,7 @@
 			document.pw.newpw2.focus();
 			return false;
 		}
-		
-		
-		
 	}
-	
-	$(document).ready(function(){
-		
-		var ck1=false;			//id
-		var ck2=false;			//pw
-		var ck3=false;			//pw1
-		var ck4=false;			//name
-		var ck5=false;			//phone
-		var ck6=false;			//address2
-		var ck7=false;			//address3	
-	
-	 
-	$("#newpw2").keyup(function(){
-		
-		 var userPass = $("#userPass").val();
-		var newpw2 = $("#newpw2").val();
-		var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/.test(userPass);
-		
-		if(check){
-			 	$('#pwck_msg2').text("사용 가능한 비밀번호입니다");     
-				$('#pwck_msg2').css("color","green");
-				$('#pwck_msg2').css("padding-left","1rem");
-				ck2 = true;
-		 }else{
-			 	$('#pwck_msg2').text("대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");     
-				$('#pwck_msg2').css("color","red"); 
-			 	$('#pwck_msg2').css("padding-left","1rem");
-			 	ck2 = false;
-		 }
-		 
-		 });
-	
-	});
 	
 </script>
 <body>
@@ -311,62 +326,134 @@
 								<tr>
 									<td><h4>나의 피부</h4></td>
 									<td>
-										<%
-											if (mdto.getUserSkinType().equals("건성")) {
-										%> <input type="radio" name="skinType" value="건성" checked>
-										건성 <input type="radio" name="skinType" value="중성"> 중성
-										<input type="radio" name="skinType" value="지성"> 지성 <input
-										type="radio" name="skinType" value="복합성"> 복합성 <%
- 	} else if (mdto.getUserSkinType().equals("중성")) {
- %> <input type="radio" name="skinType" value="건성"> 건성 <input
-										type="radio" name="skinType" value="중성" checked> 중성 <input
-										type="radio" name="skinType" value="지성"> 지성 <input
-										type="radio" name="skinType" value="복합성"> 복합성 <%
- 	} else if (mdto.getUserSkinType().equals("지성")) {
- %> <input type="radio" name="skinType" value="건성"> 건성 <input
-										type="radio" name="skinType" value="중성"> 중성 <input
-										type="radio" name="skinType" value="지성" checked> 지성 <input
-										type="radio" name="skinType" value="복합성"> 복합성 <%
- 	} else if (mdto.getUserSkinType().equals("복합성")) {
- %> <input type="radio" name="skinType" value="건성"> 건성 <input
-										type="radio" name="skinType" value="중성"> 중성 <input
-										type="radio" name="skinType" value="지성"> 지성 <input
-										type="radio" name="skinType" value="복합성" checked> 복합성
-										<%
- 	}
- %>
+									<c:if test="${mdto.userSkinType == '건성'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinType" value="건성" checked> 건성
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinType" value="중성" > 중성
+								  </label>
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinType" value="지성" > 지성
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinType" value="복합성" > 복합성
+								  </label>
+								</c:if>
+								<c:if test="${mdto.userSkinType == '중성'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								   <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinType" value="건성" > 건성
+								  </label>
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinType" value="중성" checked> 중성
+								  </label>
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinType" value="지성" > 지성
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinType" value="복합성" > 복합성
+								  </label>
+								</c:if>
+								<c:if test="${mdto.userSkinType == '지성'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinType" value="건성" > 건성
+								  </label>
+								    <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinType" value="중성" > 중성
+								  </label>
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinType" value="지성" checked> 지성
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinType" value="복합성" > 복합성
+								  </label>
+									
+								</c:if>
+								<c:if test="${mdto.userSkinType == '복합성'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinType" value="건성" > 건성
+								  </label>
+									  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinType" value="중성" > 중성
+								  </label>
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinType" value="지성" > 지성
+								  </label>
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinType" value="복합성" checked> 복합성
+									</label>
+								</c:if>
 									</td>
 								</tr>
+								
 								<tr>
 									<td><h4>피부 고민</h4></td>
-									<td>
-										<%
-											if (mdto.getUserTrouble().equals("여드름")) {
-										%> <input type="radio" name="skinTrouble" value="여드름" checked>
-										여드름 <input type="radio" name="skinTrouble" value="아토피">
-										아토피 <input type="radio" name="skinTrouble" value="민감성">
-										민감성 <input type="radio" name="skinTrouble" value="해당없음">
-										해당없음 <%
- 	} else if (mdto.getUserTrouble().equals("아토피")) {
- %> <input type="radio" name="skinTrouble" value="여드름"> 여드름 <input
-										type="radio" name="skinTrouble" value="아토피" checked>
-										아토피 <input type="radio" name="skinTrouble" value="민감성">
-										민감성 <input type="radio" name="skinTrouble" value="해당없음">
-										해당없음 <%
- 	} else if (mdto.getUserTrouble().equals("민감성")) {
- %> <input type="radio" name="skinTrouble" value="여드름"> 여드름 <input
-										type="radio" name="skinTrouble" value="아토피"> 아토피 <input
-										type="radio" name="skinTrouble" value="민감성" checked>
-										민감성 <input type="radio" name="skinTrouble" value="해당없음">
-										해당없음 <%
- 	} else if (mdto.getUserTrouble().equals("해당없음")) {
- %> <input type="radio" name="skinTrouble" value="여드름"> 여드름 <input
-										type="radio" name="skinTrouble" value="아토피"> 아토피 <input
-										type="radio" name="skinTrouble" value="민감성"> 민감성 <input
-										type="radio" name="skinTrouble" value="해당없음" checked>
-										해당없음 <%
- 	}
- %>
+										<td>
+									<c:if test="${mdto.userTrouble == '민감성'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinTrouble" value="민감성" checked> 민감성
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinTrouble" value="아토피" > 아토피
+								  </label>
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinTrouble" value="여드름" > 여드름
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinTrouble" value="해당없음" > 해당없음
+								  </label>
+								</c:if>
+								<c:if test="${mdto.userTrouble == '아토피'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								   <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinTrouble" value="민감성" > 민감성
+								  </label>
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinTrouble" value="아토피" checked> 아토피
+								  </label>
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinTrouble" value="여드름" > 여드름
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinTrouble" value="해당없음" > 해당없음
+								  </label>
+								</c:if>
+								<c:if test="${mdto.userTrouble == '여드름'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinTrouble" value="민감성" > 민감성
+								  </label>
+								    <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinTrouble" value="아토피" > 아토피
+								  </label>
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinTrouble" value="여드름" checked> 여드름
+								  </label>
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinTrouble" value="해당없음" > 해당없음
+								  </label>
+									
+								</c:if>
+								<c:if test="${mdto.userTrouble == '해당없음'}"> 
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinTrouble" value="민감성" > 민감성
+								  </label>
+									  <label class="btn btn-outline-info">
+								   	<input type="radio" id="radio" name="skinTrouble" value="아토피" > 아토피
+								  </label>
+								  <label class="btn btn-outline-info">
+								    <input type="radio" id="radio" name="skinTrouble" value="여드름" > 여드름
+								  </label>
+								  <label class="btn btn-outline-info active">
+									<input type="radio" id="radio" name="skinTrouble" value="해당없음" checked> 해당없음
+									</label>
+								</c:if>
 									</td>
 								</tr>
 								<tr>

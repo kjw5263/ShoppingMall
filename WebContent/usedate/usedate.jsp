@@ -149,63 +149,55 @@
 						</div>
 					<div class="col-10">
 							
-						
-						
 						<table class="table">
 							<tr>
-								<th colspan="4" style="text-align: center;">내가 구매한 상품</th>
+								<th colspan="2" style="text-align: center;">내가 구매한 상품</th>
 								<th>개봉하기</th>
 							</tr>
 							
-							<c:set var="result" value="0"/>
-							<c:choose>
-								<c:when test="${orderList != null}">
-									<c:forEach begin="0" var="orderList" items="${orderList}" varStatus="status">
-										<!-- 설정값   -->
+							<c:set var="oNum" value="0"/>
+							<c:if test="${orderList != null }">
+							<c:forEach var="odto" items="${orderList}" varStatus="st">
+								<c:set var="oNum" value="${odto.o_Num}"/>
+								<tr style="font-size: 20px;">
 									
+									<td rowspan="2"><img src="./admingoods/upload/${goodsList[st.index].cosImage.split(",")[0]}" width="150px"
+										height="150px">
+									<td rowspan="2"><b>${goodsList[st.index].cosName}</b><br> <br>
+										개봉 후 사용 기한 : <b>${goodsList[st.index].useDate}</b> 개월 <br>
+										주문일자 ${odto.orderDate}<br>
 										<c:choose>
-										<c:when test="${usestatus[status.index].open_status == 1}">
-											<c:set var="result" value="${usestatus[status.index].remain_amount}"/>
-										</c:when>
-										<c:when test="${usestatus[status.index].open_status == 0}">
-											<c:set var="result" value="${orderList.o_cosAmount}"/>
-										</c:when>
-										</c:choose>
-									
-											<c:choose>
-											<c:when test="${usestatus[status.index].first_open == 1 && usestatus[status.index].remain_amount <= 0 }">
-												<input type="button" value="OPEN 완료"
-												class="btn btn-secondary" id="open"
-												onclick="alert('모두 사용했습니다.')">
+											<c:when test="${usestatusList[st.index].open_status == 1}">
+												수량 : ${usestatusList[st.index].remain_amount } 개
 											</c:when>
-										
+											<c:otherwise>
+												수량 : ${odto.o_cosAmount} 개
+											</c:otherwise>
+											
 										</c:choose>
 										
-										<c:if test="${usestatus[status.index].first_open == 0 && usestatus[status.index].remain_amount > 0 }">
-												<input type="button" value="OPEN" class="btn btn-info"
-												onclick="location.href='opencosAction.ud?cosNum=${orderList.o_cosNum}&openstatus=${usestatus[status.index].open_status}&openstatus=${usestatus[status.index].open_status}&cosAmount=${orderList.o_cosAmount}&firstopen=${usestatus[status.index].first_open}&statusnum=${usestatus[status.index].status_Num}&oNum=${o_Num}'">
-												
-										</c:if>
-									
-										<c:set var="oNum" value="${orderList.o_Num}"/>
-										
-										<!-- 설정값   -->
-									
+									</td>
+									<c:choose>
+										<c:when test="${usestatusList[st.index].first_open == 1 && usestatusList[st.index].remain_amount <= 0}">
+									<tr><td>
+									<input type="button" value="OPEN 완료" class="btn btn-secondary" id="open" onclick="alert('모두 사용했습니다.')">
+									</td></tr>
+										</c:when>
+									<c:otherwise>
 									<tr>
-										<td>
-										<img src="./admingoods/upload/${goodsList[status.index].cosImage.split(",")[0]}"
-											width="150px" height="150px"></td>
-										<td>
-											<b>${goodsList[status.index].cosName}</b><br> <br>
-											개봉 후 사용 기한 : <b>${goodsList[status.index].useDate}</b> 개월 <br> 주문일자
-											${orderList.orderDate}<br>
-											수량 : ${result} 개
-										</td>
-									 </tr>
-									</c:forEach>
-								</c:when>
+										<td><input type="button" value="OPEN" class="btn btn-info" 
+										onclick="location.href='opencosAction.ud?cosNum=${odto.o_cosNum}&openstatus=${usestatusList[st.index].open_status}&cosAmount=${odto.o_cosAmount}&firstopen=${usestatusList[st.index].first_open}&statusnum=${usestatusList[st.index].status_Num}&oNum=${oNum}'">
+									</td>
+									</tr>
+								</tr>
+								</c:otherwise>
 							</c:choose>
+							</c:forEach>
+						</c:if>
 						</table>
+							
+					
+						
 
 						<!--페이징 처리  -->
 						<div style="margin-left: 45%;">
@@ -218,38 +210,34 @@
 									<c:set var="endPage" value="${startPage + pageBlock-1 }"/>
 								
 									
-									<c:choose>
-										<c:when test="${startPage > pageBlock}">
+										<c:if test="${startPage > pageBlock}">
 												<li class="page-item"><a class="page-link"
-											href="./getLike.li?pageNum=${startPage-pageBlock}"
+											href="./Usedate.ud?pageNum=${startPage-pageBlock}"
 											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 											</a></li>
-										</c:when>
-									</c:choose>
+										</c:if>
 									
 										<c:forEach begin="${startPage }" end="${endPage}" var="i">
 											<li class="page-item"><a class="page-link"
-																		href="./getLike.li?pageNum=${i}" class="btn btn-primary btn">${i}</a></li>
+																		href="./Usedate.ud?pageNum=${i}" class="btn btn-primary btn">${i}</a></li>
 										</c:forEach>
 									
-									<c:choose>	
-										<c:when test="${endPage > pageCount }">
-											<c:set var="endPage" value="${pageCount}"/> 
-										</c:when>
+										<c:if test="${endPage > pageCount }">
+											<c:set var="endPage" value="${endPage = pageCount}"/> 
+										</c:if>
 										
-										<c:when test="${endPage < pageCount}">
+										<c:if test="${endPage < pageCount}">
 											<li class="page-item"><a class="page-link"
-										href="./getLike.li?pageNum=${startPage+pageBlock}" ara-label="Next"> 
+										href="./Usedate.ud?pageNum=${startPage+pageBlock}" ara-label="Next"> 
 										<span aria-hidden="true">&raquo;</span></a></li>
-										</c:when>
-									</c:choose>
+										</c:if>
 								</c:if>
 								
 							</ul>
 						</div>
 						<!-- 페이징 처리 -->
 						
-						<br><br>
+								<br><br>
 						<h3>화장품 사용기한 확인하기</h3><br>
 						<h5>*사용 완료 하신 경우 오른쪽의 사용완료 버튼을 눌러주세요!</h5>
 						<br>
@@ -335,7 +323,7 @@
 								<td><%=closedate%></td>
 								<td>
 								<input type="button" class="btn" style="background-color: #B0BCC2; color: white;" value="사용완료" 
-								onclick="location.href='./completeUse.ud?openNum=<%=udto.getOpenNum()%>'"></td>
+								onclick="location.href='./completeUseAction.ud?openNum=<%=udto.getOpenNum()%>'"></td>
 							</tr>
 							
 							<%}
