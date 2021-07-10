@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/main.css" type="text/css">
 
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
@@ -220,17 +221,19 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="section-title">
-                            <h2 style="margin-bottom:80px">Best Skincare</h2>
+                            <h2 style="margin-bottom:60px">
+                            Best Skincare<span>.</span>
+                            </h2>
                         </div>
 
                         <ul class="product-controls">
-                        	<li data-filter=".allgoods" style="font-size:25px"><b>All</b></li>
+                        	<li data-filter=".allgoods" id="all"><b>All</b></li>
                           <%
                             for(int i = 2 ; i<http.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=http[i][1] %>"
-                             style="font-size:25px;"><b><%=http[i][1] %></b></li>
+                            <li data-filter=".<%=http[i][1] %>" id="cate">
+                            <b><%=http[i][1] %></b></li>
                             <%} %>
                             
                         </ul>
@@ -246,26 +249,24 @@
 
                 <div class="col-lg-3 col-sm-6 mix all allgoods <%=dto.getCosCategory() %> ">
 
-                    <div class="single-product-item">
+                    <div class="single-product-item" id="product">
                         <figure>
                             <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>">
                             <img src="./admingoods/upload/<%=dto.getCosImage()%>" alt="">
                             </a>
-                            <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
                         	<div>
 								<div style="text-align: center;"><%=dto.getCosName()%></div>
-                            	<div style="color:#E02020; text-align: center; font-size:22px; font-weight: 500;" >
+                            	<div id="price">
                             	<fmt:formatNumber value="<%=dto.getCosPrice() %>" pattern="#,###"/>원</div>                	
-                        	</div>
+                        		</div>
                             <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
                             onclick="basketact(<%=dto.getCosNum()%>)"
                             style='cursor:pointer;'>
                             
-                            <img src="./img/icons/heart1.png" width="40px" 
-                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'"
-                            style='cursor:pointer; margin-left:10px; margin-top:10px;'>
+                            <img src="./img/icons/heart1.png" width="40px" id="heart" 
+                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
                         	</p>
                         </div>
                     </div>
@@ -322,9 +323,6 @@
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
     
-    
-    
- 
 
    
 </body>
@@ -342,5 +340,3 @@
 
 
 </html>
-
-
