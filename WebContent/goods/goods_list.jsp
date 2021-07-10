@@ -189,7 +189,12 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기</button>	
+                            
+                            <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
+                            onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
+                            
+                            
+                            <img src="./img/icons/heart.png" width="40px" onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
                         </div>
                     </div>
                 </div>
@@ -206,7 +211,11 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기 </button>	
+                           <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
+                            onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
+                            
+                            
+                            <img src="./img/icons/heart.png" width="40px" onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
                         </div>
                     </div>
                 </div>
