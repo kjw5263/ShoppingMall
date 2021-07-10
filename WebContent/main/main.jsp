@@ -322,6 +322,9 @@
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
     
+    
+    
+ 
 
    
 </body>
@@ -339,3 +342,5 @@
 
 
 </html>
+
+
