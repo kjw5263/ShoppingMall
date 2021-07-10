@@ -69,20 +69,28 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
+	
+	<!-- Page Add Section Begin -->
+	<section class="page-add">
+	<div class="row" style="margin-bottom: -3%;">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-10">
+			<div class="page-breadcrumb">
+				<h2>
+					FAQ<span>.</span>
+				</h2>
+				<h3>자주 묻는 질문</h3>
+				<h5>*다른 문의사항이 있을 경우 챗봇으로 문의해주세요.</h5>
+			</div>
+		</div>
+	</div>
+	</section>
+	<!-- Page Add Section End -->
+	
+	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
-	<!-- 제목 시작 -->
-	  <div class="col-md-12 text-center p-5 row">
-	  
-		  <div class="col-2"></div>
-		  <div class="col-4">
-		   	<a href="./FaqList.faq" style="text-decoration-line: none; color: black;"> <h3>고객 센터 - 자주묻는 질문</h3> </a>
-		  </div>
-		  <div class="col-6"></div>
-		
-	  </div>
-	<!-- 제목 끝 --> 	
 				
 	<!-- 글쓰기 버튼 시작 -->			
 		<div class="row">
@@ -155,11 +163,23 @@
 				  </tbody>
 				</table>
 				<!-- faq 테이블 끝 -->
+				
+				
 			</div>
 			<div class="col-2">	</div>
 		</div>
 	</div>
 	<!-- container 끝 -->	
+	
+	<!-- Page End Section Begin -->
+	<section class="page-add">
+	<div class="row">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-9">
+			<div class="page-breadcrumb"></div>
+		</div></div>
+	</section>
+	<!-- Page End Section End -->
 	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
