@@ -85,7 +85,7 @@
 		                    <li><a href="./emailJoin.me">Register</a></li>
 		                    <li><a href="./MemberLogin.me" class="in">Sign in</a></li>
 		                <%}else{%>
-		                    <li><span class="mt-5">
+		                    <li><span class="mt-5" style="color:black;">
 		                    <b><%=userId %></b>님 반갑습니다.</span></li>
 		                <%}%>
                     </ul>
