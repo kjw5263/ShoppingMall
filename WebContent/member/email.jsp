@@ -5,7 +5,6 @@
 <html lang="zxx">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
-	<title>Login V10</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -32,7 +31,7 @@
 <!--===============================================================================================-->
 
 
-    <title>이메일 인증페이지</title>
+    <title>이메일 인증페이지 | JUST SKIN </title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">

@@ -52,7 +52,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="./js/chatbot.js" type="text/javascript"></script>
-    <title>상세페이지</title>
+    <title>상세페이지 | JUST SKIN</title>
     <script type="text/javascript">
         function isBasket(num) {
         	if(num==1){

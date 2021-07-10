@@ -5,7 +5,7 @@
 
 <html>
 <head>
-	<title>Login V10</title>
+	<title>피부진단 | JUST SKIN</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	

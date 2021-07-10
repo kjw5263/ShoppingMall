@@ -14,7 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>JUST SKIN</title>
     <link rel="stylesheet" href="./goods_board/style/reviewList.css">
 </head>
 <script>
