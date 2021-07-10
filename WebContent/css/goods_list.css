@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+
+#cat{
+	font-size:18px;
+	padding: 9px;
+}
+
+#all{
+	font-size:18px;
+	padding: 9px;
+}
+
+#best{
+	font-size:18px;
+	padding: 9px;
+}
+
+#cate{
+	font-size:18px;
+	padding: 9px;
+}
+
+#type{
+	font-size:18px;
+	padding: 9px;
+	margin-bottom: -100px;
+}
+
+span {
+    color: #B0BCC2;
+}
+
+#product{
+	width: 300px;
+	height: 500px;
+	padding: 30px;
+}
+
+#image{
+	width: 215px;
+	height: 215px;
+}
+
+#price{
+	color:#E02020; 
+	text-align: center; 
+	font-size:22px; 
+	font-weight: 500;"
+}
+
+#heart{
+	cursor:pointer; 
+	margin-left:10px; 
+	margin-top:10px;'
+}
