@@ -50,9 +50,6 @@
 		if (userId == null) {
 			response.sendRedirect("../MemberLogin.me");
 		}
-
-		List orderList = (List)request.getAttribute("orderList");
-		List goodsList = (List)request.getAttribute("goodsList");
 	%>
 
 
@@ -160,7 +157,7 @@
 								</c:when>
 							</c:choose>
 						</c:forEach>
-						<ul class="mypage-step" style="text-decoration: none;" id="mypage-step">
+						<ul class="mypage-step">
 							<li>
 								<div>
 									<div class="contents1">결제완료</div>
@@ -217,32 +214,28 @@
 								</tr>
 							</thead>
 							
-							<%for(int i=0;i<orderList.size();i++){
-								OrderDTO odto = (OrderDTO)orderList.get(i);
-								GoodsDTO gdto = (GoodsDTO)goodsList.get(i);
-								
-								%>
-								
-							<tbody>
+							
+							<c:forEach var="odto" items="${orderList}" varStatus="st">
+									<tbody>
 								<tr>
-									<td><%=odto.getOrderDate()%><br> <a
-										href="Orderdetail.or?tradeNum=<%=odto.getO_tradeNum() %>"
+									<td><fmt:formatDate value="${odto.orderDate}"/><br> <a
+										href="Orderdetail.or?tradeNum=${odto.o_tradeNum}"
 										id="detail">상세보기</a></td>
 									<td>
 										<ul class="goods-view">
 											<li><img
-												src="./admingoods/upload/<%=gdto.getCosImage().split(",")[0] %>"
+												src="./admingoods/upload/${goodsList[st.index].cosImage.split(',')[0]}"
 												width="100px" height="100px;"></li>
-											<li><b id="brand"><%=gdto.getCosBrand() %></b><br>
-												<%=odto.getO_cosName()%></li>
+											<li><b id="brand">${goodsList[st.index].cosBrand}</b><br>${odto.o_cosName}</li>
 										</ul>
 									</td>
-									<td><%=odto.getO_cosAmount()%></td>
-									<td><b id="price"><%=odto.getSumMoney()%><b>원</td>
-									<td><%=odto.getOrderStatus() %></td>
+									<td>${odto.o_cosAmount }</td>
+									<td><b id="price">₩<fmt:formatNumber value="${odto.sumMoney }" pattern="#,###"/></h3><b></td>
+									<td>${odto.orderStatus}</td>
 								</tr>
 							</tbody>
-							<%} %>
+							
+							</c:forEach>
 						</table>
 
 						<br> <br> <br>

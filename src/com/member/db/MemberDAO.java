@@ -553,11 +553,15 @@ public class MemberDAO {
 			try {
 				conn = getConnection();
 				sql = "select userPass from user_info where userId=?";
+				System.out.println("111111111111");
+				System.out.println(userId);
+				System.out.println(userPass);
+				System.out.println(newpw1);
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, userId);
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
-					if (rs.getString("userPass").equals("userPass")) {
+					if (userPass.equals(rs.getString("userPass"))) {
 
 						sql = "update user_info set userPass=? where userId=?";
 						pstmt = conn.prepareStatement(sql);

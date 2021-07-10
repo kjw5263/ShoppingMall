@@ -143,7 +143,7 @@
 										src="./admingoods/upload/${LikeList.cosImage.split(",")[0]}"
 										width="150px" height="150px"></td>
 									<td><b>${LikeList.cosBrand }</b><br> ${LikeList.cosName }
-										<h4> ${LikeList.cosPrice }원
+										<h4> <fmt:formatNumber value="${LikeList.cosPrice }" pattern="#,###"/>원
 										</h4></td>
 
 									<td><input type="image" src="./img/icons/heart.png"

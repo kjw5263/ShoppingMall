@@ -53,6 +53,8 @@ public class MemberUpdateInfoproAction2 implements Action{
 	    	  System.out.println("비밀번호 변경");
 		      String userPass = request.getParameter("userPass");
 		      String newpw1 = request.getParameter("newpw1");
+		      System.out.println("전달받은 비밀번호" + userPass);
+		      System.out.println("새 비밀번호" + newpw1);
 		      int result = mdao.updatememberpw(userId,userPass,newpw1);
 		      
 		      System.out.println("result 값 "+ result);

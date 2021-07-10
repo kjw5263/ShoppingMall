@@ -236,7 +236,7 @@ public class OrderDAO {
 			
 			try {
 				conn = getConnection();
-				sql = "select * from order_board ob join cos_list cl on ob.o_cosNum = cl.cosNum where ob.o_userId = ?";
+				sql = "select * from order_board ob join cos_list cl on ob.o_cosNum = cl.cosNum where ob.o_userId = ? order by o_Num desc";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, userId);
 				
