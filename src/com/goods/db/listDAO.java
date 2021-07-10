@@ -19,20 +19,28 @@ public class listDAO extends DBconnection{
 	
 	private ResultSet rs = null;
 	private String sql = "";
-	
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
+
+	varlist vars = new varlist();
+	private String databasename = vars.getDatabasename();
 	varlist var = new varlist();
 	String tablename = var.getGoodslistTablename(); 
 	
 	DBconnection con = new DBconnection();
 	setGoodsTool setTool = new setGoodsTool();
+	
 	public List getGoodsList() {
 		List goodsList = new ArrayList();
 		try {
 			
 			
 			sql = "select * from "+tablename;
-			rs = con.selsql(sql);
-
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				
 				
@@ -51,7 +59,7 @@ public class listDAO extends DBconnection{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			con.closeDB();
+			
 			closeDB();
 		}
 
@@ -77,7 +85,10 @@ public class listDAO extends DBconnection{
 									+ " cosCategory like '%"+item+"%' ";
 			System.out.println("sql = "+  sql);
 			
-			rs = con.selsql(sql);
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				GoodsDTO goods = new GoodsDTO();
@@ -132,7 +143,10 @@ public class listDAO extends DBconnection{
 					}
 			}
 			System.out.println(sql);
-			rs = con.selsql(sql);
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				GoodsDTO goods = new GoodsDTO();
@@ -184,8 +198,10 @@ public class listDAO extends DBconnection{
 						sql = "select * from "+tablename + "order by cosNum desc limit " + startRow +" , "+ pageSize;
 					}
 			}
-			System.out.println(sql);
-			rs = con.selsql(sql);
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				GoodsDTO goods = new GoodsDTO();
@@ -225,7 +241,10 @@ public class listDAO extends DBconnection{
 			
 			
 				
-				rs = con.selsql(sql);
+				conn = getConnection();
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				
 				while (rs.next()) {
 					GoodsDTO goods = new GoodsDTO();
@@ -258,8 +277,10 @@ public class listDAO extends DBconnection{
 			try {
 				
 				sql ="select distinct cosBrand from cos_list";
-				rs = con.selsql(sql);
+				conn = getConnection();
 				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					testList.add(rs.getString("cosBrand"));
 				} 
@@ -283,8 +304,10 @@ public class listDAO extends DBconnection{
 			try {
 				
 				sql ="select distinct cosCategory from cos_list";
-				rs = con.selsql(sql);
+				conn = getConnection();
 				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					testList.add(rs.getString("cosCategory"));
 				} 
@@ -308,7 +331,10 @@ public class listDAO extends DBconnection{
 			try {
 				
 				sql ="select distinct cosSkinType from cos_list";
-				rs = con.selsql(sql);
+				conn = getConnection();
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				
 				while (rs.next()) {
 					testList.add(rs.getString("cosSkinType"));
@@ -326,6 +352,41 @@ public class listDAO extends DBconnection{
 	        testList.toArray(arr);
 			return arr;
 		}
-	
+		protected Connection getConnection() {
+			try {
+				// Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
+				Context initCTX = new InitialContext();
+				// DB연동 정보를 불러오기(context.xml)
+				
+				DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/"+ databasename);
+
+				conn = ds.getConnection();
+
+				System.out.println(" 드라이버 로드, 디비연결 성공! ");
+				System.out.println(conn);
+
+			} catch (NamingException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			setConn(conn);
+			return conn;
+		}
+		public void closeDB() {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 }

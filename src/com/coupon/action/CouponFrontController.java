@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.coupon.action.ActionForward;
+
 
 @WebServlet("*.cp")
 public class CouponFrontController extends HttpServlet{
@@ -68,7 +70,46 @@ public class CouponFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/couponEvent.cp")){
+			
+			action = new CouponEventAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/couponDown.cp")){
+			
+			action = new CouponDownAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
+//		else if(command.equals("/couponInfo.cp")){
+//			System.out.println("C : couponInfo.cp호출");
+//			// 화면을 보여주기=> view페이지로 이동
+//			
+//			forward = new ActionForward();
+//			forward.setPath("./coupon_point/couponEvent.jsp");
+//			forward.setRedirect(false);
+//			
+//		}
+//		
+		
+		
+		
+		
+		
+		
+		
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) 끝 *******************/

@@ -26,7 +26,7 @@ public class OrderConfirmAction implements Action {
 			return forward;
 		}
 		
-	
+		// 주문 내역 가져오기
 		AdminGoodsDAO agDAO = new AdminGoodsDAO();
 		
 		Vector orVector = agDAO.detailOrder(tradeNum);

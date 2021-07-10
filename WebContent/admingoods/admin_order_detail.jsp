@@ -3,6 +3,7 @@
 <%@page import="com.basket.db.BasketDTO"%>
 <%@page import="com.member.db.MemberDTO"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -117,8 +118,9 @@
 						 width="80" height="80"></td>	
 				         <td>${detailOrder[deo.index].o_cosName }</td>
 				         <td>${detailOrder[deo.index].o_cosAmount }</td>
-				         <td>${i.cosPrice }</td>
-				         <td>${i.cosPrice * detailOrder[deo.index].o_cosAmount }</td>
+				         <td>₩<fmt:formatNumber value="${i.cosPrice }" pattern="#,###"/></td>
+				         <td>₩<fmt:formatNumber value="${i.cosPrice * detailOrder[deo.index].o_cosAmount }" pattern="#,###"/></td>
+				         
 				    </c:forEach>
 				</tbody>
  			</table>
@@ -183,13 +185,12 @@
 						<th style="font-size: 20px;">총 결제금액</th>
 					</tr>
 					<tr>  		      
-				        <th style="font-size: 20px;">${detailOrder[0].sumMoney }</th>
-				        <th style="color: #0A82FF; font-size: 20px;">
-				        
+						<th style="font-size: 20px;">₩<fmt:formatNumber value="${detailOrder[0].sumMoney }" pattern="#,###"/></th>
+				        <th style="color: #0A82FF; font-size: 20px;"> 
 				        	쿠폰 : ${detailOrder[0].cpUseAmount }<br>
 				        	포인트 : ${detailOrder[0].ptUseAmount }
 				        </th>
-				        <th style="font-size: 20px;">${detailOrder[0].payMoney }</th>
+				        <th style="font-size: 20px;">₩<fmt:formatNumber value="${detailOrder[0].payMoney }" pattern="#,###"/></th>
 				    </tr> 
 				</tbody>
 			</table>

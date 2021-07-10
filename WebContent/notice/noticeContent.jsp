@@ -66,8 +66,10 @@
      <style type="text/css">
 
 table {
-    width: 80%;
-    margin-left : 5%;
+    margin-right :5%;
+     
+         margin-left : 10%;
+   
     border-top: 1px solid #444444;
     border-collapse: collapse;
   }
@@ -121,13 +123,16 @@ table {
 		
 	%> 
 	<br>
-<button class="btn btn-secondary" onclick="location.href='http://localhost:8088/ShoppingMall/notice.nos'">목록으로</button>	
-<br>
+
+<div>
+<button style=" float: right; margin-right:23% " class="btn btn-secondary" onclick="location.href='./notice.nos'">목록으로</button>	
+   <br>
+    <div style="margin-right:30%">
 <table class="table table-striped">
 <tr class="table-active">
-<td><%=type %>
+<td style ="width:30%"><%=type %>
 </td>
-<td><%=notit.getNoticeTitle() %></td>
+<td style ="width:70%"><%=notit.getNoticeTitle() %></td>
 </tr>
 
 
@@ -138,8 +143,10 @@ table {
         
         
         <%
-        System.out.println("ssss "+notit.getNoticeFile());
-        if (notit.getNoticeFile()==null){
+      
+        
+        if (notit.getNoticeFile()==null || notit.getNoticeFile().equals(null)
+        		||  notit.getNoticeFile().equals("null")){
         	%>
         	첨부파일 없음
         	<%
@@ -170,13 +177,16 @@ table {
 
 </tr>
 </table>
-<br>
+	     </div>
+	     <%if(userId.equals("admin")){ %>
+<button style=" float: right; margin-right:23% " class="btn btn-danger" onclick="location.href='./noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
+<button style=" float: right; margin-right:2% " class="btn btn-warning" onclick="location.href='./noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>	
+	<% } %>
+</div>
 <br>
 
-<%if(userId.equals("admin")){ %>
-<button class="btn btn-danger" onclick="location.href='http://localhost:8088/ShoppingMall/noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
-<button  class="btn btn-warning" onclick="location.href='http://localhost:8088/ShoppingMall/noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>	
-	<% } %>
+
+
 	<br>
 	
 <!-- footer 시작 -->

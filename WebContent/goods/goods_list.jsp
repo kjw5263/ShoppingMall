@@ -189,7 +189,12 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기</button>	
+                            
+                            <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
+                            onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
+                            
+                            
+                            <img src="./img/icons/heart.png" width="40px" onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
                         </div>
                     </div>
                 </div>
@@ -206,7 +211,11 @@ table tr td {
                         <div class="product-text">
                             <h6><%=dto.getCosName()%></h6>
                             <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기 </button>	
+                           <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
+                            onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
+                            
+                            
+                            <img src="./img/icons/heart.png" width="40px" onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
                         </div>
                     </div>
                 </div>
@@ -230,15 +239,12 @@ table tr td {
 function basketact(x) {
 	var sure  = confirm("장바구니에 담으시겠습니까?");
 	if(sure == true){
-	 location.href = "http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum="+x;
+	 location.href = "./BasketAdd.ba?cosAmount=1&cosNum="+x;
 	}else{
 		
 	}
 	
 }
-
-
-
 
 </script>
 

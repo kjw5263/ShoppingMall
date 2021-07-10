@@ -9,22 +9,23 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.notice.db.DBconnection;
 import com.var.list.varlist;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class NoticeDAO extends DBconnection{
+public class NoticeDAO {
 	
 	private ResultSet rs = null;
 	private String sql = "";
 	varlist var = new varlist();
 	private String tablename = var.getnoticelistTablename();
-	DBconnection con = new DBconnection();
-	setnoticetool setTool = new setnoticetool();
 	
+	setnoticetool setTool = new setnoticetool();
+	private Connection conn = null;
+	private PreparedStatement pstmt = null;
+	private String databasename = var.getDatabasename();
 	public void insertNotice(noticeDTO noti){
 		noticeinsert Dobbynoti = new noticeinsert();
 		Dobbynoti.doit(noti);
@@ -60,7 +61,10 @@ public class NoticeDAO extends DBconnection{
 			
 			
 			sql = "select * from "+tablename;
-			rs = con.selsql(sql);
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 
 			while (rs.next()) {
@@ -81,7 +85,7 @@ public class NoticeDAO extends DBconnection{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			con.closeDB();
+			
 			closeDB();
 		}
 
@@ -96,8 +100,10 @@ public class NoticeDAO extends DBconnection{
 						+ " where noticeType = 0 order by noticeNum desc limit " + startRow +" , "+ pageSize;		
 			
 			 System.out.println("minsql = "+ sql);
-			rs = con.selsql(sql);
-			
+				conn = getConnection();
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				
@@ -117,7 +123,7 @@ public class NoticeDAO extends DBconnection{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			con.closeDB();
+			
 			closeDB();
 		}
 
@@ -131,8 +137,10 @@ public class NoticeDAO extends DBconnection{
 			
 			sql = "select * from "+tablename +" where noticeType = 1 ";
 			System.out.println("bigsql = "+ sql);
-			rs = con.selsql(sql);
+			conn = getConnection();
 			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				
@@ -152,7 +160,7 @@ public class NoticeDAO extends DBconnection{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			con.closeDB();
+
 			closeDB();
 		}
 
@@ -163,7 +171,10 @@ public class NoticeDAO extends DBconnection{
 		
 		  try{
 		        sql =  "select max(noticeNum) as num from "+ tablename ;
-				rs = con.selsql(sql);
+				conn = getConnection();
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				rs.next();
 				return rs.getInt(1);
 		        }catch (Exception e) {
@@ -183,7 +194,10 @@ public class NoticeDAO extends DBconnection{
 		  try{
 		        sql =  "select max(noticeNum) as num from "+ tablename
 		        		+ " where noticeType = 1 ";
-				rs = con.selsql(sql);
+				conn = getConnection();
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				rs.next();
 				return rs.getInt(1);
 		        }catch (Exception e) {
@@ -196,6 +210,42 @@ public class NoticeDAO extends DBconnection{
 		        
 		
 		
+	}
+	public void closeDB() {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	protected Connection getConnection() {
+		try {
+			// Context 객체를 생성 (프로젝트 정보를 가지고있는객체)
+			Context initCTX = new InitialContext();
+			// DB연동 정보를 불러오기(context.xml)
+			
+			DataSource ds = (DataSource) initCTX.lookup("java:comp/env/jdbc/"+ databasename);
+
+			conn = ds.getConnection();
+
+			System.out.println(" 드라이버 로드, 디비연결 성공! ");
+			System.out.println(conn);
+
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return conn;
 	}
 	
 	
