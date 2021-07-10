@@ -1,7 +1,9 @@
 <%@page import="com.goods.db.listDAO"%>
 <%@page import="com.goods.db.GoodsDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.var.list.varlist"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,7 +16,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Violet | Template</title>
+    <title>JUST SKIN</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -59,7 +61,6 @@
 		}else{
 			
 		}
-		
 	}
 	
 	</script>
@@ -78,11 +79,10 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
   <%
+  	String userId = (String) session.getAttribute("userId");
 //테스트 버전 업2!
   	listDAO gdao = new listDAO();
-  
- 	
-   
+
     List bestgoodsList = gdao.getbestGoodsList();
 
     String goHead = "./GoodsList.cos";
@@ -161,7 +161,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="single-features-ads">
-                            <img src="./img/icons/chat.png" alt="">
+                            <img src="./img/icons/chat1.png" alt="">
                             <h4>24시간 1:1 실시간 채팅</h4>
                             <p> 저스트스킨에게 궁금한 점이 생기셨나요?<br>
                              	홈페이지 하단 챗봇을 통해 질문해주세요.<br>
@@ -220,23 +220,27 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="section-title">
-                            <h2>Best Skincare</h2>
+                            <h2 style="margin-bottom:80px">Best Skincare</h2>
                         </div>
+
                         <ul class="product-controls">
-                        	<li data-filter=".allgoods">All</li>
+                        	<li data-filter=".allgoods" style="font-size:25px"><b>All</b></li>
                           <%
                             for(int i = 2 ; i<http.length;i++){
                             	
                             %>
-                            <li data-filter=".<%=http[i][1] %>"><%=http[i][1] %></li>
+                            <li data-filter=".<%=http[i][1] %>"
+                             style="font-size:25px;"><b><%=http[i][1] %></b></li>
                             <%} %>
                             
                         </ul>
+
                     </div>
                 </div>
             </div>
             <div class="row" id="product-list">
-                <%for(int i = 0 ; i<bestsize ;i++){ 
+                <%
+                for(int i = 0 ; i<bestsize ;i++){ 
             	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
             	%>
 
@@ -251,22 +255,21 @@
                         </figure>
                         <div class="product-text">
                         	<div>
-								<div><%=dto.getCosName()%></div>
-                            	<div><%=dto.getCosPrice() %>원</div>                          	
+								<div style="text-align: center;"><%=dto.getCosName()%></div>
+                            	<div style="color:#E02020; text-align: center; font-size:22px; font-weight: 500;" >
+                            	<fmt:formatNumber value="<%=dto.getCosPrice() %>" pattern="#,###"/>원</div>                	
                         	</div>
                             <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
                             onclick="basketact(<%=dto.getCosNum()%>)"
                             style='cursor:pointer;'>
                             
-                            
-                            <img src="./img/icons/heart.png" width="40px" 
+                            <img src="./img/icons/heart1.png" width="40px" 
                             onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'"
-                            style='cursor:pointer;'>
-                            
-                            
+                            style='cursor:pointer; margin-left:10px; margin-top:10px;'>
                         	</p>
                         </div>
                     </div>
+    
                 </div>
                 <%} %>
             </div>
@@ -314,17 +317,6 @@
         </div>
     </section>
     <!-- Page Add Section End -->
-    
-    <!-- 사이드 배너 시작 -->  
-    <div id="sidebanner">
-    	<a href="./Question.que"><img alt="" src="./img/main/search.png">
-    	<div class="text-center">
-    	<b>나에게 맞는<br>
-    		화장품은?</b>
-    	</div>
-    	</a>
-	</div>
-    <!-- 사이드 배너 끝 -->
 
     <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
