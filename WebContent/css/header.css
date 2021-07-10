@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+a:hover {
+	text-decoration: none;
+	outline: none;
+	color: black;
+}
+
+a {
+    color: #1e1e1e;
+    font-size: 16px;
+    display: inline-block;
+    font-weight: 500;
+    position: relative;
+    line-height: 42px;
+}
+

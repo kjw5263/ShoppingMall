@@ -145,7 +145,6 @@ table tr td {
                          
                             <%
                             for(int i = 0 ; i<http.length;i++){
-                            	
                             %>
                             <li data-filter=".<%=http[i] %>"><%=http[i] %></li>
                             <%} %>
@@ -156,7 +155,6 @@ table tr td {
                             <li data-filter=".allgoods">All</li>
                             <%
                             for(int i = 0 ; i<cat.length;i++){
-                            	
                             %>
                             <li data-filter=".<%=cat[i] %>"><%=cat[i] %></li>
                             <%} %>
@@ -167,7 +165,6 @@ table tr td {
                             <li data-filter=".allgoods">All</li>
                             <%
                             for(int i = 0 ; i<skin.length;i++){
-                            	
                             %>
                             <li data-filter=".<%=skin[i] %>"><%=skin[i] %></li>
                             <%} %>
