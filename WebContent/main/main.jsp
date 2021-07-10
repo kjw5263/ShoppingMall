@@ -49,6 +49,20 @@
 	<!-- 챗봇 시작 -->
 	<script src="./js/chatbot.js" type="text/javascript"></script>
 	<!-- 챗봇 끝 -->
+	
+	<script type="text/javascript">
+
+	function basketact(x) {
+		var sure  = confirm("장바구니에 담으시겠습니까?");
+		if(sure == true){
+		 location.href = "./BasketAdd.ba?cosAmount=1&cosNum="+x;
+		}else{
+			
+		}
+		
+	}
+	
+	</script>
     
 </head>
 
@@ -166,7 +180,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="single-box-item first-box">
-                                    <img src="./img/sale.jpg" alt="sale" onclick="location.href='./couponEvent.cp'">
+                                    <img src="./img/sale.jpg" alt="sale" 
+                                    onclick="location.href='./couponEvent.cp'"
+                                    style='cursor:pointer;'>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -239,10 +255,13 @@
                             	<div><%=dto.getCosPrice() %>원</div>                          	
                         	</div>
                             <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
-                            onclick="location.href='./BasketAdd.ba?cosAmount=1&cosNum=<%=dto.getCosNum()%>'">
+                            onclick="basketact(<%=dto.getCosNum()%>)"
+                            style='cursor:pointer;'>
                             
                             
-                            <img src="./img/icons/heart.png" width="40px" onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
+                            <img src="./img/icons/heart.png" width="40px" 
+                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'"
+                            style='cursor:pointer;'>
                             
                             
                         	</p>
@@ -323,18 +342,7 @@
     <script src="./js/jquery.nice-select.min.js"></script>
     <script src="./js/mixitup.min.js"></script>
     <script src="./js/main.js"></script>
-    
-    
-   	<!-- 플로팅 배너 시작 -->
-	<div id="banner" style=" position:block;">
-		<a href="./Survey.me"><img alt="" src="./img/main/question.png"></a>
-	</div>
-	<!-- 플로팅 배너 끝 -->
 
-    
-    
-
-    
 </body>
 
 
