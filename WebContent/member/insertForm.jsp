@@ -4,7 +4,7 @@
 <html lang="zxx">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
-	<title>Login V10</title> 
+	<title>회원가입 | JUST SKIN</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	

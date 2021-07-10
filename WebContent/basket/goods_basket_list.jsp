@@ -37,19 +37,27 @@
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
     
-<title>장바구니</title>
+<title>장바구니 | JUST SKIN</title>
 </head>
 <body>
 <!-- Header Section Begin -->
 <jsp:include page="/header/header.jsp"/>
 <!-- Header Section End -->
 
-    <!-- Page Add Section Begin -->
-    <section class="page-add">
-        <div class="container">
-        </div>
-    </section>
-    <!-- Page Add Section End -->
+   <!-- Page Add Section Begin -->
+	<section class="page-add">
+	<div class="row" style="margin-bottom: -2%;">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-10">
+			<div class="page-breadcrumb">
+				<h2>
+					장바구니<span>.</span>
+				</h2>
+			</div>
+		</div>
+	</div>
+	</section>
+	<!-- Page Add Section End -->
     
 	<!-- container 시작 -->	
 	<div class="container-fluid">	

@@ -37,7 +37,7 @@
     <script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
     <script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
     
-<title>등록 상품 목록</title>
+<title>등록 상품 목록 | JUST SKIN</title>
 </head>
 <body>
 <!-- Header Section Begin -->

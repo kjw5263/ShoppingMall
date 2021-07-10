@@ -29,7 +29,7 @@
 <!--===============================================================================================-->
 
 
-<title>회원가입</title>
+<title>회원가입 | JUST SKIN</title>
 
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"

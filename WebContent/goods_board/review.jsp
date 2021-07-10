@@ -13,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Title</title>
+  <title>JUST SKIN</title>
   <meta charset="UTF-8">
   <meta name="description" content="Yoga Studio Template">
   <meta name="keywords" content="Yoga, unica, creative, html">

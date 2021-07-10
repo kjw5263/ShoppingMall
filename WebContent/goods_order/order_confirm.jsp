@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문완료 - 주문상세내역</title>
+<title>주문완료 - 주문상세내역 | JUST SKIN </title>
 
 <meta charset="UTF-8">
 <meta name="description" content="Yoga Studio Template">

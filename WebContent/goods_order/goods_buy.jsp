@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>상품 주문하기</title>
+<title>상품 주문 하기 | JUST SKIN</title>
 
 
 <meta charset="UTF-8">
