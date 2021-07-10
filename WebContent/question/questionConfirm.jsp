@@ -79,15 +79,6 @@
 		</div>
 	
 	
-		<div class="row">
-			<div class="col-2">
-			</div>
-			<div class="col-8 text-center" >
-				점수는 ${sum} 입니다. <br>
-			</div>
-			<div class="col-2">	
-			</div>			
-		</div>
 		
 		<div class="row">
 			<div class="col-2">

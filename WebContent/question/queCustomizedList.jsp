@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -73,7 +73,7 @@
 	<div class="container-fluid"></div>
 	<!-- container 시작 -->	
 	<div class="container text-center mt-5">	
-		${userSkinType} 피부타입을 위한 추천 화장품		
+		<h4><b>${userSkinType} 피부타입을 위한 추천 화장품</b></h4>		
 		
 		<div class="row mt-5">
 		
@@ -87,9 +87,17 @@
                        </figure>
                        <div class="product-text">
                            <h6>${i.cosName}</h6>
-                           <p>${i.cosPrice}원  </p>
+                           <p><fmt:formatNumber value="${i.cosPrice}" pattern="#,###"/>원  </p>
                            
-                           <button onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=${i.cosNum} '">장바구니 담기</button>	
+                           <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
+                            onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=${i.cosNum} '"
+                            style='cursor:pointer;'>
+                            
+                            <img src="./img/icons/heart1.png" width="40px" 
+                            onclick="location.href='./insertLike.li?cosNum=${i.cosNum}'"
+                            style='cursor:pointer; margin-left:10px; margin-top:10px;'>
+                            
+                            
            		
                        </div>
                    </div>
