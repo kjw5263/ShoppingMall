@@ -14,9 +14,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>PRODUCT | JUST SKIN</title>
-
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -33,9 +31,7 @@
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <link rel="stylesheet" href="./css/goods_list.css" type="text/css">
     <script src="./js/chatbot.js" type="text/javascript"></script>
-
 </head>
-
 
 <body>
 
@@ -45,11 +41,11 @@
 	<!-- header 끝 -->
   
   <%
-	//테스트 버전 업2!
+//테스트 버전 업2!
   	listDAO gdao = new listDAO();
   	
-	List goodsList = (List)request.getAttribute("goodsList");
-	List bestgoodsList = (List)request.getAttribute("bestgoodsList");
+  List goodsList = (List)request.getAttribute("goodsList");
+  List bestgoodsList = (List)request.getAttribute("bestgoodsList");
 
     String goHead = "./GoodsList.cos";
     varlist var = new varlist();
@@ -59,35 +55,36 @@
    	
     int size = goodsList.size();
     int bestsize = bestgoodsList.size();
+    
+   
   %>
 	<section class="latest-products spad">
         <div class="container">
             <div class="product-filter">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-						<div class="section-title">
+                        <div class="section-title">
 							<div class="page-breadcrumb">
 								<h2 id="title">
 									PRODUCTS<span>.</span>
 								</h2>
 							</div>
-						</div>
-
-                        <ul class="product-controls">
+                        </div>
+                        <ul class="product-controls" id="proc">
                        	 	<li data-filter=".allgoods" id="all"><b>All</b></li>
-                           
                            
                             <li data-filter=".베스트상품" id="best"><b>베스트상품</b></li>
 
                          
                             <%
                             for(int i = 0 ; i<http.length;i++){
+                            	
                             %>
                             <li data-filter=".<%=http[i] %>" id="cate"><b><%=http[i] %></b></li>
-                            <%} %>
+                            <%} %>                      
                         </ul>
-                        <hr> 
-                        <ul class="product-controls">
+                        <hr>
+                         <ul class="product-controls">
                             <%
                             for(int i = 0 ; i<cat.length;i++){
                             	if(i==8){
@@ -96,11 +93,12 @@
                             <%} else { %>
                             <li data-filter=".<%=cat[i] %>" id="cat"><b><%=cat[i] %></b></li>
                             <%} }%> 
-                        </ul>                        
-                        <hr>
+                        </ul>
+                         <hr>
                          <ul class="product-controls">
                             <%
                             for(int i = 0 ; i<skin.length;i++){
+                            	
                             %>
                             <li data-filter=".<%=skin[i] %>" id="type"><b><%=skin[i] %></b></li>
                             <%} %>
@@ -123,14 +121,13 @@
 								<div style="text-align: center;"><%=dto.getCosName()%></div>
                             	<div id="price">
                             	<fmt:formatNumber value="<%=dto.getCosPrice() %>" pattern="#,###"/>원</div>                	
-                        		</div>
+                            </div>
                             <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
                             onclick="basketact(<%=dto.getCosNum()%>)"
                             style='cursor:pointer;'>
                             
                             <img src="./img/icons/heart1.png" width="40px" id="heart"
-                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
-                        	</p>
+                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">                           
                         </div>
                     </div>
                 </div>
@@ -138,26 +135,23 @@
                 <%for(int i = 0 ; i<bestsize ;i++){ 
             	GoodsDTO dto = (GoodsDTO) bestgoodsList.get(i);
             	%>
-                <div class="col-lg-3 col-sm-6 mix all 베스트상품">
+                <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">
                     <div class="single-product-item">
                         <figure>
                             <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage()%>" alt=""></a>
                             <div class="p-status">best</div>
                         </figure>
                         <div class="product-text">
-                        	<div>
-								<div style="text-align: center;"><%=dto.getCosName()%></div>
-                            	<div id="price">
-                            	<fmt:formatNumber value="<%=dto.getCosPrice() %>" pattern="#,###"/>원</div>                	
-                        	</div>
+							<div style="text-align: center;"><%=dto.getCosName()%></div>
+                           	<div id="price">
+                           	<fmt:formatNumber value="<%=dto.getCosPrice() %>" pattern="#,###"/>원</div>                	
+                        </div>
                             <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
                             onclick="basketact(<%=dto.getCosNum()%>)"
                             style='cursor:pointer;'>
                             
                             <img src="./img/icons/heart1.png" width="40px" id="heart"
-                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">
-                        	</p>
-                        </div>
+                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">                        
                     </div>
                 </div>
                 <%} %>
@@ -167,16 +161,19 @@
     </section>
     
     <!-- Page Add Section Begin -->
-    <section class="page-add" style="margin-bottom: 100px;">
+    <section class="page-add" style="margin-bottom: 70px;">
         <div class="container">
         </div>
     </section>
     <!-- Page Add Section End -->
-    
+        
     <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
-
+    
+  
+  
+  
 
 </body>
 
@@ -185,12 +182,15 @@
 function basketact(x) {
 	var sure  = confirm("장바구니에 담으시겠습니까?");
 	if(sure == true){
-	 location.href = "./BasketAdd.ba?cosAmount=1&cosNum="+x;
+	 location.href = "http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum="+x;
 	}else{
 		
 	}
 	
 }
+
+
+
 
 </script>
 
