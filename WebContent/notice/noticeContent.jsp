@@ -148,8 +148,8 @@
 
 				<div>
 				
-						<table class="table table-striped">
-							<tr class="table-active">
+						<table class="table">
+							<tr>
 								<td style="width: 30%"><%=type%></td>
 								<td style="width: 70%"><%=notit.getNoticeTitle()%></td>
 							</tr>

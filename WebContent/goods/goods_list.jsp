@@ -182,7 +182,7 @@
 function basketact(x) {
 	var sure  = confirm("장바구니에 담으시겠습니까?");
 	if(sure == true){
-	 location.href = "http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum="+x;
+	 location.href = "./BasketAdd.ba?cosAmount=1&cosNum="+x;
 	}else{
 		
 	}

@@ -129,7 +129,7 @@
 
 
 			<form action="noticewritepro.nos" method="post" enctype="multipart/form-data">
-				<table class="table table-striped">
+				<table class="table">
 						<tr>						
 						<td>제목</td>
 						<td colspan="2"><input type="text" name="title" class="form-control"></td> 
