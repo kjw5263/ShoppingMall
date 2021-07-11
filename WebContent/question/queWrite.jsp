@@ -61,6 +61,21 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
+	<!-- Page Add Section Begin -->
+	<section class="page-add" style="margin-top: 50px;">
+	<div class="row" id="add">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-10">
+			<div class="page-breadcrumb">
+				<h2>
+					질문 - 글쓰기<span>.</span>
+				</h2>
+			</div>			
+		</div>
+	</div>
+	</section>
+	<!-- Page Add Section End -->
+	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
@@ -69,16 +84,6 @@
 			
 			
 			<div class="col-8">
-			
-				<!-- 제목 시작 -->
-				<div class="col-md-12 text-center p-5 row">
-					<div class="col-2"></div>
-					<div class="col-4">
-						<h3>질문 - 글쓰기</h3>
-					</div>
-					<div class="col-6"></div>
-				</div>
-				<!-- 제목 끝 --> 
 				
 				<!-- 글쓰기 폼 시작 -->
 				<form action="./QueWriteAction.que" method="post" id="fr" onsubmit="return check()">
@@ -101,6 +106,13 @@
 		
 	</div>
 	<!-- container 끝 -->	
+	
+	<!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 120px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->	
 	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
