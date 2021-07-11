@@ -78,8 +78,7 @@
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function DaumPostcode() {
 		new daum.Postcode(
-				{
-					oncomplete : function(data) {
+				{oncomplete : function(data) {
 						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
@@ -130,196 +129,179 @@
 	
 	$(document).ready(function() {
 			
+			var ck1=false;			//id
+			var ck2=false;			//pw
+			var ck3=false;			//pw1
+			var ck4=false;			//name
+			var ck5=false;			//phone
+			var ck6=false;			//address3
 		
-		var ck1=false;			//id
-		var ck2=false;			//pw
-		var ck3=false;			//pw1
-		var ck4=false;			//name
-		var ck5=false;			//phone
-		var ck6=false;			//address2
-		var ck7=false;			//address3
-		
-		$("form").submit(function(){
-			
-			 if($.trim($("#userId").val()) == ""){
-				 $('.ckMsg_id').text("아이디를 입력하세요");     
-	             $('.ckMsg_id').css("color","red"); 
-	             $('.ckMsg_id').css("padding-left","1rem"); 
-	             $("#userId").focus();
-	             return false;
-			 }
-			 if($.trim($("#pw").val()) == ""){
-				 $('.ckMsg_pw').text("비밀번호를 입력하세요");     
-	             $('.ckMsg_pw').css("color","red"); 
-	             $('.ckMsg_pw').css("padding-left","1rem"); 
-	             $("#pw").focus();
-	             return false;
-			 }
-			 if($.trim($("#pw1").val()) == ""){
-				 $('.ckMsg_pw1').text("비밀번호 확인을 입력하세요");     
-	             $('.ckMsg_pw1').css("color","red"); 
-	             $('.ckMsg_pw1').css("padding-left","1rem"); 
-	             $("#pw1").focus();
-	             return false;
-			 }
-			 if($.trim($("#name").val()) == ""){
-				 $('.ckMsg_name').text("이름을 입력하세요");     
-	             $('.ckMsg_name').css("color","red"); 
-	             $('.ckMsg_name').css("padding-left","1rem"); 
-	             $("#name").focus();
-	             return false;
-			 }
-			 if($.trim($("#phone").val()) == ""){
-				 $('.ckMsg_ph').text("연락처를 입력하세요");     
-	             $('.ckMsg_ph').css("color","red"); 
-	             $('.ckMsg_ph').css("padding-left","1rem"); 
-	             $("#phone").focus();
-	             return false;
-			 }
-			 if($.trim($("#address1").val()) == ""){
-				 $('.ckMsg_addr1').text("주소를 입력하세요");     
-	             $('.ckMsg_addr1').css("color","red"); 
-	             $('.ckMsg_addr1').css("padding-left","1rem"); 
-	             $("#address1").focus();
-	             return false;
-			 }
-			 if($.trim($("#address2").val()) == ""){
-				 $('.ckMsg_addr2').text("주소를 입력하세요");     
-	             $('.ckMsg_addr2').css("color","red"); 
-	             $('.ckMsg_addr2').css("padding-left","1rem"); 
-	             $("#address2").focus();
-	             return false;
-			 }
-			 
-			 if($.trim($("#address3").val()) == ""){
-				$('.ckMsg_addr3').text("상세주소를 입력하세요");     
-	            $('.ckMsg_addr3').css("color","red"); 
-	            $('.ckMsg_addr3').css("padding-left","1rem"); 
-	            $("#address3").focus();
-	            return false;											
-			 }
-			 
-			 
-			 if(ck1 == false || ck2 == false || ck3 == false || ck4 == false || 
-				ck5 == false || ck6 == false ||ck7 == false){
-				 return false;
-			 }
-		}); //form 공백체크
+				$("#form").submit(function(){
+					
+					 if($.trim($("#userId").val()) == ""){
+						 $('.ckMsg_id').text("아이디를 입력하세요");     
+			             $('.ckMsg_id').css("color","red"); 
+			             $('.ckMsg_id').css("padding-left","1rem"); 
+			             $("#userId").focus();
+			             return false;
+					 }
+					 if($.trim($("#pw").val()) == ""){
+						 $('.ckMsg_pw').text("비밀번호를 입력하세요");     
+			             $('.ckMsg_pw').css("color","red"); 
+			             $('.ckMsg_pw').css("padding-left","1rem"); 
+			             $("#pw").focus();
+			             return false;
+					 }
+					 if($.trim($("#pw1").val()) == ""){
+						 $('.ckMsg_pw1').text("비밀번호 확인을 입력하세요");     
+			             $('.ckMsg_pw1').css("color","red"); 
+			             $('.ckMsg_pw1').css("padding-left","1rem"); 
+			             $("#pw1").focus();
+			             return false;
+					 }
+					 if($.trim($("#name").val()) == ""){
+						 $('.ckMsg_name').text("이름을 입력하세요");     
+			             $('.ckMsg_name').css("color","red"); 
+			             $('.ckMsg_name').css("padding-left","1rem"); 
+			             $("#name").focus();
+			             return false;
+					 }
+					 if($.trim($("#phone").val()) == ""){
+						 $('.ckMsg_ph').text("연락처를 입력하세요");     
+			             $('.ckMsg_ph').css("color","red"); 
+			             $('.ckMsg_ph').css("padding-left","1rem"); 
+			             $("#phone").focus();
+			             return false;
+					 }
+					 			 
+					 if($.trim($("#address3").val()) == ""){
+						$('.ckMsg_addr3').text("상세주소를 입력하세요");     
+			            $('.ckMsg_addr3').css("color","red"); 
+			            $('.ckMsg_addr3').css("padding-left","1rem"); 
+			            $("#address3").focus();
+			            return false;
+					 }
+					 
+					 if(ck1 == false || ck2 == false || ck3 == false || ck4 == false || ck5 == false ||
+							 ck6 == false ){
+						 return false;
+					 }
+				}); //form 공백체크
 		
 
-		$("#userId").keyup(function() {
-				var userId = $("#userId").val();
-				var check = /^[A-Za-z\d_-]{4,15}$/;
-				
-				$.ajax({
-						url : './MemberCheckAction.me',
-						type : 'post',
-						data : {"userId" : userId},
-						success : function(data) {
-							
-						if (data > 0) {
-							$('.ckMsg_id').text("이미 존재하는 아이디입니다");
-							$('.ckMsg_id').css("color","red");
-							$('.ckMsg_id').css("padding-left","5px");
-							ck1 = false;} 
-						else {
-							if (userId.match(check) != null) {
-								$('.ckMsg_id').text("사용가능한 아이디입니다");
-								$('.ckMsg_id').css("color","green");
-								ck1 = true;}
-							else {$('.ckMsg_id').text("아이디는 4~15자리만 가능합니다");
-								  $('.ckMsg_id').css("color","red");
-								  $('.ckMsg_id').css("padding-left","5px");
-								  ck1 = false;}
-							}
-						 },
-						error : function() {alert("에러입니다");}
-				});
-		});//id 중복확인 
+				$("#userId").keyup(function() {
+					var userId = $("#userId").val();
+					var check = /^[A-Za-z\d_-]{4,15}$/;
+					
+					$.ajax({
+							url : './MemberCheckAction.me',
+							type : 'post',
+							data : {"userId" : userId},
+							success : function(data) {
+								
+							if (data > 0) {
+								$('.ckMsg_id').text("이미 존재하는 아이디입니다");
+								$('.ckMsg_id').css("color","red");
+								$('.ckMsg_id').css("padding-left","5px");
+								ck1 = false;} 
+							else {
+								if (userId.match(check) != null) {
+									$('.ckMsg_id').text("사용가능한 아이디입니다");
+									$('.ckMsg_id').css("color","green");
+									ck1 = true;}
+								else {$('.ckMsg_id').text("아이디는 4~15자리만 가능합니다");
+									  $('.ckMsg_id').css("color","red");
+									  $('.ckMsg_id').css("padding-left","5px");
+									  ck1 = false;}
+								}
+							 },
+							error : function() {alert("에러입니다");}
+					});
+				});//id 중복확인 
 
-		$("#pw").keyup(function() {
-				var userPass = $("#pw").val();
-				var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/
-						.test(userPass);
+				$("#pw").keyup(function() {
+					var userPass = $("#pw").val();
+					var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/
+							.test(userPass);
+	
+					if (userPass == null) {
+						$('.ckMsg_pw').text(
+								"비밀번호를 입력하세요");
+						$('.ckMsg_pw').css("color",
+								"red");
+						$('.ckMsg_pw').css(
+								"padding-left",
+								"5px");
+						ck2 = false;
+	
+					} else if (check) {
+						$('.ckMsg_pw').text(
+								"사용 가능한 비밀번호입니다");
+						$('.ckMsg_pw').css("color",
+								"green");
+						$('.ckMsg_pw').css(
+								"padding-left",
+								"5px");
+						ck2 = true;
+					} else {
+						$('.ckMsg_pw')
+								.text("대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");
+						$('.ckMsg_pw').css("color",
+								"red");
+						$('.ckMsg_pw').css(
+								"padding-left",
+								"5px");
+						ck2 = false;
+					}
 
-				if (userPass == null) {
-					$('.ckMsg_pw').text(
-							"비밀번호를 입력하세요");
-					$('.ckMsg_pw').css("color",
-							"red");
-					$('.ckMsg_pw').css(
-							"padding-left",
-							"1rem");
-					ck2 = false;
+				});//pw
 
-				} else if (check) {
-					$('.ckMsg_pw').text(
-							"사용 가능한 비밀번호입니다");
-					$('.ckMsg_pw').css("color",
-							"green");
-					$('.ckMsg_pw').css(
-							"padding-left",
-							"1rem");
-					ck2 = true;
-				} else {
-					$('.ckMsg_pw')
-							.text("대소문자,숫자,특수문자(@$!%*#?&) 세가지를 조합한 8~16자리를 입력하세요");
-					$('.ckMsg_pw').css("color",
-							"red");
-					$('.ckMsg_pw').css(
-							"padding-left",
-							"5px");
-					ck2 = false;
-				}
+				$("#pw1").keyup(function() {
 
-			});//pw
+					if ($("#pw").val() != $("#pw1")
+							.val()) {
+						$('.ckMsg_pw1').text(
+								"비밀번호가 일치하지 않습니다");
+						$('.ckMsg_pw1').css(
+								"color", "red");
+						$('.ckMsg_pw1').css(
+								"padding-left",
+								"5px");
+						ck3 = false;
+					} else {
+						$('.ckMsg_pw1').text(
+								"비밀번호가 일치합니다");
+						$('.ckMsg_pw1').css(
+								"color", "green");
+						$('.ckMsg_pw1').css(
+								"padding-left",
+								"5px");
+						ck3 = true;
+					}
 
-		$("#pw1").keyup(function() {
+				});//pw1 (pw확인)
 
-				if ($("#pw").val() != $("#pw1")
-						.val()) {
-					$('.ckMsg_pw1').text(
-							"비밀번호가 일치하지 않습니다");
-					$('.ckMsg_pw1').css(
-							"color", "red");
-					$('.ckMsg_pw1').css(
-							"padding-left",
-							"5px");
-					ck3 = false;
-				} else {
-					$('.ckMsg_pw1').text(
-							"비밀번호가 일치합니다");
-					$('.ckMsg_pw1').css(
-							"color", "green");
-					$('.ckMsg_pw1').css(
-							"padding-left",
-							"5px");
-					ck3 = true;
-				}
+				$("#name").keyup(function() {
 
-			});//pw1 (pw확인)
+					var name = $("#name").val();
+					var check = /^[A-Z|a-z|가-힣]{2,5}$/;
+					
+					if (name.match(check) != null) {
+						$('.ckMsg_name').text("");
+						ck4 = true;
+					} else {
+						$('.ckMsg_name').text(
+								"이름을 정확히 입력하세요");
+						$('.ckMsg_name')
+								.css("color", "red");
+						$('.ckMsg_name').css(
+								"padding-left", "5px");
+						ck4 = false;
+					}
 
-		$("#name").keyup(function() {
+				});//name
 
-				var name = $("#name").val();
-				var check = /^[A-Z|a-z|가-힣]{2,5}$/;
-				
-				if (name.match(check) != null) {
-					$('.ckMsg_name').text("");
-					ck4 = true;
-				} else {
-					$('.ckMsg_name').text(
-							"이름을 정확히 입력하세요");
-					$('.ckMsg_name')
-							.css("color", "red");
-					$('.ckMsg_name').css(
-							"padding-left", "5px");
-					ck4 = false;
-				}
-
-			});//name
-
-		$("#phone").keyup(function() {
+				$("#phone").keyup(function() {
 
 						var phone = $("#phone").val();
 						var check1 = /^010([0-9]{8})$/;
@@ -336,10 +318,33 @@
 							$('.ckMsg_phone').css(
 									"padding-left",
 									"5px");
-							chkup5 = false;
+							ck5 = false;
 						}
 
-					});//phone
+				});//phone
+					
+				$("#address3").keyup(function() {
+
+						var address3 = $("#address3").val();
+						var check = /^[A-Z|a-z|가-힣|0-9]{2,10}$/;
+						if (address3.match(check1) != null) {
+							$('.ckMsg_addr3').text("");
+							ck6 = true;
+						} else {
+							$('.ckMsg_addr3').text(
+									"상세주소를 적어주세요");
+							$('.ckMsg_addr3').css(
+									"color", "red");
+							$('.ckMsg_addr3').css(
+									"padding-left",
+									"5px");
+							ck6 = false;
+						}
+
+				});//address3		
+		
+					
+					
 		});//form
 	</script>
 	<!-- 유효성 체크  끝 -->
@@ -367,9 +372,9 @@
 	<!-- Page introduce Section End -->
 
 <!-- Sign Up insert Page Begin -->
-<section class="cart-total-page spad" id="signUp">
+<section class="cart-total-page spad">
 	<div class="container">
-		<form action="./MemberJoinAction.me" class="checkout-form" method="post">
+		<form action="./MemberJoinAction.me" class="checkout-form" method="post" id="form" name="form">
 			<div class="row">
 					<input type="hidden" name="naverLogin" value="<%=naverLogin%>">
 					<input type="hidden" name="kakaoLogin" value="<%=kakaoLogin%>">
@@ -429,12 +434,6 @@
 						<div class="col-lg-3">
 							<input type="date" id="userBirth" name="userBirth" min="1940-01-01" max="2009-12-31" value="2000-01-01">
 						</div>
-					<!-- 	<div class="col-lg-7">
-							<div class="agree">
-								<input type="checkbox" id="ageCheck">
-   								<label for="a4"><span>만 14세 이상 확인 (필수)</span></label>
-							</div>
-						</div> -->
 					</div>
 					<div class="row">
 						<div class="col-lg-2">
@@ -521,7 +520,7 @@
 				<div class="payment-method">
 					<div class="row">
 						<div class=col-12>
-                 			<h4>피부에 맞는 화장품을 추천해드립니다.</h4>
+                 			<h4>회원가입시 피부에 맞는 화장품을 추천해드립니다.</h4>
                         </div>
                     </div> 
                     
@@ -532,16 +531,16 @@
                        <div class=col-10>	
                     		<div class="btn-group btn-group-toggle" data-toggle="buttons">
                     		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="건성"> 건성
+                    			   <input type="radio" name="userSkinType" value="건성"> 건성
                       		   </label>
                       		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="중성"> 중성
+                    			   <input type="radio" name="userSkinType" value="중성"> 중성
                       		   </label>
                       		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="지성"> 지성
+                    			   <input type="radio" name="userSkinType" value="지성"> 지성
                       		   </label>
                       		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="복합성"> 복합성
+                    			   <input type="radio" name="userSkinType" value="복합성"> 복합성
                       		   </label>
                        		</div>
                        </div>
@@ -553,24 +552,24 @@
                        <div class=col-10>	
                     		<div class="btn-group btn-group-toggle" data-toggle="buttons">
                     		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="민감성"> 민감성
+                    			   <input type="radio" name="userTrouble" value="민감성"> 민감성
                       		   </label>
                       		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="아토피"> 아토피
+                    			   <input type="radio" name="userTrouble" value="아토피"> 아토피
                       		   </label>
                       		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="여드름"> 여드름
+                    			   <input type="radio" name="userTrouble" value="여드름"> 여드름
                       		   </label>
                       		   <label class="btn btn-outline-info">
-                    			   <input type="radio" name="skinType" value="해당없음"> 해당없음
+                    			   <input type="radio" name="userTrouble" value="해당없음"> 해당없음
                       		   </label>
                        		</div>
                        </div>
                     </div>
                     <div class=row>
                     	<div class=col-4></div>
-                    	<div class=col-4 align="center">
-						  <button type="submit" class="btn btn-secondary" style="border-radius: 12px;">회원가입하기</button>
+                    	<div class=col-4>
+						  <input type="submit" class="btn btn-secondary" style="border-radius: 12px;" value="회원가입하기">
 						</div>
 						<div class=col-4></div>
 					</div>
