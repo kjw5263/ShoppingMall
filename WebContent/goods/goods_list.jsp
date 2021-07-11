@@ -67,7 +67,7 @@
                     <div class="col-lg-12 text-center">
 						<div class="section-title">
 							<div class="page-breadcrumb">
-								<h2 style="margin-bottom:60px">
+								<h2 id="title">
 									PRODUCTS<span>.</span>
 								</h2>
 							</div>

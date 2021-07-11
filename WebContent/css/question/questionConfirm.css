@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+#jum {
+    color: #B0BCC2;
+}
+
+#type{
+	font-size:25px;
+	padding:4px;
+}
+
+#type2{
+	font-size:25px;
+	color:#3232FF;
+	padding:4px;
+}
+
+#title{
+	margin-top:-20px;
+	margin-bottom:50px;
+	font-size:50px;
+	font-weight: 550;
+}
+
+#image{
+	width:150px;
+	height:150px;
+	margin-bottom:30px;
+}
+
+#at{
+	font-size:20px;
+}
+
+#alert{
+	font-size:17px;
+	color:black;
+}
+
+#type3{
+	margin-bottom:55px;
+}
+
+#care{
+	margin-bottom:30px;
+}
+
+#danger{
+	margin-bottom:30px;
+}

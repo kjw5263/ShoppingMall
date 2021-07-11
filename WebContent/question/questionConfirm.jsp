@@ -50,6 +50,10 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    
+ 	<!-- 화장품 리스트 css 시작 -->
+    <link rel="stylesheet" href="./css/question/questionConfirm.css" type="text/css">
+	<!-- 화장품 리스트 css 끝 -->   
 
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -63,6 +67,11 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
+	<section class="page-add" style="margin-top: 15px;">
+        <div class="container">
+        </div>
+    </section>
+	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
@@ -70,58 +79,55 @@
 			<div class="col-2">
 			</div>
 			<div class="col-8 text-center" >
-				<h4>피부타입 테스트 진단결과</h4>
+				<h3 id="title">피부타입 진단결과<span id="jum">.</span></h3>
 				<br>
-				<img alt="" src="./img/question/skin.png" width="150px" height="150px">
+				<img alt="" src="./img/question/skin.png" id="image">
 			</div>
 			<div class="col-2">	
 			</div>			
 		</div>
 	
-	
-		
 		<div class="row">
 			<div class="col-2">
 			</div>
-			<div class="col-8 text-center" >
-			  
-				당신의 피부타입은
-				
+			<div class="col-8 text-center">
+				<div id="type3">
+				<span id="type">당신의 피부타입은</span>
 				<c:choose>
 		         <c:when test = "${sum <= qsdto.score1}">
-		           	건성입니다.
+		           	<b id="type2">건성</b><span id="type">입니다.</span>
 		           	<%
 		           	request.setAttribute("userSkinType", "건성");
 		           	userSkinType = "건성";
 		           	%>
 		         </c:when>
 		         <c:when test = "${qsdto.score2 <= sum && sum <= qsdto.score3}">
-		         	중성입니다.
+		         	<b id="type2">중성</b><span id="type">입니다.</span>
 		           	<%
 		           	request.setAttribute("userSkinType", "중성");
 		           	userSkinType = "중성";
 		         	%>
 		         </c:when>
 				 <c:when test = "${qsdto.score4 <= sum && sum <= qsdto.score5}">
-		         	복합성입니다.
+		         	<b id="type2">복합성</b><span id="type">입니다.</span>
 		           	<%
 		           	request.setAttribute("userSkinType", "복합성"); 
 		           	userSkinType = "복합성";
 		           	%>
 		         </c:when>		         
 		         <c:otherwise>
-		         	지성입니다.
+		         	<b id="type2">지성</b><span id="type">입니다.</span>
 		           	<%
 		           	request.setAttribute("userSkinType", "지성"); 
 		           	userSkinType = "지성";
 		           	%>
 		         </c:otherwise>
 		      </c:choose>
-
-			<div class="alert alert-info mt-3" role="alert">
-					<h5>Care Point !</h5>
+		      </div>
+			<div class="alert alert-info mt-3" role="alert" id="care">
+					<h5 id="at"><b>Care Point !</b></h5>
 					  
-					 <div class="alert alert-light mt-3" role="alert">
+					 <div class="alert alert-light mt-3" role="alert" id="alert">
 					 	<c:choose>
 					 		<c:when test="${userSkinType eq '건성' }">
 							  	로션과 크림은 수분보다 유분 함량이 많은 것을 선택하는 것이 좋습니다. <br>
@@ -145,11 +151,11 @@
 					 	</c:choose>
 					</div>
 				</div>
-				<div class="alert alert-danger" role="alert">
+				<div class="alert alert-danger" role="alert" id="danger">
 				
-					<h5>주의사항 !</h5>
+					<h5 id="at"><b>주의사항 !</b></h5>
 				  
-					<div class="alert alert-light mt-3" role="alert">
+					<div class="alert alert-light mt-3" role="alert" id="alert">
 					 	<c:choose>
 					 		<c:when test="${userSkinType eq '건성' }">
 							 	심한 사우나나 더운 열은 피하고 피부의 수분 공급을 위해 물을 충분히 마시도록 합니다. <br>
@@ -186,9 +192,9 @@
 			</div>
 			<div class="col-8 text-center" >
 			
-			<button type="button" class="btn btn-secondary" onclick="location.href='./Question.que'">🔎 다시 테스트</button>
+			<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='./Question.que'">🔎 다시 테스트</button>
 			
-			<button type="button" class="btn btn-success" onclick="location.href='./Customized.que?userSkinType=<%=userSkinType%>'">🧐 나에게 맞는 제품 보기</button>
+			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='./Customized.que?userSkinType=<%=userSkinType%>'">🧐 나에게 맞는 제품 보기</button>
 						
 			</div>
 			<div class="col-2">	
@@ -197,6 +203,13 @@
 	
 	</div>
 	<!-- container 끝 -->	
+	
+	<!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 100px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
