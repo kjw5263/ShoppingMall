@@ -62,6 +62,17 @@
 	<!-- jquery 준비 시작 -->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- jquery 준비 끝 -->
+	
+	<script type="text/javascript">
+	function basketact(x) {
+		var sure  = confirm("장바구니에 담으시겠습니까?");
+		if(sure == true){
+		 location.href = "./BasketAdd.ba?cosAmount=1&cosNum="+x;
+		}else{
+			
+		}
+	}	
+	</script>
 
 </head>
 <body>
@@ -69,35 +80,46 @@
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
+	
+	<!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-top: 30px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 
 	<div class="container-fluid"></div>
 	<!-- container 시작 -->	
 	<div class="container text-center mt-5">	
-		<h4><b>${userSkinType} 피부타입을 위한 추천 화장품</b></h4>		
+	
+		<div class="section-title">
+		<div class="page-breadcrumb">
+			<h3 id="title">
+				${userSkinType}을 위한 추천 화장품<span>.</span>
+			</h3>
+		</div>
+		</div>
 		
 		<div class="row mt-5">
 		
 			<c:forEach var="i" items="${ CumtomizedList }">
 			
                <div class="col-lg-3 col-sm-6 mix all ${i.cosBrand} ${i.cosCategory} ${i.cosSkinType}">
-                   <div class="single-product-item">
+                   <div class="single-product-item" id="product">
                        <figure>
-                           <a href="./GoodsDetail.cos?cosNum=${i.cosNum}"><img src="./admingoods/upload/${i.cosImage.split(',')[0]}" alt=""></a>
-                           <div class="p-status">new</div>
+                           <a href="./GoodsDetail.cos?cosNum=${i.cosNum}"><img src="./admingoods/upload/${i.cosImage.split(',')[0]}" alt="" id="image"></a>
                        </figure>
                        <div class="product-text">
-                           <h6>${i.cosName}</h6>
-                           <p><fmt:formatNumber value="${i.cosPrice}" pattern="#,###"/>원  </p>
+                           <h6 id="name">${i.cosName}</h6>
+                           <p id="price"><fmt:formatNumber value="${i.cosPrice}" pattern="#,###"/>원  </p>
                            
                            <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
-                            onclick="location.href='http://localhost:8088/ShoppingMall/Goods_basketpro.cos?cosAmount=1&cosNum=${i.cosNum} '"
-                            style='cursor:pointer;'>
+                           onclick="basketact(${i.cosNum})" style='cursor:pointer;'>
                             
                             <img src="./img/icons/heart1.png" width="40px" 
                             onclick="location.href='./insertLike.li?cosNum=${i.cosNum}'"
-                            style='cursor:pointer; margin-left:10px; margin-top:10px;'>
-                            
-                            
+                            id="heart">
+
            		
                        </div>
                    </div>
@@ -126,6 +148,14 @@
 		</div>
 			
 	</div>
+	
+	<!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 120px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+    
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 시작 -->

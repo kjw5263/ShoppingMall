@@ -40,6 +40,15 @@
 	   $(window).scroll(function() {
 	      $("#banner").stop().animate({   "top" : ($(window).scrollTop() + 800) + "px"   }, 500);
 	   });
+	   
+		function basketact(x) {
+			var sure  = confirm("장바구니에 담으시겠습니까?");
+			if(sure == true){
+			 location.href = "./BasketAdd.ba?cosAmount=1&cosNum="+x;
+			}else{
+				
+			}
+		}
 
     </script>
     
@@ -53,19 +62,6 @@
 	<script src="./js/chatbot.js" type="text/javascript"></script>
 	<!-- 챗봇 끝 -->
 	
-	<script type="text/javascript">
-
-	function basketact(x) {
-		var sure  = confirm("장바구니에 담으시겠습니까?");
-		if(sure == true){
-		 location.href = "./BasketAdd.ba?cosAmount=1&cosNum="+x;
-		}else{
-			
-		}
-	}
-	
-	</script>
-    
 </head>
 
 <body>

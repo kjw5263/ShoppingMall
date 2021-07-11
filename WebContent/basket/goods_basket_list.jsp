@@ -50,7 +50,7 @@
 		<div class="col-lg-2"></div>
 		<div class="col-lg-10">
 			<div class="page-breadcrumb">
-				<h2>
+				<h2 id="add">
 					장바구니<span>.</span>
 				</h2>
 			</div>
