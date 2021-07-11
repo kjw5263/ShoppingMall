@@ -2033,6 +2033,23 @@ ol {
 	
 }
 
+.payment-method .col-4{
+	margin-top:50px;
+}
+
+.payment-method .col-10{
+	margin-top:10px;
+}
+
+.payment-method .in-name{
+	margin-top: 15px;
+}
+
+.payment-method input[type=submit] {
+ 	border-radius: 12px;
+ 	
+ } 
+
 
 /*---------------------
   Cart Total Page 

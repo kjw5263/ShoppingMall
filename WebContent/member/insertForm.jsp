@@ -567,14 +567,15 @@
                        </div>
                     </div>
                     <div class=row>
-                    	<div class=col-4></div>
-                    	<div class=col-4>
-						  <input type="submit" class="btn btn-secondary" style="border-radius: 12px;" value="회원가입하기">
+                    	<div class=col-4 ></div>
+                    	<div class=col-4 >
+						  <input type="submit" class="btn btn-secondary" value="회원가입하기">
 						</div>
 						<div class=col-4></div>
 					</div>
-			</div>
-		</div>
+			 </div>
+		  </div>
+	   </div>
 	</form>
   </div> <!-- container div -->
 </section>
