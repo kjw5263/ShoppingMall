@@ -167,7 +167,10 @@
 														<b>4</b>
 													</c:when>
 												</c:choose>
-														level
+														level 
+														<div id="mulum">
+														<h5 id="sul">?</h5>
+														</div>
 											</td>
 										<c:set var="cnt" value="0"/>
 										<c:forEach var="result" items="${couponList}" varStatus="status">

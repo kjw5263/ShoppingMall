@@ -47,6 +47,7 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
 <!-- jquery 준비 시작 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -129,6 +130,34 @@ $(document).ready(function () {
 	<!-- header 시작 -->
 	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
+	
+	 <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>EVENT<span>.</span></h2>
+                        <a href="./Main.me">Home</a>
+                        <a href="">EVENT</a>
+                        <a class="active" href="">COUPON</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+	
 
 	<!-- container 시작 -->
 	<div class="container-fluid">
@@ -145,7 +174,7 @@ $(document).ready(function () {
 			<div class="col-2" style="background-color: #610B5E;"></div>
 			<div class="col-8" align="center">
 				<button class="btn btn-secondary" id="cp1">
-					쿠폰 다운받기   
+					쿠폰 다운받기
 				</button>
 	
 			</div> 

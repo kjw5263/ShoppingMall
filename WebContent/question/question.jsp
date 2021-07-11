@@ -33,6 +33,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="./css/util.css">
 	<link rel="stylesheet" type="text/css" href="./css/login.css">
+	<link rel="stylesheet" href="./css/topimage.css" type="text/css">
 <!--===============================================================================================-->
 
 
@@ -69,20 +70,32 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-    <!-- Page Add Section Begin -->
-	<section class="page-add" style="margin-top: 50px;">
-	<div class="row" id="add">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-10">
-			<div class="page-breadcrumb">
-				<h2>
-					나의 피부타입은<span>?</span>
-				</h2>
-			</div>			
-		</div>
-	</div>
-	</section>
-	<!-- Page Add Section End -->	
+  <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2 style="font-size: 40px;">나의 피부타입은<span>?</span></h2>
+                          <a href="./Main.me">Home</a>
+                        <a href="./MemberInfo.me">SKIN TYPE</a>
+                        <a class="active" href="">나의 피부타입</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
     
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
