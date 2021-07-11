@@ -64,19 +64,19 @@
 	<!-- header 끝 -->
     
     <!-- Page Add Section Begin -->
-	<section class="page-add" style="margin-top: 30px;">
+	<section class="page-add" style="margin-top: 50px;">
 	<div class="row" id="add">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-10">
 			<div class="page-breadcrumb">
 				<h2>
-					질문 - 설정하기<span>.</span>
+					피부타입 - 점수설정<span>.</span>
 				</h2>
-			</div>
+			</div>			
 		</div>
 	</div>
 	</section>
-	<!-- Page Add Section End -->	
+	<!-- Page Add Section End -->
     	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
@@ -88,54 +88,54 @@
 			<div class="col-8">
 
 				<!-- 글쓰기 폼 시작 -->
-				<form action="./QueSettingAction.que" method="post" id="fr" onsubmit="return check()">
-				
+				<form action="./QueSettingAction.que" 
+				method="post" id="fr" onsubmit="return check()">
+
 				
 					
-					<table class="table">
+					<table class="table" style="padding:-100px;">
 					  <thead>
 					    <tr>
-					      <th scope="col">타입</th>
-					      <th scope="col" class="text-center">범위</th>
-					      
+					      <th scope="col" colspan="2" style="text-align:center;">건성</th>
+					      <th scope="col" colspan="3" style="text-align:center">중성</th>
+					      <th scope="col" colspan="3" style="text-align:center">복합성</th>
+					      <th scope="col" style="text-align:center">지성</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					    <tr>
-					      <th scope="row">건성타입</th>
-					      <td>점수 &#60;</td>
-					      <td><input type="text" class="form-control" placeholder="점수" name="score1" id="score1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-					  		value="${qsdto.score1 }" style="width: 50px">
-					      </td>
-					    </tr>
-					    <tr>
-					      <th scope="row">중성타입</th>
-					      <td>
-					      	<input type="text" class="form-control" placeholder="점수" name="score2" id="score2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-								 value="${qsdto.score2 }" style="width: 50px">
-								<td>&#60; 점수 &#60;</td>
-								<td>
-								<input type="text" class="form-control" placeholder="점수" name="score3" id="score3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-								value="${qsdto.score3 }" style="width: 50px">
-					      		</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">복합성타입</th>
-					      <td>
-					      	
-					      	<input type="text" class="form-control" placeholder="점수" name="score4" id="score4" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-							  value="${qsdto.score4 }" style="width: 50px">
-							  <td>&#60; 점수 &#60;</td>
-							  <td>
-							  <input type="text" class="form-control" placeholder="점수" name="score5" id="score5" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
-							  value="${qsdto.score5 }" style="width: 50px">
-					          </td>
-					    </tr>
-					    
-					    <tr>
-					      <th colspan="2">이외 지성</th>
-					      
-					    </tr>
+							<td>점수 &#60;</td>
+							<td><input type="text" class="form-control"
+								placeholder="점수" name="score1" id="score1"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-lg"
+								value="${qsdto.score1 }" style="width: 50px; margin-left:100;"></td>
+
+							<td><input type="text" class="form-control"
+								placeholder="점수" name="score2" id="score2"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-lg"
+								value="${qsdto.score2 }" style="width: 50px">
+							<td>&#60; 점수 &#60;</td>
+							<td><input type="text" class="form-control"
+								placeholder="점수" name="score3" id="score3"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-lg"
+								value="${qsdto.score3 }" style="width: 50px"></td>
+
+							<td><input type="text" class="form-control"
+								placeholder="점수" name="score4" id="score4"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-lg"
+								value="${qsdto.score4 }" style="width: 50px">
+							<td>&#60; 점수 &#60;</td>
+							<td><input type="text" class="form-control"
+								placeholder="점수" name="score5" id="score5"
+								aria-label="Sizing example input"
+								aria-describedby="inputGroup-sizing-lg"
+								value="${qsdto.score5 }" style="width: 50px"></td>
+							<td>이외 점수</td>
+							</tr>
 					  </tbody>
 					</table>
 				

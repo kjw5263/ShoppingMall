@@ -35,6 +35,8 @@
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./css/N_style.css" type="text/css">
 <link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+<link rel="stylesheet" href="./css/topimage.css" type="text/css">
+
 
 <script src="../jq/jquery-3.6.0.js"></script>
 <script src="../jq/jquery-3.6.0.min.js"></script>
@@ -93,23 +95,33 @@ function datecheck(){
 	<!-- container 시작 -->
 
 
-	<!-- Page Add Section Begin -->
-	<section class="page-add">
-	<div class="row">
-		<div class="col-lg-3"></div>
-
-		<div class="col-lg-9">
-			<div class="page-breadcrumb">
-				<h2>
-					MY PAGE<span>.</span>
-				</h2>
-			</div>
-		</div>
-
-
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+	 <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>MY PAGE<span>.</span></h2>
+                        <h4>나의 쿠폰/포인트</h4>
+                        <a href="#">Home</a>
+                        <a href="#">MY PAGE</a>
+                        <a class="active" href="#">나의 쿠폰</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 
 
 	<div class="container-fluid">

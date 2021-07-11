@@ -41,7 +41,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Violet | Template</title>
+    <title>피부진단 | JUST SKIN</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -69,21 +69,27 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-	<!-- Page Add Section Begin -->
-    <section class="page-add" style="margin-top: 15px;">
-        <div class="container">
-        </div>
-    </section>
-    <!-- Page Add Section End -->
+    <!-- Page Add Section Begin -->
+	<section class="page-add" style="margin-top: 50px;">
+	<div class="row" id="add">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-10">
+			<div class="page-breadcrumb">
+				<h2>
+					나의 피부타입은<span>?</span>
+				</h2>
+			</div>			
+		</div>
+	</div>
+	</section>
+	<!-- Page Add Section End -->	
     
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
-	
+		
 		<div class="row mt-5">
 			<div class="col-2"></div>
-			<div class="col-8 text-center">
-				<div id="type"><b>나의 피부타입은?</b></div>
-			</div>
+			<div class="col-8 text-center"></div>
 			<div class="col-2 mt-3">
 				<c:if test="${userId eq 'admin' }">
 					<button type="button" class="btn btn-secondary" id="write">글쓰기</button>

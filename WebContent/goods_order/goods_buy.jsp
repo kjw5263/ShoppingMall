@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
  <!--  다음 우편번호 API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -303,6 +304,34 @@ function payClick() {
 
 	%>
 	
+		<!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>ORDER<span>.</span></h2>
+                        <h4>주문 / 결제</h4>
+                        <a href="./Main.me">Home</a>
+                        <a href="./MemberInfo.me">ORDER</a>
+                        <a class="active" href="">주문 / 결제</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+	
 	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
@@ -312,7 +341,6 @@ function payClick() {
 	<div class="col-8 " style="padding-bottom:100px;">
 	
 	
-	<h2 style="margin:30px 30px 30px 0;">주문/결제</h2>
 	<div style="margin:50px 30px 10px 0;"><h3>배송상품</h3></div>
 	<div style="margin:10px 30px 10px 0;"><h5>총 
 	<c:set var="totalCnt" value="0" />

@@ -46,9 +46,21 @@
 <jsp:include page="/header/header.jsp"/>
 <!-- Header Section End -->
 
-    <!-- Page Add Section Begin -->
+      <!-- Page Add Section Begin -->
     <section class="page-add">
         <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>ADMIN PAGE<span>.</span></h2>
+                        <h3>주문 상세 페이지</h3>
+                        <p style="border: 1px solid #B0BCC2;"></p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+               </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- Page Add Section End -->
