@@ -30,7 +30,7 @@ public class emailSendAction implements Action {
 		
 		response.setContentType("text/html;charset=UTF-8");
 		String senderEmail="cosshopping29@gmail.com"; //보내는 사람 (쇼핑몰 메일주소)
-		String subject =  "Cos Shopping 회원가입 인증메일입니다."; //보내는 제목
+		String subject =  "JUST SKIN 회원가입 인증메일입니다."; //보내는 제목
 		
 		
 		try {
@@ -52,7 +52,7 @@ public class emailSendAction implements Action {
 			message.setReplyTo(new Address[]{sender_address});
 			message.addRecipient(Message.RecipientType.TO, user_mail_address);
 			message.setSubject(subject);
-			message.setContent("인증 번호는 "+contentKey+" 입니다.","text/html;charset=UTF-8");
+			message.setContent("인증번호를 회원가입창에서 입력해주세요"+"<br>"+"인증 번호는 "+contentKey+" 입니다.","text/html;charset=UTF-8");
 			message.setSentDate(new java.util.Date());
 			message.saveChanges();
 			Transport.send(message);

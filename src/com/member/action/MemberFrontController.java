@@ -465,8 +465,6 @@ public class MemberFrontController extends HttpServlet{
 			         forward.setRedirect(false);
 
 			      }
-				
-				
 		
 		System.out.println("C : 2. 페이지 주소 매핑 완료 ");
 		/********************************* 2. 페이지 주소 매핑(연결) 끝 *******************/
