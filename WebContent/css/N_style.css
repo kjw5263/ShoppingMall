@@ -3,9 +3,11 @@
 
 *{
 	text-decoration: none;
-	cursor:pointer;
-	
 }
+* > a { cursor:pointer; }
+
+* > button { cursor:pointer; }
+	
 
 .contents1{
   font-size: 20px;
@@ -135,7 +137,7 @@ list-style: none;
 #order-detail{
 	border: 2px solid #EAEAEA;	
 	border-radius: 10px;
-	height: 5%;
+	height: 6%;
 }
 
 #order-detail > ul {

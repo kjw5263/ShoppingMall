@@ -89,11 +89,8 @@
 	<!-- header 시작 -->
 	<jsp:include page="/header/header.jsp" />
 	<!-- header 끝 -->
+<!-- container 시작 -->
 
-	<div id="Container1">
-		<div id="Contents1">
-
-			
 
  <!-- Page Add Section Begin -->
     <section class="page-add">
@@ -124,8 +121,13 @@
     <!-- Page Add Section End -->
 
 
-			<div class="mypage-ix1">
-				<div class="mypage-lnb1">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8">
+				<div class="row">
+					<div class="col-2">
+					<div class="mypage-lnb1">
 								<ul>
 									<li>
 										<h2>나의 쇼핑</h2>
@@ -155,13 +157,14 @@
 									</li>
 								</ul>
 								</div>
-				<%-- 마이페이지 본문 시작!!           --%>
-				<div class="mypage-contents1">
-					<div class="title-area1">
-						<h2 class="tit2">리뷰</h2>
+						</div>
+					<div class="col-10">
+						<h3>
+							나의 리뷰
+						</h3>
+						<br>
 
-					</div>
-					<%
+						<%
                     if(reviewList != null && listCount > 0){
                 %>
 
@@ -251,14 +254,18 @@
 					<section id="pageList" style="margin-left: 30%; margin-top: 300px">
 
 					<%if(nowPage<=1){ %> [이전] <%}else{ %> <a
-						href="./ReviewList.rev?page=<%=nowPage-1 %>">[이전]</a>&nbsp; <%} %> <%for(int a=startPage;a<=endPage;a++){
-                        if(a==nowPage){%> [<%=a %>] <%}else{ %> <a
-						id="#click" href="./ReviewList.rev?page=<%=a %>"
+						href="./ReviewList.rev?page=<%=nowPage-1 %>">[이전]</a>&nbsp; <%} %> 
+						<%for(int a=startPage;a<=endPage;a++){
+                        if(a==nowPage){%> [<%=a %>] 
+                        <%}else{ %> <a id="#click" href="./ReviewList.rev?page=<%=a %>"
 						onclick="focusOn()">[<%=a %>]
-					</a>&nbsp; <%} %> <%} %> <%if(nowPage>=maxPage){ %> [다음] <%}else{ %> <a
+					</a>&nbsp; <%} %> 
+					<%} %> 
+					<%if(nowPage>=maxPage){ %> [다음] <%}else{ %> <a
 						href="./ReviewList.rev?page=<%=nowPage+1 %>">[다음]</a> <%
                         }
                     %> </section>
+                    
 					<%
                 }
                 else
@@ -268,21 +275,28 @@
 					<%
                     }
                 %>
+					</div>
 				</div>
 			</div>
+			<div class="col-2"></div>
 		</div>
 
 
-	</div>
 
+	</div>
+	<!-- Page Add Section Begin -->
+	<section class="page-add"> </section>
+	<!-- Page Add Section End -->
+
+	<!-- container 끝 -->
 
 
 	<!-- footer 시작 -->
-	<div>
-		<jsp:include page="/footer/footer.jsp" />
-	</div>
-
+	<jsp:include page="../footer/footer.jsp" />
 	<!-- footer 시작 -->
+
+
+
 
 </body>
 </html>

@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./css/N_style.css" type="text/css">
 <link rel="stylesheet" href="./goods_board/style/review_user_list.css">
 <link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
