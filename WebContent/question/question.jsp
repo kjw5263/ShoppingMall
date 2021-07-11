@@ -69,13 +69,20 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
+	<!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-top: 15px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+    
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
 		<div class="row mt-5">
 			<div class="col-2"></div>
 			<div class="col-8 text-center">
-				<div><h3>나의 피부타입은?!</h3></div>
+				<div id="type"><b>나의 피부타입은?</b></div>
 			</div>
 			<div class="col-2 mt-3">
 				<c:if test="${userId eq 'admin' }">
@@ -95,7 +102,7 @@
 				
 				<c:forEach var="i" items="${ queQueList }">
 				
-				<div class="mt-4"><h5>${i.qnum}. ${i.qsub}</h5></div>
+				<div class="mt-4" id="que">${i.qnum}. ${i.qsub}</div>
 				<div class="mt-3" id="div1">
 								
 					<c:forEach var="j" begin="0" end="4" step="1">
@@ -174,6 +181,13 @@
 			</div>
 	</div>
 	<!-- container 끝 -->	
+	
+	<!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 100px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 	
 	
 	<!-- footer 시작 -->

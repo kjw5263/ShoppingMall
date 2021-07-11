@@ -35,8 +35,6 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Violet | Template</title>
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap"
@@ -64,7 +62,22 @@
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
-	
+    
+    <!-- Page Add Section Begin -->
+	<section class="page-add" style="margin-top: 30px;">
+	<div class="row" id="add">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-10">
+			<div class="page-breadcrumb">
+				<h2>
+					질문 - 설정하기<span>.</span>
+				</h2>
+			</div>
+		</div>
+	</div>
+	</section>
+	<!-- Page Add Section End -->	
+    	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
@@ -73,19 +86,7 @@
 			
 			
 			<div class="col-8">
-			
-				<!-- 제목 시작 -->
-				<div class="col-md-12 text-center p-5 row">
-					<div class="col-2"></div>
-					<div class="col-4">
-						<h3>질문 - 설정하기</h3>
-					</div>
-					<div class="col-6"></div>
-				</div>
-				<!-- 제목 끝 --> 
-				
-				<hr>
-				
+
 				<!-- 글쓰기 폼 시작 -->
 				<form action="./QueSettingAction.que" method="post" id="fr" onsubmit="return check()">
 				
@@ -102,9 +103,8 @@
 					  <tbody>
 					    <tr>
 					      <th scope="row">건성타입</th>
-					      <td>
-					      점수 &#60;
-					      	<input type="text" class="form-control" placeholder="점수" name="score1" id="score1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+					      <td>점수 &#60;</td>
+					      <td><input type="text" class="form-control" placeholder="점수" name="score1" id="score1" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
 					  		value="${qsdto.score1 }" style="width: 50px">
 					      </td>
 					    </tr>
@@ -113,10 +113,11 @@
 					      <td>
 					      	<input type="text" class="form-control" placeholder="점수" name="score2" id="score2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
 								 value="${qsdto.score2 }" style="width: 50px">
-								&#60; 점수 &#60;
+								<td>&#60; 점수 &#60;</td>
+								<td>
 								<input type="text" class="form-control" placeholder="점수" name="score3" id="score3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
 								value="${qsdto.score3 }" style="width: 50px">
-					      </td>
+					      		</td>
 					    </tr>
 					    <tr>
 					      <th scope="row">복합성타입</th>
@@ -124,10 +125,11 @@
 					      	
 					      	<input type="text" class="form-control" placeholder="점수" name="score4" id="score4" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
 							  value="${qsdto.score4 }" style="width: 50px">
-							  &#60; 점수 &#60;
+							  <td>&#60; 점수 &#60;</td>
+							  <td>
 							  <input type="text" class="form-control" placeholder="점수" name="score5" id="score5" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
 							  value="${qsdto.score5 }" style="width: 50px">
-					      </td>
+					          </td>
 					    </tr>
 					    
 					    <tr>
@@ -151,7 +153,13 @@
 		
 	</div>
 	<!-- container 끝 -->	
-	
+
+	<!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 120px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->	
 	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
