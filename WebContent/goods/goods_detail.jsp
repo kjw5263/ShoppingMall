@@ -333,14 +333,14 @@
 
             <table border="1" style="margin: 100px 50px 200px 50px; height: 500px; text-align: center">
                 <tr>
-                    <td>용량</td>
+                    <td width="100px;">용량</td>
                     <td>
                         <%= dto.getCosVolumn()%>
                     </td>
                 </tr>
                 <tr>
                     <td>주요사양</td>
-                    <td><%=dto.getIngredient() %></td>
+                    <td style="padding: 20px;" ><%=dto.getIngredient() %></td>
                 </tr>
                 <tr>
                     <td>사용기간</td>

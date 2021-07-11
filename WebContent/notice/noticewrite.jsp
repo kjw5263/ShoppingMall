@@ -80,7 +80,7 @@
 	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 
-		 <!-- Page Add Section Begin -->
+	<!-- Page Add Section Begin -->
     <section class="page-add">
         <div class="container">
             <div class="row" >
