@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
     <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
     <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
@@ -46,6 +47,18 @@
     <!-- Page Add Section Begin -->
     <section class="page-add">
         <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>ADMIN PAGE<span>.</span></h2>
+                        <h3>쿠폰 수정 페이지</h3>
+                        <p style="border: 1px solid #B0BCC2;"></p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+               </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- Page Add Section End -->

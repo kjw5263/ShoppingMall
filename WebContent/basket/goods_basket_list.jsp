@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
     <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
     <script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
@@ -44,20 +45,32 @@
 <jsp:include page="/header/header.jsp"/>
 <!-- Header Section End -->
 
-   <!-- Page Add Section Begin -->
-	<section class="page-add">
-	<div class="row" style="margin-bottom: -2%;">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-10">
-			<div class="page-breadcrumb">
-				<h2>
-					장바구니<span>.</span>
-				</h2>
-			</div>
-		</div>
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+ <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>CART<span>.</span></h2>
+                        <a href="./Main.me">Home</a>
+                        <a href="">CART</a>
+                        <a class="active" href="">나의 장바구니</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
     
 	<!-- container 시작 -->	
 	<div class="container-fluid">	

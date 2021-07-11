@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-
+ <link rel="stylesheet" href="./css/topimage.css" type="text/css">
     <link rel="stylesheet" href="./goods/rating.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -149,35 +149,41 @@
 <!-- Header Info End -->
 <!-- Header End -->
 
-<!-- Page Add Section Begin -->
+	<!-- Page Add Section Begin -->
+	<section class="page-add">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="page-breadcrumb">
+						<h2><%=dto.getCosCategory()%><span>.</span>
+						</h2>
+						<a href="./GoodsList.cos">홈</a> <a href="#"><%=dto.getCosBrand()%></a>
+						<a class="active" href="#"><%=dto.getCosCategory()%></a>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="row">
+						<div class="col-lg-12" id="topimg_bg">
+							<div id="topimg_ch">
+								<h1>2021</h1>
+								<h2>BEST SELLER.</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page Add Section End -->
 
-
-
-<section class="page-add">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="page-breadcrumb">
-                    <h2><%=dto.getCosCategory() %><span>.</span></h2>
-                    <a href="./GoodsList.cos">홈</a>
-                    <a href="#"><%= dto.getCosBrand()%></a>
-                    <a class="active" href="#"><%=dto.getCosCategory() %></a>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <img src="img/add.jpg" alt="">
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Page Add Section End -->
-
-<!-- Product Page Section Beign -->
+	<!-- Product Page Section Beign -->
 <form action="" method="post" name="gfr">
     <section class="product-page">
         <div class="container">
             <div class="product-control">
-                <% if (dto.getCosNum() == 1){ %>
+                <%
+                	if (dto.getCosNum() == 1) {
+                %>
                 <a href="GoodsDetail.cos?cosNum=<%=count%>">Previous</a>
                 <%}else { %>
                 <a href="GoodsDetail.cos?cosNum=<%=dto.getCosNum()-1%>">Previous</a>

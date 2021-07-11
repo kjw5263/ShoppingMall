@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+#top_txt{
+	padding: 34px 0 0;
+	
+	
+}
+
+
+
+#topimg_bg {
+	background-image: url("../img/skincare11.jpg");
+	background-repeat: no-repeat;
+	width: 800px;
+	height: 150px;
+	
+}
+
+#topimg_ch {
+	margin-top: 3.5%;
+	margin-left: 4%;
+	text-align: left;
+}
+
+#topimg_ch h1 {
+	color: white;
+	font-weight: 650;
+	font-size: 36px;
+	font-family: "Montserrat", sans-serif;
+	margin: 0;
+	height: 43px;
+}
+#topimg_ch h2 {
+	color: white;
+	font-size: 30px;
+	font-weight: 650;
+	text-decoration: underline;
+	font-family: "Montserrat", sans-serif;
+	margin: 1% 0 0 0;
+	height: 36px;
+}
+

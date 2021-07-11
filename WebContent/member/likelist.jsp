@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./goods_board/style/review_user_list.css">
+<link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
 <style type="text/css">
 #cb {
@@ -67,22 +68,32 @@
 
 
 	<!-- Page Add Section Begin -->
-	<section class="page-add">
-	<div class="row">
-		<div class="col-lg-3"></div>
-
-		<div class="col-lg-9">
-			<div class="page-breadcrumb">
-				<h2>
-					MY PAGE<span>.</span>
-				</h2>
-			</div>
-		</div>
-
-
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>MY PAGE<span>.</span></h2>
+                        <h4>나의 좋아요</h4>
+                        <a href="./Main.me">Home</a>
+                        <a href="./MemberInfo.me">MY PAGE</a>
+                        <a class="active" href="">나의 좋아요</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 
 
 	<div class="container-fluid">
@@ -146,8 +157,8 @@
 										<h4> <fmt:formatNumber value="${LikeList.cosPrice }" pattern="#,###"/>원
 										</h4></td>
 
-									<td><input type="image" src="./img/icons/heart.png"
-										width="40px" style="margin-top: 80%"></td>
+									<td><input type="image" src="./img/icons/heart1.png"
+										width="40px" style="margin-top: 50%"></td>
 							</form>
 							</tr>
 								
