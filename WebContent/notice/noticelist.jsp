@@ -65,6 +65,7 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
 
 
@@ -83,20 +84,32 @@
 	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
-	<!-- Page Add Section Begin -->
-	<section class="page-add">
-	<div class="row" style="margin-bottom: -2%;">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-10">
-			<div class="page-breadcrumb">
-				<h2>
-					NOTICE<span>.</span>
-				</h2>
-			</div>
-		</div>
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+	 <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>NOTICE<span>.</span></h2>
+                        <a href="./Main.me">Home</a>
+                        <a href="">NOTICE</a>
+                        <a class="active" href="">공지사항</a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 	
 	
 

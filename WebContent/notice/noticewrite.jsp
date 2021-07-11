@@ -80,21 +80,25 @@
 	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 
-	<!-- Page Add Section Begin -->
-	<section class="page-add">
-	<div class="row" style="margin-bottom: -2%;">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-10">
-			<div class="page-breadcrumb">
-				<h2>
-					NOTICE<span>.</span>
-				</h2>
-				<h3>관리자 페이지 - 공지사항 작성</h3>
-			</div>
-		</div>
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+		 <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>ADMIN PAGE<span>.</span></h2>
+                        <h3>공지사항 글 쓰기</h3>
+						<p style="border: 1px solid #B0BCC2;"></p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-8">
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 
 	<!-- container 시작 -->
 	<div class="container-fluid">

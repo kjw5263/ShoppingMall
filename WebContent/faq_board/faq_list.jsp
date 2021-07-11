@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>JUST SKIN | FAQ </title>
+	<title>FAQ | JUST SKIN </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
 
 	<!-- jquery 준비 시작 -->
@@ -68,24 +69,31 @@
 	<!-- header 시작 -->
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
-	
-	
-	<!-- Page Add Section Begin -->
-	<section class="page-add">
-	<div class="row" style="margin-bottom: -3%;">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-10">
-			<div class="page-breadcrumb">
-				<h2>
-					FAQ<span>.</span>
-				</h2>
-				<h3>자주 묻는 질문</h3>
-				<h5>*다른 문의사항이 있을 경우 챗봇으로 문의해주세요.</h5>
-			</div>
-		</div>
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+ <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>FAQ<span>.</span></h2>
+                        <h3>자주 묻는 질문</h3>
+						<b>*다른 문의사항은 챗봇으로 문의해주세요.</b>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                     <div class="row">
+                    <div class="col-lg-12" id="topimg_bg">
+                       <div id="topimg_ch" >
+                        <h1>2021</h1>
+                        <h2>BEST SELLER.</h2>
+                      </div>
+                        </div>
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 	
 	
 	<!-- container 시작 -->	
