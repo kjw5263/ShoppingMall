@@ -150,8 +150,8 @@
 				%>
 				
 				<div>
-						<table class="table table-striped">
-							<tr class="table-active">
+						<table class="table">
+							<tr>
 								<th style="width: 30%"></th>
 								<th style="width: 70%">제목</th>
 							</tr>

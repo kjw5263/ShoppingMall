@@ -463,7 +463,7 @@
 
                             </dl>
                             <p class="alignCenter">
-                                <button class="btn btn-primary" onclick="insertPopup()" >글등록</button>
+                                <button class="btn btn-info" onclick="insertPopup()" >글등록</button>
 
                             </p>
                         </div>
