@@ -65,6 +65,26 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 	
+	 <!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>ADMIN PAGE<span>.</span></h2>
+                        <h3>고객센터 글 쓰기</h3>
+                      	<p style="border: 1px solid #B0BCC2;"></p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-8">
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
+	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
 	
@@ -73,16 +93,6 @@
 			
 			
 			<div class="col-8">
-			
-			<!-- 제목 시작 -->
-				<div class="col-md-12 text-center p-5 row">
-					<div class="col-2"></div>
-					<div class="col-4">
-						<h3>고객 센터 - 글쓰기</h3>
-					</div>
-					<div class="col-6"></div>
-				</div>
-			<!-- 제목 끝 --> 
 				<form action="./FaqWriteAction.faq" method="post" id="fr" onsubmit="return check()">
 				<!-- 카테고리 시작 -->
 				<div class="row">
