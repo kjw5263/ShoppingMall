@@ -106,27 +106,27 @@
 									<li>
 										<h2>나의 쇼핑</h2>
 										<ul style="list-style: none">
-											<li class="subMenu"><a href="./getOrderList.or">주문/배송조회</a></li>
+											<li class="subMenu"><a href="./getOrderList.or" style="cursor:pointer;">주문/배송조회</a></li>
 											<li class="subMenu"><a href="">취소/반품/교환내역</a></li>
 										</ul>
 										<ul style="list-style: none">
-											<li class="subMenu"><a href="./BasketList.ba">장바구니</a></li>
-											<li class="subMenu"><a href="./getLike.li">좋아요</a></li>
-											<li class="subMenu"><a href="./MyCoupon.cp">포인트 / 쿠폰</a></li>
+											<li class="subMenu"><a href="./BasketList.ba" style="cursor:pointer;" >장바구니</a></li>
+											<li class="subMenu"><a href="./getLike.li" style="cursor:pointer;">좋아요</a></li>
+											<li class="subMenu"><a href="./MyCoupon.cp" style="cursor:pointer;">포인트 / 쿠폰</a></li>
 										</ul>
 									</li>
 									<li class="line" style="list-style: none">
 										<h2>나의 활동</h2>
 										<ul style="list-style: none">
-											<li class="subMenu"><a href="./ReviewList.rev">리뷰</a></li>
-											<li class="subMenu"><a href="./Usedate.ud">화장품 사용기한 조회</a></li>
+											<li class="subMenu"><a href="./ReviewList.rev" style="cursor:pointer;">리뷰</a></li>
+											<li class="subMenu"><a href="./Usedate.ud" style="cursor:pointer;">화장품 사용기한 조회</a></li>
 										</ul>
 									</li>
 									<li class="line" style="list-style: none">
 										<h2>나의 정보</h2>
 										<ul style="list-style: none">
-											<li class="subMenu"><a href="./MemberUpdateInfo.me">회원정보수정</a></li>
-											<li class="subMenu"><a href="./MemberDelete.me">회원탈퇴</a></li>
+											<li class="subMenu"><a href="./MemberUpdateInfo.me" style="cursor:pointer;">회원정보수정</a></li>
+											<li class="subMenu"><a href="./MemberDelete.me" style="cursor:pointer;">회원탈퇴</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -154,13 +154,13 @@
 										<tr>
 											<td>
 												<c:choose>
-													<c:when test="${mdto.userTotal > 0 && mdto.userTotal<= 99999}">
+													<c:when test="${mdto.userTotal >= 0 && mdto.userTotal<= 99999}">
 														<b>1</b>
 													</c:when>
 													<c:when test="${mdto.userTotal >= 100000 && mdto.userTotal<= 149999 }">
 														<b>2</b>
 													</c:when>
-													<c:when test="${mdto.userTotal >= 150000 && mdto.userTotal }">
+													<c:when test="${mdto.userTotal >= 150000 && mdto.userTotal <= 199999}">
 														<b>3</b>
 													</c:when>
 													<c:when test="${mdto.userTotal >= 200000}">
@@ -173,9 +173,9 @@
 										<c:forEach var="result" items="${couponList}" varStatus="status">
 											<c:set var="cnt" value="${cnt+result.mcAmount}" />
 										</c:forEach>
-										<td><a href="./MyCoupon.cp"><b><c:out value="${cnt}"/></b>
+										<td><a href="./MyCoupon.cp" style="cursor:pointer;"><b><c:out value="${cnt}"/></b>
 											</a> 장</td>
-											<td><a href="./MyCoupon.cp" style="color: orange;"><b>${mdto.userPoint}</b></a>P</td>
+											<td><a href="./MyCoupon.cp" style="color: orange;" style="cursor:pointer;"><b>${mdto.userPoint}</b></a>P</td>
 										</tr>
 									</table>
 								</div>
@@ -183,7 +183,7 @@
 
 							<h4>주문 배송 조회</h4>
 							<div style="text-align: right;">
-								<a href="./getOrderList.or">> 더보기</a>
+								<a href="./getOrderList.or" style="cursor:pointer;">> 더보기</a>
 							</div>
 							<br>
 							
@@ -275,7 +275,7 @@
 								찜 목록 (총 <b style="color: orange;">${fn:length(LikeList)}</b>개)
 							</h4>
 							<h5 style="text-align: right;">
-								<a href="./getLike.li">> 더보기 </a>
+								<a href="./getLike.li" style="cursor:pointer;">> 더보기 </a>
 							</h5>
 							<hr>
 							<fieldset style="padding: 20px;"">
@@ -363,8 +363,6 @@
 					</div>
 				</div>
 				<!--6 -->
-
-
 
 				<div class="col-2"></div>
 			</div>

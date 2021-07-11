@@ -477,6 +477,9 @@
     </div>
 
     <!-- Related Product Section End -->
+    	<!-- Page Add Section Begin -->
+	<section class="page-add"> </section>
+	<!-- Page Add Section End -->
 
     <!-- Footer Section Begin -->
     <jsp:include page="/footer/footer.jsp"/>

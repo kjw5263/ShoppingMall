@@ -413,7 +413,6 @@ public class MemberDAO {
 					dto.setUserPoint(rs.getInt("userPoint"));
 					dto.setUserTotal(rs.getInt("userTotal"));
 					dto.setUserPoint(rs.getInt("userPoint"));
-					dto.setUserTotal(rs.getInt("userPoint"));
 					dto.setUserLevel(rs.getInt("userLevel"));
 				}
 				System.out.println("DAO : 회원정보 저장완료");

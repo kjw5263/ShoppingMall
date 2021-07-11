@@ -229,13 +229,7 @@
 								<td colspan="3" id="allmoney"><b>총 결제 금액 : </b><b
 									id="money"><fmt:formatNumber value="${odto1.payMoney}" pattern="#,###"/>
 									</b> <br>
-									ㄴ <b>결제 수단 :</b>
-									<c:choose>
-										<c:when test="${odto1.payType == 0}">카드</c:when>
-										<c:when test="${odto1.payType == 1}">계좌이체</c:when>
-										<c:when test="${odto1.payType == 2}">카카오 페이</c:when>
-									
-									</c:choose>
+									ㄴ <b>결제 수단 : ${odto1.payType}</b>
 									</td>
 							</tr>
 
