@@ -76,7 +76,6 @@
         }
     </script>
 
-
 </head>
 <body>
 <%
@@ -309,9 +308,9 @@
 
     <ul class="nav nav-tabs">
         <p style="width: 400px;">
-        <li class='active' style="width: 200px; text-align: center; font-size: 20px"><a href="#tabmenu_01" data-toggle="tab">상세이미지</a></li>
+        <li class="active" style="width: 200px; text-align: center; font-size: 20px"><a href="#tabmenu_01" data-toggle="tab">상세이미지</a></li>
         <li style="width: 200px;text-align: center; font-size: 20px"><a href="#tabmenu_02" data-toggle="tab">사용설명</a></li>
-        <li style="width: 200px;text-align: center;font-size: 20px"><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=cnt %>)</a></li>
+        <li  style="width: 200px;text-align: center;font-size: 20px"><a href="#tabmenu_03" data-toggle="tab">리뷰(<%=cnt %>)</a></li>
         </p>
     </ul>
 
@@ -331,7 +330,8 @@
         </div>
         <div class="tab-pane fade" id="tabmenu_02">
 
-            <table border="1" style="margin: 100px 50px 200px 50px; height: 500px; text-align: center">
+            <table class="table table-striped" border="1" style="margin: 100px 50px 300px 320px; width: 800px;height: 1000px;
+             font-size: 25px; vertical-align: middle;text-align: center">
                 <tr>
                     <td width="100px;">용량</td>
                     <td>

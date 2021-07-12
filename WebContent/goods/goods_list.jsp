@@ -139,8 +139,9 @@
                 <div class="col-lg-3 col-sm-6 mix all 베스트상품" style="display: none;">
                     <div class="single-product-item" id="product">
                         <figure>
-                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>">
-                            <img src="./admingoods/upload/<%=dto.getCosImage()%>" alt="" id="image"></a>
+
+                            <a href="./GoodsDetail.cos?cosNum=<%=dto.getCosNum()%>"><img src="./admingoods/upload/<%=dto.getCosImage().split(",")[0]%>" alt="" id="image"></a>
+
                             <div class="p-status">best</div>
                         </figure>
                         <div class="product-text">

@@ -65,10 +65,13 @@
 <!-- 이메일 유효성확인 -->
 <script type="text/javascript">
 		var chkup = false;
-
+		var userEmail = $("#userEmail").val();
+		
 		$(document).ready(function(){
+		
 			$("#fr").submit(function(){
-				 if($.trim($("#userEmail").val()) == null){
+				
+				 if($.trim(userEmail) == null){
 					 $('.ckMsg_mail').text("이메일을 입력하세요");     
 		             $('.ckMsg_mail').css("color","red"); 
 		             $('.ckMsg_mail').css("padding-left","1rem"); 
@@ -78,14 +81,18 @@
 				 if(chkup == false){
 					 return false;
 				 }
+				 if(userEmail.indexOf("@") == -1 || userEmail.indexOf(".") == -1 ||userEmail.indexOf("@") < 5 || 
+					userEmail.indexOf("@")>userEmail.indexOf(".")){
+					  alert("이메일 형식이 올바르지 않습니다.");
+				  	  return false;
+				 })
 			 });
 			 
 			 $("#userEmail").keyup(function(){
 				  
-					var Usermail = $("#userEmail").val();
 					var chk = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 					
-					if(Usermail.match(chk) != null){
+					if(userEmail.match(chk) != null){
 						$('.ckMsg_mail').text("");     
 						chkup = true;  
 					}else{

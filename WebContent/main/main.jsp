@@ -177,7 +177,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="single-box-item first-box">
-                                    <img src="./img/sale.jpg" alt="sale" 
+                                    <img src="./img/coupon/mainCoupon.png" alt="sale" 
                                     onclick="location.href='./couponEvent.cp'"
                                     style='cursor:pointer;'>
                                 </div>
