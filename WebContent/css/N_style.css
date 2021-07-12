@@ -38,7 +38,7 @@
 .mypage-step{
   display: flex;
   width: 100%;
-  background: #EAEAEA;
+  background: #DEE2E6;
   margin: auto;
   border-radius: 10px;
   height: 18%;
@@ -106,7 +106,7 @@ list-style: none;
   top:-66px;
   display: flex;
   width: 100%;
-  background: #EAEAEA;
+  background: #DEE2E6;
   margin: auto;
   border-radius: 10px;
   height: 10%;

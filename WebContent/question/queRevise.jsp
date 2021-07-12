@@ -68,19 +68,24 @@
 	<!-- header 끝 -->
 	
 	<!-- Page Add Section Begin -->
-	<section class="page-add" style="margin-top: 50px;">
-	<div class="row" id="add">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-10">
-			<div class="page-breadcrumb">
-				<h2>
-					질문 - 글 수정하기<span>.</span>
-				</h2>
-			</div>			
-		</div>
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>ADMIN PAGE<span>.</span></h2>
+                        <h3>조항 수정하기</h3>
+						<p style="border: 1px solid #B0BCC2;"></p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-8">
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
