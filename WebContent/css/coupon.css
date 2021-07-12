@@ -18,3 +18,14 @@
 
 .center-mode { position: absolute; display: block; top: 50%; left: 50%; margin: 0 auto; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); }
 
+.detail-content-header {align: center;}
+
+h2,p {text-align: center;font-weight: bold;}
+
+.detail-sub {margin:20px;}
+
+.container-fluid .col-6 {margin-top: 15px; margin-bottom: 25px;}
+
+.modal-body .row {text-align: center; margin: 20px; }
+
+#cpList {text-align: center; list-style: none; margin-bottom: 15px;}

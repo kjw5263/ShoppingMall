@@ -1,5 +1,7 @@
 package com.member.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,8 +46,14 @@ public class MemberJoinAction implements Action {
       mdao.insertMember(mdto,referral_id);
 	  //회원가입시 쿠폰 지급
 	  mdao.insertCoupon(userId);
-    		
-      
+    
+	  PrintWriter out = response.getWriter();
+	  
+	  out.println(
+				"<script>"
+				+ "alert('반갑습니다 :) 회원가입이 완료되었습니다! "
+				+ "신규회원용 쿠폰을 확인해보세요'); "
+				+ "</script>");
       
       // 페이지 이동(ActionForward객체)
       ActionForward forward = new ActionForward();
