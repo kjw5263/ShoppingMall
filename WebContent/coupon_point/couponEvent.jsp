@@ -49,6 +49,7 @@
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./css/topimage.css" type="text/css">
+<link rel="stylesheet" href="./css/coupon.css" type="text/css">
 
 <!-- jquery 준비 시작 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -165,20 +166,10 @@ $(document).ready(function () {
 	
 		<div class="detail-content-header">
 			
-			<h2 class="detail-title">7월 여름 쿠폰 Summer Discount</h2>
+			<h2 class="detail-title">7월 Summer Coupon</h2>
 			<p class="detail-sub">거짓말같은 혜택이 쏟아진다</p>
 			<div class="share-list-wrap">
 				<!-- 소셜링크영역 -->
-				<div class="share-list">
-					<a href="javascript:rd.common.shareToFacebook();" title="페이스북 공유하기">
-						<i class="social-ico facebook"></i>
-					</a>
-				</div>
-				<div class="share-list">
-					<a href="javascript:rd.common.shareToKakaoStory();" title="카카오스토리 공유하기">
-						<i class="social-ico kakao-story"></i>
-					</a>
-				</div>
 				<div class="share-list">
 					<a href="javascript:rd.common.shareToKakao();" title="카카오톡 공유하기">
 						<i class="social-ico kakao-talk"></i>
@@ -191,17 +182,14 @@ $(document).ready(function () {
 				</div>
 			</div>
 		</div>
-	
-	<!-- header 시작 -->
-	<jsp:include page="../header/header.jsp" />
-	<!-- header 끝 -->
+
 
 	<!-- container 시작 -->
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-3"></div>
 			<div class="col-6" align="center">
-				<img alt="couponEventImg" src="./img/coupon/Coupon_info1.png">
+				<img alt="couponEventImg" class="img-fluid" src="./img/coupon/Coupon_info1.png">
 			</div> 
 			<div class="col-3">
 			</div>
@@ -209,8 +197,8 @@ $(document).ready(function () {
 		<div class="row">
 			<div class="col-3"></div>
 				<div class="col-6" align="center">
-					<button class="btn btn-secondary" id="cp1">
-						쿠폰 다운받기   
+					<button class="btn btn-info btn-lg" id="cp1">
+						쿠폰 다운 받으러 가기   
 					</button>
 				</div> 
 			<div class="col-3"></div>
@@ -223,28 +211,24 @@ $(document).ready(function () {
 
 							<!-- Modal Header -->
 							<div class="modal-header">
-								<h4 class="modal-title">쿠폰받아랑@@@</h4>
+								<h4 class="modal-title">쿠폰받아랑</h4>
 								<button type="button" class="close" data-dismiss="modal" id="modalExit">&times;</button>
 							</div>
 
 							<!-- Modal body -->
 							<div class="modal-body">
-							<!-- css 정리해야함 -->
-								
-								<div class="row" align="center">
-									<div style="margin-bottom: 15px">
+								<div class="row">
+								  <ul id="cpList">
+									<li>
 									 <input type="image" class="cpButton" src="./img/coupon/coupon1.png" width="50%" id="cpImg1" value="${couponList[2].couponNum }">
-									</div>
-								</div>	
-								<div class="row" align="center">
-									<div style="margin-bottom: 15px">
+									</li>
+									<li> 
 									 <input type="image" class="cpButton" src="./img/coupon/coupon2.png" width="50%" id="cpImg2" value="${couponList[3].couponNum }">
-									</div>
-								</div>	
-								<div class="row" align="center">
-									<div style="margin-bottom: 15px">
+									</li>
+									<li>
 									 <input type="image" class="cpButton" src="./img/coupon/coupon3.png" width="50%" id="cpImg3" value="${couponList[4].couponNum }">
-									</div>
+								  	</li>
+								  </ul>
 								</div>		
 									
 							</div>

@@ -1,0 +1,110 @@
+@CHARSET "UTF-8";
+
+#title{
+	margin-top:50px;
+	font-size:55px;
+	font-weight: 600;
+}
+
+#product{
+	width: 300px;
+	height: 500px;
+	padding: 30px;
+}
+
+#image{
+	width: 215px;
+	height: 215px;
+}
+
+#price{
+	color:#E02020; 
+	text-align: center; 
+	font-size:22px; 
+	font-weight: 500;"
+}
+
+#heart{
+	cursor:pointer; 
+	margin-left:10px; 
+	margin-top:10px;'
+}
+
+h2{
+	font-size: 28px; 
+	text-align:left;
+}
+
+#result{
+	margin-top: -10px; 
+	margin-left: 450px;
+	weight:150px;
+	height:150px;
+}
+
+#coment1{
+	text-align: center; 
+	font-size:19px; 
+	color:black;
+	margin-bottom:20px;
+}
+
+#coment2{
+	margin-top: -10px; 
+	text-align: center;
+}
+
+button{
+	margin-bottom: -40px; 
+	margin-top: 10px; 
+	text-align: center; 
+	margin-left: 450px;
+}
+
+.guide {
+    top: -66px;
+    display: flex;
+    width: 100%;
+    background: #EAEAEA;
+    margin: auto;
+    border-radius: 10px;
+    height: 10%;
+    margin-bottom:30px;
+}
+
+.guide > p {
+    float: left;
+    width: 50%;
+    padding-left: 150px;
+    line-height: 64px;
+    font-size: 18px;
+    color: #333;
+    background: #EAEAEA; 
+    no-repeat: 225px 22px;
+}
+
+#input1{
+	font-size: 40px; 
+	font-weight: 600;
+	color: #0A82FF;
+}
+#input2{
+	font-size: 25px; 
+	font-weight: 500;
+	color: #0A82FF;
+}
+
+#search{
+	weight:28px;
+	height:28px;
+}
+
+#re1{
+	margin-top:15px;
+}
+
+#re2{
+	margin-top:16px;
+	font-size:14px;
+}
+

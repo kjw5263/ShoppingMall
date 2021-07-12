@@ -39,9 +39,10 @@
 		// 전달정보 저장 - pageNum
 		String noticeNum = (String) request.getParameter("noticeNum");
 		String pageNum =  (String)request.getParameter("pageNum");
-		String id =  (String)request.getParameter("userId");
+		String id = (String)session.getAttribute("userId");
 		// 전달정보 저장 - 액션태그 (자바빈)- num,pass
 		NoticeDAO noti = new NoticeDAO();
+		System.out.println(id);
 		int check1 = noti.deleteCheckNotice(id);
 		
 		
