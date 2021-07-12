@@ -74,7 +74,6 @@
                         <h2>ADMIN PAGE<span>.</span></h2>
                         <h3>고객센터 글 쓰기</h3>
                       	<p style="border: 1px solid #B0BCC2;"></p>
-                        
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -95,7 +94,7 @@
 			<div class="col-8">
 				<form action="./FaqWriteAction.faq" method="post" id="fr" onsubmit="return check()">
 				<!-- 카테고리 시작 -->
-				<div class="row">
+				<div class="row" style="margin-left:1px;">
 					<select class="form-select" name="faqCategory" id="faqCategory" aria-label="Default select example">
 					  <option value="" selected>카테고리</option>
 					  <option value="회원관련">회원관련</option>
@@ -134,6 +133,13 @@
 		
 	</div>
 	<!-- container 끝 -->	
+	
+    <!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 80px;">
+        <div class="container">
+        </div>
+    </section>
+    <!-- Page Add Section End -->
 	
 	<!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
