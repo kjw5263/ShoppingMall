@@ -36,8 +36,8 @@ public class noticeUpdate {
 				+ " noticeFile = "+"'"+noti.getNoticeFile() +"',"
 				+ " noticeType = '"+noti.getNoticeType() +"',"
 				+ " noticeRealFileName = '"+noti.getNoticeRealFileName() +"',"
-				+ " noticeImg = '"+noti.getNoticeImg() +"',"
-				+ " noticeRealImgName = '"+noti.getNoticeRealImgName() +"'"
+				+ " noticeimage = '"+noti.getNoticeImg() +"',"
+				+ " noticeRealimageName = '"+noti.getNoticeRealImgName() +"'"
 				+ " where  noticeNum = "+noti.getNoticeNum()+" ";
 				System.out.println("수정 sql = "+ sql );
 				conn = getConnection();
