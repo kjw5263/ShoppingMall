@@ -22,7 +22,7 @@ public class GoodsSearchAction implements Action{
 		// 파라미터를 처리
 		// item=best
 		String paka  = (String)request.getParameter("searchname");
-		
+		request.setAttribute("paka", paka);
 		
 		System.out.print("paka = "+paka);
 		
