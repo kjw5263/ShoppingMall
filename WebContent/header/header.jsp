@@ -77,7 +77,7 @@
                         <li><a class="active" href="./index.jsp">Home</a></li>
                         <li><a href="./GoodsList.cos">Products</a></li>
                         <li><a href="./Question.que">피부진단</a></li>
-                        <li><a href="./notice.nos">공지사항</a></li>
+                        <li><a href="./notice.nos">공지사항 / 이벤트</a></li>
                         <li><a href="./FaqList.faq">FQA</a></li>
 		                <%
 		        		 if(session.getAttribute("userId") == null){
