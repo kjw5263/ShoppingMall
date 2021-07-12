@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+
+#score-table > thead{
+	font-size: 20px;
+}
+
+#skinborder {
+	border-right-style: dotted; 
+	border-right-color: #dee2e6;
+	
+}
+
+.scorewid > div {
+	width: 70px;	
+}
+
+.scorewid > div > .form-control{
+ 	box-sizing: content-box;
+}
+
+#score-txt {
+	font-size: 20px; 
+	text-align: center;
+	box-sizing: content-box;
+	padding-top: 10px;
+}
+
+tbody > div {
+	width: 70px;
+	
+}

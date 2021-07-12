@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/question/Que_style.css" type="text/css">
 
 
 
@@ -63,20 +64,25 @@
  		<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
     
-    <!-- Page Add Section Begin -->
-	<section class="page-add" style="margin-top: 50px;">
-	<div class="row" id="add">
-		<div class="col-lg-2"></div>
-		<div class="col-lg-10">
-			<div class="page-breadcrumb">
-				<h2>
-					피부타입 - 점수설정<span>.</span>
-				</h2>
-			</div>			
-		</div>
-	</div>
-	</section>
-	<!-- Page Add Section End -->
+ 	<!-- Page Add Section Begin -->
+    <section class="page-add">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4">
+                    <div class="page-breadcrumb">
+                        <h2>ADMIN PAGE<span>.</span></h2>
+                        <h3>점수 세팅 페이지</h3>
+						<p style="border: 1px solid #B0BCC2;"></p>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-8">
+               </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Add Section End -->
     	
 	<!-- container 시작 -->	
 	<div class="container-fluid">	
@@ -90,58 +96,104 @@
 				<!-- 글쓰기 폼 시작 -->
 				<form action="./QueSettingAction.que" 
 				method="post" id="fr" onsubmit="return check()">
-
-				
-					
-					<table class="table" style="padding:-100px;">
-					  <thead>
-					    <tr>
-					      <th scope="col" colspan="2" style="text-align:center;">건성</th>
-					      <th scope="col" colspan="3" style="text-align:center">중성</th>
-					      <th scope="col" colspan="3" style="text-align:center">복합성</th>
-					      <th scope="col" style="text-align:center">지성</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr>
-							<td>점수 &#60;</td>
-							<td><input type="text" class="form-control"
+						
+						<table class="table" style="text-align: center;" id="score-table">
+						<thead>
+							<tr class="thead-light">
+								<th colspan="16">피부타입</th>
+							</tr>
+							<tr>
+								<th colspan="3" id="skinborder">건성</th>
+								<th colspan="5" id="skinborder">중성</th>
+								<th colspan="5" id="skinborder">복합성</th>
+								<th colspan="3">지성</th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<!--건성  -->
+							<td id="score-txt"><p style="margin-top: 20%;"></p>
+								 &nbsp;&nbsp;점수
+							</td>
+							<td><p style="margin-top: 20%;"></p>
+							<b>&#60;</b>
+							</td>
+							<td id="skinborder" class="scorewid">
+								<div>
+								<input type="text" class="form-control"
 								placeholder="점수" name="score1" id="score1"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-lg"
-								value="${qsdto.score1 }" style="width: 50px; margin-left:100;"></td>
-
-							<td><input type="text" class="form-control"
+								value="${qsdto.score1 }">
+								</div>
+							</td>
+							<!--건성  -->
+							<!--중성  -->
+							<td class="scorewid">
+								<div>
+								<input type="text" class="form-control"
 								placeholder="점수" name="score2" id="score2"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-lg"
-								value="${qsdto.score2 }" style="width: 50px">
-							<td>&#60; 점수 &#60;</td>
-							<td><input type="text" class="form-control"
+								value="${qsdto.score2 }">
+								</div>
+							</td>
+							<td><p style="margin-top: 20%;"></p>
+							<b>&#60;</b></td>
+							<td id="score-txt"><p style="margin-top: 20%;"></p>
+							점수
+							</td>
+							<td><p style="margin-top: 20%;"></p>
+							<b>&#60;</b></td>
+							<td id="skinborder" class="scorewid">
+								<div>
+								<input type="text" class="form-control"
 								placeholder="점수" name="score3" id="score3"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-lg"
-								value="${qsdto.score3 }" style="width: 50px"></td>
-
-							<td><input type="text" class="form-control"
+								value="${qsdto.score3 }">
+								</div>
+							</td>
+							<!--중성  -->
+							
+							<!--복합성  -->
+							<td class="scorewid">
+								<div>
+								<input type="text" class="form-control"
 								placeholder="점수" name="score4" id="score4"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-lg"
-								value="${qsdto.score4 }" style="width: 50px">
-							<td>&#60; 점수 &#60;</td>
-							<td><input type="text" class="form-control"
+								value="${qsdto.score4 }">
+								</div>
+							</td>
+							<td><p style="margin-top: 20%;"></p>
+							<b>&#60;</b></td>
+							<td id="score-txt"><p style="margin-top: 20%;"></p>
+							점수</td>
+							<td><p style="margin-top: 20%;"></p>
+							<b>&#60;</b></td>
+							<td id="skinborder" class="scorewid"> 
+								<div>
+								<input type="text" class="form-control"
 								placeholder="점수" name="score5" id="score5"
 								aria-label="Sizing example input"
 								aria-describedby="inputGroup-sizing-lg"
-								value="${qsdto.score5 }" style="width: 50px"></td>
-							<td>이외 점수</td>
-							</tr>
-					  </tbody>
+								value="${qsdto.score5 }" style="width: 50px">
+								</div>
+							</td>
+							<!--복합성  -->
+							<!--지성  -->
+							<td id="score-txt" class="scorewid"><p style="margin-top: 20%;"></p>
+							이외 점수</td>
+							<!--지성  -->
+						</tr>
+						</tbody>
 					</table>
 				
-				
 					<hr>
+					<div style="text-align: right;">
 					<button type="submit" class="btn btn-primary mb-3">세팅하기</button>
+					</div>
 				</form>
 				<!-- 글쓰기 폼 끝 -->
 				

@@ -90,7 +90,7 @@
             <div class="row" >
                 <div class="col-lg-4">
                     <div class="page-breadcrumb">
-                        <h2>NOTICE<span>.</span></h2>
+                        <h2>NOTICE & EVENT<span>.</span></h2>
                         <a href="./Main.me">Home</a>
                         <a href="">NOTICE</a>
                         <a class="active" href="">공지사항</a>
