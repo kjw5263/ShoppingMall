@@ -49,7 +49,7 @@
 		notit = noti.getNoticeData(num);
 		//bdao.getBoard(num).getNum(); (x)
 		
-String id =  (String)request.getParameter("userId");
+String id = (String)session.getAttribute("userId");
 // 전달정보 저장 - 액션태그 (자바빈)- num,pass
 
 int check1 = noti.deleteCheckNotice(id);
