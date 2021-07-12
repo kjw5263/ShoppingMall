@@ -189,25 +189,27 @@
 				</table>
 			</form>
 			</div>
-<div class="col-2"></div><!--여백  -->
-</div>
-</div>
-<!-- container 끝 -->
-
-<!-- Page End Section Begin -->
-<section class="page-add">
-<div class="row">
-	<div class="col-lg-3"></div>
-	<div class="col-lg-9">
-		<div class="page-breadcrumb"></div>
+			
+	<!--여백  -->		
+	<div class="col-2"></div><!--여백  -->
 	</div>
-</div>
-</section>
-<!-- Page End Section End -->
-
-<!-- footer 시작 -->
-<jsp:include page="../footer/footer.jsp" />
-<!-- footer 시작 -->
+	</div>
+	<!-- container 끝 -->
+	
+	<!-- Page End Section Begin -->
+	<section class="page-add">
+	<div class="row">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-9">
+			<div class="page-breadcrumb"></div>
+		</div>
+	</div>
+	</section>
+	<!-- Page End Section End -->
+	
+	<!-- footer 시작 -->
+	<jsp:include page="../footer/footer.jsp" />
+	<!-- footer 시작 -->
 
 </body>
 <script type="text/javascript">
