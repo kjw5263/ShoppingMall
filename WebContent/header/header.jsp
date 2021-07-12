@@ -22,11 +22,11 @@
 
 
     <!-- Search model -->
-	<div class="search-model">
+	<div class="search-model"style="background-color: black; opacity: 0.8;">
 		<div class="h-100 d-flex align-items-center justify-content-center">
 			<div class="search-close-switch">+</div>
 			<form class="search-model-form" action="Goodssearch.cos" method="post">
-				<input type="text" name = "searchname" id="search-input" placeholder="Search here.....">
+				<input type="text" name = "searchname" id="search-input" placeholder="Search here">
 			</form>
 		</div>
 	</div>
