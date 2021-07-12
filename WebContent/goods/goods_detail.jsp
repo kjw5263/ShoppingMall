@@ -110,6 +110,10 @@
             alert('글을 작성하셨습니다');
         }else if (checkInt ==='0'){
             alert('구매 상품이 없습니다.');
+            if (confirm('구매 페이지로 이동 하시겠습니까?')=== true){
+                location.href='./getOrderList.or'
+            }
+
         }
         else {
             window.name="ReviewFormPro.rev"
