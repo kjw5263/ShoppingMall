@@ -9,7 +9,7 @@
 <body>
 
 	<!-- model2 실행페이지 -->
-	<%
+	<% 
 		 // index.jsp 페이지
 		//response.sendRedirect("./MemberJoin.me");
 		//response.sendRedirect("./MemberLogin.me");
