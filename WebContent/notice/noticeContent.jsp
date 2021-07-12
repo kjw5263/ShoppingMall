@@ -198,7 +198,7 @@
 							if (userId.equals("admin")) {
 						%>
 						<button class="btn btn-danger"
-							onclick="location.href='./noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
+							onclick="delact()">글삭제</button>
 						<button class="btn btn-warning"
 							onclick="location.href='./noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>
 						<%
@@ -236,4 +236,34 @@
 	<!-- footer 시작 -->
 
 </body>
+
+
+
+<script type="text/javascript">
+
+function delact() {
+	var sure  = confirm("삭제하시겠습니까");
+	if(sure == true){
+	 location.href = "noticedelpro.nos?pageNum=<%=pageNum%>&noticeNum=<%=num%>";
+	}else{
+		
+	}
+	
+	
+}
+
+function upact(x) {
+	var sure  = confirm("업데이트하시겠습니까");
+	if(sure == true){
+	 location.href = "noticeup.nos?pageNum=<%=pageNum%>&noticeNum=<%=num%>";
+	}else{
+		
+	}
+	
+}
+
+
+</script>
+
+
 </html>

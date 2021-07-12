@@ -65,7 +65,7 @@
                     <div class="col-lg-12 text-center">
                     <div class="page-breadcrumb">
                         <h2><b id="input1">'${paka}'</b> 검색결과</h2>
-      					<hr> 
+      					<hr style="margin-bottom:-500px;"> 
                     </div>
                     </div>
                 </div>
@@ -124,11 +124,7 @@
             
         </div>
     </section>
-      <!-- Page Add Section Begin -->
-    <section class="page-add" style="margin-bottom: 70px;">
-        <div class="container">
-        </div>
-    </section>
+
     <!-- footer 시작 -->
    		<jsp:include page="../footer/footer.jsp" />
     <!-- footer 끝 -->
