@@ -151,7 +151,7 @@
 				      <c:choose>
 					      <c:when test="${userId eq 'admin' }">
 						  <th id="${i.faqNum }" style="width: 10%">
-					      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> /
+					      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> 
 					       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=${i.faqNum }'">삭제</span>					  
 						  </th>
 						  </c:when>
