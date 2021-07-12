@@ -123,6 +123,12 @@ list-style: none;
 	color: #BDBDBD;
 }
 
+#review-btn {
+	width: 70px; 
+	height: 30px; 
+	font-size: 11px;
+	margin-top: 1%;
+}
 /* 주문조회  */
 
 /* 상세 주문조회 */

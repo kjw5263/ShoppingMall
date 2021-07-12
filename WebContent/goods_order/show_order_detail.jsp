@@ -159,7 +159,9 @@
 									<td><img
 										src="./admingoods/upload/${goodsList[st.index].cosImage.split(',')[0]}"
 										width="100px" height="100px"></td>
-									<td><b id="brand">${goodsList[st.index].cosBrand}</b><br>${goodsList[st.index].cosName}
+									<td><b id="brand">${goodsList[st.index].cosBrand}</b><br>${goodsList[st.index].cosName}<br>
+									<button class="btn btn-info" onclick="location.href='./GoodsDetail.cos?cosNum=${odto3.o_cosNum}'" 
+											style="width: 70px; height: 30px; font-size: 11px; margin-top: 1%;">REVIEW</button>
 									</td>
 									<td>₩<fmt:formatNumber value="${goodsList[st.index].cosPrice}" pattern="#,###"/></td>
 									<td>${odto3.o_cosAmount} 개</td>
