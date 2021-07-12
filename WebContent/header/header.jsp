@@ -10,6 +10,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./css/header.css" type="text/css">
+
+<style type="text/css">
+@media (min-width: 768px) {
+
+.header-info {
+     overflow: visible !important;
+     margin-top: 30px;
+}
+
+
+.cnt {
+margin: 0 auto !important; 
+ width: 50% !important; } 
+
+.header-item {
+ width: 100% !important;
+ margin-left: 50px;  
+ margin-right: 50px;  }
+</style>
+
 </head>
 <body>
 
@@ -96,28 +116,26 @@
     
     
     <!-- Header Info Begin -->
-    <div class="header-info">
+    <div class="header-info" style="padding: 5px;">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="header-item">
-                        <img src="./img/icons/delivery.png" alt="">
-                        <p>10시 이전 주문 시 <b>당일배송</b></p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-left text-lg-center">
+            <div class="row cnt">
+                <div class="text-left text-lg-left">
                     <div class="header-item">
                         <img src="./img/icons/voucher.png" alt=""
                         onclick="location.href='./couponEvent.cp'"
                         style='cursor:pointer;'>
                         <p onclick="location.href='./couponEvent.cp'"
-                        style='cursor:pointer;'>20% Student Discount</p>
+                        style='cursor:pointer;'>10% Discount Coupon</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-left text-xl-right">
+                <div class="text-left text-lg-center">
+                    <div class="header-item">
+                    </div>
+                </div>
+                <div class="text-left text-xl-right">
                     <div class="header-item">
                     <img src="./img/icons/sales.png" alt="">
-                    <p>회원가입 시 <b>추천인</b> 입력하면 <b>500포인트</b> 즉시 적립! </p>
+                    <p>회원가입하면 <b>500포인트</b> 적립! </p>
                 </div>
                 </div>
             </div>
