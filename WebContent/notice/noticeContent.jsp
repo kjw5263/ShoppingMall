@@ -147,59 +147,65 @@
 				<br>
 
 				<div>
-				
-						<table class="table">
-							<tr>
-								<td style="width: 30%"><%=type%></td>
-								<td style="width: 70%"><%=notit.getNoticeTitle()%></td>
-							</tr>
+
+					<table class="table">
+						<tr>
+							<td style="width: 30%"><%=type%></td>
+							<td style="width: 70%"><%=notit.getNoticeTitle()%></td>
+						</tr>
 
 
-							<br>
+						<br>
 
-							<tr>
-								<td><b>첨부파일 </b></td>
-								<td>
-									<%
-										System.out.println("ssss " + notit.getNoticeFile());
-										if (notit.getNoticeFile() == null) {
+						<tr>
+							<td><b>첨부파일 </b></td>
+							<td>
+								<%
+									 
+							        if (notit.getNoticeFile()==null || notit.getNoticeFile().equals(null)
+							        		||  notit.getNoticeFile().equals("null")){
 									%> 첨부파일 없음 <%
 										} else {
 									%><a
-									href="./notice/filedown.jsp?filename=<%=notit.getNoticeFile()%>"><%=notit.getNoticeRealFileName()%></a>
-									<%
+								href="./notice/filedown.jsp?filename=<%=notit.getNoticeFile()%>"><%=notit.getNoticeRealFileName()%></a>
+								<%
 										}
 									%>
 
-								</td>
-							</tr>
+							</td>
+						</tr>
 
-							<tr>
-								<td height="300px" colspan="2"
-									style="position: static; top: 3px; left: 5px; text-align: inherit;">
-									<%=notit.getNoticeContent()%><br> <%
- 	if (notit.getNoticeImg() == null) {
+						<tr>
+							<td height="300px" colspan="2"
+								style="position: static; top: 3px; left: 5px; text-align: inherit;">
+								<%=notit.getNoticeContent()%><br> <%
+										 
+								        if (notit.getNoticeImg()==null || notit.getNoticeImg().equals(null)
+								        		||  notit.getNoticeImg().equals("null")){
  %> <%
  	} else {
  %><img width="500px" height="500px"
-									src="./upload/<%=notit.getNoticeImg()%>"> <%
-										}
-									%>
-								</td>
+								src="./upload/<%=notit.getNoticeImg()%>"> <%
+ 	}
+ %>
+							</td>
 
-							</tr>
-						</table>
-						
+						</tr>
+					</table>
+
 					<div style="text-align: right;">
-					<%
-						if (userId.equals("admin")) {
-					%>
-					<button class="btn btn-danger" onclick="location.href='./noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
-					<button class="btn btn-warning" onclick="location.href='./noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>
-					<%
-						}
-					%>
-					<button class="btn btn-info" onclick="location.href='./notice.nos'">목록으로</button>
+						<%
+							if (userId.equals("admin")) {
+						%>
+						<button class="btn btn-danger"
+							onclick="location.href='./noticedel.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글삭제</button>
+						<button class="btn btn-warning"
+							onclick="location.href='./noticeup.nos?noticeNum=<%=num%>&pageNum=<%=pageNum%>'">글수정</button>
+						<%
+							}
+						%>
+						<button class="btn btn-info"
+							onclick="location.href='./notice.nos'">목록으로</button>
 					</div>
 				</div>
 
