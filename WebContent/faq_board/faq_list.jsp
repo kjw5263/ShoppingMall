@@ -77,7 +77,7 @@
                     <div class="page-breadcrumb">
                         <h2>FAQ<span>.</span></h2>
                         <h3>자주 묻는 질문</h3>
-						<b>*다른 문의사항은 챗봇으로 문의해주세요.</b>
+						<p>다른 문의사항은 챗봇으로 문의해주세요.</p>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -135,7 +135,7 @@
 				<!-- faq 테이블 시작 -->
 				<table class="table">
 				  <tbody>
-				  	<tr class="table-active">
+				  	<tr class="table" style="background-color:#f8f9fa;">
 				      <th class="text-center">유형</th>
 				      <th class="text-center">내용</th>
 				      <th class="text-center"></th>
@@ -151,7 +151,7 @@
 				      <c:choose>
 					      <c:when test="${userId eq 'admin' }">
 						  <th id="${i.faqNum }" style="width: 10%">
-					      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> /
+					      	<button type="button" class="btn btn-primary btn-sm" onclick="location.href='./FaqRevise.faq?faqNum=${i.faqNum }'">수정</button> 
 					       	<span type="button" class="btn btn-danger btn-sm" onclick="location.href='./FaqDelete.faq?faqNum=${i.faqNum }'">삭제</span>					  
 						  </th>
 						  </c:when>
@@ -161,7 +161,7 @@
 					  </c:choose>
 					  
 				    </tr>
-				    <tr style="display: none; background-color: #E9ECEF;" id="${i.faqNum }_answer">
+				    <tr style="display: none; background-color: #f8f9fa;" id="${i.faqNum }_answer">
 					  <th class="text-center">답변</th>
 					  <td class="text-center" style="width: 650px"><b style="width: 737;">${i.faqAnswer }</b></td>
 					  <th></th>
