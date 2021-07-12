@@ -31,77 +31,7 @@
     <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <script src="./js/chatbot.js" type="text/javascript"></script>
-<style type="text/css">
-button{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:34px;
-  font-size:1em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-button:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-button:hover:before,button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
 
-
-
-
-	#one{
-	  border-right:	1px solid #444444;
-	}
-	#one:last-child {
-	border-right: 0;
-	}
-table {
-	margin-top : 10px;
-	margin-bottom : 10px;
-	margin-left : 50px;
-    border-collapse: collapse;
-}
-table td {
-    border:  0px solid black;
-}
-table tr {
-    border-top: 0;
-}
-table tr {
-    border-bottom: 0;
-}
-table tr td {
-    border-left: 10;
-}
-table tr td {
-    
-}
-
-
-</style>
 
 </head>
 
@@ -154,9 +84,17 @@ table tr td {
                             <div class="p-status">new</div>
                         </figure>
                         <div class="product-text">
-                            <h6><%=dto.getCosName()%></h6>
-                            <p><%=dto.getCosPrice() %>원  </p>
-                            <button onclick="basketact(<%=dto.getCosNum()%>)">장바구니 담기</button>	
+                           <div>
+								<div style="text-align: center;"><%=dto.getCosName()%></div>
+                            	<div id="price">
+                            	<fmt:formatNumber value="<%=dto.getCosPrice() %>" pattern="#,###"/>원</div>                	
+                            </div>
+                            <img src="./img/add_basket.png" width="35px" height="30px" alt="" 
+                            onclick="basketact(<%=dto.getCosNum()%>)"
+                            style='cursor:pointer;'>
+                            
+                            <img src="./img/icons/heart1.png" width="40px" id="heart"
+                            onclick="location.href='./insertLike.li?cosNum=<%=dto.getCosNum()%>'">      
                         </div>
                     </div>
                 </div>
@@ -164,6 +102,11 @@ table tr td {
                 
                 
             </div>
+        </div>
+    </section>
+      <!-- Page Add Section Begin -->
+    <section class="page-add" style="margin-bottom: 70px;">
+        <div class="container">
         </div>
     </section>
     <!-- footer 시작 -->

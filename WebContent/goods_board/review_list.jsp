@@ -17,15 +17,7 @@
     <title>JUST SKIN</title>
     <link rel="stylesheet" href="./goods_board/style/reviewList.css">
 </head>
-<script>
-    function fnMove(seq){
-        var offset = $("#p" + seq).offset();
-        $('html, body').animate({scrollTop : offset.top}, 400);
-    }
-</script>
-
-
-    <%
+<%
     ArrayList<GoodsReviewDTO> reviewList = (ArrayList<GoodsReviewDTO>) request.getAttribute("reviewList");
     PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
     int listCount = pageInfo.getListCount();
@@ -33,8 +25,10 @@
     int maxPage = pageInfo.getMaxPage();
     int startPage = pageInfo.getStartPage();
     int endPage = pageInfo.getEndPage();
+    int cosNum = Integer.parseInt(request.getParameter("cosNum"));
 
-    %>
+%>
+
 <body>
 
 
@@ -153,28 +147,22 @@
         </div>
     </div>
 
-
-
-<%--    <td><%=reviewList.get(i).getBOAR %></td>--%>
-<%--    <td><%=reviewList.get(i).getBOARD_READCOUNT() %></td>--%>
-
 <%} %>
 
-
-
-
     <section id="pageList" style="margin-left: 50%">
+
         <%if(nowPage<=1){ %>
         [이전]
         <%}else{ %>
-        <a href="GoodsDetail.cos?cosNum=1&page=<%=nowPage-1 %>" id="p1" onclick="fnMove('1')">[이전]</a>&nbsp;
+        <a href="./GoodsDetail.cos?cosNum=<%= cosNum%>&page=<%=nowPage-1 %>">[이전]</a>&nbsp;
+
         <%} %>
 
         <%for(int a=startPage;a<=endPage;a++){
             if(a==nowPage){%>
         [<%=a %>]
         <%}else{ %>
-        <a href="GoodsDetail.cos?cosNum=1&page=<%=a %>" id="p2" onclick="fnMove('2')">[<%=a %>]
+        <a href="./GoodsDetail.cos?cosNum=<%=cosNum %>&page=<%=a %>" id="p2" >[<%=a %>]
         </a>&nbsp;
         <%} %>
         <%} %>
@@ -182,9 +170,13 @@
         <%if(nowPage>=maxPage){ %>
         [다음]
         <%}else{ %>
-        <a href="GoodsDetail.cos?cosNum=1&page=<%=nowPage+1 %>" id="p3" onclick="fnMove('3')">[다음]</a>
+        <a href="./GoodsDetail.cos?cosNum=<%=cosNum%>&page=<%=nowPage+1 %>" id="next">[다음]</a>
+
+
         <%} %>
+
     </section>
+
         <%
     }
 	else
