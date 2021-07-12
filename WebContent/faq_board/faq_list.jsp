@@ -161,7 +161,7 @@
 					  </c:choose>
 					  
 				    </tr>
-				    <tr style="display: none;" id="${i.faqNum }_answer" class="table-secondary">
+				    <tr style="display: none; background-color: #E9ECEF;" id="${i.faqNum }_answer">
 					  <th class="text-center">답변</th>
 					  <td class="text-center" style="width: 650px"><b style="width: 737;">${i.faqAnswer }</b></td>
 					  <th></th>
