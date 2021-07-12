@@ -151,8 +151,6 @@ public class CouponDAO {
    
     //pointcheck(startdate,enddate)
     public List pointcheck(String startdate,String enddate,String userId){
-    	System.out.println(startdate);
-    	System.out.println(enddate);
     	
     	List orderList = new ArrayList();
     	try {

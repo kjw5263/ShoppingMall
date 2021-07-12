@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="./css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="./css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="./css/style.css" type="text/css">
+<link rel="stylesheet" href="./css/N_style.css" type="text/css">
 <link rel="stylesheet" href="./goods_board/style/review_user_list.css">
 <link rel="stylesheet" href="./css/topimage.css" type="text/css">
 
@@ -138,12 +139,26 @@
 							나의 찜목록 (총 <b style="color: orange;">${cnt }</b>개)
 						</h3>
 						<br>
-
+								
 						<table class="table">
+							<thead>
 							<tr>
 								<th colspan="2">상품</th>
 								<th>관리</th>
 							</tr>
+							</thead>
+							<c:if test="${fn:length(LikeList) == 0}">
+							<tbody>
+								<tr id="nopnt">
+									<td colspan="3">
+										<div id="nopnt-text" >
+										<div style="background-image: url('./img/icons/exclamation.png');"></div>
+										<h4>좋아요를 추가해보세요.</h4>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+							</c:if>
 							<c:if test="${LikeList != null}">
 								<c:forEach var="LikeList" items="${LikeList}">
 									<form action="./deleteLike.li" method="get">
@@ -156,12 +171,10 @@
 									<td><b>${LikeList.cosBrand }</b><br> ${LikeList.cosName }
 										<h4> <fmt:formatNumber value="${LikeList.cosPrice }" pattern="#,###"/>원
 										</h4></td>
-
 									<td><input type="image" src="./img/icons/heart1.png"
 										width="40px" style="margin-top: 50%"></td>
 							</form>
 							</tr>
-								
 								</c:forEach>
 							</c:if>
 							

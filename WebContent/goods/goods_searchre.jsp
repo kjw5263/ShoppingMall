@@ -5,6 +5,7 @@
 <%@page import="com.var.list.varlist"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -136,6 +137,7 @@ table tr td {
                     <div class="col-lg-12 text-center">
                         <div class="section-title">
                             <h2>search Result</h2>
+                            <h3><b>${paka}</b>에 대한 결과입니다.</h3>
                         </div>
                        
                     </div>
