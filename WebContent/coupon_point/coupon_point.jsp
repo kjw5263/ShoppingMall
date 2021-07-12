@@ -1,4 +1,5 @@
 <%@page import="com.order.db.OrderDTO"%>
+<%@page import="com.sun.xml.internal.txw2.Document"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.List"%>
@@ -9,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>COUPON | JUST SKIN</title>
+<title>Insert title here</title>
 <meta charset="UTF-8">
 <meta name="description" content="Yoga Studio Template">
 <meta name="keywords" content="Yoga, unica, creative, html">
@@ -34,32 +35,43 @@
 <link rel="stylesheet" href="./css/style.css" type="text/css">
 <link rel="stylesheet" href="./css/N_style.css" type="text/css">
 <link rel="stylesheet" href="./goods_board/style/review_user_list.css">
-<link rel="stylesheet" href="./css/topimage.css" type="text/css">
-
 
 <script src="../jq/jquery-3.6.0.js"></script>
 <script src="../jq/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 function datecheck(){
 	
-	var startyear = $('#startyear').val();
+	
+	var today = new Date();
+	var startyear = $('#startyear').val(); 
 	var endyear = $('#endyear').val();
 	var startmonth = $('#startmonth').val();
 	var endmonth = $('#endmonth').val();
 	var startday = $('#startday').val();
 	var endday = $('#endday').val();
 	
+	
+	var startdate1 = new Date();
+	startdate1.setFullYear(startyear,startmonth-1,startday);
+
+	var enddate1 = new Date();
+	enddate1.setFullYear(endyear,endmonth-1,endday);
+	
+
 	var startdate = startyear +"-"+ startmonth +"-"+ startday;
 	var enddate = endyear + "-" + endmonth +"-"+ endday
 	
 	$('#startdate').val(startdate);
 	$('#enddate').val(enddate);
 	
-	if(startdate > enddate){
+	if(startdate1 > enddate1){
 		alert('검색 종료일을 검색 시작일 보다 늦은 날짜로 지정해주세요.');
 		return false;
 	}else if(endyear - startyear > 2){
 		alert('최대 검색 가능 기간은 1년 입니다.');
+		return false;
+	}else if(startdate1 > today || enddate1 > today){
+		alert('오늘 이전의 날짜만 검색이 가능합니다.');
 		return false;
 	}
 	
@@ -94,33 +106,23 @@ function datecheck(){
 	<!-- container 시작 -->
 
 
-	 <!-- Page Add Section Begin -->
-    <section class="page-add">
-        <div class="container">
-            <div class="row" >
-                <div class="col-lg-4">
-                    <div class="page-breadcrumb">
-                        <h2>MY PAGE<span>.</span></h2>
-                        <h4>나의 쿠폰/포인트</h4>
-                        <a href="#">Home</a>
-                        <a href="#">MY PAGE</a>
-                        <a class="active" href="#">나의 쿠폰</a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                     <div class="row">
-                    <div class="col-lg-12" id="topimg_bg">
-                       <div id="topimg_ch" >
-                        <h1>2021</h1>
-                        <h2>BEST SELLER.</h2>
-                      </div>
-                        </div>
-               </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Page Add Section End -->
+	<!-- Page Add Section Begin -->
+	<section class="page-add">
+	<div class="row">
+		<div class="col-lg-3"></div>
+
+		<div class="col-lg-9">
+			<div class="page-breadcrumb">
+				<h2>
+					MY PAGE<span>.</span>
+				</h2>
+			</div>
+		</div>
+
+
+	</div>
+	</section>
+	<!-- Page Add Section End -->
 
 
 	<div class="container-fluid">
@@ -199,9 +201,8 @@ function datecheck(){
 						<h3>포인트 조회</h3>
 						<fieldset id="checkline">
 							<br>
-							<form action="pointcheck.cp" method="get"
+							<form action="pointcheck.cp" method="post"
 								onsubmit="return datecheck()">
-								<input type="hidden" name="searchmonth" value="0">
 								<input type="hidden" id="startdate" name="startdate"> <input
 									type="hidden" id="enddate" name="enddate"> <input
 									type="button" value="1개월" class="btn btn-outline-info"
@@ -264,7 +265,6 @@ function datecheck(){
 									<td>적립</td>
 									<td>사용</td>
 								</tr>
-								
 							</thead>
 							<tbody>
 								<%
@@ -284,7 +284,7 @@ function datecheck(){
 						}%>
 							<!-- ----------------------------------------------------------- -->
 							<tbody>
-								<%if(orderList != null){
+						<%if(orderList != null){
 						for(int i=0;i<orderList.size();i++){
 							OrderDTO odto = (OrderDTO)orderList.get(i);%>
 								<tr>
@@ -299,14 +299,14 @@ function datecheck(){
 							<tbody>
 								<%} 
 						} else if(orderList == null && orderList2 == null){%>
-							
-							<tbody>
 								<tr id="nopnt">
 									<td colspan="4">
-										<div id="nopnt-text">적립 / 사용한 포인트가 없습니다.</div>
+										<div id="nopnt-text" >
+										<div style="background-image: url('./img/icons/coinN.png');"></div>
+										<h4>기간내 적립/사용한 포인트가 존재하지 않습니다.</h4>
+										</div>
 									</td>
 								</tr>
-							</tbody>
 							<%} %>
 
 

@@ -40,48 +40,6 @@
 <link rel="stylesheet" href="./css/topimage.css" type="text/css">
 </head>
 <script src="./js/jquery-3.6.0.js"></script>
-<script src="../jq/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-function datecheck(){
-	
-	
-	var today = new Date();
-	var startyear = $('#startyear').val(); 
-	var endyear = $('#endyear').val();
-	var startmonth = $('#startmonth').val();
-	var endmonth = $('#endmonth').val();
-	var startday = $('#startday').val();
-	var endday = $('#endday').val();
-	
-	
-	var startdate1 = new Date();
-	startdate1.setFullYear(startyear,startmonth-1,startday);
-
-	var enddate1 = new Date();
-	enddate1.setFullYear(endyear,endmonth-1,endday);
-	
-
-	var startdate = startyear +"-"+ startmonth +"-"+ startday;
-	var enddate = endyear + "-" + endmonth +"-"+ endday
-	
-	$('#startdate').val(startdate);
-	$('#enddate').val(enddate);
-	
-	if(startdate1 > enddate1){
-		alert('검색 종료일을 검색 시작일 보다 늦은 날짜로 지정해주세요.');
-		return false;
-	}else if(endyear - startyear > 2){
-		alert('최대 검색 가능 기간은 1년 입니다.');
-		return false;
-	}else if(startdate1 > today || enddate1 > today){
-		alert('오늘 이전의 날짜만 검색이 가능합니다.');
-		return false;
-	}
-	
-}
-
-
-</script>
 
 <body>
 	<!-- header 시작 -->
@@ -209,8 +167,7 @@ function datecheck(){
 								</c:when>
 							</c:choose>
 						</c:forEach>
-						
-						<ul class="mypage-step" style="height: 130px;">
+						<ul class="mypage-step">
 							<li>
 								<div>
 									<div class="contents1">결제완료</div>
@@ -256,72 +213,10 @@ function datecheck(){
 						</ul>
 <!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<배송 상태>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
 
-<!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<주문 조회>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-						
-						
-						<fieldset id="checkline" style="margin-top: 5%;">
-							<br>
-							<form action="OrdercheckAction.or" method="post"
-								onsubmit="return datecheck()">
-								<input type="hidden" name="searchmonth" value="0">
-								<input type="hidden" id="startdate" name="startdate"> <input
-									type="hidden" id="enddate" name="enddate"> <input
-									type="button" value="1개월" class="btn btn-outline-info"
-									onclick="location.href='OrdercheckAction.or?searchmonth=1';">
-								<input type="button" value="3개월" class="btn btn-outline-info"
-									onclick="location.href='OrdercheckAction.or?searchmonth=3';">
-								<input type="button" value="6개월" class="btn btn-outline-info"
-									onclick="location.href='OrdercheckAction.or?searchmonth=6';">
-
-								<br>
-								<br> <select name="startyear" id="startyear"
-									class="custom-select" style="width: 100px;">
-									<option name="2021">2021</option>
-									<option name="2020">2020</option>
-									<option name="2019">2019</option>
-									<option name="2018">2018</option>
-									<option name="2017">2017</option>
-								</select>년&nbsp;&nbsp; <select name="startmonth" id="startmonth"
-									class="custom-select" style="width: 100px;">
-									<%for(int i=1;i<13;i++) {%>
-									<option name="<%=i%>"><%=i %></option>
-									<%} %>
-								</select>월&nbsp;&nbsp; <select name="startday" id="startday"
-									class="custom-select" style="width: 100px;">
-									<%for(int i=1;i<32;i++) {%>
-									<option name="<%=i%>"><%=i %></option>
-									<%} %>
-								</select>일 <b class="wave">~</b> <select name="endyear" id="endyear"
-									class="custom-select" style="width: 100px;">
-									<option name="2021">2021</option>
-									<option name="2020">2020</option>
-									<option name="2019">2019</option>
-									<option name="2018">2018</option>
-									<option name="2017">2017</option>
-								</select>년&nbsp;&nbsp; <select name="endmonth" id="endmonth"
-									class="custom-select" style="width: 100px;">
-									<%for(int i=1;i<13;i++) {%>
-									<option name="<%=i%>"><%=i %></option>
-									<%} %>
-								</select>월&nbsp;&nbsp; <select name="endday" id="endday"
-									class="custom-select" style="width: 100px;">
-									<%for(int i=1;i<32;i++) {%>
-									<option name="<%=i%>"><%=i %></option>
-									<%} %>
-								</select>일&nbsp;&nbsp; <input type="submit" value="조회하기"
-									class="btn btn-info">
-
-							</form>
-							<br>
-							<br>
-						</fieldset>
-						*1년 이내의 주문 내역만 조회 가능합니다.
-<!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<주문 조회>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-
-<!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<주문 조회 테이블1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-<!-- orderckList2 1,3,6개월 조회 , orderckList1 특정기간 조회-->
-						<table class="table table-bordered" style="text-align: center;">
-							<thead style="text-align: center;" class="order-thead">
+<!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<주문 조회 테이블>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+						<table class="table table-bordered" style="margin-top: 8%"
+							id="orderList">
+							<thead class="order-thead">
 								<tr>
 									<th>주문일자</th>
 									<th>상품</th>
@@ -330,69 +225,31 @@ function datecheck(){
 									<th>상태</th>
 								</tr>
 							</thead>
-						<c:choose>
-							<c:when test="${orderckList2 != null }">
-							<tbody>
-								<c:forEach var="odck2" items="${orderckList2}" varStatus="st">
-								<c:set var="gdck2" value="${goodsckList2 }"/>
+							
+							
+							<c:forEach var="odto" items="${orderList}" varStatus="st">
+									<tbody>
 								<tr>
-									<td><fmt:formatDate value="${odck2.orderDate}"/><br> <a
-										href="Orderdetail.or?tradeNum=${odck2.o_tradeNum}"
-										id="detail">상세보기</a></td></td>
+									<td><fmt:formatDate value="${odto.orderDate}"/><br> <a
+										href="Orderdetail.or?tradeNum=${odto.o_tradeNum}"
+										id="detail">상세보기</a></td>
 									<td>
 										<ul class="goods-view">
 											<li><img
-												src="./admingoods/upload/${gdck2[st.index].cosImage.split(',')[0]}"
+												src="./admingoods/upload/${goodsList[st.index].cosImage.split(',')[0]}"
 												width="100px" height="100px;"></li>
-											<li><b id="brand">${gdck2[st.index].cosBrand}</b><br>${odck2.o_cosName}</li>
+											<li><b id="brand">${goodsList[st.index].cosBrand}</b><br>${odto.o_cosName}</li>
 										</ul>
 									</td>
-									<td>${odck2.o_cosAmount }</td>
-									<td><b id="price">₩<fmt:formatNumber value="${odck2.sumMoney }" pattern="#,###"/></h3><b></td>
-									<td>${odck2.orderStatus}</td>
+									<td>${odto.o_cosAmount }</td>
+									<td><b id="price">₩<fmt:formatNumber value="${odto.sumMoney }" pattern="#,###"/></h3><b></td>
+									<td>${odto.orderStatus}</td>
 								</tr>
-								</c:forEach>
 							</tbody>
-							</c:when>
-							<c:when test="${orderckList1 != null }">
-									<tbody>
-										<c:forEach var="odck1" items="${orderckList1}" varStatus="st">
-													<c:set var="gdck1" value="${goodsckList1 }"/>
-												<tr>
-													<td><fmt:formatDate value="${odck1.orderDate}"/><br> <a
-														href="Orderdetail.or?tradeNum=${odck1.o_tradeNum}"
-														id="detail">상세보기</a></td></td>
-													<td>
-														<ul class="goods-view">
-															<li><img
-																src="./admingoods/upload/${gdck1[st.index].cosImage.split(',')[0]}"
-																width="100px" height="100px;"></li>
-															<li><b id="brand">${gdck1[st.index].cosBrand}</b><br>${odck1.o_cosName}</li>
-														</ul>
-													</td>
-													<td>${odck1.o_cosAmount }</td>
-													<td><b id="price">₩<fmt:formatNumber value="${odck1.sumMoney }" pattern="#,###"/></h3><b></td>
-													<td>${odck1.orderStatus}</td>
-												</tr>
-												
-										</c:forEach>
-									</tbody>
-								</c:when>
-								<c:when test="${fn:length(orderckList1) == 0 && fn:length(orderckList2) == 0}">
-										<tbody>
-											<tr id="nopnt">
-												<td colspan="5">
-													<div id="nopnt-text" >
-													<div style="background-image: url('./img/icons/exclamation.png');"></div>
-													<h4>기간 내 주문한 내역이 없습니다.</h4>
-													</div>
-												</td>
-											</tr>
-										</tbody>
-								</c:when>
-						</c:choose>
+							
+							</c:forEach>
 						</table>
-<!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<주문 조회 테이블1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+<!--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<주문 조회 테이블>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
 
 						<br> <br> <br>
 					</div>

@@ -28,7 +28,8 @@
 <link rel="stylesheet" type="text/css" href="./vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="./css/util.css">
-<link rel="stylesheet" type="text/css" href="./css/login.css">
+<link rel="stylesheet" type="text/css" href="./css/coupon.css">
+
 <!--===============================================================================================-->
 
 <!-- Google Font -->
@@ -161,25 +162,58 @@ $(document).ready(function () {
 
 	<!-- container 시작 -->
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-2" style="background-color: #610B5E;"></div>
-			<div class="col-8" align="center">
-				<img alt="couponEventImg" src="./img/coupon/couponInfo.png">
+	
+		<div class="detail-content-header">
 			
+			<h2 class="detail-title">7월 여름 쿠폰 Summer Discount</h2>
+			<p class="detail-sub">거짓말같은 혜택이 쏟아진다</p>
+			<div class="share-list-wrap">
+				<!-- 소셜링크영역 -->
+				<div class="share-list">
+					<a href="javascript:rd.common.shareToFacebook();" title="페이스북 공유하기">
+						<i class="social-ico facebook"></i>
+					</a>
+				</div>
+				<div class="share-list">
+					<a href="javascript:rd.common.shareToKakaoStory();" title="카카오스토리 공유하기">
+						<i class="social-ico kakao-story"></i>
+					</a>
+				</div>
+				<div class="share-list">
+					<a href="javascript:rd.common.shareToKakao();" title="카카오톡 공유하기">
+						<i class="social-ico kakao-talk"></i>
+					</a>
+				</div>
+				<div class="share-list">
+					<a href="javascript:void" id="eventCopyUrl" title="URL 복사하기">
+						<i class="social-ico url"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	
+	<!-- header 시작 -->
+	<jsp:include page="../header/header.jsp" />
+	<!-- header 끝 -->
+
+	<!-- container 시작 -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3"></div>
+			<div class="col-6" align="center">
+				<img alt="couponEventImg" src="./img/coupon/Coupon_info1.png">
 			</div> 
-			<div class="col-2" style="background-color: #610B5E;">
+			<div class="col-3">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-2" style="background-color: #610B5E;"></div>
-			<div class="col-8" align="center">
-				<button class="btn btn-secondary" id="cp1">
-					쿠폰 다운받기
-				</button>
-	
-			</div> 
-			<div class="col-2" style="background-color: #610B5E;">
-			</div>
+			<div class="col-3"></div>
+				<div class="col-6" align="center">
+					<button class="btn btn-secondary" id="cp1">
+						쿠폰 다운받기   
+					</button>
+				</div> 
+			<div class="col-3"></div>
 		</div>
 		
 				<!-- The Modal -->

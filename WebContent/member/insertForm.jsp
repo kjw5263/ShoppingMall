@@ -326,8 +326,8 @@
 				$("#address3").keyup(function() {
 
 						var address3 = $("#address3").val();
-						var check = /^[A-Z|a-z|가-힣|0-9]{2,10}$/;
-						if (address3.match(check1) != null) {
+						var check = /^[A-Z|a-z|가-힣|0-9| ]{2,10}$/;
+						if (address3.match(check) != null) {
 							$('.ckMsg_addr3').text("");
 							ck6 = true;
 						} else {
@@ -567,14 +567,15 @@
                        </div>
                     </div>
                     <div class=row>
-                    	<div class=col-4></div>
-                    	<div class=col-4>
-						  <input type="submit" class="btn btn-secondary" style="border-radius: 12px;" value="회원가입하기">
+                    	<div class=col-4 ></div>
+                    	<div class=col-4 >
+						  <input type="submit" class="btn btn-secondary" value="회원가입하기">
 						</div>
 						<div class=col-4></div>
 					</div>
-			</div>
-		</div>
+			 </div>
+		  </div>
+	   </div>
 	</form>
   </div> <!-- container div -->
 </section>

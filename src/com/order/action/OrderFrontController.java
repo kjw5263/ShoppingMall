@@ -91,6 +91,18 @@ public class OrderFrontController extends HttpServlet {
 			}
 			
 		}	
+		else if(command.equals("/OrdercheckAction.or")){
+			
+			action = new OrdercheckAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}	
 		/********************************* 2. 페이지 주소 매핑(연결) *******************/
 	
 		

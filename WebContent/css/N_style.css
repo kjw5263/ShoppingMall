@@ -200,10 +200,19 @@ list-style: none;
 	
 }
 
-#nopnt-text {
-	margin-top: 15%;
+
+#nopnt-text > div {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	height: 100px;
 	
+	background-repeat: no-repeat;
+	background-size: 100px;
+	background-position: top center;
+	
+
 }
+
 	
 
 
@@ -216,6 +225,7 @@ list-style: none;
 }
 
 /*쿠폰, 포인트 페이지*/
+
 
 
 
