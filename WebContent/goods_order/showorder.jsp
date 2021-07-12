@@ -341,10 +341,13 @@ function datecheck(){
 										id="detail">상세보기</a></td></td>
 									<td>
 										<ul class="goods-view">
-											<li><img
+											<li style="width: 100px; height: 100px;"><img
 												src="./admingoods/upload/${gdck2[st.index].cosImage.split(',')[0]}"
 												width="100px" height="100px;"></li>
-											<li><b id="brand">${gdck2[st.index].cosBrand}</b><br>${odck2.o_cosName}</li>
+											<li><b id="brand">${gdck2[st.index].cosBrand}</b><br>${odck2.o_cosName}
+											<br><button class="btn btn-info" onclick="location.href='./GoodsDetail.cos?cosNum=${odck2.o_cosNum}'" 
+											style="width: 70px; height: 30px; font-size: 11px; margin-top: 1%;">REVIEW</button>
+											</li>
 										</ul>
 									</td>
 									<td>${odck2.o_cosAmount }</td>

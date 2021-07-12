@@ -344,6 +344,7 @@ public class OrderDAO {
 					odto.setO_cosAmount(rs.getInt("o_cosAmount"));
 					odto.setOrderDate(rs.getDate("orderDate"));
 					odto.setO_tradeNum(rs.getString("o_tradeNum"));
+					odto.setO_cosNum(rs.getInt("o_cosNum"));
 					
 					
 					goodsList.add(gdto);
