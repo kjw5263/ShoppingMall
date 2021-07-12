@@ -72,6 +72,21 @@
 		int check1 = noti.deleteCheckNotice(id);
 		
 		
+		
+	
+		 if (notit.getNoticeFile()==null){
+			notit.setNoticeFile("첨부파일");
+			notit.setNoticeRealFileName("첨부파일");
+		}
+		 if (notit.getNoticeImg()==null){
+				notit.setNoticeImg("이미지");
+				notit.setNoticeRealImgName("이미지");
+			}
+			
+		
+		System.out.println("ssss + "+notit.getNoticeImg());
+		
+		
 		 if(check1 == 1){
 		 	
 		  }else{
@@ -107,21 +122,84 @@
 			</tr>
 			<tr>
 				<td>중요도</td>
-				<td>
-				<input type="checkbox" value="1" id="imp1" name="imp2" onclick="pop()">
-				<input type="checkbox" value="0" id="imp2" name="imp2" checked="checked" class="hidden"></td>
+					<td>
+							
+						<select class="custom-select" id="inputGroupSelect01" name="imp2">
+
+							<option value="1" selected>공지사항</option>
+							<option value="0">이벤트</option>
+
+						</select>
+						
+							
+							</td>		
 			</tr>
 			<tr>
 				<td>파일</td>
-				<td><div class="input-group">
-				<div class="custom-file">
-				<input type="file" id="inputGroupimgsys05" 
-				class="custom-file-input" name="filename" 
-				value="<%=notit.getNoticeFile() %>" aria-describedby="inputGroupFileAddon04">
-				<label id="imglabel001" class="custom-file-label" for="inputGroupFile04"><%=notit.getNoticeFile() %></label>
-				</div></div></td>
-				<td><div class="input-group-append">
-				<button class="btn btn-outline-secondary" onclick="imgsss()" type="button"id="inputGroupFileAddon05">취소하기</button></div></td>
+				<%
+					
+					if(notit.getNoticeImg().equals("이미지")){
+					%>
+					<td><div class="input-group">
+						<div class="custom-file">
+							<input type="file" id="inputGroupFilesys04" class="custom-file-input" name="filename"
+								value="<%=notit.getNoticeFile() %>"
+								aria-describedby="inputGroupFileAddon04"> <label 
+								id="filelabel001" class="custom-file-label" for="inputGroupFile04"><%=notit.getNoticeFile() %></label>
+						</div>
+						
+					</div></td>
+					<%}else{ %>
+					<td><div class="input-group">
+						<div class="custom-file">
+							<input type="file" id="inputGroupFilesys04" class="custom-file-input" name="filename"
+								value=""
+								aria-describedby="inputGroupFileAddon04"> <label 
+								id="filelabel001" class="custom-file-label" for="inputGroupFile04"><%=notit.getNoticeFile() %></label>
+						</div>
+						
+					</div></td>
+					
+					
+					
+					<%} %>
+					<td><div class="input-group-append">
+							<button class="btn btn-outline-secondary" onclick="filesss()" type="button"
+								id="inputGroupFileAdd3on04">취소하기</button>
+						</div></td>
+			</tr>
+			<tr>
+				<td>이미지</td>
+					<%
+					
+					if(notit.getNoticeImg().equals("이미지")){
+					%>
+							<td><div class="input-group">
+						<div class="custom-file">
+							<input type="file" id="inputGroupimgsys05" class="custom-file-input" name="Imgname"
+								value="<%=notit.getNoticeImg() %>"
+								aria-describedby="inputGroupFileAddon04"> <label
+								id="imglabel001" class="custom-file-label" for="inputGroupFile04"><%=notit.getNoticeImg() %></label>
+						</div>
+						
+					</div></td>
+					<%}else{ %>
+							<td><div class="input-group">
+						<div class="custom-file">
+							<input type="file" id="inputGroupimgsys05" class="custom-file-input" name="filename"
+								value=""
+								aria-describedby="inputGroupFileAddon04"> <label
+								id="imglabel001" class="custom-file-label" for="inputGroupFile04"><%=notit.getNoticeImg() %></label>
+						</div>
+						
+					</div></td>
+					
+					
+					<%} %>
+					<td><div class="input-group-append">
+							<button class="btn btn-outline-secondary" onclick="imgsss()" type="button"
+								id="inputGroupFileAddon05">취소하기</button>
+						</div></td>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -165,15 +243,29 @@
 
 </body>
 <script type="text/javascript">
-	
-	function pop() {
-		if(document.getElementById("imp2").checked==true){
-			document.getElementById("imp2").checked=false;
-		}else{
-			document.getElementById("imp2").checked=true;
-		}
-	}
-
+    $('.custom-file input').change(function (e) {
+        var files = [];
+        for (var i = 0; i < $(this)[0].files.length; i++) {
+            files.push($(this)[0].files[i].name);
+        }
+        $(this).next('.custom-file-label').html(files.join(', '));
+    });
+</script>
+<script type="text/javascript">
+    function filesss () {
+		var sss = document.getElementById('filelabel001');
+		document.getElementById("inputGroupFilesys04").value = "";
+    	sss.innerText = "첨부파일";
+    }
+</script>
+<script type="text/javascript">
+    function imgsss () {
+      
+    	var sss = document.getElementById('imglabel001');
+    	document.getElementById("inputGroupimgsys05").value = "";
+    	sss.innerText = "이미지";
+    	
+    }
 </script>
 
 </html>

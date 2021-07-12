@@ -165,7 +165,7 @@
 						</div></td>
 						</tr>
 						<tr>
-							<td>파일</td>
+							<td>이미지</td>
 							<td><div class="input-group">
 						<div class="custom-file">
 							<input type="file" id="inputGroupimgsys05" class="custom-file-input" name="filename"
