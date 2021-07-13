@@ -186,7 +186,7 @@
 					<%}else{ %>
 							<td><div class="input-group">
 						<div class="custom-file">
-							<input type="file" id="inputGroupimgsys05" class="custom-file-input" name="filename"
+							<input type="file" id="inputGroupimgsys05" class="custom-file-input" name="Imgname"
 								value=""
 								aria-describedby="inputGroupFileAddon04"> <label
 								id="imglabel001" class="custom-file-label" for="inputGroupFile04"><%=notit.getNoticeImg() %></label>

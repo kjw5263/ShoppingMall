@@ -67,6 +67,8 @@ public class noticeUpdateProAction implements Action{
 		notit.setNoticeType(Integer.parseInt(multi.getParameter("imp2")));
 		notit.setNoticeRealFileName(multi.getOriginalFileName("filename"));
 		notit.setNoticeFile(multi.getFilesystemName("filename"));
+		notit.setNoticeRealImgName(multi.getOriginalFileName("Imgname"));
+		notit.setNoticeImg(multi.getFilesystemName("Imgname"));
 		// List goodsList =  gdao.getGoodsList();
 		// => Action 페이지에서 사용하는 경우
 		System.out.println(notit.toString());
