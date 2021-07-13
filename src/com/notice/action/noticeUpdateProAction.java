@@ -10,7 +10,11 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import java.util.List;
-
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 import com.goods.db.GoodsDAO;
@@ -38,8 +42,23 @@ public class noticeUpdateProAction implements Action{
 		
 		
 		noticeDTO notit = new noticeDTO();
+		String realPath = ".\\upload";
+		Path directoryPath = Paths.get(realPath);
+
 		
-		String realPath = "C:\\Users\\ITWILL\\git\\ShoppingMall\\WebContent\\upload";
+		try {
+			// 디렉토리 생성
+			Files.createDirectory(directoryPath);
+			System.out.println(directoryPath + " 디렉토리가 생성되었습니다.");
+			} catch (FileAlreadyExistsException e) {
+			System.out.println("디렉토리가 이미 존재합니다");
+			} catch (NoSuchFileException e) {
+			System.out.println("디렉토리 경로가 존재하지 않습니다");
+			}
+
+			
+		
+		
 		
 		   System.out.println("실제 저장위치 : "+realPath);
 		   

@@ -19,7 +19,8 @@
    String savePath ="upload";
    // 파일이 업로드된 경로   
    ServletContext ctx = getServletContext();
-   String sDownloadPath = ".\\WebContent\\upload";
+   String realPath; 
+   String sDownloadPath = ".\\upload";
 			
    
    System.out.println("upload 폴더의 실제주소(서버안에 있는 실제주소)" + sDownloadPath);
