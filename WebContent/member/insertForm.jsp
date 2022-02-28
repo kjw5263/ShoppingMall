@@ -124,7 +124,7 @@
 	<jsp:include page="../header/header.jsp" />
 	<!-- header 끝 -->
 
-	<!-- 유효성 체크  시작  (name, id, pw, pw1, phone, address) -->
+	<!-- 유효성 체크  시작  (name, id, pw, pw1, phone) -->
 	<script type="text/javascript">
 	
 	$(document).ready(function() {
@@ -134,7 +134,6 @@
 			var ck3=false;			//pw1
 			var ck4=false;			//name
 			var ck5=false;			//phone
-			var ck6=false;			//address3
 		
 				$("#form").submit(function(){
 					
@@ -173,17 +172,8 @@
 			             $("#phone").focus();
 			             return false;
 					 }
-					 			 
-					 if($.trim($("#address3").val()) == ""){
-						$('.ckMsg_addr3').text("상세주소를 입력하세요");     
-			            $('.ckMsg_addr3').css("color","red"); 
-			            $('.ckMsg_addr3').css("padding-left","1rem"); 
-			            $("#address3").focus();
-			            return false;
-					 }
 					 
-					 if(ck1 == false || ck2 == false || ck3 == false || ck4 == false || ck5 == false ||
-							 ck6 == false ){
+					 if(ck1 == false || ck2 == false || ck3 == false || ck4 == false || ck5 == false){
 						 return false;
 					 }
 				}); //form 공백체크
@@ -323,29 +313,7 @@
 
 				});//phone
 					
-				$("#address3").keyup(function() {
-
-						var address3 = $("#address3").val();
-						var check = /^[A-Z|a-z|가-힣|0-9| ]{2,10}$/;
-						if (address3.match(check) != null) {
-							$('.ckMsg_addr3').text("");
-							ck6 = true;
-						} else {
-							$('.ckMsg_addr3').text(
-									"상세주소를 적어주세요");
-							$('.ckMsg_addr3').css(
-									"color", "red");
-							$('.ckMsg_addr3').css(
-									"padding-left",
-									"5px");
-							ck6 = false;
-						}
-
-				});//address3		
-		
-					
-					
-		});//form
+		});//function
 	</script>
 	<!-- 유효성 체크  끝 --> 
 
@@ -429,7 +397,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-2">
-							<p class="in-name">생년월일*</p>
+							<p class="in-name">생년월일</p>
 						</div>
 						<div class="col-lg-3">
 							<input type="date" id="userBirth" name="userBirth" min="1940-01-01" max="2009-12-31" value="2000-01-01">
@@ -437,7 +405,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-2">
-							<p class="in-name">휴대폰 번호*</p>
+							<p class="in-name">휴대폰 번호</p>
 						</div>
 						<div class="col-lg-3">
 							<input type="text" id="phone" name="userTel" placeholder="'-'를 제외한 연락처를 입력하세요">
@@ -456,7 +424,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-2">
-							<p class="in-name">성별*</p>
+							<p class="in-name">성별</p>
 						</div>
 						<div class="col-lg-2">
 							<div class="diff-addr">
@@ -473,7 +441,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-2">
-							<p class="in-name">주소*</p>
+							<p class="in-name">주소</p>
 						</div>
 						<div class="col-lg-2">
 							<input type="text" name="address1" id="address1" placeholder="우편번호" readonly>

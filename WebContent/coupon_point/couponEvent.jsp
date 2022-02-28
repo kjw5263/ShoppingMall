@@ -115,9 +115,11 @@ $(document).ready(function () {
 				}else if(data == 2) {
 					alert("이미 발급 받은 쿠폰입니다!");
 			 	}else{
-					alert("발급 조건에 맞지 않습니다!");}
+					alert("발급 조건에 맞지 않습니다!");
+				}
 			},
 				error : function() {
+					alert("에러입니다");
 				}
 			
 		});
@@ -146,14 +148,14 @@ $(document).ready(function () {
                     </div>
                 </div>
                 <div class="col-lg-8">
-                     <div class="row">
+                  <div class="row">
                     <div class="col-lg-12" id="topimg_bg">
                        <div id="topimg_ch" >
                         <h1>2021</h1>
                         <h2>BEST SELLER.</h2>
                       </div>
-                        </div>
-               </div>
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>
@@ -241,6 +243,7 @@ $(document).ready(function () {
 						</div>
 					</div>
 				</div>
+	   </div>
 	</div>
 	<!-- container 끝 -->
 

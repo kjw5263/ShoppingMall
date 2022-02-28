@@ -296,7 +296,7 @@ public class CouponDAO {
 			
 			}else{
 				
-				if(couponNum == 5){
+				if(couponNum == 5){ //couponNum - 5 첫구매 회원 전용 쿠폰
 						//첫구매 쿠폰 클릭 했으나, 구매금액이 0원이 아닌 회원 (다운X)
 					sql = "select userId from user_info where userTotal='0' and userId=?";
 					pstmt = conn.prepareStatement(sql);
@@ -307,15 +307,10 @@ public class CouponDAO {
 					
 					if(rs.next()){
 						
-						insertCoupon(userId, couponNum);
-						
-						result=1;
-			       		   		
-					}else{
 						result=3;// 발급조건에 맞지않음!
 					}
 				
-				}else{//5번이 아닐경우 (구매금액 0원이 아니면서 쿠폰 x 회원들)
+				}else{//구매금액 0원이 아니면서 쿠폰 x 회원들)
 						insertCoupon(userId,couponNum);
 						
 						result=1;
@@ -369,4 +364,3 @@ public class CouponDAO {
     //insertCoupon(userId, couponNum)
 
 }
-
